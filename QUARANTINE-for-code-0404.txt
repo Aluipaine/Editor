@@ -1,0 +1,20 @@
+    <section class="horizontalinputs horizontalinputs-left">
+                    <!-- <div style="" class="tyosto_measure"><label for="" class="k_vrmod">VR MOD</label><input type="text" name="_levymod" value="37.5" class="lineinput drawarea__mm levy_input" id="k_vrmod" onchange="change__levykiinnike();aloita_tyosto_kiinnikkeet();"></div> -->
+                    <div style="margin-top: 50px;" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_vrlevy" onchange="change__levykiinnike();"><label for="">VR LEVY</label></div>
+                 </section>
+
+                 <section class="horizontalinputs horizontalinputs-right">
+                    <!-- <div style="" class="tyosto_measure"><label for="" class="k_ormod">OR MOD</label><input type="text" name="_levymod" value="37.5" class="lineinput drawarea__mm levy_input" id="k_ormod" onchange="change__levykiinnike();aloita_tyosto_kiinnikkeet();"></div> -->
+                    <div style="margin-top: 50px;" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_orlevy" onchange="change__levykiinnike();"><label for="">OR LEVY</label></div>
+                    
+                 </section>
+
+                 <section class="verticalinputs verticalinputs-up" style="left: margin-left:30px;float: right;top:-30px;">
+                    <!-- <div style="margin-top: 0%;" class="tyosto_measure"><input type="text" name="_levymod" value="37.5" class="lineinput drawarea__mm levy_input" id="k_yrmod" onchange="change__levykiinnike();aloita_tyosto_kiinnikkeet();"><label for="">YR MOD</label></div> -->
+                    <div style="" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_yrlevy" onchange="change__levykiinnike();"><label for="">YR LEVY</label></div>
+                 </section>
+
+                 <section class="verticalinputs verticalinputs-down" style=" margin-left:30px;float: right;op: -33px;">
+                   <!-- <div class="tyosto_measure"><input type="text" name="_levymod" value="37.5" class="lineinput drawarea__mm levy_input" id="k_armod" onchange="change__levykiinnike();aloita_tyosto_kiinnikkeet();"><label for="">AR MOD</label></div> -->
+                   <div style="" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_arlevy" onchange="change__levykiinnike();"><label for="">AR LEVY</label></div>
+                 </section>
