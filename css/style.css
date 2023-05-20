@@ -2252,10 +2252,9 @@ tr.bottom-border {
 }
 
 #project__roomcount .SizeChooser td:hover,
-#project__roomcount .SizeChooser td:focus,
-.SizeChooser-hover {
-  background: #e5fbdd;
-  border: 2px solid #a9ffb2;
+#project__roomcount .SizeChooser td:focus {
+  /* background: #e5fbdd;
+  border: 2px solid #a9ffb2; */
 }
 
 #rowcount span,

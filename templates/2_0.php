@@ -55,7 +55,14 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div onclick='initalize_cross();' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);' dataset-room='".strtolower($key0)."'>".$key0."</div>";
+                        $aroom = str_replace('a_room:','',str_replace('~',',',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3]))))));
+                          $broom = str_replace('b_room:','',str_replace('~',',',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4]))))));
+                            $croom = str_replace('c_room:','',str_replace('~',',',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5]))))));
+                              $droom = str_replace('d_room:','',str_replace('~',',',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[6]))))));
+                                $kroom = str_replace('k_room:','',str_replace('~',',',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[7]))))));
+                                  $lroom = str_replace('l_room:','',str_replace('~',',',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8]))))));
+
+                          echo "<div onclick='initalize_cross();' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);' dataset-room='".strtolower($key0)."' dataset-aroom='".strtolower($aroom)."' dataset-broom='".strtolower($broom)."' dataset-croom='".strtolower($croom)."' dataset-droom='".strtolower($droom)."' dataset-kroom='".strtolower($kroom)."' dataset-lroom='".strtolower($lroom)."'>".$key0."</div>";
                    
                   }
 
