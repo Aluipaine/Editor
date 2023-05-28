@@ -281,9 +281,23 @@ function changeheights() {
      if (mval_dir === "y" && mval_cord > 3650 || mval_dir === "x" && mval_cord > 9999) {
        return;
      }
+
+     
+      
    }
    height = document.querySelector('.drawarea_h').value;
    width = document.querySelector('.drawarea_w').value;
+
+   thisroom = document.querySelector(".house__wall_" + current_room.toLowerCase());
+
+   thisroom.querySelectorAll("input")[0].value = parseFloat(height);
+   thisroom.querySelectorAll("input")[1].value = parseFloat(width);
+
+   wall_oncross = document.querySelector(".current__housewall");
+
+   wall_oncross.querySelectorAll("input")[0].value = parseFloat(height);
+   wall_oncross.querySelectorAll("input")[1].value = parseFloat(width);
+
    document.querySelector('.box__lower_lowerdecor').style.maxWidth = height / 5 + "px";
    document.querySelector('.box__lower_lowerdecor').style.left = (-1) * ((height / 5) - 20) + "px";
    document.querySelector('#box_h').value = height;
@@ -344,6 +358,7 @@ function changeheights() {
    }
 
   changeheights();
+  adjust_roomsizes();
  }
 
  function changesize__bottom(maxval) {

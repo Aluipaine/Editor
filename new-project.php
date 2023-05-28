@@ -152,7 +152,7 @@ include('header.php');
             <input type="text" name="h_rooms_nowork" id="h_rooms_nowork" style="display:none;">
                
          </fieldset>
-         <div onclick='$("#new_project").hide();$("#new_project").slideUp(200);$("#roomconfig_first").slideDown(200);$("#roomconfig_first").show();' class="next_btn btn ready_btn">Lisää uusi projekti</div>
+         <div onclick='$("#new_project").hide();$("#new_project").slideUp(200);$("#roomconfig_first").slideDown(200);$("#roomconfig_first").show();' class="next_btn btn ready_btn">Jatka eteenpäin</div>
       </div>     
     </section>  
 
@@ -565,7 +565,7 @@ include('header.php');
       <input type="hidden" name="f_pr_rap" class="pr_rap f_pr_rap" value="">
       <input type="hidden" name="f_pr_krs" class="pr_krs f_pr_krs" value="">
       <div class="row">
-          <div class="col-6"><a class="prev_btn" href="#roomconfig_second" onclick="$('#roomconfig_second').hide();$('#roomconfig_first').slideUp(200);$('#roomconfig_fourth').slideDown(200);$('#roomconfig_fourth').show();">Edellinen</a></div>
+          <div class="col-6"><a class="prev_btn" href="#roomconfig_second" onclick="$('#roomconfig_third').hide();$('#roomconfig_third').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();">Edellinen</a></div>
           <div class="col-6">
               <div class="col-6"><butto class="finalization_btn ready_btn">Aloita projekti</button></div>
           </div>

@@ -217,16 +217,18 @@ $("#A").delegate('td', 'mouseover mouseleave click', function(e) {
                   $(this).removeClass("nowork");
                   $(this).find('label').text("");
                   cellindex = i;
+                  console.log("IF EVENT");
               } else {
-                  $(this).addClass("nowork");
+                  $(this).addClass("nowork"); $(this).removeClass("checked");
                   $(this).find('label').val("");
+                  console.log("ELSE EVENT");
               }
 
           }
 
 
       } else if ($(this).hasClass("noindex")) {
-          z -= 0;
+          z = 0;
           $('#a_nextnum').val(z);
       } else if ($(this).find('input').prop('checked') == false) {
           z -= 1;
@@ -306,14 +308,14 @@ $("#B").delegate('td', 'mouseover mouseleave click', function(e) {
                   $(this).find('label').text("");
                   cellindex = i;
               } else {
-                  $(this).addClass("nowork");
+                  $(this).addClass("nowork"); $(this).removeClass("checked");
                   $(this).find('label').val("");
               }
 
           }
 
       } else if ($(this).hasClass("noindex")) {
-          z -= 0;
+          z = 0;
           $('#b_nextnum').val(z);
       } else if ($(this).find('input').prop('checked') == false) {
           z -= 1;
@@ -392,7 +394,7 @@ $("#C").delegate('td', 'mouseover mouseleave click', function(e) {
                   $(this).find('label').text("");
                   cellindex = i;
               } else {
-                  $(this).addClass("nowork");
+                  $(this).addClass("nowork"); $(this).removeClass("checked");
                   $(this).find('label').val("");
               }
 
@@ -400,7 +402,7 @@ $("#C").delegate('td', 'mouseover mouseleave click', function(e) {
 
 
       } else if ($(this).hasClass("noindex")) {
-          z -= 0;
+          z = 0;
           $('#c_nextnum').val(z);
       } else if ($(this).find('input').prop('checked') == false) {
           z -= 1;
@@ -479,7 +481,7 @@ $("#D").delegate('td', 'mouseover mouseleave click', function(e) {
                   $(this).find('label').text("");
                   cellindex = i;
               } else {
-                  $(this).addClass("nowork");
+                  $(this).addClass("nowork"); $(this).removeClass("checked");
                   $(this).find('label').val("");
               }
 
@@ -487,7 +489,7 @@ $("#D").delegate('td', 'mouseover mouseleave click', function(e) {
 
 
       } else if ($(this).hasClass("noindex")) {
-          z -= 0;
+          z = 0;
           $('#d_nextnum').val(z);
       } else if ($(this).find('input').prop('checked') == false) {
           z -= 1;
@@ -568,7 +570,7 @@ $("#E").delegate('td', 'mouseover mouseleave click', function(e) {
                   $(this).find('label').text("");
                   cellindex = i;
               } else {
-                  $(this).addClass("nowork");
+                  $(this).addClass("nowork"); $(this).removeClass("checked");
                   $(this).find('label').val("");
               }
 
@@ -576,7 +578,7 @@ $("#E").delegate('td', 'mouseover mouseleave click', function(e) {
 
 
       } else if ($(this).hasClass("noindex")) {
-          z -= 0;
+          z = 0;
           $('#e_nextnum').val(z);
       } else if ($(this).find('input').prop('checked') == false) {
           z -= 1;
@@ -655,14 +657,14 @@ $("#F").delegate('td', 'mouseover mouseleave click', function(e) {
                   $(this).find('label').text("");
                   cellindex = i;
               } else {
-                  $(this).addClass("nowork");
+                  $(this).addClass("nowork"); $(this).removeClass("checked");
                   $(this).find('label').val("");
               }
 
           }
 
       } else if ($(this).hasClass("noindex")) {
-          z -= 0;
+          z = 0;
           $('#f_nextnum').val(z);
       } else if ($(this).find('input').prop('checked') == false) {
           z -= 1;
@@ -739,14 +741,14 @@ $("#G").delegate('td', 'mouseover mouseleave click', function(e) {
                   $(this).find('label').text("");
                   cellindex = i;
               } else {
-                  $(this).addClass("nowork");
+                  $(this).addClass("nowork"); $(this).removeClass("checked");
                   $(this).find('label').val("");
               }
 
           }
 
       } else if ($(this).hasClass("noindex")) {
-          z -= 0;
+          z = 0;
           $('#g_nextnum').val(z);
       } else if ($(this).find('input').prop('checked') == false) {
           z -= 1;
@@ -824,14 +826,14 @@ $("#H").delegate('td', 'mouseover mouseleave click', function(e) {
                   $(this).find('label').text("");
                   cellindex = i;
               } else {
-                  $(this).addClass("nowork");
+                  $(this).addClass("nowork"); $(this).removeClass("checked");
                   $(this).find('label').val("");
               }
 
           }
 
       } else if ($(this).hasClass("noindex")) {
-          z -= 0;
+          z = 0;
           $('#h_nextnum').val(z);
       } else if ($(this).find('input').prop('checked') == false) {
           z -= 1;
@@ -963,7 +965,7 @@ $(".rappu_more").click(function() {
                       $(this).find('label').text("");
                       cellindex = i;
                   } else {
-                      $(this).addClass("nowork");
+                      $(this).addClass("nowork"); $(this).removeClass("checked");
                       $(this).find('label').val("");
                   }
 
@@ -1047,7 +1049,7 @@ $(".rappu_more").click(function() {
                       $(this).find('label').text("");
                       cellindex = i;
                   } else {
-                      $(this).addClass("nowork");
+                      $(this).addClass("nowork"); $(this).removeClass("checked");
                       $(this).find('label').val("");
                   }
 
@@ -1134,7 +1136,7 @@ $(".rappu_more").click(function() {
                       $(this).find('label').text("");
                       cellindex = i;
                   } else {
-                      $(this).addClass("nowork");
+                      $(this).addClass("nowork"); $(this).removeClass("checked");
                       $(this).find('label').val("");
                   }
 
@@ -1220,7 +1222,7 @@ $(".rappu_more").click(function() {
                       $(this).find('label').text("");
                       cellindex = i;
                   } else {
-                      $(this).addClass("nowork");
+                      $(this).addClass("nowork"); $(this).removeClass("checked");
                       $(this).find('label').val("");
                   }
 
@@ -1304,7 +1306,7 @@ $(".rappu_more").click(function() {
                       $(this).find('label').text("");
                       cellindex = i;
                   } else {
-                      $(this).addClass("nowork");
+                      $(this).addClass("nowork"); $(this).removeClass("checked");
                       $(this).find('label').val("");
                   }
 
@@ -1388,7 +1390,7 @@ $(".rappu_more").click(function() {
                       $(this).find('label').text("");
                       cellindex = i;
                   } else {
-                      $(this).addClass("nowork");
+                      $(this).addClass("nowork"); $(this).removeClass("checked");
                       $(this).find('label').val("");
                   }
 
@@ -1472,7 +1474,7 @@ $(".rappu_more").click(function() {
                       $(this).find('label').text("");
                       cellindex = i;
                   } else {
-                      $(this).addClass("nowork");
+                      $(this).addClass("nowork"); $(this).removeClass("checked");
                       $(this).find('label').val("");
                   }
 
@@ -1557,7 +1559,7 @@ $(".rappu_more").click(function() {
                       $(this).find('label').text("");
                       cellindex = i;
                   } else {
-                      $(this).addClass("nowork");
+                      $(this).addClass("nowork"); $(this).removeClass("checked");
                       $(this).find('label').val("");
                   }
 

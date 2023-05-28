@@ -62,7 +62,7 @@
                                 $kroom = str_replace('k_room:','',str_replace('~',',',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[7]))))));
                                   $lroom = str_replace('l_room:','',str_replace('~',',',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8]))))));
 
-                          echo "<div onclick='initalize_cross();' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);' dataset-room='".strtolower($key0)."' dataset-aroom='".strtolower($aroom)."' dataset-broom='".strtolower($broom)."' dataset-croom='".strtolower($croom)."' dataset-droom='".strtolower($droom)."' dataset-kroom='".strtolower($kroom)."' dataset-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                          echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);' data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                    
                   }
 
@@ -80,7 +80,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);' dataset-room='".strtolower($key0)."'>".$key0."</div>";
+                          echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);' data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                    
                   }
 
@@ -352,7 +352,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[2]))))));
-                          echo "<div onclick='initalize_cross();' dataset-room='".strtolower($key0)."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div onclick='apartment = this;initalize_cross(this);' data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
 
@@ -368,7 +368,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[2]))))));
-                          echo "<div dataset-room='".strtolower($key0)."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
 
@@ -644,7 +644,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div onclick='initalize_cross();' dataset-room='".strtolower($key0)."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div onclick='apartment = this;initalize_cross(this);' data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
 
@@ -660,7 +660,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div dataset-room='".strtolower($key0)."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
                 ?>
@@ -909,7 +909,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div onclick='initalize_cross();' dataset-room='".strtolower($key0)."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div onclick='apartment = this;initalize_cross(this);' data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
 
@@ -925,7 +925,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div dataset-room='".strtolower($key0)."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
                 ?>
@@ -1174,7 +1174,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div onclick='initalize_cross();' dataset-room='".strtolower($key0)."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div onclick='apartment = this;initalize_cross(this);' data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
 
@@ -1190,7 +1190,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div dataset-room='".strtolower($key0)."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
                 ?>
@@ -1439,7 +1439,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div onclick='initalize_cross();' dataset-room='".strtolower($key0)."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div onclick='apartment = this;initalize_cross(this);' data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
 
@@ -1455,7 +1455,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div dataset-room='".strtolower($key0)."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
                 ?>
@@ -1704,7 +1704,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div onclick='initalize_cross();' dataset-room='".strtolower($key0)."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div onclick='apartment = this;initalize_cross(this);' data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
 
@@ -1720,7 +1720,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div dataset-room='".strtolower($key0)."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
                 ?>
@@ -1969,7 +1969,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div onclick='initalize_cross();' dataset-room='".strtolower($key0)."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div onclick='apartment = this;initalize_cross(this);' data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='project__building_room ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
 
@@ -1985,7 +1985,7 @@
                         $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                         $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                         $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                          echo "<div dataset-room='".strtolower($key0)."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
+                          echo "<div data-room='".strtolower($key0)."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*60);margin-left:calc(".$key2 . "px*60);'>".$key0."</div>";
                    
                   }
                 ?>
@@ -2289,7 +2289,7 @@
             <div class="c_meaning c_meaning_6"><i>VIRHE/ONGELMA</i></div>
             <div class="c_meaning c_meaning_7"><i>KRIITTINEN VIRHE/ONGELMA</i></div>
           </div>
-          <div style="width: 100%;margin-top: 20px;">
+          <div class="zeroscreen_settings">
            <h2>1. Talon alkuasetukset <div class="f_btn o_btn" onclick="fp_open();">täältä</div></h2>
 
                <h2>2. Säädä alkuasetukset <div class="m_btn o_btn" >täältä</div></h2>
@@ -2336,8 +2336,8 @@
       <div class="col-6">
         <div id="house" class="house">
            <div class="row">
-              <div class="house__wall house__wall_roof" style="width: 340px; height: 240px;right: calc(240px);margin-left: auto;">
-               <div class="house__wall_status house__wall_status_r" data-room="K" onclick='$("#step_drawscreen").val("drawscreen_section_one");refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>KATTO</div>
+              <div class="house__wall house__wall_roof house__wall_k" style="width: 340px; height: 240px;right: calc(240px);margin-left: auto;">
+               <div class="house__wall_status house__wall_status_r" data-room="K" onclick="input_step = 'drawscreen_section_one';submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);refresh__drawcontrols();">KATTO</div>
                <input type="number" class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
                <input type="number" class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof();">
 
@@ -2348,8 +2348,8 @@
               </div>
            </div>
            <div class="row">
-              <div class="house__wall house__wall_one" style="width: 340px; height: 240px;">
-                 <div class="house__wall_status house__wall_status_a" data-room="A" onclick='$("#step_drawscreen").val("drawscreen_section_one");refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>Seinä A</div>
+              <div class="house__wall house__wall_one house__wall_a" style="width: 340px; height: 240px;">
+                 <div class="house__wall_status house__wall_status_a" data-room="A" onclick='input_step = "drawscreen_section_one";refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>Seinä A</div>
                  <input type="number" class="lineinput house__wall_param wall_height" value="3200" name="wall_one_a_h" id="wall_one_a_h" onchange="change_a();">
                  <input type="number" class="lineinput house__wall_param wall_width" value="6000" name="wall_one_a_w" id="wall_one_a_w" onchange="change_a();">
                  <div class="house__wallspecial">
@@ -2358,8 +2358,8 @@
                  </div>
 
               </div>
-              <div class="house__wall house__wall_two" style="width: 240px; height: 240px;">
-               <div class="house__wall_status house__wall_status_b" data-room="B" onclick='$("#step_drawscreen").val("drawscreen_section_one");refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>Seinä B</div>
+              <div class="house__wall house__wall_two house__wall_b" style="width: 240px; height: 240px;">
+               <div class="house__wall_status house__wall_status_b" data-room="B" onclick='input_step = "drawscreen_section_one";refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>Seinä B</div>
                <input type="number" class="lineinput house__wall_param wall_height" value="3200" name="wall_one_b_h" id="wall_one_b_h" onchange="change_b();">
                <input type="number" class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_b_w" id="wall_one_b_w" onchange="change_b();">
                <div class="house__wallspecial">
@@ -2367,8 +2367,8 @@
                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="b"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
                  </div>
               </div>
-              <div class="house__wall house__wall_three" style="width: 340px; height: 240px;">
-               <div class="house__wall_status house__wall_status_c" data-room="C" onclick='$("#step_drawscreen").val("drawscreen_section_one");refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>Seinä C</div>
+              <div class="house__wall house__wall_three house__wall_c" style="width: 340px; height: 240px;">
+               <div class="house__wall_status house__wall_status_c" data-room="C" onclick='input_step = "drawscreen_section_one";refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>Seinä C</div>
                <input type="number" class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_c_h" id="wall_one_c_h" onchange="change_c();">
                <input type="number" class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_c_w" id="wall_one_c_w" onchange="change_c();">
                <div class="house__wallspecial">
@@ -2376,8 +2376,8 @@
                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="c"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
                  </div>
               </div>
-              <div class="house__wall house__wall_four" style="width: 240px; height: 240px;">
-               <div class="house__wall_status house__wall_status_d" data-room="D" onclick='$("#step_drawscreen").val("drawscreen_section_one");refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>Seinä D</div>
+              <div class="house__wall house__wall_four house__wall_d" style="width: 240px; height: 240px;">
+               <div class="house__wall_status house__wall_status_d" data-room="D" onclick='input_step = "drawscreen_section_one";refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>Seinä D</div>
                <input type="number" class="lineinput house__wall_param wall_height" value="3200" name="wall_one_d_h" id="wall_one_d_h" onchange="change_d();">
                <input type="number" class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_d_w" id="wall_one_d_w" onchange="change_d();">
                <div class="house__wallspecial">
@@ -2387,8 +2387,8 @@
               </div>
            </div>
            <div class="row">
-                 <div class="house__wall house__wall_floor" style="width: 340px; height: 240px;right: calc(240px);margin-left: auto;">
-                  <div class="house__wall_status house__wall_status_l" data-room="L" onclick='$("#step_drawscreen").val("drawscreen_section_one");refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>LATTIA</div>
+                 <div class="house__wall house__wall_floor house__wall_l" style="width: 340px; height: 240px;right: calc(240px);margin-left: auto;">
+                  <div class="house__wall_status house__wall_status_l" data-room="L" onclick='input_step = "drawscreen_section_one";refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>LATTIA</div>
                   <input type="number" class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_floor_h" id="wall_one_floor_h" onchange="change_floor();">
                   <input type="number" class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_floor_w" id="wall_one_floor_w" onchange="change_floor();">
                   <div class="house__wallspecial">
@@ -2642,8 +2642,8 @@
       <div class="modal">
         <section class="comment__section">
            <h2>Levytetäänkö muutkin seinät?</h2>
-            <div class="modal_close_btn modal-no" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');">Ei</div>
-            <div class="modal_close_btn modal-yes" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');">Kyllä</div>
+            <div class="modal_close_btn modal-no" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeWalls_all();">Ei</div>
+            <div class="modal_close_btn modal-yes" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeWalls_all();">Kyllä</div>
         </section>
       </div>
     </div>

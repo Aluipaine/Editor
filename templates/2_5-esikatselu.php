@@ -20,37 +20,37 @@
       <section class="nav" style="position:relative;">
          <nav>
           <ul>
-             <li><div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('rooms');">Ristivalikkoon</div></li>
+             <li><div onclick="$('#step_drawscreen').val('rooms');refresh__drawcontrols();updatearea();">Ristivalikkoon</div></li>
              <li>
-                <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_one');" class="nav__comleted">Origo</div>
+                <div onclick="$('#step_drawscreen').val('drawscreen_section_one');refresh__drawcontrols();updatearea();" class="nav__comleted">Origo</div>
              </li>
              <li>
-                <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_two');" class="nav__comleted">Aukot</div>
+                <div onclick="$('#step_drawscreen').val('drawscreen_section_two');refresh__drawcontrols();updatearea();" class="nav__comleted">Aukot</div>
              </li>
              <li>
-                <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_three');" class="nav__comleted">Läpiviennit</div>
+                <div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();" class="nav__comleted">Läpiviennit</div>
              </li>
              <li>
-                <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_four');" class="nav__comleted">Saumat</div>
+                <div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();" class="nav__comleted">Saumat</div>
              </li>
              <li>
-                <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_five');" class="nav__comleted">Ladonta</div>
+                <div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();" class="nav__comleted">Ladonta</div>
              </li>
              <li>
-                <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_tyostot');" class="nav__comleted">Kiinnikkeet</div>
+                <div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();" class="nav__comleted">Kiinnikkeet</div>
              </li>
-             <li><div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_eight');osittainen_siirto_muualle();" class="nav__comleted">Seinät</div></li>
+             <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();updatearea();osittainen_siirto_muualle();" class="nav__comleted">Seinät</div></li>
              <li>
-                <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_esikatselu');" class="nav_current">Levyt</div>
+                <div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();" class="nav_current">Levyt</div>
              </li>
 
              <li>
-                <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_six');">Rangat</div>
+                <div onclick="$('#step_drawscreen').val('drawscreen_section_six');refresh__drawcontrols();updatearea();">Rangat</div>
              </li>
              <li>
-                <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_seven');">Listat</div>
+                <div onclick="$('#step_drawscreen').val('drawscreen_section_seven');refresh__drawcontrols();updatearea();">Listat</div>
              </li>
-           <li><div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('project_start');">Päävalikkoon</div></li>
+           <li><div onclick="$('#step_drawscreen').val('project_start');refresh__drawcontrols();updatearea();">Päävalikkoon</div></li>
 
           </ul>
        </nav>

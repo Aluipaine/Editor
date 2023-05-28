@@ -649,6 +649,12 @@ td.hidden {
   height: 18px;
 }
 
+.zeroscreen_settings {
+  display: none;
+  width: 100%;
+  margin-top: 20px;
+}
+
 .drawarea_two_zero {
   background: #fefefe;
   border: 1px solid rgba(153, 153, 153, 0.99);
@@ -1549,8 +1555,13 @@ body.step_screen .drawarea__control {
   left: -10px;
   right: unset;
   position: relative;
-  top: 0;
+  top: -10px;
   bottom: 0;
+}
+
+.drawarea__house .house__wall input.wall_width,
+.drawarea__house .house__wall input.wall_width_2 {
+  left: 11px;
 }
 .box__decor:before,
 .box__decor:after {
@@ -4517,7 +4528,7 @@ input.secondcord {
   display: block;
 }
 
-.table_size_chooser input:checked + label {
+.table_size_chooser .checked input:checked + label {
   background: #78b960;
   outline: 1px solid #e9e9e9;
   border: none;
@@ -4534,6 +4545,7 @@ input.secondcord {
 
 .table_size_chooser .nowork input:checked + label {
   background: var(--nowork);
+  border: 2px solid var(--nowork);
 }
 
 .nowork input + label {

@@ -21,40 +21,40 @@
       <nav>
          <ul>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('rooms');">Ristivalikkoon</div>
+               <div onclick="$('#step_drawscreen').val('rooms');refresh__drawcontrols();updatearea();">Ristivalikkoon</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_one');" class="nav__comleted">Origo</div>
+               <div onclick="$('#step_drawscreen').val('drawscreen_section_one');refresh__drawcontrols();updatearea();" class="nav__comleted">Origo</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_two');" class="nav_current">Aukot</div>
+               <div onclick="$('#step_drawscreen').val('drawscreen_section_two');refresh__drawcontrols();updatearea();" class="nav_current">Aukot</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_three');">Läpiviennit</div>
+               <div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();">Läpiviennit</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_four');">Saumat</div>
+               <div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();">Saumat</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_five');">Ladonta</div>
+               <div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();">Ladonta</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_tyostot');">Kiinnikkeet</div>
+               <div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();">Kiinnikkeet</div>
             </li>
             <li>
                <div onclick="alert('Onnistuu kiinnikkeet-kohdasta');">Seinät</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_esikatselu');">Levyt</div>
+               <div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();">Levyt</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_six');">Rangat</div>
+               <div onclick="$('#step_drawscreen').val('drawscreen_section_six');refresh__drawcontrols();updatearea();">Rangat</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_seven');">Listat</div>
+               <div onclick="$('#step_drawscreen').val('drawscreen_section_seven');refresh__drawcontrols();updatearea();">Listat</div>
             </li>
             <li>
-               <div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('project_start');">Päävalikkoon</div>
+               <div onclick="$('#step_drawscreen').val('project_start');refresh__drawcontrols();updatearea();">Päävalikkoon</div>
             </li>
             <!-- <li><div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_three');">Seuraava</div></li> -->
          </ul>

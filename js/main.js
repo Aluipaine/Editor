@@ -1,5 +1,6 @@
 // Universal
 current_room = null;
+apartment = null;
 
 $("#rooms").hide();
 $("#drawscreen_section_zero").hide();
@@ -31,7 +32,49 @@ $('.drawarea__navigation').hide();
 // // document.querySelector("#drawarea_w").value = "9975";
 // // setTimeout(changesize(),3000);
 
+function changeWalls_all() {
+  setTimeout(() => {
+    saving_array = [];
+    saving_id = $('.id').val();
 
+    aroom_data = apartment.dataset.aroom;
+    broom_data = apartment.dataset.broom;
+    croom_data = apartment.dataset.croom;
+    droom_data = apartment.dataset.droom;
+    kroom_data = apartment.dataset.kroom;
+    lroom_data = apartment.dataset.lroom;
+
+    aroom_data_ = aroom_data.split(",");
+    broom_data_ = broom_data.split(",");
+    croom_data_ = croom_data.split(",");
+    droom_data_ = droom_data.split(",");
+    kroom_data_ = kroom_data.split(",");
+    lroom_data_ = lroom_data.split(",");
+
+    arsz = parseFloat(document.querySelector(".house__wall_a .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_a .wall_width").value);
+    brsz = parseFloat(document.querySelector(".house__wall_b .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_b .wall_width_2").value);
+    crsz = parseFloat(document.querySelector(".house__wall_c .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_c .wall_width").value);
+    drsz = parseFloat(document.querySelector(".house__wall_d .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_d .wall_width_2").value);
+    krsz = parseFloat(document.querySelector(".house__wall_k .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_k .wall_width").value);
+    lrsz = parseFloat(document.querySelector(".house__wall_l .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_l .wall_width").value);
+
+
+    ad = aroom_data_[0] + ","+aroom_data_[1]+","+arsz+","+aroom_data_[3]+","+aroom_data_[4]+","+aroom_data_[5]+","+aroom_data_[6]+","+aroom_data_[7];
+    bd = broom_data_[0] + ","+broom_data_[1]+","+brsz+","+broom_data_[3]+","+broom_data_[4]+","+broom_data_[5]+","+broom_data_[6]+","+broom_data_[7];
+    cd = croom_data_[0] + ","+croom_data_[1]+","+crsz+","+croom_data_[3]+","+croom_data_[4]+","+croom_data_[5]+","+croom_data_[6]+","+croom_data_[7];
+    dd = droom_data_[0] + ","+droom_data_[1]+","+drsz+","+droom_data_[3]+","+droom_data_[4]+","+droom_data_[5]+","+droom_data_[6]+","+droom_data_[7];
+    kd = kroom_data_[0] + ","+kroom_data_[1]+","+krsz+","+kroom_data_[3]+","+kroom_data_[4]+","+kroom_data_[5]+","+kroom_data_[6]+","+kroom_data_[7];
+    ld = lroom_data_[0] + ","+lroom_data_[1]+","+lrsz+","+lroom_data_[3]+","+lroom_data_[4]+","+lroom_data_[5]+","+lroom_data_[6]+","+lroom_data_[7];
+    
+    apartment.dataset.aroom = ad;
+    apartment.dataset.broom = bd;
+    apartment.dataset.croom = cd;
+    apartment.dataset.droom = dd;
+    apartment.dataset.kroom = kd;
+    apartment.dataset.lroom = ld;
+  }, 500);
+  submitprogress('', 'save');
+}
 function refresh__drawcontrols() {
   $("#rooms").hide();
   $("#drawscreen_section_zero").hide();
@@ -69,54 +112,65 @@ function refresh__drawcontrols() {
   // $("#drawscreen_section_four").show();
   // $('.drawarea__controls_four').show();
   // $("#drawscreen_section_four").slideDown(200);
-  k_saved_input = document.querySelector(".k_saved").value;
-  a_saved_input = document.querySelector(".a_saved").value;
-  b_saved_input = document.querySelector(".b_saved").value;
-  c_saved_input = document.querySelector(".c_saved").value;
-  d_saved_input = document.querySelector(".d_saved").value;
-  l_saved_input = document.querySelector(".l_saved").value;
+  input_step = document.querySelector('#step_drawscreen').value;
 
+  if(apartment != null) {
+    k_saved_input = apartment.dataset.kroom;
+    a_saved_input = apartment.dataset.aroom;
+    b_saved_input = apartment.dataset.broom;
+    c_saved_input = apartment.dataset.croom;
+    d_saved_input = apartment.dataset.droom;
+    l_saved_input = apartment.dataset.lroom;
+
+    if (k_saved_input.length > 5) {
+      k_wall = document.querySelectorAll(".house__wall_status_r");
+      for (var w = 0; w < k_wall.length; w++) {
+        k_wall[w].classList.add("tomeasure");
+      }
+    }
+    if (a_saved_input.length > 5) {
+      a_wall = document.querySelectorAll(".house__wall_status_a");
+      for (var w = 0; w < a_wall.length; w++) {
+        a_wall[w].classList.add("tomeasure");
+      }
+    }
+    if (b_saved_input.length > 5) {
+      b_wall = document.querySelectorAll(".house__wall_status_b");
+      for (var w = 0; w < b_wall.length; w++) {
+        b_wall[w].classList.add("tomeasure");
+      }
+    }
+    if (c_saved_input.length > 5) {
+      c_wall = document.querySelectorAll(".house__wall_status_c");
+      for (var w = 0; w < c_wall.length; w++) {
+        c_wall[w].classList.add("tomeasure");
+      }
+    }
+    if (d_saved_input.length > 5) {
+      d_wall = document.querySelectorAll(".house__wall_status_d");
+      for (var w = 0; w < d_wall.length; w++) {
+        d_wall[w].classList.add("tomeasure");
+      }
+    }
+    if (l_saved_input.length > 5) {
+      l_wall = document.querySelectorAll(".house__wall_status_l");
+      for (var w = 0; w < l_wall.length; w++) {
+        l_wall[w].classList.add("tomeasure");
+      }
+    }
+  }
+  
+  
+  
+    
+  
+ 
 
 
   
-  if (k_saved_input.length > 5) {
-    k_wall = document.querySelectorAll(".house__wall_status_r");
-    for (var w = 0; w < k_wall.length; w++) {
-      k_wall[w].classList.add("tomeasure");
-    }
-  }
-  if (a_saved_input.length > 5) {
-    a_wall = document.querySelectorAll(".house__wall_status_a");
-    for (var w = 0; w < a_wall.length; w++) {
-      a_wall[w].classList.add("tomeasure");
-    }
-  }
-  if (b_saved_input.length > 5) {
-    b_wall = document.querySelectorAll(".house__wall_status_b");
-    for (var w = 0; w < b_wall.length; w++) {
-      b_wall[w].classList.add("tomeasure");
-    }
-  }
-  if (c_saved_input.length > 5) {
-    c_wall = document.querySelectorAll(".house__wall_status_c");
-    for (var w = 0; w < c_wall.length; w++) {
-      c_wall[w].classList.add("tomeasure");
-    }
-  }
-  if (d_saved_input.length > 5) {
-    d_wall = document.querySelectorAll(".house__wall_status_d");
-    for (var w = 0; w < d_wall.length; w++) {
-      d_wall[w].classList.add("tomeasure");
-    }
-  }
-  if (l_saved_input.length > 5) {
-    l_wall = document.querySelectorAll(".house__wall_status_l");
-    for (var w = 0; w < l_wall.length; w++) {
-      l_wall[w].classList.add("tomeasure");
-    }
-  }
+  
   setTimeout(function() {
-    input_step = document.querySelector('#step_drawscreen').value;
+    
     var drawscreen_section_zero = document.getElementById("drawscreen_section_zero");
     var drawscreen_section_one = document.getElementById("drawscreen_section_one");
     var drawscreen_section_two = document.querySelector('#drawscreen_section_two');
@@ -141,7 +195,7 @@ function refresh__drawcontrols() {
     }
 
     // submitprogress('', 'save');
-    if (input_step == 'rooms') {
+    if (input_step === 'rooms') {
       $('.drawarea__section').hide();
       if (document.querySelector(".saumat__grandrow")) {
         document.querySelector(".saumat__grandrow").style.opacity = 0;
@@ -2344,6 +2398,7 @@ function submitprogress(b, moddingtype, id, type, array) {
         $(obj).val(value);
         var _id = value;
       });
+      
       var _id = value;
       saving_array = [];
       saving_id = $('.id').val();
@@ -2368,44 +2423,156 @@ function submitprogress(b, moddingtype, id, type, array) {
       saving_array.push(saving_sau);
       saving_array.push(saving_lev);
       //current_room = 'C';  TEMPORARY FOR TESTING
-      $('.' + current_room.toLowerCase() + "_saved").val(saving_array);
-      _saving_k = $(".k_saved").val();
-      _saving_a = $(".a_saved").val();
-      _saving_b = $(".b_saved").val();
-      _saving_c = $(".c_saved").val();
-      _saving_d = $(".d_saved").val();
-      _saving_l = $(".l_saved").val();
-      // _saving_walls = $(".walls_content").val();
+      
+      if(current_room != null) {
+        if(current_room.toLowerCase() == 'a') {
+          apartment.dataset.aroom = saving_array;
+        }
+        if(current_room.toLowerCase() == 'b') {
+          apartment.dataset.broom = saving_array;
+        }
+        if(current_room.toLowerCase() == 'c') {
+          apartment.dataset.croom = saving_array;
+        }
+        if(current_room.toLowerCase() == 'd') {
+          apartment.dataset.droom = saving_array;
+        }
+        if(current_room.toLowerCase() == 'k') {
+          apartment.dataset.kroom = saving_array;
+        }
+        if(current_room.toLowerCase() == 'l') {
+          apartment.dataset.lroom = saving_array;
+        }
+      }
+      if(document.querySelectorAll("#A")) {
+        a_rooms_ = document.querySelectorAll("#A .project__building_room");
 
-      saving_k = _saving_k.replace('"', '').replace("'", "");
-      saving_a = _saving_a.replace('"', '').replace("'", "");
-      saving_b = _saving_b.replace('"', '').replace("'", "");
-      saving_c = _saving_c.replace('"', '').replace("'", "");
-      saving_d = _saving_d.replace('"', '').replace("'", "");
-      saving_l = _saving_l.replace('"', '').replace("'", "");
+        a_rooms = '';
+
+        for (let i = 0; i < a_rooms_.length; i++) {     
+          _name = a_rooms_[i].dataset.room.replaceAll(",","~");
+          positionX = a_rooms_[i].dataset.x.replaceAll(",","~");
+          positionY = a_rooms_[i].dataset.y.replaceAll(",","~");
+          a_room = a_rooms_[i].dataset.aroom.replaceAll(",","~");
+          b_room = a_rooms_[i].dataset.broom.replaceAll(",","~");
+          c_room = a_rooms_[i].dataset.croom.replaceAll(",","~");
+          d_room = a_rooms_[i].dataset.droom.replaceAll(",","~");
+          k_room = a_rooms_[i].dataset.kroom.replaceAll(",","~");
+          l_room = a_rooms_[i].dataset.lroom.replaceAll(",","~");
+          
+          element = '{"name": "'+_name.toUpperCase()+'","positionY": '+positionY+',"positionX": '+positionX+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
+          a_rooms+=element;
+        }
+        
+      }
+      else {
+        a_rooms = '';
+      }
+      b_rooms = '';
+            // if(document.querySelectorAll("#B")) {
+            //   b_rooms_ = document.querySelectorAll("#B .project__building_room");
+            //   b_rooms = '';
+
+            //   for (let i = 0; i < b_rooms_.length; i++) {     
+            //     _name = b_rooms_[i].dataset.room.replace(",","~").replace('"','').replace("'","");
+            //     positionX = b_rooms_[i].dataset.x.replace(",","~").replace('"','').replace("'","");
+            //     positionY = b_rooms_[i].dataset.y.replace(",","~").replace('"','').replace("'","");
+            //     a_room = b_rooms_[i].dataset.aroom.replace(",","~").replace('"','').replace("'","");
+            //     b_room = b_rooms_[i].dataset.broom.replace(",","~").replace('"','').replace("'","");
+            //     c_room = b_rooms_[i].dataset.croom.replace(",","~").replace('"','').replace("'","");
+            //     d_room = b_rooms_[i].dataset.droom.replace(",","~").replace('"','').replace("'","");
+            //     k_room = b_rooms_[i].dataset.kroom.replace(",","~").replace('"','').replace("'","");
+            //     l_room = b_rooms_[i].dataset.lroom.replace(",","~").replace('"','').replace("'","");
+                
+            //     element = '{"name": "'+_name+'","positionX": '+positionX+',"positionY": '+positionY+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
+            //     b_rooms+=element;
+            //   }
+              
+            // }
+            // else {
+            //   b_rooms = '';
+            // }
+      c_rooms = '';
+      // if(document.querySelectorAll("#C")) {
+      //   c_rooms_ = document.querySelectorAll("#C .project__building_room");
+      //   c_rooms = '';
+
+      //   for (let i = 0; i < c_rooms_.length; i++) {     
+      //     _name = c_rooms_[i].dataset.room.replace(",","~").replace('"','').replace("'","");
+      //     positionX = c_rooms_[i].dataset.x.replace(",","~").replace('"','').replace("'","");
+      //     positionY = c_rooms_[i].dataset.y.replace(",","~").replace('"','').replace("'","");
+      //     a_room = c_rooms_[i].dataset.aroom.replace(",","~").replace('"','').replace("'","");
+      //     b_room = c_rooms_[i].dataset.broom.replace(",","~").replace('"','').replace("'","");
+      //     c_room = c_rooms_[i].dataset.croom.replace(",","~").replace('"','').replace("'","");
+      //     d_room = c_rooms_[i].dataset.droom.replace(",","~").replace('"','').replace("'","");
+      //     k_room = c_rooms_[i].dataset.kroom.replace(",","~").replace('"','').replace("'","");
+      //     l_room = c_rooms_[i].dataset.lroom.replace(",","~").replace('"','').replace("'","");
+          
+      //     element = '{"name": "'+_name+'","positionX": '+positionX+',"positionY": '+positionY+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
+      //     c_rooms+=element;
+      //   }
+      // }
+      // else {
+      //   c_rooms = '';
+      // }
+
+      if(document.querySelectorAll("#D")) {
+        d_rooms = document.querySelectorAll("#D .project__building_room");
+      }
+      else {
+        d_rooms = '';
+      }
+
+      if(document.querySelectorAll("#E")) {
+        e_rooms = document.querySelectorAll("#E .project__building_room");
+      }
+      else {
+        e_rooms = '';
+      }
+
+      if(document.querySelectorAll("#F")) {
+        f_rooms = document.querySelectorAll("#F .project__building_room");
+      }
+      else {
+        f_rooms = '';
+      }
+
+      if(document.querySelectorAll("#G")) {
+        g_rooms = document.querySelectorAll("#G .project__building_room");
+      }
+      else {
+        g_rooms = '';
+      }
+
+      if(document.querySelectorAll("#H")) {
+        h_rooms = document.querySelectorAll("#H .project__building_room");
+      }
+      else {
+        h_rooms = '';
+      }
+
+      _saving_a_rooms = "["+a_rooms.replace("'","")+"]";
+      _saving_b_rooms = "["+b_rooms.replace("'","")+"]";
+      _saving_c_rooms = "["+c_rooms.replace("'","")+"]";
+      // _saving_d_rooms
+      // _saving_e_rooms
+      // _saving_f_rooms
+      // _saving_g_rooms
+      // _saving_h_rooms
+
       s_walls = _saving_walls.replace('"', '').replace("'", "");
       a_asetukset = _a_asetukset.replace('"', '').replace("'", "");
       console.log("_saving_walls" + s_walls);
       formData = {
         id: _id.replace('"', '').replace("'", ""),
-        k_saved: _saving_k.replace('"', '').replace("'", ""),
-        a_saved: _saving_a.replace('"', '').replace("'", ""),
-        b_saved: _saving_b.replace('"', '').replace("'", ""),
-        c_saved: _saving_c.replace('"', '').replace("'", ""),
-        d_saved: _saving_d.replace('"', '').replace("'", ""),
-        l_saved: _saving_l.replace('"', '').replace("'", ""),
-        w_content: s_walls.replace('"', '').replace("'", ""),
-        aukko_settings: a_asetukset.replace('"', '').replace("'", ""),
-        // lapiviennit: _lapiviennit,
-        // saumat: _saumat,
-        // levyt: _levyt,
-        // rangat: _rangat,
-        // listat: _listat,
-        // kokonaisalue: _kokonaisalue,
-        // levytettava_alue: _levytettava_alue,
-        // poisjaava_alue: _poisjaava_alue,
-        // keskusmittapiste_cord: _keskusmittapiste_cord,
-        // reklamaatiot: _reklamaatiot,
+        saving_a_rooms: _saving_a_rooms,
+        saving_b_rooms: _saving_b_rooms,
+        saving_c_rooms: _saving_c_rooms,
+        // saving_d_rooms: _saving_d_rooms,
+        // saving_e_rooms: _saving_e_rooms, 
+        // saving_f_rooms: _saving_f_rooms, 
+        // saving_g_rooms: _saving_g_rooms, 
+        // saving_h_rooms: _saving_h_rooms
       };
 
       $.ajax({
@@ -2452,8 +2619,29 @@ function nav_betweenwalls(b) {
 
 function initializeroom(room, menu) {
   ir_no = room.dataset.room;
-  ir_value = document.querySelector("." + ir_no.toLowerCase() + "_saved").value;
+  
+  
   mode_room = ir_no.toLowerCase();
+  $('#step_drawscreen').val('drawscreen_section_one');
+  if(mode_room == 'a') {
+    ir_value = apartment.dataset.aroom;
+  }
+  if(mode_room == 'b') {
+    ir_value = apartment.dataset.broom;
+  }
+  if(mode_room == 'c') {
+    ir_value = apartment.dataset.croom;
+  }
+  if(mode_room == 'd') {
+    ir_value = apartment.dataset.droom;
+  }
+  if(mode_room == 'k') {
+    ir_value = apartment.dataset.kroom;
+  }
+  if(mode_room == 'l') {
+    ir_value = apartment.dataset.lroom;
+  }  
+
 
   // INITIALIZE CURRENT STATUS DA
   da_roomnav = document.querySelectorAll(".house__wall");
@@ -3053,10 +3241,26 @@ function initializeroom(room, menu) {
   counting__aukkos();
 
   ir_no = room.dataset.room;
-  ir_value = document.querySelector("." + ir_no.toLowerCase() + "_saved").value;
   mode_room = ir_no.toLowerCase();
 
-
+  if(mode_room == 'a') {
+    ir_value = apartment.dataset.aroom;
+  }
+  if(mode_room == 'b') {
+    ir_value = apartment.dataset.broom;
+  }
+  if(mode_room == 'c') {
+    ir_value = apartment.dataset.croom;
+  }
+  if(mode_room == 'd') {
+    ir_value = apartment.dataset.droom;
+  }
+  if(mode_room == 'k') {
+    ir_value = apartment.dataset.kroom;
+  }
+  if(mode_room == 'l') {
+    ir_value = apartment.dataset.lroom;
+  }
   calculateamounts();
 }
 // Function for changing element coords
@@ -3222,12 +3426,6 @@ function gridify() {
 }
 window.onload = (event) => {
   gridify();
-
- 
-
-
-  
-  document.querySelector("#rooms > input.c_saved")
 };
 $(document).ready(function() {
   $(window).keydown(function(event) {

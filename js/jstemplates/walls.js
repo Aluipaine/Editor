@@ -280,7 +280,7 @@ function siirto_muualle() {
   // console.log("Menee rankoihin");
   // refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_seven'); listoita();
   // console.log("Menee listoihin
-  // refresh__drawcontrols();$('#step_drawscreen').val('drawscreen_section_eight');
+  $('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();
 }
 
 
@@ -526,6 +526,9 @@ function osittainen_siirto_muualle() {
       }
     
   })();
+
+    $('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();
+
   // refresh__drawcontrols();$('#step_drawscreen').val('drawscreen_section_five');levyta();
   // console.log("Levytetty");
   // refresh__drawcontrols();$('#step_drawscreen').val('drawscreen_section_tyostot');
@@ -538,5 +541,5 @@ function osittainen_siirto_muualle() {
   // console.log("Menee rankoihin");
   // refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_seven'); listoita();
   // console.log("Menee listoihin
-  // refresh__drawcontrols();$('#step_drawscreen').val('drawscreen_section_eight');
+  // $('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();
 }

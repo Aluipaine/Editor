@@ -1,0 +1,21 @@
+Mittapisteen asetus:
+Mittapisteille saa asettaa aukkoja ja läpivientejä seuraavissa vaiheissa. Maksimi mittapisteiden määrä on 2. 
+Paina nappia “Lisää mittapiste” tai vihreää nappia piirtoalueen yläpuolella
+Säädä koordinaatit millimetreinä oikeasta alakulmasta
+Kun olet valmis, paina jatka
+Tästä voit vaihtaa origon kulmaa
+
+REKLAMAATIOT JA HUOMIOT:
+Painamalla punaista nappia, jätät reklamaation huoneesta.Toiminnallisuus ei ole vielä tehdy loppuun saakka, joten käyttö ei suositeltavaa.
+
+
+Uuden aukon asetus:
+Paina “Lisää aukko” nappia ja aseta mitat aukon jokaiseen kulmaan. Huomaathan, että aukon pituus ja korkeus laskeutuu itsestään. Niihin kenttiin ei ole tarvetta laittaa mitään.
+Halutessasi voit asettaa kommentin. Tällöin:
+paina kommentin aihetta, 
+lisää alempaan isoon kenttään itse kommentti
+Valitse kommentin saaja
+
+Aukkojen asetukset: Koskee vain aukon ylitystä ladonnan yhteydessä (Standard-mittojen kytkentä piirtoalueeseen).
+
+
