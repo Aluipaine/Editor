@@ -44,6 +44,16 @@ function eight__navigation(arg) {
   e_levyt = eight.querySelectorAll(".levy");
   e_rangat = eight.querySelectorAll(".tyostot__grandrow");
   e_listat__grandrow = eight.querySelectorAll(".listat__grandrow");
+  if (document.querySelector("#eight__lvl_zero").checked) {
+    for (var i = e_levyt.length - 1; i >= 0; i--) {
+      e_levyt[i].classList.remove("levy_disabled");
+    }
+  }
+  else {
+    for (var i = e_levyt.length - 1; i >= 0; i--) {
+      e_levyt[i].classList.add("levy_disabled");
+    }
+  }
   if (document.querySelector("#eight__lvl_one").checked) {
     for (var i = e_levyt.length - 1; i >= 0; i--) {
       e_kin = e_levyt[i].querySelectorAll(".tyostot__tyosto");
@@ -95,41 +105,82 @@ function siirto_muualle() {
 
   rooms_vaaka = [];
   room_summ = 0;
+
   oneroom = document.querySelector("div.house__wall.house__wall_one");
   tworoom = document.querySelector("div.house__wall.house__wall_two");
   threeroom = document.querySelector("div.house__wall.house__wall_three");
-  fourromm = document.querySelector("div.house__wall.house__wall_four");
+  fourroom = document.querySelector("div.house__wall.house__wall_four");
+
   oneroom_h = parseFloat(oneroom.querySelector(".wall_height").value);
   tworoom_h = parseFloat(tworoom.querySelector(".wall_height").value);
   threeroom_h = parseFloat(threeroom.querySelector(".wall_height").value);
-  fourromm_h = parseFloat(fourromm.querySelector(".wall_height").value);
+  fourroom_h = parseFloat(fourroom.querySelector(".wall_height").value);
+
   oneroom_w = parseFloat(oneroom.querySelector(".wall_width").value);
   tworoom_w = parseFloat(tworoom.querySelector(".wall_width_2").value);
   threeroom_w = parseFloat(threeroom.querySelector(".wall_width").value);
-  fourromm_w = parseFloat(fourromm.querySelector(".wall_width_2").value);
+  fourroom_w = parseFloat(fourroom.querySelector(".wall_width_2").value);
+
   oneroom_name = parseFloat(oneroom.querySelector(".house__wall_status").innerText);
   tworoom_name = parseFloat(tworoom.querySelector(".house__wall_status").innerText);
   threeroom_name = parseFloat(threeroom.querySelector(".house__wall_status").innerText);
-  fourromm_name = parseFloat(fourromm.querySelector(".house__wall_status").innerText);
+  fourroom_name = parseFloat(fourroom.querySelector(".house__wall_status").innerText);
+
   one = oneroom_h + "|" + oneroom_w + "|" + oneroom_name;
   two = tworoom_h + "|" + tworoom_w + "|" + tworoom_name;
   three = threeroom_h + "|" + threeroom_w + "|" + threeroom_name;
-  four = fourromm_h + "|" + fourromm_w + "|" + fourromm_name;
-  rooms_vaaka.push(one);
-  rooms_vaaka.push(two);
-  rooms_vaaka.push(three);
-  rooms_vaaka.push(four);
+  four = fourroom_h + "|" + fourroom_w + "|" + fourroom_name;
+
   copiedcanvases = [];
-  // secondcanvas = document.querySelector("#box-wrapper > main").cloneNode(true);
-  // secondcanvas.dataset.height = 250+parseFloat(document.querySelector("#drawarea_h").value)/5 + "px";
-  // secondcanvas.dataset.width = 50+parseFloat(document.querySelector("#box_w").value)/5 + "px";
-  // secondcanvas.style.width = parseFloat(document.querySelector("#drawarea_w").value)/5 + "px";
-  // secondcanvas.style.height = parseFloat(document.querySelector("#drawarea_h").value)/5 + "px";
-  // secondcanvas.style.display ="block";
-  // copiedcanvases.push(secondcanvas);
+
+
+  secondcanvas = canvas.cloneNode(true);
+  secondcanvas.style.height = room_h / 5 + "px";
+  secondcanvas.dataset.height = room_h / 5 + "px";
+  secondcanvas.style.width = room_w / 5 + "px";
+  secondcanvas.dataset.width = room_w / 5 + "px";
+  secondcanvas.style.display = "block";
+  copiedcanvases.push(secondcanvas);
+
+  if(current_room.toLowerCase() == 'a' || oneroom.querySelector(".house__wall_status").classList.contains('hidden') || oneroom.querySelector(".house__wall_status").classList.contains('measured') || oneroom.classList.contains('hidden') ) {
+    rooms_vaaka.push('skip');
+  } else {
+    rooms_vaaka.push(one);
+  } 
+
+  if(current_room.toLowerCase() == 'b' || tworoom.querySelector(".house__wall_status").classList.contains('hidden') || tworoom.querySelector(".house__wall_status").classList.contains('measured') || tworoom.classList.contains('hidden') ) {
+    rooms_vaaka.push('skip');
+  }
+  else {
+    rooms_vaaka.push(two);
+  }
+
+  if(current_room.toLowerCase() == 'c' || threeroom.querySelector(".house__wall_status").classList.contains('hidden') || threeroom.querySelector(".house__wall_status").classList.contains('measured') || threeroom.classList.contains('hidden') ) {
+    rooms_vaaka.push('skip');
+  }
+  else {
+    rooms_vaaka.push(three);
+  }
+
+  if(current_room.toLowerCase() == 'd' || fourroom.querySelector(".house__wall_status").classList.contains('hidden') || fourroom.querySelector(".house__wall_status").classList.contains('measured') || fourroom.classList.contains('hidden') ) {
+    rooms_vaaka.push('skip');
+  }
+  else {
+    rooms_vaaka.push(four);
+  }
+
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
   (async () => {
     for (var z = 0; z < rooms_vaaka.length; z++) {
+      if(rooms_vaaka[z] == 'skip') {
+        if(realcount == rooms_vaaka.length) {
+          $('#step_drawscreen').val('drawscreen_section_eight');
+          refresh__drawcontrols();
+          break;
+        }
+        continue;
+      }
+
       room_h = parseFloat(rooms_vaaka[z].split("|")[0]);
       room_w = parseFloat(rooms_vaaka[z].split("|")[1]);
       document.querySelector(".wall").value = rooms_vaaka[z].split("|")[2];
@@ -189,8 +240,10 @@ function siirto_muualle() {
       for (var i = 0; i < horizontals_original.length; i++) {
         h_parent.appendChild(horizontals_original[i]);
       }
-      levyta();
+      await sleep(1000);
+      // levyta();
       submitprogress('', 'adding', '', 'sau');
+      submitprogress('', 'save');
       await sleep(1000);
       $('#step_drawscreen').val('drawscreen_section_five');
       refresh__drawcontrols();
@@ -289,30 +342,60 @@ function osittainen_siirto_muualle() {
 
   rooms_vaaka = [];
   room_summ = 0;
+
   oneroom = document.querySelector("div.house__wall.house__wall_one");
   tworoom = document.querySelector("div.house__wall.house__wall_two");
   threeroom = document.querySelector("div.house__wall.house__wall_three");
-  fourromm = document.querySelector("div.house__wall.house__wall_four");
+  fourroom = document.querySelector("div.house__wall.house__wall_four");
+
   oneroom_h = parseFloat(oneroom.querySelector(".wall_height").value);
   tworoom_h = parseFloat(tworoom.querySelector(".wall_height").value);
   threeroom_h = parseFloat(threeroom.querySelector(".wall_height").value);
-  fourromm_h = parseFloat(fourromm.querySelector(".wall_height").value);
+  fourroom_h = parseFloat(fourroom.querySelector(".wall_height").value);
+
   oneroom_w = parseFloat(oneroom.querySelector(".wall_width").value);
   tworoom_w = parseFloat(tworoom.querySelector(".wall_width_2").value);
   threeroom_w = parseFloat(threeroom.querySelector(".wall_width").value);
-  fourromm_w = parseFloat(fourromm.querySelector(".wall_width_2").value);
+  fourroom_w = parseFloat(fourroom.querySelector(".wall_width_2").value);
+
   oneroom_name = parseFloat(oneroom.querySelector(".house__wall_status").innerText);
   tworoom_name = parseFloat(tworoom.querySelector(".house__wall_status").innerText);
   threeroom_name = parseFloat(threeroom.querySelector(".house__wall_status").innerText);
-  fourromm_name = parseFloat(fourromm.querySelector(".house__wall_status").innerText);
+  fourroom_name = parseFloat(fourroom.querySelector(".house__wall_status").innerText);
+
   one = oneroom_h + "|" + oneroom_w + "|" + oneroom_name;
   two = tworoom_h + "|" + tworoom_w + "|" + tworoom_name;
   three = threeroom_h + "|" + threeroom_w + "|" + threeroom_name;
-  four = fourromm_h + "|" + fourromm_w + "|" + fourromm_name;
-  rooms_vaaka.push(one);
-  rooms_vaaka.push(two);
-  rooms_vaaka.push(three);
-  rooms_vaaka.push(four);
+  four = fourroom_h + "|" + fourroom_w + "|" + fourroom_name;
+
+
+  if(oneroom.querySelector(".house__wall_status").classList.contains('hidden') || oneroom.querySelector(".house__wall_status").classList.contains('measured') || oneroom.classList.contains('hidden') ) {
+    rooms_vaaka.push('skip');
+  } else {
+    rooms_vaaka.push(one);
+  } 
+
+  if(tworoom.querySelector(".house__wall_status").classList.contains('hidden') || tworoom.querySelector(".house__wall_status").classList.contains('measured') || tworoom.classList.contains('hidden') ) {
+    rooms_vaaka.push('skip');
+  }
+  else {
+    rooms_vaaka.push(two);
+  }
+
+  if(threeroom.querySelector(".house__wall_status").classList.contains('hidden') || threeroom.querySelector(".house__wall_status").classList.contains('measured') || threeroom.classList.contains('hidden') ) {
+    rooms_vaaka.push('skip');
+  }
+  else {
+    rooms_vaaka.push(three);
+  }
+
+  if(fourroom.querySelector(".house__wall_status").classList.contains('hidden') || fourroom.querySelector(".house__wall_status").classList.contains('measured') || fourroom.classList.contains('hidden') ) {
+    rooms_vaaka.push('skip');
+  }
+  else {
+    rooms_vaaka.push(four);
+  }
+
   copiedcanvases = [];
   // secondcanvas = document.querySelector("#box-wrapper > main").cloneNode(true);
   // secondcanvas.dataset.height = 250+parseFloat(document.querySelector("#drawarea_h").value)/5 + "px";
@@ -324,6 +407,16 @@ function osittainen_siirto_muualle() {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
   (async () => {
     for (var z = 0; z < rooms_vaaka.length; z++) {
+      realcount = Math.floor(parseFloat(z) + 1);
+      console.log("z+1: " + realcount);
+      if(rooms_vaaka[z] == 'skip') {
+        if(realcount == rooms_vaaka.length) {
+          $('#step_drawscreen').val('drawscreen_section_eight');
+          refresh__drawcontrols();
+          break;
+        }
+        continue;
+      }
       room_h = parseFloat(rooms_vaaka[z].split("|")[0]);
       room_w = parseFloat(rooms_vaaka[z].split("|")[1]);
       document.querySelector(".wall").value = rooms_vaaka[z].split("|")[2];
@@ -363,8 +456,7 @@ function osittainen_siirto_muualle() {
       await sleep(1000);
       $("#project_start").hide();
       console.log("z: " + z);
-      realcount = Math.floor(parseFloat(z) + 1);
-      console.log("z+1: " + realcount);
+      
       document.querySelector("div.house.drawarea__house > div:nth-child(2) > div:nth-child(" + realcount + ") > div.house__wall_status").click();
       // updatearea();
       // changesize();
@@ -445,8 +537,9 @@ function osittainen_siirto_muualle() {
       }
     }
     await sleep(1000);
-    refresh__drawcontrols();
+    
     $('#step_drawscreen').val('drawscreen_section_eight');
+    refresh__drawcontrols();
     await sleep(1000);
     // takeshotAllwalls();
 

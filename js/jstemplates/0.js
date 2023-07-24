@@ -1,3 +1,4 @@
+current_apartment = null;
 function rooms__change_asjarj(order) {
   asj = order.dataset.tochange;
   mode_room = asj.toLowerCase();
@@ -178,75 +179,40 @@ $('.project__building div.project__building_room').click(function() {
   c_saved_input = apartment_.data('croom');
   d_saved_input = apartment_.data('droom');
   l_saved_input = apartment_.data('lroom');
-  if (k_saved_input.length > 25) {
-    k_wall = document.querySelectorAll(".house__wall_status_r");
-    for (var w = 0; w < k_wall.length; w++) {
-      if (k_wall[w].innerHTML.search("vaaka")) {
-        k_wall[w].classList.add("saumatok");
-      }
-      else {
-        k_wall[w].classList.add("tomeasure");
-      }
-    }
-  }
-  if (a_saved_input.length > 25) {
-    a_wall = document.querySelectorAll(".house__wall_status_a");
-    for (var w = 0; w < a_wall.length; w++) {
-      if (a_wall[w].innerHTML.search("vaaka")) {
-        a_wall[w].classList.add("saumatok");
-      }
-      else {
-        a_wall[w].classList.add("tomeasure");
-      }
-    }
-  }
-  if (b_saved_input.length > 25) {
-    b_wall = document.querySelectorAll(".house__wall_status_b");
-    for (var w = 0; w < b_wall.length; w++) {
-      if (b_wall[w].innerHTML.search("vaaka")) {
-        b_wall[w].classList.add("saumatok");
-      }
-      else {
-        b_wall[w].classList.add("tomeasure");
-      }
-    }
-  }
-  if (c_saved_input.length > 25) {
-    c_wall = document.querySelectorAll(".house__wall_status_c");
-    for (var w = 0; w < c_wall.length; w++) {
-      if (c_wall[w].innerHTML.search("vaaka")) {
-        c_wall[w].classList.add("saumatok");
-      }
-      else {
-        c_wall[w].classList.add("tomeasure");
-      }
-    }
-  }
-  if (d_saved_input.length > 25) {
-    d_wall = document.querySelectorAll(".house__wall_status_d");
-    for (var w = 0; w < d_wall.length; w++) {
-      if (d_wall[w].innerHTML.search("vaaka")) {
-        d_wall[w].classList.add("saumatok");
-      }
-      else {
-        d_wall[w].classList.add("tomeasure");
-      }
-    }
-  }
-  if (l_saved_input.length > 25) {
-    l_wall = document.querySelectorAll(".house__wall_status_l");
-    for (var w = 0; w < l_wall.length; w++) {
-      if (l_wall[w].innerHTML.search("vaaka")) {
-        l_wall[w].classList.add("saumatok");
-      }
-      else {
-        l_wall[w].classList.add("tomeasure");
-      }
-    }
-  }
-  initalize_cross();
 
-  $(this).addClass("tomeasure");
+  k_wall = document.querySelectorAll(".house__wall_status_k");
+  for (var w = 0; w < k_wall.length; w++) {
+    k_wall[w].classList.add(k_saved_input.split(",")[1]);
+  }
+
+
+  a_wall = document.querySelectorAll(".house__wall_status_a");
+  for (var w = 0; w < a_wall.length; w++) {
+    a_wall[w].classList.add(a_saved_input.split(",")[1]);
+  }
+
+  b_wall = document.querySelectorAll(".house__wall_status_b");
+  for (var w = 0; w < b_wall.length; w++) {
+    b_wall[w].classList.add(b_saved_input.split(",")[1]);
+  }
+
+  c_wall = document.querySelectorAll(".house__wall_status_c");
+  for (var w = 0; w < c_wall.length; w++) {
+    c_wall[w].classList.add(c_saved_input.split(",")[1]);
+  }
+  
+  d_wall = document.querySelectorAll(".house__wall_status_d");
+  for (var w = 0; w < d_wall.length; w++) {
+    d_wall[w].classList.add(d_saved_input.split(",")[1]);
+  }
+
+  l_wall = document.querySelectorAll(".house__wall_status_l");
+  for (var w = 0; w < l_wall.length; w++) {
+    l_wall[w].classList.add(l_saved_input.split(",")[1]);
+  }
+  initalize_cross(apartment_.text());
+
+  // $(this).addClass("tomeasure");
 
   // initalize_cross();
 
@@ -315,7 +281,7 @@ $('.project__building div.project__building_room').click(function() {
   //d
   if(w[5]) {
     $("#wall_one_roof").val(w[5]);
-    $("div.house__wall_status_r").text(w[5]);
+    $("div.house__wall_status_k").text(w[5]);
   }
   else {
     $("#wall_one_roof").val("KATTO " + $(this).text() + "_K");
@@ -335,6 +301,7 @@ $('#rooms div.house__wall_status').click(function() {
   $("#zero_tila").text(tilaname);
   var text = $(this).text();
   $("#zero_huone").text(text);
+  $(this).removeClass("undone");
   $(this).addClass("tomeasure");
   $(this).parent().find('.wall_height').val();
   $(this).parent().find('.wall_width').val();
@@ -348,7 +315,7 @@ $('#rooms div.house__wall_status').click(function() {
   $("#drawarea_h").val($(this).parent().find('.wall_height').val());
   changesize();
 
-  walls_content=document.querySelector(".house__wall_status_l").innerText + ","+document.querySelector(".house__wall_status_a").innerText + ","+document.querySelector(".house__wall_status_b").innerText + ","+document.querySelector(".house__wall_status_c").innerText + ","+document.querySelector(".house__wall_status_d").innerText + ","+document.querySelector(".house__wall_status_r").innerText;
+  walls_content=document.querySelector(".house__wall_status_l").innerText + ","+document.querySelector(".house__wall_status_a").innerText + ","+document.querySelector(".house__wall_status_b").innerText + ","+document.querySelector(".house__wall_status_c").innerText + ","+document.querySelector(".house__wall_status_d").innerText + ","+document.querySelector(".house__wall_status_k").innerText;
   document.querySelector(".walls_content").value = walls_content;
 
   initalize_cross();
@@ -401,7 +368,7 @@ $( window ).on( "load", function() {
   //w
   if(w[5]) {
     $("#wall_one_roof").val(w[5]);
-     $("div.house__wall_status_r").text(w[5]);
+     $("div.house__wall_status_k").text(w[5]);
   }
 } );
 
@@ -425,6 +392,25 @@ function initalize_cross(arg) {
   console.log('initalize_cross fired');
   //document.querySelector('#step_drawscreen').value='rooms';
 
+  if(arg && typeof arg === 'string' || arg instanceof String) {
+    console.log("arg" + arg);
+    current_apartment = String(arg).replaceAll(" ","").toLowerCase();
+    if(window.location.href.indexOf('&apartment=' + current_apartment) === -1) {
+      console.log("true");
+      var refresh = window.location.href + '&apartment=' + current_apartment;    
+      window.history.pushState({ path: refresh }, '', refresh);
+    }
+    else if(window.location.href.indexOf('&apartment=' + current_apartment) !== -1) {
+      let paramString = window.location.href.split('?')[1];
+      let queryString = new URLSearchParams(paramString);
+
+      for (let pair of queryString.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
+    }
+  }
+  
+ 
   
   setTimeout(() => {
     // a_saved = document.querySelector("#rooms > input.a_saved").value;
@@ -442,8 +428,20 @@ function initalize_cross(arg) {
     l_wall = document.querySelector("#house div.house__wall.house__wall_floor");
 
     if(a_saved.length>10) {
-      a_wall.querySelector(".wall_height").value = parseFloat(a_saved.split(",")[2].split("|")[0]);
-      a_wall.querySelector(".wall_width").value = parseFloat(a_saved.split(",")[2].split("|")[1]);
+      a_wall.querySelector(".wall_height").value = parseFloat(a_saved.split(",")[3].split("|")[0]);
+      a_wall.querySelector(".wall_width").value = parseFloat(a_saved.split(",")[3].split("|")[1]);
+
+      a_wall.querySelector(".house__wall_status").classList.remove('undone');
+      a_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      a_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      a_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      a_wall.querySelector(".house__wall_status").classList.remove('measured');
+      a_wall.querySelector(".house__wall_status").classList.remove('done');
+      a_wall.querySelector(".house__wall_status").classList.remove('prob');
+      a_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      a_wall.querySelector(".house__wall_status").classList.add(a_saved.split(",")[1]);
 
       a_wall.style.height = parseFloat(a_wall.querySelector(".wall_height").value) / 10 + "px";
       a_wall.style.width = parseFloat(a_wall.querySelector(".wall_width").value) / 10 + "px";
@@ -457,8 +455,20 @@ function initalize_cross(arg) {
     }
 
     if(b_saved.length>10) {
-      b_wall.querySelector(".wall_height").value = parseFloat(b_saved.split(",")[2].split("|")[0]);
-      b_wall.querySelector(".wall_width_2").value = parseFloat(b_saved.split(",")[2].split("|")[1]);
+      b_wall.querySelector(".wall_height").value = parseFloat(b_saved.split(",")[3].split("|")[0]);
+      b_wall.querySelector(".wall_width_2").value = parseFloat(b_saved.split(",")[3].split("|")[1]);
+
+      b_wall.querySelector(".house__wall_status").classList.remove('undone');
+      b_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      b_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      b_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      b_wall.querySelector(".house__wall_status").classList.remove('measured');
+      b_wall.querySelector(".house__wall_status").classList.remove('done');
+      b_wall.querySelector(".house__wall_status").classList.remove('prob');
+      b_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      b_wall.querySelector(".house__wall_status").classList.add(b_saved.split(",")[1]);
 
       b_wall.style.height = parseFloat(b_wall.querySelector(".wall_height").value) / 10 + "px";
       b_wall.style.width = parseFloat(b_wall.querySelector(".wall_width_2").value) / 10 + "px";
@@ -472,8 +482,20 @@ function initalize_cross(arg) {
     }
 
     if(c_saved.length>10) {
-      c_wall.querySelector(".wall_height").value = parseFloat(c_saved.split(",")[2].split("|")[0]);
-      c_wall.querySelector(".wall_width").value = parseFloat(c_saved.split(",")[2].split("|")[1]);
+      c_wall.querySelector(".wall_height").value = parseFloat(c_saved.split(",")[3].split("|")[0]);
+      c_wall.querySelector(".wall_width").value = parseFloat(c_saved.split(",")[3].split("|")[1]);
+
+      c_wall.querySelector(".house__wall_status").classList.remove('undone');
+      c_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      c_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      c_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      c_wall.querySelector(".house__wall_status").classList.remove('measured');
+      c_wall.querySelector(".house__wall_status").classList.remove('done');
+      c_wall.querySelector(".house__wall_status").classList.remove('prob');
+      c_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      c_wall.querySelector(".house__wall_status").classList.add(c_saved.split(",")[1]);
 
       c_wall.style.height = parseFloat(c_wall.querySelector(".wall_height").value) / 10 + "px";
       c_wall.style.width = parseFloat(c_wall.querySelector(".wall_width").value) / 10 + "px";
@@ -486,8 +508,20 @@ function initalize_cross(arg) {
       c_wall.style.width = parseFloat(c_wall.querySelector(".wall_width").value) / 10 + "px";
     }
     if(d_saved.length>10) {
-      d_wall.querySelector(".wall_height").value = parseFloat(d_saved.split(",")[2].split("|")[0]);
-      d_wall.querySelector(".wall_width_2").value = parseFloat(d_saved.split(",")[2].split("|")[1]);
+      d_wall.querySelector(".wall_height").value = parseFloat(d_saved.split(",")[3].split("|")[0]);
+      d_wall.querySelector(".wall_width_2").value = parseFloat(d_saved.split(",")[3].split("|")[1]);
+
+      d_wall.querySelector(".house__wall_status").classList.remove('undone');
+      d_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      d_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      d_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      d_wall.querySelector(".house__wall_status").classList.remove('measured');
+      d_wall.querySelector(".house__wall_status").classList.remove('done');
+      d_wall.querySelector(".house__wall_status").classList.remove('prob');
+      d_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      d_wall.querySelector(".house__wall_status").classList.add(d_saved.split(",")[1]);
 
       d_wall.style.height = parseFloat(d_wall.querySelector(".wall_height").value) / 10 + "px";
       d_wall.style.width = parseFloat(d_wall.querySelector(".wall_width_2").value) / 10 + "px";
@@ -502,8 +536,20 @@ function initalize_cross(arg) {
       d_wall.style.width = parseFloat(d_wall.querySelector(".wall_width_2").value) / 10 + "px";
     }
     if(k_saved.length>10) {
-      k_wall.querySelector(".wall_height").value = parseFloat(k_saved.split(",")[2].split("|")[0]);
-      k_wall.querySelector(".wall_width").value = parseFloat(k_saved.split(",")[2].split("|")[1]);
+      k_wall.querySelector(".wall_height").value = parseFloat(k_saved.split(",")[3].split("|")[0]);
+      k_wall.querySelector(".wall_width").value = parseFloat(k_saved.split(",")[3].split("|")[1]);
+
+      k_wall.querySelector(".house__wall_status").classList.remove('undone');
+      k_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      k_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      k_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      k_wall.querySelector(".house__wall_status").classList.remove('measured');
+      k_wall.querySelector(".house__wall_status").classList.remove('done');
+      k_wall.querySelector(".house__wall_status").classList.remove('prob');
+      k_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      k_wall.querySelector(".house__wall_status").classList.add(k_saved.split(",")[1]);
 
       k_wall.style.height = parseFloat(k_wall.querySelector(".wall_height").value) / 10 + "px";
       k_wall.style.width = parseFloat(k_wall.querySelector(".wall_width").value) / 10 + "px";
@@ -516,8 +562,21 @@ function initalize_cross(arg) {
       k_wall.style.width = parseFloat(k_wall.querySelector(".wall_width").value) / 10 + "px";
     }
     if(l_saved.length>10) {
-      l_wall.querySelector(".wall_height").value = parseFloat(l_saved.split(",")[2].split("|")[0]);
-      l_wall.querySelector(".wall_width").value = parseFloat(l_saved.split(",")[2].split("|")[1]);
+      l_wall.querySelector(".wall_height").value = parseFloat(l_saved.split(",")[3].split("|")[0]);
+      l_wall.querySelector(".wall_width").value = parseFloat(l_saved.split(",")[3].split("|")[1]);
+
+
+      l_wall.querySelector(".house__wall_status").classList.remove('undone');
+      l_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      l_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      l_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      l_wall.querySelector(".house__wall_status").classList.remove('measured');
+      l_wall.querySelector(".house__wall_status").classList.remove('done');
+      l_wall.querySelector(".house__wall_status").classList.remove('prob');
+      l_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      l_wall.querySelector(".house__wall_status").classList.add(l_saved.split(",")[1]);
 
       l_wall.style.height = parseFloat(l_wall.querySelector(".wall_height").value) / 10 + "px";
       l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 10 + "px";
@@ -564,4 +623,35 @@ function adjust_roomsizes() {
 
   l_wall.style.height = parseFloat(l_wall.querySelector(".wall_height").value) / 10 + "px";
   l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 10 + "px";
+}
+
+
+function degradate_url(stage) {
+  urlString = window.location.href;
+  url = new URL(urlString);
+  if(stage === 1) {
+    removedParam = 'apartment';
+    url.searchParams.delete(removedParam);
+
+    removedParam = 'room';
+    url.searchParams.delete(removedParam);
+
+    removedParam = 'step';
+    url.searchParams.delete(removedParam);
+  }
+  if(stage === 2) {
+    removedParam = 'room';
+    url.searchParams.delete(removedParam);
+
+    removedParam = 'step';
+    url.searchParams.delete(removedParam);
+  }
+  if(stage === 3) {
+    removedParam = 'step';
+    url.searchParams.delete(removedParam);
+  }
+  url.searchParams.delete(removedParam);
+  // location.href = url;
+  modified_url = JSON.stringify(url).replaceAll('"',"").replaceAll("'","").replaceAll("http://localhost/","").replaceAll("%22","").replaceAll("https://teditori.gromi.fi/","").replaceAll("http://teditori.gromi.fi/","");
+  window.history.pushState({ path: modified_url }, '', modified_url);
 }

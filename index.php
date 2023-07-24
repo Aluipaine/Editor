@@ -5,16 +5,20 @@ session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){ 
-    if(isset($_SESSION["username"]) && $_SESSION["username"] == 'Marko'){
-        header("location: welcome-" . $_SESSION['username'] . ".php");
+    if(isset($_SESSION["role"]) && $_SESSION["role"] == 'admin'){
+        header("location: welcome-marko.php");
     } else {
+        $username_role_ = mysqli_query($link, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
+        $username_role = mysqli_fetch_assoc($username_role_);
+        
+        $_SESSION["role"] = $username_role['role'];
         header("location: welcome.php");
     }
     exit;
 }
 
 // Include config file
-require_once "config.php";
+require "config.php";
  
 // Define variables and initialize with empty values
 $username = $password = "";

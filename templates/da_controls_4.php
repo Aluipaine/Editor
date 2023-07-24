@@ -14,7 +14,7 @@
       <div class="drawarea__controls_btn" onclick="siirto_ladonta();" style="background: darkgreen;">
          Saumoita muut seinät
       </div>
-      <div class="drawarea__controls_btn" onclick="refresh__drawcontrols();$('#step_drawscreen').val('drawscreen_section_five');submitprogress('', 'adding', '', 'sau');submitprogress('', 'adding', '', 'lev');">
+      <div class="drawarea__controls_btn" onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();submitprogress('', 'adding', '', 'sau');submitprogress('', 'adding', '', 'lev');">
          Levytä
       </div>
       <?php include("./templates/house_nav.php");  ?>

@@ -4,6 +4,10 @@
            <nav>
              <ul style="display:flex;flex-direction: column;">
               <li><div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('rooms');">Ristivalikkoon</div></li>
+              
+              <li><input type="checkbox" checked id="eight__lvl_zero" class="taso_btn drawarea__controls_btn taso__btns_one" onclick="eight__navigation(0);">
+              <label for="eight__lvl_zero" class="taso__btns_one taso_btn">Näytä levyt</label></li>
+              
               <li><input type="checkbox" checked id="eight__lvl_one" class="taso_btn drawarea__controls_btn taso__btns_one" onclick="eight__navigation(1);">
               <label for="eight__lvl_one" class="taso__btns_one taso_btn">Näytä kiinnikkeet</label></li>
               
@@ -21,12 +25,18 @@
 
               <li><div class="greenbtn" onclick="create__excel_fromallwalls();">Lataa Seinän Excel</div></li>
               <li><div class="yellowbtn" onclick="takeshotAllwalls();">Ota PDF-kuvakaappaus</div></li>
+              <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();" class="redbtn">Palaa Ladontaan</div></li>
+              </ul>
+            </nav>
+            <nav style="margin: 15px 0 0 0;">
+            <h4>Valikko</h4>
+             <ul style="display:flex;flex-direction: column;max-width:100%;">
                 <li><div onclick="$('#step_drawscreen').val('drawscreen_section_one'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Origo</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_two'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Aukot</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Läpiviennit</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Saumat</div></li>
-               <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Ladonta</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Kiinnikkeet</div></li>
+               <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Ladonta</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav_current">Seinät</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu'); refresh__drawcontrols();updatearea(); delcanvases();">Levyt</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_six'); refresh__drawcontrols();updatearea(); delcanvases();">Rangat</div></li>
@@ -80,5 +90,7 @@
           
     </div>
   </div>
+  <div class="greenbtn finalization_downloadbtn" onclick="create__excel_fromallwalls();">Hyväksy ja jatka</div>
+
 </div>
 

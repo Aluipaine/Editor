@@ -2,6 +2,39 @@
 current_room = null;
 apartment = null;
 
+all_apartments = document.querySelectorAll('.project__building_room');
+
+for (let i = 0; i < all_apartments.length; i++) {
+  if(all_apartments[i].dataset.aroom && all_apartments[i].dataset.broom && all_apartments[i].dataset.croom && all_apartments[i].dataset.droom && all_apartments[i].dataset.kroom && all_apartments[i].dataset.lroom) {
+    if(all_apartments[i].dataset.aroom.split(",")[1] == "problem" || all_apartments[i].dataset.broom.split(",")[1] == "problem" || all_apartments[i].dataset.croom.split(",")[1] == "problem" || all_apartments[i].dataset.droom.split(",")[1] == "problem" || all_apartments[i].dataset.kroom.split(",")[1] == "problem" || all_apartments[i].dataset.lroom.split(",")[1] == "problem") {
+        all_apartments[i].classList.add("problem");
+    }
+    else if(all_apartments[i].dataset.aroom.split(",")[1] == "prob" || all_apartments[i].dataset.broom.split(",")[1] == "prob" || all_apartments[i].dataset.croom.split(",")[1] == "prob" || all_apartments[i].dataset.droom.split(",")[1] == "prob" || all_apartments[i].dataset.kroom.split(",")[1] == "prob" || all_apartments[i].dataset.lroom.split(",")[1] == "prob") {
+        all_apartments[i].classList.add("prob");
+    }
+
+    else if(all_apartments[i].dataset.aroom.split(",")[1] == "measured" || all_apartments[i].dataset.broom.split(",")[1] == "measured" || all_apartments[i].dataset.croom.split(",")[1] == "measured" || all_apartments[i].dataset.droom.split(",")[1] == "measured" || all_apartments[i].dataset.kroom.split(",")[1] == "measured" || all_apartments[i].dataset.lroom.split(",")[1] == "measured") {
+        all_apartments[i].classList.add("measured");
+    }
+
+    else if(all_apartments[i].dataset.aroom.split(",")[1] == "rangatok" || all_apartments[i].dataset.broom.split(",")[1] == "rangatok" || all_apartments[i].dataset.croom.split(",")[1] == "rangatok" || all_apartments[i].dataset.droom.split(",")[1] == "rangatok" || all_apartments[i].dataset.kroom.split(",")[1] == "rangatok" || all_apartments[i].dataset.lroom.split(",")[1] == "rangatok") {
+        all_apartments[i].classList.add("rangatok");
+    }
+
+    else if(all_apartments[i].dataset.aroom.split(",")[1] == "nowork" || all_apartments[i].dataset.broom.split(",")[1] == "nowork" || all_apartments[i].dataset.croom.split(",")[1] == "nowork" || all_apartments[i].dataset.droom.split(",")[1] == "nowork" || all_apartments[i].dataset.kroom.split(",")[1] == "nowork" || all_apartments[i].dataset.lroom.split(",")[1] == "nowork") {
+        all_apartments[i].classList.add("nowork");
+    }
+    
+    else if(all_apartments[i].dataset.aroom.split(",")[1] == "undone" || all_apartments[i].dataset.broom.split(",")[1] == "undone" || all_apartments[i].dataset.croom.split(",")[1] == "undone" || all_apartments[i].dataset.droom.split(",")[1] == "undone" || all_apartments[i].dataset.kroom.split(",")[1] == "undone" || all_apartments[i].dataset.lroom.split(",")[1] == "undone") {
+        all_apartments[i].classList.add("undone");
+    }
+    else {
+        all_apartments[i].classList.add("done");
+    }
+  }
+}
+
+
 $("#rooms").hide();
 $("#drawscreen_section_zero").hide();
 $("#drawscreen_section_one").hide();
@@ -59,13 +92,13 @@ function changeWalls_all() {
     lrsz = parseFloat(document.querySelector(".house__wall_l .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_l .wall_width").value);
 
 
-    ad = aroom_data_[0] + ","+aroom_data_[1]+","+arsz+","+aroom_data_[3]+","+aroom_data_[4]+","+aroom_data_[5]+","+aroom_data_[6]+","+aroom_data_[7];
-    bd = broom_data_[0] + ","+broom_data_[1]+","+brsz+","+broom_data_[3]+","+broom_data_[4]+","+broom_data_[5]+","+broom_data_[6]+","+broom_data_[7];
-    cd = croom_data_[0] + ","+croom_data_[1]+","+crsz+","+croom_data_[3]+","+croom_data_[4]+","+croom_data_[5]+","+croom_data_[6]+","+croom_data_[7];
-    dd = droom_data_[0] + ","+droom_data_[1]+","+drsz+","+droom_data_[3]+","+droom_data_[4]+","+droom_data_[5]+","+droom_data_[6]+","+droom_data_[7];
-    kd = kroom_data_[0] + ","+kroom_data_[1]+","+krsz+","+kroom_data_[3]+","+kroom_data_[4]+","+kroom_data_[5]+","+kroom_data_[6]+","+kroom_data_[7];
-    ld = lroom_data_[0] + ","+lroom_data_[1]+","+lrsz+","+lroom_data_[3]+","+lroom_data_[4]+","+lroom_data_[5]+","+lroom_data_[6]+","+lroom_data_[7];
-    
+    ad = aroom_data_[0] + "," + aroom_data_[1] + "," + arsz + "," + aroom_data_[3] + "," + aroom_data_[4] + "," + aroom_data_[5] + "," + aroom_data_[6] + "," + aroom_data_[7];
+    bd = broom_data_[0] + "," + broom_data_[1] + "," + brsz + "," + broom_data_[3] + "," + broom_data_[4] + "," + broom_data_[5] + "," + broom_data_[6] + "," + broom_data_[7];
+    cd = croom_data_[0] + "," + croom_data_[1] + "," + crsz + "," + croom_data_[3] + "," + croom_data_[4] + "," + croom_data_[5] + "," + croom_data_[6] + "," + croom_data_[7];
+    dd = droom_data_[0] + "," + droom_data_[1] + "," + drsz + "," + droom_data_[3] + "," + droom_data_[4] + "," + droom_data_[5] + "," + droom_data_[6] + "," + droom_data_[7];
+    kd = kroom_data_[0] + "," + kroom_data_[1] + "," + krsz + "," + kroom_data_[3] + "," + kroom_data_[4] + "," + kroom_data_[5] + "," + kroom_data_[6] + "," + kroom_data_[7];
+    ld = lroom_data_[0] + "," + lroom_data_[1] + "," + lrsz + "," + lroom_data_[3] + "," + lroom_data_[4] + "," + lroom_data_[5] + "," + lroom_data_[6] + "," + lroom_data_[7];
+
     apartment.dataset.aroom = ad;
     apartment.dataset.broom = bd;
     apartment.dataset.croom = cd;
@@ -73,7 +106,10 @@ function changeWalls_all() {
     apartment.dataset.kroom = kd;
     apartment.dataset.lroom = ld;
   }, 500);
-  submitprogress('', 'save');
+  if (current_room !== null) {
+    submitprogress('', 'save');
+  }
+  // submitprogress('', 'save');
 }
 function refresh__drawcontrols() {
   $("#rooms").hide();
@@ -114,7 +150,7 @@ function refresh__drawcontrols() {
   // $("#drawscreen_section_four").slideDown(200);
   input_step = document.querySelector('#step_drawscreen').value;
 
-  if(apartment != null) {
+  if (apartment != null) {
     k_saved_input = apartment.dataset.kroom;
     a_saved_input = apartment.dataset.aroom;
     b_saved_input = apartment.dataset.broom;
@@ -122,55 +158,55 @@ function refresh__drawcontrols() {
     d_saved_input = apartment.dataset.droom;
     l_saved_input = apartment.dataset.lroom;
 
-    if (k_saved_input.length > 5) {
-      k_wall = document.querySelectorAll(".house__wall_status_r");
-      for (var w = 0; w < k_wall.length; w++) {
-        k_wall[w].classList.add("tomeasure");
-      }
-    }
-    if (a_saved_input.length > 5) {
-      a_wall = document.querySelectorAll(".house__wall_status_a");
-      for (var w = 0; w < a_wall.length; w++) {
-        a_wall[w].classList.add("tomeasure");
-      }
-    }
-    if (b_saved_input.length > 5) {
-      b_wall = document.querySelectorAll(".house__wall_status_b");
-      for (var w = 0; w < b_wall.length; w++) {
-        b_wall[w].classList.add("tomeasure");
-      }
-    }
-    if (c_saved_input.length > 5) {
-      c_wall = document.querySelectorAll(".house__wall_status_c");
-      for (var w = 0; w < c_wall.length; w++) {
-        c_wall[w].classList.add("tomeasure");
-      }
-    }
-    if (d_saved_input.length > 5) {
-      d_wall = document.querySelectorAll(".house__wall_status_d");
-      for (var w = 0; w < d_wall.length; w++) {
-        d_wall[w].classList.add("tomeasure");
-      }
-    }
-    if (l_saved_input.length > 5) {
-      l_wall = document.querySelectorAll(".house__wall_status_l");
-      for (var w = 0; w < l_wall.length; w++) {
-        l_wall[w].classList.add("tomeasure");
-      }
-    }
+    // if (k_saved_input.length > 5) {
+    //   k_wall = document.querySelectorAll(".house__wall_status_k");
+    //   for (var w = 0; w < k_wall.length; w++) {
+    //     k_wall[w].classList.add("tomeasure");
+    //   }
+    // }
+    // if (a_saved_input.length > 5) {
+    //   a_wall = document.querySelectorAll(".house__wall_status_a");
+    //   for (var w = 0; w < a_wall.length; w++) {
+    //     a_wall[w].classList.add("tomeasure");
+    //   }
+    // }
+    // if (b_saved_input.length > 5) {
+    //   b_wall = document.querySelectorAll(".house__wall_status_b");
+    //   for (var w = 0; w < b_wall.length; w++) {
+    //     b_wall[w].classList.add("tomeasure");
+    //   }
+    // }
+    // if (c_saved_input.length > 5) {
+    //   c_wall = document.querySelectorAll(".house__wall_status_c");
+    //   for (var w = 0; w < c_wall.length; w++) {
+    //     c_wall[w].classList.add("tomeasure");
+    //   }
+    // }
+    // if (d_saved_input.length > 5) {
+    //   d_wall = document.querySelectorAll(".house__wall_status_d");
+    //   for (var w = 0; w < d_wall.length; w++) {
+    //     d_wall[w].classList.add("tomeasure");
+    //   }
+    // }
+    // if (l_saved_input.length > 5) {
+    //   l_wall = document.querySelectorAll(".house__wall_status_l");
+    //   for (var w = 0; w < l_wall.length; w++) {
+    //     l_wall[w].classList.add("tomeasure");
+    //   }
+    // }
   }
-  
-  
-  
-    
-  
- 
 
 
-  
-  
-  setTimeout(function() {
-    
+
+
+
+
+
+
+
+
+  setTimeout(function () {
+
     var drawscreen_section_zero = document.getElementById("drawscreen_section_zero");
     var drawscreen_section_one = document.getElementById("drawscreen_section_one");
     var drawscreen_section_two = document.querySelector('#drawscreen_section_two');
@@ -194,6 +230,42 @@ function refresh__drawcontrols() {
       $('.drawarea__section').hide();
     }
 
+    let rooms = document.querySelectorAll(".project__building_room");
+
+    for (let a = 0; a < rooms.length; a++) {
+        
+        const element = rooms[a];
+        t = rooms[a];
+        if(t.dataset.aroom) {}
+        else {
+            continue;
+        }
+        statuses = "";
+
+        // console.log(t);
+        statuses += t.dataset.aroom.split(",")[1] + " __ ";
+        statuses += t.dataset.broom.split(",")[1] + " __ ";
+        statuses += t.dataset.croom.split(",")[1] + " __ ";
+        statuses += t.dataset.droom.split(",")[1] + " __ ";
+        statuses += t.dataset.kroom.split(",")[1] + " __ ";
+        statuses += t.dataset.lroom.split(",")[1] + " __ ";
+
+        if(statuses.includes("undone") && statuses.includes("measured") && statuses.includes("tomeasure")) {
+            element.classList.add("bg-1");
+        }
+        else if(statuses.includes("undone") && statuses.includes("measured")) {
+            element.classList.add("bg-2");
+        }
+        else if(statuses.includes("undone") && statuses.includes("tomeasure")) {
+            element.classList.add("bg-3");
+        }
+
+        else if(statuses.includes("measured") && statuses.includes("tomeasure")) {
+            element.classList.add("bg-4");
+        }
+    }
+
+
     // submitprogress('', 'save');
     if (input_step === 'rooms') {
       $('.drawarea__section').hide();
@@ -207,6 +279,7 @@ function refresh__drawcontrols() {
         document.querySelector("div.tyostot__grandrow").remove();
       }
       if (document.querySelector("div.levyt")) {
+
         document.querySelector("div.levyt").remove();
       }
       aukot = canvas.querySelectorAll(".aukko");
@@ -295,7 +368,7 @@ function refresh__drawcontrols() {
       document.querySelector(".drawarea__section").style.display = 'flex';
       document.querySelector("#box-wrapper").style.display = 'block';
       var drawarea__left = document.querySelector(".drawarea__left");
-      drawarea__left.onclick = function() {};
+      drawarea__left.onclick = function () { };
       for (var i = 0; i < da__controls.length; i++) {
         da__controls[i].style.display = "none";
       }
@@ -319,7 +392,7 @@ function refresh__drawcontrols() {
         drawarea__top_circle[i].style.display = "none";
       }
 
-      
+
 
       // Enable popup for Aukot and Reijät 2.2-2.3
       document.querySelector(".drawarea__top").classList.remove("m_btn");
@@ -366,35 +439,48 @@ function refresh__drawcontrols() {
         }
       }
 
-      walls_content=document.querySelector(".house__wall_status_l").innerText + ","+document.querySelector(".house__wall_status_a").innerText + ","+document.querySelector(".house__wall_status_b").innerText + ","+document.querySelector(".house__wall_status_c").innerText + ","+document.querySelector(".house__wall_status_d").innerText + ","+document.querySelector(".house__wall_status_r").innerText;
-      document.querySelector(".walls_content").value = walls_content;
 
+      room_status = 'tomeasure';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+
+
+      walls_content = document.querySelector(".house__wall_status_l").innerText + "," + document.querySelector(".house__wall_status_a").innerText + "," + document.querySelector(".house__wall_status_b").innerText + "," + document.querySelector(".house__wall_status_c").innerText + "," + document.querySelector(".house__wall_status_d").innerText + "," + document.querySelector(".house__wall_status_k").innerText;
+      document.querySelector(".walls_content").value = walls_content;
+      // degradate_url(3);
     }
     else {
-       let array__ofinputsy = [];
-       let array__ofinputsx = [];
+      let array__ofinputsy = [];
+      let array__ofinputsx = [];
 
-       array__ofinputsy.push(document.querySelector("#cord_up"));
-       array__ofinputsx.push(document.querySelector("#cord_left"));
-       array__ofinputsx.push(document.querySelector("#aukotcord_left"));
-       array__ofinputsx.push(document.querySelector("#aukotcord_right"));
-       array__ofinputsy.push(document.querySelector("#aukotcord_low"));
-       array__ofinputsy.push(document.querySelector("#aukotcord_up"));
-       array__ofinputsy.push(document.querySelector("#lvcord_low"));
-       array__ofinputsx.push(document.querySelector("#lvcord_left"));
-
-
+      // 09-07 change
+      try {
+        array__ofinputsy.push(document.querySelector("#cord_up"));
+        array__ofinputsx.push(document.querySelector("#cord_left"));
+        array__ofinputsx.push(document.querySelector("#aukotcord_left"));
+        array__ofinputsx.push(document.querySelector("#aukotcord_right"));
+        array__ofinputsy.push(document.querySelector("#aukotcord_low"));
+        array__ofinputsy.push(document.querySelector("#aukotcord_up"));
+        array__ofinputsy.push(document.querySelector("#lvcord_low"));
+        array__ofinputsx.push(document.querySelector("#lvcord_left"));
         const i_height = document.querySelector('#box_h').value;
         const i_width = document.querySelector('#box_w').value;
 
 
-       for (var i = 0; i < array__ofinputsx.length; i++) {
-         array__ofinputsx[i].dataset.maximum = parseFloat(i_width);
-       }
+        for (var i = 0; i < array__ofinputsx.length; i++) {
+          array__ofinputsx[i].dataset.maximum = parseFloat(i_width);
+        }
 
-       for (var i = 0; i < array__ofinputsy.length; i++) {
-         array__ofinputsy[i].dataset.maximum = parseFloat(i_height);
-       }
+        for (var i = 0; i < array__ofinputsy.length; i++) {
+          array__ofinputsy[i].dataset.maximum = parseFloat(i_height);
+        }
+      } catch (error) {
+        array__ofinputsy.push(document.querySelector("#cord_up"));
+        array__ofinputsx.push(document.querySelector("#cord_left"));
+      }
+      
+
+
+      
     }
     if (input_step == 'drawscreen_section_two') {
       $('.drawarea__section').show();
@@ -407,9 +493,9 @@ function refresh__drawcontrols() {
       document.querySelector(".drawarea__section").style.display = 'flex';
       document.querySelector("#box-wrapper").style.display = 'block';
       var drawarea__left = document.querySelector(".drawarea__left");
-      drawarea__left.onclick = function() {};
+      drawarea__left.onclick = function () { };
       var drawarea__bottom = document.querySelector(".drawarea__bottom");
-      drawarea__bottom.onclick = function() {};
+      drawarea__bottom.onclick = function () { };
       for (var i = 0; i < da__controls.length; i++) {
         da__controls[i].style.display = "none";
       }
@@ -480,6 +566,9 @@ function refresh__drawcontrols() {
           sauma__controls_dels[i].style.display = "block";
         }
       }
+
+      room_status = 'tomeasure';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     if (input_step == 'drawscreen_section_three') {
       $('.drawarea__section').show();
@@ -492,9 +581,9 @@ function refresh__drawcontrols() {
       document.querySelector(".drawarea__section").style.display = 'flex';
       document.querySelector("#box-wrapper").style.display = 'block';
       var drawarea__left = document.querySelector(".drawarea__left");
-      drawarea__left.onclick = function() {};
+      drawarea__left.onclick = function () { };
       var drawarea__bottom = document.querySelector(".drawarea__bottom");
-      drawarea__bottom.onclick = function() {};
+      drawarea__bottom.onclick = function () { };
       if (document.querySelector(".saumat__grandrow")) {
         document.querySelector(".saumat__grandrow").style.opacity = 0;
       }
@@ -565,6 +654,9 @@ function refresh__drawcontrols() {
           sauma__controls_dels[i].style.display = "block";
         }
       }
+
+      room_status = 'tomeasure';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     if (input_step == 'drawscreen_section_four') {
       $('.drawarea__section').show();
@@ -577,11 +669,11 @@ function refresh__drawcontrols() {
       document.querySelector(".drawarea__section").style.display = 'flex';
       document.querySelector("#box-wrapper").style.display = 'block';
       var drawarea__left = document.querySelector(".drawarea__left");
-      drawarea__left.onclick = function() {
+      drawarea__left.onclick = function () {
         luo__sauma_vdrag()
       };
       var drawarea__bottom = document.querySelector(".drawarea__bottom");
-      drawarea__bottom.onclick = function() {
+      drawarea__bottom.onclick = function () {
         luo__sauma_hdrag()
       };
       if (document.querySelector(".saumat__grandrow")) {
@@ -831,8 +923,8 @@ function refresh__drawcontrols() {
         sauma__control.setAttribute("onclick", "clearcord(this,'sau');");
         sauma__control.setAttribute("data-from", parseFloat(sauma__control.value));
         // if (document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus")
-          // .checked || vaakahanta_alas === true) {
-          sauma.style.bottom = "60px";
+        // .checked || vaakahanta_alas === true) {
+        sauma.style.bottom = "60px";
         // }
         // else {
         //   sauma.style.top = "60px";
@@ -846,7 +938,7 @@ function refresh__drawcontrols() {
         sauma.append(sauma__controls);
         sauma.dataset.from = 300;
         calculateamounts();
-        
+
       }
 
 
@@ -870,6 +962,9 @@ function refresh__drawcontrols() {
         closer[i].style.zIndex = 1;
         closer[i].style.opacity = 1;
       }
+
+      room_status = 'saumatok';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     else {
       let closer = document.querySelectorAll(".closer");
@@ -879,114 +974,11 @@ function refresh__drawcontrols() {
       }
 
       var drawarea__left = document.querySelector(".drawarea__left");
-      drawarea__left.onclick = function() {};
+      drawarea__left.onclick = function () { };
       var drawarea__bottom = document.querySelector(".drawarea__bottom");
-      drawarea__bottom.onclick = function() {};
+      drawarea__bottom.onclick = function () { };
     }
-    if (input_step == 'drawscreen_section_five') {
-      $('.drawarea__section').show();
-      for (var i = 0; i < da__controls.length; i++) {
-        da__controls[i].style.display = "none";
-      }
-      $("#drawscreen_section_five").show();
-      $('.drawarea__controls_five').show();
-      $("#drawscreen_section_five").slideDown(200);
-      $('.drawarea__section').css('display', 'flex');
-      $('.drawarea__controls_five').css('display', 'block');
-      $('.levy__section').css('display', 'none');
-      document.querySelector("#box-wrapper > main").style.display = "block";
-      document.querySelector(".drawarea__section").style.display = 'flex';
-      document.querySelector("#box-wrapper").style.display = 'block';
-      var drawarea__left = document.querySelector(".drawarea__left");
-      var drawarea__bottom = document.querySelector(".drawarea__bottom");
-      if (document.querySelector(".sauma")) {}
-      else {
-        alert("Saumoitathan ennen levyjen asennusta.");
-        $('#step_drawscreen').val('drawscreen_section_four');
-        refresh__drawcontrols();
-        updatearea();
-        return;
-      }
-      document.querySelector(".drawarea__control.drawarea__top").style.zIndex = '2';
-      document.querySelector(".drawarea__control.drawarea__right").style.zIndex = '2';
-      for (var i = 0; i < drawarea__top_circle.length; i++) {
-        drawarea__top_circle[i].style.display = "none";
-      }
-      // Enable/disable levytysalue controls
-      for (var i = 0; i < boxes.length; i++) {
-        boxes[i].style.display = "none";
-      }
-      // Drawarea limit
-      document.querySelector("#box_upper__bottom-mid").style.display = 'none';
-      document.querySelector("#box_lower__top-mid").style.display = 'none';
-      document.querySelector("#box_right__left-mid").style.display = 'none';
-      document.querySelector("#box_left__right-mid").style.display = 'none';
-      // Aukot for s 2.2
-      for (var i = 0; i < da__topitems.length; i++) {
-        da__topitems[i].style.display = "none";
-      }
-      let levy = document.querySelectorAll(".levy");
-      for (var i = 0; i < levy.length; i += 1) {
-        levy[i].classList.remove("levy_transparent");
-      }
-
-      let combined__levy = canvas.querySelectorAll(".combined__levy");
-      for (var i = 0; i < combined__levy.length; i += 1) {
-        combined__levy[i].classList.remove("combined__levy");
-      }
-      // Enable popup for Aukot and Reijät 2.2-2.3
-      document.querySelector(".drawarea__top").classList.remove("m_btn");
-      //Enable reclamation for 2.1-2.3
-      document.querySelector(".drawarea__right").classList.remove("recl_btn");
-      // Enable controls
-      document.querySelector(".drawarea__bottom_container").style.display = 'none';
-      document.querySelector(".box__upper_upperdecor").style.display = 'none';
-      document.querySelector(".box__lower_lowerdecor").style.display = 'none';
-      // Disable drawarea controls for 2.4-2.7
-      document.querySelector(".drawarea__right").classList.add("disabled");
-      document.querySelector(".drawarea__top").classList.add("disabled");
-      document.querySelector(".drawarea__right").classList.remove("m_btn");
-      document.querySelector(".drawarea__top").classList.remove("m_btn");
-      document.querySelector(".sauma__downctrl_container").classList.remove("disabled");
-      document.querySelector(".sauma__rightctrl_container").classList.remove("disabled");
-      // Edit Sauma's for 2.6-2.7
-      var saumas = document.querySelectorAll(".sauma");
-      if (saumas) {
-        for (var i = 0; i < saumas.length; i += 1) {
-          saumas[i].style.zIndex = '3';
-          saumas[i].classList.remove('deformed');
-        }
-      }
-      // Reklamation things for 2.8
-      document.querySelector("#box-wrapper").classList.remove("drawarea__eight");
-      document.querySelector(".drawarea__right > span").innerHTML = 'Reklamaatiot ja huomiot';
-      for (var i = 0; i < da__topitems_eight.length; i++) {
-        da__topitems_eight[i].style.display = "none";
-      }
-      if (document.querySelector(".sauma__controls_del")) {
-        let sauma__controls_dels = document.querySelectorAll(".sauma__controls_del");
-        for (var i = sauma__controls_dels.length - 1; i >= 0; i--) {
-          sauma__controls_dels[i].style.display = "block";
-        }
-      }
-
-      var tyostot = document.querySelectorAll(".tyostot__tyosto");
-      if (tyostot) {
-        for (var i = 0; i < tyostot.length; i += 1) {
-          tyostot[i].style.display = 'block';
-          // tyostot[i].classList.remove('deformed');
-        }
-      }
-    }
-    else {
-      // if(canvas.querySelector(".closer")) {
-      //    closers = canvas.querySelectorAll(".closer");
-      //    for (var i = closers.length - 1; i >= 0; i--) {
-      //       closers[i].style.opacity = 0;
-      //       closers[i].style.zIndex = -1;
-      //    }
-      // }
-    }
+    
     if (input_step == 'drawscreen_section_tyostot') {
       $('.drawarea__section').show();
       // $('.box-wrapper').css('display', 'none');
@@ -1066,7 +1058,7 @@ function refresh__drawcontrols() {
         // Sort the array of HTML elements by their offset left position
         sortedElements.sort((a, b) => a.offsetLeft - b.offsetLeft);
       }
-      kp_one.addEventListener("click", function() {
+      kp_one.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         kp_two.checked = false;
         kp_three.checked = false;
@@ -1080,10 +1072,10 @@ function refresh__drawcontrols() {
         tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      kp_two.addEventListener("click", function() {
+      kp_two.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         kp_one.checked = false;
         kp_three.checked = false;
@@ -1096,10 +1088,10 @@ function refresh__drawcontrols() {
         }
         tyostanaytto(evt);
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      kp_three.addEventListener("click", function() {
+      kp_three.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         kp_one.checked = false;
         kp_two.checked = false;
@@ -1113,10 +1105,10 @@ function refresh__drawcontrols() {
         tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      kp_four.addEventListener("click", function() {
+      kp_four.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         kp_one.checked = false;
         kp_two.checked = false;
@@ -1130,10 +1122,10 @@ function refresh__drawcontrols() {
         tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      kv_one.addEventListener("click", function() {
+      kv_one.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         kv_two.checked = false;
         kv_three.checked = false;
@@ -1147,10 +1139,10 @@ function refresh__drawcontrols() {
         tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      kv_two.addEventListener("click", function() {
+      kv_two.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         kv_one.checked = false;
         kv_three.checked = false;
@@ -1164,10 +1156,10 @@ function refresh__drawcontrols() {
         tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      kv_three.addEventListener("click", function() {
+      kv_three.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         kv_one.checked = false;
         kv_two.checked = false;
@@ -1181,10 +1173,10 @@ function refresh__drawcontrols() {
         tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      kv_four.addEventListener("click", function() {
+      kv_four.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         kv_one.checked = false;
         kv_two.checked = false;
@@ -1198,13 +1190,13 @@ function refresh__drawcontrols() {
         tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
 
 
 
-      lt_kp_one.addEventListener("click", function() {
+      lt_kp_one.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         lt_kp_two.checked = false;
         lt_kp_three.checked = false;
@@ -1218,10 +1210,10 @@ function refresh__drawcontrols() {
         // tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      lt_kp_two.addEventListener("click", function() {
+      lt_kp_two.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         lt_kp_one.checked = false;
         lt_kp_three.checked = false;
@@ -1235,10 +1227,10 @@ function refresh__drawcontrols() {
         // tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      lt_kp_three.addEventListener("click", function() {
+      lt_kp_three.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         lt_kp_one.checked = false;
         lt_kp_two.checked = false;
@@ -1252,10 +1244,10 @@ function refresh__drawcontrols() {
         // tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      lt_kp_four.addEventListener("click", function() {
+      lt_kp_four.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         lt_kp_one.checked = false;
         lt_kp_two.checked = false;
@@ -1269,10 +1261,10 @@ function refresh__drawcontrols() {
         // tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      lt_kv_one.addEventListener("click", function() {
+      lt_kv_one.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         lt_kv_two.checked = false;
         lt_kv_three.checked = false;
@@ -1286,10 +1278,10 @@ function refresh__drawcontrols() {
         // tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      lt_kv_two.addEventListener("click", function() {
+      lt_kv_two.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         lt_kv_one.checked = false;
         lt_kv_three.checked = false;
@@ -1303,10 +1295,10 @@ function refresh__drawcontrols() {
         // tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      lt_kv_three.addEventListener("click", function() {
+      lt_kv_three.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         lt_kv_one.checked = false;
         lt_kv_two.checked = false;
@@ -1320,10 +1312,10 @@ function refresh__drawcontrols() {
         // tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
-      lt_kv_four.addEventListener("click", function() {
+      lt_kv_four.addEventListener("click", function () {
         let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
         lt_kv_one.checked = false;
         lt_kv_two.checked = false;
@@ -1337,7 +1329,7 @@ function refresh__drawcontrols() {
         // tyostanaytto(evt);
 
         l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy"); 
+        levy_visualisation = l_container.querySelector(".levy");
         countdown__kiinnikkeet(levy_visualisation);
       });
 
@@ -1360,7 +1352,7 @@ function refresh__drawcontrols() {
         five_levy_closers[i].remove();
       }
       let k_levys = canvas.querySelectorAll(".levy");
-      
+
       tyostot__tyosto_pysty = canvas.querySelectorAll(".levy_tyostot_x > div");
       tyostot__tyosto_vaaka = canvas.querySelectorAll(".levy_tyostot_y > div");
       for (var i = tyostot__tyosto_pysty.length - 1; i >= 0; i--) {
@@ -1387,7 +1379,23 @@ function refresh__drawcontrols() {
       for (var i = k_levys.length - 1; i >= 0; i--) {
         fixkiinnikkeet(k_levys[i]);
       }
-      
+
+      room_status = 'saumatok';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+
+
+      t3 = canvas.querySelectorAll(".secondcord");
+      for (var s = t3.length - 1; s >= 0; s--) {
+        if(t3[s].parentElement.classList.contains("tyostot__tyosto_pysty")) {
+          t3[s].style.top = 30+((parseFloat(drawarea.style.height))) + "px";
+          t3[s].style.position = "absolute";
+        }
+        if(t3[s].parentElement.classList.contains("tyostot__tyosto_vaaka")) {
+          // t3[s].style.left = 10 + (-0.9) * ((parseFloat(drawarea.style.width))) + "px";
+          t3[s].style.right = 30+((parseFloat(drawarea.style.width))) + "px";
+          t3[s].style.position = "absolute";
+        }
+      }
 
     }
     else {
@@ -1399,10 +1407,171 @@ function refresh__drawcontrols() {
         sauma__controls[i].style.display = "block";
       }
 
-      if(document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled")) {
+      if (document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled")) {
         document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled").style.borderLeft = "1px solid black";
         document.querySelector("#box-wrapper > div.drawarea__control.drawarea__top.disabled").style.borderBottom = "1px solid black";
       }
+    }
+    
+    if (input_step == 'drawscreen_section_five') {
+      $('.drawarea__section').show();
+      for (var i = 0; i < da__controls.length; i++) {
+        da__controls[i].style.display = "none";
+      }
+
+      if (document.querySelector(".levy_tyostot_x") && document.querySelector(".levy_tyostot_y")) {
+        
+      }
+      else {
+        $('#step_drawscreen').val('drawscreen_section_tyostot');
+        refresh__drawcontrols();
+        updatearea();
+        return;
+      }
+      
+      $("#drawscreen_section_five").show();
+      $('.drawarea__controls_five').show();
+      $("#drawscreen_section_five").slideDown(200);
+      $('.drawarea__section').css('display', 'flex');
+      $('.drawarea__controls_five').css('display', 'block');
+      $('.levy__section').css('display', 'none');
+      document.querySelector("#box-wrapper > main").style.display = "block";
+      document.querySelector(".drawarea__section").style.display = 'flex';
+      document.querySelector("#box-wrapper").style.display = 'block';
+      var drawarea__left = document.querySelector(".drawarea__left");
+      var drawarea__bottom = document.querySelector(".drawarea__bottom");
+      if (document.querySelector(".sauma")) { }
+      else {
+        alert("Saumoitathan ennen levyjen asennusta.");
+        $('#step_drawscreen').val('drawscreen_section_four');
+        refresh__drawcontrols();
+        updatearea();
+        return;
+      }
+      document.querySelector(".drawarea__control.drawarea__top").style.zIndex = '2';
+      document.querySelector(".drawarea__control.drawarea__right").style.zIndex = '2';
+      for (var i = 0; i < drawarea__top_circle.length; i++) {
+        drawarea__top_circle[i].style.display = "none";
+      }
+      // Enable/disable levytysalue controls
+      for (var i = 0; i < boxes.length; i++) {
+        boxes[i].style.display = "none";
+      }
+      // Drawarea limit
+      document.querySelector("#box_upper__bottom-mid").style.display = 'none';
+      document.querySelector("#box_lower__top-mid").style.display = 'none';
+      document.querySelector("#box_right__left-mid").style.display = 'none';
+      document.querySelector("#box_left__right-mid").style.display = 'none';
+      // Aukot for s 2.2
+      for (var i = 0; i < da__topitems.length; i++) {
+        da__topitems[i].style.display = "none";
+      }
+      let levy = document.querySelectorAll(".levy");
+      for (var i = 0; i < levy.length; i += 1) {
+        levy[i].classList.remove("levy_transparent");
+      }
+
+      let combined__levy = canvas.querySelectorAll(".combined__levy");
+      for (var i = 0; i < combined__levy.length; i += 1) {
+        combined__levy[i].classList.remove("combined__levy");
+      }
+      // Enable popup for Aukot and Reijät 2.2-2.3
+      document.querySelector(".drawarea__top").classList.remove("m_btn");
+      //Enable reclamation for 2.1-2.3
+      document.querySelector(".drawarea__right").classList.remove("recl_btn");
+      // Enable controls
+      document.querySelector(".drawarea__bottom_container").style.display = 'none';
+      document.querySelector(".box__upper_upperdecor").style.display = 'none';
+      document.querySelector(".box__lower_lowerdecor").style.display = 'none';
+      // Disable drawarea controls for 2.4-2.7
+      document.querySelector(".drawarea__right").classList.add("disabled");
+      document.querySelector(".drawarea__top").classList.add("disabled");
+      document.querySelector(".drawarea__right").classList.remove("m_btn");
+      document.querySelector(".drawarea__top").classList.remove("m_btn");
+      document.querySelector(".sauma__downctrl_container").classList.remove("disabled");
+      document.querySelector(".sauma__rightctrl_container").classList.remove("disabled");
+      // Edit Sauma's for 2.6-2.7
+      var saumas = document.querySelectorAll(".sauma");
+      if (saumas) {
+        for (var i = 0; i < saumas.length; i += 1) {
+          saumas[i].style.zIndex = '3';
+          saumas[i].classList.remove('deformed');
+        }
+      }
+      // Reklamation things for 2.8
+      document.querySelector("#box-wrapper").classList.remove("drawarea__eight");
+      document.querySelector(".drawarea__right > span").innerHTML = 'Reklamaatiot ja huomiot';
+      for (var i = 0; i < da__topitems_eight.length; i++) {
+        da__topitems_eight[i].style.display = "none";
+      }
+      if (document.querySelector(".sauma__controls_del")) {
+        let sauma__controls_dels = document.querySelectorAll(".sauma__controls_del");
+        for (var i = sauma__controls_dels.length - 1; i >= 0; i--) {
+          sauma__controls_dels[i].style.display = "block";
+        }
+      }
+
+      var tyostot = document.querySelectorAll(".tyostot__tyosto");
+      if (tyostot) {
+        for (var i = 0; i < tyostot.length; i += 1) {
+          tyostot[i].style.display = 'block';
+          // tyostot[i].classList.remove('deformed');
+        }
+      }
+
+      sauma__controls = canvas.querySelectorAll(".sauma__controls");
+
+      for (let i = 0; i < sauma__controls.length; i++) {
+        sauma__controls[i].style.display = 'none';
+      }
+
+      x_cords = canvas.querySelectorAll(".x_cord");
+      for (let i = 0; i < x_cords.length; i++) {
+        x_cords[i].style.display = 'none';
+      }
+
+      x_cord_mkis = canvas.querySelectorAll(".x_cord_mki");
+      for (let i = 0; i < x_cord_mkis.length; i++) {
+        x_cord_mkis[i].style.display = 'none';
+      }
+      
+      x_dels = canvas.querySelectorAll(".x_del");
+      for (let i = 0; i < x_dels.length; i++) {
+        x_dels[i].style.display = 'none';
+      }
+
+      drawarea__control = document.querySelectorAll(".drawarea__control");
+      for (let i = 0; i < drawarea__control.length; i++) {
+        drawarea__control[i].style.borderColor = 'rgba(0,0,0,.2)';
+      }
+
+      t3 = canvas.querySelectorAll(".secondcord");
+      for (var s = t3.length - 1; s >= 0; s--) {
+        if(t3[s].parentElement.classList.contains("tyostot__tyosto_pysty")) {
+          t3[s].style.top = 30+((parseFloat(drawarea.style.height))) + "px";
+          t3[s].style.position = "absolute";
+        }
+        if(t3[s].parentElement.classList.contains("tyostot__tyosto_vaaka")) {
+          // t3[s].style.left = 10 + (-0.9) * ((parseFloat(drawarea.style.width))) + "px";
+          t3[s].style.right = 30+((parseFloat(drawarea.style.width))) + "px";
+          t3[s].style.position = "absolute";
+        }
+      }
+
+
+
+      room_status = 'saumatok';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      create__ladontaoptions();
+    }
+    else {
+      // if(canvas.querySelector(".closer")) {
+      //    closers = canvas.querySelectorAll(".closer");
+      //    for (var i = closers.length - 1; i >= 0; i--) {
+      //       closers[i].style.opacity = 0;
+      //       closers[i].style.zIndex = -1;
+      //    }
+      // }
     }
     if (input_step == 'drawscreen_section_esikatselu') {
       $('.drawarea__section').show();
@@ -1505,6 +1674,9 @@ function refresh__drawcontrols() {
       for (var i = 0; i < sauma__controls.length; i++) {
         sauma__controls[i].style.opacity = 0;
       }
+
+      room_status = 'saumatok';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
 
 
       // draggable measure
@@ -1624,6 +1796,8 @@ function refresh__drawcontrols() {
         }
       }
       rangoita();
+      room_status = 'rangatok';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     else {
       if (canvas.querySelector("div.tyostot__grandrow")) {
@@ -1642,9 +1816,9 @@ function refresh__drawcontrols() {
         document.querySelector(".drawarea__section").style.display = 'flex';
         document.querySelector("#box-wrapper").style.display = 'block';
         var drawarea__left = document.querySelector(".drawarea__left");
-        drawarea__left.onclick = function() {};
+        drawarea__left.onclick = function () { };
         var drawarea__bottom = document.querySelector(".drawarea__bottom");
-        drawarea__bottom.onclick = function() {};
+        drawarea__bottom.onclick = function () { };
         document.querySelector(".drawarea__control.drawarea__top").style.zIndex = '2';
         document.querySelector(".drawarea__control.drawarea__right").style.zIndex = '2';
         for (var i = 0; i < da__controls.length; i++) {
@@ -1731,13 +1905,18 @@ function refresh__drawcontrols() {
         listat__grandrow.innerHTML = tyostot_grandrow.innerHTML;
         listoitettu = false;
         listoitus();
-      }
+
+              }
       else {
         $('#step_drawscreen').val('drawscreen_section_six');
         refresh__drawcontrols();
         updatearea();
         alert("Aseta rangat ennen listoja");
       }
+
+      room_status = 'measured';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+
     }
     else {
       if (document.querySelector(".listat__grandrow")) {
@@ -1745,9 +1924,8 @@ function refresh__drawcontrols() {
       }
     }
     if (input_step == 'drawscreen_section_eight') {
-      if (document.querySelector(".levy_tyostot_x") && document.querySelector(".levy_tyostot_y")) {}
+      if (document.querySelector(".levy_tyostot_x") && document.querySelector(".levy_tyostot_y")) { }
       else {
-        alert("Asetathan Levyt ja kiinnikkeet ennen seiniä.");
         $('#step_drawscreen').val('drawscreen_section_five');
         refresh__drawcontrols();
         updatearea();
@@ -1762,9 +1940,9 @@ function refresh__drawcontrols() {
       document.querySelector(".drawarea__section").style.display = 'flex';
       document.querySelector("#box-wrapper").style.display = 'block';
       var drawarea__left = document.querySelector(".drawarea__left");
-      drawarea__left.onclick = function() {};
+      drawarea__left.onclick = function () { };
       var drawarea__bottom = document.querySelector(".drawarea__bottom");
-      drawarea__bottom.onclick = function() {};
+      drawarea__bottom.onclick = function () { };
       for (var i = 0; i < da__controls.length; i++) {
         da__controls[i].style.display = "none";
       }
@@ -1775,6 +1953,7 @@ function refresh__drawcontrols() {
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.display = "none";
       }
+      
       // document.querySelector(".drawarea__controls_eight").style.display = 'none';
       // Drawarea limit
       document.querySelector("#box_upper__bottom-mid").style.display = 'none';
@@ -1834,6 +2013,9 @@ function refresh__drawcontrols() {
         lineinbuts[a].style.display = "none";
       }
 
+      room_status = 'measured';
+      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+
 
 
     }
@@ -1862,47 +2044,47 @@ function refresh__drawcontrols() {
     }
 
     da_b = document.querySelector(".drawarea__bottom");
-   da_l = document.querySelector(".drawarea__left");
+    da_l = document.querySelector(".drawarea__left");
 
-   changeheights();
+    changeheights();
 
-   if(da_b.querySelector(".end_measure")) {
-    b_end_measure.innerHTML = parseFloat(document.querySelector("#box_w").value)+10;
-   }
-   else {
-    b_start_measure = document.createElement("b");
-    b_start_measure.innerHTML = "0";
-    b_end_measure = document.createElement("b");
-    b_end_measure.innerHTML = parseFloat(document.querySelector("#box_w").value)+10;
-    b_end_measure.style.right = -10 + "px";
+    if (da_b.querySelector(".end_measure")) {
+      b_end_measure.innerHTML = parseFloat(document.querySelector("#box_w").value) + 10;
+    }
+    else {
+      b_start_measure = document.createElement("b");
+      b_start_measure.innerHTML = "0";
+      b_end_measure = document.createElement("b");
+      b_end_measure.innerHTML = parseFloat(document.querySelector("#box_w").value) + 10;
+      b_end_measure.style.right = -10 + "px";
 
-    b_start_measure.classList.add("start_measure");
-    b_end_measure.classList.add("end_measure");
-    b_start_measure.classList.add("aukko__cord");
-    b_end_measure.classList.add("aukko__cord");
+      b_start_measure.classList.add("start_measure");
+      b_end_measure.classList.add("end_measure");
+      b_start_measure.classList.add("aukko__cord");
+      b_end_measure.classList.add("aukko__cord");
 
-    da_b.appendChild(b_start_measure);
-    da_b.appendChild(b_end_measure);
-   }
+      da_b.appendChild(b_start_measure);
+      da_b.appendChild(b_end_measure);
+    }
 
-   if(da_l.querySelector(".end_measure")) {
-    end_measure.innerHTML = parseFloat(document.querySelector("#box_h").value)+10;
-   }
-   else {
-    start_measure = document.createElement("b");
-    start_measure.innerHTML = "0";
-    end_measure = document.createElement("b");
-    end_measure.innerHTML = parseFloat(document.querySelector("#box_h").value)+10;
-    end_measure.style.top = -10 + "px";
+    if (da_l.querySelector(".end_measure")) {
+      end_measure.innerHTML = parseFloat(document.querySelector("#box_h").value) + 10;
+    }
+    else {
+      start_measure = document.createElement("b");
+      start_measure.innerHTML = "0";
+      end_measure = document.createElement("b");
+      end_measure.innerHTML = parseFloat(document.querySelector("#box_h").value) + 10;
+      end_measure.style.top = -10 + "px";
 
-    start_measure.classList.add("start_measure");
-    end_measure.classList.add("end_measure");
-    start_measure.classList.add("aukko__cord");
-    end_measure.classList.add("aukko__cord");
+      start_measure.classList.add("start_measure");
+      end_measure.classList.add("end_measure");
+      start_measure.classList.add("aukko__cord");
+      end_measure.classList.add("aukko__cord");
 
-    da_l.appendChild(start_measure);
-    da_l.appendChild(end_measure);
-   }
+      da_l.appendChild(start_measure);
+      da_l.appendChild(end_measure);
+    }
 
     // Modal button
     var m_btn = document.getElementsByClassName("m_btn");
@@ -1954,7 +2136,7 @@ function refresh__drawcontrols() {
     submitprogress('', 'save');
   }
 }
-var addFunctionOnWindowLoad = function(callback) {
+var addFunctionOnWindowLoad = function (callback) {
   if (window.addEventListener) {
     window.addEventListener('load', callback, false);
   }
@@ -1964,40 +2146,40 @@ var addFunctionOnWindowLoad = function(callback) {
 }
 addFunctionOnWindowLoad(refresh__drawcontrols);
 
-function submitprogress(b, moddingtype, id, type, array) {
-  setTimeout(function() {
+function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
+  setTimeout(function () {
     var input_step = $('#step_drawscreen').val();
-    $('.id').each(function(i, obj) {
+    $('.id').each(function (i, obj) {
       value = $("#project__building_id").text();
       $(obj).val(value);
       var _id = value;
     });
     var _id = value;
-    $('.wall').each(function(i, obj) {
+    $('.wall').each(function (i, obj) {
       value = $(b).text();
       $(obj).val(value);
       var _wall = value;
     });
     var _wall = value;
-    $('.room').each(function(i, obj) {
+    $('.room').each(function (i, obj) {
       value = $('#roomname').val();
       $(obj).val(value);
       var _room = value;
     });
     var _room = value;
-    $('.step').each(function(i, obj) {
+    $('.step').each(function (i, obj) {
       value = "drawscreen_section_zero";
       $(obj).val(value);
       var _step = value;
     });
     var _step = value;
-    $('.settings').each(function(i, obj) {
+    $('.settings').each(function (i, obj) {
       value = "{}";
       $(obj).val(value);
       var _settings = value;
     });
     var _settings = value;
-    $('.kokonaisalue').each(function(i, obj) {
+    $('.kokonaisalue').each(function (i, obj) {
       h = $(this).parent().find('input.wall_height').val();
       w = $(this).parent().find('input.wall_width').val();
       value = h + " " + w;
@@ -2006,14 +2188,14 @@ function submitprogress(b, moddingtype, id, type, array) {
     });
     value = h + "|" + w;
     var _kokonaisalue = value;
-    $('.levytettava_alue').each(function(i, obj) {
+    $('.levytettava_alue').each(function (i, obj) {
       h = $('.drawarea__h_cord').text();
       w = $('.drawarea__w_cord').text();
       value = h + " " + w;
       $(obj).val(value);
     });
     var _levytettava_alue = value;
-    $('.poisjaava_alue').each(function(i, obj) {
+    $('.poisjaava_alue').each(function (i, obj) {
       u = $('.box__upper_mm').text();
       r = $('.box__right_mm').text();
       _u = $('.box__lower_mm').text();
@@ -2022,15 +2204,20 @@ function submitprogress(b, moddingtype, id, type, array) {
       $(obj).val(value);
     });
     var _poisjaava_alue = value;
-    $('.keskusmittapiste_cord').each(function(i, obj) {
+    $('.keskusmittapiste_cord').each(function (i, obj) {
       l = $("#drawarea__origo_central").css("left");
       t = $("#drawarea__origo_central").css("bottom");
       value = l + "," + t;
       $(obj).val(value);
     });
+    $('.room_status').each(function (i, obj) {
+     
+      value = room_status;
+      $(obj).val(value);
+    });
     var _keskusmittapiste_cord = value;
     const x = [];
-    $('.reklamaatiot').each(function(i, obj) {
+    $('.reklamaatiot').each(function (i, obj) {
       if ($("#mitta__huomiot")) {
         if ($('#m__a_sahko').is(':checked')) {
           x.push("sahko,");
@@ -2068,86 +2255,86 @@ function submitprogress(b, moddingtype, id, type, array) {
       lapiviennit = document.querySelector("input.lapiviennit");
       lapiviennit.value += array;
     }
-     if (type === "sau") {
-      array = [];
-      saumat_data = document.querySelector("input.saumat_data");
+    // if (type === "sau") {
+    //   array = [];
+    //   saumat_data = document.querySelector("input.saumat_data");
 
 
-      if(saumat_data.value.length > 2) {
-        document.querySelector("input.saumat_dataforback").value = saumat_data.value;
-      }
-      saumat_data.value = "";
-      v_s = document.querySelectorAll('.verticalrow_saumat > div');
-      h_s = document.querySelectorAll('.horizontalrow_saumat > div');
-      for (var i = 0; i < v_s.length; i++) {
-        vs_name = parseFloat(v_s[i].dataset.no);
-        vs_type = "pysty";
-        vs_b = 0;
-        vs_left = parseFloat(v_s[i].style.left);
-        vs_cord = v_s[i].querySelector(".sauma__vertical_ctrl").value;
-        array += vs_name + "|" + vs_type + "|" + vs_b + "|" + vs_left + "|" + vs_cord + "|" + vs_name + "__";
-      }
-      for (var i = 0; i < h_s.length; i++) {
-        vs_name = h_s[i].dataset.no;
-        vs_type = "vaaka";
-        vs_b = parseFloat(h_s[i].style.bottom);
-        vs_left = 0;
-        vs_cord = h_s[i].querySelector(".sauma__horizontal_ctrl").value;
-        array += vs_name + "|" + vs_type + "|" + vs_b + "|" + vs_left + "|" + vs_cord + "|" + vs_name + "__";
-      }
-      saumat_data = document.querySelector("input.saumat_data");
-      saumat_data.value = array;
-      realval = saumat_data.value;
-      saumat_data.value =  realval.replace(",","__");
+    //   if (saumat_data.value.length > 2) {
+    //     document.querySelector("input.saumat_dataforback").value = saumat_data.value;
+    //   }
+    //   saumat_data.value = "";
+    //   v_s = document.querySelectorAll('.verticalrow_saumat > div');
+    //   h_s = document.querySelectorAll('.horizontalrow_saumat > div');
+    //   for (var i = 0; i < v_s.length; i++) {
+    //     vs_name = parseFloat(v_s[i].dataset.no);
+    //     vs_type = "pysty";
+    //     vs_b = 0;
+    //     vs_left = parseFloat(v_s[i].style.left);
+    //     vs_cord = v_s[i].querySelector(".sauma__vertical_ctrl").value;
+    //     array += vs_name + "|" + vs_type + "|" + vs_b + "|" + vs_left + "|" + vs_cord + "|" + vs_name + "__";
+    //   }
+    //   for (var i = 0; i < h_s.length; i++) {
+    //     vs_name = h_s[i].dataset.no;
+    //     vs_type = "vaaka";
+    //     vs_b = parseFloat(h_s[i].style.bottom);
+    //     vs_left = 0;
+    //     vs_cord = h_s[i].querySelector(".sauma__horizontal_ctrl").value;
+    //     array += vs_name + "|" + vs_type + "|" + vs_b + "|" + vs_left + "|" + vs_cord + "|" + vs_name + "__";
+    //   }
+    //   saumat_data = document.querySelector("input.saumat_data");
+    //   saumat_data.value = array;
+    //   realval = saumat_data.value;
+    //   saumat_data.value = realval.replace(",", "__");
 
 
-      prevdata = document.querySelector("input.saumat_dataforback").value;
-    }
-    if (type === "lev") {
-      levy_array = [];
-      levyt_data = document.querySelector("input.levyt_data");
-      levyt_data.value = "";
-      levy_item = canvas.querySelectorAll('.levy');
-      for (var i = 0; i < levy_item.length; i++) {
+    //   prevdata = document.querySelector("input.saumat_dataforback").value;
+    // }
+    // if (type === "lev") {
+    //   levy_array = [];
+    //   levyt_data = document.querySelector("input.levyt_data");
+    //   levyt_data.value = "";
+    //   levy_item = canvas.querySelectorAll('.levy');
+    //   for (var i = 0; i < levy_item.length; i++) {
 
-        l_name = levy_item[i].querySelector(".levy_name").innerHTML;
-        if(levy_item[i].classList.contains("dir_y")) {
-          l_type = "pysty";
-        }
-        else if(levy_item[i].classList.contains("dir_x")) {
-          l_type = "vaaka";
-        }
-        l_title = levy_item[i].title;
+    //     l_name = levy_item[i].querySelector(".levy_name").innerHTML;
+    //     if (levy_item[i].classList.contains("dir_y")) {
+    //       l_type = "pysty";
+    //     }
+    //     else if (levy_item[i].classList.contains("dir_x")) {
+    //       l_type = "vaaka";
+    //     }
+    //     l_title = levy_item[i].title;
 
-        l_b =  parseFloat(levy_item[i].style.bottom)*5;
-        l_l =  parseFloat(levy_item[i].style.left)*5;
-        l_w =  parseFloat(levy_item[i].style.width)*5;
-        l_h =  parseFloat(levy_item[i].style.height)*5;
-        
-        l_title =  parseFloat(l_h)+"--"+parseFloat(l_w) +"--"+parseFloat(l_b)+"--"+ parseFloat(l_l);
+    //     l_b = parseFloat(levy_item[i].style.bottom) * 5;
+    //     l_l = parseFloat(levy_item[i].style.left) * 5;
+    //     l_w = parseFloat(levy_item[i].style.width) * 5;
+    //     l_h = parseFloat(levy_item[i].style.height) * 5;
 
-        l_no = levy_item[i].dataset.levy;
+    //     l_title = parseFloat(l_h) + "--" + parseFloat(l_w) + "--" + parseFloat(l_b) + "--" + parseFloat(l_l);
 
-        l_tyostot_y = "";
-        l_tyostot_x = "";
+    //     l_no = levy_item[i].dataset.levy;
 
-        
-        levy_array += l_name+"|"+l_type+"|"+l_b+"|"+l_l+"|"+l_h+"|"+l_w+"|"+l_title+"|"+l_no+"|"+l_tyostot_y+"|"+l_tyostot_x+"|";
-      }
-      levyt_data = document.querySelector("input.levyt_data");
-      levyt_data.value = levy_array;
-      realval = levyt_data.value;
-      levyt_data.value =  realval.replace("_"," ");
-      prevdata = levyt_data.value;
-    }
-    if (type === "rangat") {
-      rangat = document.querySelector("input.rangat");
-      rangat.value += array;
-    }
-    if (type === "listat") {
-      listat = document.querySelector("input.listat");
-      listat.value += array;
-    }
+    //     l_tyostot_y = "";
+    //     l_tyostot_x = "";
+
+
+    //     levy_array += l_name + "|" + l_type + "|" + l_b + "|" + l_l + "|" + l_h + "|" + l_w + "|" + l_title + "|" + l_no + "|" + l_tyostot_y + "|" + l_tyostot_x + "|";
+    //   }
+    //   levyt_data = document.querySelector("input.levyt_data");
+    //   levyt_data.value = levy_array;
+    //   realval = levyt_data.value;
+    //   levyt_data.value = realval.replace("_", " ");
+    //   prevdata = levyt_data.value;
+    // }
+    // if (type === "rangat") {
+    //   rangat = document.querySelector("input.rangat");
+    //   rangat.value += array;
+    // }
+    // if (type === "listat") {
+    //   listat = document.querySelector("input.listat");
+    //   listat.value += array;
+    // }
   }
   if (moddingtype === "cancel") {
     if (type === "mp") {
@@ -2198,7 +2385,7 @@ function submitprogress(b, moddingtype, id, type, array) {
           obj = prevdata.split("|")[4].replace("__", "").toLowerCase();
           if (document.querySelector('#' + obj) && document.querySelector('#' + obj).dataset.prevcord) {
             document.querySelector('#' + obj).style.bottom = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[1]) / 5 +
-            "px";
+              "px";
             document.querySelector('#' + obj).style.left = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[2]) / 5 + "px";
           }
           else {
@@ -2230,9 +2417,9 @@ function submitprogress(b, moddingtype, id, type, array) {
             aukko.style.left = parseFloat(aukko.dataset.prevcord.split("|")[2]) / 5 + "px";
             aukko.style.width = parseFloat(aukko.dataset.prevcord.split("|")[3]) / 5 + "px";
             aukko.style.height = parseFloat(aukko.dataset.prevcord.split("|")[4]) / 5 + "px";
-            document.querySelector('#' + og_id + ' > .newDiv__height').innerHTML = parseFloat(aukko.style.height)*5;
+            document.querySelector('#' + og_id + ' > .newDiv__height').innerHTML = parseFloat(aukko.style.height) * 5;
             document.querySelector('#' + og_id + ' > .aukko_inner_lcord').style.bottom = -30 + parseFloat(aukko.style.height) + "px";
-            document.querySelector('#' + og_id + ' > .newDiv__width').innerHTML = parseFloat(aukko.style.width)*5;
+            document.querySelector('#' + og_id + ' > .newDiv__width').innerHTML = parseFloat(aukko.style.width) * 5;
             document.querySelector('#' + og_id + ' > .aukko_inner_rcord').style.bottom = -30 + parseFloat(aukko.style.height) + "px";
             document.querySelector('#' + og_id + ' > .aukko_inner_rcord').style.left = -30 + parseFloat(aukko.style.width) + "px";
             document.querySelector('#' + og_id + ' > .newDiv__y').innerHTML = "Y: " + (parseFloat(aukko.dataset.prevcord.split("|")[1]) +
@@ -2254,13 +2441,13 @@ function submitprogress(b, moddingtype, id, type, array) {
           obj = prevdata.split("|")[4].replace("__", "");
           if (document.querySelector('#' + obj) && document.querySelector('#' + obj).dataset.prevcord) {
             document.querySelector('#' + obj).style.bottom = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[1]) / 5 +
-            "px";
+              "px";
             document.querySelector('#' + obj).style.left = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[2]) / 5 + "px";
 
             real_lv = document.querySelector('#' + obj);
 
-            real_lv.querySelector(".lv_lcord").innerHTML = parseFloat(document.querySelector('#' + obj).style.bottom)*5;
-            real_lv.querySelector(".lv_bcord").innerHTML = parseFloat(document.querySelector('#' + obj).style.left)*5;
+            real_lv.querySelector(".lv_lcord").innerHTML = parseFloat(document.querySelector('#' + obj).style.bottom) * 5;
+            real_lv.querySelector(".lv_bcord").innerHTML = parseFloat(document.querySelector('#' + obj).style.left) * 5;
 
           }
           else {
@@ -2279,129 +2466,159 @@ function submitprogress(b, moddingtype, id, type, array) {
       }
     }
     if (type === "sau") {
-        ir_sau_ = document.querySelector(".saumat_dataforback").value;
-        somat = canvas.querySelectorAll(".sauma");
+      ir_sau_ = document.querySelector(".saumat_dataforback").value;
+      somat = canvas.querySelectorAll(".sauma");
 
-        for (var i = 0; i < somat.length; i++) {
-          somat[i].remove();
-        }
-        document.querySelector(".drawarea__controls_four-pysty").innerHTML = "";
-        document.querySelector(".drawarea__controls_four-vaaka").innerHTML = "";
-
-        ir_sau = ir_sau_.split("__");
-        //SAUMAT 
-        if(ir_sau.length > 1) {
-          for (var i = ir_sau.length - 1; i >= 0; i--) {
-         
-            sau_data = ir_sau[i].split("|");
-            if(sau_data.length >1) {
-              sau_name = sau_data[0];
-              sau_type = sau_data[1];
-              sau_b = sau_data[2];
-              sau_left = sau_data[3];
-              sau_cord = sau_data[4];
-              sau_name = sau_data[5];
-              luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
-              if (sau_type == 'pysty') {}
-              if (sau_type == 'vaaka') {}
-            }
-            
-          }
-          alkusaumat();
-          calculateamounts();
-          sauma__verticals = canvas.querySelectorAll(".sauma__vertical");
-          sauma__horizontals = canvas.querySelectorAll(".sauma__horizontal");
-          if (canvas.querySelector(".sauma__vertical")) {
-            for (var i = 0; i < sauma__verticals.length; i++) {
-              if (sauma__verticals[i].querySelector(".sauma__controls_del")) {
-                sauma__verticals[i].querySelector(".sauma__controls_del").innerHTML = i + 1;
-                sauma__verticals[i].dataset.no = i + 1;
-              }
-            }
-            s_v = i + 1;
-          }
-          if (canvas.querySelector(".sauma__horizontal")) {
-            for (var i = 0; i < sauma__horizontals.length; i++) {
-              if (sauma__horizontals[i].querySelector(".sauma__controls_del")) {
-                sauma__horizontals[i].querySelector(".sauma__controls_del").innerHTML = String.fromCharCode(65 + parseFloat(i + 1));
-                sauma__horizontals[i].dataset.no = String.fromCharCode(65 + parseFloat(i + 1));
-              }
-            }
-            s_h = i + 1;
-          }
-
-          dels = canvas.querySelectorAll(".sauma__controls_del");
-      
-          for (var i = dels.length - 1; i >= 0; i--) {
-            sauma = dels[i].parentElement.parentElement;
-            if(dels[i].querySelector(".delmeasure")) {
-              delmeasure = dels[i].querySelector(".delmeasure");
-              if(sauma.classList.contains("sauma__vertical")) {
-                delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left)*5);
-              }
-              else if(sauma.classList.contains("sauma__horizontal")) {
-                delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom)*5);
-              }
-            }
-            else {
-              
-              delmeasure = document.createElement("div");
-              delmeasure.classList.add("delmeasure");
-              if(sauma.classList.contains("sauma__vertical")) {
-                delmeasure.classList.add("delmeasure_vertical");
-                delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left)*5);
-              }
-              else if(sauma.classList.contains("sauma__horizontal")) {
-                delmeasure.classList.add("delmeasure_horizontal");
-                delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom)*5);
-              }
-
-              dels[i].appendChild(delmeasure);
-            }
-          }
-
-
-
-          saumasize__checkup();
-
-          // sauma_h = canvas.querySelectorAll(".sauma__horizontal");
-          // sauma_v = canvas.querySelectorAll(".sauma__vertical");
-          // sauma_h.forEach(function(j) {
-          //   j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-          //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-          //   });
-          //   j.addEventListener('touchmove', (e) => {
-          //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-          //   });
-          // });
-
-          // sauma_v.forEach(function(j) {
-          //   j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-          //       resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
-          //   });
-          //   j.addEventListener('touchmove', (e) => {
-          //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
-          //   });
-          // });
-
-          setTimeout(function() {levyta();console.log("LEVYTÄ FIRED")}, 1000);
-
-          calculateamounts();
-        }
+      for (var i = 0; i < somat.length; i++) {
+        somat[i].remove();
       }
+      document.querySelector(".drawarea__controls_four-pysty").innerHTML = "";
+      document.querySelector(".drawarea__controls_four-vaaka").innerHTML = "";
+
+      ir_sau = ir_sau_.split("__");
+      //SAUMAT 
+      if (ir_sau.length > 1) {
+        for (var i = ir_sau.length - 1; i >= 0; i--) {
+
+          sau_data = ir_sau[i].split("|");
+          if (sau_data.length > 1) {
+            sau_name = sau_data[0];
+            sau_type = sau_data[1];
+            sau_b = sau_data[2];
+            sau_left = sau_data[3];
+            sau_cord = sau_data[4];
+            sau_name = sau_data[5];
+            luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
+            if (sau_type == 'pysty') { }
+            if (sau_type == 'vaaka') { }
+          }
+
+        }
+        alkusaumat();
+        calculateamounts();
+        sauma__verticals = canvas.querySelectorAll(".sauma__vertical");
+        sauma__horizontals = canvas.querySelectorAll(".sauma__horizontal");
+        if (canvas.querySelector(".sauma__vertical")) {
+          for (var i = 0; i < sauma__verticals.length; i++) {
+            if (sauma__verticals[i].querySelector(".sauma__controls_del")) {
+              sauma__verticals[i].querySelector(".sauma__controls_del").innerHTML = i + 1;
+              sauma__verticals[i].dataset.no = i + 1;
+            }
+          }
+          s_v = i + 1;
+        }
+        if (canvas.querySelector(".sauma__horizontal")) {
+          for (var i = 0; i < sauma__horizontals.length; i++) {
+            if (sauma__horizontals[i].querySelector(".sauma__controls_del")) {
+              sauma__horizontals[i].querySelector(".sauma__controls_del").innerHTML = String.fromCharCode(65 + parseFloat(i + 1));
+              sauma__horizontals[i].dataset.no = String.fromCharCode(65 + parseFloat(i + 1));
+            }
+          }
+          s_h = i + 1;
+        }
+
+        dels = canvas.querySelectorAll(".sauma__controls_del");
+
+        for (var i = dels.length - 1; i >= 0; i--) {
+          sauma = dels[i].parentElement.parentElement;
+          if (dels[i].querySelector(".delmeasure")) {
+            delmeasure = dels[i].querySelector(".delmeasure");
+            if (sauma.classList.contains("sauma__vertical")) {
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
+            }
+            else if (sauma.classList.contains("sauma__horizontal")) {
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
+            }
+          }
+          else {
+
+            delmeasure = document.createElement("div");
+            delmeasure.classList.add("delmeasure");
+            if (sauma.classList.contains("sauma__vertical")) {
+              delmeasure.classList.add("delmeasure_vertical");
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
+            }
+            else if (sauma.classList.contains("sauma__horizontal")) {
+              delmeasure.classList.add("delmeasure_horizontal");
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
+            }
+
+            dels[i].appendChild(delmeasure);
+          }
+        }
+
+
+
+        saumasize__checkup();
+
+        // sauma_h = canvas.querySelectorAll(".sauma__horizontal");
+        // sauma_v = canvas.querySelectorAll(".sauma__vertical");
+        // sauma_h.forEach(function(j) {
+        //   j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
+        //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
+        //   });
+        //   j.addEventListener('touchmove', (e) => {
+        //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
+        //   });
+        // });
+
+        // sauma_v.forEach(function(j) {
+        //   j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
+        //       resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+        //   });
+        //   j.addEventListener('touchmove', (e) => {
+        //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+        //   });
+        // });
+
+        setTimeout(function () { levyta(); console.log("LEVYTÄ FIRED") }, 1000);
+
+        calculateamounts();
+      }
+    }
     prevdata = null;
   }
   if (moddingtype === "save") {
-    setTimeout(function() {
-      $('.id').each(function(i, obj) {
+    setTimeout(function () {
+      $('.id').each(function (i, obj) {
         value = $("#project__building_id").text();
         $(obj).val(value);
         var _id = value;
       });
-      
+
       var _id = value;
       saving_array = [];
       saving_id = $('.id').val();
+
+      room_status = 'measured';
+      if(current_room) {
+        if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("problem")) {
+          room_status = 'problem';
+        }
+        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("prob")) {
+          room_status = 'prob';
+        }
+        else if (document.querySelector(".house__wall_" + current_room.toLowerCase()).classList.contains("hidden")) {
+          room_status = 'hidden';
+        }
+        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("done")) {
+          room_status = 'done';
+        }
+        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("rangatok")) {
+          room_status = 'rangatok';
+        }
+        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("measured")) {
+          room_status = 'measured';
+        }
+        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("nowork")) {
+          room_status = 'nowork';
+        }
+        else {
+          room_status = 'undone';
+        }
+      }
+      
+
       saving_origo = parseFloat(document.querySelector("#drawarea__origo_central").style.left) + "|" + parseFloat(document.querySelector(
         "#drawarea__origo_central").style.bottom);
       _saving_walls = $('.walls_content').val();
@@ -2414,7 +2631,9 @@ function submitprogress(b, moddingtype, id, type, array) {
       saving_w = $('#box_w').val();
       saving_h = $('#box_h').val();
       saving_cord = saving_h + "|" + saving_w;
+
       saving_array.push(saving_id);
+      saving_array.push(room_status);
       saving_array.push(saving_origo);
       saving_array.push(saving_cord);
       saving_array.push(saving_mps);
@@ -2423,75 +2642,75 @@ function submitprogress(b, moddingtype, id, type, array) {
       saving_array.push(saving_sau);
       saving_array.push(saving_lev);
       //current_room = 'C';  TEMPORARY FOR TESTING
-      
-      if(current_room != null) {
-        if(current_room.toLowerCase() == 'a') {
+
+      if (current_room != null) {
+        if (current_room.toLowerCase() == 'a') {
           apartment.dataset.aroom = saving_array;
         }
-        if(current_room.toLowerCase() == 'b') {
+        if (current_room.toLowerCase() == 'b') {
           apartment.dataset.broom = saving_array;
         }
-        if(current_room.toLowerCase() == 'c') {
+        if (current_room.toLowerCase() == 'c') {
           apartment.dataset.croom = saving_array;
         }
-        if(current_room.toLowerCase() == 'd') {
+        if (current_room.toLowerCase() == 'd') {
           apartment.dataset.droom = saving_array;
         }
-        if(current_room.toLowerCase() == 'k') {
+        if (current_room.toLowerCase() == 'k') {
           apartment.dataset.kroom = saving_array;
         }
-        if(current_room.toLowerCase() == 'l') {
+        if (current_room.toLowerCase() == 'l') {
           apartment.dataset.lroom = saving_array;
         }
       }
-      if(document.querySelectorAll("#A")) {
+      if (document.querySelectorAll("#A")) {
         a_rooms_ = document.querySelectorAll("#A .project__building_room");
 
         a_rooms = '';
 
-        for (let i = 0; i < a_rooms_.length; i++) {     
-          _name = a_rooms_[i].dataset.room.replaceAll(",","~");
-          positionX = a_rooms_[i].dataset.x.replaceAll(",","~");
-          positionY = a_rooms_[i].dataset.y.replaceAll(",","~");
-          a_room = a_rooms_[i].dataset.aroom.replaceAll(",","~");
-          b_room = a_rooms_[i].dataset.broom.replaceAll(",","~");
-          c_room = a_rooms_[i].dataset.croom.replaceAll(",","~");
-          d_room = a_rooms_[i].dataset.droom.replaceAll(",","~");
-          k_room = a_rooms_[i].dataset.kroom.replaceAll(",","~");
-          l_room = a_rooms_[i].dataset.lroom.replaceAll(",","~");
-          
-          element = '{"name": "'+_name.toUpperCase()+'","positionY": '+positionY+',"positionX": '+positionX+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
-          a_rooms+=element;
+        for (let i = 0; i < a_rooms_.length; i++) {
+          _name = a_rooms_[i].dataset.room.replaceAll(",", "~").replaceAll("   ", " ");;
+          positionX = a_rooms_[i].dataset.x.replaceAll(",", "~").replaceAll("   ", " ");
+          positionY = a_rooms_[i].dataset.y.replaceAll(",", "~").replaceAll("   ", " ");;
+          a_room = a_rooms_[i].dataset.aroom.replaceAll(",", "~").replaceAll("   ", " ");;
+          b_room = a_rooms_[i].dataset.broom.replaceAll(",", "~").replaceAll("   ", " ");;
+          c_room = a_rooms_[i].dataset.croom.replaceAll(",", "~").replaceAll("   ", " ");;
+          d_room = a_rooms_[i].dataset.droom.replaceAll(",", "~").replaceAll("   ", " ");;
+          k_room = a_rooms_[i].dataset.kroom.replaceAll(",", "~").replaceAll("   ", " ");;
+          l_room = a_rooms_[i].dataset.lroom.replaceAll(",", "~").replaceAll("   ", " ");;
+
+          element = '{"name": "' + _name.toUpperCase() + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+          a_rooms += element;
         }
-        
+
       }
       else {
         a_rooms = '';
       }
       b_rooms = '';
-            // if(document.querySelectorAll("#B")) {
-            //   b_rooms_ = document.querySelectorAll("#B .project__building_room");
-            //   b_rooms = '';
+      // if(document.querySelectorAll("#B")) {
+      //   b_rooms_ = document.querySelectorAll("#B .project__building_room");
+      //   b_rooms = '';
 
-            //   for (let i = 0; i < b_rooms_.length; i++) {     
-            //     _name = b_rooms_[i].dataset.room.replace(",","~").replace('"','').replace("'","");
-            //     positionX = b_rooms_[i].dataset.x.replace(",","~").replace('"','').replace("'","");
-            //     positionY = b_rooms_[i].dataset.y.replace(",","~").replace('"','').replace("'","");
-            //     a_room = b_rooms_[i].dataset.aroom.replace(",","~").replace('"','').replace("'","");
-            //     b_room = b_rooms_[i].dataset.broom.replace(",","~").replace('"','').replace("'","");
-            //     c_room = b_rooms_[i].dataset.croom.replace(",","~").replace('"','').replace("'","");
-            //     d_room = b_rooms_[i].dataset.droom.replace(",","~").replace('"','').replace("'","");
-            //     k_room = b_rooms_[i].dataset.kroom.replace(",","~").replace('"','').replace("'","");
-            //     l_room = b_rooms_[i].dataset.lroom.replace(",","~").replace('"','').replace("'","");
-                
-            //     element = '{"name": "'+_name+'","positionX": '+positionX+',"positionY": '+positionY+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
-            //     b_rooms+=element;
-            //   }
-              
-            // }
-            // else {
-            //   b_rooms = '';
-            // }
+      //   for (let i = 0; i < b_rooms_.length; i++) {     
+      //     _name = b_rooms_[i].dataset.room.replace(",","~").replace('"','').replace("'","");
+      //     positionX = b_rooms_[i].dataset.x.replace(",","~").replace('"','').replace("'","");
+      //     positionY = b_rooms_[i].dataset.y.replace(",","~").replace('"','').replace("'","");
+      //     a_room = b_rooms_[i].dataset.aroom.replace(",","~").replace('"','').replace("'","");
+      //     b_room = b_rooms_[i].dataset.broom.replace(",","~").replace('"','').replace("'","");
+      //     c_room = b_rooms_[i].dataset.croom.replace(",","~").replace('"','').replace("'","");
+      //     d_room = b_rooms_[i].dataset.droom.replace(",","~").replace('"','').replace("'","");
+      //     k_room = b_rooms_[i].dataset.kroom.replace(",","~").replace('"','').replace("'","");
+      //     l_room = b_rooms_[i].dataset.lroom.replace(",","~").replace('"','').replace("'","");
+
+      //     element = '{"name": "'+_name+'","positionX": '+positionX+',"positionY": '+positionY+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
+      //     b_rooms+=element;
+      //   }
+
+      // }
+      // else {
+      //   b_rooms = '';
+      // }
       c_rooms = '';
       // if(document.querySelectorAll("#C")) {
       //   c_rooms_ = document.querySelectorAll("#C .project__building_room");
@@ -2507,7 +2726,7 @@ function submitprogress(b, moddingtype, id, type, array) {
       //     d_room = c_rooms_[i].dataset.droom.replace(",","~").replace('"','').replace("'","");
       //     k_room = c_rooms_[i].dataset.kroom.replace(",","~").replace('"','').replace("'","");
       //     l_room = c_rooms_[i].dataset.lroom.replace(",","~").replace('"','').replace("'","");
-          
+
       //     element = '{"name": "'+_name+'","positionX": '+positionX+',"positionY": '+positionY+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
       //     c_rooms+=element;
       //   }
@@ -2516,49 +2735,51 @@ function submitprogress(b, moddingtype, id, type, array) {
       //   c_rooms = '';
       // }
 
-      if(document.querySelectorAll("#D")) {
+      if (document.querySelectorAll("#D")) {
         d_rooms = document.querySelectorAll("#D .project__building_room");
       }
       else {
         d_rooms = '';
       }
 
-      if(document.querySelectorAll("#E")) {
+      if (document.querySelectorAll("#E")) {
         e_rooms = document.querySelectorAll("#E .project__building_room");
       }
       else {
         e_rooms = '';
       }
 
-      if(document.querySelectorAll("#F")) {
+      if (document.querySelectorAll("#F")) {
         f_rooms = document.querySelectorAll("#F .project__building_room");
       }
       else {
         f_rooms = '';
       }
 
-      if(document.querySelectorAll("#G")) {
+      if (document.querySelectorAll("#G")) {
         g_rooms = document.querySelectorAll("#G .project__building_room");
       }
       else {
         g_rooms = '';
       }
 
-      if(document.querySelectorAll("#H")) {
+      if (document.querySelectorAll("#H")) {
         h_rooms = document.querySelectorAll("#H .project__building_room");
       }
       else {
         h_rooms = '';
       }
 
-      _saving_a_rooms = "["+a_rooms.replace("'","")+"]";
-      _saving_b_rooms = "["+b_rooms.replace("'","")+"]";
-      _saving_c_rooms = "["+c_rooms.replace("'","")+"]";
+      _saving_a_rooms = "[" + a_rooms.replace("'", "") + "]";
+      _saving_b_rooms = "[" + b_rooms.replace("'", "") + "]";
+      _saving_c_rooms = "[" + c_rooms.replace("'", "") + "]";
       // _saving_d_rooms
       // _saving_e_rooms
       // _saving_f_rooms
       // _saving_g_rooms
       // _saving_h_rooms
+      settings_aukot_array = document.querySelector("#aukko_settings").value;
+      
 
       s_walls = _saving_walls.replace('"', '').replace("'", "");
       a_asetukset = _a_asetukset.replace('"', '').replace("'", "");
@@ -2568,6 +2789,7 @@ function submitprogress(b, moddingtype, id, type, array) {
         saving_a_rooms: _saving_a_rooms,
         saving_b_rooms: _saving_b_rooms,
         saving_c_rooms: _saving_c_rooms,
+        settings: settings_aukot_array.toString(),
         // saving_d_rooms: _saving_d_rooms,
         // saving_e_rooms: _saving_e_rooms, 
         // saving_f_rooms: _saving_f_rooms, 
@@ -2575,14 +2797,40 @@ function submitprogress(b, moddingtype, id, type, array) {
         // saving_h_rooms: _saving_h_rooms
       };
 
+
+      if(aukkotallennus) {
+        if(aukkotallennus == 'aukkotallennus') {
+          settings_aukot = document.querySelectorAll(".aukko__toindex");
+          settings_aukot_array = [];
+          for (let s = 0; s < settings_aukot.length; s++) {
+            settings_aukot_array.push(settings_aukot[s].value);
+          }
+          
+          document.querySelector("#aukko_settings").value = settings_aukot_array.toString();
+          formData = {
+            id: _id.replace('"', '').replace("'", ""),
+            saving_a_rooms: _saving_a_rooms,
+            saving_b_rooms: _saving_b_rooms,
+            saving_c_rooms: _saving_c_rooms,
+            settings: settings_aukot_array.toString(),
+            // saving_d_rooms: _saving_d_rooms,
+            // saving_e_rooms: _saving_e_rooms, 
+            // saving_f_rooms: _saving_f_rooms, 
+            // saving_g_rooms: _saving_g_rooms, 
+            // saving_h_rooms: _saving_h_rooms
+          };
+        }
+        
+      }
+
       $.ajax({
         type: "POST",
         url: "/updateproject.php",
         data: formData,
-        error: function(jqxhr, status, exception) {
+        error: function (jqxhr, status, exception) {
           alert('Tietokantavirhe, soita numeroon +358449782028');
         }
-      }).done(function(data) {
+      }).done(function (data) {
         // alert('Seinä ' + current_room + ' tallennettu');
         // console.log("saved Data: " + data);
       });
@@ -2591,9 +2839,9 @@ function submitprogress(b, moddingtype, id, type, array) {
 }
 
 function nav_betweenwalls(b) {
-  setTimeout(function() {
+  setTimeout(function () {
     rooms_array = [];
-    $('#house .house__wall').each(function(i, obj) {
+    $('#house .house__wall').each(function (i, obj) {
       wall_name = $(this).find(".house__wall_status").data("room");
       wall_h = $(this).find('input.house__wall_param:nth-child(2)').val();
       wall_w = $(this).find('input.house__wall_param:nth-child(3)').val();
@@ -2614,35 +2862,56 @@ function nav_betweenwalls(b) {
       }
     }
     $('.walls').val(rooms_array);
+    
   }, 1000);
 }
 
 function initializeroom(room, menu) {
   ir_no = room.dataset.room;
+
+
+  
+  if(window.location.href.indexOf('&room=' + current_room.toLowerCase()) === -1) {
+    degradate_url(2);
+    var refresh = window.location.href + '&room=' + current_room.toLowerCase();    
+    window.history.pushState({ path: refresh }, '', refresh);
+    console.log("ADDED TO URL");
+  }
+
+
+  if(document.querySelector("#open_comments")) {
+    if(document.querySelector("#open_comments").value.length > 5) {
+      initializeroom_comments(room, menu);
+      return;
+    }
+  }
+  
+
   
   
   mode_room = ir_no.toLowerCase();
   $('#step_drawscreen').val('drawscreen_section_one');
-  if(mode_room == 'a') {
+  if (mode_room == 'a') {
     ir_value = apartment.dataset.aroom;
   }
-  if(mode_room == 'b') {
+  if (mode_room == 'b') {
     ir_value = apartment.dataset.broom;
   }
-  if(mode_room == 'c') {
+  if (mode_room == 'c') {
     ir_value = apartment.dataset.croom;
   }
-  if(mode_room == 'd') {
+  if (mode_room == 'd') {
     ir_value = apartment.dataset.droom;
   }
-  if(mode_room == 'k') {
+  if (mode_room == 'k') {
     ir_value = apartment.dataset.kroom;
   }
-  if(mode_room == 'l') {
+  if (mode_room == 'l') {
     ir_value = apartment.dataset.lroom;
-  }  
+  }
 
 
+  room_status = ir_value.split(",")[1];
   // INITIALIZE CURRENT STATUS DA
   da_roomnav = document.querySelectorAll(".house__wall");
   for (var i = da_roomnav.length - 1; i >= 0; i--) {
@@ -2652,6 +2921,8 @@ function initializeroom(room, menu) {
   for (var i = da_curnav.length - 1; i >= 0; i--) {
     da_curnav[i].classList.add("current__housewall");
   }
+
+
   // START CLEARING
   mps = canvas.querySelectorAll(".mp");
   aukkos = canvas.querySelectorAll(".aukko");
@@ -2676,7 +2947,7 @@ function initializeroom(room, menu) {
   document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo oikealle";
   document.querySelector("#drawarea__origo_central").style.left = "1px";
   document.querySelector("#drawarea__origo_central").style.bottom = "1px";
-  
+
   document.querySelector(".mittapisteet").value = "";
   document.querySelector(".aukot").value = "";
   document.querySelector(".lapiviennit").value = "";
@@ -2690,9 +2961,13 @@ function initializeroom(room, menu) {
     canvas.querySelector(".saumat__grandrow").remove();
   }
   if (canvas.querySelector(".levyt")) {
-    canvas.querySelector(".levyt").remove();
+    sisa_levyt = canvas.querySelectorAll(".levyt .levy");
+    for (let lev = 0; lev < sisa_levyt.length; lev++) {
+      sisa_levyt[lev].remove();
+    }
+    // document.querySelector("div.levyt").remove();
   }
-  if (canvas.querySelector(".tyostot__grandrow")) {
+  if (canvas.querySelector(".tyostot__grandrow") && input_step != 'drawscreen_section_six' && input_step != 'drawscreen_section_seven' && input_step != 'drawscreen_section_eight' && input_step != 'drawscreen_section_nine' && input_step != 'drawscreen_section_esikatselu') {
     canvas.querySelector(".tyostot__grandrow").remove();
   }
   if (canvas.querySelector(".listat__grandrow")) {
@@ -2702,25 +2977,26 @@ function initializeroom(room, menu) {
   if (ir_value.length > 5) {
     ir_splitted = ir_value.split(",");
     ir_id = ir_splitted[0];
-    ir_origo = ir_splitted[1];
-    ir_origo_x = parseFloat(ir_splitted[1].split("|")[0]);
-    ir_origo_y = parseFloat(ir_splitted[1].split("|")[1]);
+    ir_status = ir_splitted[1];
+    ir_origo = ir_splitted[2];
+    ir_origo_x = parseFloat(ir_splitted[2].split("|")[0]);
+    ir_origo_y = parseFloat(ir_splitted[2].split("|")[1]);
     // Origo formatting DISABLED
-    if(ir_origo_x == 1 && ir_origo_y == 1) {
-       document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo oikealle";
+    if (ir_origo_x == 1 && ir_origo_y == 1) {
+      document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo oikealle";
     }
-    else if(ir_origo_x > 1 && ir_origo_y > 1) {
-       document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo vasemmalle";
+    else if (ir_origo_x > 1 && ir_origo_y > 1) {
+      document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo vasemmalle";
     }
-    else if(ir_origo_x > 1 && ir_origo_y == 1) {
-       document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo ylös";
+    else if (ir_origo_x > 1 && ir_origo_y == 1) {
+      document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo ylös";
     }
-    else if(ir_origo_x == 1 && ir_origo_y > 1) {
-       document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo alas";
+    else if (ir_origo_x == 1 && ir_origo_y > 1) {
+      document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo alas";
     }
-    document.querySelector("#drawarea__origo_central").style.left = ir_origo_x + "px";
-    document.querySelector("#drawarea__origo_central").style.bottom = ir_origo_y + "px";
-    if(menu) {
+    document.querySelector("#drawarea__origo_central").style.left = 1 + "px";
+    document.querySelector("#drawarea__origo_central").style.bottom = 1 + "px";
+    if (menu) {
     }
     if (room.parentElement.querySelector(".wall_height") && room.parentElement.querySelector(".wall_width")) {
       room_h = parseFloat(room.parentElement.querySelector(".wall_height").value);
@@ -2731,34 +3007,34 @@ function initializeroom(room, menu) {
     }
     else {
       // Alue formaddig OKKKKKKK
-      ir_alue = ir_splitted[2];
-      ir_alue_x = ir_splitted[2].split("|")[1];
-      ir_alue_y = ir_splitted[2].split("|")[0];
+      ir_alue = ir_splitted[3];
+      ir_alue_x = ir_splitted[3].split("|")[1];
+      ir_alue_y = ir_splitted[3].split("|")[0];
       document.querySelector("#drawarea_h").value = parseFloat(ir_alue_y);
       document.querySelector("#drawarea_w").value = parseFloat(ir_alue_x);
       setTimeout(changesize(), 1000);
     }
-    ir_mps = ir_splitted[3].split("__");
-    ir_aus = ir_splitted[4].split("__");
-    ir_lv =  ir_splitted[5].split("__");
-    ir_sau = ir_splitted[6].split("__");
-    ir_lev = ir_splitted[7].split("__");
+    ir_mps = ir_splitted[4].split("__");
+    ir_aus = ir_splitted[5].split("__");
+    ir_lv = ir_splitted[6].split("__");
+    ir_sau = ir_splitted[7].split("__");
+    ir_lev = ir_splitted[8].split("__");
     ir_kin = ""; //ir_splitted[5].split("__");
     ir_ran = ""; //ir_splitted[5].split("__");
     ir_lis = ""; //ir_splitted[5].split("__");
 
 
     // LISTAT
-    if(ir_lis.length > 1) {}
+    if (ir_lis.length > 1) { }
 
     // RANGAT
-    else if(ir_ran.length > 1) {}
+    else if (ir_ran.length > 1) { }
 
     // KIINNIKKEET
-    else if(ir_kin.length > 1) {}
+    else if (ir_kin.length > 1) { }
 
     // LEVYT
-    else if(ir_lev.length > 1) {
+    else if (ir_lev.length > 1) {
       // MPs formatting
       for (var i = 0; i < ir_mps.length; i++) {
         if (ir_mps[i].length > 3) {
@@ -2770,7 +3046,7 @@ function initializeroom(room, menu) {
           mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
         }
       }
-      
+
       for (var i = 0; i < ir_aus.length; i++) {
         if (ir_aus[i].length > 3) {
           ir_aus_name = ir_aus[i].split("|")[0];
@@ -2785,19 +3061,21 @@ function initializeroom(room, menu) {
           ir_aus_comment = ir_aus[i].split("|")[8];
           ir_aus_cfrom = ir_aus[i].split("|")[9];
           ir_aus_cto = ir_aus[i].split("|")[10];
-          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes,ir_aus_comment,ir_aus_cfrom,ir_aus_cto);
+          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
           // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
           // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
         }
       }
 
-      refresh__drawcontrols();
-      updatearea();
+
       $('#step_drawscreen').val('drawscreen_section_three');
-      
       refresh__drawcontrols();
       updatearea();
+
+
       $('#step_drawscreen').val('drawscreen_section_four');
+      refresh__drawcontrols();
+      updatearea();
       if (document.querySelector(".saumat__grandrow")) {
         saumat = document.querySelector(".saumat__grandrow");
       }
@@ -2806,13 +3084,13 @@ function initializeroom(room, menu) {
         saumat.classList.add("saumat__grandrow");
         canvas.appendChild(saumat);
       }
-      if (saumat.querySelector(".horizontalrow_saumat")) {}
+      if (saumat.querySelector(".horizontalrow_saumat")) { }
       else {
         newrow_horizontal = document.createElement("div");
         saumat.appendChild(newrow_horizontal);
         newrow_horizontal.classList.add("horizontalrow_saumat");
       }
-      if (saumat.querySelector(".verticalrow_saumat")) {}
+      if (saumat.querySelector(".verticalrow_saumat")) { }
       else {
         newrow_vertical = document.createElement("div");
         saumat.appendChild(newrow_vertical);
@@ -2828,8 +3106,8 @@ function initializeroom(room, menu) {
         sau_cord = sau_data[4];
         sau_name = sau_data[5];
         luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
-        if (sau_type == 'pysty') {}
-        if (sau_type == 'vaaka') {}
+        if (sau_type == 'pysty') { }
+        if (sau_type == 'vaaka') { }
       }
       alkusaumat();
       calculateamounts();
@@ -2855,29 +3133,29 @@ function initializeroom(room, menu) {
       }
 
       dels = canvas.querySelectorAll(".sauma__controls_del");
-  
+
       for (var i = dels.length - 1; i >= 0; i--) {
         sauma = dels[i].parentElement.parentElement;
-        if(dels[i].querySelector(".delmeasure")) {
+        if (dels[i].querySelector(".delmeasure")) {
           delmeasure = dels[i].querySelector(".delmeasure");
-          if(sauma.classList.contains("sauma__vertical")) {
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left)*5);
+          if (sauma.classList.contains("sauma__vertical")) {
+            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
           }
-          else if(sauma.classList.contains("sauma__horizontal")) {
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom)*5);
+          else if (sauma.classList.contains("sauma__horizontal")) {
+            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
           }
         }
         else {
-          
+
           delmeasure = document.createElement("div");
           delmeasure.classList.add("delmeasure");
-          if(sauma.classList.contains("sauma__vertical")) {
+          if (sauma.classList.contains("sauma__vertical")) {
             delmeasure.classList.add("delmeasure_vertical");
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left)*5);
+            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
           }
-          else if(sauma.classList.contains("sauma__horizontal")) {
+          else if (sauma.classList.contains("sauma__horizontal")) {
             delmeasure.classList.add("delmeasure_horizontal");
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom)*5);
+            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
           }
 
           dels[i].appendChild(delmeasure);
@@ -2889,13 +3167,13 @@ function initializeroom(room, menu) {
       saumat = canvas.querySelectorAll(".sauma");
 
       for (var i = saumat.length - 1; i >= 0; i--) {
-        saumat[i].removeEventListener('touchmove', (e) => {});
-        saumat[i].querySelector(".sauma__controls").removeEventListener('touchmove', (e) => {});
+        saumat[i].removeEventListener('touchmove', (e) => { });
+        saumat[i].querySelector(".sauma__controls").removeEventListener('touchmove', (e) => { });
       }
 
       sauma_h = canvas.querySelectorAll(".sauma__horizontal");
       sauma_v = canvas.querySelectorAll(".sauma__vertical");
-      sauma_h.forEach(function(j) {
+      sauma_h.forEach(function (j) {
         j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
           resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
         });
@@ -2904,9 +3182,9 @@ function initializeroom(room, menu) {
         });
       });
 
-      sauma_v.forEach(function(j) {
+      sauma_v.forEach(function (j) {
         j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
         });
         j.addEventListener('touchmove', (e) => {
           resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
@@ -2922,37 +3200,35 @@ function initializeroom(room, menu) {
 
       // levy initialization
 
-      setTimeout(function() {
+      setTimeout(function () {
         lev = ir_lev[0].split(" ");
-        dex=0;
-        if(canvas.querySelector(".levyt")) {
+        dex = 0;
+        if (canvas.querySelector(".levyt")) {
           levyt = canvas.querySelector(".levyt");
           levyt.innerHTML = "";
         }
         else {
-           levyt = document.createElement("div");
+          levyt = document.createElement("div");
           levyt.classList.add("levyt");
           canvas.append(levyt);
         }
-       
+
 
         for (var i = 0; i < lev.length; i++) {
-          if(lev[i].length > 10) {
-            levyt.prepend(luo__levy_restore(lev[i].split("|")[0],lev[i].split("|")[1],parseFloat(lev[i].split("|")[2]),parseFloat(lev[i].split("|")[3]),lev[i].split("|")[4],lev[i].split("|")[5],lev[i].split("|")[6],lev[i].split("|")[7]));
+          if (lev[i].length > 10) {
+            levyt.prepend(luo__levy_restore(lev[i].split("|")[0], lev[i].split("|")[1], parseFloat(lev[i].split("|")[2]), parseFloat(lev[i].split("|")[3]), lev[i].split("|")[4], lev[i].split("|")[5], lev[i].split("|")[6], lev[i].split("|")[7]));
           }
         }
         console.log("LEVYTÄ FIRED");
       }, 1000);
 
-      
+
 
 
     }
 
-   
-
     //SAUMAT 
-    else if(ir_sau.length > 1) {
+    else if (ir_sau.length > 1) {
       // MPs formatting
       for (var i = 0; i < ir_mps.length; i++) {
         if (ir_mps[i].length > 3) {
@@ -2964,7 +3240,7 @@ function initializeroom(room, menu) {
           mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
         }
       }
-      
+
       for (var i = 0; i < ir_aus.length; i++) {
         if (ir_aus[i].length > 3) {
           ir_aus_name = ir_aus[i].split("|")[0];
@@ -2975,23 +3251,22 @@ function initializeroom(room, menu) {
           ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
           ir_aus_id = ir_aus[i].split("|")[4];
           ir_aus_classes = ir_aus[i].split("|")[7];
-          
+
           ir_aus_comment = ir_aus[i].split("|")[8];
           ir_aus_cfrom = ir_aus[i].split("|")[9];
           ir_aus_cto = ir_aus[i].split("|")[10];
-          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes,ir_aus_comment,ir_aus_cfrom,ir_aus_cto);
+          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
           // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
           // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
         }
       }
-
-      refresh__drawcontrols();
-      updatearea();
       $('#step_drawscreen').val('drawscreen_section_three');
-      
       refresh__drawcontrols();
       updatearea();
+
       $('#step_drawscreen').val('drawscreen_section_four');
+      refresh__drawcontrols();
+      updatearea();
       if (document.querySelector(".saumat__grandrow")) {
         saumat = document.querySelector(".saumat__grandrow");
       }
@@ -3000,13 +3275,13 @@ function initializeroom(room, menu) {
         saumat.classList.add("saumat__grandrow");
         canvas.appendChild(saumat);
       }
-      if (saumat.querySelector(".horizontalrow_saumat")) {}
+      if (saumat.querySelector(".horizontalrow_saumat")) { }
       else {
         newrow_horizontal = document.createElement("div");
         saumat.appendChild(newrow_horizontal);
         newrow_horizontal.classList.add("horizontalrow_saumat");
       }
-      if (saumat.querySelector(".verticalrow_saumat")) {}
+      if (saumat.querySelector(".verticalrow_saumat")) { }
       else {
         newrow_vertical = document.createElement("div");
         saumat.appendChild(newrow_vertical);
@@ -3022,8 +3297,8 @@ function initializeroom(room, menu) {
         sau_cord = sau_data[4];
         sau_name = sau_data[5];
         luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
-        if (sau_type == 'pysty') {}
-        if (sau_type == 'vaaka') {}
+        if (sau_type == 'pysty') { }
+        if (sau_type == 'vaaka') { }
       }
       alkusaumat();
       calculateamounts();
@@ -3049,29 +3324,29 @@ function initializeroom(room, menu) {
       }
 
       dels = canvas.querySelectorAll(".sauma__controls_del");
-  
+
       for (var i = dels.length - 1; i >= 0; i--) {
         sauma = dels[i].parentElement.parentElement;
-        if(dels[i].querySelector(".delmeasure")) {
+        if (dels[i].querySelector(".delmeasure")) {
           delmeasure = dels[i].querySelector(".delmeasure");
-          if(sauma.classList.contains("sauma__vertical")) {
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left)*5);
+          if (sauma.classList.contains("sauma__vertical")) {
+            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
           }
-          else if(sauma.classList.contains("sauma__horizontal")) {
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom)*5);
+          else if (sauma.classList.contains("sauma__horizontal")) {
+            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
           }
         }
         else {
-          
+
           delmeasure = document.createElement("div");
           delmeasure.classList.add("delmeasure");
-          if(sauma.classList.contains("sauma__vertical")) {
+          if (sauma.classList.contains("sauma__vertical")) {
             delmeasure.classList.add("delmeasure_vertical");
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left)*5);
+            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
           }
-          else if(sauma.classList.contains("sauma__horizontal")) {
+          else if (sauma.classList.contains("sauma__horizontal")) {
             delmeasure.classList.add("delmeasure_horizontal");
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom)*5);
+            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
           }
 
           dels[i].appendChild(delmeasure);
@@ -3083,13 +3358,13 @@ function initializeroom(room, menu) {
       saumat = canvas.querySelectorAll(".sauma");
 
       for (var i = saumat.length - 1; i >= 0; i--) {
-        saumat[i].removeEventListener('touchmove', (e) => {});
-        saumat[i].querySelector(".sauma__controls").removeEventListener('touchmove', (e) => {});
+        saumat[i].removeEventListener('touchmove', (e) => { });
+        saumat[i].querySelector(".sauma__controls").removeEventListener('touchmove', (e) => { });
       }
 
       sauma_h = canvas.querySelectorAll(".sauma__horizontal");
       sauma_v = canvas.querySelectorAll(".sauma__vertical");
-      sauma_h.forEach(function(j) {
+      sauma_h.forEach(function (j) {
         j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
           resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
         });
@@ -3098,22 +3373,26 @@ function initializeroom(room, menu) {
         });
       });
 
-      sauma_v.forEach(function(j) {
+      sauma_v.forEach(function (j) {
         j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
         });
         j.addEventListener('touchmove', (e) => {
           resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
         });
       });
 
-      setTimeout(function() {levyta();console.log("LEVYTÄ FIRED")}, 1000);
+      setTimeout(function () { levyta('important'); console.log("LEVYTÄ FIRED") }, 1000);
+      $('#step_drawscreen').val('drawscreen_section_five');
+      refresh__drawcontrols();
+      updatearea();
     }
-    
+
     //LV
-    else if(ir_lv.length > 1) {
+    else if (ir_lv.length > 1) {
       for (var i = 0; i < ir_mps.length; i++) {
         if (ir_mps[i].length > 5) {
+          // room_status = ir_mps[i].split("|")[0];
           ir_mps_name = ir_mps[i].split("|")[0];
           ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
           ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
@@ -3124,11 +3403,12 @@ function initializeroom(room, menu) {
           mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
         }
       }
-      
+
+
+      $('#step_drawscreen').val('drawscreen_section_one');
       refresh__drawcontrols();
       updatearea();
-      $('#step_drawscreen').val('drawscreen_section_one');
-      
+
       for (var i = 0; i < ir_aus.length; i++) {
         if (ir_aus[i].length > 3) {
           ir_aus_name = ir_aus[i].split("|")[0];
@@ -3139,19 +3419,20 @@ function initializeroom(room, menu) {
           ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
           ir_aus_id = ir_aus[i].split("|")[4];
           ir_aus_classes = ir_aus[i].split("|")[7];
-          
+
           ir_aus_comment = ir_aus[i].split("|")[8];
           ir_aus_cfrom = ir_aus[i].split("|")[9];
           ir_aus_cto = ir_aus[i].split("|")[10];
-          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes,ir_aus_comment,ir_aus_cfrom,ir_aus_cto);
+          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
           // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
           // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
         }
       }
 
+
+      $('#step_drawscreen').val('drawscreen_section_two');
       refresh__drawcontrols();
       updatearea();
-      $('#step_drawscreen').val('drawscreen_section_two');
 
       for (var i = 0; i < ir_lv.length; i++) {
         if (ir_lv[i].length > 3) {
@@ -3165,17 +3446,18 @@ function initializeroom(room, menu) {
           ir_lv_comment = ir_lv[i].split("|")[6];
           ir_lv_cfrom = ir_lv[i].split("|")[7];
           ir_lv_cto = ir_lv[i].split("|")[8];
-          mitta__create_mitta("restoring", "lv", ir_lvs_name, ir_lvs_b, ir_lvs_l, '', '', ir_lvs_vount, ir_lvs_id, ir_lvs_sade,ir_lv_comment,ir_lv_cfrom,ir_lv_cto);
+          mitta__create_mitta("restoring", "lv", ir_lvs_name, ir_lvs_b, ir_lvs_l, '', '', ir_lvs_vount, ir_lvs_id, ir_lvs_sade, ir_lv_comment, ir_lv_cfrom, ir_lv_cto);
 
         }
       }
+
+      $('#step_drawscreen').val('drawscreen_section_three');
       refresh__drawcontrols();
       updatearea();
-      $('#step_drawscreen').val('drawscreen_section_three');
     }
 
     //AUKOT 
-    else if(ir_aus.length > 1) {
+    else if (ir_aus.length > 1) {
       for (var i = 0; i < ir_mps.length; i++) {
         if (ir_mps[i].length > 5) {
           ir_mps_name = ir_mps[i].split("|")[0];
@@ -3186,11 +3468,12 @@ function initializeroom(room, menu) {
           mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
         }
       }
-      
+
+
+      $('#step_drawscreen').val('drawscreen_section_one');
       refresh__drawcontrols();
       updatearea();
-      $('#step_drawscreen').val('drawscreen_section_one');
-      
+
       for (var i = 0; i < ir_aus.length; i++) {
         if (ir_aus[i].length > 3) {
           ir_aus_name = ir_aus[i].split("|")[0];
@@ -3206,19 +3489,19 @@ function initializeroom(room, menu) {
           ir_aus_comment = ir_aus[i].split("|")[8];
           ir_aus_cfrom = ir_aus[i].split("|")[9];
           ir_aus_cto = ir_aus[i].split("|")[10];
-          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes,ir_aus_comment,ir_aus_cfrom,ir_aus_cto);
+          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
           // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
           // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
         }
       }
 
+      $('#step_drawscreen').val('drawscreen_section_two');
       refresh__drawcontrols();
       updatearea();
-      $('#step_drawscreen').val('drawscreen_section_two');
     }
 
     //MITTAPISTEET, OK
-    else if(ir_mps.length > 1) {
+    else if (ir_mps.length > 1) {
       for (var i = 0; i < ir_mps.length; i++) {
         if (ir_mps[i].length > 5) {
           ir_mps_name = ir_mps[i].split("|")[0];
@@ -3229,10 +3512,10 @@ function initializeroom(room, menu) {
           mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
         }
       }
-      
+
+      $('#step_drawscreen').val('drawscreen_section_one');
       refresh__drawcontrols();
       updatearea();
-      $('#step_drawscreen').val('drawscreen_section_one');
     }
   }
   else {
@@ -3243,22 +3526,22 @@ function initializeroom(room, menu) {
   ir_no = room.dataset.room;
   mode_room = ir_no.toLowerCase();
 
-  if(mode_room == 'a') {
+  if (mode_room == 'a') {
     ir_value = apartment.dataset.aroom;
   }
-  if(mode_room == 'b') {
+  if (mode_room == 'b') {
     ir_value = apartment.dataset.broom;
   }
-  if(mode_room == 'c') {
+  if (mode_room == 'c') {
     ir_value = apartment.dataset.croom;
   }
-  if(mode_room == 'd') {
+  if (mode_room == 'd') {
     ir_value = apartment.dataset.droom;
   }
-  if(mode_room == 'k') {
+  if (mode_room == 'k') {
     ir_value = apartment.dataset.kroom;
   }
-  if(mode_room == 'l') {
+  if (mode_room == 'l') {
     ir_value = apartment.dataset.lroom;
   }
   calculateamounts();
@@ -3366,22 +3649,24 @@ function touchedElement(boxSelector, widthInputSelector, heightInputSelector, el
 // bottom_input - up input
 // left_input - left input
 function getElementCoords(bottom_input, left_input) {
-  const SHAPE_H = document.querySelector("#box_h").value;
-  const SHAPE_W = document.querySelector("#box_w").value;
-  const origoBottom = document.querySelector(".setting__canvas #drawarea__origo_central").style.bottom.replace("px", "");
-  const origoLeft = document.querySelector(".setting__canvas #drawarea__origo_central").style.left.replace("px", "");
-  const cordsBottom = document.querySelector(bottom_input);
-  const cordsLeft = document.querySelector(left_input);
+  if(document.querySelector('#drawscreen_section_two')) {
+    const SHAPE_H = document.querySelector("#box_h").value;
+    const SHAPE_W = document.querySelector("#box_w").value;
+    const origoBottom = document.querySelector(".setting__canvas #drawarea__origo_central").style.bottom.replace("px", "");
+    const origoLeft = document.querySelector(".setting__canvas #drawarea__origo_central").style.left.replace("px", "");
+    const cordsBottom = document.querySelector(bottom_input);
+    const cordsLeft = document.querySelector(left_input);
 
-  if (origoBottom && origoLeft) {
-    cordsBottom.value = origoBottom * 5;
-    cordsLeft.value = origoLeft * 5;
-    change__newdiv_cord();
-  }
-  else {
-    cordsBottom.value = 5;
-    cordsLeft.value = 5;
-    change__newdiv_cord();
+    if (origoBottom && origoLeft) {
+      cordsBottom.value = origoBottom * 5;
+      cordsLeft.value = origoLeft * 5;
+      change__newdiv_cord();
+    }
+    else {
+      cordsBottom.value = 5;
+      cordsLeft.value = 5;
+      change__newdiv_cord();
+    }
   }
 }
 const origo = document.querySelector('#drawarea__origo_central');
@@ -3422,13 +3707,13 @@ function gridify() {
     document.querySelector(".kokonaisalue").value = document.querySelector("#drawarea_h").value + " " + document.querySelector("#drawarea_w").value;
   }, 1000);
 
-  
+
 }
 window.onload = (event) => {
   gridify();
 };
-$(document).ready(function() {
-  $(window).keydown(function(event) {
+$(document).ready(function () {
+  $(window).keydown(function (event) {
     if (event.keyCode == 13) {
       event.preventDefault();
       return false;
@@ -3472,7 +3757,7 @@ function takeshot(arg) {
   // and append it
   // to the output div
   output.innerHTML = "";
-  html2canvas(div).then(function(canvas2) {
+  html2canvas(div).then(function (canvas2) {
     // output.appendChild(canvas2);
     const imageData = canvas2.toDataURL('image/png');
     const screenshotImage = new Image();
@@ -3569,24 +3854,27 @@ function prepend__reclamation() {
 
 function addproblemstatus(e) {
   elid = e.getAttribute('id');
-  el_ = elid.replace('--Tila ', '').toLowerCase();
-  document.querySelector(".project__building_room." + el_).classList.add("prob");
-  if (document.querySelector('#comment__importance').checked === true) {
-    document.querySelector(".project__building_room." + el_).classList.add("critical");
+  el_ = elid.replace('--Tila ', '').replace('    ', '').replaceAll(' ', '').toLowerCase();
+  document.querySelector(".project__building_room." + el_.replaceAll(' ', '')).classList.add("prob");
+  if(document.querySelector('#comment__importance')) {
+    if (document.querySelector('#comment__importance').checked === true) {
+      document.querySelector(".project__building_room." + el_.replaceAll(' ', '')).classList.add("critical");
+    }
   }
+  
 }
 //Ultimate rule: all radiobuttons and checkboxes get focus on checked
 var radios = document.querySelectorAll('input[type="radio"]');
-radios.forEach(function(r) {
-  r.addEventListener("click", function(e) {
+radios.forEach(function (r) {
+  r.addEventListener("click", function (e) {
     r.focus();
   }, {
     useCapture: true
   });
 });
 var checkedboxes = document.querySelectorAll('input[type="checkbox"]');
-checkedboxes.forEach(function(ch) {
-  ch.addEventListener("click", function(e) {
+checkedboxes.forEach(function (ch) {
+  ch.addEventListener("click", function (e) {
     ch.focus();
   }, {
     useCapture: true
@@ -3601,3 +3889,105 @@ function delcanvases() {
     todel[i].remove();
   }
 }
+
+
+function skipping() {
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+  (async () => {
+    if(window.location.href.indexOf('&apartment=') > 1) {    
+      skipping_apartment = document.querySelector('#skipping_apartment').value;
+      document.querySelector("." + skipping_apartment).click();
+      await sleep(1000);
+      if(window.location.href.indexOf('&room=') > 1) {
+        skipping_room = document.querySelector('#skipping_room').value;
+        document.querySelector(".house__wall_status_" + skipping_room).click();
+        await sleep(1000);
+        if(window.location.href.indexOf('&step=') > 1) {
+          input_step = document.querySelector('#step_drawscreen').value;
+          skipping_step = document.querySelector('#skipping_step').value;
+          input_step = skipping_step.replaceAll("0","drawscreen_section_zero").replaceAll("1","drawscreen_section_one").replaceAll("2","drawscreen_section_two").replaceAll("3","drawscreen_section_three").replaceAll("4","drawscreen_section_four").replaceAll("5","drawscreen_section_five").replaceAll("6","drawscreen_section_six").replaceAll("7","drawscreen_section_seven").replaceAll("8","drawscreen_section_eight").replaceAll("9","drawscreen_section_tyostot").replaceAll("10","drawscreen_section_esikatselu");
+          
+          await sleep(1000);
+          $('#step_drawscreen').val(input_step);
+          refresh__drawcontrols();
+          updatearea();
+        }
+      }
+    }
+  })();
+
+  // if(current_user_permissions)
+}
+
+setTimeout(() => {
+  skipping();
+}, "550");
+
+
+function initialize__housetempla(arguemento,stage) {
+  rdata = document.querySelector("."+current_apartment);
+  if(stage === 1) {
+    house__templeates = document.querySelectorAll(".house__types_type");
+    for (let a = 0; a < house__templeates.length; a++) {
+      house__templeates[a].classList.remove("active");
+    }
+    arguemento.classList.add("active");
+
+    rdata.dataset.aroom = arguemento.dataset.aroom;
+    rdata.dataset.broom = arguemento.dataset.broom;
+    rdata.dataset.croom = arguemento.dataset.croom;
+    rdata.dataset.droom = arguemento.dataset.droom;
+    rdata.dataset.kroom = arguemento.dataset.kroom;
+    rdata.dataset.lroom = arguemento.dataset.lroom;
+    
+    
+    // input_step = "drawscreen_section_one";
+    submitprogress('','save');
+    
+    
+    setTimeout(() => {
+      location.reload();
+    }, "1050");
+    
+  }
+  if(stage === 2) {
+    
+    newtype = document.createElement("div");
+    newtype.classList.add("house__types_type");
+    newtype.innerHTML = 'Uusi';
+    newtype.dataset.aroom = rdata.dataset.aroom;
+    newtype.dataset.broom = rdata.dataset.broom;
+    newtype.dataset.croom = rdata.dataset.croom;
+    newtype.dataset.droom = rdata.dataset.droom;
+    newtype.dataset.kroom = rdata.dataset.kroom;
+    newtype.dataset.lroom = rdata.dataset.lroom;
+
+
+    document.querySelector(".house__types_row").appendChild(newtype);
+  
+
+    formData = {
+      a: newtype.dataset.aroom.toString(),
+      b: newtype.dataset.broom.toString(),
+      c: newtype.dataset.croom.toString(),
+      d: newtype.dataset.droom.toString(),
+      k: newtype.dataset.kroom.toString(), 
+      l: newtype.dataset.lroom.toString(), 
+    };
+    $.ajax({
+      type: "POST",
+      url: "/db/updatepohjat.php",
+      data: formData,
+      error: function (jqxhr, status, exception) {
+        alert('Tietokantavirhe, soita numeroon +358449782028');
+      }
+    }).done(function (data) {
+      // alert('Seinä ' + current_room + ' tallennettu');
+      // console.log("saved Data: " + data);
+      alert("function initialize__housetempla(9) OK");
+
+    });
+  }
+
+}
+

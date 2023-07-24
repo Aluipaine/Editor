@@ -422,8 +422,9 @@ function change__rankacord(input) {
 erikoisranka_no = 0;
 valiranka_no = 0;
 saumaranka_no = 0;
-old_rangat_excel = document.querySelector(".ranka_excel").innerHTML;
-
+if(document.querySelector(".ranka_excel")) {
+  old_rangat_excel = document.querySelector(".ranka_excel").innerHTML;
+}
 function create__rankaexcel() {
   tyostot = canvas.querySelectorAll(".tyostot__grandrow > div");
   h = parseFloat(document.querySelector("#box_h").value);

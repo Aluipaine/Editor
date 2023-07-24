@@ -1,22 +1,30 @@
 <?php
 // Initialize the session
 session_start();
- 
+require_once "config.php";
+
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
 
+
+
 if(htmlspecialchars($_SESSION["username"]) === "marko" || htmlspecialchars($_SESSION["username"]) === "Marko") {
   header("location: welcome-marko.php");
   exit;
 }
-require_once "config.php";
 
 
 $posts = mysqli_query($link, "SELECT * FROM `projects`");
 $posts = mysqli_fetch_all($posts);
+
+$username = $_SESSION["username"];
+$username_role_ = mysqli_query($link, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
+$username_role = mysqli_fetch_assoc($username_role_);
+
+$_SESSION["role"] = $username_role['role'];
 
 ?>
  <?php include('./header.php') ?>
@@ -29,6 +37,7 @@ $posts = mysqli_fetch_all($posts);
 </section>
 
 <section id="projects__list" class="projects__list">
+
     <div class="container">
 
       <div class="row">
@@ -36,7 +45,7 @@ $posts = mysqli_fetch_all($posts);
         <div class="col-6"><h2 class="h1">Nykyiset projektit:</h2></div>
 
         <div class="col-6"><a class="ready_btn" href="./new-project.php">Uusi projekti</a></div>
-
+       
       </div>
 
       <section id="projects">
@@ -60,7 +69,7 @@ $posts = mysqli_fetch_all($posts);
                 <td><?= $post[2] ?></td>
                 <td><?= $post[1] ?></td>
                 <td style="text-transform: capitalize;"><?= $post[5] ?></td>
-                <td><a href="post.php?id=<?= $post[0] . '&user=' . htmlspecialchars($_SESSION["username"]) ?>">Jatka projektiin</a></td>
+                <td><a href="post.php?id=<?= $post[0] . '&user=' . htmlspecialchars($_SESSION["username"]) . '&role=' . htmlspecialchars($_SESSION["role"]) ?>">Jatka projektiin</a></td>
               </tr>
             <?php
         }

@@ -1955,12 +1955,12 @@ $('.finalization_btn').click(function(e) {
               name: nam,
               positionX: posX,
               positionY: posY,
-              a_room: "13~1|1~2200|6000~~~~~",
-              b_room: "13~1|1~2200|2200~~~~~",
-              c_room: "13~1|1~2200|6000~~~~~",
-              d_room: "13~1|1~2200|2200~~~~~",
-              k_room: "13~1|1~2200|6000~~~~~",
-              l_room: "13~1|1~2200|6000~~~~~"
+              a_room: "13~undone~1|1~2200|4000~~~~~",
+              b_room: "13~undone~1|1~2200|2200~~~~~",
+              c_room: "13~undone~1|1~2200|4000~~~~~",
+              d_room: "13~undone~1|1~2200|2200~~~~~",
+              k_room: "13~undone~1|1~2200|4000~~~~~",
+              l_room: "13~undone~1|1~2200|4000~~~~~"
           });
           $("#a_rooms").val(JSON.stringify(a_array));
       }
@@ -1990,12 +1990,12 @@ $('.finalization_btn').click(function(e) {
               name: nam,
               positionX: posX,
               positionY: posY,
-              a_room: "13~1|1~2200|6000~~~~~",
-              b_room: "13~1|1~2200|2200~~~~~",
-              c_room: "13~1|1~2200|6000~~~~~",
-              d_room: "13~1|1~2200|2200~~~~~",
-              k_room: "13~1|1~2200|6000~~~~~",
-              l_room: "13~1|1~2200|6000~~~~~"
+              a_room: "13~undone~1|1~2200|4000~~~~~",
+              b_room: "13~undone~1|1~2200|2200~~~~~",
+              c_room: "13~undone~1|1~2200|4000~~~~~",
+              d_room: "13~undone~1|1~2200|2200~~~~~",
+              k_room: "13~undone~1|1~2200|4000~~~~~",
+              l_room: "13~undone~1|1~2200|4000~~~~~"
           });
           $("#b_rooms").val(JSON.stringify(b_array));
       }
@@ -2025,12 +2025,12 @@ $('.finalization_btn').click(function(e) {
               name: nam,
               positionX: posX,
               positionY: posY,
-              a_room: "13~1|1~2200|6000~~~~~",
-              b_room: "13~1|1~2200|2200~~~~~",
-              c_room: "13~1|1~2200|6000~~~~~",
-              d_room: "13~1|1~2200|2200~~~~~",
-              k_room: "13~1|1~2200|6000~~~~~",
-              l_room: "13~1|1~2200|6000~~~~~"
+              a_room: "13~undone~1|1~2200|4000~~~~~",
+              b_room: "13~undone~1|1~2200|2200~~~~~",
+              c_room: "13~undone~1|1~2200|4000~~~~~",
+              d_room: "13~undone~1|1~2200|2200~~~~~",
+              k_room: "13~undone~1|1~2200|4000~~~~~",
+              l_room: "13~undone~1|1~2200|4000~~~~~"
           });
           $("#c_rooms").val(JSON.stringify(c_array));
       }
@@ -2060,12 +2060,12 @@ $('.finalization_btn').click(function(e) {
               name: nam,
               positionX: posX,
               positionY: posY,
-              a_room: "13~1|1~2200|6000~~~~~",
-              b_room: "13~1|1~2200|2200~~~~~",
-              c_room: "13~1|1~2200|6000~~~~~",
-              d_room: "13~1|1~2200|2200~~~~~",
-              k_room: "13~1|1~2200|6000~~~~~",
-              l_room: "13~1|1~2200|6000~~~~~"
+              a_room: "13~undone~1|1~2200|4000~~~~~",
+              b_room: "13~undone~1|1~2200|2200~~~~~",
+              c_room: "13~undone~1|1~2200|4000~~~~~",
+              d_room: "13~undone~1|1~2200|2200~~~~~",
+              k_room: "13~undone~1|1~2200|4000~~~~~",
+              l_room: "13~undone~1|1~2200|4000~~~~~"
           });
           $("#d_rooms").val(JSON.stringify(d_array));
       }
@@ -2094,12 +2094,12 @@ $('.finalization_btn').click(function(e) {
               name: nam,
               positionX: posX,
               positionY: posY,
-              a_room: "13~1|1~2200|6000~~~~~",
-              b_room: "13~1|1~2200|2200~~~~~",
-              c_room: "13~1|1~2200|6000~~~~~",
-              d_room: "13~1|1~2200|2200~~~~~",
-              k_room: "13~1|1~2200|6000~~~~~",
-              l_room: "13~1|1~2200|6000~~~~~"
+              a_room: "13~undone~1|1~2200|4000~~~~~",
+              b_room: "13~undone~1|1~2200|2200~~~~~",
+              c_room: "13~undone~1|1~2200|4000~~~~~",
+              d_room: "13~undone~1|1~2200|2200~~~~~",
+              k_room: "13~undone~1|1~2200|4000~~~~~",
+              l_room: "13~undone~1|1~2200|4000~~~~~"
           });
           $("#e_rooms").val(JSON.stringify(e_array));
       }
@@ -2129,12 +2129,12 @@ $('.finalization_btn').click(function(e) {
               name: nam,
               positionX: posX,
               positionY: posY,
-              a_room: "13~1|1~2200|6000~~~~~",
-              b_room: "13~1|1~2200|2200~~~~~",
-              c_room: "13~1|1~2200|6000~~~~~",
-              d_room: "13~1|1~2200|2200~~~~~",
-              k_room: "13~1|1~2200|6000~~~~~",
-              l_room: "13~1|1~2200|6000~~~~~"
+              a_room: "13~undone~1|1~2200|4000~~~~~",
+              b_room: "13~undone~1|1~2200|2200~~~~~",
+              c_room: "13~undone~1|1~2200|4000~~~~~",
+              d_room: "13~undone~1|1~2200|2200~~~~~",
+              k_room: "13~undone~1|1~2200|4000~~~~~",
+              l_room: "13~undone~1|1~2200|4000~~~~~"
           });
           $("#f_rooms").val(JSON.stringify(f_array));
       }
@@ -2162,12 +2162,12 @@ $('.finalization_btn').click(function(e) {
               name: nam,
               positionX: posX,
               positionY: posY,
-              a_room: "13~1|1~2200|6000~~~~~",
-              b_room: "13~1|1~2200|2200~~~~~",
-              c_room: "13~1|1~2200|6000~~~~~",
-              d_room: "13~1|1~2200|2200~~~~~",
-              k_room: "13~1|1~2200|6000~~~~~",
-              l_room: "13~1|1~2200|6000~~~~~"
+              a_room: "13~undone~1|1~2200|4000~~~~~",
+              b_room: "13~undone~1|1~2200|2200~~~~~",
+              c_room: "13~undone~1|1~2200|4000~~~~~",
+              d_room: "13~undone~1|1~2200|2200~~~~~",
+              k_room: "13~undone~1|1~2200|4000~~~~~",
+              l_room: "13~undone~1|1~2200|4000~~~~~"
           });
           $("#g_rooms").val(JSON.stringify(g_array));
       }
@@ -2197,12 +2197,12 @@ $('.finalization_btn').click(function(e) {
               name: nam,
               positionX: posX,
               positionY: posY,
-              a_room: "13~1|1~2200|6000~~~~~",
-              b_room: "13~1|1~2200|2200~~~~~",
-              c_room: "13~1|1~2200|6000~~~~~",
-              d_room: "13~1|1~2200|2200~~~~~",
-              k_room: "13~1|1~2200|6000~~~~~",
-              l_room: "13~1|1~2200|6000~~~~~"
+              a_room: "13~undone~1|1~2200|4000~~~~~",
+              b_room: "13~undone~1|1~2200|2200~~~~~",
+              c_room: "13~undone~1|1~2200|4000~~~~~",
+              d_room: "13~undone~1|1~2200|2200~~~~~",
+              k_room: "13~undone~1|1~2200|4000~~~~~",
+              l_room: "13~undone~1|1~2200|4000~~~~~"
           });
           $("#h_rooms").val(JSON.stringify(h_array));
       }
@@ -2226,3 +2226,72 @@ $('.finalization_btn').click(function(e) {
 
   $('#new_project__form').submit();
 });
+
+
+/* <div class="form-subgroup">
+  <label>Rakennesuunnittelija:</label>
+  <input type="text" name="prc_11" class="form-control" value=" " required>
+</div>
+<div class="form-subgroup">
+  <label>Rakennesuunnittelija puh:</label>
+  <input type="text" name="prc_11_puh" class="form-control" value=" " required>
+</div>
+<div class="form-subgroup">
+  <label>Rakennesuunnittelija email:</label>
+  <input type="text" name="prc_11_email" class="form-control" value=" " required>
+</div>
+<div class="form-subgroup">
+  <label for="firstrole">Rooli:</label>
+  <select name="role" id="firstrole">
+    <option value="saaja">Viestien saaja</option>
+    <option value="katsoja">Katsoja</option>
+    <option value="duunari">Kommentointi</option>
+  </select>
+</div>
+<div class="form-subgroup">
+  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+  <div class="row-reversed">
+    <label for="firstrole_permission">Kyllä</label>
+    <input type="checkbox" id="firstrole_permission" class="standard_checkbox">
+  </div>
+</div> */
+
+prc_count = 11;
+function creation_henkilolisays() {
+    prc_count+=1;
+    if(prc_count >= 31) {
+        alert("Henkilöiden maksimimäärä ylitetty!");
+        return;
+    }
+    var group = document.createElement("div");
+    group.classList.add("form-group");
+
+    var subgroup_1 = document.createElement("div");
+    var subgroup_2 = document.createElement("div");
+    var subgroup_3 = document.createElement("div");
+    var subgroup_4 = document.createElement("div");
+    var subgroup_5 = document.createElement("div");
+
+
+    subgroup_1.classList.add("form-subgroup");
+    subgroup_2.classList.add("form-subgroup");
+    subgroup_3.classList.add("form-subgroup");
+    subgroup_4.classList.add("form-subgroup");
+    subgroup_5.classList.add("form-subgroup");
+    
+        
+    subgroup_1.innerHTML = '<label>Nimi ja Rooli: </label><input type="text" name="prc_'+prc_count+'" class="form-control" value=" " required></div>';
+    subgroup_2.innerHTML = '<label>Puhelinnumero: </label><input type="text" name="prc_'+prc_count+'_puh" class="form-control" value=" " required></div>';
+    subgroup_3.innerHTML = '<label>Sähköposti: </label><input type="text" name="prc_'+prc_count+'_email" class="form-control" value=" " required></div>';
+    subgroup_4.innerHTML = '<label for="prc_'+prc_count+'_role">Rooli:</label><select name="role" id="prc_'+prc_count+'_role"><option value="saaja">Viestien saaja</option><option value="katsoja">Katsoja</option><option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option></select>';
+    subgroup_5.innerHTML = '<h5>Saako katsoa kaikki projektin tiedot?</h5><div class="row-reversed"><label for="prc_'+prc_count+'_permission">Kyllä</label><input type="checkbox" id="prc_'+prc_count+'_permission" class="standard_checkbox"></div><h5>Poista näkymässä projektilla</h5><div class="row-reversed"><label for="prc_'+prc_count+'_hiding">Kyllä</label><input type="checkbox" id="prc_'+prc_count+'_hiding" class="standard_checkbox"></div>';
+
+
+    group.appendChild(subgroup_1);
+    group.appendChild(subgroup_2);
+    group.appendChild(subgroup_3);
+    group.appendChild(subgroup_4);
+    group.appendChild(subgroup_5);
+
+    document.querySelector("#new_project > fieldset").append(group);
+}

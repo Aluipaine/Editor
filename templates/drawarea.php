@@ -43,7 +43,7 @@
              <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">85</div>
              <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">125</div>
 
-             <div class="drawarea__top_item drawarea__top_circle sahkoputki" style="background: #eee;font-size: 10px;align-items: center;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').innerHTML = this.innerHTML;">72</div>
+             <div class="drawarea__top_item drawarea__top_circle sahkoputki" style="background: #eee;font-size: 10px;align-items: center;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').innerHTML = this.innerHTML;">75</div>
 
              <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML.replace('IV ','');">IV 110</div>
              <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML.replace('IV ','');">IV 135</div>
@@ -1745,15 +1745,27 @@
 
 
       </div>
-     
-    <?php include('./templates/da_controls_1.php'); ?>
-    <?php include('./templates/da_controls_2.php'); ?>
-    <?php include('./templates/da_controls_3.php'); ?>
-    <?php include('./templates/da_controls_4.php'); ?>
-    <?php include('./templates/da_controls_5.php'); ?>
-    <?php include('./templates/da_controls_5-5.php'); ?>
-    <?php include('./templates/da_controls_5-esikatselu.php'); ?>
-    <?php include('./templates/da_controls_6.php'); ?>
-    <?php include('./templates/da_controls_7.php'); ?>
+
+    
+    <?php 
+      if(isset($_GET["role"]) && $_GET["role"] == 'mittaus'){
+        include('./templates/da_controls_1.php');
+      include('./templates/da_controls_2.php');
+      include('./templates/da_controls_3.php');
+      include('./templates/da_controls_4.php');
+      include('./templates/da_controls_5.php');
+      include('./templates/da_controls_5-5.php');
+      include('./templates/da_controls_5-esikatselu.php');
+      include('./templates/da_controls_6.php');
+      include('./templates/da_controls_7.php');
+      }
+      else {
+        include('./templates/da_controls_commenting.php');
+        include('./templates/da_controls_1.php');
+        include('./templates/da_controls_2.php');
+
+      }
+      
+    ?>
 
    </div>

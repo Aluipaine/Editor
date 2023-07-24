@@ -1,6 +1,11 @@
 listoitettu = false;
-old_listat_excel = document.querySelector(".lista_excel").innerHTML;
-old_ikkunalista_excel = document.querySelector(".ikkunalista_excel").innerHTML;
+if(document.querySelector(".lista_excel")) {
+  old_listat_excel = document.querySelector(".lista_excel").innerHTML;
+}
+
+if(document.querySelector(".ikkunalista_excel")) {
+  old_ikkunalista_excel = document.querySelector(".ikkunalista_excel").innerHTML;
+}
 
 function listoitus() {
   lista_excel = document.querySelector(".lista_excel");

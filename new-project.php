@@ -26,8 +26,30 @@ include('header.php');
                <input type="text" name="prc_1_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>Pääurakoitsija email: </label>
                <input type="text" name="prc_1_email" class="form-control" value=" " required></div>
-               
+               <div class="form-subgroup">
+                  <label for="prc_1_role">Rooli: </label>
+                  <select name="prc_1_role" id="prc_1_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option>
+                     <option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_1_permission">Kyllä</label>
+                     <input name="prc_1_permission" type="checkbox" id="prc_1_permission" class="standard_checkbox" value="1">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_1_hiding">Kyllä</label>
+                     <input name="prc_1_hiding" type="checkbox" id="prc_1_hiding" class="standard_checkbox" value="1">
+                  </div>
                   
+               </div>  
+
             </div>
             <div class="form-group">
                <div class="form-subgroup"><label>Asiakas: </label>
@@ -36,9 +58,28 @@ include('header.php');
                <input type="text" name="prc_2_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>Asiakas email: </label>
                <input type="text" name="prc_2_email" class="form-control" value=" " required> </div>
-               
-               
-                 
+               <div class="form-subgroup">
+                  <label for="prc_2_role">Rooli: </label>
+                  <select name="role" id="prc_2_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_2_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_2_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_2_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_2_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div> 
             </div>
             <div class="form-group">
                <div class="form-subgroup"><label>Myyjä: </label>
@@ -47,7 +88,28 @@ include('header.php');
                <input type="text" name="prc_3_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>Myyjä email: </label>
                <input type="text" name="prc_3_email" class="form-control" value=" " required></div>
-               
+               <div class="form-subgroup">
+                  <label for="prc_3_role">Rooli: </label>
+                  <select name="role" id="prc_3_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_3_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_3_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_3_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_3_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div> 
                
                   
             </div>
@@ -58,7 +120,28 @@ include('header.php');
                <input type="text" name="prc_4_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"> <label>Asentaja email: </label>
                <input type="text" name="prc_4_email" class="form-control" value=" " required></div>
-               
+               <div class="form-subgroup">
+                  <label for="prc_4_role">Rooli: </label>
+                  <select name="role" id="prc_4_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_4_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_4_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_4_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_4_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div>  
                
                  
             </div>
@@ -70,7 +153,28 @@ include('header.php');
                <input type="text" name="prc_5_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>Mittamies email: </label>
                <input type="text" name="prc_5_email" class="form-control" value=" " required></div>
-               
+               <div class="form-subgroup">
+                  <label for="prc_5_role">Rooli: </label>
+                  <select name="role" id="prc_5_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_5_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_5_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_5_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_5_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div>  
                
                   
             </div>
@@ -81,7 +185,28 @@ include('header.php');
                <input type="text" name="prc_6_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>Sähköurakoitsija email: </label>
                <input type="text" name="prc_6_email" class="form-control" value=" " required></div>
-               
+               <div class="form-subgroup">
+                  <label for="prc_6_role">Rooli: </label>
+                  <select name="role" id="prc_6_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_6_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_6_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_6_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_6_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div> 
                
                   
             </div>
@@ -92,7 +217,28 @@ include('header.php');
                <input type="text" name="prc_7_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>LVI-urakoitsija email: </label>
                <input type="text" name="prc_7_email" class="form-control" value=" " required></div>
-               
+               <div class="form-subgroup">
+                  <label for="prc_7_role">Rooli: </label>
+                  <select name="role" id="prc_7_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_7_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_7_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_7_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_7_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div>  
                
                   
             </div>
@@ -103,6 +249,28 @@ include('header.php');
                <input type="text" name="prc_8_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>Lasitusfirma email: </label>
                <input type="text" name="prc_8_email" class="form-control" value=" " required></div>
+               <div class="form-subgroup">
+                  <label for="prc_8_role">Rooli: </label>
+                  <select name="role" id="prc_8_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_8_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_8_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_8_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_8_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div> 
             </div>
 
             <div class="form-group">
@@ -112,6 +280,28 @@ include('header.php');
                <input type="text" name="prc_9_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>Palokatko email: </label>
                <input type="text" name="prc_9_email" class="form-control" value=" " required></div>
+               <div class="form-subgroup">
+                  <label for="prc_9_role">Rooli: </label>
+                  <select name="role" id="prc_9_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_9_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_9_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_9_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_9_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div> 
             </div>
 
             <div class="form-group">
@@ -121,6 +311,28 @@ include('header.php');
                <input type="text" name="prc_10_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>Arkkitehti email: </label>
                <input type="text" name="prc_10_email" class="form-control" value=" " required></div>
+               <div class="form-subgroup">
+                  <label for="prc_10_role">Rooli: </label>
+                  <select name="role" id="prc_10_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_10_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_10_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_10_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_10_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div> 
             </div>
 
             <div class="form-group">
@@ -130,6 +342,32 @@ include('header.php');
                <input type="text" name="prc_11_puh" class="form-control" value=" " required></div>
                <div class="form-subgroup"><label>Rakennesuunnittelija email: </label>
                <input type="text" name="prc_11_email" class="form-control" value=" " required></div>
+               <div class="form-subgroup">
+                  <label for="prc_11_role">Rooli: </label>
+                  <select name="role" id="prc_11_role">
+                     <option value="saaja">Viestien saaja</option>
+                     <option value="katsoja">Katsoja</option>
+                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
+                  </select>
+               </div>
+               <div class="form-subgroup">
+                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                  <div class="row-reversed">
+                     <label for="prc_11_permission">Kyllä</label>
+                     <input type="checkbox" id="prc_11_permission" class="standard_checkbox">
+                  </div>
+
+                  <h5>Poista näkymässä projektilla</h5>
+                  <div class="row-reversed">
+                     <label for="prc_11_hiding">Kyllä</label>
+                     <input type="checkbox" id="prc_11_hiding" class="standard_checkbox">
+                  </div>
+                  
+               </div> 
+            </div>
+
+            <div class="button f_contactadding_btn" onclick="creation_henkilolisays();">
+               Lisää uusi henkilö projektiin
             </div>
 
             <input type="text" name="a_rooms" id="a_rooms" style="display:none;">

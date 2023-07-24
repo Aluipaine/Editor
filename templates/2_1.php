@@ -23,14 +23,15 @@
    <section class="nav">
       <nav>
          <ul>
-            <li><div onclick="$('#step_drawscreen').val('rooms');refresh__drawcontrols();updatearea();">Ristivalikkoon</div></li>
+            <li><div onclick="$('#step_drawscreen').val('rooms');refresh__drawcontrols();updatearea();degradate_url(2);">Ristivalikkoon</div></li>
 
             <li><div onclick="$('#step_drawscreen').val('drawscreen_section_one');" class="nav_current">Origo</div></li>
             <li><div onclick="$('#step_drawscreen').val('drawscreen_section_two');refresh__drawcontrols();updatearea();">Aukot</div></li>
             <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();">Läpiviennit</div></li>
             <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();">Saumat</div></li>
-            <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();">Ladonta</div></li>
             <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();">Kiinnikkeet</div></li>
+            <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();">Ladonta</div></li>
+
             <li><div onclick="alert('Onnistuu kiinnikkeet-kohdasta');">Seinät</div></li>
             <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();">Levyt</div></li>
             <li><div onclick="$('#step_drawscreen').val('drawscreen_section_six');refresh__drawcontrols();updatearea();">Rangat</div></li>

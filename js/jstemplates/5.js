@@ -50,6 +50,10 @@ function luo__levy(h, w, dex, col, b, l) {
   else {
     levy.style.right = (parseFloat(l) / 5) + "px";
   }
+
+  if(parseFloat(levy.style.width)*5 < 300) {
+    levy.classList.add("levytext_inverted");
+  }
   // levy.appendChild(levy_name);
   var l_meta = document.createElement("input");
   l_meta.type = "hidden";
@@ -60,7 +64,7 @@ function luo__levy(h, w, dex, col, b, l) {
 
 }
 
-function levyta() {
+function levyta(priority) {
   fixmissing__saumoitus();
   levy_c = -1;
   levy_array = [];
@@ -123,7 +127,7 @@ function levyta() {
   // if (document.getElementById("settings__saumahanta-vas").checked) {
   //   levyt.style.flexDirection = "row-reverse";
   // }
-  if (input_step == 'drawscreen_section_four') {
+  if (input_step == 'drawscreen_section_four' || priority=='important') {
     var prev_b = 0;
     var preh_l = 0;
     for (var i = 0; i < vaakamitat.length; i++) {
@@ -158,7 +162,10 @@ function levyta() {
       let levy = document.querySelectorAll(".levy");
       for (var i = 0; i < levy.length; i += 1) {
         // levy[i].style.background = "transparent";
-        levy[i].classList.add("levy_transparent");
+        if(input_step == 'drawscreen_section_four') {
+          levy[i].classList.add("levy_transparent");
+        }
+        
       }
       let closer = document.querySelectorAll(".closer");
       for (var i = 0; i < closer.length; i += 1) {
@@ -437,4 +444,38 @@ function luo__levy_restore(mod_nam, mod_type, mod_b, mod_left, mod_height, mod_w
   dex = mod_nam.split("_")[1][1];
   col = mod_nam.split("_")[1][0];
 
+}
+
+function create__ladontaoptions() {
+  da_5 = document.querySelector(".drawarea__controls_fiveitems");
+  da_5.innerHTML = "";
+  levys = canvas.querySelectorAll(".levy");
+  for (var i = 0; i < levys.length; i++) {
+    
+    
+    levy__options = document.createElement("div");
+    levy__options.innerHTML = levys[i].innerText;
+    levy__options_settings = document.createElement("i");
+    pressed__levy = levys[i].dataset.levy;
+    levy__options_settings.setAttribute("onclick",
+      "find__that_levy("+pressed__levy+");"
+    );
+    levy__options_settings.innerHTML =
+      "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.00159 9.45C6.33358 9.45 5.69293 9.19188 5.22058 8.73241C4.74822 8.27295 4.48286 7.64978 4.48286 7C4.48286 6.35022 4.74822 5.72705 5.22058 5.26759C5.69293 4.80812 6.33358 4.55 7.00159 4.55C7.6696 4.55 8.31025 4.80812 8.7826 5.26759C9.25495 5.72705 9.52032 6.35022 9.52032 7C9.52032 7.64978 9.25495 8.27295 8.7826 8.73241C8.31025 9.19188 7.6696 9.45 7.00159 9.45ZM12.3485 7.679C12.3773 7.455 12.3989 7.231 12.3989 7C12.3989 6.769 12.3773 6.538 12.3485 6.3L13.8669 5.159C14.0037 5.054 14.0396 4.865 13.9533 4.711L12.514 2.289C12.4277 2.135 12.2334 2.072 12.075 2.135L10.2831 2.835C9.90892 2.562 9.52032 2.324 9.06695 2.149L8.80068 0.294C8.7719 0.126 8.62077 0 8.1086 0H5.56231C5.38241 0 5.23128 0.126 5.2025 0.294L4.93623 2.149C4.48286 2.324 4.09425 2.562 3.72004 2.835L1.92815 2.135C1.76983 2.072 1.57552 2.135 1.48917 2.289L0.0498936 4.711C-0.0436593 4.865 -0.000480936 5.054 0.13625 5.159L1.65468 6.3C1.6259 6.538 1.60431 6.769 1.60431 7C1.60431 7.231 1.6259 7.455 1.65468 7.679L0.13625 8.841C-0.000480936 8.946 -0.0436593 9.135 0.0498936 9.289L1.48917 11.711C1.57552 11.865 1.76983 11.921 1.92815 11.865L3.72004 11.158C4.09425 11.438 4.48286 11.676 4.93623 11.851L5.2025 13.706C5.23128 13.874 5.38241 14 5.56231 14H8.1086C8.62077 14 8.7719 13.874 8.80068 13.706L9.06695 11.851C9.52032 11.669 9.90892 11.438 10.2831 11.158L12.075 11.865C12.2334 11.921 12.4277 11.865 12.514 11.711L13.9533 9.289C14.0396 9.135 14.0037 8.946 13.8669 8.841L12.3485 7.679Z' fill='#222222'/></svg>";
+
+    levy__options_settings.classList.add("newDiv__comment_settings");
+    levy__options.appendChild(levy__options_settings);
+    da_5.prepend(levy__options);
+
+  }
+}
+function find__that_levy(number) {
+  levys = canvas.querySelectorAll(".levy");
+  for (var i = 0; i < levys.length; i++) {
+    if(levys[i].dataset.levy == number) {
+        console.log("OK");
+        levys[i].querySelector("b").click();
+        break;
+    }
+  }
 }

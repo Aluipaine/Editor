@@ -2201,13 +2201,15 @@
     </div>
     <div class="container colormeanings">
       <div class="row">
-        <div class="c_meaning c_meaning_1"><b>EI TYÖTÄ</b></div>
-        <div class="c_meaning c_meaning_2"><b>TEKEMÄTTÄ</b></div>
-        <div class="c_meaning c_meaning_3"><b>MITATTU</b></div>
-        <div class="c_meaning c_meaning_4"><b>RANGAT ASENNETTU</b></div>
-        <div class="c_meaning c_meaning_5"><b>VALMIS</b></div>
-        <div class="c_meaning c_meaning_6"><b>VIRHE/ONGELMA</b></div>
-        <div class="c_meaning c_meaning_7"><b>KRIITTINEN VIRHE/ONGELMA</b></div>
+          <div class="c_meaning c_meaning_1"><i>EI TYÖTÄ</i></div>
+          <div class="c_meaning c_meaning_2"><i>TEKEMÄTTÄ</i></div>
+          <div class="c_meaning c_meaning_3"><i>MITTAUS ALOITETTU</i></div>
+          <div class="c_meaning c_meaning_4"><i>SAUMAT MITATTU</i></div>
+          <div class="c_meaning c_meaning_5"><i>RANGAT MITATTU</i></div>
+          <div class="c_meaning c_meaning_6"><i>MITATTU</i></div>
+          <div class="c_meaning c_meaning_7"><i>VALMIS</i></div>
+          <div class="c_meaning c_meaning_8"><i>VIRHE/ONGELMA</i></div>
+          <div class="c_meaning c_meaning_9"><i>KRIITTINEN VIRHE/ONGELMA</i></div>
       </div>
     </div>
 </section>
@@ -2269,6 +2271,7 @@
     <input type="hidden" value="" name="levyt" class="levyt_data">
     <input type="hidden" value="" name="rangat" class="rangat">
     <input type="hidden" value="" name="listat" class="listat">
+    <input type="hidden" value="" name="room_status" class="room_status">
     <input type="hidden" value="" name="kokonaisalue" class="kokonaisalue">
     <input type="hidden" value="" name="levytettava_alue" class="levytettava_alue">
     <input type="hidden" value="" name="poisjaava_alue" class="poisjaava_alue">
@@ -2283,11 +2286,13 @@
             <h3>(Seinän nimen taustaväri)</h3>
             <div class="c_meaning c_meaning_1"><i>EI TYÖTÄ</i></div>
             <div class="c_meaning c_meaning_2"><i>TEKEMÄTTÄ</i></div>
-            <div class="c_meaning c_meaning_3"><i>MITATTU</i></div>
-            <div class="c_meaning c_meaning_4"><i>RANGAT ASENNETTU</i></div>
-            <div class="c_meaning c_meaning_5"><i>VALMIS</i></div>
-            <div class="c_meaning c_meaning_6"><i>VIRHE/ONGELMA</i></div>
-            <div class="c_meaning c_meaning_7"><i>KRIITTINEN VIRHE/ONGELMA</i></div>
+            <div class="c_meaning c_meaning_3"><i>MITTAUS ALOITETTU</i></div>
+            <div class="c_meaning c_meaning_4"><i>SAUMAT MITATTU</i></div>
+            <div class="c_meaning c_meaning_5"><i>RANGAT MITATTU</i></div>
+            <div class="c_meaning c_meaning_6"><i>MITATTU</i></div>
+            <div class="c_meaning c_meaning_7"><i>VALMIS</i></div>
+            <div class="c_meaning c_meaning_8"><i>VIRHE/ONGELMA</i></div>
+            <div class="c_meaning c_meaning_9"><i>KRIITTINEN VIRHE/ONGELMA</i></div>
           </div>
           <div class="zeroscreen_settings">
            <h2>1. Talon alkuasetukset <div class="f_btn o_btn" onclick="fp_open();">täältä</div></h2>
@@ -2334,19 +2339,50 @@
         </div>
       </div>
       <div class="col-6">
-        <div id="house" class="house">
-           <div class="row">
-              <div class="house__wall house__wall_roof house__wall_k" style="width: 340px; height: 240px;right: calc(240px);margin-left: auto;">
-               <div class="house__wall_status house__wall_status_r" data-room="K" onclick="input_step = 'drawscreen_section_one';submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);refresh__drawcontrols();">KATTO</div>
-               <input type="number" class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
-               <input type="number" class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof();">
+        
+        <div id="types" class="house__types">
+          <h2>Parveketyypit</h2>
+          <div class="house__types_row row">
+            <?php 
+              $alphabet = range('A', 'Z');            
+              $p_data = mysqli_query($db, "SELECT * FROM `pohjat`");
+              $p_da = mysqli_fetch_all($p_data);
+              $p_data = $p_da;
+              $key_name = -1;
+              foreach ($p_data as $p_key) {
+                  $i_a = $p_key[1];
+                  $i_b = $p_key[2];
+                  $i_c = $p_key[3];
+                  $i_d = $p_key[4];
+                  $i_k = $p_key[5];
+                  $i_l = $p_key[6];
 
-               <div class="house__wallspecial">
-                 <div class="house__wall_asjarj asjarjk">5</div>
-                 <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="k"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-               </div>
-              </div>
-           </div>
+                  $key_name += 1;
+
+                  echo "<div onclick='initialize__housetempla(this,1);' data-aroom='" . strtolower($i_a) . "' data-broom='" . strtolower($i_b) . "' data-croom='" . strtolower($i_c) . "' data-droom='" . strtolower($i_d) . "' data-kroom='" . strtolower($i_k) . "' data-lroom='" . strtolower($i_l) . "' class='house__types_type'>" . $alphabet[$key_name] . "</div>";
+              }
+              
+            ?>
+          </div>
+          <div class="house__types_button" onclick="initialize__housetempla(this,2);">
+            Tallenna tämä asunto pohjaksi
+          </div>
+        </div>
+        
+
+        <div id="house" class="house">
+            <div class="row">
+                <div class="house__wall house__wall_roof house__wall_k" style="width: 340px; height: 240px;right: calc(240px);margin-left: auto;">
+                <div class="house__wall_status house__wall_status_k" data-room="K" onclick="input_step = 'drawscreen_section_one';submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);refresh__drawcontrols();">KATTO</div>
+                <input type="number" class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
+                <input type="number" class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof();">
+
+                <div class="house__wallspecial">
+                  <div class="house__wall_asjarj asjarjk">5</div>
+                  <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="k"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                </div>
+                </div>
+            </div>
            <div class="row">
               <div class="house__wall house__wall_one house__wall_a" style="width: 340px; height: 240px;">
                  <div class="house__wall_status house__wall_status_a" data-room="A" onclick='input_step = "drawscreen_section_one";refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);'>Seinä A</div>
@@ -2401,7 +2437,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6"><div class="prev_btn"  onclick='$("#step_drawscreen").val("project_start");refresh__drawcontrols();'>Edellinen</div></div>
+      <div class="col-6"><div class="prev_btn"  onclick='$("#step_drawscreen").val("project_start");refresh__drawcontrols();degradate_url(1);'>Edellinen</div></div>
 
       </div>
   </div>
@@ -2636,6 +2672,9 @@
 </form>
 
 <input type="text" hidden id="step_drawscreen" value="">
+<input type="text" hidden id="skipping_apartment" value="<?php echo $_GET['apartment']?>">
+<input type="text" hidden id="skipping_room" value="<?php echo $_GET['room']?>">
+<input type="text" hidden id="skipping_step" value="<?php echo $_GET['step']?>">
 
  <div class="question-container recl-container out" id="question__popup">
     <div class="modal-background">

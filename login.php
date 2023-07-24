@@ -1,20 +1,24 @@
 <?php 
-
+// Include config file
+require "config.php";
 // // Initialize the session
 session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){ 
-    if(isset($_SESSION["username"]) && $_SESSION["username"] == 'Marko'){
+    if(isset($_SESSION["role"]) && $_SESSION["role"] == 'admin'){
         header("location: welcome-marko.php");
     } else {
+        $username_role_ = mysqli_query($link, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
+        $username_role = mysqli_fetch_assoc($username_role_);
+        
+        $_SESSION["role"] = $username_role['role'];
         header("location: welcome.php");
     }
     exit;
 }
 
-// Include config file
-require_once "config.php";
+
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -66,9 +70,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
+                            $_SESSION["username"] = $username;    
                             
-                            if(isset($_SESSION["username"]) && $_SESSION["username"] == 'Marko'){
+                            $username_role_ = mysqli_query($link, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
+                            $username_role = mysqli_fetch_assoc($username_role_);
+
+
+                            $_SESSION["role"] = $username_role['role'];
+                            if(isset($_SESSION["role"]) && $_SESSION["role"] == 'admin'){
                                     header("location: welcome-marko.php");
                                 } else {
                                     header("location: welcome.php");
@@ -147,6 +156,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <p>Eikö tiliä löydy? <a href="register.php">Rekisteröidy</a>. <br> Mikäli et muista salasanaasi, ota yhteyttä Koodariin</p>
         </form>
       </div>
+
 </section>
 
 <?php 

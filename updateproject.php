@@ -14,9 +14,7 @@ $saving_e = $_POST['saving_e_rooms'];
 $saving_f = $_POST['saving_f_rooms']; //$_POST['c_saved']
 $saving_g = $_POST['saving_g_rooms'];
 $saving_h = $_POST['saving_h_rooms'];
-// $step = $_POST['step'];
-// $step = $_POST['step'];
-// $settings = $_POST['settings'];
+$settings = $_POST['settings'];
 // $projectdata = $_POST['projectdata'];
 
 
@@ -28,7 +26,7 @@ $saving_h = $_POST['saving_h_rooms'];
 
 // $meta = mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$step' WHERE `id`=$id AND `meta_key`='step'");
 
-// $meta = mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$settings' WHERE `id`=$id AND `meta_key`='settings'");
+$meta = mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$settings' WHERE `id`=$id AND `meta_key`='settings'");
 $meta = mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$w_content' WHERE `id`=$id AND `meta_key`='walls_content'");
 $meta = mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$a_settings' WHERE `id`=$id AND `meta_key`='aukko_settings'");
 

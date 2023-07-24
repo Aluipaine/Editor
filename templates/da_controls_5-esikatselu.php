@@ -8,7 +8,7 @@
     <div class="aukko_settingsbtn" onclick="open_aukko_settings(true);">
      Lista- ja ranka-asetuksia
   </div>
-   <div class="drawarea__controls_btn" onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_six'); ">
+   <div class="drawarea__controls_btn" onclick="$('#step_drawscreen').val('drawscreen_section_six');refresh__drawcontrols();updatearea(); ">
      Siirry rankoihin
    </div>
    <div class="form-group st_question"><input type="checkbox" name="stjarj" id="stjarj" checked><label for="stjarj">Standard?</label></div>

@@ -1,5 +1,6 @@
-old_levy_excel = document.querySelector(".levy_excel").innerHTML;
-
+if(document.querySelector(".levy_excel")) {
+  old_levy_excel = document.querySelector(".levy_excel").innerHTML;
+}
 function create__levy_excel() {
   const saumas = document.querySelectorAll(".sauma");
   let horizontalBleam = 0;
