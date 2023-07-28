@@ -21,11 +21,14 @@
 
 Тестовые доступы:
 1. Измерение
-Jyri
-Ipah6Xae!
+    Jyri
+    Ipah6Xae!
 2. Комментирование
-duunari 
-Nakkimakkara456
+    duunari 
+    Nakkimakkara456
 3. Админитсрация
-Marko
-NakkiMakkara123
+    Marko
+    NakkiMakkara123
+
+
+
