@@ -5424,3 +5424,54 @@ input[type="radio"] + label.levy__label:focus, input[type="radio"] + label.levy_
   flex-direction: row-reverse;
   justify-content: flex-end;
 }
+#levysivu h1 {
+  font-size: 30px;
+  margin-top: 5vh;
+}
+
+.greenbtn {
+  background-color: #18ab00;
+  color: #fff;
+}
+#levysivu h1 input  {
+  font-size: inherit;
+  border: unset;
+  border-bottom: 1px solid black;
+  padding: 10px;
+}
+#levysivu h1 .levy_sizes {
+  margin-top: 2vh;
+}
+#levysivu h1 .levy_sizes input {
+  font-size: 22px;
+  border: unset;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  max-width: 100px;
+}
+
+#levysivu h1 .levy_sizes span {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  margin: 10px;
+}
+
+#levysivu .greenbtn {
+  border-radius: 0px;
+  font-size: 12px;
+  border: 2px solid #d5d5d5;
+  margin: 20px 0;
+  /* padding: 9px 28px; */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  text-align: center;
+  line-height: 3;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+/* • Kommentoijan puolen korjaukset делегирование или сделай */
