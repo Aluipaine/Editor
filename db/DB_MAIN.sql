@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1deb1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307
--- Generation Time: Jul 24, 2023 at 04:28 PM
--- Server version: 8.0.30
--- PHP Version: 7.2.34
+-- Host: localhost:3306
+-- Generation Time: Jul 28, 2023 at 08:15 PM
+-- Server version: 10.11.3-MariaDB-1
+-- PHP Version: 8.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,19 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comments` (
   `id` varchar(255) NOT NULL,
-  `projectid` int NOT NULL,
-  `room` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `projectid` int(11) NOT NULL,
+  `room` varchar(50) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `x_y` varchar(255) DEFAULT NULL,
   `content` varchar(2000) DEFAULT NULL,
-  `attachments` varchar(3000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `attachments` varchar(3000) DEFAULT NULL,
   `comment_from` varchar(255) DEFAULT NULL,
   `comment_to` varchar(255) DEFAULT NULL,
   `urgency` varchar(255) DEFAULT NULL,
   `creation_time` varchar(255) DEFAULT NULL,
   `ending_time` varchar(255) DEFAULT NULL,
   `aihe` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `comments`
@@ -68,14 +68,14 @@ INSERT INTO `comments` (`id`, `projectid`, `room`, `name`, `x_y`, `content`, `at
 --
 
 CREATE TABLE `pohjat` (
-  `id` int NOT NULL,
-  `a` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `b` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `c` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `d` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `k` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `l` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int(11) NOT NULL,
+  `a` text DEFAULT NULL,
+  `b` text DEFAULT NULL,
+  `c` text DEFAULT NULL,
+  `d` text DEFAULT NULL,
+  `k` text DEFAULT NULL,
+  `l` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pohjat`
@@ -93,11 +93,11 @@ INSERT INTO `pohjat` (`id`, `a`, `b`, `c`, `d`, `k`, `l`) VALUES
 --
 
 CREATE TABLE `projectmeta` (
-  `meta_id` int NOT NULL,
-  `id` int NOT NULL,
+  `meta_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `meta_key` varchar(255) NOT NULL,
   `meta_value` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `projectmeta`
@@ -701,12 +701,12 @@ INSERT INTO `projectmeta` (`meta_id`, `id`, `meta_key`, `meta_value`) VALUES
 --
 
 CREATE TABLE `projects` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `title` varchar(300) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `link` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `project_type` varchar(300) CHARACTER SET utf8mb3 COLLATE utf8mb3_swedish_ci DEFAULT NULL,
-  `user` text CHARACTER SET latin1 COLLATE latin1_swedish_ci
+  `project_type` varchar(300) DEFAULT NULL,
+  `user` text CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_swedish_ci;
 
 --
@@ -725,28 +725,31 @@ INSERT INTO `projects` (`id`, `title`, `created_at`, `link`, `project_type`, `us
 --
 
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(255) DEFAULT NULL,
-  `permissionrank` varchar(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '0',
+  `permissionrank` varchar(1) NOT NULL DEFAULT '0',
   `visible_forall` varchar(1) NOT NULL DEFAULT '0',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `phone` bigint(20) NOT NULL,
+  `email` text NOT NULL,
+  `company` text NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `role`, `permissionrank`, `visible_forall`, `created_at`) VALUES
-(1, 'admin', '$2y$10$H3081r4OB97irEoTMJoKouI2odKyU0d2vRVtm3EV987pXDJ2ue7oq', 'admin', '1', '0', '2022-01-26 15:12:01'),
-(2, 'Jyri', '$2y$10$SGyk40ELdJrak44ZKPqgNOrSklCBEpspTQk.wUQjkgeemBYiO8.jG', 'mittaus', '1', '0', '2022-01-26 15:22:02'),
-(4, 'Marko', '$2y$10$goFDu8dFgD7k3Emnm7g.fe7z.5OD6TdC3oMLifRxMOr1ZFuUvQl1y', 'admin', '1', '0', '2023-01-12 19:11:17'),
-(5, 'JariRannanjarvi', '$2y$10$96y6r6yV14bQMGyPN18/luUMQWD3mu9svWrg4EBcCEBjNXlkncjEO', 'mittaus', '1', '0', '2023-05-30 16:33:14'),
-(6, 'Virtanen', '$2y$10$.kaoJanCFAlf0Jz4Q3W9VedLheLWGckGtSQ6YvltVJTiNZ5IQUxWu', 'mittaus', '1', '0', '2023-07-04 18:11:09'),
-(7, 'saaja', '$2y$10$md0nFoTex6NTY.l9w8Kx9.y95kertRGmVXeQKOyrn7gqy8BG.UdYu', 'saaja', '0', '0', '2023-07-06 14:05:14'),
-(8, 'katsoja', '$2y$10$PxBfLfqBLDWttW8MFs48VOCIG98uOHrPS7Err9o0XluAVrgMSmtfm', 'katsoja', '0', '0', '2023-07-06 14:05:29'),
-(9, 'duunari', '$2y$10$4Cbpj.gmgVnLgQNLWUUG4OOPwt/AZPmxgRRo/Vkzavc9Pbj6wllM6', 'duunari', '0', '0', '2023-07-06 14:05:46');
+INSERT INTO `users` (`id`, `username`, `password`, `role`, `permissionrank`, `visible_forall`, `phone`, `email`, `company`, `created_at`) VALUES
+(1, 'admin', '$2y$10$H3081r4OB97irEoTMJoKouI2odKyU0d2vRVtm3EV987pXDJ2ue7oq', 'admin', '1', '0', 0, '', '', '2022-01-26 15:12:01'),
+(2, 'Jyri', '$2y$10$SGyk40ELdJrak44ZKPqgNOrSklCBEpspTQk.wUQjkgeemBYiO8.jG', 'mittaus', '1', '0', 0, '', '', '2022-01-26 15:22:02'),
+(4, 'Marko', '$2y$10$goFDu8dFgD7k3Emnm7g.fe7z.5OD6TdC3oMLifRxMOr1ZFuUvQl1y', 'admin', '1', '0', 0, '', '', '2023-01-12 19:11:17'),
+(5, 'JariRannanjarvi', '$2y$10$96y6r6yV14bQMGyPN18/luUMQWD3mu9svWrg4EBcCEBjNXlkncjEO', 'mittaus', '1', '0', 0, '', '', '2023-05-30 16:33:14'),
+(6, 'Virtanen', '$2y$10$.kaoJanCFAlf0Jz4Q3W9VedLheLWGckGtSQ6YvltVJTiNZ5IQUxWu', 'mittaus', '1', '0', 0, '', '', '2023-07-04 18:11:09'),
+(7, 'saaja', '$2y$10$md0nFoTex6NTY.l9w8Kx9.y95kertRGmVXeQKOyrn7gqy8BG.UdYu', 'saaja', '0', '0', 0, '', '', '2023-07-06 14:05:14'),
+(8, 'katsoja', '$2y$10$PxBfLfqBLDWttW8MFs48VOCIG98uOHrPS7Err9o0XluAVrgMSmtfm', 'katsoja', '0', '0', 0, '', '', '2023-07-06 14:05:29'),
+(9, 'duunari', '$2y$10$4Cbpj.gmgVnLgQNLWUUG4OOPwt/AZPmxgRRo/Vkzavc9Pbj6wllM6', 'duunari', '0', '0', 0, '', '', '2023-07-06 14:05:46');
 
 --
 -- Indexes for dumped tables
@@ -791,25 +794,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `pohjat`
 --
 ALTER TABLE `pohjat`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `projectmeta`
 --
 ALTER TABLE `projectmeta`
-  MODIFY `meta_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13955;
+  MODIFY `meta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13955;
 
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
