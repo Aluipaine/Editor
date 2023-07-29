@@ -324,7 +324,7 @@ function initializeroom_comments(room, menu) {
 
 function comment__restore(ga) {
   console.log("GA: " + ga);  
-  console.log("test");
+
   grand_array = ga.split(",");
   const newDiv = document.createElement("span");
   const newDiv__comment = document.createElement("span");
@@ -363,11 +363,11 @@ function comment__restore(ga) {
   newDiv.dataset.from = grand_array[7];
   newDiv.dataset.to = grand_array[8];
   newDiv.dataset.priority = grand_array[9];
-  newDiv.dataset.aihe = grand_array[13];
+  newDiv.dataset.aihe = grand_array[12];
   newDiv.dataset.content = grand_array[5].replaceAll("/(?:\r\n|\r|\n)/g","  ");
 
-  console.log("grand_array:" + grand_array);
-
+  console.log("grand_array:", grand_array);
+  console.log("newDiv.dataset:", newDiv.dataset);
   
   newDiv__comment_del.setAttribute("name", id);
   newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
