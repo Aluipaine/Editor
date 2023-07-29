@@ -199,7 +199,7 @@ function delete_comment(id) {
 
 
 
-function open_comment(name,tiedostot,from,to,priority,content,comment_id) {
+function open_comment(name,tiedostot,from,to,priority,aihe,content,comment_id) {
   document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');
   document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');
   document.querySelector('body').classList.add('modal-active');
@@ -210,6 +210,7 @@ function open_comment(name,tiedostot,from,to,priority,content,comment_id) {
   document.querySelector('.commentbox__from').innerHTML = from; //OK
   document.querySelector('.commentbox__to').innerHTML = to; //OK
   document.querySelector('.commentbox__priority').innerHTML = priority; //OK
+  document.querySelector('.commentbox__aihe').innerHTML = aihe; //OK
   document.querySelector('.commentbox__content').innerHTML = content; //OK
 }
 
@@ -323,6 +324,7 @@ function initializeroom_comments(room, menu) {
 
 function comment__restore(ga) {
   console.log("GA: " + ga);  
+  console.log("test");
   grand_array = ga.split(",");
   const newDiv = document.createElement("span");
   const newDiv__comment = document.createElement("span");
@@ -361,12 +363,15 @@ function comment__restore(ga) {
   newDiv.dataset.from = grand_array[7];
   newDiv.dataset.to = grand_array[8];
   newDiv.dataset.priority = grand_array[9];
+  newDiv.dataset.aihe = grand_array[13];
   newDiv.dataset.content = grand_array[5].replaceAll("/(?:\r\n|\r|\n)/g","  ");
+
+  console.log("grand_array:" + grand_array);
 
   
   newDiv__comment_del.setAttribute("name", id);
   newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
-  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id + "');");
+  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.aihe + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id + "');");
 
 
 

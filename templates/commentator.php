@@ -122,7 +122,10 @@
                     <h4>Prioriteetti:</h4>
                     <span class="commentbox__priority">-</span>
                 </div>
-                
+                <div class="col-3">
+                    <h4>Aihe:</h4>
+                    <span class="commentbox__aihe">-</span>
+                </div>
             </div>
             <div class="commentbox__text">
                 <h4>Sisältö:</h4>
