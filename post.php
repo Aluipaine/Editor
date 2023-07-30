@@ -41,12 +41,12 @@ else {
     foreach ($_open_comments as $value) {
         if($usrpermissions[0][4] == 0) {
             if($usrpermissions[0][1] == $value[7] || $usrpermissions[0][1] == $value[8]) {
-                $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13];
+                $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13] . "," . $value[14];
                 $txt .= "~";
             }
         }
         else {
-            $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13];
+            $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13] . "," . $value[14];
             $txt .= "~";
         }
         
@@ -69,4 +69,4 @@ echo '<input type="hidden" value="' . $usrpermissions[0][4] . '" id="current_use
 
 include('./footer-post.php');
 
- ?>
+?>

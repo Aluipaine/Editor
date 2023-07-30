@@ -225,15 +225,20 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
     url: "/getanswers.php",
     type: "post",
     data: {
-      answer_to: answer_to,
-      user: m_user
+      answer_to: id,
+      user: document.querySelector("#current_user").value
     },
     success: (answers) => {
-      let answersDiv = document.querySelector("commentbox__answers");
+      console.log("JGHIJSFJKSDJF: ", answers);
+      let answersDiv = document.querySelector("#commentbox__answers");
       answersDiv.innerHTML = "<h6>Vastaukset:</h6>";
 
       answers.split("~").forEach((answer) => {
         let grand_array = answer.split(",");
+
+        if(grand_array.length < 13) {
+          return; // continue
+        }
 
         let answer_name = grand_array[3];
         let answer_files = grand_array[6].replaceAll("/(?:\r\n|\r|\n)/g", ", ").replaceAll("\n", " ");
@@ -400,6 +405,8 @@ function initializeroom_comments(room, menu) {
 function comment__restore(ga) {
   console.log("GA: " + ga);
   grand_array = ga.split(",");
+  console.log("grand_array:", grand_array)
+  console.log("grand_array[14]:", grand_array[14]);
 
   if (grand_array[14] == '') {
 
@@ -448,7 +455,8 @@ function comment__restore(ga) {
     newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
     newDiv__comment_settings.setAttribute("onclick", "open_comment('" + id + "','" + "','" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.deadline + "','" + newDiv.dataset.aihe + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g", ", ") + "','" + id + "');");
 
-
+    console.log("newDiv:", newDiv)
+    console.log("dataset:", newDiv.dataset);
 
     kommentti_count += 1;
     newDiv__comment.innerHTML = newDiv.dataset.commentname;
@@ -473,7 +481,7 @@ function comment__restore(ga) {
     newDiv.classList.add("com");
     newDiv.dataset.no = kommentti_count;
 
-
+  
 
     newDiv__comment_settings.setAttribute("name", id);
     newDiv__comment_del.setAttribute("name", id);
