@@ -14,10 +14,12 @@ $comment_to = $_POST['comment_to'];
 $urgency = $_POST['urgency'];
 $ending_time = $_POST['ending_time']; 
 $aihe = $_POST['aihe']; 
+$deadline = $_POST['deadline'];
+$answer_to = $_POST['answer_to'];  
 
 
 $starting_time = date("Y-m-d H:i:s");
-$meta = mysqli_query($db, "INSERT INTO `comments` (`id`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$aihe');");
+$meta = mysqli_query($db, "INSERT INTO `comments` (`id`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$aihe', '$deadline', '$answer_to');");
 
 // $date = date("Y-m-d H:i:s");
 

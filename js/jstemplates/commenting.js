@@ -36,14 +36,14 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
   newDiv.dataset.from = document.querySelector("#kommentti_comment_from").value;
   newDiv.dataset.to = document.querySelector("#kommentti_comment_to").value;
   newDiv.dataset.priority = document.querySelector("#comment__priority").value;
-  newDiv.dataset.ending = document.querySelector('#comment__ending').value;
+  newDiv.dataset.deadline = document.querySelector('#comment__deadline').value;
   newDiv.dataset.aihe = document.querySelector('input[name="mitta__huomiot"]:checked').value;
   newDiv.dataset.content = document.querySelector("#kommentti_comment").value.replaceAll("/(?:\r\n|\r|\n)/g",", ");
 
   document.querySelector("#box-wrapper > main").prepend(newDiv);
   newDiv__comment_del.setAttribute("name", id);
   newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
-  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from +"','"+ newDiv.dataset.to +"','"+newDiv.dataset.priority + "','" + newDiv.dataset.ending + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id +"');");
+  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from +"','"+ newDiv.dataset.to +"','"+newDiv.dataset.priority + "','" + newDiv.dataset.deadline + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id +"');");
 
   
 
@@ -98,7 +98,8 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
   project_id = document.querySelector("#rooms > input.id").value;
   _attachments = document.querySelector("#comment__preview_files").innerText;
   _urgency = document.querySelector("#comment__priority").value;
-  _ending_time = document.querySelector("#comment__ending").value;
+  _ending_time = '';
+  _deadline = document.querySelector("#comment__deadline").value;
   room_id = document.querySelector(".kommentti_nappula").getAttribute("id");
   x_y = parseFloat(document.querySelector("#cord_left").value) + "|" + parseFloat(document.querySelector("#cord_up").value);
   _name = newDiv.dataset.commentname;
@@ -116,6 +117,7 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
       comment_to:  document.querySelector("#kommentti_comment_to").value,
       urgency:  _urgency,
       ending_time:  _ending_time,
+      deadline: _deadline,
       aihe: aihe
     };
 
@@ -125,6 +127,7 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
       data: formData,
       error: function (jqxhr, status, exception) {
         alert('Tietokantavirhe, soita numeroon +358449782028');
+        console.log(formData);
       }
     }).done(function (data) {
       // alert('Seinä ' + current_room + ' tallennettu');
@@ -200,7 +203,7 @@ function delete_comment(id) {
 
 
 
-function open_comment(name,tiedostot,from,to,priority,ending,aihe,content,comment_id) {
+function open_comment(name,tiedostot,from,to,priority,deadline,aihe,content,comment_id) {
   document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');
   document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');
   document.querySelector('body').classList.add('modal-active');
@@ -211,7 +214,7 @@ function open_comment(name,tiedostot,from,to,priority,ending,aihe,content,commen
   document.querySelector('.commentbox__from').innerHTML = from; //OK
   document.querySelector('.commentbox__to').innerHTML = to; //OK
   document.querySelector('.commentbox__priority').innerHTML = priority; //OK
-  document.querySelector('.commentbox__ending').innerHTML = ending; //OK
+  document.querySelector('.commentbox__deadline').innerHTML = deadline; //OK
   document.querySelector('.commentbox__aihe').innerHTML = aihe; //OK
   document.querySelector('.commentbox__content').innerHTML = content; //OK
 }
@@ -296,6 +299,7 @@ function initializeroom_comments(room, menu) {
           if (ir_coms[i].length > 5 && name_splitted == mode_room) {
             grande_array = ir_coms[i]
             comment__restore(grande_array);
+            console.log("COMMENT RESTORE");
           }
       }
     }
@@ -365,7 +369,7 @@ function comment__restore(ga) {
   newDiv.dataset.from = grand_array[7];
   newDiv.dataset.to = grand_array[8];
   newDiv.dataset.priority = grand_array[9];
-  newDiv.dataset.ending = grand_array[11];
+  newDiv.dataset.deadline = grand_array[11];
   newDiv.dataset.aihe = grand_array[12];
   newDiv.dataset.content = grand_array[5].replaceAll("/(?:\r\n|\r|\n)/g","  ");
 
@@ -374,7 +378,7 @@ function comment__restore(ga) {
   
   newDiv__comment_del.setAttribute("name", id);
   newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
-  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.ending + "','" + newDiv.dataset.aihe + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id + "');");
+  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.deadline + "','" + newDiv.dataset.aihe + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id + "');");
 
 
 

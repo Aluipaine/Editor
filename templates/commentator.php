@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-3">
                     <h6>Takaraja:</h6>
-                    <input name="ending_time" id="comment__ending" type="date" min="<?php echo date("Y-m-d") ?>"></input>
+                    <input name="deadline_time" id="comment__deadline" type="date" min="<?php echo date("Y-m-d") ?>"></input>
                 </div>
             </div>
         </section>
@@ -132,16 +132,17 @@
                 </div>
                 <div class="col-3">
                     <h4>Takaraja:</h4>
-                    <span class="commentbox__ending">-</span>
+                    <span class="commentbox__deadline">-</span>
                 </div>
             </div>
             <div class="commentbox__text">
                 <h4>Sisältö:</h4>
                 <p class="commentbox__content"></p>
             </div>
-            <div class="row">
-                <div class="col-6"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula">Sulje</div></div>
-                <div class="col-6"><div name="" class="modal_close_btn drawarea__controls_btn kuittaus_nappula" onclick="comment__kuittaus(this.getAttribute('name'));addproblemstatus(this);">Kuittaan tehdyksi</div></div>
+            <div class="row center">
+                <div class="col-4"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula">Sulje</div></div>
+                <div class="col-4"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" onclick="comment__kuittaus(this.getAttribute('name'));addproblemstatus(this);">Kuittaan tehdyksi</div></div>
+                <div class="col-4"><div class="modal_close_btn drawarea__controls_btn vastaus_nappula" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();">Vastaus kommenttiin</div></div>
             </div>
         </section>
         <div class="modal_close_btn drawarea__controls_btn kommentti_nappula" onclick="comment__create();addproblemstatus(this);">Valmis</div>

@@ -75,6 +75,11 @@ h1 {
   flex-wrap: wrap;
 }
 
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
 .col-6 {
   flex: 0 0 50%;
 }
@@ -5389,7 +5394,12 @@ input[type="radio"] + label.levy__label:focus, input[type="radio"] + label.levy_
 }
 
 .kuittaus_nappula.modal_close_btn.drawarea__controls_btn {
-  background-color: dark#008d0e;
+  background-color: #008d0e;
+  margin-top:25px;
+}
+
+.vastaus_nappula.modal_close_btn.drawarea__controls_btn {
+  background-color: darkblue;
   margin-top:25px;
 }
 
