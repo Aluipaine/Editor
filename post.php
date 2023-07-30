@@ -32,7 +32,7 @@ else {
     $usrpermissions = mysqli_fetch_all($usrpermissions_);
 
 
-    $open_comments_ = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='';");
+    $open_comments_ = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='' AND `answer_to`='';");
     $_open_comments = mysqli_fetch_all($open_comments_);
     // print_r($_open_comments);
 

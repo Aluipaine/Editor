@@ -12,6 +12,7 @@
     <div class="modal-background">
       <div class="modal">
          <div class="modal_close_btn"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"/></svg></div>
+         <input name="comment__answer_to" id="comment__answer_to" type="hidden" value="">
          <h2><input type="text" value="Kommentti " class="lineinput" id="kommentti__name"></h2>
          <section class="kommentti__etaisyydet">
            <h4>Etäisyys (mm)</h4>
@@ -142,7 +143,10 @@
             <div class="row center">
                 <div class="col-4"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula">Sulje</div></div>
                 <div class="col-4"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" onclick="comment__kuittaus(this.getAttribute('name'));addproblemstatus(this);">Kuittaan tehdyksi</div></div>
-                <div class="col-4"><div class="modal_close_btn drawarea__controls_btn vastaus_nappula" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();">Vastaus kommenttiin</div></div>
+                <div class="col-4"><div class="drawarea__controls_btn_ vastaus_nappula m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();">Vastaus kommenttiin</div></div>
+            </div>
+            <div id="commentbox__answers">
+             <h6>Vastaukset:</h6>
             </div>
         </section>
         <div class="modal_close_btn drawarea__controls_btn kommentti_nappula" onclick="comment__create();addproblemstatus(this);">Valmis</div>

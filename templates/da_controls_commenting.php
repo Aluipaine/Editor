@@ -4,7 +4,7 @@
       
    </div>
    <div class="drawarea__controls_btns">
-      <div class="drawarea__controls_btn m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();">
+      <div class="drawarea__controls_btn m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();document.querySelector('#comment__answer_to').value = '';">
        UUSI KOMMENTTI
       </div>
    </div>

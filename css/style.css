@@ -5398,9 +5398,10 @@ input[type="radio"] + label.levy__label:focus, input[type="radio"] + label.levy_
   margin-top:25px;
 }
 
-.vastaus_nappula.modal_close_btn.drawarea__controls_btn {
+.vastaus_nappula.drawarea__controls_btn_ {
   background-color: darkblue;
   margin-top:25px;
+  height: 25px;
 }
 
 .commentbox__text {
