@@ -99,6 +99,10 @@
                     </select>
                     <!-- <input name="aukko_comment_to" id="aukko_comment_to" type="text"> -->
                 </div>
+                <div class="col-3">
+                    <h6>Takaraja:</h6>
+                    <input name="ending_time" id="comment__ending" type="date" min="<?php echo date("Y-m-d") ?>"></input>
+                </div>
             </div>
         </section>
         <section class="commentbox">
@@ -125,6 +129,10 @@
                 <div class="col-3">
                     <h4>Aihe:</h4>
                     <span class="commentbox__aihe">-</span>
+                </div>
+                <div class="col-3">
+                    <h4>Takaraja:</h4>
+                    <span class="commentbox__ending">-</span>
                 </div>
             </div>
             <div class="commentbox__text">

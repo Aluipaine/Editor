@@ -36,13 +36,14 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
   newDiv.dataset.from = document.querySelector("#kommentti_comment_from").value;
   newDiv.dataset.to = document.querySelector("#kommentti_comment_to").value;
   newDiv.dataset.priority = document.querySelector("#comment__priority").value;
+  newDiv.dataset.ending = document.querySelector('#comment__ending').value;
   newDiv.dataset.aihe = document.querySelector('input[name="mitta__huomiot"]:checked').value;
   newDiv.dataset.content = document.querySelector("#kommentti_comment").value.replaceAll("/(?:\r\n|\r|\n)/g",", ");
 
   document.querySelector("#box-wrapper > main").prepend(newDiv);
   newDiv__comment_del.setAttribute("name", id);
   newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
-  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from +"','"+ newDiv.dataset.to +"','"+newDiv.dataset.priority + "','"+newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id +"');");
+  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from +"','"+ newDiv.dataset.to +"','"+newDiv.dataset.priority + "','" + newDiv.dataset.ending + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id +"');");
 
   
 
@@ -97,7 +98,7 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
   project_id = document.querySelector("#rooms > input.id").value;
   _attachments = document.querySelector("#comment__preview_files").innerText;
   _urgency = document.querySelector("#comment__priority").value;
-  _ending_time = "";
+  _ending_time = document.querySelector("#comment__ending").value;
   room_id = document.querySelector(".kommentti_nappula").getAttribute("id");
   x_y = parseFloat(document.querySelector("#cord_left").value) + "|" + parseFloat(document.querySelector("#cord_up").value);
   _name = newDiv.dataset.commentname;
@@ -199,7 +200,7 @@ function delete_comment(id) {
 
 
 
-function open_comment(name,tiedostot,from,to,priority,aihe,content,comment_id) {
+function open_comment(name,tiedostot,from,to,priority,ending,aihe,content,comment_id) {
   document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');
   document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');
   document.querySelector('body').classList.add('modal-active');
@@ -210,6 +211,7 @@ function open_comment(name,tiedostot,from,to,priority,aihe,content,comment_id) {
   document.querySelector('.commentbox__from').innerHTML = from; //OK
   document.querySelector('.commentbox__to').innerHTML = to; //OK
   document.querySelector('.commentbox__priority').innerHTML = priority; //OK
+  document.querySelector('.commentbox__ending').innerHTML = ending; //OK
   document.querySelector('.commentbox__aihe').innerHTML = aihe; //OK
   document.querySelector('.commentbox__content').innerHTML = content; //OK
 }
@@ -363,6 +365,7 @@ function comment__restore(ga) {
   newDiv.dataset.from = grand_array[7];
   newDiv.dataset.to = grand_array[8];
   newDiv.dataset.priority = grand_array[9];
+  newDiv.dataset.ending = grand_array[11];
   newDiv.dataset.aihe = grand_array[12];
   newDiv.dataset.content = grand_array[5].replaceAll("/(?:\r\n|\r|\n)/g","  ");
 
@@ -371,7 +374,7 @@ function comment__restore(ga) {
   
   newDiv__comment_del.setAttribute("name", id);
   newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
-  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.aihe + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id + "');");
+  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.ending + "','" + newDiv.dataset.aihe + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g",", ") + "','" + id + "');");
 
 
 
