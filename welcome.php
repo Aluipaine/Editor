@@ -17,7 +17,7 @@ if(htmlspecialchars($_SESSION["username"]) === "marko" || htmlspecialchars($_SES
 }
 
 
-$posts = mysqli_query($link, "SELECT * FROM `projects`");
+$posts = mysqli_query($link, "SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `addedusers` WHERE `user_id`=" . $_SESSION["id"] . ");");
 $posts = mysqli_fetch_all($posts);
 
 $username = $_SESSION["username"];

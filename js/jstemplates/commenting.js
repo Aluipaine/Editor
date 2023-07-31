@@ -507,3 +507,22 @@ function comment__restore(ga) {
   }
 
 }
+
+function fetch_added_users() {
+  $.ajax({
+    url: "/get-added-users.php",
+    type: "post",
+    data: {
+      project_id: document.querySelector("#currect_project_id").value
+    },
+    success: (users) => {
+      users = JSON.parse(users);
+      let comment_to = document.querySelector("#kommentti_comment_to");
+      comment_to.innerHTML = '';
+
+      users.forEach((user) => {
+        comment_to.innerHTML += `<option value="${user}">${user}</option>`;
+      });
+    }
+  })
+}

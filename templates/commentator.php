@@ -143,7 +143,7 @@
             <div class="row center">
                 <div class="col-4"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula">Sulje</div></div>
                 <div class="col-4"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" onclick="comment__kuittaus(this.getAttribute('name'));addproblemstatus(this);">Kuittaan tehdyksi</div></div>
-                <div class="col-4"><div class="drawarea__controls_btn_ vastaus_nappula m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();">Vastaus kommenttiin</div></div>
+                <div class="col-4"><div class="drawarea__controls_btn_ vastaus_nappula m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();fetch_added_users();">Vastaus kommenttiin</div></div>
             </div>
             <div id="commentbox__answers" style="margin-top: 50px;">
              <h6>Vastaukset:</h6>

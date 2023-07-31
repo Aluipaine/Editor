@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 31, 2023 at 12:33 AM
+-- Generation Time: Jul 31, 2023 at 04:10 PM
 -- Server version: 10.11.3-MariaDB-1
 -- PHP Version: 8.2.7
 
@@ -24,24 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `addedusers`
+-- Table structure for table `projects`
 --
 
-CREATE TABLE `addedusers` (
+CREATE TABLE `projects` (
   `id` int(11) NOT NULL,
-  `project_id` int(11) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
-  `added_by` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `title` varchar(300) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `link` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `project_type` varchar(300) DEFAULT NULL,
+  `user` text CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_swedish_ci;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `title`, `created_at`, `link`, `project_type`, `user`) VALUES
+(8, ' L11 1krs', '2023-07-06', '', '', ' '),
+(9, ' test', '2023-07-18', '', '', ''),
+(10, ' test', '2023-07-18', '', '', '');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `addedusers`
+-- Indexes for table `projects`
 --
-ALTER TABLE `addedusers`
+ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -49,10 +60,10 @@ ALTER TABLE `addedusers`
 --
 
 --
--- AUTO_INCREMENT for table `addedusers`
+-- AUTO_INCREMENT for table `projects`
 --
-ALTER TABLE `addedusers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `projects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
