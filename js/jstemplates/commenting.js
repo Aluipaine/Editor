@@ -19,82 +19,86 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
   comment__container.appendChild(comment__text);
   comment__container.appendChild(comment__from);
   comment__container.appendChild(comment__to);
-  newDiv.appendChild(newDiv__hidden_attention);
-  newDiv.appendChild(newDiv__hidden_attentioncommmets);
-  newDiv__comment_settings = document.createElement("i");
-  newDiv__comment_del = document.createElement("i");
-  newDiv__comment_settings.innerHTML =
-    "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.00159 9.45C6.33358 9.45 5.69293 9.19188 5.22058 8.73241C4.74822 8.27295 4.48286 7.64978 4.48286 7C4.48286 6.35022 4.74822 5.72705 5.22058 5.26759C5.69293 4.80812 6.33358 4.55 7.00159 4.55C7.6696 4.55 8.31025 4.80812 8.7826 5.26759C9.25495 5.72705 9.52032 6.35022 9.52032 7C9.52032 7.64978 9.25495 8.27295 8.7826 8.73241C8.31025 9.19188 7.6696 9.45 7.00159 9.45ZM12.3485 7.679C12.3773 7.455 12.3989 7.231 12.3989 7C12.3989 6.769 12.3773 6.538 12.3485 6.3L13.8669 5.159C14.0037 5.054 14.0396 4.865 13.9533 4.711L12.514 2.289C12.4277 2.135 12.2334 2.072 12.075 2.135L10.2831 2.835C9.90892 2.562 9.52032 2.324 9.06695 2.149L8.80068 0.294C8.7719 0.126 8.62077 0 8.1086 0H5.56231C5.38241 0 5.23128 0.126 5.2025 0.294L4.93623 2.149C4.48286 2.324 4.09425 2.562 3.72004 2.835L1.92815 2.135C1.76983 2.072 1.57552 2.135 1.48917 2.289L0.0498936 4.711C-0.0436593 4.865 -0.000480936 5.054 0.13625 5.159L1.65468 6.3C1.6259 6.538 1.60431 6.769 1.60431 7C1.60431 7.231 1.6259 7.455 1.65468 7.679L0.13625 8.841C-0.000480936 8.946 -0.0436593 9.135 0.0498936 9.289L1.48917 11.711C1.57552 11.865 1.76983 11.921 1.92815 11.865L3.72004 11.158C4.09425 11.438 4.48286 11.676 4.93623 11.851L5.2025 13.706C5.23128 13.874 5.38241 14 5.56231 14H8.1086C8.62077 14 8.7719 13.874 8.80068 13.706L9.06695 11.851C9.52032 11.669 9.90892 11.438 10.2831 11.158L12.075 11.865C12.2334 11.921 12.4277 11.865 12.514 11.711L13.9533 9.289C14.0396 9.135 14.0037 8.946 13.8669 8.841L12.3485 7.679Z' fill='#222222'/></svg>";
-  newDiv__comment_del.innerHTML =
-    "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z' fill='#EB1010'/></svg>";
-  newDiv__comment_settings.classList.add("m_btn");
-  newDiv__comment_settings.classList.add("newDiv__comment_settings");
-  newDiv__comment_del.classList.add("newDiv__comment_del");
 
-  newDiv.dataset.commentname = document.querySelector("#kommentti__name").value;
-  newDiv.dataset.files = document.querySelector("#comment__preview_files").innerHTML;
-  newDiv.dataset.from = document.querySelector("#kommentti_comment_from").value;
-  newDiv.dataset.to = document.querySelector("#kommentti_comment_to").value;
-  newDiv.dataset.priority = document.querySelector("#comment__priority").value;
-  newDiv.dataset.deadline = document.querySelector('#comment__deadline').value;
-  newDiv.dataset.aihe = document.querySelector('input[name="mitta__huomiot"]:checked').value;
-  newDiv.dataset.content = document.querySelector("#kommentti_comment").value.replaceAll("/(?:\r\n|\r|\n)/g", ", ");
+  if (document.querySelector("#comment__answer_to").value == '') {
+    newDiv.appendChild(newDiv__hidden_attention);
+    newDiv.appendChild(newDiv__hidden_attentioncommmets);
+    newDiv__comment_settings = document.createElement("i");
+    newDiv__comment_del = document.createElement("i");
+    newDiv__comment_settings.innerHTML =
+      "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.00159 9.45C6.33358 9.45 5.69293 9.19188 5.22058 8.73241C4.74822 8.27295 4.48286 7.64978 4.48286 7C4.48286 6.35022 4.74822 5.72705 5.22058 5.26759C5.69293 4.80812 6.33358 4.55 7.00159 4.55C7.6696 4.55 8.31025 4.80812 8.7826 5.26759C9.25495 5.72705 9.52032 6.35022 9.52032 7C9.52032 7.64978 9.25495 8.27295 8.7826 8.73241C8.31025 9.19188 7.6696 9.45 7.00159 9.45ZM12.3485 7.679C12.3773 7.455 12.3989 7.231 12.3989 7C12.3989 6.769 12.3773 6.538 12.3485 6.3L13.8669 5.159C14.0037 5.054 14.0396 4.865 13.9533 4.711L12.514 2.289C12.4277 2.135 12.2334 2.072 12.075 2.135L10.2831 2.835C9.90892 2.562 9.52032 2.324 9.06695 2.149L8.80068 0.294C8.7719 0.126 8.62077 0 8.1086 0H5.56231C5.38241 0 5.23128 0.126 5.2025 0.294L4.93623 2.149C4.48286 2.324 4.09425 2.562 3.72004 2.835L1.92815 2.135C1.76983 2.072 1.57552 2.135 1.48917 2.289L0.0498936 4.711C-0.0436593 4.865 -0.000480936 5.054 0.13625 5.159L1.65468 6.3C1.6259 6.538 1.60431 6.769 1.60431 7C1.60431 7.231 1.6259 7.455 1.65468 7.679L0.13625 8.841C-0.000480936 8.946 -0.0436593 9.135 0.0498936 9.289L1.48917 11.711C1.57552 11.865 1.76983 11.921 1.92815 11.865L3.72004 11.158C4.09425 11.438 4.48286 11.676 4.93623 11.851L5.2025 13.706C5.23128 13.874 5.38241 14 5.56231 14H8.1086C8.62077 14 8.7719 13.874 8.80068 13.706L9.06695 11.851C9.52032 11.669 9.90892 11.438 10.2831 11.158L12.075 11.865C12.2334 11.921 12.4277 11.865 12.514 11.711L13.9533 9.289C14.0396 9.135 14.0037 8.946 13.8669 8.841L12.3485 7.679Z' fill='#222222'/></svg>";
+    newDiv__comment_del.innerHTML =
+      "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z' fill='#EB1010'/></svg>";
+    newDiv__comment_settings.classList.add("m_btn");
+    newDiv__comment_settings.classList.add("newDiv__comment_settings");
+    newDiv__comment_del.classList.add("newDiv__comment_del");
 
-  document.querySelector("#box-wrapper > main").prepend(newDiv);
-  newDiv__comment_del.setAttribute("name", id);
-  newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
-  newDiv__comment_settings.setAttribute("onclick", "open_comment('" + id + "','" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.deadline + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g", ", ") + "','" + id + "');");
+    newDiv.dataset.commentname = document.querySelector("#kommentti__name").value;
+    newDiv.dataset.files = document.querySelector("#comment__preview_files").innerHTML;
+    newDiv.dataset.from = document.querySelector("#kommentti_comment_from").value;
+    newDiv.dataset.to = document.querySelector("#kommentti_comment_to").value;
+    newDiv.dataset.priority = document.querySelector("#comment__priority").value;
+    newDiv.dataset.deadline = document.querySelector('#comment__deadline').value;
+    newDiv.dataset.aihe = document.querySelector('input[name="mitta__huomiot"]:checked').value;
+    newDiv.dataset.content = document.querySelector("#kommentti_comment").value.replaceAll("/(?:\r\n|\r|\n)/g", ", ");
 
-
-
-  input_step = document.querySelector('#step_drawscreen').value;
-  kommentti_count += 1;
-  newDiv__comment.innerHTML = document.querySelector("#kommentti__name").value + "#" + kommentti_count;
-  newDiv__hidden_attention.type = "hidden";
-  newDiv__hidden_attention.name = "attentions";
-  newDiv__hidden_attentioncommmets.type = "hidden";
-  newDiv__hidden_attentioncommmets.name = "commmets";
-  document.querySelector(".drawarea__controls_elementsone").prepend(newDiv__comment);
-  document.querySelector(".drawarea__controls_elementsone").prepend(newDiv__hidden_attention);
-  document.querySelector(".drawarea__controls_elementsone").prepend(newDiv__hidden_attentioncommmets);
+    document.querySelector("#box-wrapper > main").prepend(newDiv);
+    newDiv__comment_del.setAttribute("name", id);
+    newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
+    newDiv__comment_settings.setAttribute("onclick", "open_comment('" + id + "','" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.deadline + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g", ", ") + "','" + id + "');");
 
 
-  newDiv.style.left = eval(document.querySelector("#cord_left").value) / 5 + "px";
 
-  newDiv.style.bottom = eval(document.querySelector("#cord_up").value) / 5 + "px";
+    input_step = document.querySelector('#step_drawscreen').value;
+    kommentti_count += 1;
+    newDiv__comment.innerHTML = document.querySelector("#kommentti__name").value + "#" + kommentti_count;
+    newDiv__hidden_attention.type = "hidden";
+    newDiv__hidden_attention.name = "attentions";
+    newDiv__hidden_attentioncommmets.type = "hidden";
+    newDiv__hidden_attentioncommmets.name = "commmets";
+    document.querySelector(".drawarea__controls_elementsone").prepend(newDiv__comment);
+    document.querySelector(".drawarea__controls_elementsone").prepend(newDiv__hidden_attention);
+    document.querySelector(".drawarea__controls_elementsone").prepend(newDiv__hidden_attentioncommmets);
 
 
-  if (document.querySelector("#cord_up").value == "") {
-    newDiv.style.bottom = 0;
+    newDiv.style.left = eval(document.querySelector("#cord_left").value) / 5 + "px";
+
+    newDiv.style.bottom = eval(document.querySelector("#cord_up").value) / 5 + "px";
+
+
+    if (document.querySelector("#cord_up").value == "") {
+      newDiv.style.bottom = 0;
+    }
+
+    if (document.querySelector("#kommentti_comment").value != '') {
+      newDiv__hidden_attentioncommmets.value += document.querySelector("#kommentti_comment").value + '<br> Tältä: ' + document.querySelector(
+        "#kommentti_comment_from").value + '<br> Tälle: ' + document.querySelector("#kommentti_comment_to").value;
+      comment__text.innerHTML = document.querySelector("#kommentti_comment").value;
+      comment__from.innerHTML = document.querySelector("#kommentti_comment_from").value;
+      comment__to.innerHTML = document.querySelector("#kommentti_comment_to").value;
+    }
+    newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
+    newDiv.classList.add("com");
+    newDiv.dataset.no = kommentti_count;
+
+
+
+    newDiv__comment_settings.setAttribute("name", id);
+    newDiv__comment_del.setAttribute("name", id);
+    newDiv__comment.setAttribute("name", id);
+    newDiv.setAttribute("id", id);
+    newDiv__comment.appendChild(newDiv__comment_settings);
+    newDiv__comment.appendChild(newDiv__comment_del);
+    // const inH = document.createElement('input');
+    // const inW = document.createElement('input');
+    // inH.setAttribute('type', 'num');
+    // inW.setAttribute('type', 'num');
+    // touchedElement('#box-wrapper > main', '#drawarea_w', '#drawarea_h', newDiv, 'elem', inH, inW );
+    if (newDiv.dataset.from !== document.querySelector("#current_user").value) {
+      newDiv__comment_del.style.display = "none";
+    }
   }
 
-  if (document.querySelector("#kommentti_comment").value != '') {
-    newDiv__hidden_attentioncommmets.value += document.querySelector("#kommentti_comment").value + '<br> Tältä: ' + document.querySelector(
-      "#kommentti_comment_from").value + '<br> Tälle: ' + document.querySelector("#kommentti_comment_to").value;
-    comment__text.innerHTML = document.querySelector("#kommentti_comment").value;
-    comment__from.innerHTML = document.querySelector("#kommentti_comment_from").value;
-    comment__to.innerHTML = document.querySelector("#kommentti_comment_to").value;
-  }
-  newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
-  newDiv.classList.add("com");
-  newDiv.dataset.no = kommentti_count;
-
-
-
-  newDiv__comment_settings.setAttribute("name", id);
-  newDiv__comment_del.setAttribute("name", id);
-  newDiv__comment.setAttribute("name", id);
-  newDiv.setAttribute("id", id);
-  newDiv__comment.appendChild(newDiv__comment_settings);
-  newDiv__comment.appendChild(newDiv__comment_del);
-  // const inH = document.createElement('input');
-  // const inW = document.createElement('input');
-  // inH.setAttribute('type', 'num');
-  // inW.setAttribute('type', 'num');
-  // touchedElement('#box-wrapper > main', '#drawarea_w', '#drawarea_h', newDiv, 'elem', inH, inW );
-  if (newDiv.dataset.from !== document.querySelector("#current_user").value) {
-    newDiv__comment_del.style.display = "none";
-  }
   project_id = document.querySelector("#rooms > input.id").value;
   _attachments = document.querySelector("#comment__preview_files").innerText;
   _urgency = document.querySelector("#comment__priority").value;
@@ -102,8 +106,8 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
   _deadline = document.querySelector("#comment__deadline").value;
   room_id = document.querySelector(".kommentti_nappula").getAttribute("id");
   x_y = parseFloat(document.querySelector("#cord_left").value) + "|" + parseFloat(document.querySelector("#cord_up").value);
-  _name = newDiv.dataset.commentname;
-  _aihe = newDiv.dataset.aihe;
+  _name = document.querySelector("#kommentti__name").value;
+  _aihe = document.querySelector('input[name="mitta__huomiot"]:checked').value;
   _answer_to = document.querySelector("#comment__answer_to").value;
   setTimeout(function () {
     formData = {
@@ -229,14 +233,13 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
       user: document.querySelector("#current_user").value
     },
     success: (answers) => {
-      console.log("JGHIJSFJKSDJF: ", answers);
       let answersDiv = document.querySelector("#commentbox__answers");
       answersDiv.innerHTML = "<h6>Vastaukset:</h6>";
 
       answers.split("~").forEach((answer) => {
         let grand_array = answer.split(",");
 
-        if(grand_array.length < 13) {
+        if (grand_array.length < 13) {
           return; // continue
         }
 
@@ -248,11 +251,12 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
         let answer_aihe = grand_array[12];
         let answer_deadline = grand_array[13];
         let answer_content = grand_array[5].replaceAll("/(?:\r\n|\r|\n)/g", "  ");
-        
+
         // Sorry for that, I don't know how to use DOM and I have a burning deadline.
         // P.S. Your code is good and understandable, respect for this.
         answersDiv.innerHTML += `
-        <section class="commentbox">
+        <hr style="margin-top: 50px;">
+        <section class="commentbox comment_answer">
           <h2 class="commentbox__name">${answer_name}</h2>
           <div class="row">
               <div class="col-3">
@@ -285,8 +289,8 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
               <p class="commentbox__content">${answer_content}</p>
           </div>
           <div class="row center">
-              <div class="col-6"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula">Sulje</div></div>
-              <div class="col-6"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" onclick="comment__kuittaus(this.getAttribute('name'));addproblemstatus(this);">Kuittaan tehdyksi</div></div>
+              <div class="col-4"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula">Sulje</div></div>
+              <div class="col-4"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" onclick="comment__kuittaus(this.getAttribute('name'));addproblemstatus(this);">Kuittaan tehdyksi</div></div>
           </div>
         </section>`
       });
@@ -453,7 +457,7 @@ function comment__restore(ga) {
 
     newDiv__comment_del.setAttribute("name", id);
     newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_comment(obj);");
-    newDiv__comment_settings.setAttribute("onclick", "open_comment('" + id + "','" + "','" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.deadline + "','" + newDiv.dataset.aihe + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g", ", ") + "','" + id + "');");
+    newDiv__comment_settings.setAttribute("onclick", "open_comment('" + id + "','" + newDiv.dataset.commentname + "','" + newDiv.dataset.files + "','" + newDiv.dataset.from + "','" + newDiv.dataset.to + "','" + newDiv.dataset.priority + "','" + newDiv.dataset.deadline + "','" + newDiv.dataset.aihe + "','" + newDiv.dataset.content.replaceAll("/(?:\r\n|\r|\n)/g", ", ") + "','" + id + "');");
 
     console.log("newDiv:", newDiv)
     console.log("dataset:", newDiv.dataset);
@@ -481,7 +485,7 @@ function comment__restore(ga) {
     newDiv.classList.add("com");
     newDiv.dataset.no = kommentti_count;
 
-  
+
 
     newDiv__comment_settings.setAttribute("name", id);
     newDiv__comment_del.setAttribute("name", id);

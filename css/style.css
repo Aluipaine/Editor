@@ -5372,6 +5372,12 @@ input[type="radio"] + label.levy__label:focus, input[type="radio"] + label.levy_
 .commentmodal_active .commentbox {
   display: block;
 }
+
+.comment_answer {
+  margin-right: 15%;
+  margin-left: 15%;
+}
+
 .modal .asiakirja_first {
   width: 100%;
 }
