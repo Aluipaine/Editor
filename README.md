@@ -83,14 +83,25 @@ footer-post.php - Подвал сайта, подключаются скрипт
 
 
 levynakyma.php
+
 new-project.php
+
 post.php в templates составляющие
+
 register.php
+
 reset-password.php
+
 welcome.php
+
 welcome-marko.php
+
 templates/commentator.php - ?
+
 logout.php - Страница выхода
+
 login.php - Страница входа 2
+
 index.php - Страница входа 1
+
 
