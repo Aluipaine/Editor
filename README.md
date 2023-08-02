@@ -46,6 +46,7 @@
 config.php и vendor/config.php
 
 
+  
 Функционал: 
 
 addcomment.php - Добавляет в базу данных комментарий (роль 2) 
