@@ -71,13 +71,18 @@ db/updatepohjat.php - Сохраняет и обновляет новые шаб
 
 
 Части
-header.php - 
-index.php
+header.php - Шапка сайта, подключаются скрипты в фронт-енде
+
+index.php - Страница входа 1
+
 footer.php
+
 footer-post.php
+
 +php файлы в папке 'templates'
 
-login.php
+login.php - Страница входа 2
+
 logout.php
 
 
