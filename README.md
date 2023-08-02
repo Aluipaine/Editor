@@ -70,20 +70,16 @@ upload.php - Старый загрузчик файлов (роль 1)
 db/updatepohjat.php - Сохраняет и обновляет новые шаблоны помещений в базу данных (роль 1)
 
 
-Части
+Части 
 header.php - Шапка сайта, подключаются скрипты в фронт-енде
 
-index.php - Страница входа 1
+footer.php - Подвал сайта, подключаются скрипты и закрывается html (роль 3)
 
-footer.php
-
-footer-post.php
+footer-post.php - Подвал сайта, подключаются скрипты и закрывается html (роль 1, 2)
 
 +php файлы в папке 'templates'
 
-login.php - Страница входа 2
 
-logout.php
 
 
 levynakyma.php
@@ -94,3 +90,7 @@ reset-password.php
 welcome.php
 welcome-marko.php
 templates/commentator.php - ?
+logout.php - Страница выхода
+login.php - Страница входа 2
+index.php - Страница входа 1
+
