@@ -82,19 +82,19 @@ footer-post.php - Подвал сайта, подключаются скрипт
 
 
 
-levynakyma.php - Страница создания одной панели
+levynakyma.php - Страница создания одной панели (будет публичным)
 
-new-project.php
+new-project.php - Здесь создается новый проект (роль 1)
 
-post.php в templates составляющие
+post.php и составляющие в templates - главная страница проекта (роль 1 и 2)
 
-register.php
+register.php - страница регистрации пользователя, не работает 02-08-23
 
-reset-password.php
+reset-password.php - страница обнуления пароля (роль 1, 2, 3)
 
-welcome.php
+welcome.php - главная страница для работы (роль 1 и 2)
 
-welcome-marko.php
+welcome-marko.php - главная страница администратора (роль 3)
 
 templates/commentator.php - ?
 
