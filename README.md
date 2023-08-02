@@ -82,7 +82,7 @@ footer-post.php - Подвал сайта, подключаются скрипт
 
 
 
-levynakyma.php - 
+levynakyma.php - Страница создания одной панели
 
 new-project.php
 
