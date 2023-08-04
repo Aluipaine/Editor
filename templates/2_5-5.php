@@ -351,7 +351,7 @@
 
 
 
-<div class="levytyosto_container">
+<div id="levytyosto_container" class="levytyosto_container">
   <div class="modal-background">
     <div class="modal">
       <div class="modal_close_btn" onclick="open_ltladonta_settings(false)">

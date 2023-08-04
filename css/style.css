@@ -4449,6 +4449,26 @@ input.secondcord {
   margin-left: 48px;
 }
 
+div.x_del {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #f00;
+}
+
+div.x_del:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "\274c";
+  font-size: 6px;
+  color: #f00;
+  line-height: 13px;
+  text-align: center;
+}
+
 .tyostot__tyosto_vaaka div {
   left: 25px;
   top: 3px;
