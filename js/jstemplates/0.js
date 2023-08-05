@@ -1,8 +1,24 @@
+let currect_arak = undefined;
+
 current_apartment = null;
 function rooms__change_asjarj(order) {
   asj = order.dataset.tochange;
   mode_room = asj.toLowerCase();
   ir_value = document.querySelector(".asjarj" + mode_room.toLowerCase() + "").innerHTML = parseFloat(order.value);
+
+  $.ajax({
+    url: "/update-walls.php",
+    type:"post",
+    data: {
+      project_id: document.querySelector("#currect_project_id").value,
+      arak: currect_arak,
+      wall: mode_room,
+      asjarj: ir_value
+    },
+    success: (answer) => {
+      console.log(answer);
+    }
+  });
 }
 
 
@@ -10,7 +26,22 @@ function rooms__change_name(order) {
   asj = order.dataset.tochange;
   mode_room = asj.toLowerCase();
   ir_value = document.querySelector(".house__wall_status_" + mode_room.toLowerCase() + "").innerHTML = order.value;
+  $.ajax({
+    url: "/update-walls.php",
+    type:"post",
+    data: {
+      project_id: document.querySelector("#currect_project_id").value,
+      arak: currect_arak,
+      wall: mode_room,
+      name: ir_value
+    },
+    success: (answer) => {
+      console.log(answer);
+    }
+  });
 }
+
+
 
 function hide__room(room) {
   thiswall = room.parentElement.parentElement;
@@ -24,6 +55,20 @@ function hide__room(room) {
     for (var i = tohide__room.length - 1; i >= 0; i--) {
       tohide__room[i].classList.remove("hidden");
     }
+
+    $.ajax({
+      url: "/update-walls.php",
+      type:"post",
+      data: {
+        project_id: document.querySelector("#currect_project_id").value,
+        arak: currect_arak,
+        wall: mode_room,
+        hidden: 0
+      },
+      success: (answer) => {
+        console.log(answer);
+      }
+    });
   }
   else {
     thiswall.classList.add('hidden');
@@ -35,6 +80,20 @@ function hide__room(room) {
     for (var i = tohide__room.length - 1; i >= 0; i--) {
       tohide__room[i].classList.add("hidden");
     }
+
+    $.ajax({
+      url: "/update-walls.php",
+      type:"post",
+      data: {
+        project_id: document.querySelector("#currect_project_id").value,
+        arak: currect_arak,
+        wall: mode_room,
+        hidden: 1
+      },
+      success: (answer) => {
+        console.log(answer);
+      }
+    });
   }
 }
 // Huone risti
@@ -236,56 +295,57 @@ $('.project__building div.project__building_room').click(function() {
   //NEW#######
   $("#roomname").val("Tila " + $(this).text());
 
-  var w = $(".walls_content").val().split(",");
-  //floor
-  if(w[0]) {
-    $("#wall_one_floor").val(w[0]);
-    $("div.house__wall_status_l").text(w[0]);
-  }
-  else {
-    $("#wall_one_floor").val("LATTIA " + $(this).text() + "_L");
-  }
-  //a
-  if(w[1]) {
-    $("#wall_one_a").val(w[1]);
-    $("div.house__wall_status_a").text(w[1]);
-  }
-  else {
-   $("#wall_one_a").val("SEINÄ " + $(this).text() + "_A");
-  }
-  //b
-  if(w[2]) {
-    $("#wall_one_b").val(w[2]);
-    $("div.house__wall_status_b").text(w[2]);
-  }
-  else {
-     $("#wall_one_b").val("SEINÄ " + $(this).text() + "_B");
-  }
-  //c
-  if(w[3]) {
-    $("#wall_one_c").val(w[3]);
-    $("div.house__wall_status_c").text(w[3]);
-  }
-  else {
-    $("#wall_one_c").val("SEINÄ " + $(this).text() + "_C");
-  }
+  // Sorry for replacing this, but projectmeta is unclear shit. I replaced with another shit (Look for `roomwalls` table in database).
+  // var w = $(".walls_content").val().split(",");
+  // //floor
+  // if(w[0]) {
+  //   $("#wall_one_floor").val(w[0]);
+  //   $("div.house__wall_status_l").text(w[0]);
+  // }
+  // else {
+  //   $("#wall_one_floor").val("LATTIA " + $(this).text() + "_L");
+  // }
+  // //a
+  // if(w[1]) {
+  //   $("#wall_one_a").val(w[1]);
+  //   $("div.house__wall_status_a").text(w[1]);
+  // }
+  // else {
+  //  $("#wall_one_a").val("SEINÄ " + $(this).text() + "_A");
+  // }
+  // //b
+  // if(w[2]) {
+  //   $("#wall_one_b").val(w[2]);
+  //   $("div.house__wall_status_b").text(w[2]);
+  // }
+  // else {
+  //    $("#wall_one_b").val("SEINÄ " + $(this).text() + "_B");
+  // }
+  // //c
+  // if(w[3]) {
+  //   $("#wall_one_c").val(w[3]);
+  //   $("div.house__wall_status_c").text(w[3]);
+  // }
+  // else {
+  //   $("#wall_one_c").val("SEINÄ " + $(this).text() + "_C");
+  // }
 
-  //d
-  if(w[4]) {
-    $("#wall_one_d").val(w[4]);
-    $("div.house__wall_status_d").text(w[4]);
-  }
-  else {
-    $("#wall_one_d").val("SEINÄ " + $(this).text() + "_D");
-  }
-  //d
-  if(w[5]) {
-    $("#wall_one_roof").val(w[5]);
-    $("div.house__wall_status_k").text(w[5]);
-  }
-  else {
-    $("#wall_one_roof").val("KATTO " + $(this).text() + "_K");
-  }
+  // //d
+  // if(w[4]) {
+  //   $("#wall_one_d").val(w[4]);
+  //   $("div.house__wall_status_d").text(w[4]);
+  // }
+  // else {
+  //   $("#wall_one_d").val("SEINÄ " + $(this).text() + "_D");
+  // }
+  // //d
+  // if(w[5]) {
+  //   $("#wall_one_roof").val(w[5]);
+  //   $("div.house__wall_status_k").text(w[5]);
+  // }
+  // else {
+  //   $("#wall_one_roof").val("KATTO " + $(this).text() + "_K");
+  // }
   
 
   
@@ -338,39 +398,39 @@ function create_rooms() {
 };
 
 
-$( window ).on( "load", function() {
-  //NEW#######
-  w = $(".walls_content").val().split(",");
-  //floor
-  if(w[0]) {
-    $("#wall_one_floor").val(w[0]);
-    $("div.house__wall_status_l").text(w[0]);
-  }
-  //a
-  if(w[1]) {
-    $("#wall_one_a").val(w[1]);
-    $("div.house__wall_status_a").text(w[1]);
-  }
-  if(w[2]) {
-    $("#wall_one_b").val(w[2]);
-    $("div.house__wall_status_b").text(w[2]);
-  }
-  //c
-  if(w[3]) {
-    $("#wall_one_c").val(w[3]);
-    $("div.house__wall_status_c").text(w[3]);
-  }
-  //d
-  if(w[4]) {
-    $("#wall_one_d").val(w[4]);
-    $("div.house__wall_status_d").text(w[4]);
-  }
-  //w
-  if(w[5]) {
-    $("#wall_one_roof").val(w[5]);
-     $("div.house__wall_status_k").text(w[5]);
-  }
-} );
+// $( window ).on( "load", function() {
+//   //NEW#######
+//   w = $(".walls_content").val().split(",");
+//   //floor
+//   if(w[0]) {
+//     $("#wall_one_floor").val(w[0]);
+//     $("div.house__wall_status_l").text(w[0]);
+//   }
+//   //a
+//   if(w[1]) {
+//     $("#wall_one_a").val(w[1]);
+//     $("div.house__wall_status_a").text(w[1]);
+//   }
+//   if(w[2]) {
+//     $("#wall_one_b").val(w[2]);
+//     $("div.house__wall_status_b").text(w[2]);
+//   }
+//   //c
+//   if(w[3]) {
+//     $("#wall_one_c").val(w[3]);
+//     $("div.house__wall_status_c").text(w[3]);
+//   }
+//   //d
+//   if(w[4]) {
+//     $("#wall_one_d").val(w[4]);
+//     $("div.house__wall_status_d").text(w[4]);
+//   }
+//   //w
+//   if(w[5]) {
+//     $("#wall_one_roof").val(w[5]);
+//      $("div.house__wall_status_k").text(w[5]);
+//   }
+// } );
 
 
 function initalize_cross(arg) {
@@ -394,7 +454,7 @@ function initalize_cross(arg) {
 
   if(arg && typeof arg === 'string' || arg instanceof String) {
     console.log("arg" + arg);
-    current_apartment = String(arg).replaceAll(" ","").toLowerCase();
+    currect_arak = current_apartment = String(arg).replaceAll(" ","").toLowerCase();
     if(window.location.href.indexOf('&apartment=' + current_apartment) === -1) {
       console.log("true");
       var refresh = window.location.href + '&apartment=' + current_apartment;    
@@ -409,8 +469,6 @@ function initalize_cross(arg) {
       }
     }
   }
-  
- 
   
   setTimeout(() => {
     // a_saved = document.querySelector("#rooms > input.a_saved").value;
@@ -588,9 +646,55 @@ function initalize_cross(arg) {
       l_wall.style.height = parseFloat(l_wall.querySelector(".wall_height").value) / 10 + "px";
       l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 10 + "px";
     }
+
+    console.log("currect_arak:", currect_arak);
+
+    $.ajax({
+      url: "/get-walls.php",
+      type: "post",
+      data: {
+        project_id: document.querySelector("#currect_project_id").value,
+        arak: currect_arak
+      },
+      success: (answer) => {
+        let walls = JSON.parse(answer);
+        console.log("walls:", walls);
+
+        walls.forEach((wall) => {
+          //  	id 	project_id 	arak 	wall 	asjarj 	name 	description 	hidden 	
+
+          let i = wall[3].toLowerCase();
+          j = i == 'k' ? 'roof' : i == 'l' ? 'floor' : i;
+
+          document.querySelector(`#wall_order_${j}`).value = wall[4] && wall[4] > 0 ? parseInt(wall[4]) : wallAToNum(i);
+          document.querySelector(`#wall_one_${j}`).value = wall[5] ? wall[5] : "SEINÄ " + i.toUpperCase(); console.log(document.querySelector(`#wall_one_${j}`).value);
+          document.querySelector(`#wall_desc_${j}`).value = wall[6] ? wall[6] : "" ;
+
+          wall[7] ? document.querySelector(`.house__wall_${j}`).classList.remove("hidden")
+          : document.querySelector(`.house__wall_${j}`).classList.add("hidden") ;
+        }); 
+      }
+    });
   }, 500);
 
   refresh__drawcontrols();
+}
+
+function wallAToNum(a) {
+  a = a.toLowerCase();
+  if(a == "a") {
+    return 1;
+  } else if(a == "b") {
+    return 2;
+  } else if(a == "c") {
+    return 3;
+  } else if(a == "d") {
+    return 4;
+  } else if(a == "k" || a == "roof") {
+    return 5;
+  } else if(a == "l" || a == "floor") {
+    return 6;
+  }
 }
 
 function adjust_roomsizes() {
