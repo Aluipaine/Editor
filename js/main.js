@@ -2809,6 +2809,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
           document.querySelector("#aukko_settings").value = settings_aukot_array.toString();
           formData = {
             id: _id.replace('"', '').replace("'", ""),
+            username: document.querySelector("#currect_user").value,
             saving_a_rooms: _saving_a_rooms,
             saving_b_rooms: _saving_b_rooms,
             saving_c_rooms: _saving_c_rooms,
@@ -3991,3 +3992,22 @@ function initialize__housetempla(arguemento,stage) {
 
 }
 
+function kumoa() {
+  $.ajax({
+    url: "/kumoa.php",
+    type: "post",
+    data: {
+      project_id: document.querySelector("$currect_project_id").value,
+      username: document.querySelector("#currect_user").value
+    },
+    success: (answer) => {
+      console.log("KUMOA:", answer);
+      if(answer != "ok" && answer != "") {
+        alert('Tietokantavirhe, soita numeroon +358449782028');
+      }
+    },
+    error: () => {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+    }
+  });
+}

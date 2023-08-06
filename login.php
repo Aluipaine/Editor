@@ -1,6 +1,6 @@
 <?php 
 // Include config file
-require "config.php";
+require "vendor/config.php";
 // // Initialize the session
 session_start();
  
@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if(isset($_SESSION["role"]) && $_SESSION["role"] == 'admin'){
         header("location: welcome-marko.php");
     } else {
-        $username_role_ = mysqli_query($link, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
+        $username_role_ = mysqli_query($db, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
         $username_role = mysqli_fetch_assoc($username_role_);
         
         $_SESSION["role"] = $username_role['role'];
@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT id, username, password FROM users WHERE username = ?";
         
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($db, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             
@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;    
                             
-                            $username_role_ = mysqli_query($link, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
+                            $username_role_ = mysqli_query($db, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
                             $username_role = mysqli_fetch_assoc($username_role_);
 
 
@@ -101,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Close connection
-    mysqli_close($link);
+    mysqli_close($db);
 }
 ?>
 

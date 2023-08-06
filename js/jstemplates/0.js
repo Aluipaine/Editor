@@ -11,6 +11,7 @@ function rooms__change_asjarj(order) {
     type:"post",
     data: {
       project_id: document.querySelector("#currect_project_id").value,
+      username: document.querySelector("#currect_user").value,
       arak: currect_arak,
       wall: mode_room,
       asjarj: ir_value
@@ -31,6 +32,7 @@ function rooms__change_name(order) {
     type:"post",
     data: {
       project_id: document.querySelector("#currect_project_id").value,
+      username: document.querySelector("#currect_user").value,
       arak: currect_arak,
       wall: mode_room,
       name: ir_value
@@ -61,6 +63,7 @@ function hide__room(room) {
       type:"post",
       data: {
         project_id: document.querySelector("#currect_project_id").value,
+        username: document.querySelector("#currect_user").value,
         arak: currect_arak,
         wall: mode_room,
         hidden: 0
@@ -86,6 +89,7 @@ function hide__room(room) {
       type:"post",
       data: {
         project_id: document.querySelector("#currect_project_id").value,
+        username: document.querySelector("#currect_user").value,
         arak: currect_arak,
         wall: mode_room,
         hidden: 1

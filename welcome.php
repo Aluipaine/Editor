@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
-require_once "config.php";
+require_once "vendor/config.php";
 
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -17,11 +17,11 @@ if(htmlspecialchars($_SESSION["username"]) === "marko" || htmlspecialchars($_SES
 }
 
 
-$posts = mysqli_query($link, "SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `addedusers` WHERE `username`=\"" . $_SESSION["username"] . "\");");
+$posts = mysqli_query($db, "SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `addedusers` WHERE `username`=\"" . $_SESSION["username"] . "\");");
 $posts = mysqli_fetch_all($posts);
 
 $username = $_SESSION["username"];
-$username_role_ = mysqli_query($link, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
+$username_role_ = mysqli_query($db, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
 $username_role = mysqli_fetch_assoc($username_role_);
 
 $_SESSION["role"] = $username_role['role'];
