@@ -9,7 +9,7 @@
       <div class="drawarea__controls_settingsbtn drawarea__controls_btn m_btn">
          Saumojen asetukset
       </div>
-      <div class="kumoa" onclick="submitprogress('', 'back', '', 'sau');">Kumoa</div>      
+      <div class="kumoa" onclick="submitprogress('', 'back', '', 'sau');kumoa();">Kumoa</div>      
       <!-- <div class="form-group st_question"><input type="checkbox" name="stjarj" id="stjarj" checked><label for="stjarj">Standard?</label></div> -->
       <div class="drawarea__controls_btn" onclick="siirto_ladonta();" style="background: darkgreen;">
          Saumoita muut seinät

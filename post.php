@@ -65,7 +65,7 @@ else {
 // print_r($usrpermissions[0][4]);
 echo '<input type="hidden" value="' . $usrpermissions[0][1] . '" id="current_user" name="current_user">';
 echo '<input type="hidden" value="' . $usrpermissions[0][4] . '" id="current_user_permissions" name="current_user_permissions">';
-echo '<input type="hidden" value="' . $id . '" id="currect_project_id" name="currect_project_id">';
+echo '<input type="hidden" value="' . $id . '" id="current_project_id" name="current_project_id">';
 
 
 include('./footer-post.php');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 03, 2023 at 11:40 PM
+-- Generation Time: Aug 07, 2023 at 05:27 PM
 -- Server version: 10.11.3-MariaDB-1
 -- PHP Version: 8.2.7
 
@@ -41,7 +41,7 @@ CREATE TABLE `addedusers` (
 --
 
 INSERT INTO `addedusers` (`id`, `project_id`, `username`, `added_by`) VALUES
-(1, 8, '9', 'Marko'),
+(1, 8, 'duunari', 'Marko'),
 (5, 11, 'Jyri', '');
 
 -- --------------------------------------------------------
@@ -96,6 +96,20 @@ INSERT INTO `comments` (`id`, `projectid`, `room`, `name`, `x_y`, `content`, `at
 ('comd00194a614cb3', 8, '--Tila   L11-1>a', 'Kommentti ', '500|500', 'dsssdsd', 'https://teditori.gromi.fi/uploads/Beta-järjestelmä.pdf\n\n\nhttps://teditori.gromi.fi/uploads/Beta Balcony-järjestelmä.pdf\n\n\nhttps://teditori.gromi.fi/uploads/Gamma-järjestelmä.pdf\n\n', 'duunari', 'Jari', '1', '2023-07-11 16:22:58', '2023-07-13 13:55:52', NULL, NULL, ''),
 ('come0ae42aa8c847', 8, '--Tila    L11-3>c', 'Kommentti testo', '5|5', '', '', 'duunari', 'Jari', '1', '2023-07-31 00:26:47', '', 'Ilmastointi', '', 'com3255cf2a39a59'),
 ('comf9dd498e672c6', 8, '--Tila L11-3 >c', 'Kommentti kmkmkm', '5|5', 'esdrftgyhujikmj', '', 'duunari', 'Jari', '1', '2023-07-30 14:32:56', '2023-08-05', 'Sähkö', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kumoalog`
+--
+
+CREATE TABLE `kumoalog` (
+  `id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `redo` varchar(255) NOT NULL,
+  `undo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -813,9 +827,9 @@ INSERT INTO `projectmeta` (`meta_id`, `id`, `meta_key`, `meta_value`) VALUES
 (14036, 11, 'f_pr_krs', ''),
 (14037, 11, 'f_pr_rap', ''),
 (14038, 11, 'pr_room_in_rap', ''),
-(14039, 11, 'a_rooms', '[{\"name\":\"ARAK-1\",\"positionX\":9,\"positionY\":1,\"a_room\":\"13~undone~1|1~2200|4000~~~~~\",\"b_room\":\"13~undone~1|1~2200|2200~~~~~\",\"c_room\":\"13~undone~1|1~2200|4000~~~~~\",\"d_room\":\"13~undone~1|1~2200|2200~~~~~\",\"k_room\":\"13~undone~1|1~2200|4000~~~~~\",\"l_room\":\"13~undone~1|1~2200|4000~~~~~\"},{\"name\":\"ARAK-2\",\"positionX\":9,\"positionY\":2,\"a_room\":\"13~undone~1|1~2200|4000~~~~~\",\"b_room\":\"13~undone~1|1~2200|2200~~~~~\",\"c_room\":\"13~undone~1|1~2200|4000~~~~~\",\"d_room\":\"13~undone~1|1~2200|2200~~~~~\",\"k_room\":\"13~undone~1|1~2200|4000~~~~~\",\"l_room\":\"13~undone~1|1~2200|4000~~~~~\"},{\"name\":\"ARAK-3\",\"positionX\":9,\"positionY\":3,\"a_room\":\"13~undone~1|1~2200|4000~~~~~\",\"b_room\":\"13~undone~1|1~2200|2200~~~~~\",\"c_room\":\"13~undone~1|1~2200|4000~~~~~\",\"d_room\":\"13~undone~1|1~2200|2200~~~~~\",\"k_room\":\"13~undone~1|1~2200|4000~~~~~\",\"l_room\":\"13~undone~1|1~2200|4000~~~~~\"},{\"name\":\"ARAK-4\",\"positionX\":9,\"positionY\":4,\"a_room\":\"13~undone~1|1~2200|4000~~~~~\",\"b_room\":\"13~undone~1|1~2200|2200~~~~~\",\"c_room\":\"13~undone~1|1~2200|4000~~~~~\",\"d_room\":\"13~undone~1|1~2200|2200~~~~~\",\"k_room\":\"13~undone~1|1~2200|4000~~~~~\",\"l_room\":\"13~undone~1|1~2200|4000~~~~~\"}]'),
-(14040, 11, 'b_rooms', ''),
-(14041, 11, 'c_rooms', ''),
+(14039, 11, 'a_rooms', '[{\"name\": \" ARAK-1\",\"positionY\":  9,\"positionX\":  1,\"a_room\": \" 11 ~rangatok~1|1~2190|3980~mittapiste #1|5|5|1|mp2bbfa8bdbe401|a__~ovi # 1|0|0|1|aukko2250f95c7c9c5|undefined|undefined|aukko ovi|||__~läpivienti #1|nan|nan|1|lv54d32ee6f4434|75|||__~~\",\"b_room\": \" 11 ~measured~1|1~2190|2200~~~~~\",\"c_room\": \" 11 ~measured~1|1~2190|4000~~~~~\",\"d_room\": \" 11 ~measured~1|1~2190|2200~~~~~\",\"k_room\": \" 13~undone~1|1~2200|4000~~~~~\",\"l_room\": \" 13~undone~1|1~2200|4000~~~~~\"},{\"name\": \" ARAK-2\",\"positionY\":  9,\"positionX\":  2,\"a_room\": \"11~undone~1|1~2200|~~~~~\",\"b_room\": \"11~undone~1|1~2200|2200~~~~~\",\"c_room\": \"11 ~rangatok~1|1~2200|4000~mittapiste #1|5|5|1|mp2ccf5fa125f068|c__~~~~\",\"d_room\": \"  11 ~measured~1|1~2200|2200~~~~~\",\"k_room\": \" 13~undone~1|1~2200|4000~~~~~\",\"l_room\": \" 13~undone~1|1~2200|4000~~~~~\"},{\"name\": \" ARAK-3\",\"positionY\":  9,\"positionX\":  3,\"a_room\": \" 13~undone~1|1~2200|4000~~~~~\",\"b_room\": \" 13~undone~1|1~2200|2200~~~~~\",\"c_room\": \" 13~undone~1|1~2200|4000~~~~~\",\"d_room\": \" 13~undone~1|1~2200|2200~~~~~\",\"k_room\": \" 13~undone~1|1~2200|4000~~~~~\",\"l_room\": \" 13~undone~1|1~2200|4000~~~~~\"},{\"name\": \" ARAK-4\",\"positionY\":  9,\"positionX\":  4,\"a_room\": \" 13~undone~1|1~2200|4000~~~~~\",\"b_room\": \" 13~undone~1|1~2200|2200~~~~~\",\"c_room\": \" 13~undone~1|1~2200|4000~~~~~\",\"d_room\": \" 13~undone~1|1~2200|2200~~~~~\",\"k_room\": \" 13~undone~1|1~2200|4000~~~~~\",\"l_room\": \" 13~undone~1|1~2200|4000~~~~~}}}}}}}}}}}}}}}}}}}\"},]'),
+(14040, 11, 'b_rooms', '[]'),
+(14041, 11, 'c_rooms', '[]'),
 (14042, 11, 'd_rooms', ''),
 (14043, 11, 'e_rooms', ''),
 (14044, 11, 'f_rooms', ''),
@@ -925,7 +939,7 @@ INSERT INTO `projectmeta` (`meta_id`, `id`, `meta_key`, `meta_value`) VALUES
 (14148, 11, 'step', ''),
 (14149, 11, 'wall', ''),
 (14150, 11, 'room', ''),
-(14151, 11, 'settings', ''),
+(14151, 11, 'settings', '+25,0,+25,0,+25,0,0,-25,+25,0,+25,0,+25,0,0,-25,+25,0,+25,0,+25,0,0,-25,+25,0,+25,0,+25,0,0,-25,+25,0,+25,0,+25,0,0,-25'),
 (14152, 11, 'mittapisteet', ''),
 (14153, 11, 'aukot', ''),
 (14154, 11, 'reijat', ''),
@@ -2431,6 +2445,38 @@ INSERT INTO `projects` (`id`, `title`, `created_at`, `link`, `project_type`, `us
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `roomwalls`
+--
+
+CREATE TABLE `roomwalls` (
+  `id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `arak` varchar(255) NOT NULL,
+  `wall` varchar(1) DEFAULT NULL,
+  `asjarj` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT '',
+  `hidden` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL,
+  `projekti_jarjestelma` varchar(255) DEFAULT NULL,
+  `aukko_asetukset` varchar(255) DEFAULT NULL,
+  `reika_asetukset` varchar(255) DEFAULT NULL,
+  `sauma_asetukset` varchar(255) DEFAULT NULL,
+  `materiaali_asetukset` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -2478,6 +2524,12 @@ ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `kumoalog`
+--
+ALTER TABLE `kumoalog`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pohjat`
 --
 ALTER TABLE `pohjat`
@@ -2493,6 +2545,18 @@ ALTER TABLE `projectmeta`
 -- Indexes for table `projects`
 --
 ALTER TABLE `projects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roomwalls`
+--
+ALTER TABLE `roomwalls`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2513,6 +2577,12 @@ ALTER TABLE `addedusers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `kumoalog`
+--
+ALTER TABLE `kumoalog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `pohjat`
 --
 ALTER TABLE `pohjat`
@@ -2529,6 +2599,18 @@ ALTER TABLE `projectmeta`
 --
 ALTER TABLE `projects`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `roomwalls`
+--
+ALTER TABLE `roomwalls`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -12,7 +12,7 @@
 
       <div class="form-group st_question"><input type="checkbox" name="stjarj" id="stjarj" checked><label for="stjarj">Standard?</label></div>
       <div onclick="move_origo(this);" class="drawarea__controls_origoset">Origo oikealle</div>
-      <div class="kumoa" onclick="submitprogress('','back','','aukot');">Kumoa</div>
+      <div class="kumoa" onclick="submitprogress('','back','','aukot');kumoa();">Kumoa</div>
       <?php include("./templates/house_nav.php");  ?>
    </div>
 </div>

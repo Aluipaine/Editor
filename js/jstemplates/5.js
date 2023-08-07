@@ -65,6 +65,7 @@ function luo__levy(h, w, dex, col, b, l) {
 }
 
 function levyta(priority) {
+  console.log("LEVYTA CALLED");
   fixmissing__saumoitus();
   levy_c = -1;
   levy_array = [];
@@ -234,7 +235,9 @@ function open_ladonta_settings(e) {
     document.querySelector(".ladonta_container").classList.remove("two");
   }
 }
+
 function raksita(levy) {
+  console.log("RAKSITA CALLED");
   levy_c += 1;
 
   levys = canvas.querySelectorAll(".levy");

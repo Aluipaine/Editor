@@ -2809,7 +2809,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
           document.querySelector("#aukko_settings").value = settings_aukot_array.toString();
           formData = {
             id: _id.replace('"', '').replace("'", ""),
-            username: document.querySelector("#currect_user").value,
+            username: document.querySelector("#current_user").value,
             saving_a_rooms: _saving_a_rooms,
             saving_b_rooms: _saving_b_rooms,
             saving_c_rooms: _saving_c_rooms,
@@ -3997,8 +3997,8 @@ function kumoa() {
     url: "/kumoa.php",
     type: "post",
     data: {
-      project_id: document.querySelector("$currect_project_id").value,
-      username: document.querySelector("#currect_user").value
+      project_id: document.querySelector("$current_project_id").value,
+      username: document.querySelector("#current_user").value
     },
     success: (answer) => {
       console.log("KUMOA:", answer);

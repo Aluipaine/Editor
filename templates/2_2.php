@@ -109,7 +109,7 @@
                      </div>
                      <div id="setting__canvas_aukot" class="setting__canvas" style="height: 480px; width: 680px;">
                         <div class="drawarea__origo" id="drawarea__origo_central"></div>
-                        <main class="canvas" style="width: 100%;">
+                        <!--<main class="canvas" style="width: 100%;">-->
                         <span class="settings__aukko" id="settings__aukko"></span>
                      </div>
                   </div>

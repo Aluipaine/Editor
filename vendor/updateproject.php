@@ -42,7 +42,8 @@ $query .= "UPDATE `projectmeta` SET `meta_value`='$poisjaava_alue' WHERE `id`=$i
 $query .= "UPDATE `projectmeta` SET `meta_value`='$keskusmittapiste_cord' WHERE `id`=$id AND `meta_key`='keskusmittapiste_cord';";
 $query .= "UPDATE `projectmeta` SET `meta_value`='$reklamaatiot' WHERE `id`=$id AND `meta_key`='reklamaatiot';";
 
-$values = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id")->fetch_assoc();
+$values = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id")->fetch_all();
+$values = array_column($values, null, "meta_key");
 
 $undo = "UPDATE `projectmeta` SET `meta_value`='" . $values['wall'] . "' WHERE `id`=$id AND `meta_key`='wall';";
 $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['room'] . "' WHERE `id`=$id AND `meta_key`='room';";
@@ -61,6 +62,11 @@ $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['reklamaatiot'] . "
 
 $kumoa = "INSERT INTO `kumoalog` (`project_id`, `username`, `redo`, `undo`) VALUES ($id, '$username', '" . mysqli_real_escape_string($db, $query) . "' , '" . mysqli_real_escape_string($db, $query) . "');";
 
-mysqli_query($db, "$query $kumoa");
+$queries = explode(";", $query . $kumora);
+
+foreach($queries as $q) {
+    if($q != "")
+        mysqli_query($db, $q);
+}
 
  ?>

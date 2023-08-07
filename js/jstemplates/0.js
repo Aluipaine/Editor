@@ -10,8 +10,8 @@ function rooms__change_asjarj(order) {
     url: "/update-walls.php",
     type:"post",
     data: {
-      project_id: document.querySelector("#currect_project_id").value,
-      username: document.querySelector("#currect_user").value,
+      project_id: document.querySelector("#current_project_id").value,
+      username: document.querySelector("#current_user").value,
       arak: currect_arak,
       wall: mode_room,
       asjarj: ir_value
@@ -31,8 +31,8 @@ function rooms__change_name(order) {
     url: "/update-walls.php",
     type:"post",
     data: {
-      project_id: document.querySelector("#currect_project_id").value,
-      username: document.querySelector("#currect_user").value,
+      project_id: document.querySelector("#current_project_id").value,
+      username: document.querySelector("#current_user").value,
       arak: currect_arak,
       wall: mode_room,
       name: ir_value
@@ -62,8 +62,8 @@ function hide__room(room) {
       url: "/update-walls.php",
       type:"post",
       data: {
-        project_id: document.querySelector("#currect_project_id").value,
-        username: document.querySelector("#currect_user").value,
+        project_id: document.querySelector("#current_project_id").value,
+        username: document.querySelector("#current_user").value,
         arak: currect_arak,
         wall: mode_room,
         hidden: 0
@@ -88,8 +88,8 @@ function hide__room(room) {
       url: "/update-walls.php",
       type:"post",
       data: {
-        project_id: document.querySelector("#currect_project_id").value,
-        username: document.querySelector("#currect_user").value,
+        project_id: document.querySelector("#current_project_id").value,
+        username: document.querySelector("#current_user").value,
         arak: currect_arak,
         wall: mode_room,
         hidden: 1
@@ -657,7 +657,7 @@ function initalize_cross(arg) {
       url: "/get-walls.php",
       type: "post",
       data: {
-        project_id: document.querySelector("#currect_project_id").value,
+        project_id: document.querySelector("#current_project_id").value,
         arak: currect_arak
       },
       success: (answer) => {

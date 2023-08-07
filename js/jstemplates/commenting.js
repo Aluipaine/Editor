@@ -513,7 +513,7 @@ function fetch_added_users() {
     url: "/get-added-users.php",
     type: "post",
     data: {
-      project_id: document.querySelector("#currect_project_id").value
+      project_id: document.querySelector("#current_project_id").value
     },
     success: (users) => {
       users = JSON.parse(users);
