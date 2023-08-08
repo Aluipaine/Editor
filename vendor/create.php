@@ -2,6 +2,8 @@
 // Include config file
 require "config.php";
 
+session_start();
+
 function rand_string( $length ) {
 
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
