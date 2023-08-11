@@ -2308,32 +2308,32 @@
              <tr>
                 <td><input type="number" data-room="asjarj-1" maxlength="1" name="wall_one_asjarj asjarj" id="wall_order_a" data-tochange="a" onchange="rooms__change_asjarj(this); " value="1" class="lineinput inputname" required/></td>
                 <td><input type="text" data-room="a" name="wall_one_a" id="wall_one_a" value="SEINÄ A" data-tochange="a" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_a_desc" id="wall_desc_a" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                <td><input type="text" name="wall_one_a_desc" id="wall_desc_a" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
              </tr>
              <tr>
                 <td><input type="number" data-room="asjarj-2" maxlength="1" name="wall_two_asjarj asjarj" id="wall_order_b" data-tochange="b" onchange="rooms__change_asjarj(this); "value="2" class="lineinput inputname" required/></td>
                 <td><input type="text" data-room="b" name="wall_one_b" id="wall_one_b" value="SEINÄ B" data-tochange="b"  class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_b_desc" id="wall_desc_b" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                <td><input type="text" name="wall_one_b_desc" id="wall_desc_b" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
              </tr>
              <tr>
                 <td><input type="number" data-room="asjarj-3" maxlength="1" name="wall_three_asjarj asjarj" id="wall_order_c" data-tochange="c" onchange="rooms__change_asjarj(this); "value="3" class="lineinput inputname" required/></td>
                 <td><input type="text" data-room="c" name="wall_one_c" id="wall_one_c" value="SEINÄ C" data-tochange="c" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_c_desc" id="wall_desc_c" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                <td><input type="text" name="wall_one_c_desc" id="wall_desc_c" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
              </tr>
              <tr>
                 <td><input type="number" data-room="asjarj-4" maxlength="1" name="wall_four_asjarj asjarj" id="wall_order_d" data-tochange="d" onchange="rooms__change_asjarj(this); "value="4" class="lineinput inputname" required/></td>
                 <td><input type="text" data-room="d" name="wall_one_d" id="wall_one_d" value="SEINÄ D"  data-tochange="d" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_d_desc" id="wall_desc_d" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                <td><input type="text" name="wall_one_d_desc" id="wall_desc_d" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
              </tr>
              <tr>
                 <td><input type="number" data-room="asjarj-5" maxlength="1" name="wall_five_asjarj asjarj" id="wall_order_roof" data-tochange="k" onchange="rooms__change_asjarj(this); "value="5" class="lineinput inputname" required/></td>
                 <td><input type="text" data-room="roof" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="r" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_roof_desc" id="wall_desc_roof" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                <td><input type="text" name="wall_one_roof_desc" id="wall_desc_roof" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
              </tr>
              <tr>
                 <td><input type="number" data-room="asjarj-6" maxlength="1" name="wall_six_asjarj asjarj" id="wall_order_floor" data-tochange="l" onchange="rooms__change_asjarj(this); "value="6" class="lineinput inputname" required/></td>
                 <td><input type="text" data-room="floor" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_floor_desc" id="wall_desc_floor" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                <td><input type="text" name="wall_one_floor_desc" id="wall_desc_floor" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
              </tr>
            </table>
            <!--<div class="kumoa" onclick="kumoa();">Kumoa</div>-->

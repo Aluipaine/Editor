@@ -445,7 +445,7 @@ function refresh__drawcontrols() {
 
 
       walls_content = document.querySelector(".house__wall_status_l").innerText + "," + document.querySelector(".house__wall_status_a").innerText + "," + document.querySelector(".house__wall_status_b").innerText + "," + document.querySelector(".house__wall_status_c").innerText + "," + document.querySelector(".house__wall_status_d").innerText + "," + document.querySelector(".house__wall_status_k").innerText;
-      document.querySelector(".walls_content").value = walls_content;
+      try { document.querySelector(".walls_content").value = walls_content; } catch(e) { console.log("TRY-CATCH ERROR:", e ) }
       // degradate_url(3);
     }
     else {
@@ -2621,7 +2621,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
 
       saving_origo = parseFloat(document.querySelector("#drawarea__origo_central").style.left) + "|" + parseFloat(document.querySelector(
         "#drawarea__origo_central").style.bottom);
-      _saving_walls = $('.walls_content').val();
+      try { _saving_walls = $('.walls_content').val(); } catch(e) { console.log("TRY-CATCH ERROR:", e ); }
       _a_asetukset = $('.a_asetukset').val();
       saving_mps = $('.mittapisteet').val();
       saving_aus = $('.aukot').val();
@@ -2780,10 +2780,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
       // _saving_h_rooms
       settings_aukot_array = document.querySelector("#aukko_settings").value;
       
-
-      s_walls = _saving_walls.replace('"', '').replace("'", "");
       a_asetukset = _a_asetukset.replace('"', '').replace("'", "");
-      console.log("_saving_walls" + s_walls);
       formData = {
         id: _id.replace('"', '').replace("'", ""),
         saving_a_rooms: _saving_a_rooms,
@@ -3997,7 +3994,7 @@ function kumoa() {
     url: "/kumoa.php",
     type: "post",
     data: {
-      project_id: document.querySelector("$current_project_id").value,
+      project_id: document.querySelector("#current_project_id").value,
       username: document.querySelector("#current_user").value
     },
     success: (answer) => {
@@ -4006,7 +4003,8 @@ function kumoa() {
         alert('Tietokantavirhe, soita numeroon +358449782028');
       }
     },
-    error: () => {
+    error: (e) => {
+      console.log("NETWORK ERROR:", e);
       alert('Tietokantavirhe, soita numeroon +358449782028');
     }
   });
