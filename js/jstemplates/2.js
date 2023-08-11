@@ -63,7 +63,7 @@ palkki_count = 0;
 pilari_count = 0;
 ilmastointi_count = 0;
 
-function aukko_count(aukko, count) {
+function aukko_count_function(aukko, count) {
   if (aukko.classList.contains("ovi")) {
     ovi_count += count;
     aukko.dataset.no = parseFloat(ovi_count);
@@ -87,6 +87,7 @@ function aukko_count(aukko, count) {
 }
 
 function aukko_del(aukko, count) {
+  console.log("AUKKO_DEL CALLED");
   if(aukko) {
     obj = aukko.getAttribute("id");
   }

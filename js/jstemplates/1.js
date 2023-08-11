@@ -1,4 +1,6 @@
- // Рисование точки опоры на area canvas
+let aukko_count = 0;
+
+// Рисование точки опоры на area canvas
  function draw__point() {
   const drawscreen_section_one = document.querySelector('#drawscreen_section_one');
   const drawscreen_section_two = document.querySelector('#drawscreen_section_two');
@@ -754,7 +756,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');submitprogress('','cancel','" + mode_id + "','mp','" + t_array +
         "');mittapiste_count-=1;");
       newDiv__comment_settings.setAttribute("onclick",
-        " open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"');");
+        "open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"');");
       newDiv__comment.appendChild(newDiv__comment_settings);
       newDiv__comment.appendChild(newDiv__comment_del);
     }
@@ -845,7 +847,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         5 + "|" + parseFloat(newDiv.style.height) * 5;
       newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');submitprogress('','cancel','" + id + "','aukot','" + t_array +
         "');aukko_del(document.querySelector('#'+obj), -1);this.parentElement.remove();document.querySelector('#'+obj).remove();"); //aukko_del(document.querySelector('#'+obj), -1);
-      newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);aukko_del(document.querySelector('#' + obj), -1);document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;submitprogress('', 'cancel', '" +id + "', 'aukot', '" + t_array + "');au_previous_vord = '" + au_previous_vord + "';");
+      newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;/*submitprogress('', 'cancel', '" +id + "', 'aukot', '" + t_array + "');au_previous_vord = '" + au_previous_vord + "';*/");
       newDiv__comment.appendChild(newDiv__comment_settings);
       newDiv__comment.appendChild(newDiv__comment_del);
 
@@ -1162,23 +1164,23 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       newDiv.dataset.no = "";
       if (document.querySelector("#type__door").checked) {
         newDiv.classList.add("ovi");
-        aukko_count(newDiv, 1);
+        aukko_count_function(newDiv, 1);
       }
       if (document.querySelector("#type__window").checked) {
         newDiv.classList.add("ikkuna");
-        aukko_count(newDiv, 1);
+        aukko_count_function(newDiv, 1);
       }
       if (document.querySelector("#type__palkki").checked) {
         newDiv.classList.add("palkki");
-        aukko_count(newDiv, 1);
+        aukko_count_function(newDiv, 1);
       }
       if (document.querySelector("#type__collar").checked) {
         newDiv.classList.add("pilari");
-        aukko_count(newDiv, 1);
+        aukko_count_function(newDiv, 1);
       }
       if (document.querySelector("#type__ventilation").checked) {
         newDiv.classList.add("tuuletus");
-        aukko_count(newDiv, 1);
+        aukko_count_function(newDiv, 1);
       }
 
       realcount = newDiv.dataset.no;
@@ -1230,7 +1232,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         5 + "|" + parseFloat(newDiv.style.height) * 5;
       newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');submitprogress('','cancel','" + id + "','aukot','" + t_array +
         "');aukko_del(document.querySelector('#'+obj), -1);"); //aukko_del(document.querySelector('#'+obj), -1);
-      newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);aukko_del(document.querySelector('#' + obj), -1);document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;submitprogress('', 'cancel', '" +id + "', 'aukot', '" + t_array + "');au_previous_vord = '" + au_previous_vord + "';");
+      newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;/*submitprogress('', 'cancel', '" +id + "', 'aukot', '" + t_array + "');au_previous_vord = '" + au_previous_vord + "';*/");
 
       aukko_lcord = document.createElement("div");
       aukko_lcord.classList.add("aukko__cord");

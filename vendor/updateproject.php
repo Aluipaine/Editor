@@ -2,11 +2,6 @@
 // Include config file
 require "config.php";
 
-
-
-
-
-
 // Count total files
 $id = $_POST['id'];
 $username = $_POST['username'];
