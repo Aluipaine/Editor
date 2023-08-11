@@ -60,7 +60,7 @@ include('header.php');
                <input type="text" name="prc_2_email" class="form-control" value=" " required> </div>
                <div class="form-subgroup">
                   <label for="prc_2_role">Rooli: </label>
-                  <select name="role" id="prc_2_role">
+                  <select name="prc_2_role" id="prc_2_role">
                      <option value="saaja">Viestien saaja</option>
                      <option value="katsoja">Katsoja</option>
                      <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>

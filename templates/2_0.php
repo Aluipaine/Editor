@@ -2336,7 +2336,7 @@
                 <td><input type="text" name="wall_one_floor_desc" id="wall_desc_floor" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
              </tr>
            </table>
-           <div class="kumoa" onclick="kumoa();">Kumoa</div>
+           <!--<div class="kumoa" onclick="kumoa();">Kumoa</div>-->
         </div>
       </div>
       <div class="col-6">
