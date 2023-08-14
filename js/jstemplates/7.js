@@ -640,6 +640,7 @@ function create__levy_excel() {
 
 
   document.querySelector('.get_levy_btn').addEventListener('click', () => {
+    console.log("Starting EXEL generating...")
     filename = 'Tila ESIMERKKI - Levyt.xlsx';
     var ws = XLSX.utils.json_to_sheet(levyexcel_array);
     var wb = XLSX.utils.book_new();
