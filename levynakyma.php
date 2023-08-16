@@ -245,43 +245,45 @@ include('./header.php');
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script>
 <script>
     function tallenna_kiinnikepaikat(levy) {
-        try {
-        console.log("tallenna_kiinnikepaikat(levy) fired");
-        kiinnikkeet = levy.querySelectorAll(".tyostot__tyosto");
-        l_meta = levy.querySelector(".l_meta");
-        l_meta.value = "";
-        l_meta_x = [];
-        l_meta_y = [];
-        kiinnike_inputy = [];
-        kiinnike_inputx = [];
-        for (var i = kiinnikkeet.length - 1; i >= 0; i--) {
-            if (kiinnikkeet[i]) {
-                if (kiinnikkeet[i].classList.contains("tyostot__tyosto_vaaka")) {
-                    kiinnike_inputy.push(kiinnikkeet[i]);
-                }
-                if (kiinnikkeet[i].classList.contains("tyostot__tyosto_pysty")) {
-                    kiinnike_inputx.push(kiinnikkeet[i]);
-                }
-            }
-        }
-        for (var y = kiinnike_inputy.length - 1; y >= 0; y--) {
-            k_input = kiinnike_inputy[y].querySelectorAll("input");
-            for (var k = k_input.length - 1; k >= 0; k--) {
-                l_meta_y.push(k_input[k].value);
-            }
-        }
-        for (var x = kiinnike_inputx.length - 1; x >= 0; x--) {
-            k_input = kiinnike_inputx[x].querySelectorAll("input");
-            for (var k = k_input.length - 1; k >= 0; k--) {
-                l_meta_x.push(k_input[k].value);
-            }
-        }
-        l_meta.value = ("{" + l_meta_x + "}," + "{" + l_meta_y + "}");
-        console.log("l_meta_x: " + l_meta_x);
-        console.log("l_meta_y: " + l_meta_y);
-    } catch(e) {
-        console.log("TRY-CATCH ERROR: " + e);
-    }
+        // This is need to remove error in "7.js" script.
+        console.log("tallenna_kiinnikepaikat(levy) EMULATION FIRED");
+    //     try {
+    //     console.log("tallenna_kiinnikepaikat(levy) fired");
+    //     kiinnikkeet = levy.querySelectorAll(".tyostot__tyosto");
+    //     l_meta = levy.querySelector(".l_meta");
+    //     l_meta.value = "";
+    //     l_meta_x = [];
+    //     l_meta_y = [];
+    //     kiinnike_inputy = [];
+    //     kiinnike_inputx = [];
+    //     for (var i = kiinnikkeet.length - 1; i >= 0; i--) {
+    //         if (kiinnikkeet[i]) {
+    //             if (kiinnikkeet[i].classList.contains("tyostot__tyosto_vaaka")) {
+    //                 kiinnike_inputy.push(kiinnikkeet[i]);
+    //             }
+    //             if (kiinnikkeet[i].classList.contains("tyostot__tyosto_pysty")) {
+    //                 kiinnike_inputx.push(kiinnikkeet[i]);
+    //             }
+    //         }
+    //     }
+    //     for (var y = kiinnike_inputy.length - 1; y >= 0; y--) {
+    //         k_input = kiinnike_inputy[y].querySelectorAll("input");
+    //         for (var k = k_input.length - 1; k >= 0; k--) {
+    //             l_meta_y.push(k_input[k].value);
+    //         }
+    //     }
+    //     for (var x = kiinnike_inputx.length - 1; x >= 0; x--) {
+    //         k_input = kiinnike_inputx[x].querySelectorAll("input");
+    //         for (var k = k_input.length - 1; k >= 0; k--) {
+    //             l_meta_x.push(k_input[k].value);
+    //         }
+    //     }
+    //     l_meta.value = ("{" + l_meta_x + "}," + "{" + l_meta_y + "}");
+    //     console.log("l_meta_x: " + l_meta_x);
+    //     console.log("l_meta_y: " + l_meta_y);
+    // } catch(e) {
+    //     console.log("TRY-CATCH ERROR: " + e);
+    // }
     }
 </script>
 
