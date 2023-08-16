@@ -152,7 +152,7 @@ if(isset($_POST['prc_1']) && strlen($_POST['prc_1']) > 2){
 	$prc_1_role = $_POST['prc_1_role'];
 	$prc_1_permission = $_POST['prc_1_permission'];
 	$prc_1_hiding = $_POST['prc_1_hiding'];
-    $adduser = $_POST['prc_1'];
+	$adduser = $_POST['prc_1'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_1'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -182,6 +182,7 @@ if(isset($_POST['prc_2']) && strlen($_POST['prc_2']) > 2) {
 	$prc_2_role = $_POST['prc_2_role'];
 	$prc_2_permission = $_POST['prc_2_permission'];
 	$prc_2_hiding = $_POST['prc_2_hiding'];
+	$adduser = $_POST['prc_2'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_2'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -212,6 +213,7 @@ if(isset($_POST['prc_3'])  && strlen($_POST['prc_3']) > 2) {
 	$prc_3_role = $_POST['prc_3_role'];
 	$prc_3_permission = $_POST['prc_3_permission'];
 	$prc_3_hiding = $_POST['prc_3_hiding'];
+	$adduser = $_POST['prc_3'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_3'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -241,6 +243,7 @@ if(isset($_POST['prc_4'])  && strlen($_POST['prc_4']) > 2) {
 	$prc_4_role = $_POST['prc_4_role'];
 	$prc_4_permission = $_POST['prc_4_permission'];
 	$prc_4_hiding = $_POST['prc_4_hiding'];
+	$adduser = $_POST['prc_4'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_4'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -270,6 +273,7 @@ if(isset($_POST['prc_5']) && strlen($_POST['prc_5']) > 2) {
 	$prc_5_role = $_POST['prc_5_role'];
 	$prc_5_permission = $_POST['prc_5_permission'];
 	$prc_5_hiding = $_POST['prc_5_hiding'];
+	$adduser = $_POST['prc_5'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_5'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -299,6 +303,7 @@ if(isset($_POST['prc_6']) && strlen($_POST['prc_6']) > 2) {
 	$prc_6_role = $_POST['prc_6_role'];
 	$prc_6_permission = $_POST['prc_6_permission'];
 	$prc_6_hiding = $_POST['prc_6_hiding'];
+	$adduser = $_POST['prc_6'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_6'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -328,6 +333,7 @@ if(isset($_POST['prc_7']) && strlen($_POST['prc_7']) > 2) {
 	$prc_7_role = $_POST['prc_7_role'];
 	$prc_7_permission = $_POST['prc_7_permission'];
 	$prc_7_hiding = $_POST['prc_7_hiding'];
+	$adduser = $_POST['prc_7'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_7'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -357,6 +363,7 @@ if(isset($_POST['prc_8']) && strlen($_POST['prc_8']) > 2) {
 	$prc_8_role = $_POST['prc_8_role'];
 	$prc_8_permission = $_POST['prc_8_permission'];
 	$prc_8_hiding = $_POST['prc_8_hiding'];
+	$adduser = $_POST['prc_8'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_8'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -386,6 +393,7 @@ if(isset($_POST['prc_9']) && strlen($_POST['prc_9']) > 2) {
 	$prc_9_role = $_POST['prc_9_role'];
 	$prc_9_permission = $_POST['prc_9_permission'];
 	$prc_9_hiding = $_POST['prc_9_hiding'];
+	$adduser = $_POST['prc_9'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_9'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -415,6 +423,7 @@ if(isset($_POST['prc_10']) && strlen($_POST['prc_10']) > 2) {
 	$prc_10_role = $_POST['prc_10_role'];
 	$prc_10_permission = $_POST['prc_10_permission'];
 	$prc_10_hiding = $_POST['prc_10_hiding'];
+	$adduser = $_POST['prc_10'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_10'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -444,6 +453,7 @@ if(isset($_POST['prc_11']) && strlen($_POST['prc_11']) > 2) {
 	$prc_11_role = $_POST['prc_11_role'];
 	$prc_11_permission = $_POST['prc_11_permission'];
 	$prc_11_hiding = $_POST['prc_11_hiding'];
+	$adduser = $_POST['prc_11'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_11'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -473,6 +483,7 @@ if(isset($_POST['prc_12']) && strlen($_POST['prc_12']) > 2) {
 	$prc_12_role = $_POST['prc_12_role'];
 	$prc_12_permission = $_POST['prc_12_permission'];
 	$prc_12_hiding = $_POST['prc_12_hiding'];
+	$adduser = $_POST['prc_12'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_12'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -510,6 +521,7 @@ if(isset($_POST['prc_13']) && strlen($_POST['prc_13']) > 2) {
 	$prc_13_role = $_POST['prc_13_role'];
 	$prc_13_permission = $_POST['prc_13_permission'];
 	$prc_13_hiding = $_POST['prc_13_hiding'];
+	$adduser = $_POST['prc_13'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_13'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -547,6 +559,7 @@ if(isset($_POST['prc_14']) && strlen($_POST['prc_14']) > 2) {
 	$prc_14_role = $_POST['prc_14_role'];
 	$prc_14_permission = $_POST['prc_14_permission'];
 	$prc_14_hiding = $_POST['prc_14_hiding'];
+	$adduser = $_POST['prc_14'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_14'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -585,6 +598,7 @@ if(isset($_POST['prc_15']) && strlen($_POST['prc_15']) > 2) {
 	$prc_15_role = $_POST['prc_15_role'];
 	$prc_15_permission = $_POST['prc_15_permission'];
 	$prc_15_hiding = $_POST['prc_15_hiding'];
+	$adduser = $_POST['prc_15'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_15'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -621,6 +635,7 @@ if(isset($_POST['prc_16'])  && strlen($_POST['prc_16']) > 2) {
 	$prc_16_role = $_POST['prc_16_role'];
 	$prc_16_permission = $_POST['prc_16_permission'];
 	$prc_16_hiding = $_POST['prc_16_hiding'];
+	$adduser = $_POST['prc_16'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_16'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -659,6 +674,7 @@ if(isset($_POST['prc_17'])  && strlen($_POST['prc_17']) > 2) {
 	$prc_17_role = $_POST['prc_17_role'];
 	$prc_17_permission = $_POST['prc_17_permission'];
 	$prc_17_hiding = $_POST['prc_17_hiding'];
+	$adduser = $_POST['prc_17'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_17'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -697,6 +713,7 @@ if(isset($_POST['prc_18'])  && strlen($_POST['prc_18']) > 2) {
 	$prc_18_role = $_POST['prc_18_role'];
 	$prc_18_permission = $_POST['prc_18_permission'];
 	$prc_18_hiding = $_POST['prc_18_hiding'];
+	$adduser = $_POST['prc_18'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_18'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -735,6 +752,7 @@ if(isset($_POST['prc_19'])  && strlen($_POST['prc_19']) > 2) {
 	$prc_19_role = $_POST['prc_19_role'];
 	$prc_19_permission = $_POST['prc_19_permission'];
 	$prc_19_hiding = $_POST['prc_19_hiding'];
+	$adduser = $_POST['prc_19'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_19'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -771,6 +789,7 @@ if(isset($_POST['prc_20'])  && strlen($_POST['prc_20']) > 2) {
 	$prc_20_role = $_POST['prc_20_role'];
 	$prc_20_permission = $_POST['prc_20_permission'];
 	$prc_20_hiding = $_POST['prc_20_hiding'];
+	$adduser = $_POST['prc_20'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_20'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -809,6 +828,7 @@ if(isset($_POST['prc_21'])  && strlen($_POST['prc_21']) > 2) {
 	$prc_21_role = $_POST['prc_21_role'];
 	$prc_21_permission = $_POST['prc_21_permission'];
 	$prc_21_hiding = $_POST['prc_21_hiding'];
+	$adduser = $_POST['prc_21'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_21'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -847,6 +867,7 @@ if(isset($_POST['prc_22'])  && strlen($_POST['prc_22']) > 2) {
 	$prc_22_role = $_POST['prc_22_role'];
 	$prc_22_permission = $_POST['prc_22_permission'];
 	$prc_22_hiding = $_POST['prc_22_hiding'];
+	$adduser = $_POST['prc_22'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_22'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -885,6 +906,7 @@ if(isset($_POST['prc_23'])  && strlen($_POST['prc_23']) > 2) {
 	$prc_23_role = $_POST['prc_23_role'];
 	$prc_23_permission = $_POST['prc_23_permission'];
 	$prc_23_hiding = $_POST['prc_23_hiding'];
+	$adduser = $_POST['prc_23'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_23'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -923,6 +945,7 @@ if(isset($_POST['prc_24'])  && strlen($_POST['prc_24']) > 2) {
 	$prc_24_role = $_POST['prc_24_role'];
 	$prc_24_permission = $_POST['prc_24_permission'];
 	$prc_24_hiding = $_POST['prc_24_hiding'];
+	$adduser = $_POST['prc_24'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_24'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -960,6 +983,7 @@ if(isset($_POST['prc_25'])  && strlen($_POST['prc_25']) > 2) {
 	$prc_25_role = $_POST['prc_25_role'];
 	$prc_25_permission = $_POST['prc_25_permission'];
 	$prc_25_hiding = $_POST['prc_25_hiding'];
+	$adduser = $_POST['prc_25'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_25'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -998,6 +1022,7 @@ if(isset($_POST['prc_26'])  && strlen($_POST['prc_26']) > 2) {
 	$prc_26_role = $_POST['prc_26_role'];
 	$prc_26_permission = $_POST['prc_26_permission'];
 	$prc_26_hiding = $_POST['prc_26_hiding'];
+	$adduser = $_POST['prc_26'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_26'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -1036,6 +1061,7 @@ if(isset($_POST['prc_27'])  && strlen($_POST['prc_27']) > 2) {
 	$prc_27_role = $_POST['prc_27_role'];
 	$prc_27_permission = $_POST['prc_27_permission'];
 	$prc_27_hiding = $_POST['prc_27_hiding'];
+	$adduser = $_POST['prc_27'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_27'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -1074,6 +1100,7 @@ if(isset($_POST['prc_28'])  && strlen($_POST['prc_28']) > 2) {
 	$prc_28_role = $_POST['prc_28_role'];
 	$prc_28_permission = $_POST['prc_28_permission'];
 	$prc_28_hiding = $_POST['prc_28_hiding'];
+	$adduser = $_POST['prc_28'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_28'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -1112,6 +1139,7 @@ if(isset($_POST['prc_29'])  && strlen($_POST['prc_29']) > 2) {
 	$prc_29_role = $_POST['prc_29_role'];
 	$prc_29_permission = $_POST['prc_29_permission'];
 	$prc_29_hiding = $_POST['prc_29_hiding'];
+	$adduser = $_POST['prc_29'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_29'");
 	$username_role = mysqli_fetch_assoc($username_role_);
@@ -1150,6 +1178,7 @@ if(isset($_POST['prc_30'])  && strlen($_POST['prc_30']) > 2) {
 	$prc_30_role = $_POST['prc_30_role'];
 	$prc_30_permission = $_POST['prc_30_permission'];
 	$prc_30_hiding = $_POST['prc_30_hiding'];
+	$adduser = $_POST['prc_30'];
 
 	$username_role_ = mysqli_query($db, "SELECT `username` FROM `users` WHERE `username` LIKE '$prc_30'");
 	$username_role = mysqli_fetch_assoc($username_role_);
