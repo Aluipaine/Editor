@@ -66,7 +66,7 @@ function create__levy_excel(now) {
   if(levy_excel != null)
     levy_excel.innerHTML = old_levy_excel;
 
-  let items = canvas.querySelectorAll(".levy");
+  let  items = canvas.querySelectorAll(".levy");
   const tableExcel = document.querySelector('.excel table tbody');
   const equals = [];
   const levyexcel_array = [];
@@ -183,6 +183,7 @@ function create__levy_excel(now) {
     var h108 = document.createElement('td');
     h1.innerHTML = '';
     h2.innerHTML = '';
+    try {
     if (document.querySelector("#settings__sauma_pysty").checked) {
       h3.innerHTML = item.querySelector(".levy_h").innerText;
       h4.innerHTML = item.querySelector(".levy_w").innerText;
@@ -191,10 +192,13 @@ function create__levy_excel(now) {
       h3.innerHTML = item.querySelector(".levy_w").innerText;
       h4.innerHTML = item.querySelector(".levy_h").innerText;
     }
+  } catch(e) {
+    console.log("TRY-CATCH ERROR:", e);
+  }
     h5.innerHTML = '';
     h6.innerHTML = '';
     //t_a = tyostot.split("},{");
-    console.log("tyostot " + tyostot);
+    //console.log("tyostot " + tyostot);
     let v_r = [];
     let r_r = [];
     var aggregate_val = [];
@@ -529,6 +533,7 @@ function create__levy_excel(now) {
       'Yhdistä Xx-XX': h107.textContent,
       'Yhdistä Yx-YX': h108.textContent
     }, );
+    try {
     row.append(h1)
     row.append(h2)
     row.append(h3)
@@ -638,23 +643,35 @@ function create__levy_excel(now) {
     row.append(h107)
     row.append(h108)
     tableExcel.append(row);
+    } catch(e) {
+      console.log("TRY-CATCH ERROR:", e);
+    }
     indexes++;
   });
 
   if(now) {
-    export_levy_excel();
-  } else {
-    document.querySelector('.get_levy_btn').addEventListener('click', () => {
-      export_levy_excel();
-    });
-  }
 
-  function export_levy_excel() {
-    console.log("Starting EXEL generating...")
+    console.log("Starting EXEL generating... (NOW)");
+    console.log("Levy Excel Array:", levyexcel_array);
+
     filename = 'Tila ESIMERKKI - Levyt.xlsx';
     var ws = XLSX.utils.json_to_sheet(levyexcel_array);
     var wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Levyt");
     XLSX.writeFile(wb, filename);
+
+  } else {
+
+    console.log("Starting EXEL generating...");
+    console.log("Levy Excel Array:", levyexcel_array);
+
+    document.querySelector('.get_levy_btn').addEventListener('click', () => {
+      filename = 'Tila ESIMERKKI - Levyt.xlsx';
+      var ws = XLSX.utils.json_to_sheet(levyexcel_array);
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Levyt");
+      XLSX.writeFile(wb, filename);
+    });
+
   }
 }

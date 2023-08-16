@@ -32,7 +32,7 @@ include('./header.php');
                 </h1>
             </div>
             <div class="col-6 levytyosto__maincol">
-                <div class="visible levy_vis lt_levy_vis dir_y canvas canvas" style="height: 438px; width: 248px; background-color: rgb(241, 241, 241);" title="1240,2190,5,1255" data-levy="1">
+                <div class="visible levy_vis lt_levy_vis levy dir_y levy_canvas" style="height: 438px; width: 248px; background-color: rgb(241, 241, 241);" title="1240,2190,5,1255" data-levy="1">
                     <b>
                         <div class="levy_name">TYYPPI A</div>
                         <i class="levy_size">1240x2190mm</i>
@@ -229,20 +229,61 @@ include('./header.php');
 </section>
 
 <!-- Функционал из других скриптов (не используется) -->
-<!-- <script src="/js/jquery.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/jstemplates/4.js"></script>
-<script src="/js/jstemplates/5.js"></script>
-<script src="/js/jstemplates/6.js"></script>
-<script src="/js/jstemplates/8.js"></script>
-<script>find__that_levy(0);</script> -->
+<!-- <script src="/js/jquery.min.js"></script> -->
+<!-- <script src="/js/main.js"></script> -->
+<!-- <script src="/js/jstemplates/4.js"></script> -->
+<!-- <script src="/js/jstemplates/5.js"></script> -->
+<!-- <script src="/js/jstemplates/6.js"></script> -->
+<!-- <script src="/js/jstemplates/8.js"></script> -->
+<!-- <script>find__that_levy(0);</script> -->
 
 <!-- Новый функционал переписанный с каким-никаким рефакторингом -->
 <script src="/js/levynakyma.js"></script>
 
 <!-- Сторонние скрипты для экспорта в Excel -->
 <script src="/js/jstemplates/7.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script>
+<script>
+    function tallenna_kiinnikepaikat(levy) {
+        try {
+        console.log("tallenna_kiinnikepaikat(levy) fired");
+        kiinnikkeet = levy.querySelectorAll(".tyostot__tyosto");
+        l_meta = levy.querySelector(".l_meta");
+        l_meta.value = "";
+        l_meta_x = [];
+        l_meta_y = [];
+        kiinnike_inputy = [];
+        kiinnike_inputx = [];
+        for (var i = kiinnikkeet.length - 1; i >= 0; i--) {
+            if (kiinnikkeet[i]) {
+                if (kiinnikkeet[i].classList.contains("tyostot__tyosto_vaaka")) {
+                    kiinnike_inputy.push(kiinnikkeet[i]);
+                }
+                if (kiinnikkeet[i].classList.contains("tyostot__tyosto_pysty")) {
+                    kiinnike_inputx.push(kiinnikkeet[i]);
+                }
+            }
+        }
+        for (var y = kiinnike_inputy.length - 1; y >= 0; y--) {
+            k_input = kiinnike_inputy[y].querySelectorAll("input");
+            for (var k = k_input.length - 1; k >= 0; k--) {
+                l_meta_y.push(k_input[k].value);
+            }
+        }
+        for (var x = kiinnike_inputx.length - 1; x >= 0; x--) {
+            k_input = kiinnike_inputx[x].querySelectorAll("input");
+            for (var k = k_input.length - 1; k >= 0; k--) {
+                l_meta_x.push(k_input[k].value);
+            }
+        }
+        l_meta.value = ("{" + l_meta_x + "}," + "{" + l_meta_y + "}");
+        console.log("l_meta_x: " + l_meta_x);
+        console.log("l_meta_y: " + l_meta_y);
+    } catch(e) {
+        console.log("TRY-CATCH ERROR: " + e);
+    }
+    }
+</script>
 
 </body>
 

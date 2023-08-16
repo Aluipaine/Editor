@@ -4,7 +4,8 @@ let levy_sizes_w_input = document.querySelector(".drawarea_w");
 let levy_sizes_h_input = document.querySelector(".drawarea_h");
 let levy_count_input = document.querySelector(".drawarea_count");
 
-let canvas = document.querySelector(".canvas");
+let canvas = document.querySelector(".levytyosto__maincol");
+let levy_canvas = document.querySelector(".levy_canvas");
 let levy_tyostot_x = document.querySelector(".levy_tyostot_x");
 let levy_tyostot_y = document.querySelector(".levy_tyostot_y");
 let levy_name = document.querySelector(".levy_name");
@@ -47,7 +48,7 @@ levy_name_input.addEventListener("input", () => {
 levy_sizes_w_input.addEventListener("input", () => {
     let value = levy_sizes_w_input.value / 5;
 
-    canvas.style.width = value + "px";
+    levy_canvas.style.width = value + "px";
     levy_size.innerHTML =
         levy_sizes_w_input.value + "x" + levy_sizes_h_input.value + "mm";
 
@@ -57,7 +58,7 @@ levy_sizes_w_input.addEventListener("input", () => {
 levy_sizes_h_input.addEventListener("input", () => {
     let value = levy_sizes_h_input.value / 5;
 
-    canvas.style.height = value + "px";
+    levy_canvas.style.height = value + "px";
     levy_size.innerHTML =
         levy_sizes_w_input.value + "x" + levy_sizes_h_input.value + "mm";
 
@@ -69,7 +70,7 @@ levy_count_input.addEventListener("input", () => {
 });
 
 function levy_color_change(obj) {
-    canvas.style.backgroundColor =
+    levy_canvas.style.backgroundColor =
         obj.style.backgroundColor;
 }
 
@@ -220,7 +221,7 @@ document.querySelector(".submit_add_lv_modal").addEventListener("click", () => {
     let comment = document.querySelector("#lv_comment").value;
 
     if (name != "" && radius != 0 && from != 0 && distance != 0 && comment != "") {
-        canvas.innerHTML += `
+        levy_canvas.innerHTML += `
         <span onclick="this.classList.toggle('comment__visible')" style="bottom: 1px; left: 1px; margin-bottom: -11px; margin-left: -11px; height: ${radius_px}px; width: ${radius_px}px;" class="lapivienti lv lapivienti__customsize" id="${id}" data-no="1">
             ${radius}
             <div class="comment__container">
