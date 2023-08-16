@@ -102,7 +102,7 @@ include('./header.php');
                     </fieldset>
 
                     <h5>Excel</h5>
-                    <button class="greenbtn">Vie Excel-tiedostoon</button>
+                    <button class="greenbtn" onclick="create__levy_excel(true);">Vie Excel-tiedostoon</button>
                 </div>
             </div>
         </div>
@@ -228,6 +228,7 @@ include('./header.php');
         </div>
 </section>
 
+<!-- Функционал из других скриптов (не используется) -->
 <!-- <script src="/js/jquery.min.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/jstemplates/4.js"></script>
@@ -236,7 +237,12 @@ include('./header.php');
 <script src="/js/jstemplates/8.js"></script>
 <script>find__that_levy(0);</script> -->
 
+<!-- Новый функционал переписанный с каким-никаким рефакторингом -->
 <script src="/js/levynakyma.js"></script>
+
+<!-- Сторонние скрипты для экспорта в Excel -->
+<script src="/js/jstemplates/7.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script> 
 
 </body>
 

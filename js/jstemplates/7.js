@@ -1,7 +1,8 @@
+let old_levy_excel = "";
 if(document.querySelector(".levy_excel")) {
   old_levy_excel = document.querySelector(".levy_excel").innerHTML;
 }
-function create__levy_excel() {
+function create__levy_excel(now) {
   const saumas = document.querySelectorAll(".sauma");
   let horizontalBleam = 0;
   let verticalBleam = 0;
@@ -62,7 +63,9 @@ function create__levy_excel() {
     }
   }
   levy_excel = document.querySelector(".levy_excel");
-  levy_excel.innerHTML = old_levy_excel;
+  if(levy_excel != null)
+    levy_excel.innerHTML = old_levy_excel;
+
   let items = canvas.querySelectorAll(".levy");
   const tableExcel = document.querySelector('.excel table tbody');
   const equals = [];
@@ -638,13 +641,20 @@ function create__levy_excel() {
     indexes++;
   });
 
+  if(now) {
+    export_levy_excel();
+  } else {
+    document.querySelector('.get_levy_btn').addEventListener('click', () => {
+      export_levy_excel();
+    });
+  }
 
-  document.querySelector('.get_levy_btn').addEventListener('click', () => {
+  function export_levy_excel() {
     console.log("Starting EXEL generating...")
     filename = 'Tila ESIMERKKI - Levyt.xlsx';
     var ws = XLSX.utils.json_to_sheet(levyexcel_array);
     var wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Levyt");
     XLSX.writeFile(wb, filename);
-  });
+  }
 }

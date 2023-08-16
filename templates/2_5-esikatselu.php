@@ -38,7 +38,7 @@
     <section class="excel">
       <h3>Levyexcel</h3>
       
-      <div class="greenbtn" onclick="create__levy_excel();">Generoi Levyexcel</div>
+      <div class="greenbtn" onclick="create__levy_excel(false);">Generoi Levyexcel</div>
      <!-- Set for input default center coords  -->
       <table class="levy_excel">
         <tr>
