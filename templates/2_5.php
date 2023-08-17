@@ -263,10 +263,49 @@
             <div class="form-group">
               <h5>Väri:</h5>
               <fieldset class="form-subgroup">
-              <input type="radio" name="levyn_vari" id="levy_vari_0"><label for="levy_vari_0" style="background: rgba(241, 241, 241,1);" class="levy__label" onclick="levy__interaction(1,this);">Oletus</label>
-                <input type="radio" name="levyn_vari" id="levy_vari_1"><label for="levy_vari_1" style="background: rgba(107, 78, 56,1);" class="wt levy__label" onclick="levy__interaction(1,this);">Ahogany Red</label>
-                <input type="radio" name="levyn_vari" id="levy_vari_2"><label for="levy_vari_2" style="background: rgba(246, 91, 52, 1);" class="wt levy__label" onclick="levy__interaction(1,this);">Exterior Red</label>
-                <input type="radio" name="levyn_vari" id="levy_vari_3"><label for="levy_vari_3" style="background: rgba(173, 241, 38,1);" class="wt levy__label" onclick="levy__interaction(1,this);">Lime Green</label>
+                <input type="radio" name="levyn_vari" id="levy_vari_0"><label for="levy_vari_0" style="background: rgba(241, 241, 241,1);" class="levy__label" onclick="levy__interaction(1,this);">Oletus</label>
+                <?php
+                $s_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id` = '100' AND `meta_key` = 's_materials'");
+                $s_da = mysqli_fetch_all($s_data);
+                $s_data = $s_da[0][3];
+
+                $s_da_ = explode("],[", $s_data);
+                $_s = explode('}","{', $s_da_[0]);
+
+
+                // $s_ = str_replace("]" , "",$_s);
+                // $s = str_replace("[" , "",$s_);
+
+                // print_r($s);
+
+                // print_r($_s);
+                $vari_id = 1;
+                foreach ($_s as $sy) {
+
+                  // echo $sy;
+                  $sy_1 = str_replace("{", "", str_replace("}", "", $sy));
+                  $sy_2 = str_replace("[", "", str_replace("]", "", $sy_1));
+                  $sy_3 = str_replace('"', '', $sy_2);
+                  $sys = explode(",", $sy_3);
+
+                  // print_r($sys);
+                  //echo '<div class="material__customcol_item"><input type="checkbox" name="material_type" value="' . $sys[0] . '"><label style="color: white; background: ' . $sys[7] . ';">' . $sys[0] . '</label><input type="hidden" name="material_bg" value="' . $sys[7] . '"><input type="hidden" name="material_colour" value="' . $sys[7] . '"><input type="hidden" name="material_array" value="{' . $sys[0] . ',' . $sys[1] . ',' . $sys[2] . ',' . $sys[3] . ',' . $sys[4] . ',' . $sys[5] . ',' . $sys[6] . ',' . $sys[7] . '}"></div>';
+                  //echo '<input type="radio" id="levy_vari_' . $vari_id . '" name="levyn_vari" style="display: none;"><label for="levy_vari_' . $vari_id++ . '" style="background-color: ' . $sys[7] . ';" class="wt levy__label" onclick="/*levy__interaction(1,this);*/levy_color_change(this);" value="' . $sys[0] . '">' . $sys[0] . '</label>';
+                  echo '<input type="radio" name="levyn_vari" id="levy_vari_' . $vari_id . '"><label for="levy_vari_' . $vari_id . '" style="background: ' . $sys[7] . ';" class="wt levy__label" onclick="levy__interaction(1,this);">' . $sys[0] . '</label>';
+                  $vari_id++;
+                  // print_r($s);
+
+                  // $sys = explode(",",$s[0]);
+                  //    if(strlen($sy)>=3) {
+                  //       // echo '<div class="material__customcol_item"><input type="checkbox" name="system_type" value="Classic" checked><label style="background: #E2E2E2;">' . str_replace('"','', $sy) . '</label></div>';
+
+                  //       echo '<div class="material__customcol_item"><input type="checkbox" name="material_type" value="Exterior Green" id="exterior green"><label for="exterior green" style="color: rgb(255, 255, 255); background: rgb(110, 135, 85);">FO Malibu E. Green</label><input type="hidden" name="material_bg" value="rgb(255, 255, 255)"><input type="hidden" name="material_colour" value="rgb(110, 135, 85)"><input type="hidden" name="material_array" value="Exterior Green,Exterior Green,FO/B_s2_d0,1250,600,8,Standard,#6E8755"></div>';
+                  //    }
+              }
+
+
+
+              ?>
               </fieldset>
               <h5>Ruuvilinjat</h5>
               <div class="form-subgroup">

@@ -134,7 +134,6 @@ function s__newmaterial() {
     var new_materialthickness = document.querySelector("#new_materialthickness").value;
     var new_materialstructure = document.querySelector("#new_materialstructure").value;
 
-
     var material = document.createElement("div");
     var material__checkbox = document.createElement("input");
     var material__checkbox_label = document.createElement("label");

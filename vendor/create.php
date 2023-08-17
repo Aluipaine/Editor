@@ -1275,6 +1275,8 @@ $room_one_floor_desc = $_POST['room_one_floor_desc'] . '\r\n';
 $room_one_floor_h = $_POST['room_one_floor_h'];
 $room_one_floor_w = $_POST['room_one_floor_w'];
 
+$chosen_jarjestelma = $_POST['system_type'];
+
 $s_settings = "";
 $s_materials = "";
 
@@ -1286,9 +1288,10 @@ if (!$post) {
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_id', '$id')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_name', '$project_name')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_type', '$project_type')");
-$meta = mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$s_settings' WHERE `id`=$id AND `meta_key`='s_settings'");
-$meta = mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$s_materials' WHERE `id`=$id AND `meta_key`='s_materials'");
+// $meta = mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$s_settings' WHERE `id`=$id AND `meta_key`='s_settings'");
+// $meta = mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$s_materials' WHERE `id`=$id AND `meta_key`='s_materials'");
 
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'chosen_jarjestelma', '$chosen_jarjestelma')");
 
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 's_settings', '$s_settings')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 's_materials', '$s_materials')");

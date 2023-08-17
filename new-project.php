@@ -14,18 +14,18 @@ include('header.php');
     <section id="new_project">
          <div class="form-subgroup main">
             <label>Projektin nimi: </label>
-            <input type="text" name="project_name" class="form-control" value=" " required>   
+            <input type="text" name="project_name" class="form-control" value="" required>   
          </div>    
          <fieldset>
             <div class="form-group">
                <div class="form-subgroup">
                   <label>Pääurakoitsija: </label>
-                  <input type="text" name="prc_1" class="form-control" value=" " required>
+                  <input type="text" name="prc_1" class="form-control" value="" required>
                </div>
                <div class="form-subgroup"><label>Pääurakoitsija puh: </label>
-               <input type="text" name="prc_1_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_1_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Pääurakoitsija email: </label>
-               <input type="text" name="prc_1_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_1_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_1_role">Rooli: </label>
                   <select name="prc_1_role" id="prc_1_role">
@@ -53,11 +53,11 @@ include('header.php');
             </div>
             <div class="form-group">
                <div class="form-subgroup"><label>Asiakas: </label>
-               <input type="text" name="prc_2" class="form-control" value=" " required></div>
+               <input type="text" name="prc_2" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Asiakas puh: </label>
-               <input type="text" name="prc_2_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_2_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Asiakas email: </label>
-               <input type="text" name="prc_2_email" class="form-control" value=" " required> </div>
+               <input type="text" name="prc_2_email" class="form-control" value="" required> </div>
                <div class="form-subgroup">
                   <label for="prc_2_role">Rooli: </label>
                   <select name="prc_2_role" id="prc_2_role">
@@ -83,11 +83,11 @@ include('header.php');
             </div>
             <div class="form-group">
                <div class="form-subgroup"><label>Myyjä: </label>
-               <input type="text" name="prc_3" class="form-control" value=" " required></div>
+               <input type="text" name="prc_3" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Myyjä puh: </label>
-               <input type="text" name="prc_3_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_3_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Myyjä email: </label>
-               <input type="text" name="prc_3_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_3_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_3_role">Rooli: </label>
                   <select name="role" id="prc_3_role">
@@ -115,11 +115,11 @@ include('header.php');
             </div>
             <div class="form-group">
                <div class="form-subgroup"><label>Asentaja: </label>
-               <input type="text" name="prc_4" class="form-control" value=" " required></div>
+               <input type="text" name="prc_4" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Asentaja puh: </label>
-               <input type="text" name="prc_4_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_4_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"> <label>Asentaja email: </label>
-               <input type="text" name="prc_4_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_4_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_4_role">Rooli: </label>
                   <select name="role" id="prc_4_role">
@@ -148,11 +148,11 @@ include('header.php');
 
             <div class="form-group">
                <div class="form-subgroup"><label>Mittamies: </label>
-               <input type="text" name="prc_5" class="form-control" value=" " required></div>
+               <input type="text" name="prc_5" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Mittamies puh: </label>
-               <input type="text" name="prc_5_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_5_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Mittamies email: </label>
-               <input type="text" name="prc_5_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_5_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_5_role">Rooli: </label>
                   <select name="role" id="prc_5_role">
@@ -180,11 +180,11 @@ include('header.php');
             </div>
             <div class="form-group">
                <div class="form-subgroup"><label>Sähköurakoitsija: </label>
-               <input type="text" name="prc_6" class="form-control" value=" " required></div>
+               <input type="text" name="prc_6" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Sähköurakoitsija puh: </label>
-               <input type="text" name="prc_6_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_6_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Sähköurakoitsija email: </label>
-               <input type="text" name="prc_6_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_6_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_6_role">Rooli: </label>
                   <select name="role" id="prc_6_role">
@@ -212,11 +212,11 @@ include('header.php');
             </div>
             <div class="form-group">
                <div class="form-subgroup"><label>LVI-urakoitsija: </label>
-               <input type="text" name="prc_7" class="form-control" value=" " required></div>
+               <input type="text" name="prc_7" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>LVI-urakoitsija puh: </label>
-               <input type="text" name="prc_7_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_7_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>LVI-urakoitsija email: </label>
-               <input type="text" name="prc_7_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_7_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_7_role">Rooli: </label>
                   <select name="role" id="prc_7_role">
@@ -244,11 +244,11 @@ include('header.php');
             </div>
             <div class="form-group">
                <div class="form-subgroup"><label>Lasitusfirma: </label>
-               <input type="text" name="prc_8" class="form-control" value=" " required></div>
+               <input type="text" name="prc_8" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Lasitusfirma puh: </label>
-               <input type="text" name="prc_8_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_8_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Lasitusfirma email: </label>
-               <input type="text" name="prc_8_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_8_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_8_role">Rooli: </label>
                   <select name="role" id="prc_8_role">
@@ -275,11 +275,11 @@ include('header.php');
 
             <div class="form-group">
                <div class="form-subgroup"><label>Palokatko: </label>
-               <input type="text" name="prc_9" class="form-control" value=" " required></div>
+               <input type="text" name="prc_9" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Palokatko puh: </label>
-               <input type="text" name="prc_9_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_9_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Palokatko email: </label>
-               <input type="text" name="prc_9_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_9_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_9_role">Rooli: </label>
                   <select name="role" id="prc_9_role">
@@ -306,11 +306,11 @@ include('header.php');
 
             <div class="form-group">
                <div class="form-subgroup"><label>Arkkitehti: </label>
-               <input type="text" name="prc_10" class="form-control" value=" " required></div>
+               <input type="text" name="prc_10" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Arkkitehti puh: </label>
-               <input type="text" name="prc_10_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_10_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Arkkitehti email: </label>
-               <input type="text" name="prc_10_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_10_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_10_role">Rooli: </label>
                   <select name="role" id="prc_10_role">
@@ -337,11 +337,11 @@ include('header.php');
 
             <div class="form-group">
                <div class="form-subgroup"><label>Rakennesuunnittelija: </label>
-               <input type="text" name="prc_11" class="form-control" value=" " required></div>
+               <input type="text" name="prc_11" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Rakennesuunnittelija puh: </label>
-               <input type="text" name="prc_11_puh" class="form-control" value=" " required></div>
+               <input type="text" name="prc_11_puh" class="form-control" value="" required></div>
                <div class="form-subgroup"><label>Rakennesuunnittelija email: </label>
-               <input type="text" name="prc_11_email" class="form-control" value=" " required></div>
+               <input type="text" name="prc_11_email" class="form-control" value="" required></div>
                <div class="form-subgroup">
                   <label for="prc_11_role">Rooli: </label>
                   <select name="role" id="prc_11_role">
@@ -473,11 +473,25 @@ include('header.php');
 
                   foreach ($sys as $sy) {
                      if(strlen($sy)>=3) {
-                        echo '<div class="material__customcol_item"><input type="checkbox" name="system_type" value="Classic" checked><label style="background: #E2E2E2;">' . str_replace('"','', $sy) . '</label></div>';
+                        echo '<div class="material__customcol_item"><input type="checkbox" name="system_type" class="valitut_järjestelmät" value="' . str_replace('"','', $sy) . '" checked><label style="background: #E2E2E2;">' . str_replace('"','', $sy) . '</label></div>';
                      }
                   }
 
                 ?>
+
+               <script>
+                  let valitut_järjestelmät = document.querySelectorAll('.valitut_järjestelmät');
+
+                  valitut_järjestelmät.forEach(radio => {
+                  radio.addEventListener('click', function() {
+                     valitut_järjestelmät.forEach(marko => {
+                        if (radio != marko) {
+                           marko.checked = false;
+                        }
+                     });
+                  });
+                  });
+               </script>
                <div class="material__customcol_item">
 
                   
@@ -1242,7 +1256,7 @@ include('header.php');
    function pohjakierros_function() {
       
    }
-</script>
+</>
 
 
 <script>
@@ -1549,4 +1563,4 @@ include('header.php');
                   </div>
                 </section>
       </div>
-      <input type="hidden" name="project_type" id="project_type" value=" " required> -->
+      <input type="hidden" name="project_type" id="project_type" value="" required> -->
