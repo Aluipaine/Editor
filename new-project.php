@@ -471,10 +471,12 @@ include('header.php');
 
                   $sys = explode(",",$s[0]);
 
+                  $unique_id = 0;
                   foreach ($sys as $sy) {
                      if(strlen($sy)>=3) {
-                        echo '<div class="material__customcol_item"><input type="checkbox" name="system_type" class="valitut_järjestelmät" value="' . str_replace('"','', $sy) . '" checked><label style="background: #E2E2E2;">' . str_replace('"','', $sy) . '</label></div>';
+                        echo '<div class="material__customcol_item"><input id="selected-systems-' . $unique_id . '" type="checkbox" name="system_type" class="valitut_järjestelmät" value="' . str_replace('"','', $sy) . '" checked><label for="selected-systems-' . $unique_id . '" style="background: #E2E2E2;">' . str_replace('"','', $sy) . '</label></div>';
                      }
+                     $unique_id++;
                   }
 
                 ?>
@@ -517,6 +519,7 @@ include('header.php');
           // print_r($s);
 
           // print_r($_s);
+          $unique_id = 0;
           foreach ($_s as $sy) {
 
             // echo $sy;
@@ -526,7 +529,7 @@ include('header.php');
             $sys = explode(",", $sy_3);
 
             // print_r($sys);
-           echo '<div class="material__customcol_item"><input type="checkbox" name="material_type" value="'.$sys[0].'"><label style="color: white; background: '.$sys[7].';">'.$sys[0].'</label><input type="hidden" name="material_bg" value="'.$sys[7].'"><input type="hidden" name="material_colour" value="'.$sys[7].'"><input type="hidden" name="material_array" value="'.$sys[0].','.$sys[1].','.$sys[2].','.$sys[3].','.$sys[4].','.$sys[5].','.$sys[6].','.$sys[7].'"></div>';
+           echo '<div class="material__customcol_item"><input id="custom-color-' . $unique_id . '" type="checkbox" name="material_type" value="'.$sys[0].'"><label for="custom-color-' . $unique_id . '" style="color: white; background: '.$sys[7].';">'.$sys[0].'</label><input type="hidden" name="material_bg" value="'.$sys[7].'"><input type="hidden" name="material_colour" value="'.$sys[7].'"><input type="hidden" name="material_array" value="'.$sys[0].','.$sys[1].','.$sys[2].','.$sys[3].','.$sys[4].','.$sys[5].','.$sys[6].','.$sys[7].'"></div>';
             // print_r($s);
 
             // $sys = explode(",",$s[0]);
@@ -535,6 +538,8 @@ include('header.php');
 
             //       echo '<div class="material__customcol_item"><input type="checkbox" name="material_type" value="Exterior Green" id="exterior green"><label for="exterior green" style="color: rgb(255, 255, 255); background: rgb(110, 135, 85);">FO Malibu E. Green</label><input type="hidden" name="material_bg" value="rgb(255, 255, 255)"><input type="hidden" name="material_colour" value="rgb(110, 135, 85)"><input type="hidden" name="material_array" value="Exterior Green,Exterior Green,FO/B_s2_d0,1250,600,8,Standard,#6E8755"></div>';
             //    }
+
+            $unique_id++;
           }
           
           
@@ -1206,16 +1211,6 @@ include('header.php');
       i2.setAttribute("name",plusone_rappu_O.toLowerCase()+"_nextnum");
       i2.value = "1";
 
-
-
-
-     
-
-      
-
-      
-
-
       const grandparent = document.createElement("div");
       grandparent.classList = ("per50 floatleft coderdy rappu-2");
       grandparent.setAttribute('id', plusone_rappu_O);
@@ -1256,7 +1251,7 @@ include('header.php');
    function pohjakierros_function() {
       
    }
-</>
+</script>
 
 
 <script>
