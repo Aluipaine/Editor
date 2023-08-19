@@ -3,6 +3,8 @@
  * Each input field has the same name and class ('marko__holeparameter' and 'lineinput' respectively)
  */
 
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 function s_synchronize() {
   if (document.querySelectorAll('.material__customcol_item')[0].length < 3) {
     document.querySelectorAll('.material__customcol_item')[0].remove();
@@ -29,7 +31,6 @@ function s_synchronize() {
   document.getElementsByName('_s_aukko_6').forEach(element => s_aukko_6.push(element.value));
   document.getElementsByName('_s_aukko_7').forEach(element => s_aukko_7.push(element.value));
   document.getElementsByName('_s_aukko_8').forEach(element => s_aukko_8.push(element.value));
-
 
   let s_reika_1 = [];
   let s_reika_2 = [];
@@ -63,6 +64,18 @@ function s_synchronize() {
   document.getElementsByName('_s_reika_14').forEach(element => s_reika_14.push(element.value));
   document.getElementsByName('_s_reika_15').forEach(element => s_reika_15.push(element.value));
 
+  let sauma__suunta = "";
+  let sauma__xtype = "";
+  let sauma__ytype = "";
+  let sauma__saumoitus_x = "";
+  let sauma__saumoitus_y = "";
+
+  document.getElementsByName('sauma__suunta').forEach(element => element.checked ? sauma__suunta = element.value : "");
+  document.getElementsByName('sauma__xtype').forEach(element => element.checked ? sauma__xtype = element.value : "");
+  document.getElementsByName('sauma__ytype').forEach(element => element.checked ? sauma__ytype = element.value : "");
+  document.getElementsByName('sauma__saumoitus_x').forEach(element => element.checked ? sauma__saumoitus_x = element.value : "");
+  document.getElementsByName('sauma__saumoitus_y').forEach(element => element.checked ? sauma__saumoitus_y = element.value : "");
+
   let data = [];
   let materials = [];
 
@@ -93,12 +106,46 @@ function s_synchronize() {
   data.push(s_reika_14);
   data.push(s_reika_15);
 
+  data.push(sauma__suunta);
+  data.push(sauma__xtype);
+  data.push(sauma__ytype);
+  data.push(sauma__saumoitus_x);
+  data.push(sauma__saumoitus_y);
+
   
   document.querySelector("#s_settings").value = JSON.stringify(data);
 
   document.getElementsByName('material_array').forEach(element => materials.push(element.value));
 
   document.querySelector("#s_materials").value = JSON.stringify(materials);
+
+  // Aukko asetukset
+
+  let aukko_mallit = [];
+
+  let aukko_mallityypit = [];
+
+  let aukko_template = "";
+  
+  for(let i = 0; i < 26; i++) {
+    let aukko_mallit_arr = [];
+    
+    document.getElementsByName('_s_aukko_' + letters[i]).forEach((element) => {
+      aukko_mallit_arr.push(element.value);
+    });
+
+    aukko_mallit.push(aukko_mallit_arr);
+  }
+  
+  document.getElementsByName("template-button").forEach(element => aukko_mallityypit.push(element.value));
+
+  document.getElementsByName("template-button").forEach(element => element.checked ? aukko_template = element.value : "");
+
+  document.querySelector("#aukko_mallit").value = JSON.stringify(aukko_mallit);
+
+  document.querySelector("#aukko_mallityypit").value = JSON.stringify(aukko_mallityypit);
+
+  document.querySelector("#aukko_template").value = aukko_template;
 
 }
 function s__createnewrow_holes() {
@@ -109,8 +156,29 @@ function s__createnewrow_holes() {
   document.querySelector("#hole_set > table").append(newrow);
 }
 
+function s_change_malli(letter) {
+  document.querySelectorAll(".aukko-table").forEach((table) =>{
+    if(table.id == "aukko-table-" + letter) {
+      table.style.display = "flex";
+    } else {
+      table.style.display = "none";
+    }
+  });
+}
+
 function s_newmalli() {
-  console.log("malli");
+  let buttons = document.getElementsByName("template-button").length;
+  let letter = letters[buttons];
+  if(letter != undefined) {
+    document.querySelector("#hole_settings_objects").innerHTML += `
+    <input type="radio" name="template-button" id="template-button-${letter}">
+    <label onclick="s_change_malli('${letter}');" style="padding: 10px 15px;outline: 1px solid black;border-radius: 5px;margin: 0 5px;cursor: pointer;" for="template-button-${letter}">${letter}</label>`;
+    
+    document.querySelector(`#template-button-${letter}`).click();
+    s_change_malli(letter);
+  } else {
+    alert("Et voi luoda enempää kuin 26 mallia!")
+  }
 }
 
 function s__createnewrow_morehole() {

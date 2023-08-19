@@ -2160,7 +2160,7 @@ tr.bottom-border {
 .levy_types {
   position: absolute;
   left: -10px;
-  top: -20px;
+  top: -30px;
 
   display: flex;
   flex-direction: row;

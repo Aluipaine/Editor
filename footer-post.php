@@ -4,18 +4,18 @@ $settings_fetched = mysqli_query($db, "SELECT `meta_value` FROM `projectmeta` WH
 $settings_aukot = mysqli_fetch_all($settings_fetched);
 
 
-$settings_array = explode(",", $settings_aukot[0][0]); 
+$settings_array = explode(",", $settings_aukot[0][0]);
 ?>
 
-<input type="hidden" value="<?php echo implode(" " , $settings_aukot[0]); ?>" name="aukko_settings" id="aukko_settings" class="aukko_settings">
-  <div class="recl-container del_from_comments" id="reclamation__popup">
-    <div class="modal-background">
+<input type="hidden" value="<?php echo implode(" ", $settings_aukot[0]); ?>" name="aukko_settings" id="aukko_settings" class="aukko_settings">
+<div class="recl-container del_from_comments" id="reclamation__popup">
+   <div class="modal-background">
       <div class="modal">
-        <section>
-         <h2>Reklamaatiot ja huomiot</h2>
-        </section>
-        <section>
-           <h4>Huomiot</h4>
+         <section>
+            <h2>Reklamaatiot ja huomiot</h2>
+         </section>
+         <section>
+            <h4>Huomiot</h4>
             <fieldset>
                <input id="m__a_sahko" name="mitta__huomiot" type="checkbox" value="Sähkö">
                <label for="m__a_sahko">Sähkö</label>
@@ -24,42 +24,43 @@ $settings_array = explode(",", $settings_aukot[0][0]);
                <input id="m__a_tornado" name="mitta__huomiot" type="checkbox" value="Tornado">
                <label for="m__a_tornado">Tornado</label>
             </fieldset>
-        </section>
-        <section class="comment__section">
-           <h4>Lähetä kommentti</h4>
-           <textarea name="mittapiste_comment" id="mittapiste_comment" cols="30" rows="10" style="resize: none;"></textarea>
-           <div class="row">
-              <div class="col-6">
-                 <h6>Keneltä</h6>
-                 <input name="mittapiste_comment_from" id="mittapiste_comment_from" type="text" value="<?php echo $_GET['user']; ?>">
-              </div>
-              <div class="col-6">
-                 <h6>Kenelle</h6>
-                 <input name="mittapiste_comment_to" id="mittapiste_comment_to" type="text">
-              </div>
-           </div>
-        </section>
-       <!--  <section class="comment__section">
+         </section>
+         <section class="comment__section">
+            <h4>Lähetä kommentti</h4>
+            <textarea name="mittapiste_comment" id="mittapiste_comment" cols="30" rows="10" style="resize: none;"></textarea>
+            <div class="row">
+               <div class="col-6">
+                  <h6>Keneltä</h6>
+                  <input name="mittapiste_comment_from" id="mittapiste_comment_from" type="text" value="<?php echo $_GET['user']; ?>">
+               </div>
+               <div class="col-6">
+                  <h6>Kenelle</h6>
+                  <input name="mittapiste_comment_to" id="mittapiste_comment_to" type="text">
+               </div>
+            </div>
+         </section>
+         <!--  <section class="comment__section">
            <h4>Reklamoitavaa:</h4>
            <textarea name="mittapiste_comment" id="mittapiste_comment" cols="30" rows="10" style="resize: none;"></textarea>
         </section> -->
-        <div class="form-group"><input type="checkbox" id="comment__importance"><label for="comment__importance">Onko kriittinen?</label></div>
-        <div class="modal_close_btn drawarea__controls_btn" id="" onclick="addproblemstatus(this);">Valmis</div>
+         <div class="form-group"><input type="checkbox" id="comment__importance"><label for="comment__importance">Onko kriittinen?</label></div>
+         <div class="modal_close_btn drawarea__controls_btn" id="" onclick="addproblemstatus(this);">Valmis</div>
       </div>
-    </div>
-  </div>
-  <?php 
-      if(isset($_GET["role"]) && $_GET["role"] == 'mittaus'){
-      }
-      else {
-         echo '<script>document.querySelector(".del_from_comments").remove();</script>';
-      }
-  ?>
-  
-   <div class="aukko_container">
-      <div class="modal-background">
+   </div>
+</div>
+<?php
+if (isset($_GET["role"]) && $_GET["role"] == 'mittaus') {
+} else {
+   echo '<script>document.querySelector(".del_from_comments").remove();</script>';
+}
+?>
+
+<div class="aukko_container">
+   <div class="modal-background">
       <div class="modal">
-         <div class="modal_close_btn" onclick="open_aukko_settings(false)"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
+         <div class="modal_close_btn" onclick="open_aukko_settings(false)"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path>
+            </svg></div>
          <div class="row" style="opacity: 0.1;display: none;">
             <div class="greenbtn">Listan värit</div>
             <div class="greenbtn">Rangan laadut</div>
@@ -71,7 +72,43 @@ $settings_array = explode(",", $settings_aukot[0][0]);
             <!-- ranka+levyt+epdm -->
          </div>
          <h2>Aukko-asetukset</h2>
-         <table class="myinfo group-0">
+         <?php
+         // It's some modified version of the code from welcome-marko.php, but if u need u can just copy it from welcome-marko.php, if you modify it. It will works anyway.
+         // P.S. I'm not responsible for any damage. This action can make new vulnerabilities in this full of vulnerabilities project. Thanks to previous developer for this!
+         $am_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id` = '100' AND `meta_key` = 'aukko_mallit'");
+         $am_template = mysqli_query($db, "SELECT `meta_value` FROM `projectmeta` WHERE `id` = '100' AND `meta_key` = 'aukko_template'")->fetch_assoc()["meta_value"];
+         $am_da = mysqli_fetch_all($am_data);
+
+         $_am = json_decode($am_da[0][3]);
+         $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+         $letter = 0;
+         foreach ($_am as $am_1) {
+            if ($letters[$letter] == $am_template) {
+               echo '<table class="table aukko-table" id="aukko-table-' . $letters[$letter] . '"><td>Aukkojen tyypit</td><td>Nimi</td><td>Ranka Vasenreuna aukko +/-</td><td>Ranka Oikeareuna aukko +/-</td> <td>Ranka Alareuna aukko +/-</td> <td>Ranka Yläreuna aukko +/-</td> <td>Vasenreuna lista +/-</td> <td>Oikeareuna lista +/-</td><td>Alareuna lista +/-</td> <td>Yläreuna lista +/-</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td>';
+
+               echo "<tr>";
+               $count = 0;
+               foreach ($am_1 as $am_2) {
+
+                  $count++;
+
+                  echo "<td>" . "<input type='text' name='_s_aukko_" . $letters[$letter] . "' value='" . $am_2 . "' class='lineinput'>" . "</td>";
+                  if ($count == 14) {
+                     echo "</tr>";
+                     echo "<tr>";
+                     $count = 0;
+                  }
+               }
+               echo "</tr>";
+               echo '</table>';
+            }
+
+            $letter++;
+         }
+
+         ?>
+
+         <!-- <table class="myinfo group-0">
             <tr>
                <td>Aukon tyyppi</td>
                <td>Vasen max</td>
@@ -111,14 +148,14 @@ $settings_array = explode(",", $settings_aukot[0][0]);
 
                <td><input type="text" name="aukko_setting" value="Ikkuna" class="lineinput"></td>
                
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[0]) > 2 ? $settings_array[0] : '+25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[0]) > 2 ? $settings_array[0] : '+25'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[1]) > 2 ? $settings_array[1] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[2]) > 2 ? $settings_array[2] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[3]) > 2 ? $settings_array[3] : '0');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[3]) > 2 ? $settings_array[3] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[4]) > 2 ? $settings_array[4] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[5]) > 2 ? $settings_array[5] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[6]) > 2 ? $settings_array[6] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[7]) > 2 ? $settings_array[7] : '-25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[5]) > 2 ? $settings_array[5] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[6]) > 2 ? $settings_array[6] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[7]) > 2 ? $settings_array[7] : '-25'); ?>" class="aukko__toindex lineinput"></td>
 
 
                <td style="opacity: 0.1;display: none;"><input type="text" name="aukko_setting" value="Ikkunalista" class="lineinput"></td>
@@ -142,14 +179,14 @@ $settings_array = explode(",", $settings_aukot[0][0]);
             <tr class="ovi_info">
                <td><input type="text" name="aukko_setting" value="Ovi" class="lineinput"></td>
 
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[8]) > 2 ? $settings_array[8] : '+25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[8]) > 2 ? $settings_array[8] : '+25'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[9]) > 2 ? $settings_array[9] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[10]) > 2 ? $settings_array[10] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[11]) > 2 ? $settings_array[11] : '0');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[11]) > 2 ? $settings_array[11] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[12]) > 2 ? $settings_array[12] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[13]) > 2 ? $settings_array[13] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[14]) > 2 ? $settings_array[14] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[15]) > 2 ? $settings_array[15] : '-25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[13]) > 2 ? $settings_array[13] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[14]) > 2 ? $settings_array[14] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[15]) > 2 ? $settings_array[15] : '-25'); ?>" class="aukko__toindex lineinput"></td>
 
 
                <td style="opacity: 0.1;display: none;"><input type="text" name="aukko_setting" value="ovilista" class="lineinput"></td>
@@ -174,14 +211,14 @@ $settings_array = explode(",", $settings_aukot[0][0]);
             <tr class="ilmastointi_info">
                <td><input type="text" name="aukko_setting" value="Ilmastointi" class="lineinput"></td>
 
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[16]) > 2 ? $settings_array[16] : '+25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[16]) > 2 ? $settings_array[16] : '+25'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[17]) > 2 ? $settings_array[17] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[18]) > 2 ? $settings_array[18] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[19]) > 2 ? $settings_array[19] : '0');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[19]) > 2 ? $settings_array[19] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[20]) > 2 ? $settings_array[20] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[21]) > 2 ? $settings_array[21] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[22]) > 2 ? $settings_array[22] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[23]) > 2 ? $settings_array[23] : '-25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[21]) > 2 ? $settings_array[21] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[22]) > 2 ? $settings_array[22] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[23]) > 2 ? $settings_array[23] : '-25'); ?>" class="aukko__toindex lineinput"></td>
 
 
                <td style="opacity: 0.1;display: none;"><input type="text" name="aukko_setting" value="ilmastointilista" class="lineinput"></td>
@@ -206,14 +243,14 @@ $settings_array = explode(",", $settings_aukot[0][0]);
             <tr class="pilari_info">
                <td><input type="text" name="aukko_setting" value="Pilari" class="lineinput"></td>
 
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[24]) > 2 ? $settings_array[24] : '+25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[24]) > 2 ? $settings_array[24] : '+25'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[25]) > 2 ? $settings_array[25] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[26]) > 2 ? $settings_array[26] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[27]) > 2 ? $settings_array[27] : '0');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[27]) > 2 ? $settings_array[27] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[28]) > 2 ? $settings_array[28] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[29]) > 2 ? $settings_array[29] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[30]) > 2 ? $settings_array[30] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[31]) > 2 ? $settings_array[31] : '-25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[29]) > 2 ? $settings_array[29] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[30]) > 2 ? $settings_array[30] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[31]) > 2 ? $settings_array[31] : '-25'); ?>" class="aukko__toindex lineinput"></td>
 
 
                <td style="opacity: 0.1;display: none;"><input type="text" name="aukko_setting" value="pilarilista" class="lineinput"></td>
@@ -237,14 +274,14 @@ $settings_array = explode(",", $settings_aukot[0][0]);
             <tr class="alue_erikoisranka_info bottom-border palkki_info">
                <td><input type="text" name="aukko_setting" value="Palkki" class="lineinput"></td>
 
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[32]) > 2 ? $settings_array[32] : '+25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[32]) > 2 ? $settings_array[32] : '+25'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[33]) > 2 ? $settings_array[33] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[34]) > 2 ? $settings_array[34] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[35]) > 2 ? $settings_array[35] : '0');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[35]) > 2 ? $settings_array[35] : '0'); ?>" class="aukko__toindex lineinput"></td>
                <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[36]) > 2 ? $settings_array[36] : '+25'); ?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[37]) > 2 ? $settings_array[37] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[38]) > 2 ? $settings_array[38] : '0');?>" class="aukko__toindex lineinput"></td>
-               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[39]) > 2 ? $settings_array[39] : '-25');?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[37]) > 2 ? $settings_array[37] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[38]) > 2 ? $settings_array[38] : '0'); ?>" class="aukko__toindex lineinput"></td>
+               <td><input type="text" name="aukko_setting" value="<?php echo (strlen($settings_array[39]) > 2 ? $settings_array[39] : '-25'); ?>" class="aukko__toindex lineinput"></td>
 
 
                <td style="opacity: 0.1;display: none;"><input type="text" name="aukko_setting" value="palkkilista" class="lineinput"></td>
@@ -265,13 +302,13 @@ $settings_array = explode(",", $settings_aukot[0][0]);
                <td style="opacity: 0.1;display: none;"><input type="text" name="aukko_setting" value="-" class="lineinput"></td>
                
             </tr>
-         </table>
+         </table> -->
 
-        <div class="modal_close_btn drawarea__controls_btn" onclick="open_aukko_settings(false);submitprogress('','save','','','','aukkotallennus')">Tallenna</div>
-      </div>
+         <div class="modal_close_btn drawarea__controls_btn" onclick="open_aukko_settings(false);submitprogress('','save','','','','aukkotallennus')">Tallenna</div>
       </div>
    </div>
-   <!-- <div class="aukko_container">
+</div>
+<!-- <div class="aukko_container">
       <div class="modal-background">
       <div class="modal">
          <div class="modal_close_btn" onclick="open_aukko_settings(false)"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
@@ -485,11 +522,11 @@ $settings_array = explode(",", $settings_aukot[0][0]);
       </div>
       </div>
    </div> -->
-   
+
 
 <!-- canvas -->
 <script src='/js/p5.min.js'></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script>
 
 
 
@@ -552,10 +589,9 @@ $settings_array = explode(",", $settings_aukot[0][0]);
 <!-- JS FUNCTIONS Walls.  -->
 <script src="/js/jstemplates/walls.js"></script>
 
-<?php 
-if(isset($_GET["role"]) && $_GET["role"] == 'mittaus') {
-}
-else {
+<?php
+if (isset($_GET["role"]) && $_GET["role"] == 'mittaus') {
+} else {
    echo '<script src="/js/jstemplates/commenting__file.js"></script>';
 }
 
@@ -564,47 +600,46 @@ else {
 
 <!-- Technical piece of code for Development -->
 <script>
+   // $('#step_drawscreen').val('drawscreen_section_four');
 
-// $('#step_drawscreen').val('drawscreen_section_four');
+   // $("#project_start").hide();
+   // refresh__drawcontrols();updatearea();
 
-// $("#project_start").hide();
-// refresh__drawcontrols();updatearea();
+   // document.querySelector("#drawarea_h").value = "3200";
+   // document.querySelector("#drawarea_w").value = "6000";
 
-// document.querySelector("#drawarea_h").value = "3200";
-// document.querySelector("#drawarea_w").value = "6000";
-
-// setTimeout(changesize(),100);
-
-
-// setTimeout(document.querySelector("body > section.row.drawarea__section > div.drawarea__section_container > div.drawarea__controls.drawarea__controls_five > div:nth-child(3)").click(),100);
+   // setTimeout(changesize(),100);
 
 
-
-// setTimeout(drawarea.querySelector("#drawscreen_section_tyostot > div > div:nth-child(2) > section:nth-child(20) > section > section:nth-child(4) > fieldset > div > div:nth-child(1) > label:nth-child(6)").click(),500);
-// setTimeout( drawarea.querySelector("#drawscreen_section_tyostot > div > div:nth-child(2) > section:nth-child(20) > section > section:nth-child(4) > fieldset > div > div:nth-child(2) > label:nth-child(6)").click(),500);
-// setTimeout(() => {
-//   document.querySelector("#kiinniketys__pkiinnike_three").click();
-// }, "1000");
-
-// setTimeout(() => {
-//   document.querySelector("#kiinniketys__vkiinnike_three").click();
-// }, "1000");
-
-// function jumptothelast() {
-//      rangoita();$('#step_drawscreen').val('drawscreen_section_seven');
-
-//   }
-
-// setTimeout(() => {
-//   drawarea.querySelector("#drawscreen_section_tyostot > div > div:nth-child(2) > section:nth-child(20) > section > section:nth-child(5) > div").click();
-// }, "1000");
-
-// setTimeout(() => {
-//   refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_esikatselu');
-
-//   // jumptothelast();
-// }, 1000);
+   // setTimeout(document.querySelector("body > section.row.drawarea__section > div.drawarea__section_container > div.drawarea__controls.drawarea__controls_five > div:nth-child(3)").click(),100);
 
 
-// document.querySelector("#copiedcanvases")
+
+   // setTimeout(drawarea.querySelector("#drawscreen_section_tyostot > div > div:nth-child(2) > section:nth-child(20) > section > section:nth-child(4) > fieldset > div > div:nth-child(1) > label:nth-child(6)").click(),500);
+   // setTimeout( drawarea.querySelector("#drawscreen_section_tyostot > div > div:nth-child(2) > section:nth-child(20) > section > section:nth-child(4) > fieldset > div > div:nth-child(2) > label:nth-child(6)").click(),500);
+   // setTimeout(() => {
+   //   document.querySelector("#kiinniketys__pkiinnike_three").click();
+   // }, "1000");
+
+   // setTimeout(() => {
+   //   document.querySelector("#kiinniketys__vkiinnike_three").click();
+   // }, "1000");
+
+   // function jumptothelast() {
+   //      rangoita();$('#step_drawscreen').val('drawscreen_section_seven');
+
+   //   }
+
+   // setTimeout(() => {
+   //   drawarea.querySelector("#drawscreen_section_tyostot > div > div:nth-child(2) > section:nth-child(20) > section > section:nth-child(5) > div").click();
+   // }, "1000");
+
+   // setTimeout(() => {
+   //   refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_esikatselu');
+
+   //   // jumptothelast();
+   // }, 1000);
+
+
+   // document.querySelector("#copiedcanvases")
 </script>

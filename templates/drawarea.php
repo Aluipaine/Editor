@@ -36,18 +36,35 @@
             <div class="drawarea__top_item drawarea__top_itemtwo drawarea__top_pilari" onclick="settings__aukko();document.querySelector('#type__collar').checked = true;change__aukko_sizecord();">Pilari</div>
             <div class="drawarea__top_item drawarea__top_itemtwo drawarea__top_ikkuna" onclick="settings__aukko();document.querySelector('#type__ventilation').checked = true;change__aukko_sizecord();">Ilmastointi</div>
 
-            <div class="drawarea__top_item drawarea__top_circle sahkoputki" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">27</div>
-             <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">40</div>
+            <!-- <div class="drawarea__top_item drawarea__top_circle sahkoputki" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">27</div> -->
+             <!-- <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">40</div> -->
 
-             <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">60</div>
-             <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">85</div>
-             <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">125</div>
+             <!-- <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">60</div> -->
+             <!-- <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">85</div> -->
+             <!-- <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML;">125</div> -->
 
-             <div class="drawarea__top_item drawarea__top_circle sahkoputki" style="background: #eee;font-size: 10px;align-items: center;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').innerHTML = this.innerHTML;">75</div>
+             <!-- <div class="drawarea__top_item drawarea__top_circle sahkoputki" style="background: #eee;font-size: 10px;align-items: center;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').innerHTML = this.innerHTML;">75</div> -->
 
-             <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML.replace('IV ','');">IV 110</div>
-             <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML.replace('IV ','');">IV 135</div>
-             <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML.replace('IV ','');">IV 160</div>
+             <!-- <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML.replace('IV ','');">IV 110</div> -->
+             <!-- <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML.replace('IV ','');">IV 135</div> -->
+             <!-- <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML.replace('IV ','');">IV 160</div> -->
+
+             <!-- Start of custom buttons -->
+              <?php
+              $sy = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `projectmeta` WHERE `id`=100 AND `meta_key`="s_settings"')->fetch_assoc()["meta_value"], true);
+
+              for($i = 9; $i <= 23; $i++) {
+                if($sy[$i][3] != "") {
+                  if(count(explode("x", $sy[$i][3])) > 1) {
+                    echo '<div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;border-radius: 0px;" onclick="settings__mitta();document.querySelector(\'#lapiviennit__sade_muucord\').value = ' . $sy[$i][2] . ';">' . $sy[$i][1] . '</div>';
+                  } else {
+                    echo '<div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector(\'#lapiviennit__sade_muucord\').value = ' . $sy[$i][2] . ';">' . $sy[$i][1] . '</div>';
+                  }
+                }
+              }
+              ?>
+
+              <!-- End  of custom buttons -->
 
                <div class="drawarea__top_item drawarea__top_circle drawarea__top_custom" style="background: #eee;" onclick="settings__mitta();">x</div>
 
