@@ -1516,9 +1516,7 @@ $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_va
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'keskusmittapiste_cord', '')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'reklamaatiot', '')");
 
-echo '<h1>Projekti luotu onnistuneesti!</h1>';
-echo '<h5>*Jos näet virheitä yläosassa, ne voidaan todennäköisesti jättää huomiotta.</h5>';
-echo '<button onclick="window.location.href=\'/login.php\'" style="font-size: 15">Palaa pääsivulle</button>';
+echo '<script>window.location.href="/welcome.php"</script>';
 
 // if ($post) {
 // 	echo "<script>window.location.replace('http://teditori.gromi.fi');</script>";

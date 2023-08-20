@@ -463,21 +463,22 @@ $s_settings_data = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `proj
 <section>
   <h4>Levytyksen suunta</h4>
   <section>
+    <?php var_dump($s_settings_data[24]); ?>
     <fieldset>
-      <input type="radio" id="settings__sauma_pysty" name="sauma__suunta" onclick="saumoitus__examplephoto()" value="0" <?php echo $s_settings_data[26] == "0" ? "checked" : "" ?>>
+      <input type="radio" id="settings__sauma_pysty" name="sauma__suunta" onclick="saumoitus__examplephoto()" value="0" <?php echo $s_settings_data[24] == "0" ? "checked" : "" ?>>
       <label for="settings__sauma_pysty">Levytys pystyyn</label>
-      <input type="radio" id="settings__sauma_vaaka" name="sauma__suunta" onclick="saumoitus__examplephoto()" value="1" <?php echo $s_settings_data[26] == "1" ? "checked" : "" ?>>
+      <input type="radio" id="settings__sauma_vaaka" name="sauma__suunta" onclick="saumoitus__examplephoto()" value="1" <?php echo $s_settings_data[24] == "1" ? "checked" : "" ?>>
       <label for="settings__sauma_vaaka">Levytys vaakaan</label>
     </fieldset>
   </section>
   <section>
     <h4>Saumoituksen tyyppi</h4>
     <fieldset>
-      <input type="radio" id="settings__saumahanta-oik" name="sauma__xtype" onclick="saumoitus__examplephoto()" value="0" <?php echo $s_settings_data[26] == "0" ? "checked" : "" ?>>
+      <input type="radio" id="settings__saumahanta-oik" name="sauma__xtype" onclick="saumoitus__examplephoto()" value="0" <?php echo $s_settings_data[25] == "0" ? "checked" : "" ?>>
       <label for="settings__saumahanta-oik">Vajaa levy oikealle</label>
-      <input type="radio" id="settings__saumahanta-vas" name="sauma__xtype" onclick="saumoitus__examplephoto()" value="1" <?php echo $s_settings_data[26] == "1" ? "checked" : "" ?>>
+      <input type="radio" id="settings__saumahanta-vas" name="sauma__xtype" onclick="saumoitus__examplephoto()" value="1" <?php echo $s_settings_data[25] == "1" ? "checked" : "" ?>>
       <label for="settings__saumahanta-vas">Vajaa levy vasemalle</label>
-      <input type="radio" id="settings__saumahanta-tasoitus" name="sauma__xtype" onclick="saumoitus__examplephoto()" value="2" <?php echo $s_settings_data[26] == "2" ? "checked" : "" ?>>
+      <input type="radio" id="settings__saumahanta-tasoitus" name="sauma__xtype" onclick="saumoitus__examplephoto()" value="2" <?php echo $s_settings_data[25] == "2" ? "checked" : "" ?>>
       <label for="settings__saumahanta-tasoitus">Tasaleveys</label>
     </fieldset>
     <fieldset>
@@ -494,17 +495,17 @@ $s_settings_data = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `proj
       <div class="col-6">
         <h4>Saumoitus</h4>
         <fieldset style="flex-direction: column;display: flex;" class="saumoitus__inputs">
-          <input type="radio" id="saumoitus__sauma_one" name="sauma__saumoitus_x" value="Pystysaumat aukkojen yli" onclick="saumoitus__examplephoto();" onfocus="saumoitus__examplephoto();document.getElementById('saumoitus__sauma_two').checked = false;" value="0" <?php echo $s_settings_data[26] == "0" ? "checked" : "" ?>>
+          <input type="radio" id="saumoitus__sauma_one" name="sauma__saumoitus_x" onclick="saumoitus__examplephoto();" onfocus="saumoitus__examplephoto();document.getElementById('saumoitus__sauma_two').checked = false;" value="0" <?php echo $s_settings_data[27] == "0" ? "checked" : "" ?>>
           <label for="saumoitus__sauma_one">Pystysaumat aukkojen yli</label>
 
-          <input type="radio" id="saumoitus__sauma_two" name="sauma__saumoitus_x" value="Pystysaumat aukkojen mukaan" onclick="saumoitus__examplephoto();" onfocus="saumoitus__examplephoto();document.getElementById('saumoitus__sauma_one').checked = false;" value="1" <?php echo $s_settings_data[26] == "1" ? "checked" : "" ?>>
+          <input type="radio" id="saumoitus__sauma_two" name="sauma__saumoitus_x" onclick="saumoitus__examplephoto();" onfocus="saumoitus__examplephoto();document.getElementById('saumoitus__sauma_one').checked = false;" value="1" <?php echo $s_settings_data[27] == "1" ? "checked" : "" ?>>
           <label for="saumoitus__sauma_two">Pystysaumat aukkojen mukaan </label>
         </fieldset>
         <fieldset style="flex-direction: column;display: flex;" class="saumoitus__inputs">
-          <input type="radio" id="saumoitus__sauma_one_v" name="sauma__saumoitus_y" value="Vaakasaumat aukkojen yli" onclick="saumoitus__examplephoto();" onfocus="saumoitus__examplephoto();document.getElementById('saumoitus__sauma_three').checked = false;" value="0" <?php echo $s_settings_data[26] == "0" ? "checked" : "" ?>>
+          <input type="radio" id="saumoitus__sauma_one_v" name="sauma__saumoitus_y" onclick="saumoitus__examplephoto();" onfocus="saumoitus__examplephoto();document.getElementById('saumoitus__sauma_three').checked = false;" value="0" <?php echo $s_settings_data[28] == "0" ? "checked" : "" ?>>
           <label for="saumoitus__sauma_one_v">Vaakasaumat aukkojen yli</label>
 
-          <input type="radio" id="saumoitus__sauma_three" name="sauma__saumoitus_y" value="Vaakasaumat aukkojen mukaan" onclick="saumoitus__examplephoto();" onfocus="saumoitus__examplephoto();document.getElementById('saumoitus__sauma_one_v').checked = false;" value="1" <?php echo $s_settings_data[26] == "1" ? "checked" : "" ?>>
+          <input type="radio" id="saumoitus__sauma_three" name="sauma__saumoitus_y" onclick="saumoitus__examplephoto();" onfocus="saumoitus__examplephoto();document.getElementById('saumoitus__sauma_one_v').checked = false;" value="1" <?php echo $s_settings_data[28] == "1" ? "checked" : "" ?>>
           <label for="saumoitus__sauma_three">Vaakasaumat aukkojen mukaan</label>
         </fieldset>
 
