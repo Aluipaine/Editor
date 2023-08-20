@@ -1516,9 +1516,5 @@ $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_va
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'keskusmittapiste_cord', '')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'reklamaatiot', '')");
 
-echo '<script>window.location.href="/welcome.php"</script>';
-
-// if ($post) {
-// 	echo "<script>window.location.replace('http://teditori.gromi.fi');</script>";
-// }
+echo "<script>window.location.replace('/login.php');</script>";
 ?>
