@@ -1,7 +1,7 @@
 <?php
 
-require "vendor/config.php";
-include('./header.php');
+require "../vendor/config.php";
+include('../header.php');
 
 ?>
 
@@ -15,6 +15,72 @@ include('./header.php');
     input[type=number] {
         -moz-appearance: textfield;
         /* Firefox */
+    }
+
+    .lv {
+        position: absolute;
+        bottom: 0;
+        overflow: visible;
+        outline: 1px solid #1a1a1a;
+        box-sizing: border-box;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        z-index: 4;
+        cursor: move;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -khtml-user-drag: element;
+        -webkit-user-drag: element;
+
+        background: #fff;
+        margin-left: -7.5px;
+        margin-bottom: -7.5px;
+
+        font-size: 50%;
+        align-items: center;
+        display: flex;
+        z-index: 11;
+        justify-content: center;
+    }
+
+    .lv:before, .lv:after {
+        position: absolute;
+        content: "";
+        display: block;
+        z-index: 5;
+        background: #1a1a1a;
+        width: 50%;
+        height: 50%;
+    }
+
+    .lv i {
+        background: rgba(255,255,255,.9);
+        z-index: 9999;
+        padding: 2px 3px;
+    }
+
+
+    .lv:before {
+        top: 0;
+        left: 0;
+
+        border-top-right-radius: 0;
+        border-top-left-radius: 100%;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .lv:after {
+        bottom: 0;
+        right: 0;
+
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        border-bottom-right-radius: 100%;
+        border-bottom-left-radius: 0;
     }
 </style>
 
@@ -209,31 +275,25 @@ include('./header.php');
                     <section>
                         <h4>Lisään läpiviennin</h4>
                         <fieldset>
-                            <input name="lv_from" type="radio" onfocus="/*give__origo_cord();*/" id="from__origo_lapivienti">
-                            <label for="from__origo_lapivienti">Origosta</label>
-                            <input name="lv__distances" type="radio" id="lvfrom__checkpoint_1" onclick="lv_from_change();" onfocus="/*get_from_custom_mp(1);*/">
-                            <label for="lvfrom__checkpoint_1">Mittapisteestä 1</label>
-                            <input name="lv__distances" type="radio" id="lvfrom__checkpoint_2" onclick="lv_from_change();" onfocus="/*get_from_custom_mp(2);*/">
-                            <label for="lvfrom__checkpoint_2">Mittapisteestä 2</label>
-                            <input name="lv_from" type="radio" id="from__side_lapivienti" onfocus="/*null__origo_cord();*/">
+                            <input name="lv_from" type="radio" id="from__side_lapivienti" onfocus="/*null__origo_cord();*/" checked>
                             <label for="from__side_lapivienti">Omat mitat</label>
                         </fieldset>
                         <section class="row cord">
                             <div class="col-6" style="display: flex;flex-direction: column;">
                                 <div class="lvcord__item cord__item">
                                     <label for="lvcord_low">Ylös</label>
-                                    <input id="lvcord_low" name="" type="tel" class="lineinput" onchange="change__newdiv_cord();cord__check(this);" data-maximum="2200">
+                                    <input id="lvcord_low" name="" type="tel" class="lineinput" data-maximum="2200">
                                 </div>
 
                                 <div class="lvcord__item cord__item" style="display: none;">
                                     <label for="lvcord_r">Oikealle</label>
-                                    <input id="lvcord_r" name="" type="tel" class="lineinput" onchange="change__newdiv_cord();cord__check(this);">
+                                    <input id="lvcord_r" name="" type="tel" class="lineinput">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="lvcord__item cord__item">
                                     <label for="lvcord_left">Oikealle</label>
-                                    <input id="lvcord_left" name="" type="tel" class="lineinput" onchange="change__newdiv_cord();cord__check(this);" data-maximum="4000">
+                                    <input id="lvcord_left" name="" type="tel" class="lineinput" data-maximum="4000">
                                 </div>
                             </div>
                         </section>
@@ -273,10 +333,10 @@ include('./header.php');
 <!-- <script>find__that_levy(0);</script> -->
 
 <!-- Новый функционал переписанный с каким-никаким рефакторингом -->
-<script src="/js/levynakyma.js"></script>
+<script src="../js/levynakyma.js"></script>
 
 <!-- Сторонние скрипты для экспорта в Excel -->
-<script src="/js/jstemplates/7.js"></script>
+<!-- <script src="../js/jstemplates/7.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script>
 <script>
     function tallenna_kiinnikepaikat(levy) {

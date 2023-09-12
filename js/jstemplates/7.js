@@ -654,7 +654,7 @@ function create__levy_excel(now) {
     console.log("Starting EXEL generating... (NOW)");
     console.log("Levy Excel Array:", levyexcel_array);
 
-    filename = 'Tila ESIMERKKI - Levyt.xlsx';
+    filename = 'Levy .xlsx';
     var ws = XLSX.utils.json_to_sheet(levyexcel_array);
     var wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Levyt");
@@ -666,7 +666,7 @@ function create__levy_excel(now) {
     console.log("Levy Excel Array:", levyexcel_array);
 
     document.querySelector('.get_levy_btn').addEventListener('click', () => {
-      filename = 'Tila ESIMERKKI - Levyt.xlsx';
+      filename = 'Levy .xlsx';
       var ws = XLSX.utils.json_to_sheet(levyexcel_array);
       var wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "Levyt");

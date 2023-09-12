@@ -9,7 +9,6 @@ include('header.php');
       display: none;
    }
 </style>
-
 <form action="vendor/create.php" method="post" id="new_project__form">
     <section id="new_project">
          <div class="form-subgroup main">

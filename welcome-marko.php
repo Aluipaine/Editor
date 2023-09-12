@@ -107,18 +107,37 @@ $s_settings_data = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `proj
       $_am = json_decode($am_da[0][3]);
       $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       $letter = 0;
-
+      $count_rows = 0;
       foreach ($_am as $am_1) {
-        echo '<table ' . ($letters[$letter] != $am_template ? 'style="display: none;"' : '') . ' class="table aukko-table" id="aukko-table-' . $letters[$letter] . '"><td>Aukkojen tyypit</td><td>Nimi</td><td>Ranka Vasenreuna aukko +/-</td><td>Ranka Oikeareuna aukko +/-</td> <td>Ranka Alareuna aukko +/-</td> <td>Ranka Yläreuna aukko +/-</td> <td>Vasenreuna lista +/-</td> <td>Oikeareuna lista +/-</td><td>Alareuna lista +/-</td> <td>Yläreuna lista +/-</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td>';
+        echo '<table ' . ($letters[$letter] != $am_template ? 'style="display: none;"' : '') . ' class="table aukko-table" id="aukko-table-' . $letters[$letter] . '"><td>Aukkojen tyypit</td><td>Vasen max</td><td>Vasen min</td> <td>Oikea max</td> <td>Oikea min</td> <td>Ylä max</td> <td>Ylä min</td><td>Ala max</td> <td>Ala min</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td>';
+        $count_rows++;
+        // echo "<tr>";
+        if($count_rows == 1) {
+          echo "<tr class='ikkuna_info'>";
+        }
+        elseif($count_rows == 2) {
+          echo "<tr class='ovi_info'>";
+        } 
+        elseif($count_rows == 3) {
+          echo "<tr class='ilmastointi_info'>";
+        }
+        elseif($count_rows == 4) {
+          echo "<tr class='pilari_info'>";
+        }
+        elseif($count_rows == 5) {
+          echo "<tr class='alue_erikoisranka_info bottom-border palkki_info'>";
+        }
+        else {
+            echo "<tr>";
+        }
 
-        echo "<tr>";
         $count = 0;
         foreach ($am_1 as $am_2) {
 
           $count++;
 
           echo "<td>" . "<input type='text' name='_s_aukko_" . $letters[$letter] . "' value='" . $am_2 . "' class='lineinput'>" . "</td>";
-          if ($count == 14) {
+          if ($count == 13) {
             echo "</tr>";
             echo "<tr>";
             $count = 0;
@@ -138,14 +157,14 @@ $s_settings_data = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `proj
         <tr>
           <td>Aukkojen tyypit</td>
           <td>Nimi</td>
-          <td>Ranka Vasenreuna aukko +/-</td>
-          <td>Ranka Oikeareuna aukko +/-</td> 
-          <td>Ranka Alareuna aukko +/-</td> 
-          <td>Ranka Yläreuna aukko +/-</td> 
-          <td>Vasenreuna lista +/-</td> 
-          <td>Oikeareuna lista +/-</td>
-          <td>Alareuna lista +/-</td> 
-          <td>Yläreuna lista +/-</td> 
+          <td>Ranka Vasenreuna aukko</td>
+          <td>Ranka Oikeareuna aukko</td> 
+          <td>Ranka Alareuna aukko</td> 
+          <td>Ranka Yläreuna aukko</td> 
+          <td>Vasenreuna lista</td> 
+          <td>Oikeareuna lista</td>
+          <td>Alareuna lista</td> 
+          <td>Yläreuna lista</td> 
 
           <td>+/- jotain</td>
           <td>+/- jotain</td>

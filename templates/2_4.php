@@ -120,7 +120,7 @@
               <input type="hidden" id="settings__sauma_interval_y" value="3010">
             </fieldset>
         </section>
-        <script>saumoitus__examplephoto();</script>
+        <!-- <script>saumoitus__examplephoto();</script> -->
        <div class="modal_close_btn drawarea__controls_btn" onclick="saumoita();refresh__drawcontrols();updatearea();submitprogress('','adding','','sau');">Saumoita</div>
      </div>
    </div>

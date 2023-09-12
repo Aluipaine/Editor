@@ -101,7 +101,7 @@
                     <!-- <input name="aukko_comment_to" id="aukko_comment_to" type="text"> -->
                 </div>
                 <div class="col-3">
-                    <h6>Takaraja:</h6>
+                    <h6>Deadline:</h6>
                     <input name="deadline_time" id="comment__deadline" type="date" min="<?php echo date("Y-m-d") ?>"></input>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                     <span class="commentbox__aihe">-</span>
                 </div>
                 <div class="col-3">
-                    <h4>Takaraja:</h4>
+                    <h4>Deadline:</h4>
                     <span class="commentbox__deadline">-</span>
                 </div>
             </div>

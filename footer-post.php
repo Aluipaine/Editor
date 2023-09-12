@@ -84,18 +84,37 @@ if (isset($_GET["role"]) && $_GET["role"] == 'mittaus') {
          $letter = 0;
          foreach ($_am as $am_1) {
             if ($letters[$letter] == $am_template) {
-               echo '<table class="table aukko-table" id="aukko-table-' . $letters[$letter] . '"><td>Aukkojen tyypit</td><td>Nimi</td><td>Ranka Vasenreuna aukko +/-</td><td>Ranka Oikeareuna aukko +/-</td> <td>Ranka Alareuna aukko +/-</td> <td>Ranka Yläreuna aukko +/-</td> <td>Vasenreuna lista +/-</td> <td>Oikeareuna lista +/-</td><td>Alareuna lista +/-</td> <td>Yläreuna lista +/-</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td>';
+               echo '<table class="table aukko-table" id="aukko-table-' . $letters[$letter] . '"><tr><td>Aukkojen tyypit</td><td>Vasen max</td><td>Vasen min</td> <td>Oikea max</td> <td>Oikea min</td> <td>Ylä max</td> <td>Ylä min</td><td>Ala max</td> <td>Ala min</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td><td>+/- jotain</td></tr>';
+               $count_rows = 0;
 
-               echo "<tr>";
-               $count = 0;
+             
                foreach ($am_1 as $am_2) {
 
                   $count++;
 
                   echo "<td>" . "<input type='text' name='_s_aukko_" . $letters[$letter] . "' value='" . $am_2 . "' class='lineinput'>" . "</td>";
-                  if ($count == 14) {
+                  if ($count == 13) {
                      echo "</tr>";
-                     echo "<tr>";
+                     // echo "<tr>";
+                     $count_rows+=1;
+                     if($count_rows == 1) {
+                        echo "<tr class='ikkuna_info'>";
+                     }
+                     elseif($count_rows == 2) {
+                        echo "<tr class='ovi_info'>";
+                     } 
+                     elseif($count_rows == 3) {
+                        echo "<tr class='ilmastointi_info'>";
+                     }
+                     elseif($count_rows == 4) {
+                        echo "<tr class='pilari_info'>";
+                     }
+                     elseif($count_rows == 5) {
+                        echo "<tr class='alue_erikoisranka_info bottom-border palkki_info'>";
+                     }
+                     else {
+                        echo "<tr class=" . $count_rows .">";
+                     }
                      $count = 0;
                   }
                }
