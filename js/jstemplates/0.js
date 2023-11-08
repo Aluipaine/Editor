@@ -397,7 +397,30 @@ $('.project__building div.project__building_room').click(function() {
 
 });
 
+$(".project__building_room")
+  .on("mousedown touchstart", (e) => {
+    $(e.target).focus();
+    timer = window.setTimeout((e) => longClick(e), 1000);
+  })
+  .on("mouseup mouseleave touchend touchmove", (e) =>
+    clearTimeout(timer)
+  )
+  .click((e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log("click")
+  });
 
+const longClick = (e) => {
+  console.log("longpress", `$(e.target).text()`);
+  $('.popup__statuses').addClass('active')
+  window.addEventListener("click", defaultClick, true);
+};
+
+const defaultClick = (e) => {
+  e.stopPropagation();
+  window.removeEventListener("click", defaultClick, true);
+};
 
 $('#rooms div.house__wall_status').click(function() {
   $("#rooms").slideUp(200);
