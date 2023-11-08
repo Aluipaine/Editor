@@ -1522,6 +1522,29 @@ td input {
   background: var(--done);
 }
 
+.project__building_room.active::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  box-shadow: 0 0 0 5px #00eeff;
+  z-index: 2;
+}
+
+.project__building_room-overlay {
+  opacity: 0;
+  /* background: ; */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+}
+
+.project__building.active .project__building_room:not(.active) {
+  pointer-events: none;
+}
 
 .project__building_room.measured {
   background: var(--measured);

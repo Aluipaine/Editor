@@ -1542,7 +1542,6 @@ td input {
   z-index: 3;
 }
 
-
 .project__building_room.measured {
   background: var(--measured);
 }

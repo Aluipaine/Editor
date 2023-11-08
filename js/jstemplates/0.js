@@ -423,16 +423,20 @@ $(".project__building_room")
   });
 
 const longClick = (element) => {
+  $('.project__building').removeClass('active')
   $('.project__building_room-overlay').remove()
   $('.project__building_room').removeClass('active')
   element.addClass('active')
   $('.popup__statuses').addClass('active')
   window.addEventListener("click", defaultClick, true)
+  $('.project__building').addClass('active')
   element.append(`<div class='project__building_room-overlay'></div>`)
+  // $('.project__building_room').append(`<div class='project__building_room-disable'></div>`)
   
   $('.project__building_room-overlay').click((e) => {
     e.preventDefault()
     e.stopPropagation()
+    $('.project__building').removeClass('active')
     $('.popup__statuses').removeClass('active')
     $('.project__building_room').removeClass('active')
     $('.project__building_room-overlay').remove()
