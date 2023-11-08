@@ -1,52 +1,38 @@
 <?php
-$target_dir = "/var/www/demo_gromi_f_usr/data/www/teditori.gromi.fi/uploads/";
-$target_file = $target_dir . $_FILES["comment__files"]["name"];
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_FILES['files'])) {
+      $errors = [];
+      $extensions = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'mp4', 'xml', 'xls', 'xlsx'];
+      $target = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+      $all_files = count($_FILES['files']['tmp_name']);
 
+      for ($i = 0; $i < $all_files; $i++) {
+          $file_name = $_FILES['files']['name'];
+          $file_tmp = $_FILES['files']['tmp_name'];
+          $file_type = $_FILES['files']['type'];
+          $file_size = $_FILES['files']['size'];
+          $file_ext = strtolower(end(explode('.', $_FILES['files']['name'])));
+          $rand = substr(uniqid('', true), -5);
 
-echo $_FILES["comment__files"]["tmp_name"];
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["comment__files"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
-}
+          $file = $target . $rand . $file_name;
 
-// // Check if file already exists
-// if (file_exists($target_file)) {
-//   echo "Sorry, file already exists.";
-//   $uploadOk = 0;
-// }
+          if (!in_array($file_ext, $extensions)) {
+              $errors[] = 'Extension not allowed: ' . $file_name . ' ' . $file_type;
+          }
 
-// // Check file size
-// if ($_FILES["comment__files"]["size"] > 500000) {
-//   echo "Sorry, your file is too large.";
-//   $uploadOk = 0;
-// }
+        //   if ($file_size > 2097152) {
+        //       $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
+        //   }
 
-// // Allow certain file formats
-// if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-// && $imageFileType != "gif" ) {
-//   echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-//   $uploadOk = 0;
-// }
+          if (empty($errors)) {
+              move_uploaded_file($file_tmp, $file);
+              echo str_replace("C:/OSPanel/domains/localhost/uploads/","",str_replace("/var/www/westface_fi_usr/data/www/editori.westface.fi/uploads/","",$file));
+          }
+      }
 
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
-  if (move_uploaded_file($_FILES["comment__files"]["tmp_name"], $target_file)) {
-    echo "The file ". $_FILES["comment__files"]["name"] . " has been uploaded.";
-  } else {
-    echo "Sorry, there was an error uploading your file.";
-    
+      if ($errors) print_r($errors);
   }
 }
 ?>

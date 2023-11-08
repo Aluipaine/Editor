@@ -336,7 +336,7 @@ include('../header.php');
 <script src="../js/levynakyma.js"></script>
 
 <!-- Сторонние скрипты для экспорта в Excel -->
-<!-- <script src="../js/jstemplates/7.js"></script> -->
+<script src="../js/jstemplates/7.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script>
 <script>
     function tallenna_kiinnikepaikat(levy) {

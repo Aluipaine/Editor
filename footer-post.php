@@ -555,6 +555,8 @@ if (isset($_GET["role"]) && $_GET["role"] == 'mittaus') {
 <script src='/js/clipboard.min.js'></script>
 <!-- Marko new row btn function -->
 
+<!-- TABLE MOD. -->
+<script src="js/jstemplates/creation.js"></script>
 
 <!-- MARKO -->
 <script src="/js/jstemplates/mrarko.js"></script>

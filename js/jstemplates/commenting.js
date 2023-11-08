@@ -1,6 +1,7 @@
 kommentti_count = 0;
-// Создание отверстия
+// Создание комментария
 function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hcord, mode_wcord, mode_count, mode_id, mode_specifications, ir_mitta_comment, ir_mitta_cfrom, ir_mitta_cto) {
+  new_com_id = 0;
   const newDiv = document.createElement("span");
   const newDiv__comment = document.createElement("span");
   const newDiv__hidden_attention = document.createElement("input");
@@ -37,7 +38,7 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
     newDiv.dataset.files = document.querySelector("#comment__preview_files").innerHTML;
     newDiv.dataset.from = document.querySelector("#kommentti_comment_from").value;
     newDiv.dataset.to = document.querySelector("#kommentti_comment_to").value;
-    newDiv.dataset.priority = document.querySelector("#comment__priority").value;
+    // newDiv.dataset.priority = document.querySelector("#comment__priority").value;
     newDiv.dataset.deadline = document.querySelector('#comment__deadline').value;
     newDiv.dataset.aihe = document.querySelector('input[name="mitta__huomiot"]:checked').value;
     newDiv.dataset.content = document.querySelector("#kommentti_comment").value.replaceAll("/(?:\r\n|\r|\n)/g", ", ");
@@ -97,11 +98,13 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
     if (newDiv.dataset.from !== document.querySelector("#current_user").value) {
       newDiv__comment_del.style.display = "none";
     }
+
+    document.querySelector("#kommentti__filesubmit").click();
   }
 
   project_id = document.querySelector("#rooms > input.id").value;
   _attachments = document.querySelector("#comment__preview_files").innerText;
-  _urgency = document.querySelector("#comment__priority").value;
+  // _urgency = document.querySelector("#comment__priority").value;
   _ending_time = '';
   _deadline = document.querySelector("#comment__deadline").value;
   room_id = document.querySelector(".kommentti_nappula").getAttribute("id");
@@ -116,11 +119,10 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
       room: room_id + ">" + mode_room,
       name: _name,
       x_y: x_y,
-      content: document.querySelector("#kommentti_comment").value,
+      content: document.querySelector("#kommentti_comment").value.replaceAll(","," - "),
       attachments: _attachments,
-      comment_from: document.querySelector("#kommentti_comment_from").value,
-      comment_to: document.querySelector("#kommentti_comment_to").value,
-      urgency: _urgency,
+      comment_from: document.querySelector("#kommentti_comment_from").value.replaceAll(","," - "),
+      comment_to: document.querySelector("#kommentti_comment_to").value.replaceAll(","," - ").toLowerCase(),
       ending_time: _ending_time,
       deadline: _deadline,
       aihe: _aihe,
@@ -129,7 +131,7 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
 
     $.ajax({
       type: "POST",
-      url: "/addcomment.php",
+      url: "/vendor/addcomment.php",
       data: formData,
       error: function (jqxhr, status, exception) {
         alert('Tietokantavirhe, soita numeroon +358449782028');
@@ -148,6 +150,7 @@ function change__newdiv_cord_comment() {
   const drawscreen_section_eight = document.querySelector('#drawscreen_section_eight');
   const input_step = document.querySelector('#step_drawscreen').value;
 }
+
 
 function null__comment_cord() {
   const drawscreen_section_one = document.querySelector('#drawscreen_section_one');
@@ -215,7 +218,8 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
   document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');
   document.querySelector('body').classList.add('modal-active');
   document.querySelector('body').classList.add('commentmodal_active');
-  document.querySelector('.commentbox__name').innerHTML = name;
+  document.querySelector('.commentbox__name').value = name;
+  com_id = comment_id;
   document.querySelector('.kuittaus_nappula').setAttribute("name", comment_id);
   document.querySelector('.commentbox__tiedostot').innerHTML = tiedostot;
   document.querySelector('.commentbox__from').innerHTML = from; //OK
@@ -223,7 +227,7 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
   document.querySelector('.commentbox__priority').innerHTML = priority; //OK
   document.querySelector('.commentbox__deadline').innerHTML = deadline; //OK
   document.querySelector('.commentbox__aihe').innerHTML = aihe; //OK
-  document.querySelector('.commentbox__content').innerHTML = content; //OK
+  document.querySelector('.commentbox__content').value = content; //OK
 
   $.ajax({
     url: "/getanswers.php",
@@ -252,6 +256,8 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
         let answer_deadline = grand_array[13];
         let answer_content = grand_array[5].replaceAll("/(?:\r\n|\r|\n)/g", "  ");
 
+        let answer_child_id = grand_array[0];
+        console.log("answer_parent "+answer_child_id);
         // Sorry for that, I don't know how to use DOM and I have a burning deadline.
         // P.S. Your code is good and understandable, respect for this.
         answersDiv.innerHTML += `
@@ -272,15 +278,11 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
                   <span class="commentbox__to">${answer_to}</span>
               </div>
               <div class="col-3">
-                  <h4>Prioriteetti:</h4>
-                  <span class="commentbox__priority">${answer_priority}</span>
-              </div>
-              <div class="col-3">
                   <h4>Aihe:</h4>
                   <span class="commentbox__aihe">${answer_aihe}</span>
               </div>
               <div class="col-3">
-                  <h4>Takaraja:</h4>
+                  <h4>Deadline:</h4>
                   <span class="commentbox__deadline">${answer_deadline}</span>
               </div>
           </div>
@@ -289,8 +291,8 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
               <p class="commentbox__content">${answer_content}</p>
           </div>
           <div class="row center">
-              <div class="col-4"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula">Sulje</div></div>
-              <div class="col-4"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" onclick="comment__kuittaus(this.getAttribute('name'));addproblemstatus(this);">Kuittaan tehdyksi</div></div>
+              <div class="col-4"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula" onclick="document.querySelector('#reclamation__popup').classList.remove('two');document.querySelector('#reclamation__popup').classList.add('out');">Sulje</div></div>
+              <div class="col-4"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" name="${answer_child_id}" onclick="comment__kuittaus(this.getAttribute('name'));">Kuittaan tehdyksi</div></div>
           </div>
         </section>`
       });
@@ -299,16 +301,55 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
 }
 
 function comment__kuittaus(comment_id) {
+  date = new Date();
 
+  let _day = date.getDate();
+  let _month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  let _hour = date.getHours();
+  let _min = date.getMinutes();
+  let _sec = date.getSeconds();
+  if(_month < 10) {
+      month = "0"+_month;
+  }
+  else {
+      month = _month;
+  }
+  if(_day < 10) {
+      day = "0"+_day;
+  }
+  else {
+      day = _day;
+  }
+  if(_hour < 10) {
+      hour = "0"+_hour;
+  }
+  else {
+      hour = _hour;
+  }
+  if(_min < 10) {
+      min = "0"+_min;
+  }
+  else {
+      min = _min;
+  }
+  if(_sec < 10) {
+      sec = "0"+_sec;
+  }
+  else {
+      sec = _sec;
+  }
+  currentDate = `${day}-${month}-${year} ${hour}:${min}:${sec}`;
   setTimeout(function () {
     formData = {
-      comment_id: comment_id,
-      ending_time: ""
+      comment_id: comment_id.getAttribute("name"),
+      ending_time: currentDate
     };
-
+    console.log(formData);
     $.ajax({
       type: "POST",
-      url: "/comment__kuittaus.php",
+      url: "vendor/comment__kuittaus.php",
       data: formData,
       error: function (jqxhr, status, exception) {
         alert('Tietokantavirhe, soita numeroon +358449782028');
@@ -320,15 +361,30 @@ function comment__kuittaus(comment_id) {
     });
   }, 500);
 
+ 
+
 
 }
+
+// tila_btns = document.querySelectorAll(".house__wall_status");
+// for (let i = 0; i < tila_btns.length; i++) {
+//   tila_btns[i].addEventListener("click", );  
+// }
+
+// function tila_functionbundle(arg) {
+//   apartment = arg;
+//   // initalize_cross(arg);
+//   initializeroom_comments(arg);
+// }
+
 
 function initializeroom_comments(room, menu) {
   ir_no = room.dataset.room;
 
+  console.log("initializeroom_comments");
 
   mode_room = ir_no.toLowerCase();
-  $('#step_drawscreen').val('drawscreen_section_one');
+  document.querySelector("#step_drawscreen").value = 'drawscreen_section_one';
   if (mode_room == 'a') {
     ir_value = apartment.dataset.aroom;
   }
@@ -365,23 +421,37 @@ function initializeroom_comments(room, menu) {
     coms[i].remove();
   }
 
+  comments__controlelems = document.querySelectorAll("div.drawarea__controls_elementsone.drawarea__things > span");
+
+  for (let i = 0; i < comments__controlelems.length; i++) {
+    comments__controlelems[i].remove();
+    
+  }
+
   // STOP CLEARING
   if (ir_value.length > 5) {
     kommentti_count = 0;
     ir_coms = document.querySelector("#open_comments").value.split("~");
 
-    //GOMMENTIT
-
+    //Comments
     for (var i = 0; i < ir_coms.length; i++) {
-      if (ir_coms[i].length > 4) {
+      // if (ir_coms[i].length > 4) {
+      //   console.log(ir_coms[i].split(",")[2].split(">")[0].replaceAll(" ","").replaceAll("-","").toLowerCase());
+      //   console.log(document.querySelector("#rooms > input.room").value.replaceAll(" ","").replaceAll("-","").toLowerCase());
+      // }
+      if (ir_coms[i].length > 4 && ir_coms[i].split(",")[2].split(">")[0].replaceAll(" ","").replaceAll("-","").toLowerCase() == document.querySelector("#rooms > input.room").value.replaceAll(" ","").replaceAll("-","").toLowerCase()) {
+        console.log("ROOM OK ");
         name_splitted = ir_coms[i].split(",")[2].split(">")[1];
         if (ir_coms[i].length > 5 && name_splitted == mode_room) {
-          grande_array = ir_coms[i]
+          grande_array = ir_coms[i];
+          
           comment__restore(grande_array);
+          refresh__drawcontrols();
         }
       }
     }
   }
+
 
   ir_no = room.dataset.room;
   mode_room = ir_no.toLowerCase();
@@ -404,13 +474,13 @@ function initializeroom_comments(room, menu) {
   if (mode_room == 'l') {
     ir_value = apartment.dataset.lroom;
   }
+
+  refresh__drawcontrols();
 }
 
 function comment__restore(ga) {
-  console.log("GA: " + ga);
   grand_array = ga.split(",");
-  console.log("grand_array:", grand_array)
-  console.log("grand_array[14]:", grand_array[14]);
+
 
   if (grand_array[14] == '') {
 
@@ -464,6 +534,7 @@ function comment__restore(ga) {
 
     kommentti_count += 1;
     newDiv__comment.innerHTML = newDiv.dataset.commentname;
+    newDiv__comment.classList.add(id);
     newDiv__hidden_attention.type = "hidden";
     newDiv__hidden_attention.name = "attentions";
     newDiv__hidden_attentioncommmets.type = "hidden";
@@ -479,12 +550,12 @@ function comment__restore(ga) {
       newDiv__hidden_attentioncommmets.value += grand_array[5] + '<br> Tältä: ' + grand_array[7] + '<br> Tälle: ' + grand_array[8];
       comment__text.innerHTML = grand_array[5];
       comment__from.innerHTML = grand_array[7];
+      
       comment__to.innerHTML = grand_array[8];
     }
     newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
     newDiv.classList.add("com");
     newDiv.dataset.no = kommentti_count;
-
 
 
     newDiv__comment_settings.setAttribute("name", id);
@@ -508,21 +579,970 @@ function comment__restore(ga) {
 
 }
 
-function fetch_added_users() {
-  $.ajax({
-    url: "/get-added-users.php",
-    type: "post",
-    data: {
-      project_id: document.querySelector("#current_project_id").value
-    },
-    success: (users) => {
-      users = JSON.parse(users);
-      let comment_to = document.querySelector("#kommentti_comment_to");
-      comment_to.innerHTML = '';
+// function fetch_added_users() {
+//   $.ajax({
+//     url: "/get-added-users.php",
+//     type: "post",
+//     data: {
+//       project_id: document.querySelector("#current_project_id").value
+//     },
+//     success: (users) => {
+//       console.log("USERS:" + users);
+//       users = JSON.parse(users);
+//       let comment_to = document.querySelector("#kommentti_comment_to");
+//       comment_to.innerHTML = '';
+//       try {
+//         users.forEach((user) => {
+//         comment_to.innerHTML += `<option value="${user}">${user}</option>`;
+//       });
+//       } catch (error) {
+//         console.log(error);
+//       }
+      
+//     }
+//   });
+// }
 
-      users.forEach((user) => {
-        comment_to.innerHTML += `<option value="${user}">${user}</option>`;
-      });
+
+function initializebuilding_comments(mode) {
+  ir_coms = document.querySelector("#open_comments").value.split("~");
+  rooms_probs = document.querySelectorAll(".project__building_room");
+
+  for (let rp = 0; rp < rooms_probs.length; rp++) {
+    rooms_probs[rp].classList.remove("prob");
+    rooms_probs[rp].classList.remove("problem");
+
+  }
+
+  _hours_estimate = 0;
+  _hours_estimates = document.querySelectorAll(".commentbox__hours");
+
+  for (let h_e = 0; h_e < _hours_estimates.length; h_e++) {
+    if(isNaN(_hours_estimates[h_e].value) == false) {
+      _hours_estimate += parseFloat(_hours_estimates[h_e].value);
+
     }
-  })
+  }
+
+  document.querySelector("#hours__estimate").innerHTML = parseFloat(_hours_estimate) + "h";
+
+
+  console.log(mode);
+
+  if(mode==='all') {
+    for (let q = 0; q < ir_coms.length; q++) {
+      if(ir_coms[q].length > 5) {
+        a_name = ir_coms[q].replaceAll("--Tila","").replaceAll(" <br> ","").replaceAll(" <br>","").replaceAll("<br> ","").replaceAll("<br","").replaceAll(" ","").toLowerCase().split(",")[2].split(">")[0].replaceAll(" ","");
+        // a_name = ir_coms[q].replaceAll("--Tila","").replaceAll(" ","").replaceAll(" ","").replaceAll("/","").replaceAll("<br","").toLowerCase().split(",")[2].split(">")[0];
+        problem_apartment = document.querySelector("."+a_name.replaceAll(" ","").replaceAll("<br>","").replaceAll("/",""));
+        problem_apartment.classList.remove("bg-1");
+        problem_apartment.classList.remove("bg-2");
+        
+        if(ir_coms[q].split(",")[9] == 'critical') {
+          problem_apartment.classList.add("problem");
+        }
+        else {
+          problem_apartment.classList.add("prob");
+        }
+      } 
+     
+        
+    }
+
+    statuses = document.querySelectorAll(".house__wall_status");
+    for (let s = 0; s < statuses.length; s++) {
+      statuses[s].classList.remove("prob");
+    }
+    
+
+    tables = document.querySelectorAll(".tablepreview");
+
+    for (let t = 0; t < tables.length; t++) {
+      pbr = tables[t].querySelectorAll(".project__building_room");
+      pbr_array = [];
+      pbr_array_x = [];
+      for (let r = 0; r < pbr.length; r++) {
+        if(isNaN(parseFloat(pbr[r].dataset.y)) == false) {
+          pbr_array.push(parseFloat(pbr[r].dataset.y));
+        }
+      }
+
+      for (let r = 0; r < pbr.length; r++) {
+        if(isNaN(parseFloat(pbr[r].dataset.x)) == false) {
+          pbr_array_x.push(parseFloat(pbr[r].dataset.x));
+        }
+      }
+      max_pbrarray = Math.min(...pbr_array);
+      max_pbrarray_x = Math.max(...pbr_array_x);
+      rowcount = 10 - max_pbrarray;
+      rowcount_x = max_pbrarray_x+1;
+      tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
+      tables[t].style.maxWidth = "calc("+rowcount_x+"*80px + 3px)";
+      tables[t].style.overflowX = "clip";
+      
+    }
+
+    console.log("initializebuilding_comments()");
+  }
+  else if(mode === 'all_raktyo') {
+    for (let q = 0; q < ir_coms.length; q++) {
+      if(ir_coms[q].length > 5) {
+        a_name = ir_coms[q].replaceAll("--Tila","").replaceAll(" <br> ","").replaceAll(" <br>","").replaceAll("<br> ","").replaceAll("<br","").replaceAll(" ","").toLowerCase().split(",")[2].split(">")[0].replaceAll(" ","");
+        if(ir_coms[q].split(",")[8].toLowerCase() === "rakennustyo" || ir_coms[q].split(",")[8].toLowerCase() === "rakennustyo2"|| ir_coms[q].split(",")[8].toLowerCase() === "rakennustyo3") {
+          // a_name = ir_coms[q].replaceAll("--Tila","").replaceAll(" ","").replaceAll(" ","").replaceAll("/","").replaceAll("<br","").toLowerCase().split(",")[2].split(">")[0];
+          problem_apartment = document.querySelector("."+a_name.replaceAll(" ","").replaceAll("<br>","").replaceAll("/",""));
+          problem_apartment.classList.remove("bg-1");
+          problem_apartment.classList.remove("bg-2");
+          
+          if(ir_coms[q].split(",")[9] == 'critical') {
+            problem_apartment.classList.add("problem");
+          }
+          else {
+            problem_apartment.classList.add("prob");
+          }
+        }
+        
+      }   
+    }
+
+    statuses = document.querySelectorAll(".house__wall_status");
+    for (let s = 0; s < statuses.length; s++) {
+      statuses[s].classList.remove("prob");
+    }
+    
+
+    tables = document.querySelectorAll(".tablepreview");
+
+    for (let t = 0; t < tables.length; t++) {
+      pbr = tables[t].querySelectorAll(".project__building_room");
+      pbr_array = [];
+      for (let r = 0; r < pbr.length; r++) {
+        if(isNaN(parseFloat(pbr[r].dataset.y)) == false) {
+          pbr_array.push(parseFloat(pbr[r].dataset.y));
+        }
+      }
+      max_pbrarray = Math.min(...pbr_array);
+      rowcount = 10 - max_pbrarray;
+      tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
+      
+    }
+  }
+  else {
+    for (let q = 0; q < ir_coms.length; q++) {
+      if(ir_coms[q].length > 5) {
+        a_name = ir_coms[q].replaceAll("--Tila","").replaceAll(" <br> ","").replaceAll(" <br>","").replaceAll("<br> ","").replaceAll("<br","").replaceAll(" ","").toLowerCase().split(",")[2].split(">")[0].replaceAll(" ","");
+        if(ir_coms[q].split(",")[8].toLowerCase() === mode.toLowerCase()) {
+          // a_name = ir_coms[q].replaceAll("--Tila","").replaceAll(" ","").replaceAll(" ","").replaceAll("/","").replaceAll("<br","").toLowerCase().split(",")[2].split(">")[0];
+          problem_apartment = document.querySelector("."+a_name.replaceAll(" ","").replaceAll("<br>","").replaceAll("/",""));
+          problem_apartment.classList.remove("bg-1");
+          problem_apartment.classList.remove("bg-2");
+          
+          if(ir_coms[q].split(",")[9] == 'critical') {
+            problem_apartment.classList.add("problem");
+          }
+          else {
+            problem_apartment.classList.add("prob");
+          }
+        }
+        
+      }   
+    }
+
+    statuses = document.querySelectorAll(".house__wall_status");
+    for (let s = 0; s < statuses.length; s++) {
+      statuses[s].classList.remove("prob");
+    }
+    
+
+    tables = document.querySelectorAll(".tablepreview");
+
+    for (let t = 0; t < tables.length; t++) {
+      pbr = tables[t].querySelectorAll(".project__building_room");
+      pbr_array = [];
+      for (let r = 0; r < pbr.length; r++) {
+        if(isNaN(parseFloat(pbr[r].dataset.y)) == false) {
+          pbr_array.push(parseFloat(pbr[r].dataset.y));
+        }
+      }
+      max_pbrarray = Math.min(...pbr_array);
+      rowcount = 10 - max_pbrarray;
+      tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
+      
+    }
+  }
+
 }
+initializebuilding_comments('all');
+
+
+function comment__help(id,mode) {
+  name = id.getAttribute(`name`);
+  gp = id.parentElement.parentElement.parentElement;
+  gp.querySelector(".commentbox__help").classList.toggle("visible");
+  // document.querySelector("#reclamation__popup").classList.remove("out");
+  
+  if(mode == 'mode1') {
+    gp.querySelector(".kommentti__name").value = "Vastaus: ";
+    gp.querySelector(".commentbox__help_who").innerHTML = "Kenelle"; 
+    gp.querySelector(".commentbox__help_options").innerHTML = '<option value="Marko">Marko</option><option value="Vesi">Vesi</option><option value="Sähkö">Sähkö</option><option value="IV">IV</option><option value="Lukko">Lukko</option><option value="PV">PV</option><option value="Toimisto">Toimisto</option>'; 
+    gp.querySelector(".commentbox__help_order").style.display = "none";
+    gp.querySelector(".commentbox__help_order_2").style.display = "none";
+    gp.querySelector(".commentbox__help_order_3").style.display = "none";
+    gp.querySelector(".commentbox__help_order_4").style.display = "none";
+    gp.querySelector(".commentbox__help_order_5").style.display = "none";
+    gp.querySelector(".commentbox__text > h4").innerHTML = "Kommentin sisältö:"; 
+  }
+  if(mode == 'mode2') {
+    gp.querySelector(".kommentti__name").value = "Tilauspyyntö: "; 
+    gp.querySelector(".commentbox__help_who").innerHTML = "Kauppa:"; 
+    gp.querySelector(".commentbox__help_options").innerHTML = '<option value="Stark">Stark</option><option value="Westface">Westface</option><option value="P20 Varasto">P20 Varasto</option><option value="P20 K-krs">P20 K-krs</option><option value="Peltineloset">Peltineloset</option><option value="Kannatuspalvelu">Kannatuspalvelu</option><option value="Toimisto">Toimisto</option><option value="Muu">Muu</option>'; 
+    gp.querySelector(".commentbox__help_order").style.display = "block";
+    gp.querySelector(".commentbox__help_order_2").style.display = "block";
+    gp.querySelector(".commentbox__help_order_3").style.display = "block";
+    gp.querySelector(".commentbox__help_order_4").style.display = "block";
+    gp.querySelector(".commentbox__help_order_5").style.display = "flex";
+    gp.querySelector(".commentbox__text > h4").innerHTML = "Käyttötarkoitus (lyhyesti):"; 
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $.ajax({
+//   url: "/getanswers.php",
+//   type: "post",
+//   data: {
+//     answer_to: id,
+//     user: document.querySelector("#current_user").value
+//   },
+//   success: (answers) => {
+//     let answersDiv = document.querySelector("#commentbox__answers");
+//     answersDiv.innerHTML = "<h6>Vastaukset:</h6>";
+
+//     answers.split("~").forEach((answer) => {
+//       let grand_array = answer.split(",");
+
+//       if (grand_array.length < 13) {
+//         return; // continue
+//       }
+
+//       let answer_name = grand_array[3];
+//       let answer_files = grand_array[6].replaceAll("/(?:\r\n|\r|\n)/g", ", ").replaceAll("\n", " ");
+//       let answer_from = grand_array[7];
+//       let answer_to = grand_array[8];
+//       let answer_priority = grand_array[9];
+//       let answer_aihe = grand_array[12];
+//       let answer_deadline = grand_array[13];
+//       let answer_content = grand_array[5].replaceAll("/(?:\r\n|\r|\n)/g", "  ");
+
+//       let answer_child_id = grand_array[0];
+//       console.log("answer_parent "+answer_child_id);
+//       // Sorry for that, I don't know how to use DOM and I have a burning deadline.
+//       // P.S. Your code is good and understandable, respect for this.
+//       answersDiv.innerHTML += `
+//       <hr style="margin-top: 50px;">
+//       <section class="commentbox comment_answer">
+//         <h2 class="commentbox__name">${answer_name}</h2>
+//         <div class="row">
+//             <div class="col-3">
+//               <h4>Tiedostot:</h4>
+//               <span class="commentbox__tiedostot">${answer_files}</span>
+//             </div>
+//             <div class="col-3">
+//                 <h4>Keneltä:</h4>
+//                 <span class="commentbox__from">${answer_from}</span>
+//             </div>
+//             <div class="col-3">
+//                 <h4>Kenelle:</h4>
+//                 <span class="commentbox__to">${answer_to}</span>
+//             </div>
+//             <div class="col-3">
+//                 <h4>Aihe:</h4>
+//                 <span class="commentbox__aihe">${answer_aihe}</span>
+//             </div>
+//             <div class="col-3">
+//                 <h4>Deadline:</h4>
+//                 <span class="commentbox__deadline">${answer_deadline}</span>
+//             </div>
+//         </div>
+//         <div class="commentbox__text">
+//             <h4>Sisältö:</h4>
+//             <p class="commentbox__content">${answer_content}</p>
+//         </div>
+//         <div class="row center">
+//             <div class="col-4"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula" onclick="document.querySelector('#reclamation__popup').classList.remove('two');document.querySelector('#reclamation__popup').classList.add('out');">Sulje</div></div>
+//             <div class="col-4"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" name="${answer_child_id}" onclick="comment__kuittaus(this.getAttribute('name'));">Kuittaan tehdyksi</div></div>
+//         </div>
+//       </section>`
+//     });
+//   }
+// });
+
+function comment__create_simpler(parent_id, this_element) {
+
+  document.querySelector("body").classList.toggle("bg");
+
+  let id = "com" + Math.random().toString(16).slice(2).toLowerCase().toLowerCase();
+  parent_answer = this_element.parentElement;
+  commentbox__help_order = parent_answer.querySelector(".commentbox__help_order");
+  new_com_id = parent_answer;
+  if(commentbox__help_order.style.display == "none") {
+    setTimeout(function () {
+      project_id = parseFloat(document.querySelector("#current_project_id").value);
+      room_id = document.querySelector("#roomname").value.replaceAll(" ","");
+      _attachments = parent_answer.querySelector(".comment__preview_files").innerText;
+      _ending_time = '';
+      _deadline = parent_answer.querySelector(".comment__deadline").value;
+      _x_y = "5|5";
+      _content = parent_answer.querySelector(".kommentti_comment").value.replaceAll(","," - ");
+      _name = parent_answer.querySelector(".kommentti__name").value;
+      _comment_from = parent_answer.querySelector(".kommentti_comment_from").value.replaceAll(","," - ");
+      _comment_to = parent_answer.querySelector(".kommentti_comment_to").value.replaceAll(","," - ");
+      _urgency = "no_critical";
+      _aihe = _comment_from + " kommentit";
+      _answer_to = this_element.getAttribute("name");
+
+      formData = {
+        comment_id: id,
+        project_id: project_id,
+        room: room_id + ">a",
+        name: _name,
+        x_y: _x_y,
+        content: _content,
+        attachments: _attachments,
+        comment_from: _comment_from,
+        comment_to: _comment_to,
+        urgency: _urgency,
+        ending_time: _ending_time,
+        deadline: _deadline,
+        aihe: _aihe,
+        answer_to: _answer_to,
+        time_estimate: '',
+        status: 'aloitettu',
+
+      };
+
+      $.ajax({
+        type: "POST",
+        url: "vendor/addcomment.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log(formData);
+        }
+      }).done(function (data) {
+        
+      });
+    }, 1500);
+
+    setTimeout(function () {
+      formData = {
+        comment_id: this_element.getAttribute("name"),
+        comment_status: 'Odottaa'
+      };
+      $.ajax({
+      type: "POST",
+      url: "../vendor/modifycommentstatus.php",
+      data: formData,
+      error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log(formData);
+      }
+      }).done(function (data) {
+          // alert(data);
+          location.reload();
+      });      
+    }, 1800);
+  }
+  else if(commentbox__help_order.style.display == "block") {
+    setTimeout(function () {
+      new_com_id_ = parent_answer.dataset.name;
+      
+      _project_id = parseFloat(document.querySelector("#current_project_id").value);
+      _room = document.querySelector("#roomname").value.replaceAll(" ","").replaceAll(","," - ");
+      _item = parent_answer.querySelector(".order_what").value.replaceAll(","," - ");
+      _kpl = parent_answer.querySelector(".order_count").value.replaceAll(","," - ");
+      _shop = parent_answer.querySelector(".commentbox__help_options").value.replaceAll(","," - ");
+      _purpose = parent_answer.querySelector(".kommentti_comment").value.replaceAll(","," - ");
+      _start = '';
+      _status = 'Pyydetty';
+      _deadline = parent_answer.querySelector(".comment__deadline").value.replaceAll(","," - ");
+      _attachments = parent_answer.querySelector(".comment__preview_files").innerText.replaceAll(","," - ");
+      _hinta = parent_answer.querySelector(".order_price").value.replaceAll(","," - ");
+      _pituus = parent_answer.querySelector(".order_measures_1").value.replaceAll(","," - ") + " x " + parent_answer.querySelector(".order_measures_2").value.replaceAll(","," - ") + " x " + parent_answer.querySelector(".order_measures_3").value.replaceAll(","," - ");
+      _userfrom = parent_answer.querySelector(".kommentti_comment_from").value.replaceAll(","," - ");
+      _userto = parent_answer.querySelector(".order_to").value.replaceAll(","," - ");
+      formData = {
+        comment_id: new_com_id_,
+        project_id: _project_id,
+        room: _room,
+        item: _item,
+        kpl: _kpl,
+        shop: _shop,
+        purpose: _purpose,
+        start: _start,
+        status: _status,
+        deadline: _deadline,
+        attachments: _attachments,
+        hinta: _hinta,
+        pituus: _pituus,	
+        userfrom: _userfrom,
+        userto: _userto,
+
+      };
+      $.ajax({
+        type: "POST",
+        url: "vendor/addorder.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log(formData);
+        }
+      }).done(function (data) {
+        alert('Tilauspyyntö lähetetty!');
+        location.reload();
+      });
+    }, 1500);
+    setTimeout(function () {
+      formData = {
+        comment_id: this_element.getAttribute("name"),
+        comment_status: 'Materiaalit'
+      };
+      $.ajax({
+      type: "POST",
+      url: "../vendor/modifycommentstatus.php",
+      data: formData,
+      error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log(formData);
+      }
+      }).done(function (data) {
+          // alert(data);
+          location.reload();
+      });      
+    }, 1800);
+  }
+}
+
+function comment__create_new() {
+  document.querySelector("body").classList.toggle("bg");
+  select = document.querySelector(".kommentti_comment_newto");
+  var result = [];
+  var options = select && select.options;
+  var opt;
+  selected = 0;
+  for (var i=0, iLen=options.length; i<iLen; i++) {
+    opt = options[i];
+    
+    if (opt.selected) {
+     
+      if(selected>0) {
+        result +="|";
+      }
+       selected +=1;
+      result += opt.value || opt.text;
+      
+    }
+  }
+
+  // alert(result);
+
+    new_com_id = "com" + Math.random().toString(16).slice(2).toLowerCase().toLowerCase();
+    new_com_id_ = new_com_id;
+
+    newcom = document.querySelector(".commentbox__new");
+    newcom.querySelector(".comment__preview_files").classList.add(new_com_id + '_previewfiles');
+    newcom.querySelector(".comment__preview_files").classList.add(new_com_id);
+    setTimeout(function () {
+      project_id = parseFloat(document.querySelector("#current_project_id").value);
+      room_id = document.querySelector("#roomname").value.replaceAll(" ","");
+      _attachments = newcom.querySelector(".comment__preview_files").innerText;
+      _ending_time = '';
+      _deadline = newcom.querySelector(".comment__deadline").value;
+      _x_y = newcom.querySelector(".vko_estimate").value;
+      _content = newcom.querySelector(".kommentti_comment").value.replaceAll(","," - ");
+      _name = newcom.querySelector(".kommentti__name").value;
+      _comment_from = newcom.querySelector(".kommentti_comment_from").value.replaceAll(","," - ");
+      
+      _comment_to = result.replaceAll(","," - ");
+      if(document.querySelector("#is_thecomment_critical").checked) {
+        _urgency = "critical";
+      }
+      else {
+        _urgency = "no_critical";
+      }
+      _aihe = _comment_from + " kommentit";
+      _answer_to = '';
+      _time_estimate = newcom.querySelector(".time_estimate").value;
+
+      formData = {
+        comment_id: new_com_id_,
+        project_id: project_id,
+        room: room_id + ">a",
+        name: _name,
+        x_y: _x_y,
+        content: _content,
+        attachments: _attachments,
+        comment_from: _comment_from,
+        comment_to: _comment_to,
+        urgency: _urgency,
+        ending_time: _ending_time,
+        deadline: _deadline,
+        aihe: _aihe,
+        answer_to: _answer_to,
+        time_estimate: _time_estimate
+      };
+
+      console.log(formData);
+
+      $.ajax({
+        type: "POST",
+        url: "/vendor/addcomment.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log(formData);
+        }
+      }).done(function (data) {
+        alert('Kommentti lisätty');
+        location.reload();
+        console.log(formData);
+      });
+    }, 2500);
+  
+    
+}
+
+function copy_comment(element) {
+  comment_thing = element.parentElement.parentElement.parentElement;
+  newcomment = document.querySelector('.commentbox__new');
+  newcomment.querySelector('.kommentti__name').value = comment_thing.querySelector('.commentbox__name').value;
+  newcomment.querySelector('.comment__deadline').value = comment_thing.querySelector('.comment_deadline').innerText;
+  newcomment.querySelector('.kommentti_comment').value = comment_thing.querySelector('.commentbox__content').value;
+  newcomment.querySelector('.kommentti_comment_from').value = comment_thing.querySelector('.commentbox__from').innerText;
+  newcomment.querySelector('.kommentti_comment_to').value = comment_thing.querySelector('.commentbox__to').innerText;
+  newcomment.querySelector('.comment__deadline.time_estimate').value = comment_thing.querySelector('.commentbox__hours').value;
+  newcomment.querySelector('.comment__preview_files').innerHTML = comment_thing.querySelector('.commentbox__tiedostot').innerHTML;
+}
+
+
+function laskuta_ostot_open() {
+  document.querySelector('.laskuta__ostot').classList.toggle('active');
+  elem  = document.querySelector("#or_main_label");
+  if(document.querySelector('.laskuta__ostot').classList.contains('active')) {
+    elem.innerHTML = "Sulje";
+    elem.style.background = "red";
+  }
+  else {
+    elem.innerHTML = "Laskuta kaikki ostot";
+    elem.style.background = "green";
+  }
+}
+
+
+
+function send_laskutus(elem) {
+  elem.classList.toggle("active");
+  laskutusrivit  = document.querySelector('.laskutusrivit');
+  p_elem = elem.parentElement;
+  laskutus_cls = elem.parentElement.classList;
+  laskutus_shop = p_elem.querySelectorAll("td")[5].cloneNode(true);
+  laskutus_price = p_elem.querySelectorAll("td")[11].cloneNode(true);
+  laskutus_item = p_elem.querySelectorAll("td")[3].cloneNode(true);
+
+  newdiv = document.createElement("tr");
+  newdiv.classList.add("laskutusrivit"+laskutus_shop.innerText.toLowerCase().replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","")+"_"+laskutus_cls);
+  newdiv.classList.add("laskutusrivi");
+  newdiv.dataset.identification = laskutus_cls;
+
+  newdiv.appendChild(laskutus_item);
+  newdiv.appendChild(laskutus_shop);
+  newdiv.appendChild(laskutus_price);
+
+  if(elem.classList.contains("active")) {
+    elem.style.background="green";
+    document.querySelector("#laskutusrivit_"+laskutus_shop.innerText.toLowerCase().replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","")).parentElement.querySelector("h6").innerHTML = laskutus_shop.innerText;
+    document.querySelector("#laskutusrivit_"+laskutus_shop.innerText.toLowerCase().replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","")).appendChild(newdiv);
+    summat = laskutusrivit.querySelectorAll("td.pricetopay");
+
+    summa = 0;
+    for (let s = 0; s < summat.length; s++) {
+      summa+= parseFloat(summat[s].innerText);
+    }
+
+    document.querySelector(".laskutusrivit_summa > b").innerHTML = summa+'€';
+  }
+  else {
+    elem.style.background="white";
+    document.querySelector(".laskutusrivit"+laskutus_shop.innerText.toLowerCase()+"_"+laskutus_cls).remove();
+    summat = laskutusrivit.querySelectorAll("td.pricetopay");
+
+    summa = 0;
+    for (let s = 0; s < summat.length; s++) {
+      summa+= parseFloat(summat[s].innerText);
+    }
+
+    document.querySelector(".laskutusrivit_summa > b").innerHTML = summa+'€';
+
+  
+  }
+
+}
+
+function send_laskutus_data() {
+  laskutusrivit = document.querySelectorAll(".laskutusrivi");
+
+  for (let i = 0; i < laskutusrivit.length; i++) {
+    // VENDOR CCHANGE STATUSES
+
+    setTimeout(function () {
+      _id = laskutusrivit[i].dataset.identification;
+      formData = {
+        identification: _id,
+      };
+  
+      $.ajax({
+        type: "POST",
+        url: "/vendor/change_shoppinglist_status.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log(formData);
+        }
+      }).done(function (data) {
+        alert(data);
+        //location.reload();
+      });
+    }, 150);
+  }
+
+  
+  setTimeout(function () {
+    _table = document.querySelector(".laskutusrivit").innerHTML;
+    _project_id = document.querySelector("#rooms > input.id").value;
+
+    formData = {
+      project_id: _project_id,
+      table: _table
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "/vendor/send_shoppinglist.php",
+      data: formData,
+      error: function (jqxhr, status, exception) {
+        alert('Tietokantavirhe, soita numeroon +358449782028');
+        console.log(formData);
+      }
+    }).done(function (data) {
+      alert(data);
+      location.reload();
+    });
+  }, 250);
+  
+}
+
+
+function changestatus(item,name) {
+  ticket = item.parentElement.parentElement.parentElement.parentElement;
+ 
+  if(item.innerText.toLowerCase() == "aloita") {
+      item.parentElement.parentElement.style.background = "red";
+      item.innerText = 'Keskeytä';
+      _comment_status = 'Aloitettu';
+
+      ticket.querySelector(".comment__status").innerHTML = "Aloitettu";
+      ticket.querySelector(".comment__status").style.borderColor = "yellow";
+
+
+  }
+  else if(item.innerText.toLowerCase() == "keskeytä") {
+      item.parentElement.parentElement.style.background = "orange";
+      item.innerText = 'Aloita';
+      _comment_status = 'Keskeytetty';
+
+      fourp_open(name);
+  }
+  else {
+    item.parentElement.parentElement.style.background = "red";
+    item.innerText = 'Keskeytä';
+    _comment_status = 'Aloitettu';
+    
+    ticket.querySelector(".comment__status").innerHTML = "Aloitettu";
+    ticket.querySelector(".comment__status").style.borderColor = "yellow";
+  }
+  if(_comment_status != 'Keskeytetty') {
+    setTimeout(function () {
+      formData = {
+          comment_id: name,
+          comment_status: _comment_status
+      };
+      $.ajax({
+      type: "POST",
+      url: "../vendor/modifycommentstatus.php",
+      data: formData,
+      error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log(formData);
+      }
+      }).done(function (data) {
+          // alert(data);
+          //location.reload();
+      });
+    }, 1000);
+  }
+  
+  
+}
+
+
+function change_task_hours(item,name) {
+  formData = {
+      comment_id: name,
+      comment_hours: parseFloat(item.value)
+  };
+  $.ajax({
+  type: "POST",
+  url: "../vendor/modifytaskhours.php",
+  data: formData,
+  error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log(formData);
+  }
+  }).done(function (data) {
+    //console.log(data);
+  });
+}
+
+
+function change_task_texts(item) {
+  _comment_heading = document.querySelector(".commentbox."+item+" .commentbox__name").value;
+  _comment_content = document.querySelector(".commentbox."+item+" .commentbox__content").value;
+  document.querySelector(".commentbox."+item+" .commentbox__content").innerHTML = _comment_content;
+  formData = {
+      comment_id: item,
+      comment_heading: _comment_heading,
+      comment_content: _comment_content,
+  };
+  $.ajax({
+  type: "POST",
+  url: "../vendor/modifytasktexts.php",
+  data: formData,
+  error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log(formData);
+  }
+  }).done(function (data) {
+    //console.log(data);
+  });
+}
+
+
+function change_task_assignation(item) {
+
+
+  select = document.querySelector(".change_task_assignation."+item);
+  var result = [];
+  var options = select && select.options;
+  var opt;
+  selected = 0;
+  for (var i=0, iLen=options.length; i<iLen; i++) {
+    opt = options[i];
+    
+    if (opt.selected) {
+     
+      if(selected>0) {
+        result +="|";
+      }
+       selected +=1;
+      result += opt.value || opt.text;
+      
+    }
+  }
+    // _comment_to = document.querySelector(".commentbox."+item+" .commentbox__to").value;
+  _comment_to = result;
+
+  formData = {
+      comment_id: item,
+      comment_to: _comment_to,
+  };
+  $.ajax({
+  type: "POST",
+  url: "../vendor/modifytaskresponsible.php",
+  data: formData,
+  error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log(formData);
+  }
+  }).done(function (data) {
+    //console.log(data);
+  });
+}
+
+function change_task_criticality(com_id, item) { 
+  _urgency = '';
+  if(item.checked === false) {
+    _urgency = 'no_critical';
+  }
+  else if(item.checked === true) {
+    _urgency = 'critical';
+  }
+  console.log(_urgency);
+
+  formData = {
+      comment_id: com_id,
+      urgency: _urgency,
+  };
+  $.ajax({
+  type: "POST",
+  url: "../vendor/modifytaskcriticality.php",
+  data: formData,
+  error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log(formData);
+  }
+  }).done(function (data) {
+    //console.log(data);
+  });
+}
+
+function comment__deletekuittaamatta(item) { 
+  com_id_ = item.getAttribute("name");
+  statuschange_ = 'poistettu_kuittaamatta';
+
+  
+  formData = {
+      comment_id: com_id_,
+      comment_status: statuschange_,
+  };
+  $.ajax({
+  type: "POST",
+  url: "../vendor/modifycommentstatus_poistakuittaamatta.php",
+  data: formData,
+  error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log(formData);
+  }
+  }).done(function (data) {
+    //console.log(data);
+    alert('Poistettu kuittaamatta');
+    location.reload();
+  });
+}
+
+
+function change_task_vko(item,com_id_) { 
+  vko_ = item.value;
+  
+  formData = {
+      comment_id: com_id_,
+      vko_arvio: vko_,
+  };
+  $.ajax({
+  type: "POST",
+  url: "../vendor/modifycommentvko.php",
+  data: formData,
+  error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log(formData);
+  }
+  }).done(function (data) {
+    //console.log(data);
+    // alert('Poistettu kuittaamatta');
+    // location.reload();
+  });
+}
+
+function change_task_tta(item,com_id_) { 
+  tta_ = item.value;
+
+  formData = {
+      comment_id: com_id_,
+      tta: tta_,
+  };
+  $.ajax({
+  type: "POST",
+  url: "../vendor/modifycomment_tta.php",
+  data: formData,
+  error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log(formData);
+  }
+  }).done(function (data) {
+      //console.log(data);
+      // alert('Poistettu kuittaamatta');
+      // location.reload();
+  });
+}
+
+
+function change_task_specs() {
+  com_id_ = document.querySelector(".commentasking__section").dataset.currentcomment;
+  h_remaining_ = document.querySelector("#commentasking__lefthours").value;
+  pvm_remaining_ = document.querySelector("#commentasking__pvm").value;
+  readiness_ = document.querySelector("#commentasking__readiness").value;
+
+  formData = {
+      comment_id: com_id_,
+      h_remaining: h_remaining_,
+      pvm_remaining: pvm_remaining_,
+      readiness: readiness_,
+  };
+
+  setTimeout(function () {
+    $.ajax({
+    type: "POST",
+    url: "../vendor/modifycomment_specs.php",
+    data: formData,
+    error: function (jqxhr, status, exception) {
+        alert('Tietokantavirhe, soita numeroon +358449782028');
+        console.log(formData);
+    }
+    }).done(function (data) {
+        //console.log(data);
+        // alert('Poistettu kuittaamatta');
+        // location.reload();
+    });
+
+    setTimeout(function () {
+      formData = {
+        comment_id: com_id_,
+        comment_status: 'Keskeytetty'
+      };
+  
+  
+      $.ajax({
+      type: "POST",
+      url: "../vendor/modifycommentstatus.php",
+      data: formData,
+      error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log(formData);
+      }
+      }).done(function (data) {
+          // alert(data);
+          // location.reload();
+
+          document.querySelector("."+com_id_+" .comment__status").innerHTML = "keskeytetty";
+          document.querySelector("."+com_id_+" .comment__status").style.borderColor = "red";
+      });
+    }, 500);
+  }, 250);
+  
+}
+
+

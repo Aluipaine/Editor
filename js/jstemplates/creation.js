@@ -1,4 +1,5 @@
 // highlighter for sizer visuals
+z = 0;
 $('td').mouseover(function() {
     var $this = $(this);
     var col = $this.index();
@@ -198,9 +199,10 @@ $('td').mouseover(function() {
     $EXPORT.text(JSON.stringify(data));
   });
   
-  $("#A").delegate('td', 'mouseover mouseleave click', function(e) {
+  $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
     var cellindex = 0;
     let rooms = "";
+    e.stopImmediatePropagation();
   
     if (e.type == 'click') {
         if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
@@ -210,7 +212,7 @@ $('td').mouseover(function() {
   
   
             var cells = $(this).parent().children("td");
-            var tds = $('#A .table_size_chooser td').removeClass("SizeChooser-clicked")
+            var tds = $('#A_ .table_size_chooser td').removeClass("SizeChooser-clicked")
   
             for (var i = 0; i < cells.length; i++) {
                 if ($(this).find('label').text().length > 1) {
@@ -236,11 +238,23 @@ $('td').mouseover(function() {
             $(this).find('label').text("");
             $('#a_nextnum').val(z);
         } else {
+            // e.preventDefault();
+            // e.stopPropagation();
+            
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
-            var tds = $('#A .table_size_chooser td').removeClass("SizeChooser-clicked")
-            z = parseFloat($('#a_nextnum').val());
-            z += 1;
+            var tds = $('#A_ .table_size_chooser td').removeClass("SizeChooser-clicked");
+            
+            if(Math.floor($('#a_nextnum').val()) == $('#a_nextnum').val() && $.isNumeric($('#a_nextnum').val()))  {
+                z = parseFloat($('#a_nextnum').val().replace(/\D/g,''));
+                console.log("Z::" + z);
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#a_nextnum').val().replace(/\D/g,''));
+                console.log("Z::" + z);
+                z += 1;
+            }
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
                     $(this).removeClass("cell");
@@ -252,7 +266,23 @@ $('td').mouseover(function() {
                 }
                 var a_val = $('#a_val').val();
                 var a_val_num = $('#a_nextnum').val();
-                $(this).find('label').text(a_val + a_val_num);
+
+                if($('#a_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#a_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#a_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#a_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                 var a_rooms = $('#a_rooms');
   
             }
@@ -275,19 +305,18 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#a_val').val() + parseFloat($('#a_nextnum').val());
+            V = $('#a_val').val() + parseFloat($('#a_nextnum').val().replace(/\D/g,''));
   
   
             posX = $(this).closest('tr').index();
             posY = $(this).index();
-  
   
             $('#a_nextnum').val(z);
         }
   
     }
   });
-  $("#B").delegate('td', 'mouseover mouseleave click', function(e) {
+  $("#B_").delegate('td', 'mouseover mouseleave click', function(e) {
     var cellindex = 0;
     let rooms = "";
     console.log("reg B");
@@ -316,18 +345,24 @@ $('td').mouseover(function() {
   
         } else if ($(this).hasClass("noindex")) {
             z = 0;
-            $('#b_nextnum').val(z);
+            $('#b_nextnum').val(z).replace(/\D/g,'');
         } else if ($(this).find('input').prop('checked') == false) {
             z -= 1;
             $(this).find('input').val("");
             $(this).find('label').text("");
-            $('#b_nextnum').val(z);
+            $('#b_nextnum').val(z).replace(/\D/g,'');
         } else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
             var tds = $('#B .table_size_chooser td').removeClass("SizeChooser-clicked")
-            z = parseFloat($('#b_nextnum').val());
-            z += 1;
+            if(Math.floor($('#b_nextnum').val()) == $('#b_nextnum').val() && $.isNumeric($('#b_nextnum').val()))  {
+                z = parseFloat($('#b_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#b_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
                     $(this).removeClass("cell");
@@ -339,7 +374,23 @@ $('td').mouseover(function() {
                 }
                 var a_val = $('#b_val').val();
                 var a_val_num = $('#b_nextnum').val();
-                $(this).find('label').text(a_val + a_val_num);
+                if($('#b_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#b_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#b_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#b_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+
                 var a_rooms = $('#b_rooms');
   
             }
@@ -362,19 +413,19 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#b_val').val() + parseFloat($('#b_nextnum').val());
+            V = $('#b_val').val() + parseFloat($('#b_nextnum').val().replace(/\D/g,''));
   
   
             posX = $(this).closest('tr').index();
             posY = $(this).index();
   
   
-            $('#b_nextnum').val(z);
+            $('#b_nextnum').val(z).replace(/\D/g,'');
         }
   
     }
   });
-  $("#C").delegate('td', 'mouseover mouseleave click', function(e) {
+  $("#C_").delegate('td', 'mouseover mouseleave click', function(e) {
     var cellindex = 0;
     let rooms = "";
   
@@ -403,18 +454,27 @@ $('td').mouseover(function() {
   
         } else if ($(this).hasClass("noindex")) {
             z = 0;
-            $('#c_nextnum').val(z);
+            $('#c_nextnum').val(z).replace(/\D/g,'');
         } else if ($(this).find('input').prop('checked') == false) {
             z -= 1;
             $(this).find('input').val("");
             $(this).find('label').text("");
-            $('#c_nextnum').val(z);
+            $('#c_nextnum').val(z).replace(/\D/g,'');
         } else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
             var tds = $('#C .table_size_chooser td').removeClass("SizeChooser-clicked")
-            z = parseFloat($('#c_nextnum').val());
-            z += 1;
+            // z = parseFloat($('#c_nextnum').val().replace(/\D/g,''));
+            // z += 1;
+
+            if(Math.floor($('#c_nextnum').val()) == $('#c_nextnum').val() && $.isNumeric($('#c_nextnum').val()))  {
+                z = parseFloat($('#c_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#c_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
                     $(this).removeClass("cell");
@@ -426,7 +486,23 @@ $('td').mouseover(function() {
                 }
                 var a_val = $('#c_val').val();
                 var a_val_num = $('#c_nextnum').val();
-                $(this).find('label').text(a_val + a_val_num);
+                if($('#c_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#c_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#c_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#c_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+
                 var a_rooms = $('#c_rooms');
   
             }
@@ -449,19 +525,19 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#c_val').val() + parseFloat($('#c_nextnum').val());
+            V = $('#c_val').val() + parseFloat($('#c_nextnum').val().replace(/\D/g,''));
   
   
             posX = $(this).closest('tr').index();
             posY = $(this).index();
   
   
-            $('#c_nextnum').val(z);
+            $('#c_nextnum').val(z).replace(/\D/g,'');
         }
   
     }
   });
-  $("#D").delegate('td', 'mouseover mouseleave click', function(e) {
+  $("#D_").delegate('td', 'mouseover mouseleave click', function(e) {
     var cellindex = 0;
     let rooms = "";
   
@@ -490,18 +566,27 @@ $('td').mouseover(function() {
   
         } else if ($(this).hasClass("noindex")) {
             z = 0;
-            $('#d_nextnum').val(z);
+            $('#d_nextnum').val(z).replace(/\D/g,'');
         } else if ($(this).find('input').prop('checked') == false) {
             z -= 1;
             $(this).find('input').val("");
             $(this).find('label').text("");
-            $('#d_nextnum').val(z);
+            $('#d_nextnum').val(z).replace(/\D/g,'');
         } else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
             var tds = $('#D .table_size_chooser td').removeClass("SizeChooser-clicked")
-            z = parseFloat($('#d_nextnum').val());
-            z += 1;
+            // z = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
+            // z += 1;
+
+            if(Math.floor($('#d_nextnum').val()) == $('#d_nextnum').val() && $.isNumeric($('#d_nextnum').val()))  {
+                z = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
   
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
@@ -514,7 +599,24 @@ $('td').mouseover(function() {
                 }
                 var a_val = $('#d_val').val();
                 var a_val_num = $('#d_nextnum').val();
-                $(this).find('label').text(a_val + a_val_num);
+                if($('#d_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#d_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#d_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#d_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+
+
                 var a_rooms = $('#d_rooms');
   
             }
@@ -538,19 +640,19 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#d_val').val() + parseFloat($('#d_nextnum').val());
+            V = $('#d_val').val() + parseFloat($('#d_nextnum').val().replace(/\D/g,''));
   
   
   
             posX = $(this).closest('tr').index();
             posY = $(this).index();
   
-            $('#d_nextnum').val(z);
+            $('#d_nextnum').val(z).replace(/\D/g,'');
         }
   
     }
   });
-  $("#E").delegate('td', 'mouseover mouseleave click', function(e) {
+  $("#E_").delegate('td', 'mouseover mouseleave click', function(e) {
     var cellindex = 0;
     let rooms = "";
   
@@ -579,18 +681,26 @@ $('td').mouseover(function() {
   
         } else if ($(this).hasClass("noindex")) {
             z = 0;
-            $('#e_nextnum').val(z);
+            $('#e_nextnum').val(z).replace(/\D/g,'');
         } else if ($(this).find('input').prop('checked') == false) {
             z -= 1;
             $(this).find('input').val("");
             $(this).find('label').text("");
-            $('#e_nextnum').val(z);
+            $('#e_nextnum').val(z).replace(/\D/g,'');
         } else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
             var tds = $('#E .table_size_chooser td').removeClass("SizeChooser-clicked")
-            z = parseFloat($('#e_nextnum').val());
-            z += 1;
+
+
+            if(Math.floor($('#e_nextnum').val()) == $('#e_nextnum').val() && $.isNumeric($('#e_nextnum').val()))  {
+                z = parseFloat($('#e_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#e_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
   
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
@@ -603,7 +713,23 @@ $('td').mouseover(function() {
                 }
                 var a_val = $('#e_val').val();
                 var a_val_num = $('#e_nextnum').val();
-                $(this).find('label').text(a_val + a_val_num);
+
+                if($('#e_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#e_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#e_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#e_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                 var a_rooms = $('#e_rooms');
   
             }
@@ -626,18 +752,18 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#e_val').val() + parseFloat($('#e_nextnum').val());
+            V = $('#e_val').val() + parseFloat($('#e_nextnum').val().replace(/\D/g,''));
   
   
             posX = $(this).closest('tr').index();
             posY = $(this).index();
   
-            $('#e_nextnum').val(z);
+            $('#e_nextnum').val(z).replace(/\D/g,'');
         }
   
     }
   });
-  $("#F").delegate('td', 'mouseover mouseleave click', function(e) {
+  $("#F_").delegate('td', 'mouseover mouseleave click', function(e) {
     var cellindex = 0;
     let rooms = "";
   
@@ -665,18 +791,25 @@ $('td').mouseover(function() {
   
         } else if ($(this).hasClass("noindex")) {
             z = 0;
-            $('#f_nextnum').val(z);
+            $('#f_nextnum').val(z).replace(/\D/g,'');
         } else if ($(this).find('input').prop('checked') == false) {
             z -= 1;
             $(this).find('input').val("");
             $(this).find('label').text("");
-            $('#f_nextnum').val(z);
+            $('#f_nextnum').val(z).replace(/\D/g,'');
         } else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
             var tds = $('#F .table_size_chooser td').removeClass("SizeChooser-clicked")
-            z = parseFloat($('#f_nextnum').val());
-            z += 1;
+
+            if(Math.floor($('#f_nextnum').val()) == $('#f_nextnum').val() && $.isNumeric($('#f_nextnum').val()))  {
+                z = parseFloat($('#f_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#f_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
                     $(this).removeClass("cell");
@@ -688,7 +821,22 @@ $('td').mouseover(function() {
                 }
                 var a_val = $('#f_val').val();
                 var a_val_num = $('#f_nextnum').val();
-                $(this).find('label').text(a_val + a_val_num);
+                if($('#f_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#f_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#f_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#f_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                 var a_rooms = $('#f_rooms');
   
             }
@@ -711,18 +859,18 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#f_val').val() + parseFloat($('#f_nextnum').val());
+            V = $('#f_val').val() + parseFloat($('#f_nextnum').val().replace(/\D/g,''));
   
   
             posX = $(this).closest('tr').index();
             posY = $(this).index();
   
-            $('#f_nextnum').val(z);
+            $('#f_nextnum').val(z).replace(/\D/g,'');
         }
   
     }
   });
-  $("#G").delegate('td', 'mouseover mouseleave click', function(e) {
+  $("#G_").delegate('td', 'mouseover mouseleave click', function(e) {
     var cellindex = 0;
     let rooms = "";
   
@@ -749,18 +897,25 @@ $('td').mouseover(function() {
   
         } else if ($(this).hasClass("noindex")) {
             z = 0;
-            $('#g_nextnum').val(z);
+            $('#g_nextnum').val(z).replace(/\D/g,'');
         } else if ($(this).find('input').prop('checked') == false) {
             z -= 1;
             $(this).find('input').val("");
             $(this).find('label').text("");
-            $('#g_nextnum').val(z);
+            $('#g_nextnum').val(z).replace(/\D/g,'');
         } else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
             var tds = $('#G .table_size_chooser td').removeClass("SizeChooser-clicked")
-            z = parseFloat($('#g_nextnum').val());
-            z += 1;
+
+            if(Math.floor($('#g_nextnum').val()) == $('#g_nextnum').val() && $.isNumeric($('#g_nextnum').val()))  {
+                z = parseFloat($('#g_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#g_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
                     $(this).removeClass("cell");
@@ -772,7 +927,23 @@ $('td').mouseover(function() {
                 }
                 var a_val = $('#g_val').val();
                 var a_val_num = $('#g_nextnum').val();
-                $(this).find('label').text(a_val + a_val_num);
+                
+                if($('#g_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#g_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#g_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#g_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                 var a_rooms = $('#g_rooms');
   
             }
@@ -795,18 +966,18 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#g_val').val() + parseFloat($('#g_nextnum').val());
+            V = $('#g_val').val() + parseFloat($('#g_nextnum').val().replace(/\D/g,''));
   
   
             posX = $(this).closest('tr').index();
             posY = $(this).index();
   
-            $('#g_nextnum').val(z);
+            $('#g_nextnum').val(z).replace(/\D/g,'');
         }
   
     }
   });
-  $("#H").delegate('td', 'mouseover mouseleave click', function(e) {
+  $("#H_").delegate('td', 'mouseover mouseleave click', function(e) {
     var cellindex = 0;
     let rooms = "";
   
@@ -834,18 +1005,27 @@ $('td').mouseover(function() {
   
         } else if ($(this).hasClass("noindex")) {
             z = 0;
-            $('#h_nextnum').val(z);
+            $('#h_nextnum').val(z).replace(/\D/g,'');
         } else if ($(this).find('input').prop('checked') == false) {
             z -= 1;
             $(this).find('input').val("");
             $(this).find('label').text("");
-            $('#h_nextnum').val(z);
+            $('#h_nextnum').val(z).replace(/\D/g,'');
         } else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
             var tds = $('#H .table_size_chooser td').removeClass("SizeChooser-clicked")
-            z = parseFloat($('#h_nextnum').val());
-            z += 1;
+
+            
+
+            if(Math.floor($('#h_nextnum').val()) == $('#h_nextnum').val() && $.isNumeric($('#h_nextnum').val()))  {
+                z = parseFloat($('#h_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#h_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
                     $(this).removeClass("cell");
@@ -857,7 +1037,23 @@ $('td').mouseover(function() {
                 }
                 var a_val = $('#h_val').val();
                 var a_val_num = $('#h_nextnum').val();
-                $(this).find('label').text(a_val + a_val_num);
+
+                if($('#h_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#h_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#h_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#h_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                 var a_rooms = $('#h_rooms');
   
             }
@@ -880,13 +1076,13 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#h_val').val() + parseFloat($('#h_nextnum').val());
+            V = $('#h_val').val() + parseFloat($('#h_nextnum').val().replace(/\D/g,''));
   
   
             posX = $(this).closest('tr').index();
             posY = $(this).index();
   
-            $('#h_nextnum').val(z);
+            $('#h_nextnum').val(z).replace(/\D/g,'');
         }
   
     }
@@ -941,11 +1137,11 @@ $('td').mouseover(function() {
   zf = 1;
   zg = 1;
   zh = 1;
-  const _O_ = [];
+//   const _O_ = [];
   
   $(".rappu_more").click(function() {
     setTimeout(console.log("wait"), 1000);
-    $("#A").delegate('td', 'mouseover mouseleave click', function(e) {
+    $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
         var cellindex = 0;
         let rooms = "";
   
@@ -957,7 +1153,7 @@ $('td').mouseover(function() {
   
   
                 var cells = $(this).parent().children("td");
-                var tds = $('#A .table_sizae_chooser td').removeClass("SizaeChooser-clicked")
+                var tds = $('#A_ .table_sizae_chooser td').removeClass("SizaeChooser-clicked")
   
                 for (var i = 0; i < cells.length; i++) {
                     if ($(this).find('label').text().length > 1) {
@@ -982,17 +1178,14 @@ $('td').mouseover(function() {
             } else {
                 $(this).addClass("checked");
                 var cells = $(this).parent().children("td");
-                var tds = $('#A .table_sizae_chooser td').removeClass("SizaeChooser-clicked")
-                za = parseFloat($('#a_nextnum').val());
+                var tds = $('#A_ .table_sizae_chooser td').removeClass("SizaeChooser-clicked")
+                za = parseFloat($('#a_nextnum').val().replace(/\D/g,''));
                 za += 1;
                 for (var i = 0; i < cells.length; i++) {
                     if ($(cells[i]).hasClass("cell")) {
                         $(this).removeClass("cell");
                         cellindex = i;
-  
                         break;
-  
-  
                     }
                     var a_val = $('#a_val').val();
                     var a_val_num = $('#a_nextnum').val();
@@ -1024,13 +1217,13 @@ $('td').mouseover(function() {
   
                 posX = $(this).closest('tr').index();
                 posY = $(this).index();
-  
+                
                 $('#a_nextnum').val(za);
             }
   
         }
     });
-    $("#B").delegate('td', 'mouseover mouseleave click', function(e) {
+    $("#B_").delegate('td', 'mouseover mouseleave click', function(e) {
         var cellindex = 0;
         let rooms = "";
         if (e.type == 'click') {
@@ -1041,7 +1234,7 @@ $('td').mouseover(function() {
   
   
                 var cells = $(this).parent().children("td");
-                var tds = $('#B .table_sizbe_chooser td').removeClass("SizbeChooser-clicked")
+                var tds = $('#B .table_size_chooser td').removeClass("SizbeChooser-clicked")
   
                 for (var i = 0; i < cells.length; i++) {
                     if ($(this).find('label').text().length > 1) {
@@ -1066,8 +1259,8 @@ $('td').mouseover(function() {
             } else {
                 $(this).addClass("checked");
                 var cells = $(this).parent().children("td");
-                var tds = $('#B .table_sizbe_chooser td').removeClass("SizbeChooser-clicked")
-                zb = parseFloat($('#b_nextnum').val());
+                var tds = $('#B .table_size_chooser td').removeClass("SizbeChooser-clicked")
+                zb = parseFloat($('#b_nextnum').val().replace(/\D/g,''));
                 zb += 1;
   
                 for (var i = 0; i < cells.length; i++) {
@@ -1079,9 +1272,26 @@ $('td').mouseover(function() {
   
   
                     }
+
                     var a_val = $('#b_val').val();
                     var a_val_num = $('#b_nextnum').val();
-                    $(this).find('label').text(a_val + a_val_num);
+                    if($('#b_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#b_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#b_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#b_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+    
+                   
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+
                     var a_rooms = $('#b_rooms');
   
                 }
@@ -1105,7 +1315,7 @@ $('td').mouseover(function() {
                         break;
                     }
                 }
-                V = $('#b_val').val() + parseFloat($('#b_nextnum').val());
+                V = $('#b_val').val() + parseFloat($('#b_nextnum').val().replace(/\D/g,''));
   
   
                 posX = $(this).closest('tr').index();
@@ -1116,7 +1326,7 @@ $('td').mouseover(function() {
   
         }
     });
-    $("#C").delegate('td', 'mouseover mouseleave click', function(e) {
+    $("#C_").delegate('td', 'mouseover mouseleave click', function(e) {
         var cellindex = 0;
         let rooms = "";
   
@@ -1154,7 +1364,7 @@ $('td').mouseover(function() {
                 $(this).addClass("checked");
                 var cells = $(this).parent().children("td");
                 var tds = $('#C .table_sizce_chooser td').removeClass("SizceChooser-clicked")
-                zc = parseFloat($('#c_nextnum').val());
+                zc = parseFloat($('#c_nextnum').val().replace(/\D/g,''));
                 zc += 1;
                 for (var i = 0; i < cells.length; i++) {
                     if ($(cells[i]).hasClass("cell")) {
@@ -1167,7 +1377,22 @@ $('td').mouseover(function() {
                     }
                     var a_val = $('#c_val').val();
                     var a_val_num = $('#c_nextnum').val();
-                    $(this).find('label').text(a_val + a_val_num);
+                    if($('#c_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#c_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#c_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#c_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+
+                
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                     var a_rooms = $('#c_rooms');
   
                 }
@@ -1191,7 +1416,7 @@ $('td').mouseover(function() {
                         break;
                     }
                 }
-                V = $('#c_val').val() + parseFloat($('#c_nextnum').val());
+                V = $('#c_val').val() + parseFloat($('#c_nextnum').val().replace(/\D/g,''));
   
   
                 posX = $(this).closest('tr').index();
@@ -1202,7 +1427,7 @@ $('td').mouseover(function() {
   
         }
     });
-    $("#D").delegate('td', 'mouseover mouseleave click', function(e) {
+    $("#D_").delegate('td', 'mouseover mouseleave click', function(e) {
         var cellindex = 0;
         let rooms = "";
   
@@ -1240,7 +1465,7 @@ $('td').mouseover(function() {
                 $(this).addClass("checked");
                 var cells = $(this).parent().children("td");
                 var tds = $('#D .table_sizde_chooser td').removeClass("SizdeChooser-clicked")
-                zd = parseFloat($('#d_nextnum').val());
+                zd = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
                 zd += 1;
                 for (var i = 0; i < cells.length; i++) {
                     if ($(cells[i]).hasClass("cell")) {
@@ -1253,7 +1478,22 @@ $('td').mouseover(function() {
                     }
                     var a_val = $('#d_val').val();
                     var a_val_num = $('#d_nextnum').val();
-                    $(this).find('label').text(a_val + a_val_num);
+                    if($('#d_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#d_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#d_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#d_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+    
+                   
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                     var a_rooms = $('#d_rooms');
   
                 }
@@ -1276,7 +1516,7 @@ $('td').mouseover(function() {
                         break;
                     }
                 }
-                V = $('#d_val').val() + parseFloat($('#d_nextnum').val());
+                V = $('#d_val').val() + parseFloat($('#d_nextnum').val().replace(/\D/g,''));
   
   
                 posX = $(this).closest('tr').index();
@@ -1286,7 +1526,7 @@ $('td').mouseover(function() {
   
         }
     });
-    $("#E").delegate('td', 'mouseover mouseleave click', function(e) {
+    $("#E_").delegate('td', 'mouseover mouseleave click', function(e) {
         var cellindex = 0;
         let rooms = "";
   
@@ -1324,7 +1564,7 @@ $('td').mouseover(function() {
                 $(this).addClass("checked");
                 var cells = $(this).parent().children("td");
                 var tds = $('#E .table_sizee_chooser td').removeClass("SizeeChooser-clicked")
-                ze = parseFloat($('#e_nextnum').val());
+                ze = parseFloat($('#e_nextnum').val().replace(/\D/g,''));
                 ze += 1;
                 for (var i = 0; i < cells.length; i++) {
                     if ($(cells[i]).hasClass("cell")) {
@@ -1337,7 +1577,23 @@ $('td').mouseover(function() {
                     }
                     var a_val = $('#e_val').val();
                     var a_val_num = $('#e_nextnum').val();
-                    $(this).find('label').text(a_val + a_val_num);
+    
+                    if($('#e_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#e_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#e_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#e_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+    
+                   
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                     var a_rooms = $('#e_rooms');
   
                 }
@@ -1360,7 +1616,7 @@ $('td').mouseover(function() {
                         break;
                     }
                 }
-                V = $('#e_val').val() + parseFloat($('#e_nextnum').val());
+                V = $('#e_val').val() + parseFloat($('#e_nextnum').val().replace(/\D/g,''));
   
                 posX = $(this).closest('tr').index();
                 posY = $(this).index();
@@ -1370,7 +1626,7 @@ $('td').mouseover(function() {
   
         }
     });
-    $("#F").delegate('td', 'mouseover mouseleave click', function(e) {
+    $("#F_").delegate('td', 'mouseover mouseleave click', function(e) {
         var cellindex = 0;
         let rooms = "";
   
@@ -1408,7 +1664,7 @@ $('td').mouseover(function() {
                 $(this).addClass("checked");
                 var cells = $(this).parent().children("td");
                 var tds = $('#F .table_sizfe_chooser td').removeClass("SizfeChooser-clicked")
-                zf = parseFloat($('#f_nextnum').val());
+                zf = parseFloat($('#f_nextnum').val().replace(/\D/g,''));
                 zf += 1;
                 for (var i = 0; i < cells.length; i++) {
                     if ($(cells[i]).hasClass("cell")) {
@@ -1421,7 +1677,22 @@ $('td').mouseover(function() {
                     }
                     var a_val = $('#f_val').val();
                     var a_val_num = $('#f_nextnum').val();
-                    $(this).find('label').text(a_val + a_val_num);
+                    if($('#f_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#f_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#f_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#f_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+
+                
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                     var a_rooms = $('#f_rooms');
   
                 }
@@ -1444,7 +1715,7 @@ $('td').mouseover(function() {
                         break;
                     }
                 }
-                V = $('#f_val').val() + parseFloat($('#f_nextnum').val());
+                V = $('#f_val').val() + parseFloat($('#f_nextnum').val().replace(/\D/g,''));
   
   
                 posX = $(this).closest('tr').index();
@@ -1454,7 +1725,7 @@ $('td').mouseover(function() {
   
         }
     });
-    $("#G").delegate('td', 'mouseover mouseleave click', function(e) {
+    $("#G_").delegate('td', 'mouseover mouseleave click', function(e) {
         var cellindex = 0;
         let rooms = "";
   
@@ -1492,7 +1763,7 @@ $('td').mouseover(function() {
                 $(this).addClass("checked");
                 var cells = $(this).parent().children("td");
                 var tds = $('#G .table_sizge_chooser td').removeClass("SizgeChooser-clicked")
-                zg = parseFloat($('#g_nextnum').val());
+                zg = parseFloat($('#g_nextnum').val().replace(/\D/g,''));
                 zg += 1;
                 for (var i = 0; i < cells.length; i++) {
                     if ($(cells[i]).hasClass("cell")) {
@@ -1505,7 +1776,23 @@ $('td').mouseover(function() {
                     }
                     var a_val = $('#g_val').val();
                     var a_val_num = $('#g_nextnum').val();
-                    $(this).find('label').text(a_val + a_val_num);
+                    
+                    if($('#g_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#g_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#g_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#g_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+    
+                   
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                     var a_rooms = $('#g_rooms');
   
                 }
@@ -1528,7 +1815,7 @@ $('td').mouseover(function() {
                         break;
                     }
                 }
-                V = $('#g_val').val() + parseFloat($('#g_nextnum').val());
+                V = $('#g_val').val() + parseFloat($('#g_nextnum').val().replace(/\D/g,''));
   
   
                 posX = $(this).closest('tr').index();
@@ -1539,7 +1826,7 @@ $('td').mouseover(function() {
   
         }
     });
-    $("#H").delegate('td', 'mouseover mouseleave click', function(e) {
+    $("#H_").delegate('td', 'mouseover mouseleave click', function(e) {
         var cellindex = 0;
         let rooms = "";
   
@@ -1577,7 +1864,7 @@ $('td').mouseover(function() {
                 $(this).addClass("checked");
                 var cells = $(this).parent().children("td");
                 var tds = $('#H .table_sizhe_chooser td').removeClass("SizheChooser-clicked")
-                zh = parseFloat($('#h_nextnum').val());
+                zh = parseFloat($('#h_nextnum').val().replace(/\D/g,''));
                 zh += 1;
                 for (var i = 0; i < cells.length; i++) {
                     if ($(cells[i]).hasClass("cell")) {
@@ -1590,7 +1877,23 @@ $('td').mouseover(function() {
                     }
                     var a_val = $('#h_val').val();
                     var a_val_num = $('#h_nextnum').val();
-                    $(this).find('label').text(a_val + a_val_num);
+
+                    if($('#h_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#h_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#h_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#h_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+
+                
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
                     var a_rooms = $('#h_rooms');
   
                 }
@@ -1613,7 +1916,7 @@ $('td').mouseover(function() {
                         break;
                     }
                 }
-                V = $('#h_val').val() + parseFloat($('#h_nextnum').val());
+                V = $('#h_val').val() + parseFloat($('#h_nextnum').val().replace(/\D/g,''));
   
   
                 posX = $(this).closest('tr').index();
@@ -1772,155 +2075,32 @@ $('td').mouseover(function() {
   // roomconfig_second
   
   $(document).ready(function() {
-    $('#submit-1').click(function() {
-        var form_data = new FormData();
-        // Read selected files
-        var totalfiles = document.getElementById('files-1').files.length;
+    $('.project__creation_uploadsend').click(function() {
+        that_element_class = $(this).attr("name") + '_previewfiles';
+        // console.log($(this).parent().children()[1].children[0].children[0]);
+        totalfiles = $(this).parent().children()[1].files.length;
+        cur_comment_files = $(this).parent().children()[1].files;
+        console.log(totalfiles);
         for (var index = 0; index < totalfiles; index++) {
-            form_data.push("files-1[]", document.getElementById('files-1').files[index]);
-            // $('#preview').append('<div>OKe</div>');
-        }
-        // AJAX request
-        $.ajax({
-            url: 'ajaxupload.php',
-            type: 'post',
-            data: form_data,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                for (var index = 0; index < response.length; index++) {
-                    // var src = response[index];
-                    $('#preview-1').append('<a class="asiakirja_first" target="_blank" href="https://teditori.gromi.fi/' + response[index] + '">Avaa</a>');
-                    $('#preview-1').append('<input class="asiakirja_second" type="text" placeholder="Anna kommentti asiakirjalle (valinnainen)" name="1_asiakirja-commentary" id="1_asiakirja-commentary-' + index + '">');
+            form_data = new FormData();
+            form_data.append("files", cur_comment_files[index]);
+  
+            $.ajax({
+                url: '/upload.php',
+                type: 'POST',
+                data: form_data,
+                contentType: 'multipart/form-data',
+                // dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    document.querySelector("." +that_element_class).innerHTML += '<a class="asiakirja_first" target="_blank" href="https://editori.westface.fi/uploads/' + response + '">' + 'https://editori.westface.fi/uploads/' + response + '</a><br>';
+                    document.querySelector("#" +that_element_class + "_value").value += '<a class="asiakirja_first" target="_blank" href="https://editori.westface.fi/uploads/' + response + '">' + 'https://editori.westface.fi/uploads/' + response + '</a><br>';
+                    console.log(response);
                 }
-            }
-        });
-    });
-    $('#submit-2').click(function() {
-        var form_data = new FormData();
-        // Read selected files
-        var totalfiles = document.getElementById('files-2').files.length;
-        for (var index = 0; index < totalfiles; index++) {
-            form_data.push("files-2[]", document.getElementById('files-2').files[index]);
-            // $('#preview').append('<div>OKe</div>');
+            });
+
         }
-        // AJAX request
-        $.ajax({
-            url: 'ajaxupload.php',
-            type: 'post',
-            data: form_data,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                for (var index = 0; index < response.length; index++) {
-                    // var src = response[index];
-                    $('#preview-2').append('<a class="asiakirja_first" target="_blank" href="https://teditori.gromi.fi/' + response[index] + '">Avaa</a>');
-                    $('#preview-2').append('<input class="asiakirja_second" type="text" placeholder="Anna kommentti asiakirjalle (valinnainen)" name="2_asiakirja-commentary" id="2_asiakirja-commentary-' + index + '">');
-                }
-            }
-        });
-    });
-    $('#submit-3').click(function() {
-        var form_data = new FormData();
-        // Read selected files
-        var totalfiles = document.getElementById('files-3').files.length;
-        for (var index = 0; index < totalfiles; index++) {
-            form_data.push("files-3[]", document.getElementById('files-3').files[index]);
-        }
-        // AJAX request
-        $.ajax({
-            url: 'ajaxupload.php',
-            type: 'post',
-            data: form_data,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                for (var index = 0; index < response.length; index++) {
-                    // var src = response[index];
-                    $('#preview-3').append('<a class="asiakirja_first" target="_blank" href="https://teditori.gromi.fi/' + response[index] + '">Avaa</a>');
-                    $('#preview-3').append('<input class="asiakirja_second" type="text" placeholder="Anna kommentti asiakirjalle (valinnainen)" name="3_asiakirja-commentary" id="3_asiakirja-commentary-' + index + '">');
-                }
-            }
-        });
-    });
-    $('#submit-4').click(function() {
-        var form_data = new FormData();
-        // Read selected files
-        var totalfiles = document.getElementById('files-4').files.length;
-        for (var index = 0; index < totalfiles; index++) {
-            form_data.push("files-4[]", document.getElementById('files-4').files[index]);
-            // $('#preview').append('<div>OKe</div>');
-        }
-        // AJAX request
-        $.ajax({
-            url: 'ajaxupload.php',
-            type: 'post',
-            data: form_data,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                for (var index = 0; index < response.length; index++) {
-                    // var src = response[index];
-                    $('#preview-4').append('<a class="asiakirja_first" target="_blank" href="https://teditori.gromi.fi/' + response[index] + '">Avaa</a>');
-                    $('#preview-4').append('<input class="asiakirja_second" type="text" placeholder="Anna kommentti asiakirjalle (valinnainen)" name="4_asiakirja-commentary" id="4_asiakirja-commentary-' + index + '">');
-                }
-            }
-        });
-    });
-    
-    $('#submit-5').click(function() {
-        var form_data = new FormData();
-        // Read selected files
-        var totalfiles = document.getElementById('files-5').files.length;
-        for (var index = 0; index < totalfiles; index++) {
-            form_data.push("files-5[]", document.getElementById('files-5').files[index]);
-            // $('#preview').append('<div>OKe</div>');
-        }
-        // AJAX request
-        $.ajax({
-            url: 'ajaxupload.php',
-            type: 'post',
-            data: form_data,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                for (var index = 0; index < response.length; index++) {
-                    // var src = response[index];
-                    $('#preview-5').append('<a class="asiakirja_first" target="_blank" href="https://teditori.gromi.fi/' + response[index] + '">Avaa</a>');
-                    $('#preview-5').append('<input class="asiakirja_second" type="text" placeholder="Anna kommentti asiakirjalle (valinnainen)" name="5_asiakirja-commentary" id="5_asiakirja-commentary-' + index + '">');
-                }
-            }
-        });
-    });
-    $('#submit-6').click(function() {
-        var form_data = new FormData();
-        // Read selected files
-        var totalfiles = document.getElementById('files-6').files.length;
-        for (var index = 0; index < totalfiles; index++) {
-            form_data.push("files-6[]", document.getElementById('files-6').files[index]);
-            // $('#preview').append('<div>OKe</div>');
-        }
-        // AJAX request
-        $.ajax({
-            url: 'ajaxupload.php',
-            type: 'post',
-            data: form_data,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                for (var index = 0; index < response.length; index++) {
-                    // var src = response[index];
-                    $('#preview-6').append('<a class="asiakirja_first" target="_blank" href="https://teditori.gromi.fi/' + response[index] + '">Avaa</a>');
-                    $('#preview-6').append('<input class="asiakirja_second" type="text" placeholder="Anna kommentti asiakirjalle (valinnainen)" name="6_asiakirja-commentary" id="6_asiakirja-commentary-' + index + '">');
-                }
-            }
-        });
     });
   });
   
@@ -1942,10 +2122,12 @@ $('td').mouseover(function() {
     const g_ = [];
     const h_array = [];
     const h_ = [];
+
+
   
   
   
-    $("#A .checked").each(function(index) {
+    $("#A_ .checked").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = $(this).find("label").text();
@@ -1967,7 +2149,7 @@ $('td').mouseover(function() {
   
     });
   
-    $("#A .nowork").each(function(index) {
+    $("#A_ .nowork").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = "NOWORK";
@@ -1979,7 +2161,7 @@ $('td').mouseover(function() {
         $("#a_rooms_nowork").val(JSON.stringify(a_));
     });
   
-    $("#B .checked").each(function(index) {
+    $("#B_ .checked").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = $(this).find("label").text();
@@ -2002,7 +2184,7 @@ $('td').mouseover(function() {
   
     });
   
-    $("#B .nowork").each(function(index) {
+    $("#B_ .nowork").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = "";
@@ -2014,7 +2196,7 @@ $('td').mouseover(function() {
         $("#b_rooms_nowork").val(JSON.stringify(b_));
     });
   
-    $("#C .checked").each(function(index) {
+    $("#C_ .checked").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = $(this).find("label").text();
@@ -2037,7 +2219,7 @@ $('td').mouseover(function() {
   
     });
   
-    $("#C .nowork").each(function(index) {
+    $("#C_ .nowork").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = "";
@@ -2049,7 +2231,7 @@ $('td').mouseover(function() {
         $("#c_rooms_nowork").val(JSON.stringify(c_));
     });
   
-    $("#D .checked").each(function(index) {
+    $("#D_ .checked").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = $(this).find("label").text();
@@ -2072,7 +2254,7 @@ $('td').mouseover(function() {
   
     });
   
-    $("#D .nowork").each(function(index) {
+    $("#D_ .nowork").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = "";
@@ -2084,7 +2266,7 @@ $('td').mouseover(function() {
         $("#d_rooms_nowork").val(JSON.stringify(d_));
     });
   
-    $("#E .checked").each(function(index) {
+    $("#E_ .checked").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = $(this).find("label").text();
@@ -2107,7 +2289,7 @@ $('td').mouseover(function() {
   
     });
   
-    $("#E .nowork").each(function(index) {
+    $("#E_ .nowork").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = "";
@@ -2119,7 +2301,7 @@ $('td').mouseover(function() {
         $("#e_rooms_nowork").val(JSON.stringify(e_));
     });
   
-    $("#F .checked").each(function(index) {
+    $("#F_ .checked").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = $(this).find("label").text();
@@ -2141,7 +2323,7 @@ $('td').mouseover(function() {
   
     });
   
-    $("#F .nowork").each(function(index) {
+    $("#F_ .nowork").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = "";
@@ -2153,7 +2335,7 @@ $('td').mouseover(function() {
         $("#f_rooms_nowork").val(JSON.stringify(f_));
     });
   
-    $("#G .checked").each(function(index) {
+    $("#G_ .checked").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = $(this).find("label").text();
@@ -2175,7 +2357,7 @@ $('td').mouseover(function() {
   
     });
   
-    $("#G .nowork").each(function(index) {
+    $("#G_ .nowork").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = "";
@@ -2187,7 +2369,7 @@ $('td').mouseover(function() {
         $("#g_rooms_nowork").val(JSON.stringify(g_));
     });
   
-    $("#H .checked").each(function(index) {
+    $("#H_ .checked").each(function(index) {
         posX = $(this).closest('tr').index();
         posY = $(this).index();
         nam = $(this).find("label").text();
@@ -2245,7 +2427,7 @@ $('td').mouseover(function() {
     <select name="role" id="firstrole">
       <option value="saaja">Viestien saaja</option>
       <option value="katsoja">Katsoja</option>
-      <option value="duunari">Kommentointi</option>
+      <option value="kommentointi">Kommentointi</option>
     </select>
   </div>
   <div class="form-subgroup">
@@ -2283,7 +2465,7 @@ $('td').mouseover(function() {
       subgroup_1.innerHTML = '<label>Nimi ja Rooli: </label><input type="text" name="prc_'+prc_count+'" class="form-control" value=" " required></div>';
       subgroup_2.innerHTML = '<label>Puhelinnumero: </label><input type="text" name="prc_'+prc_count+'_puh" class="form-control" value=" " required></div>';
       subgroup_3.innerHTML = '<label>Sähköposti: </label><input type="text" name="prc_'+prc_count+'_email" class="form-control" value=" " required></div>';
-      subgroup_4.innerHTML = '<label for="prc_'+prc_count+'_role">Rooli:</label><select name="role" id="prc_'+prc_count+'_role"><option value="saaja">Viestien saaja</option><option value="katsoja">Katsoja</option><option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option></select>';
+      subgroup_4.innerHTML = '<label for="prc_'+prc_count+'_role">Rooli:</label><select name="role" id="prc_'+prc_count+'_role"><option value="saaja">Viestien saaja</option><option value="katsoja">Katsoja</option><option value="kommentointi">Kommentointi</option><option value="mittaus">Mittamies</option></select>';
       subgroup_5.innerHTML = '<h5>Saako katsoa kaikki projektin tiedot?</h5><div class="row-reversed"><label for="prc_'+prc_count+'_permission">Kyllä</label><input type="checkbox" id="prc_'+prc_count+'_permission" class="standard_checkbox"></div><h5>Poista näkymässä projektilla</h5><div class="row-reversed"><label for="prc_'+prc_count+'_hiding">Kyllä</label><input type="checkbox" id="prc_'+prc_count+'_hiding" class="standard_checkbox"></div>';
   
   
@@ -2295,3 +2477,105 @@ $('td').mouseover(function() {
   
       document.querySelector("#new_project > fieldset").append(group);
   }
+
+
+function give_numbers(elem,integer) {
+    elements_array = document.querySelector("."+elem.replaceAll(' ','___').toLowerCase()+"_userselection").value.split("|");
+    console.log(elements_array);
+    // document.querySelector(".prc_"+integer+"").value =elements_array[1];
+    document.querySelector(".prc_"+parseFloat(integer)+"_puh").value = elements_array[1];
+    document.querySelector(".prc_"+parseFloat(integer)+"_email").value = elements_array[2];    
+    document.querySelector("#prc_"+parseFloat(integer)+"_role").value = elements_array[3];    
+    // console.log(".prc_"+parseFloat(integer)+"_role ."+elements_array[3]);
+    if(parseFloat(elements_array[4]) == 1) {
+        document.querySelector("#prc_"+parseFloat(integer)+"_permission").checked = true;
+    }
+    if(parseFloat(elements_array[5]) == 1) {
+        document.querySelector("#prc_"+parseFloat(integer)+"_hiding").checked = true;
+    }
+    
+}
+
+function isInt(value) {
+    return !isNaN(value) && 
+           parseInt(Number(value)) == value && 
+           !isNaN(parseInt(value, 10));
+  }
+
+function change__byhands(elem) {
+    if(isInt(elem.value) === true) {
+        elem.dataset.no = parseFloat(elem.value.replace(/[^\d.-]/g, ''));
+    }
+}
+
+function open_ak() {
+    let _AK_shits_ = document.querySelectorAll(".AK > td");
+    _AK_shits_.forEach(myFunction);
+
+    function myFunction(item) {
+        item.classList.remove("hidden");
+        item.classList.add("nowork");
+    }
+
+}
+function open_k() {
+    let _K_shits_ = document.querySelectorAll(".K > td");
+    _K_shits_.forEach(myFunction);
+
+    function myFunction(item) {
+        item.classList.remove("hidden");
+        item.classList.add("nowork");
+    }
+}
+
+function pohjakierros_function() {
+      
+}
+
+function add_new_lvl(elem) {
+    gp = elem.parentElement.parentElement.parentElement;
+
+    table = gp.querySelector(".table > tbody");
+    len = gp.querySelectorAll("tr").length;
+    var tr = document.createElement('tr');
+    
+    if(len > 10) {
+        alert("Kerrosten maksimimäärä saavutettu");
+        return
+    }
+    for (let i = 1; i < 31; i++) {
+        if(i == 1) {
+            num = len-1;
+            var td = document.createElement('td');
+            var td_input = document.createElement('input');
+            td_input.setAttribute("name","room_name");
+            td_input.setAttribute("type","checkbox");
+
+            var td_label = document.createElement('label');
+            td_label.innerHTML=num;
+            // td.append(td_input);
+            td.append(td_label);
+            
+
+            td.classList.add("noindex");
+            tr.append(td);
+        }
+        else {
+            var td = document.createElement('td');
+            var td_input = document.createElement('input');
+            td_input.setAttribute("name","room_name");
+            td_input.setAttribute("type","checkbox");
+
+            var td_label = document.createElement('label');
+            td.append(td_input);
+            td.append(td_label);
+            
+
+            tr.append(td);
+        }
+        
+        
+    }
+    table.prepend(tr);
+
+}

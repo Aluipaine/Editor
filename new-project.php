@@ -16,377 +16,116 @@ include('header.php');
             <input type="text" name="project_name" class="form-control" value="" required>   
          </div>    
          <fieldset>
-            <div class="form-group">
-               <div class="form-subgroup">
-                  <label>Pääurakoitsija: </label>
-                  <input type="text" name="prc_1" class="form-control" value="" required>
-               </div>
-               <div class="form-subgroup"><label>Pääurakoitsija puh: </label>
-               <input type="text" name="prc_1_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Pääurakoitsija email: </label>
-               <input type="text" name="prc_1_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_1_role">Rooli: </label>
-                  <select name="prc_1_role" id="prc_1_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option>
-                     <option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_1_permission">Kyllä</label>
-                     <input name="prc_1_permission" type="checkbox" id="prc_1_permission" class="standard_checkbox" value="1">
-                  </div>
+            <?php
+               $options = "";
+               $users = mysqli_query($db, "SELECT * FROM `users`");
+               $users = mysqli_fetch_all($users);
+                  foreach ($users as $p) { 
+                     // give_numbers(this,`'.$p[6].'`,`'.$p[7].'`,`'.$p[8].'`);
+                     $options.='<option value="'.$p[1].'">'.$p[1].'</option>';
+                  }
+                  foreach ($users as $p) { 
+                     // give_numbers(this,`'.$p[6].'`,`'.$p[7].'`,`'.$p[8].'`);
+                     echo '<input type="hidden" value="'.$p[1].'|'.$p[6].'|'.$p[7].'|'.$p[3].'|'.$p[4].'|'.$p[5].'" class="'.str_replace(" ","___",strtolower($p[1])).'_userselection">';
+                  }
+            
+               $name = '';
+               for ($x = 1; $x <= 11; $x++) {
+                  if($x == 1) {
+                     $name = 'Pääurakoitsija';
+                  }
+                  else if($x == 2) {
+                     $name = 'Asiakas';
+                  }
+                  else if($x == 3) {
+                     $name = 'Myyjä';
+                  }
+                  else if($x == 4) {
+                     $name = 'Asentaja';
+                  }
+                  else if($x == 5) {
+                     $name = 'Mittamies';
+                  }
+                  else if($x == 6) {
+                     $name = 'Sähköurakoitsija';
+                  }
+                  else if($x == 7) {
+                     $name = 'LVI-urakoitsija';
+                  }
+                  else if($x == 8) {
+                     $name = 'Lasitusfirma';
+                  }
+                  else if($x == 9) {
+                     $name = 'Palokatko';
+                  }
+                  else if($x == 10) {
+                     $name = 'Arkkitehti';
+                  }
+                  else if($x == 11) {
+                     $name = 'Rakennesuunnittelija';
+                  }
 
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_1_hiding">Kyllä</label>
-                     <input name="prc_1_hiding" type="checkbox" id="prc_1_hiding" class="standard_checkbox" value="1">
-                  </div>
-                  
-               </div>  
+                  echo '<div class="form-group">
+                     <div class="form-subgroup">
+                        <label>'.$name.': </label>
+                        <input type="text" list="prc_'.$x.'_list" name="prc_'.$x.'" class="form-control" value="" required  onchange="give_numbers(this.value,'.$x.');">
+                     </div>
+                     <div class="form-subgroup"><label>'.$name.' puh: </label>
+                     <input type="text" list="" name="prc_'.$x.'_puh" class="form-control prc_'.$x.'_puh" value="" required></div>
+                     <div class="form-subgroup"><label>'.$name.' email: </label>
+                     <input type="text" list="" name="prc_'.$x.'_email" class="form-control prc_'.$x.'_email" value="" required></div>
+                     <div class="form-subgroup">
+                        <label for="prc_'.$x.'_role">Rooli: </label>
+                        <select name="prc_'.$x.'_role" id="prc_'.$x.'_role">
+                           <option value="saaja" class="saaja">Viestien saaja</option>
+                           <option value="katsoja" class="katsoja">Katsoja</option>
+                           <option value="kommentointi" class="kommentointi">Kommentointi</option>
+                           <option value="mittaus"  class="mittaus">Mittamies</option>
+                        </select>
+                     </div>
+                     <div class="form-subgroup">
+                        <h5>Saako katsoa kaikki projektin tiedot?</h5>
+                        <div class="row-reversed">
+                           <label for="prc_'.$x.'_permission">Kyllä</label>
+                           <input name="prc_'.$x.'_permission" type="checkbox" id="prc_'.$x.'_permission" class="standard_checkbox" value="1">
+                        </div>
+                        <h5>Poista näkymässä projektilla</h5>
+                        <div class="row-reversed">
+                           <label for="prc_'.$x.'_hiding">Kyllä</label>
+                           <input name="prc_'.$x.'_hiding" type="checkbox" id="prc_'.$x.'_hiding" class="standard_checkbox" value="1">
+                        </div>
+                     </div>  
+                  </div>';
 
-            </div>
-            <div class="form-group">
-               <div class="form-subgroup"><label>Asiakas: </label>
-               <input type="text" name="prc_2" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Asiakas puh: </label>
-               <input type="text" name="prc_2_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Asiakas email: </label>
-               <input type="text" name="prc_2_email" class="form-control" value="" required> </div>
-               <div class="form-subgroup">
-                  <label for="prc_2_role">Rooli: </label>
-                  <select name="prc_2_role" id="prc_2_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_2_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_2_permission" class="standard_checkbox">
-                  </div>
+                  echo '<datalist id="prc_'.$x.'_list">
+                     '.$options.'
+                  </datalist>';
+               }
+            ?>
 
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_2_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_2_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div> 
-            </div>
-            <div class="form-group">
-               <div class="form-subgroup"><label>Myyjä: </label>
-               <input type="text" name="prc_3" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Myyjä puh: </label>
-               <input type="text" name="prc_3_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Myyjä email: </label>
-               <input type="text" name="prc_3_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_3_role">Rooli: </label>
-                  <select name="role" id="prc_3_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_3_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_3_permission" class="standard_checkbox">
-                  </div>
-
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_3_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_3_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div> 
-               
-                  
-            </div>
-            <div class="form-group">
-               <div class="form-subgroup"><label>Asentaja: </label>
-               <input type="text" name="prc_4" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Asentaja puh: </label>
-               <input type="text" name="prc_4_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"> <label>Asentaja email: </label>
-               <input type="text" name="prc_4_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_4_role">Rooli: </label>
-                  <select name="role" id="prc_4_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_4_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_4_permission" class="standard_checkbox">
-                  </div>
-
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_4_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_4_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div>  
-               
-                 
-            </div>
-
-            <div class="form-group">
-               <div class="form-subgroup"><label>Mittamies: </label>
-               <input type="text" name="prc_5" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Mittamies puh: </label>
-               <input type="text" name="prc_5_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Mittamies email: </label>
-               <input type="text" name="prc_5_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_5_role">Rooli: </label>
-                  <select name="role" id="prc_5_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_5_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_5_permission" class="standard_checkbox">
-                  </div>
-
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_5_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_5_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div>  
-               
-                  
-            </div>
-            <div class="form-group">
-               <div class="form-subgroup"><label>Sähköurakoitsija: </label>
-               <input type="text" name="prc_6" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Sähköurakoitsija puh: </label>
-               <input type="text" name="prc_6_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Sähköurakoitsija email: </label>
-               <input type="text" name="prc_6_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_6_role">Rooli: </label>
-                  <select name="role" id="prc_6_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_6_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_6_permission" class="standard_checkbox">
-                  </div>
-
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_6_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_6_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div> 
-               
-                  
-            </div>
-            <div class="form-group">
-               <div class="form-subgroup"><label>LVI-urakoitsija: </label>
-               <input type="text" name="prc_7" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>LVI-urakoitsija puh: </label>
-               <input type="text" name="prc_7_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>LVI-urakoitsija email: </label>
-               <input type="text" name="prc_7_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_7_role">Rooli: </label>
-                  <select name="role" id="prc_7_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_7_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_7_permission" class="standard_checkbox">
-                  </div>
-
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_7_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_7_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div>  
-               
-                  
-            </div>
-            <div class="form-group">
-               <div class="form-subgroup"><label>Lasitusfirma: </label>
-               <input type="text" name="prc_8" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Lasitusfirma puh: </label>
-               <input type="text" name="prc_8_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Lasitusfirma email: </label>
-               <input type="text" name="prc_8_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_8_role">Rooli: </label>
-                  <select name="role" id="prc_8_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_8_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_8_permission" class="standard_checkbox">
-                  </div>
-
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_8_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_8_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div> 
-            </div>
-
-            <div class="form-group">
-               <div class="form-subgroup"><label>Palokatko: </label>
-               <input type="text" name="prc_9" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Palokatko puh: </label>
-               <input type="text" name="prc_9_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Palokatko email: </label>
-               <input type="text" name="prc_9_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_9_role">Rooli: </label>
-                  <select name="role" id="prc_9_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_9_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_9_permission" class="standard_checkbox">
-                  </div>
-
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_9_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_9_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div> 
-            </div>
-
-            <div class="form-group">
-               <div class="form-subgroup"><label>Arkkitehti: </label>
-               <input type="text" name="prc_10" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Arkkitehti puh: </label>
-               <input type="text" name="prc_10_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Arkkitehti email: </label>
-               <input type="text" name="prc_10_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_10_role">Rooli: </label>
-                  <select name="role" id="prc_10_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_10_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_10_permission" class="standard_checkbox">
-                  </div>
-
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_10_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_10_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div> 
-            </div>
-
-            <div class="form-group">
-               <div class="form-subgroup"><label>Rakennesuunnittelija: </label>
-               <input type="text" name="prc_11" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Rakennesuunnittelija puh: </label>
-               <input type="text" name="prc_11_puh" class="form-control" value="" required></div>
-               <div class="form-subgroup"><label>Rakennesuunnittelija email: </label>
-               <input type="text" name="prc_11_email" class="form-control" value="" required></div>
-               <div class="form-subgroup">
-                  <label for="prc_11_role">Rooli: </label>
-                  <select name="role" id="prc_11_role">
-                     <option value="saaja">Viestien saaja</option>
-                     <option value="katsoja">Katsoja</option>
-                     <option value="duunari">Kommentointi</option><option value="mittaus">Mittamies</option>
-                  </select>
-               </div>
-               <div class="form-subgroup">
-                  <h5>Saako katsoa kaikki projektin tiedot?</h5>
-                  <div class="row-reversed">
-                     <label for="prc_11_permission">Kyllä</label>
-                     <input type="checkbox" id="prc_11_permission" class="standard_checkbox">
-                  </div>
-
-                  <h5>Poista näkymässä projektilla</h5>
-                  <div class="row-reversed">
-                     <label for="prc_11_hiding">Kyllä</label>
-                     <input type="checkbox" id="prc_11_hiding" class="standard_checkbox">
-                  </div>
-                  
-               </div> 
-            </div>
 
             <div class="button f_contactadding_btn" onclick="creation_henkilolisays();">
                Lisää uusi henkilö projektiin
             </div>
 
-            <input type="text" name="a_rooms" id="a_rooms" style="display:none;">
-            <input type="text" name="b_rooms" id="b_rooms" style="display:none;">
-            <input type="text" name="c_rooms" id="c_rooms" style="display:none;">
-            <input type="text" name="d_rooms" id="d_rooms" style="display:none;">
-            <input type="text" name="e_rooms" id="e_rooms" style="display:none;">
-            <input type="text" name="f_rooms" id="f_rooms" style="display:none;">
-            <input type="text" name="g_rooms" id="g_rooms" style="display:none;">
-            <input type="text" name="h_rooms" id="h_rooms" style="display:none;">
+            <input type="text" list="" name="a_rooms" id="a_rooms" style="display:none;">
+            <input type="text" list="" name="b_rooms" id="b_rooms" style="display:none;">
+            <input type="text" list="" name="c_rooms" id="c_rooms" style="display:none;">
+            <input type="text" list="" name="d_rooms" id="d_rooms" style="display:none;">
+            <input type="text" list="" name="e_rooms" id="e_rooms" style="display:none;">
+            <input type="text" list="" name="f_rooms" id="f_rooms" style="display:none;">
+            <input type="text" list="" name="g_rooms" id="g_rooms" style="display:none;">
+            <input type="text" list="" name="h_rooms" id="h_rooms" style="display:none;">
 
 
-            <input type="text" name="a_rooms_nowork" id="a_rooms_nowork" style="display:none;">
-            <input type="text" name="b_rooms_nowork" id="b_rooms_nowork" style="display:none;">
-            <input type="text" name="c_rooms_nowork" id="c_rooms_nowork" style="display:none;">
-            <input type="text" name="d_rooms_nowork" id="d_rooms_nowork" style="display:none;">
-            <input type="text" name="e_rooms_nowork" id="e_rooms_nowork" style="display:none;">
-            <input type="text" name="f_rooms_nowork" id="f_rooms_nowork" style="display:none;">
-            <input type="text" name="g_rooms_nowork" id="g_rooms_nowork" style="display:none;">
-            <input type="text" name="h_rooms_nowork" id="h_rooms_nowork" style="display:none;">
+            <input type="text" list="" name="a_rooms_nowork" id="a_rooms_nowork" style="display:none;">
+            <input type="text" list="" name="b_rooms_nowork" id="b_rooms_nowork" style="display:none;">
+            <input type="text" list="" name="c_rooms_nowork" id="c_rooms_nowork" style="display:none;">
+            <input type="text" list="" name="d_rooms_nowork" id="d_rooms_nowork" style="display:none;">
+            <input type="text" list="" name="e_rooms_nowork" id="e_rooms_nowork" style="display:none;">
+            <input type="text" list="" name="f_rooms_nowork" id="f_rooms_nowork" style="display:none;">
+            <input type="text" list="" name="g_rooms_nowork" id="g_rooms_nowork" style="display:none;">
+            <input type="text" list="" name="h_rooms_nowork" id="h_rooms_nowork" style="display:none;">
                
          </fieldset>
          <div onclick='$("#new_project").hide();$("#new_project").slideUp(200);$("#roomconfig_first").slideDown(200);$("#roomconfig_first").show();' class="next_btn btn ready_btn">Jatka eteenpäin</div>
@@ -396,42 +135,39 @@ include('header.php');
    <section id="roomconfig_first">
       <h1>Lataa projektin Suunnitelmat</h1>
       <div class="first__container container">
-            <div class="form-group">
-               <h4>Kaupalliset asiakirjat</h4>
-               <input type="file" accept="application/pdf" id='files-1' name="files-1[]" multiple>
-               <div id='preview-1' class="preview_files"></div>
-               <input type="button" id="submit-1" value='Lähetä kaupalliset asiakirjat'>
-            </div>
-            <div class="form-group">
-               <h4>Työmaan asiakirjat</h4>
-               <input type="file" accept="application/pdf" id='files-2' name="files-2[]" multiple>
-               <div id='preview-2' class="preview_files"></div>
-               <input type="button" id="submit-2" value='Lähetä Työmaan asiakirjat'>
-            </div>
-            <div class="form-group">
-               <h4>Arkkitehtisuunnitelmat</h4>
-               <input type="file" accept="application/pdf" id='files-3' name="files-3[]" multiple>
-               <div id='preview-3' class="preview_files"></div>
-               <input type="button" id="submit-3" value='Lähetä Arkkitehtisuunnitelmat'>
-            </div>
-            <div class="form-group">
-               <h4>Rakennesuunnitelmat</h4>
-               <input type="file" accept="application/pdf" id='files-4' name="files-4[]" multiple>
-               <div id='preview-4' class="preview_files"></div>
-               <input type="button" id="submit-4" value='Lähetä Rakennesuunnitelmat'>
-            </div>
-            <div class="form-group">
-               <h4>Omat suunnitelmat</h4>
-               <input type="file" accept="application/pdf" id='files-5' name="files-5[]" multiple>
-               <div id='preview-5' class="preview_files"></div>
-               <input type="button" id="submit-5" value='Lähetä Omat suunnitelmat'>
-            </div>
-            <div class="form-group">
-               <h4>Muut asiakirjat?</h4>
-               <input type="file" accept="application/pdf" id='files-6' name="files-6[]" multiple>
-               <div id='preview-6' class="preview_files"></div>
-               <input type="button" id="submit-6" value='Lähetä muut asiakirjat'>
-            </div>
+         <?php
+            for ($x = 1; $x <= 6; $x++) {
+               if($x == 1) {
+               $projectsetting__fileheader = "Kaupalliset asiakirjat";
+               }
+               elseif($x == 2) {
+               $projectsetting__fileheader = "Työmaan asiakirjat";
+               }
+               elseif($x == 3) {
+               $projectsetting__fileheader = "Arkkitehtisuunnitelmat";
+               }
+               elseif($x == 4) {
+               $projectsetting__fileheader = "Rakennesuunnitelmat";
+               }
+               elseif($x == 5) {
+               $projectsetting__fileheader = "Omat suunnitelmat";
+               }
+               elseif($x == 6) {
+               $projectsetting__fileheader = "Muut asiakirjat";
+               }
+
+               $x_ = str_replace("6", "six", str_replace("5", "five", str_replace("4", "four", str_replace("3", "three", str_replace("2", "two", str_replace("1", "one", $x))))));
+
+               echo '<div class="form-group">
+               <h4>'.$projectsetting__fileheader.'</h4>
+               <input type="file" accept="application/pdf" class="project__settings_uploadinput" id="files-'.$x_.'" name="files-'.$x_.'[]" multiple>
+               <div id="preview-'.$x_.'" class="'.$x_.'_previewfiles">'.$files.'</div>
+               <input type="hidden" name="'. strtolower(str_replace("ö","o",str_replace("ä","a",str_replace(" ","_",str_replace("?","",$projectsetting__fileheader))))).'" id="'.$x_.'_previewfiles_value">
+               <input name="'.$x_.'" type="button" id="uploadsubmit-'.$x_.'" class="project__creation_uploadsend" value="Lähetä '.strtolower(mb_convert_encoding($projectsetting__fileheader,'HTML-ENTITIES','utf-8')).'">
+               </div>';
+            }
+         ?>
+
       </div>
       <div class="row">
             <div class="col-6">
@@ -554,224 +290,49 @@ include('header.php');
           </div>
       </div>
    </section> 
-   
 
    <section id="roomconfig_third" class="project__roomcount">
       <h1>Kerrosten, rappujen, ja huoneiden valinta </h1>
-      <div class="container rappus">
-          <div class="per50 floatleft coderdy rappu-1" id="A" style="opacity: 1;" maxlength="5">
+      <div class="rappus">
+          <div class="per50 floatleft coderdy rappu-1" id="A_" style="opacity: 1;" maxlength="5">
               <div class="showsizer tablepreview">
                   <div class="roomconfig_second_prefixes">
-                     <h2><input type="text" id="a_val" name="a_prefix" value="ARAK-"></h2>
-                     <h2><input type="text" id="a_nextnum" name="a_nextnum" value="1" class="prefixnum"></h2>
+                     <h2><input type="text" maxlength="7" list="" id="a_val" name="a_prefix" value="ARAK-"></h2>
+                     <h2><input type="text" maxlength="5" list="" id="a_nextnum" name="a_nextnum" value="1" class="prefixnum" onclick="change__byhands(this)"></h2>
+                     <h5><input type="text" maxlength="10" list="" id="a_nextnum_second" name="a_nextnum_second" value="" class="prefixnum prefixnum_second"></h5>
+                     <h5><input type="text" maxlength="10" list="" id="a_nextnum_third" name="a_nextnum_third" value="" class="prefixnum prefixnum_second"></h5>
+                     <div class="greenbtn newproject__addinglvl" onclick="add_new_lvl(this);">Lisää uusi kerros</div>
                   </div>
                   
                   <div class="table_size_chooser sizer">
                       <div class="SizeChooser">
                           <table class="table">
                               <tbody>
-                                  <tr>
-                                      <td class="noindex"><label>10</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td class="noindex"><label>9</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td class="noindex"><label>8</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td class="noindex"><label>7</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td class="noindex"><label>6</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td class="noindex"><label>5</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td class="noindex"><label>4</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td class="noindex"><label>3</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td class="noindex"><label>2</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td class="noindex"><label>1</label></td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                                  </tr>
-                                  <tr class="AK">
-                                      <td class="noindex"><label onclick="open_ak();">AK?</label></td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                  </tr>
-                                  <tr class="K">
-                                      <td class="noindex"><label onclick="open_k();">K?</label></td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                      <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                                  </tr>
-                              </tbody>
+                                  <?php
+                                    for ($i=1; $i >= -1; $i--) { 
+                                       if($i == 0) {
+                                          echo '<tr class="K" onclick="open_k();">';
+                                          $i_ = "K?";
+                                       }
+                                       else if($i == -1) {
+                                          echo '<tr class="AK" onclick="open_ak();">';
+                                          $i_ = "AK?";
+                                       }
+                                       else {
+                                          echo "<tr>";
+                                          $i_ = $i;
+                                       }
+                                       
+                                       
+                                       for ($a=1; $a < 30; $a++) { 
+                                          if($a == 1) {
+                                             echo '<td class="noindex"><label>'.$i_.'</label></td>';
+                                          }
+                                          echo '<td><input type="checkbox" name="room_name"><label></label></td>';
+                                       }
+                                       echo "</tr>";
+                                    }
+                                  ?>
                               </tbody>
                           </table>
                       </div>
@@ -865,209 +426,32 @@ include('header.php');
     <div class="SizeChooser">
         <table class="table">
             <tbody>
-                <tr>
-                    <td class="noindex"><label>10</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
+               <?php
+                  for ($i=1; $i >= -1; $i--) { 
+                     if($i == 0) {
+                        echo '<tr class="K" onclick="open_k();">';
+                        $i_ = "K?";
+                     }
+                     else if($i == -1) {
+                        echo '<tr class="AK" onclick="open_ak();">';
+                        $i_ = "AK?";
+                     }
+                     else {
+                        echo "<tr>";
+                        $i_ = $i;
+                     }
 
-                </tr>
-                <tr>
-                    <td class="noindex"><label>9</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
 
-                </tr>
-                <tr>
-                    <td class="noindex"><label>8</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                </tr>
-                <tr>
-                    <td class="noindex"><label>7</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                </tr>
-                <tr>
-                    <td class="noindex"><label>6</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                </tr>
-                <tr>
-                    <td class="noindex"><label>5</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                </tr>
-                <tr>
-                    <td class="noindex"><label>4</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                </tr>
-                <tr>
-                    <td class="noindex"><label>3</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                </tr>
-                <tr>
-                    <td class="noindex"><label>2</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-
-                </tr>
-                <tr>
-                    <td class="noindex"><label>1</label></td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class=""><input type="checkbox" name="room_name"><label></label> </td>
-                </tr>
-                <tr class="AK">
-                    <td class="noindex"><label onclick="open_ak();">AK?</label></td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                </tr>
-                <tr class="K">
-                    <td class="noindex"><label onclick="open_k();">K?</label></td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                    <td class="hidden"><input type="checkbox" name="room_name"><label></label> </td>
-                </tr>
+                     for ($a=1; $a < 30; $a++) { 
+                        if($a == 1) {
+                           echo '<td class="noindex"><label>'.$i_.'</label></td>';
+                        }
+                        echo '<td><input type="checkbox" name="room_name"><label></label></td>';
+                     }
+                     echo "</tr>";
+                  }
+               ?>
             </tbody>
-            
         </table>
     </div>
 </div>
@@ -1099,34 +483,34 @@ include('header.php');
    function plusone_rappu() {
       plusone_rappu_z+=1;
       if(plusone_rappu_z==1) {
-         plusone_rappu_Z = "A";
+         plusone_rappu_Z = "A_";
       } 
       else if(plusone_rappu_z==2) {
-         plusone_rappu_Z = "B";
+         plusone_rappu_Z = "B_";
       }
 
       else if(plusone_rappu_z==3) {
-         plusone_rappu_Z = "C";
+         plusone_rappu_Z = "C_";
       }
 
       else if(plusone_rappu_z==4) {
-         plusone_rappu_Z = "D";
+         plusone_rappu_Z = "D_";
       }
 
       else if(plusone_rappu_z==5) {
-         plusone_rappu_Z = "E";
+         plusone_rappu_Z = "E_";
       }
 
       else if(plusone_rappu_z==6) {
-         plusone_rappu_Z = "F";
+         plusone_rappu_Z = "F_";
       }
 
       else if(plusone_rappu_z==7) {
-         plusone_rappu_Z = "G";
+         plusone_rappu_Z = "G_";
       }
 
       else if(plusone_rappu_z==8) {
-         plusone_rappu_Z = "H";
+         plusone_rappu_Z = "H_";
       }
 
       else if(plusone_rappu_z==9) {
@@ -1139,34 +523,34 @@ include('header.php');
 
       plusone_rappu_o=plusone_rappu_z+1;
       if(plusone_rappu_o==1) {
-         plusone_rappu_O = "A";
+         plusone_rappu_O = "A_";
       } 
       else if(plusone_rappu_o==2) {
-         plusone_rappu_O = "B";
+         plusone_rappu_O = "B_";
       }
 
       else if(plusone_rappu_o==3) {
-         plusone_rappu_O = "C";
+         plusone_rappu_O = "C_";
       }
 
       else if(plusone_rappu_o==4) {
-         plusone_rappu_O = "D";
+         plusone_rappu_O = "D_";
       }
 
       else if(plusone_rappu_o==5) {
-         plusone_rappu_O = "E";
+         plusone_rappu_O = "E_";
       }
 
       else if(plusone_rappu_o==6) {
-         plusone_rappu_O = "F";
+         plusone_rappu_O = "F_";
       }
 
       else if(plusone_rappu_o==7) {
-         plusone_rappu_O = "G";
+         plusone_rappu_O = "G_";
       }
 
       else if(plusone_rappu_o==8) {
-         plusone_rappu_O = "H";
+         plusone_rappu_O = "H_";
       }
       else if(plusone_rappu_o==9) {
          alert("Maksimissaan rappuja voi olla vain 8.");
@@ -1200,15 +584,39 @@ include('header.php');
       var i1 = document.createElement('input');
       i1.value = plusone_rappu_O+"RAK-";
 
-      i1.setAttribute("id",plusone_rappu_O.toLowerCase()+"_val");
-      i1.setAttribute("name",plusone_rappu_O.toLowerCase()+"_prefix");
+      i1.setAttribute("id",plusone_rappu_O.toLowerCase()+"val");
+      i1.setAttribute("name",plusone_rappu_O.toLowerCase()+"prefix");
+      i1.setAttribute("maxlength", 7);
 
 
       var i2 = document.createElement('input');
       // el.classList = "prefixnum";
-      i2.setAttribute("id",plusone_rappu_O.toLowerCase()+"_nextnum");
-      i2.setAttribute("name",plusone_rappu_O.toLowerCase()+"_nextnum");
+      i2.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum");
+      i2.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum");
+      i2.classList.add("prefixnum");
+      i2.setAttribute("maxlength", 5);
       i2.value = "1";
+
+      var i3 = document.createElement('input');
+      // el.classList = "prefixnum";
+      i3.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_second");
+      i3.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_second");
+      i3.setAttribute("maxlength", 10);
+      i3.value = "";
+
+      var i4 = document.createElement('input');
+      // el.classList = "prefixnum";
+      i4.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_third");
+      i4.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_third");
+      i4.setAttribute("maxlength", 10);
+      i4.value = "";
+
+
+      var i5 = document.createElement('div');
+      i5.classList.add("newproject__addinglvl");
+      i5.classList.add("greenbtn");
+      i5.setAttribute("onclick",'add_new_lvl(this);');
+      i5.innerHTML = "Lisää uusi kerros";
 
       const grandparent = document.createElement("div");
       grandparent.classList = ("per50 floatleft coderdy rappu-2");
@@ -1241,14 +649,13 @@ include('header.php');
       roomconfig_second_prefixes.appendChild(roomgconfig_h2_2);
       roomgconfig_h2_1.appendChild(i1);
       roomgconfig_h2_2.appendChild(i2);
+      roomgconfig_h2_2.appendChild(i3);
+      roomgconfig_h2_2.appendChild(i4);
+      roomconfig_second_prefixes.appendChild(i5);
 
 
 
             
-   }
-
-   function pohjakierros_function() {
-      
    }
 </script>
 
@@ -1395,27 +802,7 @@ include('header.php');
       document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = d_width/10 + "px";
     }
 </script>
-<script>
-   function open_ak() {
-      let _AK_shits_ = document.querySelectorAll(".AK > td");
-      _AK_shits_.forEach(myFunction);
 
-      function myFunction(item) {
-        item.classList.remove("hidden");
-        item.classList.add("nowork");
-      }
-
-   }
-   function open_k() {
-      let _K_shits_ = document.querySelectorAll(".K > td");
-      _K_shits_.forEach(myFunction);
-
-      function myFunction(item) {
-        item.classList.remove("hidden");
-        item.classList.add("nowork");
-      }
-   }
-</script>
 <?php include('footer.php') ?>
 
 
@@ -1443,40 +830,40 @@ include('header.php');
         <div class="row house__intro">
           <div class="col-6 col-with-table">
             <h1>
-               <input type="text" placeholder="Tilan nimi tähän" value="Tila" name="room_name" class="lineinput">
+               <input type="text" list="" placeholder="Tilan nimi tähän" value="Tila" name="room_name" class="lineinput">
             </h1>
             <div class="col-table">
                <h2>Seinien asennusjärjestys</h2>
                <table>
                <tr>
-                  <td><input type="text" data-room="asjarj-1" maxlength="1" name="room_one_asjarj" value="1" class="lineinput inputname" required/></td>
-                  <td><input type="text" data-room="a" name="room_one_a" value="SEINÄ A" class="lineinput inputname" required></td>
-                  <td><input type="text" name="room_one_a_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  <td><input type="text" list="" data-room="asjarj-1" maxlength="1" name="room_one_asjarj" value="1" class="lineinput inputname" required/></td>
+                  <td><input type="text" list="" data-room="a" name="room_one_a" value="SEINÄ A" class="lineinput inputname" required></td>
+                  <td><input type="text" list="" name="room_one_a_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
                </tr>
                <tr>
-                  <td><input type="text" data-room="asjarj-2" maxlength="1" name="room_two_asjarj" value="2" class="lineinput inputname" required/></td>
-                  <td><input type="text" data-room="b" name="room_one_b" value="SEINÄ B" class="lineinput inputname" required></td>
-                  <td><input type="text" name="room_one_b_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  <td><input type="text" list="" data-room="asjarj-2" maxlength="1" name="room_two_asjarj" value="2" class="lineinput inputname" required/></td>
+                  <td><input type="text" list="" data-room="b" name="room_one_b" value="SEINÄ B" class="lineinput inputname" required></td>
+                  <td><input type="text" list="" name="room_one_b_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
                </tr>
                <tr>
-                  <td><input type="text" data-room="asjarj-3" maxlength="1" name="room_three_asjarj" value="3" class="lineinput inputname" required/></td>
-                  <td><input type="text" data-room="c" name="room_one_c" value="SEINÄ C" class="lineinput inputname" required></td>
-                  <td><input type="text" name="room_one_c_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  <td><input type="text" list="" data-room="asjarj-3" maxlength="1" name="room_three_asjarj" value="3" class="lineinput inputname" required/></td>
+                  <td><input type="text" list="" data-room="c" name="room_one_c" value="SEINÄ C" class="lineinput inputname" required></td>
+                  <td><input type="text" list="" name="room_one_c_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
                </tr>
                <tr>
-                  <td><input type="text" data-room="asjarj-4" maxlength="1" name="room_four_asjarj" value="4" class="lineinput inputname" required/></td>
-                  <td><input type="text" data-room="d" name="room_one_d" value="SEINÄ D" class="lineinput inputname" required></td>
-                  <td><input type="text" name="room_one_d_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  <td><input type="text" list="" data-room="asjarj-4" maxlength="1" name="room_four_asjarj" value="4" class="lineinput inputname" required/></td>
+                  <td><input type="text" list="" data-room="d" name="room_one_d" value="SEINÄ D" class="lineinput inputname" required></td>
+                  <td><input type="text" list="" name="room_one_d_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
                </tr>
                <tr>
-                  <td><input type="text" data-room="asjarj-5" maxlength="1" name="room_five_asjarj" value="5" class="lineinput inputname" required/></td>
-                  <td><input type="text" data-room="roof" name="room_one_roof" value="KATTO" class="lineinput inputname" required></td>
-                  <td><input type="text" name="room_one_roof_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  <td><input type="text" list="" data-room="asjarj-5" maxlength="1" name="room_five_asjarj" value="5" class="lineinput inputname" required/></td>
+                  <td><input type="text" list="" data-room="roof" name="room_one_roof" value="KATTO" class="lineinput inputname" required></td>
+                  <td><input type="text" list="" name="room_one_roof_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
                </tr>
                <tr>
-                  <td><input type="text" data-room="asjarj-6" maxlength="1" name="room_six_asjarj" value="6" class="lineinput inputname" required/></td>
-                  <td><input type="text" data-room="floor" name="room_one_floor" value="LATTIA" class="lineinput inputname" required></td>
-                  <td><input type="text" name="room_one_floor_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  <td><input type="text" list="" data-room="asjarj-6" maxlength="1" name="room_six_asjarj" value="6" class="lineinput inputname" required/></td>
+                  <td><input type="text" list="" data-room="floor" name="room_one_floor" value="LATTIA" class="lineinput inputname" required></td>
+                  <td><input type="text" list="" name="room_one_floor_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
                </tr>
                </table>
             </div>

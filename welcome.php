@@ -26,6 +26,8 @@ $username_role = mysqli_fetch_assoc($username_role_);
 
 $_SESSION["role"] = $username_role['role'];
 
+
+
 ?>
  <?php include('./header.php') ?>
 <section id="welcome">
@@ -41,11 +43,9 @@ $_SESSION["role"] = $username_role['role'];
     <div class="container">
 
       <div class="row">
-
         <div class="col-6"><h2 class="h1">Nykyiset projektit:</h2></div>
-
         <div class="col-6"><a class="ready_btn" href="./new-project.php">Uusi projekti</a></div>
-       
+
       </div>
 
       <section id="projects">
@@ -57,7 +57,17 @@ $_SESSION["role"] = $username_role['role'];
             <td>Projektit</td>
 
             <td>Nimi</td>
-            <td>Mittamies</td>
+
+            <?php
+            
+              if(htmlspecialchars($_SESSION["role"]) === "mittaus" || htmlspecialchars($_SESSION["role"]) === "admin") {
+                echo "<td>Mittamies</td>";
+              }
+              else {
+                echo "<td>Avoimet tiketit sinulle:</td>";
+              }
+            ?>
+            
 
             <td>Projektin pääsy:</td>
 
@@ -65,10 +75,28 @@ $_SESSION["role"] = $username_role['role'];
           <?php
           foreach ($posts as $post) {
             ?>
+            
             <tr>
                 <td><?= $post[2] ?></td>
                 <td><?= $post[1] ?></td>
-                <td style="text-transform: capitalize;"><?= $post[5] ?></td>
+                <td>
+                <?php
+                if(htmlspecialchars($_SESSION["role"]) === "mittaus" || htmlspecialchars($_SESSION["role"]) === "admin") {
+                  echo $post[5];
+                }
+                else {
+                  $sql = "SELECT * FROM `comments` WHERE `projectid`=" . $post[0] . " && `comment_to`='" .  strtolower($_SESSION["username"]) . "' ";
+
+                  if ($result = mysqli_query($db, $sql)) {
+                      // Return the number of rows in result set
+                      $rowcount = mysqli_num_rows( $result );
+                      // Display result
+                      printf("%d", $rowcount . "kpl");
+                   }
+                }
+               
+                 ?>
+                 </td>
                 <td><a href="post.php?id=<?= $post[0] . '&user=' . htmlspecialchars($_SESSION["username"]) . '&role=' . htmlspecialchars($_SESSION["role"]) ?>">Jatka projektiin</a></td>
               </tr>
             <?php

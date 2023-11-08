@@ -1,6 +1,7 @@
 <?php 
 // Include config file
 require "vendor/config.php";
+header('Content-type: text/plain; charset=utf-8');
 
 
 // Count total files

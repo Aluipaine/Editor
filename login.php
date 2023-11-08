@@ -129,6 +129,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     main {
       display: none;
     }
+
+    .showpwd {
+        padding: 0px;
+        width: 100%;
+        display: inline-block;
+        line-height: 2;
+        margin-top: 0px;
+        background: gray;
+        color: white;
+
+    }
  </style>
 </head>
 
@@ -152,18 +163,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group">
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"  placeholder="Salasana">
+                <input id="passwd" type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"  placeholder="Salasana">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                <div class="form-group">
+                    
+                    <input type="checkbox" onclick="showpassword();" id="showpwd">
+                    <label for="showpwd" class="showpwd">Näytä salasana</label>
+                </div>
+                
+
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Kirjaudu sisään">
             </div>
-            <p>Eikö tiliä löydy? <a href="register.php">Rekisteröidy</a>. <br> Mikäli et muista salasanaasi, ota yhteyttä Koodariin</p>
+            <!-- <p>Eikö tiliä löydy? <a href="register.php">Rekisteröidy</a>. <br> Mikäli et muista salasanaasi, ota yhteyttä Koodariin</p> -->
         </form>
       </div>
 
 </section>
-
+<script>
+    function showpassword() {
+        var x = document.getElementById("passwd");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 <?php 
 
 include('./footer.php') ?>

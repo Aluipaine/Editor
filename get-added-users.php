@@ -1,6 +1,6 @@
 <?php
 
-require_once './vendor/config.php';
+require_once 'vendor/config.php';
 
 if(!isset($_POST['project_id'])) {
     die();

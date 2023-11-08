@@ -482,7 +482,6 @@ $s_settings_data = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `proj
 <section>
   <h4>Levytyksen suunta</h4>
   <section>
-    <?php var_dump($s_settings_data[24]); ?>
     <fieldset>
       <input type="radio" id="settings__sauma_pysty" name="sauma__suunta" onclick="saumoitus__examplephoto()" value="0" <?php echo $s_settings_data[24] == "0" ? "checked" : "" ?>>
       <label for="settings__sauma_pysty">Levytys pystyyn</label>
@@ -535,6 +534,415 @@ $s_settings_data = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `proj
         <h4>Rakennekuva</h4>
         <img src="/img/saumoitus/s1.jpg" id="sauma__saumoitus_photo" style="max-width: 100%;">
       </div>
+    </div>
+  </section>
+  <section>
+     <div class="container">
+      <h4>Viestipohjat</h4>
+      <div class="row">
+        
+
+        <div class="col-6">
+          <h3>Projektin luonti</h3>
+          <div class="tabs">
+          <ul>
+              <li class="tabs__btn">Projektin luonti (hankkeen osallistujat)</li>
+              <li class="tabs__btn">Uuden käyttäjän luonti (Projektin luonti uusi käyttäjä)</li>
+              <li class="tabs__btn">Lähetä kommenttien muokkaukset (t.johto)</li>
+              <li class="tabs__btn">Lähetä laskutetut ostot (t.johto)</li>
+              <li class="tabs__btn">"Poistettu kuittaamatta"-viesti (t.johto)</li>
+              <li class="tabs__btn">Avoimet työt (t.tekijä)</li>
+              <li class="tabs__btn">Kommentit reppanoittain-raportti (t.johto)</li>
+              <li class="tabs__btn">Kommentit hankeittain-raportti (t.johto)</li>
+              <li class="tabs__btn">Kommentin kuittaus (t.johto)</li>
+              <li class="tabs__btn">Tilauksen lisäys (t.johto + saaja)</li>
+              <li class="tabs__btn">Kommentin lisäys (t.johto)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-6">
+          <section class="tabs__target" data-id="0">
+            <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='project_creation'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <i>*saajan sähköposti*</i> </label>
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *HANKKEEN NIMI* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+            <div class="tabs__target_textarea">
+            <input type="text" value="<?= $m_messages[0]; ?>"> <b> *nimi* </b>! <br>
+            <input type="text" value="<?= $m_messages[1]; ?>"> <b> *myyjän nimi* </b> <input type="text" value="<?= $m_messages[2]; ?>"><br>
+            <input type="text" value="<?= $m_messages[3]; ?>"> <b> *lista henkilöistä* </b> <input type="text" value="<?= $m_messages[4]; ?>"><br>
+            <input type="text" value="<?= $m_messages[5]; ?>"> <b> *hankkeen nimi* </b> <input type="text" value="<?= $m_messages[6]; ?>"><br>
+            <textarea cols="30" rows="10" value="<?= $m_messages[7]; ?>" oninput="this.innerHTML = this.value"></textarea>
+            </div>
+            
+          </section>
+
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='project_newuser'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+          <section class="tabs__target" data-id="1">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <i>*saajan sähköposti*</i> </label>
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *HANKKEEN NIMI* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+            <div class="tabs__target_textarea">
+              <input type="text" value="<?= $m_messages[0]; ?>"> <b> *nimi* </b>! <input value="<?= $m_messages[1]; ?>"> <br>
+              <input type="text" value="<?= $m_messages[2]; ?>"> <b> *nimi* </b> <input type="text" value="<?= $m_messages[3]; ?>"> <br>
+              <input type="text" value="<?= $m_messages[4]; ?>"> <b> *salasana* </b><input type="text" value="<?= $m_messages[5]; ?>">  <br>
+              <input type="text" value="<?= $m_messages[6]; ?>"> <b> *puhelin* </b><input type="text" value="<?= $m_messages[7]; ?>">  <br>
+              <input type="text" value="<?= $m_messages[8]; ?>"> <b> *user rooli* </b> <input type="text" value="<?= $m_messages[9]; ?>"> <br>
+              <input type="text" value="<?= $m_messages[10]; ?>"> <b> *luonti pvm* </b> <input type="text" value="<?= $m_messages[11]; ?>"> <br>
+              <textarea cols="30" rows="10" value="<?= $m_messages[12]; ?>"></textarea>
+            </div>
+          </section>
+
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='project_sendedits'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+          <section class="tabs__target" data-id="2">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <input type="text" class="tabs__target_to" value="<?= $m_headers[1]; ?>"> </label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_toname" value="<?= $m_headers[4]; ?>"> </label> <br>
+
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *PVM* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+            <textarea cols="30" rows="10" value="<?= $m_messages[0]; ?>"></textarea>
+
+          </section>
+
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='sent_purchases'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+          <section class="tabs__target" data-id="3">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <input type="text" class="tabs__target_to" value="<?= $m_headers[1]; ?>"> </label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_toname" value="<?= $m_headers[4]; ?>"> </label> <br>
+
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *hankken nimi* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+            <b>*Lista laskutettavista ostoista*</b>
+          </section>
+
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='deleted_without_consent'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+          <section class="tabs__target" data-id="4">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <input type="text" class="tabs__target_to"  value="<?= $m_headers[1]; ?>"></label><br>
+                <label>Nimi: <input type="text" class="tabs__target_toname" value="<?= $m_headers[4]; ?>"> </label> <br>
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *hankkeen nimi* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+            <b>*poistetun kommentin specsit*</b>
+
+          </section>
+
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='comments_toworkers'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+          <section class="tabs__target" data-id="5">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <i>*saajan sähköposti*</i> </label>
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *Tekijän nimi + PVM* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+            <i>(viesti, joka tulee ennen tikettilistaa jokaiselle tekijälle):</i>
+            <textarea cols="30" rows="10" value="" oninput="this.innerHTML = this.value"></textarea>
+            <b>*Tikettitaulukko*</b>
+          </section>
+
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='reppanareport'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+          <section class="tabs__target" data-id="6">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <input type="text" class="tabs__target_to" value="<?= $m_headers[1]; ?>"> </label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_toname" value="<?= $m_headers[4]; ?>"> </label> <br>
+
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *pvm* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+          </section>
+
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='projectreport'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+
+          <section class="tabs__target" data-id="7">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <input type="text" class="tabs__target_to" value="<?= $m_headers[1]; ?>"> </label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_toname" value="<?= $m_headers[4]; ?>"> </label> <br>
+
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *pvm* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+          </section>
+
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='comment_sending_to_tyonjohto'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+
+          <section class="tabs__target" data-id="8">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <input type="text" class="tabs__target_to" value="<?= $m_headers[1]; ?>"> </label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_toname" value="<?= $m_headers[4]; ?>"> </label> <br>
+
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *hankkeen nimi* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+            <b>*Kuitatun kommentin specsit*</b>
+          </section>
+
+          
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='tilauksen_lisays'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+          <section class="tabs__target" data-id="9">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <input type="text" class="tabs__target_to" value="<?= $m_headers[1]; ?>"> </label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_toname" value="<?= $m_headers[4]; ?>"> </label> <br>
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text" value="<?= $m_subject[0]; ?>"></label> *hankkeen nimi* <input type="text" value="<?= $m_subject[1]; ?>"></label> </h6>
+
+          </section>
+
+          <?php 
+              $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='kommentin_lisays'");
+              $m_da = mysqli_fetch_all($m_data);
+              $m_data = $m_da[0];
+
+              $m_headers = explode("~~~~", $m_data[1]);
+              $m_subject = explode("~~~~", $m_data[3]);
+              $m_messages = explode("~~~~", $m_data[4]);
+
+
+              // print_r($m_headers);
+              // print_r($m_subject);
+              // print_r($m_messages);
+            ?>
+          <section class="tabs__target" data-id="10">
+            <h4 class="tabs__target_title"></h4>
+            <div class="row tabs__target_receipents">
+              <div class="col-6">
+                <label>Keneltä: <input type="text" class="tabs__target_who" value="<?= $m_headers[0]; ?>"></label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_who_name" value="<?= $m_headers[2]; ?>"></label> <br>
+                <label>Sähköposti: <input type="password" class="tabs__target_who_pass" value="<?= $m_headers[3]; ?>"></label> <br>
+                <i style="font-size: 11px">(mikä tahansa westface.fi-päätteinen sähköposti)</i>
+              </div>
+              <div class="col-6">
+                <label>Kenelle: <input type="text" class="tabs__target_to" value="<?= $m_headers[1]; ?>"> </label> <br>
+                <label>Nimi: <input type="text" class="tabs__target_toname" value="<?= $m_headers[4]; ?>"> </label> <br>
+
+                <i style="font-size: 11px">+ kommentin saajan sähköposti</i>
+              </div>
+            </div>
+            <h6 class="tabs__target_subject"><label>Aihe: <input type="text"  value="<?= $m_subject[0]; ?>"></label> *hankkeen nimi* <input type="text"  value="<?= $m_subject[1]; ?>"></label> </h6>
+
+          </section>
+          
+          
+        </div>
+        <div class="btn" onclick="save__messagesettings();">Tallenna muutokset</div>
+        
+      </div>
+     
     </div>
   </section>
 </section>

@@ -5,13 +5,27 @@
   <title>WF työmaaeditori</title>
   <link rel="stylesheet" href="/css/modal.css">
   <link rel="stylesheet" href="/css/style.css">
-  <meta name="viewport" content="user-scalable=yes">
+  
   <link rel="apple-touch-icon" sizes="180x180" href="/css/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/css/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/css/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/css/favicon-16x16.png">
   <link rel="icon" type="image/x-icon" href="/css/favicon.ico">
 
+  <?php 
+    if($_GET["role"]) {
+      if($_GET["role"] != 'mittaus') {
+        echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+        
+      }
+      else {
+        echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+      }
+    }
+    else {
+      echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    }
+  ?>
   <link rel="manifest" href="/site.webmanifest">
   <link rel="mask-icon" href="/css/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">

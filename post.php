@@ -28,42 +28,57 @@ if(isset($_GET["role"]) && $_GET["role"] == 'mittaus'){
 }
 else { 
     $usr = $_GET['user'];
-    $usrpermissions_ = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr';");
-    $usrpermissions = mysqli_fetch_all($usrpermissions_);
+    if(strtolower($_GET["user"]) == "tyonjohto") {
+        $usrpermissions_ = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr';");
+        $usrpermissions = mysqli_fetch_all($usrpermissions_);
+        $open_comments_ = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='' AND `answer_to`=''");
+        $_open_comments = mysqli_fetch_all($open_comments_);
 
+        $txt = "";
+        foreach ($_open_comments as $value) {
+            $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13] . "," . $value[14];
+            $txt .= "~";
+        } 
+        echo '<input type="hidden" value="' . $txt . '" id="open_comments" name="open_comments">';
+        include('./templates/2_0.php');
+        include('./templates/drawarea.php');
+        include('./templates/commentator.php');
+        echo '<style> .drawarea__top,.box,.drawarea__right.recl_btn,.drawarea__controls_one {display: none !important} .da_controls_commenting {display: block !important} .nav li div.nav_current {color:black}</style>';    
 
-    $open_comments_ = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='' AND `answer_to`='';");
-    $_open_comments = mysqli_fetch_all($open_comments_);
-    // print_r($_open_comments);
+    }
+    else {
+        $usrpermissions_ = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr';");
+        $usrpermissions = mysqli_fetch_all($usrpermissions_);
+        $open_comments_ = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='' AND `answer_to`='' AND `comment_to` LIKE '%$usr%';");
+        $_open_comments = mysqli_fetch_all($open_comments_);
 
-    // echo $usrpermissions[0][4];
-    $txt = "";
-    foreach ($_open_comments as $value) {
-        if($usrpermissions[0][4] == 0) {
-            if($usrpermissions[0][1] == $value[7] || $usrpermissions[0][1] == $value[8]) {
+        $txt = "";
+        foreach ($_open_comments as $value) {
+            if($usrpermissions[0][4] == 0) {
+                if($usrpermissions[0][1] == $value[7] || $usrpermissions[0][1] == $value[8]) {
+                    $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13] . "," . $value[14];
+                    $txt .= "~";
+                }
+            }
+            else {
                 $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13] . "," . $value[14];
                 $txt .= "~";
             }
-        }
-        else {
-            $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13] . "," . $value[14];
-            $txt .= "~";
-        }
-        
-    } 
-    echo '<input type="hidden" value="' . $txt . '" id="open_comments" name="open_comments">';
-    include('./templates/2_0.php');
-    include('./templates/drawarea.php');
-    include('./templates/commentator.php');
-    echo '<style> .drawarea__top,.box,.drawarea__right.recl_btn,.drawarea__controls_one {display: none !important} .da_controls_commenting {display: block !important} .nav li div.nav_current {color:black}</style>';
-    
-   
+            
+        } 
+        echo '<input type="hidden" value="' . $txt . '" id="open_comments" name="open_comments">';
+        include('./templates/2_0.php');
+        include('./templates/drawarea.php');
+        include('./templates/commentator.php');
+        echo '<style> .drawarea__top,.box,.drawarea__right.recl_btn,.drawarea__controls_one {display: none !important} .da_controls_commenting {display: block !important} .nav li div.nav_current {color:black}</style>';    
+    }
 }
 
 
 // print_r($usrpermissions[0][1]);
 // print_r($usrpermissions[0][4]);
 echo '<input type="hidden" value="' . $usrpermissions[0][1] . '" id="current_user" name="current_user">';
+echo '<input type="hidden" value="' . strtolower($_GET["role"]) . '" id="current_role" name="current_role">';
 echo '<input type="hidden" value="' . $usrpermissions[0][4] . '" id="current_user_permissions" name="current_user_permissions">';
 echo '<input type="hidden" value="' . $id . '" id="current_project_id" name="current_project_id">';
 

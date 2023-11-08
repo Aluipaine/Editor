@@ -51,8 +51,8 @@
            </div>
         </section>
         <section class="comment__section">
-            <h4>Anna aihe</h4>
-            <fieldset>
+            <h4 class="comment__aihe">Anna aihe</h4>
+            <fieldset class="comment__aihe">
                 <input id="_radio" name="mitta__huomiot" type="radio" value="Ei aihetta" checked>
                 <label for="_radio">Ei aihetta</label>
                 <input id="a_radio" name="mitta__huomiot" type="radio" value="Sähkö">
@@ -84,19 +84,17 @@
                 <div class="col-3">
                 <h6>Kenelle</h6>
                     <select name="kommentti_comment_to" id="kommentti_comment_to">
-                    <option value="Jari">Jari</option>
-                    <option value="Henkka">Henkka</option>
-                    <option value="Marko">Marko</option>
-                    </select>
-                    <!-- <input name="aukko_comment_to" id="aukko_comment_to" type="text"> -->
-                </div>
-                <div class="col-3">
-                    <h6>Prioriteetti</h6>
-                    <select name="priority" id="comment__priority">
-                    <option value="1">Heti</option>
-                    <option value="2">Päivä</option>
-                    <option value="3">1-3 Päivää</option>
-                    <option value="4">Viikko</option>
+                    <?php 
+                        // require_once "vendor/config.php";
+
+                        $posts = mysqli_query($db, "SELECT * FROM `addedusers` WHERE `project_id`= " . $_GET['id'] . "; ");
+                        
+                        $posts = mysqli_fetch_all($posts);
+                        // print_r( $posts);
+                        foreach ($posts as $user) {
+                            echo "<option value=" . $user[2] . ">" . $user[2] ."</option>";
+                        }
+                    ?>
                     </select>
                     <!-- <input name="aukko_comment_to" id="aukko_comment_to" type="text"> -->
                 </div>
@@ -107,7 +105,7 @@
             </div>
         </section>
         <section class="commentbox">
-        <h2 class="commentbox__name"></h2>
+            <h2 class="commentbox__name"></h2>
             <div class="row">
                 <div class="col-3">
                   <h4>Tiedostot:</h4>
@@ -143,7 +141,7 @@
             <div class="row center">
                 <div class="col-4"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula">Sulje</div></div>
                 <div class="col-4"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" onclick="comment__kuittaus(this.getAttribute('name'));addproblemstatus(this);">Kuittaan tehdyksi</div></div>
-                <div class="col-4"><div class="drawarea__controls_btn_ vastaus_nappula m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();fetch_added_users();">Vastaus kommenttiin</div></div>
+                <div class="col-4"><div class="drawarea__controls_btn_ vastaus_nappula m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();">Vastaus kommenttiin</div></div>
             </div>
             <div id="commentbox__answers" style="margin-top: 50px;">
              <h6>Vastaukset:</h6>

@@ -3,36 +3,45 @@ current_room = null;
 apartment = null;
 
 all_apartments = document.querySelectorAll('.project__building_room');
+if(document.querySelector("#open_comments")) {
+  // for (let i = 0; i < all_apartments.length; i++) {
+  //   if(all_apartments[i].dataset.aroom.split(",")[1] == "prob" || all_apartments[i].dataset.broom.split(",")[1] == "prob" || all_apartments[i].dataset.croom.split(",")[1] == "prob" || all_apartments[i].dataset.droom.split(",")[1] == "prob" || all_apartments[i].dataset.kroom.split(",")[1] == "prob" || all_apartments[i].dataset.lroom.split(",")[1] == "prob") {
+  //     all_apartments[i].classList.add("prob");
+  //   }
+  // }
+}
+else {
+  for (let i = 0; i < all_apartments.length; i++) {
+    if(all_apartments[i].dataset.aroom && all_apartments[i].dataset.broom && all_apartments[i].dataset.croom && all_apartments[i].dataset.droom && all_apartments[i].dataset.kroom && all_apartments[i].dataset.lroom) {
+      if(all_apartments[i].dataset.aroom.split(",")[1] == "problem" || all_apartments[i].dataset.broom.split(",")[1] == "problem" || all_apartments[i].dataset.croom.split(",")[1] == "problem" || all_apartments[i].dataset.droom.split(",")[1] == "problem" || all_apartments[i].dataset.kroom.split(",")[1] == "problem" || all_apartments[i].dataset.lroom.split(",")[1] == "problem") {
+          all_apartments[i].classList.add("problem");
+      }
+      else if(all_apartments[i].dataset.aroom.split(",")[1] == "prob" || all_apartments[i].dataset.broom.split(",")[1] == "prob" || all_apartments[i].dataset.croom.split(",")[1] == "prob" || all_apartments[i].dataset.droom.split(",")[1] == "prob" || all_apartments[i].dataset.kroom.split(",")[1] == "prob" || all_apartments[i].dataset.lroom.split(",")[1] == "prob") {
+          all_apartments[i].classList.add("prob");
+      }
 
-for (let i = 0; i < all_apartments.length; i++) {
-  if(all_apartments[i].dataset.aroom && all_apartments[i].dataset.broom && all_apartments[i].dataset.croom && all_apartments[i].dataset.droom && all_apartments[i].dataset.kroom && all_apartments[i].dataset.lroom) {
-    if(all_apartments[i].dataset.aroom.split(",")[1] == "problem" || all_apartments[i].dataset.broom.split(",")[1] == "problem" || all_apartments[i].dataset.croom.split(",")[1] == "problem" || all_apartments[i].dataset.droom.split(",")[1] == "problem" || all_apartments[i].dataset.kroom.split(",")[1] == "problem" || all_apartments[i].dataset.lroom.split(",")[1] == "problem") {
-        all_apartments[i].classList.add("problem");
-    }
-    else if(all_apartments[i].dataset.aroom.split(",")[1] == "prob" || all_apartments[i].dataset.broom.split(",")[1] == "prob" || all_apartments[i].dataset.croom.split(",")[1] == "prob" || all_apartments[i].dataset.droom.split(",")[1] == "prob" || all_apartments[i].dataset.kroom.split(",")[1] == "prob" || all_apartments[i].dataset.lroom.split(",")[1] == "prob") {
-        all_apartments[i].classList.add("prob");
-    }
+      else if(all_apartments[i].dataset.aroom.split(",")[1] == "measured" || all_apartments[i].dataset.broom.split(",")[1] == "measured" || all_apartments[i].dataset.croom.split(",")[1] == "measured" || all_apartments[i].dataset.droom.split(",")[1] == "measured" || all_apartments[i].dataset.kroom.split(",")[1] == "measured" || all_apartments[i].dataset.lroom.split(",")[1] == "measured") {
+          all_apartments[i].classList.add("measured");
+      }
 
-    else if(all_apartments[i].dataset.aroom.split(",")[1] == "measured" || all_apartments[i].dataset.broom.split(",")[1] == "measured" || all_apartments[i].dataset.croom.split(",")[1] == "measured" || all_apartments[i].dataset.droom.split(",")[1] == "measured" || all_apartments[i].dataset.kroom.split(",")[1] == "measured" || all_apartments[i].dataset.lroom.split(",")[1] == "measured") {
-        all_apartments[i].classList.add("measured");
-    }
+      else if(all_apartments[i].dataset.aroom.split(",")[1] == "rangatok" || all_apartments[i].dataset.broom.split(",")[1] == "rangatok" || all_apartments[i].dataset.croom.split(",")[1] == "rangatok" || all_apartments[i].dataset.droom.split(",")[1] == "rangatok" || all_apartments[i].dataset.kroom.split(",")[1] == "rangatok" || all_apartments[i].dataset.lroom.split(",")[1] == "rangatok") {
+          all_apartments[i].classList.add("rangatok");
+      }
 
-    else if(all_apartments[i].dataset.aroom.split(",")[1] == "rangatok" || all_apartments[i].dataset.broom.split(",")[1] == "rangatok" || all_apartments[i].dataset.croom.split(",")[1] == "rangatok" || all_apartments[i].dataset.droom.split(",")[1] == "rangatok" || all_apartments[i].dataset.kroom.split(",")[1] == "rangatok" || all_apartments[i].dataset.lroom.split(",")[1] == "rangatok") {
-        all_apartments[i].classList.add("rangatok");
-    }
-
-    else if(all_apartments[i].dataset.aroom.split(",")[1] == "nowork" || all_apartments[i].dataset.broom.split(",")[1] == "nowork" || all_apartments[i].dataset.croom.split(",")[1] == "nowork" || all_apartments[i].dataset.droom.split(",")[1] == "nowork" || all_apartments[i].dataset.kroom.split(",")[1] == "nowork" || all_apartments[i].dataset.lroom.split(",")[1] == "nowork") {
-        all_apartments[i].classList.add("nowork");
-    }
-    
-    else if(all_apartments[i].dataset.aroom.split(",")[1] == "undone" || all_apartments[i].dataset.broom.split(",")[1] == "undone" || all_apartments[i].dataset.croom.split(",")[1] == "undone" || all_apartments[i].dataset.droom.split(",")[1] == "undone" || all_apartments[i].dataset.kroom.split(",")[1] == "undone" || all_apartments[i].dataset.lroom.split(",")[1] == "undone") {
-        all_apartments[i].classList.add("undone");
-    }
-    else {
-        all_apartments[i].classList.add("done");
+      else if(all_apartments[i].dataset.aroom.split(",")[1] == "nowork" || all_apartments[i].dataset.broom.split(",")[1] == "nowork" || all_apartments[i].dataset.croom.split(",")[1] == "nowork" || all_apartments[i].dataset.droom.split(",")[1] == "nowork" || all_apartments[i].dataset.kroom.split(",")[1] == "nowork" || all_apartments[i].dataset.lroom.split(",")[1] == "nowork") {
+          all_apartments[i].classList.add("nowork");
+      }
+      
+      else if(all_apartments[i].dataset.aroom.split(",")[1] == "undone" || all_apartments[i].dataset.broom.split(",")[1] == "undone" || all_apartments[i].dataset.croom.split(",")[1] == "undone" || all_apartments[i].dataset.droom.split(",")[1] == "undone" || all_apartments[i].dataset.kroom.split(",")[1] == "undone" || all_apartments[i].dataset.lroom.split(",")[1] == "undone") {
+          all_apartments[i].classList.add("undone");
+      }
+      else {
+          all_apartments[i].classList.add("done");
+      }
     }
   }
 }
+
 
 
 $("#rooms").hide();
@@ -233,7 +242,11 @@ function refresh__drawcontrols() {
     let rooms = document.querySelectorAll(".project__building_room");
 
     for (let a = 0; a < rooms.length; a++) {
-        
+      
+      if(document.querySelector("#open_comments")) {
+        // initializebuilding_comments();
+      }
+      else {
         const element = rooms[a];
         t = rooms[a];
         if(t.dataset.aroom) {}
@@ -263,6 +276,10 @@ function refresh__drawcontrols() {
         else if(statuses.includes("measured") && statuses.includes("tomeasure")) {
             element.classList.add("bg-4");
         }
+
+      }
+       
+        
     }
 
 
@@ -443,10 +460,18 @@ function refresh__drawcontrols() {
       room_status = 'tomeasure';
       document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
 
+      if(document.querySelector("#open_comments")) {
+      }
+      else {
+        walls_content = document.querySelector(".house__wall_status_l").innerText + "," + document.querySelector(".house__wall_status_a").innerText + "," + document.querySelector(".house__wall_status_b").innerText + "," + document.querySelector(".house__wall_status_c").innerText + "," + document.querySelector(".house__wall_status_d").innerText + "," + document.querySelector(".house__wall_status_k").innerText;
+        try { document.querySelector(".walls_content").value = walls_content; } catch(e) { console.log("TRY-CATCH ERROR:", e ) }
+        // degradate_url(3);
+      }
 
-      walls_content = document.querySelector(".house__wall_status_l").innerText + "," + document.querySelector(".house__wall_status_a").innerText + "," + document.querySelector(".house__wall_status_b").innerText + "," + document.querySelector(".house__wall_status_c").innerText + "," + document.querySelector(".house__wall_status_d").innerText + "," + document.querySelector(".house__wall_status_k").innerText;
-      try { document.querySelector(".walls_content").value = walls_content; } catch(e) { console.log("TRY-CATCH ERROR:", e ) }
-      // degradate_url(3);
+
+
+      
+      
     }
     else {
       let array__ofinputsy = [];
@@ -1913,10 +1938,15 @@ function refresh__drawcontrols() {
         updatearea();
         alert("Aseta rangat ennen listoja");
       }
+      if(document.querySelector("#open_comments")) {
 
-      room_status = 'measured';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      }
+      else {
+        room_status = 'measured';
+        document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
 
+      }
+      
     }
     else {
       if (document.querySelector(".listat__grandrow")) {
@@ -2013,9 +2043,13 @@ function refresh__drawcontrols() {
         lineinbuts[a].style.display = "none";
       }
 
-      room_status = 'measured';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
-
+      if(document.querySelector("#open_comments")) {
+      }
+      else {
+        room_status = 'measured';
+        document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      }
+      
 
 
     }
@@ -2589,34 +2623,39 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
       var _id = value;
       saving_array = [];
       saving_id = $('.id').val();
-
-      room_status = 'measured';
-      if(current_room) {
-        if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("problem")) {
-          room_status = 'problem';
-        }
-        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("prob")) {
-          room_status = 'prob';
-        }
-        else if (document.querySelector(".house__wall_" + current_room.toLowerCase()).classList.contains("hidden")) {
-          room_status = 'hidden';
-        }
-        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("done")) {
-          room_status = 'done';
-        }
-        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("rangatok")) {
-          room_status = 'rangatok';
-        }
-        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("measured")) {
-          room_status = 'measured';
-        }
-        else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("nowork")) {
-          room_status = 'nowork';
-        }
-        else {
-          room_status = 'undone';
+      if(document.querySelector("#open_comments")) {
+        room_status = 'prob';
+      }
+      else {
+        room_status = 'measured';
+        if(current_room) {
+          if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("problem")) {
+            room_status = 'problem';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("prob")) {
+            room_status = 'prob';
+          }
+          else if (document.querySelector(".house__wall_" + current_room.toLowerCase()).classList.contains("hidden")) {
+            room_status = 'hidden';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("done")) {
+            room_status = 'done';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("rangatok")) {
+            room_status = 'rangatok';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("measured")) {
+            room_status = 'measured';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("nowork")) {
+            room_status = 'nowork';
+          }
+          else {
+            room_status = 'undone';
+          }
         }
       }
+      
       
 
       saving_origo = parseFloat(document.querySelector("#drawarea__origo_central").style.left) + "|" + parseFloat(document.querySelector(
@@ -2876,15 +2915,6 @@ function initializeroom(room, menu) {
     console.log("ADDED TO URL");
   }
 
-
-  if(document.querySelector("#open_comments")) {
-    if(document.querySelector("#open_comments").value.length > 5) {
-      initializeroom_comments(room, menu);
-      return;
-    }
-  }
-  
-
   
   
   mode_room = ir_no.toLowerCase();
@@ -2920,629 +2950,733 @@ function initializeroom(room, menu) {
     da_curnav[i].classList.add("current__housewall");
   }
 
+  if(document.querySelector("#open_comments")) {
+    ir_no = room.dataset.room;
 
-  // START CLEARING
-  mps = canvas.querySelectorAll(".mp");
-  aukkos = canvas.querySelectorAll(".aukko");
-  lvs = canvas.querySelectorAll(".lv");
-  for (var i = 0; i < mps.length; i++) {
-    mps[i].remove();
-  }
-  for (var i = 0; i < aukkos.length; i++) {
-    aukkos[i].remove();
-  }
+    console.log("initializeroom_comments");
 
-  for (var i = 0; i < lvs.length; i++) {
-    lvs[i].remove();
-  }
-  document.querySelector(".drawarea__controls_elementsone").innerHTML = "";
-  document.querySelector(".drawarea__controls_elementstwo").innerHTML = "";
-  lapivienti_count = 0;
-  mittapiste_count = 0;
-  mp_previous_vord = null;
-  au_previous_vord = null;
-  lv_previous_vord = null;
-  document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo oikealle";
-  document.querySelector("#drawarea__origo_central").style.left = "1px";
-  document.querySelector("#drawarea__origo_central").style.bottom = "1px";
-
-  document.querySelector(".mittapisteet").value = "";
-  document.querySelector(".aukot").value = "";
-  document.querySelector(".lapiviennit").value = "";
-  document.querySelector(".saumat_data").value = "";
-  document.querySelector(".levyt_data").value = "";
-  document.querySelector(".rangat").value = "";
-  document.querySelector(".listat").value = "";
-
-
-  if (canvas.querySelector(".saumat__grandrow")) {
-    canvas.querySelector(".saumat__grandrow").remove();
-  }
-  if (canvas.querySelector(".levyt")) {
-    sisa_levyt = canvas.querySelectorAll(".levyt .levy");
-    for (let lev = 0; lev < sisa_levyt.length; lev++) {
-      sisa_levyt[lev].remove();
+    mode_room = ir_no.toLowerCase();
+    document.querySelector("#step_drawscreen").value = 'drawscreen_section_one';
+    if (mode_room == 'a') {
+      ir_value = apartment.dataset.aroom;
     }
-    // document.querySelector("div.levyt").remove();
-  }
-  if (canvas.querySelector(".tyostot__grandrow") && input_step != 'drawscreen_section_six' && input_step != 'drawscreen_section_seven' && input_step != 'drawscreen_section_eight' && input_step != 'drawscreen_section_nine' && input_step != 'drawscreen_section_esikatselu') {
-    canvas.querySelector(".tyostot__grandrow").remove();
-  }
-  if (canvas.querySelector(".listat__grandrow")) {
-    canvas.querySelector(".listat__grandrow").remove();
-  }
-  // STOP CLEARING
-  if (ir_value.length > 5) {
-    ir_splitted = ir_value.split(",");
-    ir_id = ir_splitted[0];
-    ir_status = ir_splitted[1];
-    ir_origo = ir_splitted[2];
-    ir_origo_x = parseFloat(ir_splitted[2].split("|")[0]);
-    ir_origo_y = parseFloat(ir_splitted[2].split("|")[1]);
-    // Origo formatting DISABLED
-    if (ir_origo_x == 1 && ir_origo_y == 1) {
-      document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo oikealle";
+    if (mode_room == 'b') {
+      ir_value = apartment.dataset.broom;
     }
-    else if (ir_origo_x > 1 && ir_origo_y > 1) {
-      document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo vasemmalle";
+    if (mode_room == 'c') {
+      ir_value = apartment.dataset.croom;
     }
-    else if (ir_origo_x > 1 && ir_origo_y == 1) {
-      document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo ylös";
+    if (mode_room == 'd') {
+      ir_value = apartment.dataset.droom;
     }
-    else if (ir_origo_x == 1 && ir_origo_y > 1) {
-      document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo alas";
+    if (mode_room == 'k') {
+      ir_value = apartment.dataset.kroom;
     }
-    document.querySelector("#drawarea__origo_central").style.left = 1 + "px";
-    document.querySelector("#drawarea__origo_central").style.bottom = 1 + "px";
-    if (menu) {
-    }
-    if (room.parentElement.querySelector(".wall_height") && room.parentElement.querySelector(".wall_width")) {
-      room_h = parseFloat(room.parentElement.querySelector(".wall_height").value);
-      room_w = parseFloat(room.parentElement.querySelector(".wall_width").value);
-      document.querySelector("#drawarea_h").value = parseFloat(room_h);
-      document.querySelector("#drawarea_w").value = parseFloat(room_w);
-      setTimeout(changesize(), 1000);
-    }
-    else {
-      // Alue formaddig OKKKKKKK
-      ir_alue = ir_splitted[3];
-      ir_alue_x = ir_splitted[3].split("|")[1];
-      ir_alue_y = ir_splitted[3].split("|")[0];
-      document.querySelector("#drawarea_h").value = parseFloat(ir_alue_y);
-      document.querySelector("#drawarea_w").value = parseFloat(ir_alue_x);
-      setTimeout(changesize(), 1000);
-    }
-    ir_mps = ir_splitted[4].split("__");
-    ir_aus = ir_splitted[5].split("__");
-    ir_lv = ir_splitted[6].split("__");
-    ir_sau = ir_splitted[7].split("__");
-    ir_lev = ir_splitted[8].split("__");
-    ir_kin = ""; //ir_splitted[5].split("__");
-    ir_ran = ""; //ir_splitted[5].split("__");
-    ir_lis = ""; //ir_splitted[5].split("__");
-
-
-    // LISTAT
-    if (ir_lis.length > 1) { }
-
-    // RANGAT
-    else if (ir_ran.length > 1) { }
-
-    // KIINNIKKEET
-    else if (ir_kin.length > 1) { }
-
-    // LEVYT
-    else if (ir_lev.length > 1) {
-      // MPs formatting
-      for (var i = 0; i < ir_mps.length; i++) {
-        if (ir_mps[i].length > 3) {
-          ir_mps_name = ir_mps[i].split("|")[0];
-          ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
-          ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
-          ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
-          ir_mps_id = ir_mps[i].split("|")[4];
-          mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
-        }
-      }
-
-      for (var i = 0; i < ir_aus.length; i++) {
-        if (ir_aus[i].length > 3) {
-          ir_aus_name = ir_aus[i].split("|")[0];
-          ir_aus_b = parseFloat(ir_aus[i].split("|")[1]);
-          ir_aus_l = parseFloat(ir_aus[i].split("|")[2]);
-          ir_aus_h = parseFloat(ir_aus[i].split("|")[5]);
-          ir_aus_w = parseFloat(ir_aus[i].split("|")[6]);
-          ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
-          ir_aus_id = ir_aus[i].split("|")[4];
-          ir_aus_classes = ir_aus[i].split("|")[7];
-
-          ir_aus_comment = ir_aus[i].split("|")[8];
-          ir_aus_cfrom = ir_aus[i].split("|")[9];
-          ir_aus_cto = ir_aus[i].split("|")[10];
-          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
-          // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
-          // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
-        }
-      }
-
-
-      $('#step_drawscreen').val('drawscreen_section_three');
-      refresh__drawcontrols();
-      updatearea();
-
-
-      $('#step_drawscreen').val('drawscreen_section_four');
-      refresh__drawcontrols();
-      updatearea();
-      if (document.querySelector(".saumat__grandrow")) {
-        saumat = document.querySelector(".saumat__grandrow");
-      }
-      else {
-        saumat = document.createElement("div");
-        saumat.classList.add("saumat__grandrow");
-        canvas.appendChild(saumat);
-      }
-      if (saumat.querySelector(".horizontalrow_saumat")) { }
-      else {
-        newrow_horizontal = document.createElement("div");
-        saumat.appendChild(newrow_horizontal);
-        newrow_horizontal.classList.add("horizontalrow_saumat");
-      }
-      if (saumat.querySelector(".verticalrow_saumat")) { }
-      else {
-        newrow_vertical = document.createElement("div");
-        saumat.appendChild(newrow_vertical);
-        newrow_vertical.classList.add("verticalrow_saumat");
-      }
-      for (var i = ir_sau.length - 1; i >= 0; i--) {
-        sau_data = ir_sau[i].split("|");
-
-        sau_name = sau_data[0];
-        sau_type = sau_data[1];
-        sau_b = sau_data[2];
-        sau_left = sau_data[3];
-        sau_cord = sau_data[4];
-        sau_name = sau_data[5];
-        luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
-        if (sau_type == 'pysty') { }
-        if (sau_type == 'vaaka') { }
-      }
-      alkusaumat();
-      calculateamounts();
-      sauma__verticals = canvas.querySelectorAll(".sauma__vertical");
-      sauma__horizontals = canvas.querySelectorAll(".sauma__horizontal");
-      if (canvas.querySelector(".sauma__vertical")) {
-        for (var i = 0; i < sauma__verticals.length; i++) {
-          if (sauma__verticals[i].querySelector(".sauma__controls_del")) {
-            sauma__verticals[i].querySelector(".sauma__controls_del").innerHTML = i + 1;
-            sauma__verticals[i].dataset.no = i + 1;
-          }
-        }
-        s_v = i + 1;
-      }
-      if (canvas.querySelector(".sauma__horizontal")) {
-        for (var i = 0; i < sauma__horizontals.length; i++) {
-          if (sauma__horizontals[i].querySelector(".sauma__controls_del")) {
-            sauma__horizontals[i].querySelector(".sauma__controls_del").innerHTML = String.fromCharCode(65 + parseFloat(i + 1));
-            sauma__horizontals[i].dataset.no = String.fromCharCode(65 + parseFloat(i + 1));
-          }
-        }
-        s_h = i + 1;
-      }
-
-      dels = canvas.querySelectorAll(".sauma__controls_del");
-
-      for (var i = dels.length - 1; i >= 0; i--) {
-        sauma = dels[i].parentElement.parentElement;
-        if (dels[i].querySelector(".delmeasure")) {
-          delmeasure = dels[i].querySelector(".delmeasure");
-          if (sauma.classList.contains("sauma__vertical")) {
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
-          }
-          else if (sauma.classList.contains("sauma__horizontal")) {
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
-          }
-        }
-        else {
-
-          delmeasure = document.createElement("div");
-          delmeasure.classList.add("delmeasure");
-          if (sauma.classList.contains("sauma__vertical")) {
-            delmeasure.classList.add("delmeasure_vertical");
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
-          }
-          else if (sauma.classList.contains("sauma__horizontal")) {
-            delmeasure.classList.add("delmeasure_horizontal");
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
-          }
-
-          dels[i].appendChild(delmeasure);
-        }
-      }
-
-      saumasize__checkup();
-
-      saumat = canvas.querySelectorAll(".sauma");
-
-      for (var i = saumat.length - 1; i >= 0; i--) {
-        saumat[i].removeEventListener('touchmove', (e) => { });
-        saumat[i].querySelector(".sauma__controls").removeEventListener('touchmove', (e) => { });
-      }
-
-      sauma_h = canvas.querySelectorAll(".sauma__horizontal");
-      sauma_v = canvas.querySelectorAll(".sauma__vertical");
-      sauma_h.forEach(function (j) {
-        j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-        });
-        j.addEventListener('touchmove', (e) => {
-          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-        });
-      });
-
-      sauma_v.forEach(function (j) {
-        j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
-        });
-        j.addEventListener('touchmove', (e) => {
-          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
-        });
-      });
-
-
-
-
-      refresh__drawcontrols();
-      updatearea();
-      $('#step_drawscreen').val('drawscreen_section_five');
-
-      // levy initialization
-
-      setTimeout(function () {
-        lev = ir_lev[0].split(" ");
-        dex = 0;
-        if (canvas.querySelector(".levyt")) {
-          levyt = canvas.querySelector(".levyt");
-          levyt.innerHTML = "";
-        }
-        else {
-          levyt = document.createElement("div");
-          levyt.classList.add("levyt");
-          canvas.append(levyt);
-        }
-
-
-        for (var i = 0; i < lev.length; i++) {
-          if (lev[i].length > 10) {
-            levyt.prepend(luo__levy_restore(lev[i].split("|")[0], lev[i].split("|")[1], parseFloat(lev[i].split("|")[2]), parseFloat(lev[i].split("|")[3]), lev[i].split("|")[4], lev[i].split("|")[5], lev[i].split("|")[6], lev[i].split("|")[7]));
-          }
-        }
-        console.log("LEVYTÄ FIRED");
-      }, 1000);
-
-
-
-
+    if (mode_room == 'l') {
+      ir_value = apartment.dataset.lroom;
     }
 
-    //SAUMAT 
-    else if (ir_sau.length > 1) {
-      // MPs formatting
-      for (var i = 0; i < ir_mps.length; i++) {
-        if (ir_mps[i].length > 3) {
-          ir_mps_name = ir_mps[i].split("|")[0];
-          ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
-          ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
-          ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
-          ir_mps_id = ir_mps[i].split("|")[4];
-          mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
-        }
-      }
+    room_status = ir_value.split(",")[1];
+    // INITIALIZE CURRENT STATUS DA
+    da_roomnav = document.querySelectorAll(".house__wall");
+    for (var i = da_roomnav.length - 1; i >= 0; i--) {
+      da_roomnav[i].classList.remove("current__housewall");
+    }
+    da_curnav = document.querySelectorAll(".tohide__room_" + mode_room);
+    for (var i = da_curnav.length - 1; i >= 0; i--) {
+      da_curnav[i].classList.add("current__housewall");
+    }
+    // START CLEARING
+    coms = canvas.querySelectorAll(".com");
 
-      for (var i = 0; i < ir_aus.length; i++) {
-        if (ir_aus[i].length > 3) {
-          ir_aus_name = ir_aus[i].split("|")[0];
-          ir_aus_b = parseFloat(ir_aus[i].split("|")[1]);
-          ir_aus_l = parseFloat(ir_aus[i].split("|")[2]);
-          ir_aus_h = parseFloat(ir_aus[i].split("|")[5]);
-          ir_aus_w = parseFloat(ir_aus[i].split("|")[6]);
-          ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
-          ir_aus_id = ir_aus[i].split("|")[4];
-          ir_aus_classes = ir_aus[i].split("|")[7];
-
-          ir_aus_comment = ir_aus[i].split("|")[8];
-          ir_aus_cfrom = ir_aus[i].split("|")[9];
-          ir_aus_cto = ir_aus[i].split("|")[10];
-          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
-          // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
-          // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
-        }
-      }
-      $('#step_drawscreen').val('drawscreen_section_three');
-      refresh__drawcontrols();
-      updatearea();
-
-      $('#step_drawscreen').val('drawscreen_section_four');
-      refresh__drawcontrols();
-      updatearea();
-      if (document.querySelector(".saumat__grandrow")) {
-        saumat = document.querySelector(".saumat__grandrow");
-      }
-      else {
-        saumat = document.createElement("div");
-        saumat.classList.add("saumat__grandrow");
-        canvas.appendChild(saumat);
-      }
-      if (saumat.querySelector(".horizontalrow_saumat")) { }
-      else {
-        newrow_horizontal = document.createElement("div");
-        saumat.appendChild(newrow_horizontal);
-        newrow_horizontal.classList.add("horizontalrow_saumat");
-      }
-      if (saumat.querySelector(".verticalrow_saumat")) { }
-      else {
-        newrow_vertical = document.createElement("div");
-        saumat.appendChild(newrow_vertical);
-        newrow_vertical.classList.add("verticalrow_saumat");
-      }
-      for (var i = ir_sau.length - 1; i >= 0; i--) {
-        sau_data = ir_sau[i].split("|");
-
-        sau_name = sau_data[0];
-        sau_type = sau_data[1];
-        sau_b = sau_data[2];
-        sau_left = sau_data[3];
-        sau_cord = sau_data[4];
-        sau_name = sau_data[5];
-        luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
-        if (sau_type == 'pysty') { }
-        if (sau_type == 'vaaka') { }
-      }
-      alkusaumat();
-      calculateamounts();
-      sauma__verticals = canvas.querySelectorAll(".sauma__vertical");
-      sauma__horizontals = canvas.querySelectorAll(".sauma__horizontal");
-      if (canvas.querySelector(".sauma__vertical")) {
-        for (var i = 0; i < sauma__verticals.length; i++) {
-          if (sauma__verticals[i].querySelector(".sauma__controls_del")) {
-            sauma__verticals[i].querySelector(".sauma__controls_del").innerHTML = i + 1;
-            sauma__verticals[i].dataset.no = i + 1;
-          }
-        }
-        s_v = i + 1;
-      }
-      if (canvas.querySelector(".sauma__horizontal")) {
-        for (var i = 0; i < sauma__horizontals.length; i++) {
-          if (sauma__horizontals[i].querySelector(".sauma__controls_del")) {
-            sauma__horizontals[i].querySelector(".sauma__controls_del").innerHTML = String.fromCharCode(65 + parseFloat(i + 1));
-            sauma__horizontals[i].dataset.no = String.fromCharCode(65 + parseFloat(i + 1));
-          }
-        }
-        s_h = i + 1;
-      }
-
-      dels = canvas.querySelectorAll(".sauma__controls_del");
-
-      for (var i = dels.length - 1; i >= 0; i--) {
-        sauma = dels[i].parentElement.parentElement;
-        if (dels[i].querySelector(".delmeasure")) {
-          delmeasure = dels[i].querySelector(".delmeasure");
-          if (sauma.classList.contains("sauma__vertical")) {
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
-          }
-          else if (sauma.classList.contains("sauma__horizontal")) {
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
-          }
-        }
-        else {
-
-          delmeasure = document.createElement("div");
-          delmeasure.classList.add("delmeasure");
-          if (sauma.classList.contains("sauma__vertical")) {
-            delmeasure.classList.add("delmeasure_vertical");
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
-          }
-          else if (sauma.classList.contains("sauma__horizontal")) {
-            delmeasure.classList.add("delmeasure_horizontal");
-            delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
-          }
-
-          dels[i].appendChild(delmeasure);
-        }
-      }
-
-      saumasize__checkup();
-
-      saumat = canvas.querySelectorAll(".sauma");
-
-      for (var i = saumat.length - 1; i >= 0; i--) {
-        saumat[i].removeEventListener('touchmove', (e) => { });
-        saumat[i].querySelector(".sauma__controls").removeEventListener('touchmove', (e) => { });
-      }
-
-      sauma_h = canvas.querySelectorAll(".sauma__horizontal");
-      sauma_v = canvas.querySelectorAll(".sauma__vertical");
-      sauma_h.forEach(function (j) {
-        j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-        });
-        j.addEventListener('touchmove', (e) => {
-          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-        });
-      });
-
-      sauma_v.forEach(function (j) {
-        j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
-        });
-        j.addEventListener('touchmove', (e) => {
-          resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
-        });
-      });
-
-      setTimeout(function () { levyta('important'); console.log("LEVYTÄ FIRED") }, 1000);
-      $('#step_drawscreen').val('drawscreen_section_five');
-      refresh__drawcontrols();
-      updatearea();
+    for (var i = 0; i < coms.length; i++) {
+      coms[i].remove();
     }
 
-    //LV
-    else if (ir_lv.length > 1) {
-      for (var i = 0; i < ir_mps.length; i++) {
-        if (ir_mps[i].length > 5) {
-          // room_status = ir_mps[i].split("|")[0];
-          ir_mps_name = ir_mps[i].split("|")[0];
-          ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
-          ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
-          ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
-          ir_mps_id = ir_mps[i].split("|")[4];
+    comments__controlelems = document.querySelectorAll("div.drawarea__controls_elementsone.drawarea__things > span");
 
-
-          mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
-        }
-      }
-
-
-      $('#step_drawscreen').val('drawscreen_section_one');
-      refresh__drawcontrols();
-      updatearea();
-
-      for (var i = 0; i < ir_aus.length; i++) {
-        if (ir_aus[i].length > 3) {
-          ir_aus_name = ir_aus[i].split("|")[0];
-          ir_aus_b = parseFloat(ir_aus[i].split("|")[1]);
-          ir_aus_l = parseFloat(ir_aus[i].split("|")[2]);
-          ir_aus_h = parseFloat(ir_aus[i].split("|")[5]);
-          ir_aus_w = parseFloat(ir_aus[i].split("|")[6]);
-          ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
-          ir_aus_id = ir_aus[i].split("|")[4];
-          ir_aus_classes = ir_aus[i].split("|")[7];
-
-          ir_aus_comment = ir_aus[i].split("|")[8];
-          ir_aus_cfrom = ir_aus[i].split("|")[9];
-          ir_aus_cto = ir_aus[i].split("|")[10];
-          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
-          // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
-          // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
-        }
-      }
-
-
-      $('#step_drawscreen').val('drawscreen_section_two');
-      refresh__drawcontrols();
-      updatearea();
-
-      for (var i = 0; i < ir_lv.length; i++) {
-        if (ir_lv[i].length > 3) {
-          ir_lvs_name = ir_lv[i].split("|")[0];
-          ir_lvs_b = parseFloat(ir_lv[i].split("|")[1]);
-          ir_lvs_l = parseFloat(ir_lv[i].split("|")[2]);
-          ir_lvs_vount = parseFloat(ir_lv[i].split("|")[3]);
-          ir_lvs_id = ir_lv[i].split("|")[4];
-          ir_lvs_sade = parseFloat(ir_lv[i].split("|")[5]);
-
-          ir_lv_comment = ir_lv[i].split("|")[6];
-          ir_lv_cfrom = ir_lv[i].split("|")[7];
-          ir_lv_cto = ir_lv[i].split("|")[8];
-          mitta__create_mitta("restoring", "lv", ir_lvs_name, ir_lvs_b, ir_lvs_l, '', '', ir_lvs_vount, ir_lvs_id, ir_lvs_sade, ir_lv_comment, ir_lv_cfrom, ir_lv_cto);
-
-        }
-      }
-
-      $('#step_drawscreen').val('drawscreen_section_three');
-      refresh__drawcontrols();
-      updatearea();
+    for (let i = 0; i < comments__controlelems.length; i++) {
+      comments__controlelems[i].remove();
+      
     }
 
-    //AUKOT 
-    else if (ir_aus.length > 1) {
-      for (var i = 0; i < ir_mps.length; i++) {
-        if (ir_mps[i].length > 5) {
-          ir_mps_name = ir_mps[i].split("|")[0];
-          ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
-          ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
-          ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
-          ir_mps_id = ir_mps[i].split("|")[4];
-          mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
+    // STOP CLEARING
+    if (ir_value.length > 5) {
+      kommentti_count = 0;
+      ir_coms = document.querySelector("#open_comments").value.split("~");
+      console.log(ir_coms.length);
+      console.log("OPEN_COMMENTS INPUT" + ir_coms);
+      //Comments
+      for (var cm = 0; cm < ir_coms.length; cm++) {
+        console.log(ir_coms[i]);
+        console.log("TILA EDITORISSA" + "tila"+current_apartment.replaceAll(" ","").replaceAll("-","").toLowerCase());
+        console.log("TILA TIETOKANNASSA" + ir_coms[cm].length > 4 && ir_coms[cm].split(",")[2].split(">")[0].replaceAll(" ","").replaceAll("-","").toLowerCase());
+                // if (ir_coms[i].length > 4) {
+        //   console.log(ir_coms[i].split(",")[2].split(">")[0].replaceAll(" ","").replaceAll("-","").toLowerCase());
+        //   console.log(document.querySelector("#rooms > input.room").value.replaceAll(" ","").replaceAll("-","").toLowerCase());
+        // }
+        if (ir_coms[cm].length > 4 && ir_coms[cm].split(",")[2].split(">")[0].replaceAll(" ","").replaceAll("-","").toLowerCase() === "tila"+current_apartment.replaceAll(" ","").replaceAll("-","").toLowerCase()) {
+          console.log("ROOM OK ");
+          name_splitted = ir_coms[cm].split(",")[2].split(">")[1];
+          if (ir_coms[cm].length > 5 && name_splitted == mode_room) {
+            grande_array = ir_coms[cm];
+            
+            comment__restore(grande_array);
+            refresh__drawcontrols();
+          }
         }
       }
-
-
-      $('#step_drawscreen').val('drawscreen_section_one');
-      refresh__drawcontrols();
-      updatearea();
-
-      for (var i = 0; i < ir_aus.length; i++) {
-        if (ir_aus[i].length > 3) {
-          ir_aus_name = ir_aus[i].split("|")[0];
-          ir_aus_b = parseFloat(ir_aus[i].split("|")[1]);
-          ir_aus_l = parseFloat(ir_aus[i].split("|")[2]);
-          ir_aus_h = parseFloat(ir_aus[i].split("|")[5]);
-          ir_aus_w = parseFloat(ir_aus[i].split("|")[6]);
-          ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
-          ir_aus_id = ir_aus[i].split("|")[4];
-          ir_aus_classes = ir_aus[i].split("|")[7];
-
-
-          ir_aus_comment = ir_aus[i].split("|")[8];
-          ir_aus_cfrom = ir_aus[i].split("|")[9];
-          ir_aus_cto = ir_aus[i].split("|")[10];
-          mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
-          // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
-          // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
-        }
-      }
-
-      $('#step_drawscreen').val('drawscreen_section_two');
-      refresh__drawcontrols();
-      updatearea();
     }
 
-    //MITTAPISTEET, OK
-    else if (ir_mps.length > 1) {
-      for (var i = 0; i < ir_mps.length; i++) {
-        if (ir_mps[i].length > 5) {
-          ir_mps_name = ir_mps[i].split("|")[0];
-          ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
-          ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
-          ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
-          ir_mps_id = ir_mps[i].split("|")[4];
-          mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
-        }
-      }
 
-      $('#step_drawscreen').val('drawscreen_section_one');
-      refresh__drawcontrols();
-      updatearea();
+    ir_no = room.dataset.room;
+    mode_room = ir_no.toLowerCase();
+
+    if (mode_room == 'a') {
+      ir_value = apartment.dataset.aroom;
     }
+    if (mode_room == 'b') {
+      ir_value = apartment.dataset.broom;
+    }
+    if (mode_room == 'c') {
+      ir_value = apartment.dataset.croom;
+    }
+    if (mode_room == 'd') {
+      ir_value = apartment.dataset.droom;
+    }
+    if (mode_room == 'k') {
+      ir_value = apartment.dataset.kroom;
+    }
+    if (mode_room == 'l') {
+      ir_value = apartment.dataset.lroom;
+    }
+
+    refresh__drawcontrols();
   }
   else {
+    // START CLEARING
+    mps = canvas.querySelectorAll(".mp");
+    aukkos = canvas.querySelectorAll(".aukko");
+    lvs = canvas.querySelectorAll(".lv");
+    for (var i = 0; i < mps.length; i++) {
+      mps[i].remove();
+    }
+    for (var i = 0; i < aukkos.length; i++) {
+      aukkos[i].remove();
+    }
 
-  }
-  counting__aukkos();
+    for (var i = 0; i < lvs.length; i++) {
+      lvs[i].remove();
+    }
+    document.querySelector(".drawarea__controls_elementsone").innerHTML = "";
+    document.querySelector(".drawarea__controls_elementstwo").innerHTML = "";
+    lapivienti_count = 0;
+    mittapiste_count = 0;
+    mp_previous_vord = null;
+    au_previous_vord = null;
+    lv_previous_vord = null;
+    document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo oikealle";
+    document.querySelector("#drawarea__origo_central").style.left = "1px";
+    document.querySelector("#drawarea__origo_central").style.bottom = "1px";
 
-  ir_no = room.dataset.room;
-  mode_room = ir_no.toLowerCase();
+    document.querySelector(".mittapisteet").value = "";
+    document.querySelector(".aukot").value = "";
+    document.querySelector(".lapiviennit").value = "";
+    document.querySelector(".saumat_data").value = "";
+    document.querySelector(".levyt_data").value = "";
+    document.querySelector(".rangat").value = "";
+    document.querySelector(".listat").value = "";
 
-  if (mode_room == 'a') {
-    ir_value = apartment.dataset.aroom;
+
+    if (canvas.querySelector(".saumat__grandrow")) {
+      canvas.querySelector(".saumat__grandrow").remove();
+    }
+    if (canvas.querySelector(".levyt")) {
+      sisa_levyt = canvas.querySelectorAll(".levyt .levy");
+      for (let lev = 0; lev < sisa_levyt.length; lev++) {
+        sisa_levyt[lev].remove();
+      }
+      // document.querySelector("div.levyt").remove();
+    }
+    if (canvas.querySelector(".tyostot__grandrow") && input_step != 'drawscreen_section_six' && input_step != 'drawscreen_section_seven' && input_step != 'drawscreen_section_eight' && input_step != 'drawscreen_section_nine' && input_step != 'drawscreen_section_esikatselu') {
+      canvas.querySelector(".tyostot__grandrow").remove();
+    }
+    if (canvas.querySelector(".listat__grandrow")) {
+      canvas.querySelector(".listat__grandrow").remove();
+    }
+    // STOP CLEARING
+    if (ir_value.length > 5) {
+      ir_splitted = ir_value.split(",");
+      ir_id = ir_splitted[0];
+      ir_status = ir_splitted[1];
+      ir_origo = ir_splitted[2];
+      ir_origo_x = parseFloat(ir_splitted[2].split("|")[0]);
+      ir_origo_y = parseFloat(ir_splitted[2].split("|")[1]);
+      // Origo formatting DISABLED
+      if (ir_origo_x == 1 && ir_origo_y == 1) {
+        document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo oikealle";
+      }
+      else if (ir_origo_x > 1 && ir_origo_y > 1) {
+        document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo vasemmalle";
+      }
+      else if (ir_origo_x > 1 && ir_origo_y == 1) {
+        document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo ylös";
+      }
+      else if (ir_origo_x == 1 && ir_origo_y > 1) {
+        document.querySelector(".drawarea__controls_origoset").innerHTML = "Origo alas";
+      }
+      document.querySelector("#drawarea__origo_central").style.left = 1 + "px";
+      document.querySelector("#drawarea__origo_central").style.bottom = 1 + "px";
+      if (menu) {
+      }
+      if (room.parentElement.querySelector(".wall_height") && room.parentElement.querySelector(".wall_width")) {
+        room_h = parseFloat(room.parentElement.querySelector(".wall_height").value);
+        room_w = parseFloat(room.parentElement.querySelector(".wall_width").value);
+        document.querySelector("#drawarea_h").value = parseFloat(room_h);
+        document.querySelector("#drawarea_w").value = parseFloat(room_w);
+        setTimeout(changesize(), 1000);
+      }
+      else {
+        // Alue formaddig OKKKKKKK
+        ir_alue = ir_splitted[3];
+        ir_alue_x = ir_splitted[3].split("|")[1];
+        ir_alue_y = ir_splitted[3].split("|")[0];
+        document.querySelector("#drawarea_h").value = parseFloat(ir_alue_y);
+        document.querySelector("#drawarea_w").value = parseFloat(ir_alue_x);
+        setTimeout(changesize(), 1000);
+      }
+      ir_mps = ir_splitted[4].split("__");
+      ir_aus = ir_splitted[5].split("__");
+      ir_lv = ir_splitted[6].split("__");
+      ir_sau = ir_splitted[7].split("__");
+      ir_lev = ir_splitted[8].split("__");
+      ir_kin = ""; //ir_splitted[5].split("__");
+      ir_ran = ""; //ir_splitted[5].split("__");
+      ir_lis = ""; //ir_splitted[5].split("__");
+
+
+      // LISTAT
+      if (ir_lis.length > 1) { }
+
+      // RANGAT
+      else if (ir_ran.length > 1) { }
+
+      // KIINNIKKEET
+      else if (ir_kin.length > 1) { }
+
+      // LEVYT
+      else if (ir_lev.length > 1) {
+        // MPs formatting
+        for (var i = 0; i < ir_mps.length; i++) {
+          if (ir_mps[i].length > 3) {
+            ir_mps_name = ir_mps[i].split("|")[0];
+            ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
+            ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
+            ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
+            ir_mps_id = ir_mps[i].split("|")[4];
+            mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
+          }
+        }
+
+        for (var i = 0; i < ir_aus.length; i++) {
+          if (ir_aus[i].length > 3) {
+            ir_aus_name = ir_aus[i].split("|")[0];
+            ir_aus_b = parseFloat(ir_aus[i].split("|")[1]);
+            ir_aus_l = parseFloat(ir_aus[i].split("|")[2]);
+            ir_aus_h = parseFloat(ir_aus[i].split("|")[5]);
+            ir_aus_w = parseFloat(ir_aus[i].split("|")[6]);
+            ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
+            ir_aus_id = ir_aus[i].split("|")[4];
+            ir_aus_classes = ir_aus[i].split("|")[7];
+
+            ir_aus_comment = ir_aus[i].split("|")[8];
+            ir_aus_cfrom = ir_aus[i].split("|")[9];
+            ir_aus_cto = ir_aus[i].split("|")[10];
+            mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
+            // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
+            // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
+          }
+        }
+
+
+        $('#step_drawscreen').val('drawscreen_section_three');
+        refresh__drawcontrols();
+        updatearea();
+
+
+        $('#step_drawscreen').val('drawscreen_section_four');
+        refresh__drawcontrols();
+        updatearea();
+        if (document.querySelector(".saumat__grandrow")) {
+          saumat = document.querySelector(".saumat__grandrow");
+        }
+        else {
+          saumat = document.createElement("div");
+          saumat.classList.add("saumat__grandrow");
+          canvas.appendChild(saumat);
+        }
+        if (saumat.querySelector(".horizontalrow_saumat")) { }
+        else {
+          newrow_horizontal = document.createElement("div");
+          saumat.appendChild(newrow_horizontal);
+          newrow_horizontal.classList.add("horizontalrow_saumat");
+        }
+        if (saumat.querySelector(".verticalrow_saumat")) { }
+        else {
+          newrow_vertical = document.createElement("div");
+          saumat.appendChild(newrow_vertical);
+          newrow_vertical.classList.add("verticalrow_saumat");
+        }
+        for (var i = ir_sau.length - 1; i >= 0; i--) {
+          sau_data = ir_sau[i].split("|");
+
+          sau_name = sau_data[0];
+          sau_type = sau_data[1];
+          sau_b = sau_data[2];
+          sau_left = sau_data[3];
+          sau_cord = sau_data[4];
+          sau_name = sau_data[5];
+          luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
+          if (sau_type == 'pysty') { }
+          if (sau_type == 'vaaka') { }
+        }
+        alkusaumat();
+        calculateamounts();
+        sauma__verticals = canvas.querySelectorAll(".sauma__vertical");
+        sauma__horizontals = canvas.querySelectorAll(".sauma__horizontal");
+        if (canvas.querySelector(".sauma__vertical")) {
+          for (var i = 0; i < sauma__verticals.length; i++) {
+            if (sauma__verticals[i].querySelector(".sauma__controls_del")) {
+              sauma__verticals[i].querySelector(".sauma__controls_del").innerHTML = i + 1;
+              sauma__verticals[i].dataset.no = i + 1;
+            }
+          }
+          s_v = i + 1;
+        }
+        if (canvas.querySelector(".sauma__horizontal")) {
+          for (var i = 0; i < sauma__horizontals.length; i++) {
+            if (sauma__horizontals[i].querySelector(".sauma__controls_del")) {
+              sauma__horizontals[i].querySelector(".sauma__controls_del").innerHTML = String.fromCharCode(65 + parseFloat(i + 1));
+              sauma__horizontals[i].dataset.no = String.fromCharCode(65 + parseFloat(i + 1));
+            }
+          }
+          s_h = i + 1;
+        }
+
+        dels = canvas.querySelectorAll(".sauma__controls_del");
+
+        for (var i = dels.length - 1; i >= 0; i--) {
+          sauma = dels[i].parentElement.parentElement;
+          if (dels[i].querySelector(".delmeasure")) {
+            delmeasure = dels[i].querySelector(".delmeasure");
+            if (sauma.classList.contains("sauma__vertical")) {
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
+            }
+            else if (sauma.classList.contains("sauma__horizontal")) {
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
+            }
+          }
+          else {
+
+            delmeasure = document.createElement("div");
+            delmeasure.classList.add("delmeasure");
+            if (sauma.classList.contains("sauma__vertical")) {
+              delmeasure.classList.add("delmeasure_vertical");
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
+            }
+            else if (sauma.classList.contains("sauma__horizontal")) {
+              delmeasure.classList.add("delmeasure_horizontal");
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
+            }
+
+            dels[i].appendChild(delmeasure);
+          }
+        }
+
+        saumasize__checkup();
+
+        saumat = canvas.querySelectorAll(".sauma");
+
+        for (var i = saumat.length - 1; i >= 0; i--) {
+          saumat[i].removeEventListener('touchmove', (e) => { });
+          saumat[i].querySelector(".sauma__controls").removeEventListener('touchmove', (e) => { });
+        }
+
+        sauma_h = canvas.querySelectorAll(".sauma__horizontal");
+        sauma_v = canvas.querySelectorAll(".sauma__vertical");
+        sauma_h.forEach(function (j) {
+          j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
+            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
+          });
+          j.addEventListener('touchmove', (e) => {
+            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
+          });
+        });
+
+        sauma_v.forEach(function (j) {
+          j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
+            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+          });
+          j.addEventListener('touchmove', (e) => {
+            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+          });
+        });
+
+
+
+
+        refresh__drawcontrols();
+        updatearea();
+        $('#step_drawscreen').val('drawscreen_section_five');
+
+        // levy initialization
+
+        setTimeout(function () {
+          lev = ir_lev[0].split(" ");
+          dex = 0;
+          if (canvas.querySelector(".levyt")) {
+            levyt = canvas.querySelector(".levyt");
+            levyt.innerHTML = "";
+          }
+          else {
+            levyt = document.createElement("div");
+            levyt.classList.add("levyt");
+            canvas.append(levyt);
+          }
+
+
+          for (var i = 0; i < lev.length; i++) {
+            if (lev[i].length > 10) {
+              levyt.prepend(luo__levy_restore(lev[i].split("|")[0], lev[i].split("|")[1], parseFloat(lev[i].split("|")[2]), parseFloat(lev[i].split("|")[3]), lev[i].split("|")[4], lev[i].split("|")[5], lev[i].split("|")[6], lev[i].split("|")[7]));
+            }
+          }
+          console.log("LEVYTÄ FIRED");
+        }, 1000);
+
+
+
+
+      }
+
+      //SAUMAT 
+      else if (ir_sau.length > 1) {
+        // MPs formatting
+        for (var i = 0; i < ir_mps.length; i++) {
+          if (ir_mps[i].length > 3) {
+            ir_mps_name = ir_mps[i].split("|")[0];
+            ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
+            ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
+            ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
+            ir_mps_id = ir_mps[i].split("|")[4];
+            mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
+          }
+        }
+
+        for (var i = 0; i < ir_aus.length; i++) {
+          if (ir_aus[i].length > 3) {
+            ir_aus_name = ir_aus[i].split("|")[0];
+            ir_aus_b = parseFloat(ir_aus[i].split("|")[1]);
+            ir_aus_l = parseFloat(ir_aus[i].split("|")[2]);
+            ir_aus_h = parseFloat(ir_aus[i].split("|")[5]);
+            ir_aus_w = parseFloat(ir_aus[i].split("|")[6]);
+            ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
+            ir_aus_id = ir_aus[i].split("|")[4];
+            ir_aus_classes = ir_aus[i].split("|")[7];
+
+            ir_aus_comment = ir_aus[i].split("|")[8];
+            ir_aus_cfrom = ir_aus[i].split("|")[9];
+            ir_aus_cto = ir_aus[i].split("|")[10];
+            mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
+            // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
+            // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
+          }
+        }
+        $('#step_drawscreen').val('drawscreen_section_three');
+        refresh__drawcontrols();
+        updatearea();
+
+        $('#step_drawscreen').val('drawscreen_section_four');
+        refresh__drawcontrols();
+        updatearea();
+        if (document.querySelector(".saumat__grandrow")) {
+          saumat = document.querySelector(".saumat__grandrow");
+        }
+        else {
+          saumat = document.createElement("div");
+          saumat.classList.add("saumat__grandrow");
+          canvas.appendChild(saumat);
+        }
+        if (saumat.querySelector(".horizontalrow_saumat")) { }
+        else {
+          newrow_horizontal = document.createElement("div");
+          saumat.appendChild(newrow_horizontal);
+          newrow_horizontal.classList.add("horizontalrow_saumat");
+        }
+        if (saumat.querySelector(".verticalrow_saumat")) { }
+        else {
+          newrow_vertical = document.createElement("div");
+          saumat.appendChild(newrow_vertical);
+          newrow_vertical.classList.add("verticalrow_saumat");
+        }
+        for (var i = ir_sau.length - 1; i >= 0; i--) {
+          sau_data = ir_sau[i].split("|");
+
+          sau_name = sau_data[0];
+          sau_type = sau_data[1];
+          sau_b = sau_data[2];
+          sau_left = sau_data[3];
+          sau_cord = sau_data[4];
+          sau_name = sau_data[5];
+          luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
+          if (sau_type == 'pysty') { }
+          if (sau_type == 'vaaka') { }
+        }
+        alkusaumat();
+        calculateamounts();
+        sauma__verticals = canvas.querySelectorAll(".sauma__vertical");
+        sauma__horizontals = canvas.querySelectorAll(".sauma__horizontal");
+        if (canvas.querySelector(".sauma__vertical")) {
+          for (var i = 0; i < sauma__verticals.length; i++) {
+            if (sauma__verticals[i].querySelector(".sauma__controls_del")) {
+              sauma__verticals[i].querySelector(".sauma__controls_del").innerHTML = i + 1;
+              sauma__verticals[i].dataset.no = i + 1;
+            }
+          }
+          s_v = i + 1;
+        }
+        if (canvas.querySelector(".sauma__horizontal")) {
+          for (var i = 0; i < sauma__horizontals.length; i++) {
+            if (sauma__horizontals[i].querySelector(".sauma__controls_del")) {
+              sauma__horizontals[i].querySelector(".sauma__controls_del").innerHTML = String.fromCharCode(65 + parseFloat(i + 1));
+              sauma__horizontals[i].dataset.no = String.fromCharCode(65 + parseFloat(i + 1));
+            }
+          }
+          s_h = i + 1;
+        }
+
+        dels = canvas.querySelectorAll(".sauma__controls_del");
+
+        for (var i = dels.length - 1; i >= 0; i--) {
+          sauma = dels[i].parentElement.parentElement;
+          if (dels[i].querySelector(".delmeasure")) {
+            delmeasure = dels[i].querySelector(".delmeasure");
+            if (sauma.classList.contains("sauma__vertical")) {
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
+            }
+            else if (sauma.classList.contains("sauma__horizontal")) {
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
+            }
+          }
+          else {
+
+            delmeasure = document.createElement("div");
+            delmeasure.classList.add("delmeasure");
+            if (sauma.classList.contains("sauma__vertical")) {
+              delmeasure.classList.add("delmeasure_vertical");
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
+            }
+            else if (sauma.classList.contains("sauma__horizontal")) {
+              delmeasure.classList.add("delmeasure_horizontal");
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
+            }
+
+            dels[i].appendChild(delmeasure);
+          }
+        }
+
+        saumasize__checkup();
+
+        saumat = canvas.querySelectorAll(".sauma");
+
+        for (var i = saumat.length - 1; i >= 0; i--) {
+          saumat[i].removeEventListener('touchmove', (e) => { });
+          saumat[i].querySelector(".sauma__controls").removeEventListener('touchmove', (e) => { });
+        }
+
+        sauma_h = canvas.querySelectorAll(".sauma__horizontal");
+        sauma_v = canvas.querySelectorAll(".sauma__vertical");
+        sauma_h.forEach(function (j) {
+          j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
+            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
+          });
+          j.addEventListener('touchmove', (e) => {
+            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
+          });
+        });
+
+        sauma_v.forEach(function (j) {
+          j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
+            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+          });
+          j.addEventListener('touchmove', (e) => {
+            resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+          });
+        });
+
+        setTimeout(function () { levyta('important'); console.log("LEVYTÄ FIRED") }, 1000);
+        $('#step_drawscreen').val('drawscreen_section_five');
+        refresh__drawcontrols();
+        updatearea();
+      }
+
+      //LV
+      else if (ir_lv.length > 1) {
+        for (var i = 0; i < ir_mps.length; i++) {
+          if (ir_mps[i].length > 5) {
+            // room_status = ir_mps[i].split("|")[0];
+            ir_mps_name = ir_mps[i].split("|")[0];
+            ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
+            ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
+            ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
+            ir_mps_id = ir_mps[i].split("|")[4];
+
+
+            mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
+          }
+        }
+
+
+        $('#step_drawscreen').val('drawscreen_section_one');
+        refresh__drawcontrols();
+        updatearea();
+
+        for (var i = 0; i < ir_aus.length; i++) {
+          if (ir_aus[i].length > 3) {
+            ir_aus_name = ir_aus[i].split("|")[0];
+            ir_aus_b = parseFloat(ir_aus[i].split("|")[1]);
+            ir_aus_l = parseFloat(ir_aus[i].split("|")[2]);
+            ir_aus_h = parseFloat(ir_aus[i].split("|")[5]);
+            ir_aus_w = parseFloat(ir_aus[i].split("|")[6]);
+            ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
+            ir_aus_id = ir_aus[i].split("|")[4];
+            ir_aus_classes = ir_aus[i].split("|")[7];
+
+            ir_aus_comment = ir_aus[i].split("|")[8];
+            ir_aus_cfrom = ir_aus[i].split("|")[9];
+            ir_aus_cto = ir_aus[i].split("|")[10];
+            mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
+            // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
+            // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
+          }
+        }
+
+
+        $('#step_drawscreen').val('drawscreen_section_two');
+        refresh__drawcontrols();
+        updatearea();
+
+        for (var i = 0; i < ir_lv.length; i++) {
+          if (ir_lv[i].length > 3) {
+            ir_lvs_name = ir_lv[i].split("|")[0];
+            ir_lvs_b = parseFloat(ir_lv[i].split("|")[1]);
+            ir_lvs_l = parseFloat(ir_lv[i].split("|")[2]);
+            ir_lvs_vount = parseFloat(ir_lv[i].split("|")[3]);
+            ir_lvs_id = ir_lv[i].split("|")[4];
+            ir_lvs_sade = parseFloat(ir_lv[i].split("|")[5]);
+
+            ir_lv_comment = ir_lv[i].split("|")[6];
+            ir_lv_cfrom = ir_lv[i].split("|")[7];
+            ir_lv_cto = ir_lv[i].split("|")[8];
+            mitta__create_mitta("restoring", "lv", ir_lvs_name, ir_lvs_b, ir_lvs_l, '', '', ir_lvs_vount, ir_lvs_id, ir_lvs_sade, ir_lv_comment, ir_lv_cfrom, ir_lv_cto);
+
+          }
+        }
+
+        $('#step_drawscreen').val('drawscreen_section_three');
+        refresh__drawcontrols();
+        updatearea();
+      }
+
+      //AUKOT 
+      else if (ir_aus.length > 1) {
+        for (var i = 0; i < ir_mps.length; i++) {
+          if (ir_mps[i].length > 5) {
+            ir_mps_name = ir_mps[i].split("|")[0];
+            ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
+            ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
+            ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
+            ir_mps_id = ir_mps[i].split("|")[4];
+            mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
+          }
+        }
+
+
+        $('#step_drawscreen').val('drawscreen_section_one');
+        refresh__drawcontrols();
+        updatearea();
+
+        for (var i = 0; i < ir_aus.length; i++) {
+          if (ir_aus[i].length > 3) {
+            ir_aus_name = ir_aus[i].split("|")[0];
+            ir_aus_b = parseFloat(ir_aus[i].split("|")[1]);
+            ir_aus_l = parseFloat(ir_aus[i].split("|")[2]);
+            ir_aus_h = parseFloat(ir_aus[i].split("|")[5]);
+            ir_aus_w = parseFloat(ir_aus[i].split("|")[6]);
+            ir_aus_vount = parseFloat(ir_aus[i].split("|")[3]);
+            ir_aus_id = ir_aus[i].split("|")[4];
+            ir_aus_classes = ir_aus[i].split("|")[7];
+
+
+            ir_aus_comment = ir_aus[i].split("|")[8];
+            ir_aus_cfrom = ir_aus[i].split("|")[9];
+            ir_aus_cto = ir_aus[i].split("|")[10];
+            mitta__create_mitta("restoring", "au", ir_aus_name, ir_aus_b, ir_aus_l, ir_aus_h, ir_aus_w, ir_aus_vount, ir_aus_id, ir_aus_classes, ir_aus_comment, ir_aus_cfrom, ir_aus_cto);
+            // mode_name,mode_ycord,mode_xcord,mode_hcord,mode_wcord,mode_ycord,mode_count,mode_id,mode_room
+            // Ikkuna # 1|500|505|1|aukko00e1462bffe7|1500|2000|A
+          }
+        }
+
+        $('#step_drawscreen').val('drawscreen_section_two');
+        refresh__drawcontrols();
+        updatearea();
+      }
+
+      //MITTAPISTEET, OK
+      else if (ir_mps.length > 1) {
+        for (var i = 0; i < ir_mps.length; i++) {
+          if (ir_mps[i].length > 5) {
+            ir_mps_name = ir_mps[i].split("|")[0];
+            ir_mps_b = parseFloat(ir_mps[i].split("|")[1]);
+            ir_mps_l = parseFloat(ir_mps[i].split("|")[2]);
+            ir_mps_vount = parseFloat(ir_mps[i].split("|")[3]);
+            ir_mps_id = ir_mps[i].split("|")[4];
+            mitta__create_mitta("restoring", "mp", ir_mps_name, ir_mps_b, ir_mps_l, '', '', ir_mps_vount, ir_mps_id, mode_room);
+          }
+        }
+
+        $('#step_drawscreen').val('drawscreen_section_one');
+        refresh__drawcontrols();
+        updatearea();
+      }
+    }
+    else {
+
+    }
+    counting__aukkos();
+
+    ir_no = room.dataset.room;
+    mode_room = ir_no.toLowerCase();
+
+    if (mode_room == 'a') {
+      ir_value = apartment.dataset.aroom;
+    }
+    if (mode_room == 'b') {
+      ir_value = apartment.dataset.broom;
+    }
+    if (mode_room == 'c') {
+      ir_value = apartment.dataset.croom;
+    }
+    if (mode_room == 'd') {
+      ir_value = apartment.dataset.droom;
+    }
+    if (mode_room == 'k') {
+      ir_value = apartment.dataset.kroom;
+    }
+    if (mode_room == 'l') {
+      ir_value = apartment.dataset.lroom;
+    }
+    calculateamounts();
   }
-  if (mode_room == 'b') {
-    ir_value = apartment.dataset.broom;
-  }
-  if (mode_room == 'c') {
-    ir_value = apartment.dataset.croom;
-  }
-  if (mode_room == 'd') {
-    ir_value = apartment.dataset.droom;
-  }
-  if (mode_room == 'k') {
-    ir_value = apartment.dataset.kroom;
-  }
-  if (mode_room == 'l') {
-    ir_value = apartment.dataset.lroom;
-  }
-  calculateamounts();
 }
 // Function for changing element coords
 // Parametrs:
@@ -3852,7 +3986,7 @@ function prepend__reclamation() {
 
 function addproblemstatus(e) {
   elid = e.getAttribute('id');
-  el_ = elid.replace('--Tila ', '').replace('    ', '').replaceAll(' ', '').toLowerCase();
+  el_ = elid.replace('--Tila ', '').replace('', '').replaceAll(' ', '').toLowerCase();
   document.querySelector(".project__building_room." + el_.replaceAll(' ', '')).classList.add("prob");
   if(document.querySelector('#comment__importance')) {
     if (document.querySelector('#comment__importance').checked === true) {
@@ -3892,25 +4026,31 @@ function delcanvases() {
 function skipping() {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
   (async () => {
-    if(window.location.href.indexOf('&apartment=') > 1) {    
-      skipping_apartment = document.querySelector('#skipping_apartment').value;
-      document.querySelector("." + skipping_apartment).click();
-      await sleep(1000);
-      if(window.location.href.indexOf('&room=') > 1) {
-        skipping_room = document.querySelector('#skipping_room').value;
-        document.querySelector(".house__wall_status_" + skipping_room).click();
+    if(window.location.href.indexOf('&apartment=') > 1) { 
+      try {
+        skipping_apartment = document.querySelector('#skipping_apartment').value.replaceAll("ä","a").replaceAll("ö","o");
+        document.querySelector("." + skipping_apartment).click();
         await sleep(1000);
-        if(window.location.href.indexOf('&step=') > 1) {
-          input_step = document.querySelector('#step_drawscreen').value;
-          skipping_step = document.querySelector('#skipping_step').value;
-          input_step = skipping_step.replaceAll("0","drawscreen_section_zero").replaceAll("1","drawscreen_section_one").replaceAll("2","drawscreen_section_two").replaceAll("3","drawscreen_section_three").replaceAll("4","drawscreen_section_four").replaceAll("5","drawscreen_section_five").replaceAll("6","drawscreen_section_six").replaceAll("7","drawscreen_section_seven").replaceAll("8","drawscreen_section_eight").replaceAll("9","drawscreen_section_tyostot").replaceAll("10","drawscreen_section_esikatselu");
-          
+        if(window.location.href.indexOf('&room=') > 1) {
+          skipping_room = document.querySelector('#skipping_room').value;
+          document.querySelector(".house__wall_status_" + skipping_room).click();
           await sleep(1000);
-          $('#step_drawscreen').val(input_step);
-          refresh__drawcontrols();
-          updatearea();
+          if(window.location.href.indexOf('&step=') > 1) {
+            input_step = document.querySelector('#step_drawscreen').value;
+            skipping_step = document.querySelector('#skipping_step').value;
+            input_step = skipping_step.replaceAll("0","drawscreen_section_zero").replaceAll("1","drawscreen_section_one").replaceAll("2","drawscreen_section_two").replaceAll("3","drawscreen_section_three").replaceAll("4","drawscreen_section_four").replaceAll("5","drawscreen_section_five").replaceAll("6","drawscreen_section_six").replaceAll("7","drawscreen_section_seven").replaceAll("8","drawscreen_section_eight").replaceAll("9","drawscreen_section_tyostot").replaceAll("10","drawscreen_section_esikatselu");
+            
+            await sleep(1000);
+            $('#step_drawscreen').val(input_step);
+            refresh__drawcontrols();
+            updatearea();
+          }
         }
-      }
+      } catch (error) {
+        degradate_url(1);
+        location.reload();
+      }   
+     
     }
   })();
 
@@ -4009,3 +4149,4 @@ function kumoa() {
     }
   });
 }
+

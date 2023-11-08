@@ -6,10 +6,10 @@
 // define('DB_PASSWORD', 'C)ADotY3VA?o');
 // define('DB_NAME', 'kkixmips_config');
 
-define('DB_SERVER', 'localhost');
+define('DB_SERVER', '127.0.0.1:3306');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'teditori_gro');
+define('DB_NAME', 'editori_west');
 
 /* Attempt to connect to MySQL database */
 $db = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -18,4 +18,6 @@ $db = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 if($db === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
+
+
 ?>

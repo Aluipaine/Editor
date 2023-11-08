@@ -285,3 +285,151 @@ function marko__createnewrow_morehole() {
   `;
   document.querySelector("#morehole_set > table").append(newrow);
 }
+
+tabs_btns = document.querySelectorAll(".tabs__btn");
+tabs_targets = document.querySelectorAll(".tabs__target");
+
+for (let i = 0; i < tabs_btns.length; i++) {
+  tabs_btns[i].addEventListener("click", (e) => {
+    navigation__btns(tabs_btns[i]);
+  });
+}
+function navigation__btns(elem) {
+  elemcount = 0;
+  for (let i = tabs_btns.length-1; i > -1; i--) {
+    tabs_btns[i].classList.remove('active');
+    if(tabs_btns[i].innerText == elem.innerText) {
+      elemcount = i;
+    }
+  }
+  for (let i = 0; i < tabs_targets.length; i++) {
+    tabs_targets[i].classList.remove('active');
+    
+  }
+  elem.classList.add("active");
+  tabs_targets[elemcount].classList.add("active");
+
+  tabs_targets[elemcount].querySelector(".tabs__target_title").innerHTML = elem.innerText.toUpperCase() + " <- suluissa saaja(t)";
+  
+
+}
+
+navigation__btns(tabs_btns[0]);
+
+function save__messagesettings() {
+
+  for (let i = 0; i < tabs_targets.length; i++) {
+    message_array_="";
+    if(tabs_targets[i].querySelector(".tabs__target_to")) {
+      header_array_ = tabs_targets[i].querySelector(".tabs__target_who").value + "~~~~" + tabs_targets[i].querySelector(".tabs__target_to").value+ "~~~~";
+    }
+    else {
+      header_array_ = tabs_targets[i].querySelector(".tabs__target_who").value + "~~~~"+ "~~~~";
+    }
+
+    header_array_ += tabs_targets[i].querySelector(".tabs__target_who_name").value + "~~~~";
+    header_array_ += tabs_targets[i].querySelector(".tabs__target_who_pass").value + "~~~~";
+    if(tabs_targets[i].querySelector(".tabs__target_toname")) {
+      header_array_ += tabs_targets[i].querySelector(".tabs__target_toname").value;
+    }
+    
+    
+    if(tabs_targets[i].dataset.id ==0) {
+      messagename_ = "project_creation";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[0].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[1].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[2].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[3].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[4].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[5].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[6].value + "~~~~";
+      // message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[7].value + "~~~~";
+      // message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[8].value + "~~~~";
+      // message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[9].value + "~~~~";
+      // message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[10].value + "~~~~";
+    }
+    else if(tabs_targets[i].dataset.id ==1) {
+      messagename_ = "project_newuser";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[0].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[1].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[2].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[3].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[4].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[5].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[6].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[7].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[8].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[9].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[10].value + "~~~~";
+      message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[11].value + "~~~~";
+
+    }
+    else if(tabs_targets[i].dataset.id ==2) {
+      messagename_ = "project_sendedits";
+      
+    }
+    else if(tabs_targets[i].dataset.id ==3) {
+      messagename_ = "sent_purchases";
+    }
+    else if(tabs_targets[i].dataset.id ==4) {
+      messagename_ = "deleted_without_consent";
+    }
+    else if(tabs_targets[i].dataset.id ==5) {
+      messagename_ = "comments_toworkers";
+    }
+    else if(tabs_targets[i].dataset.id ==6) {
+      messagename_ = "reppanareport";
+    }
+    else if(tabs_targets[i].dataset.id ==7) {
+      messagename_ = "projectreport";
+    }
+    else if(tabs_targets[i].dataset.id ==8) {
+      messagename_ = "comment_sending_to_tyonjohto";
+    }
+    else if(tabs_targets[i].dataset.id ==9) {
+      messagename_ = "tilauksen_lisays";
+    }
+    else if(tabs_targets[i].dataset.id ==10) {
+      messagename_ = "kommentin_lisays";
+    }
+    if(tabs_targets[i].querySelectorAll(".tabs__target_subject input").length == 2) {
+      subject_array_ = tabs_targets[i].querySelectorAll(".tabs__target_subject input")[0].value + "~~~~" + tabs_targets[i].querySelectorAll(".tabs__target_subject input")[1].value;
+    }
+    else {
+      subject_array_ = tabs_targets[i].querySelectorAll(".tabs__target_subject input")[0].value + "~~~~";
+    }
+
+    if(tabs_targets[i].querySelector("textarea")) {
+      message_array_+=tabs_targets[i].querySelector("textarea").value;
+    }
+
+    formData = {
+      header_array: header_array_,
+      subject_array: subject_array_,
+      messagename: messagename_,
+      message_array: message_array_,
+    };
+    console.log(formData);
+    $.ajax({
+      type: "POST",
+      url: "vendor/admin__mailedit.php",
+      data: formData,
+      error: function (jqxhr, status, exception) {
+        alert('Tietokantavirhe, soita numeroon +358449782028');
+      }
+    }).done(function (data) {
+      console.log("Piu piu pau pau");
+
+    });
+
+    
+  }
+  alert("Tallennettu");
+}
+
+txt = document.querySelectorAll("textarea");
+for (let i = 0; i < txt.length; i++) {
+  txt[i].innerHTML = txt[i].getAttribute("value");
+  txt[i].value = txt[i].getAttribute("value");
+  
+}
