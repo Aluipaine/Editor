@@ -329,6 +329,7 @@ td.grid-item {
   opacity: 0;
   pointer-events: none;
   z-index: -1;
+  padding-bottom: 2%;
 }
 .popup__statuses.active {
   opacity: 1;
