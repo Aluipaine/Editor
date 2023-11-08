@@ -559,7 +559,8 @@ if (isset($_GET["role"]) && $_GET["role"] == 'mittaus') {
 <script src="js/jstemplates/creation.js"></script>
 
 <!-- MARKO -->
-<script src="/js/jstemplates/mrarko.js"></script>
+
+<!-- <script src="/js/jstemplates/mrarko.js"></script> -->
 
 
 <!-- 2_1 -->

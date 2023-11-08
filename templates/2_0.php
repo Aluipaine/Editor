@@ -1,3 +1,38 @@
+
+<section class="popup__statuses active">
+  <div class="container row">
+    <div class="col-2 popup__statuses_a">
+      <div class="c_meaning c_meaning_2"><i>KESKEN </i></div>
+      <div class="c_meaning c_meaning_1"><i>EI TYÖTÄ</i></div>
+    </div>
+    <div class="col-2 popup__statuses_b">
+      <div class="c_meaning"><i>L4 TILATTU</i></div>
+      <div class="c_meaning"><i>L4 TYÖMAALLA</i></div>
+      <div class="c_meaning"><i>L4 ASENNETTU</i></div>
+    </div>
+    <div class="col-2 popup__statuses_c">
+      <div class="c_meaning"><i>L3 TILATTU</i></div>
+      <div class="c_meaning"><i>L3 TYÖMAALLA</i></div>
+      <div class="c_meaning"><i>L3 ASENNETTU</i></div>
+    </div>
+    <div class="col-2 popup__statuses_d">
+      <div class="c_meaning"><i>L2 TILATTU</i></div>
+      <div class="c_meaning"><i>L2 TYÖMAALLA</i></div>
+      <div class="c_meaning"><i>L2 ASENNETTU</i></div>
+    </div>
+    <div class="col-2 popup__statuses_e">
+      <div class="c_meaning"><i>L1 TILATTU</i></div>
+      <div class="c_meaning"><i>L1 TYÖMAALLA</i></div>
+      <div class="c_meaning"><i>L1 ASENNETTU</i></div>
+    </div>
+    <div class="col-2 popup__statuses_f">
+      <div class="c_meaning c_meaning_6"><i>HYVÄKSYTTÄVÄ</i></div>
+      <div class="c_meaning c_meaning_7"><i>VALMIS</i></div>
+      <div class="c_meaning c_meaning_8"><i>ONGELMA</i></div>
+      <div class="c_meaning c_meaning_9"><i>KRIITTINEN ONGELMA</i></div>
+    </div>
+  </div>
+</section>
 <section id="project_start" class="project__roomcount" > 
   <div class="container">
     <div class="row">
