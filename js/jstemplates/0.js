@@ -397,10 +397,20 @@ $('.project__building div.project__building_room').click(function() {
 
 });
 
+let timer = 0
+
+$('.project__building_room').click((e) => {
+  e.preventDefault()
+  e.stopPropagation()
+  $('.project__building_room-overlay').remove()
+  $(e.target).find('.active').removeClass('active')
+})
+
 $(".project__building_room")
   .on("mousedown touchstart", (e) => {
     $(e.target).focus();
-    timer = window.setTimeout((e) => longClick(e), 1000);
+    let $element = $(e.target)
+    timer = window.setTimeout(() => longClick($element), 1000);
   })
   .on("mouseup mouseleave touchend touchmove", (e) =>
     clearTimeout(timer)
@@ -408,18 +418,33 @@ $(".project__building_room")
   .click((e) => {
     e.preventDefault()
     e.stopPropagation()
+    $('.popup__statuses').removeClass('active')
     console.log("click")
   });
 
-const longClick = (e) => {
-  console.log("longpress", `$(e.target).text()`);
+const longClick = (element) => {
+  $('.project__building_room-overlay').remove()
+  $('.project__building_room').removeClass('active')
+  element.addClass('active')
   $('.popup__statuses').addClass('active')
-  window.addEventListener("click", defaultClick, true);
+  window.addEventListener("click", defaultClick, true)
+  element.append(`<div class='project__building_room-overlay'></div>`)
+  
+  $('.project__building_room-overlay').click((e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    $('.popup__statuses').removeClass('active')
+    $('.project__building_room').removeClass('active')
+    $('.project__building_room-overlay').remove()
+  })
+
+  console.log("longpress")
 };
 
 const defaultClick = (e) => {
-  e.stopPropagation();
-  window.removeEventListener("click", defaultClick, true);
+  e.stopPropagation()
+  $(e.target).addClass('active')
+  window.removeEventListener("click", defaultClick, true)
 };
 
 $('#rooms div.house__wall_status').click(function() {
