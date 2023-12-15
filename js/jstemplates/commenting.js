@@ -653,7 +653,44 @@ function initializebuilding_comments(mode) {
     for (let s = 0; s < statuses.length; s++) {
       statuses[s].classList.remove("prob");
     }
+<<<<<<< Updated upstream
   
+=======
+    
+
+    tables = document.querySelectorAll(".tablepreview");
+
+    for (let t = 0; t < tables.length; t++) {
+      if(tables[t].querySelectorAll(".project__building_room").length > 1) {
+        pbr = tables[t].querySelectorAll(".project__building_room");
+        pbr_array = [];
+        pbr_array_x = [];
+        for (let r = 0; r < pbr.length; r++) {
+          if(isNaN(parseFloat(pbr[r].dataset.y)) === false) {
+            pbr_array.push(parseFloat(pbr[r].dataset.y));
+          }
+        }
+
+        for (let r = 0; r < pbr.length; r++) {
+          if(isNaN(parseFloat(pbr[r].dataset.x)) == false) {
+            pbr_array_x.push(parseFloat(pbr[r].dataset.x));
+          }
+        }
+        max_pbrarray = Math.max(...pbr_array);
+        max_pbrarray_x = Math.max(...pbr_array_x);
+        rowcount = 1+ max_pbrarray;
+        rowcount_x = max_pbrarray_x+1;
+        tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
+        tables[t].querySelector(".project__building").style.height = tables[t].style.maxHeight;
+        tables[t].style.maxWidth = "calc("+rowcount_x+"*80px + 3px)";
+        tables[t].style.overflowX = "clip";
+      }
+      
+
+      // clip-pathinset(0 0 240px 0)
+      
+    }
+>>>>>>> Stashed changes
 
     console.log("initializebuilding_comments()");
   }

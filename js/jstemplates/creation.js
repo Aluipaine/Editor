@@ -428,8 +428,15 @@ $('td').mouseover(function() {
                     break;
                 }
             }
+<<<<<<< Updated upstream
             V = $('#a_val').val() + parseFloat($('#a_nextnum').val().replace(/\D/g, ''));
             posX = $(this).parent().data("no");
+=======
+            V = $('#a_val').val() + parseFloat($('#a_nextnum').val().replace(/\D/g,''));
+  
+  
+            posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
             posY = $(this).index();
 
             z_letter = toAlpha(z_alphabet).toUpperCase();
@@ -658,8 +665,15 @@ $('td').mouseover(function() {
                     break;
                 }
             }
+<<<<<<< Updated upstream
             Vb = $('#b_val').val() + parseFloat($('#b_nextnum').val().replace(/\D/g, ''));
             posX = $(this).parent().data("no");
+=======
+            V = $('#b_val').val() + parseFloat($('#b_nextnum').val().replace(/\D/g,''));
+  
+  
+            posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
             posY = $(this).index();
 
             zb_letter = toAlpha(zb_alphabet).toUpperCase();
@@ -772,6 +786,519 @@ $('td').mouseover(function() {
 
                 return
             }
+<<<<<<< Updated upstream
+=======
+  
+  
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+  
+  
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                V = "";
+                for (var j = 0; j <= cellindex; j++) {
+                    Z = i;
+  
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            V = $('#c_val').val() + parseFloat($('#c_nextnum').val().replace(/\D/g,''));
+  
+  
+            posX = $(this).closest('tr').data("no")+1;
+            posY = $(this).index();
+  
+  
+            $('#c_nextnum').val(z).replace(/\D/g,'');
+        }
+  
+    }
+  });
+  $("#D_").delegate('td', 'mouseover mouseleave click', function(e) {
+    var cellindex = 0;
+    let rooms = "";
+  
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+  
+  
+            var cells = $(this).parent().children("td");
+            var tds = $('#D .table_size_chooser td').removeClass("SizeChooser-clicked")
+  
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                } else {
+                    $(this).addClass("nowork"); $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                }
+  
+            }
+  
+  
+        } else if ($(this).hasClass("noindex")) {
+            z = 0;
+            $('#d_nextnum').val(z).replace(/\D/g,'');
+        } else if ($(this).find('input').prop('checked') == false) {
+            z -= 1;
+            $(this).find('input').val("");
+            $(this).find('label').text("");
+            $('#d_nextnum').val(z).replace(/\D/g,'');
+        } else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#D .table_size_chooser td').removeClass("SizeChooser-clicked")
+            // z = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
+            // z += 1;
+
+            if(Math.floor($('#d_nextnum').val()) == $('#d_nextnum').val() && $.isNumeric($('#d_nextnum').val()))  {
+                z = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+  
+            for (var i = 0; i < cells.length; i++) {
+                if ($(cells[i]).hasClass("cell")) {
+                    $(this).removeClass("cell");
+                    cellindex = i;
+  
+                    break;
+  
+  
+                }
+                var a_val = $('#d_val').val();
+                var a_val_num = $('#d_nextnum').val();
+                if($('#d_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#d_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#d_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#d_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+
+
+                var a_rooms = $('#d_rooms');
+  
+            }
+  
+  
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+  
+  
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                V = "";
+                for (var j = 0; j <= cellindex; j++) {
+  
+                    Z = i;
+  
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            V = $('#d_val').val() + parseFloat($('#d_nextnum').val().replace(/\D/g,''));
+  
+  
+  
+            posX = $(this).closest('tr').data("no")+1;
+            posY = $(this).index();
+  
+            $('#d_nextnum').val(z).replace(/\D/g,'');
+        }
+  
+    }
+  });
+  $("#E_").delegate('td', 'mouseover mouseleave click', function(e) {
+    var cellindex = 0;
+    let rooms = "";
+  
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+  
+  
+            var cells = $(this).parent().children("td");
+            var tds = $('#E .table_size_chooser td').removeClass("SizeChooser-clicked")
+  
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                } else {
+                    $(this).addClass("nowork"); $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                }
+  
+            }
+  
+  
+        } else if ($(this).hasClass("noindex")) {
+            z = 0;
+            $('#e_nextnum').val(z).replace(/\D/g,'');
+        } else if ($(this).find('input').prop('checked') == false) {
+            z -= 1;
+            $(this).find('input').val("");
+            $(this).find('label').text("");
+            $('#e_nextnum').val(z).replace(/\D/g,'');
+        } else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#E .table_size_chooser td').removeClass("SizeChooser-clicked")
+
+
+            if(Math.floor($('#e_nextnum').val()) == $('#e_nextnum').val() && $.isNumeric($('#e_nextnum').val()))  {
+                z = parseFloat($('#e_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#e_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+  
+            for (var i = 0; i < cells.length; i++) {
+                if ($(cells[i]).hasClass("cell")) {
+                    $(this).removeClass("cell");
+                    cellindex = i;
+  
+                    break;
+  
+  
+                }
+                var a_val = $('#e_val').val();
+                var a_val_num = $('#e_nextnum').val();
+
+                if($('#e_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#e_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#e_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#e_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                var a_rooms = $('#e_rooms');
+  
+            }
+  
+  
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+  
+  
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                V = "";
+                for (var j = 0; j <= cellindex; j++) {
+                    Z = i;
+  
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            V = $('#e_val').val() + parseFloat($('#e_nextnum').val().replace(/\D/g,''));
+  
+  
+            posX = $(this).closest('tr').data("no")+1;
+            posY = $(this).index();
+  
+            $('#e_nextnum').val(z).replace(/\D/g,'');
+        }
+  
+    }
+  });
+  $("#F_").delegate('td', 'mouseover mouseleave click', function(e) {
+    var cellindex = 0;
+    let rooms = "";
+  
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+  
+  
+            var cells = $(this).parent().children("td");
+            var tds = $('#F .table_size_chooser td').removeClass("SizeChooser-clicked")
+  
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                } else {
+                    $(this).addClass("nowork"); $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                }
+  
+            }
+  
+        } else if ($(this).hasClass("noindex")) {
+            z = 0;
+            $('#f_nextnum').val(z).replace(/\D/g,'');
+        } else if ($(this).find('input').prop('checked') == false) {
+            z -= 1;
+            $(this).find('input').val("");
+            $(this).find('label').text("");
+            $('#f_nextnum').val(z).replace(/\D/g,'');
+        } else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#F .table_size_chooser td').removeClass("SizeChooser-clicked")
+
+            if(Math.floor($('#f_nextnum').val()) == $('#f_nextnum').val() && $.isNumeric($('#f_nextnum').val()))  {
+                z = parseFloat($('#f_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#f_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            for (var i = 0; i < cells.length; i++) {
+                if ($(cells[i]).hasClass("cell")) {
+                    $(this).removeClass("cell");
+                    cellindex = i;
+  
+                    break;
+  
+  
+                }
+                var a_val = $('#f_val').val();
+                var a_val_num = $('#f_nextnum').val();
+                if($('#f_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#f_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#f_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#f_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                var a_rooms = $('#f_rooms');
+  
+            }
+  
+  
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+  
+  
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                V = "";
+                for (var j = 0; j <= cellindex; j++) {
+                    Z = i;
+  
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            V = $('#f_val').val() + parseFloat($('#f_nextnum').val().replace(/\D/g,''));
+  
+  
+            posX = $(this).closest('tr').data("no")+1;
+            posY = $(this).index();
+  
+            $('#f_nextnum').val(z).replace(/\D/g,'');
+        }
+  
+    }
+  });
+  $("#G_").delegate('td', 'mouseover mouseleave click', function(e) {
+    var cellindex = 0;
+    let rooms = "";
+  
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+  
+  
+            var cells = $(this).parent().children("td");
+            var tds = $('#G .table_size_chooser td').removeClass("SizeChooser-clicked")
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                } else {
+                    $(this).addClass("nowork"); $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                }
+  
+            }
+  
+        } else if ($(this).hasClass("noindex")) {
+            z = 0;
+            $('#g_nextnum').val(z).replace(/\D/g,'');
+        } else if ($(this).find('input').prop('checked') == false) {
+            z -= 1;
+            $(this).find('input').val("");
+            $(this).find('label').text("");
+            $('#g_nextnum').val(z).replace(/\D/g,'');
+        } else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#G .table_size_chooser td').removeClass("SizeChooser-clicked")
+
+            if(Math.floor($('#g_nextnum').val()) == $('#g_nextnum').val() && $.isNumeric($('#g_nextnum').val()))  {
+                z = parseFloat($('#g_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            else {
+                z = parseFloat($('#g_nextnum').val().replace(/\D/g,''));
+                z += 1;
+            }
+            for (var i = 0; i < cells.length; i++) {
+                if ($(cells[i]).hasClass("cell")) {
+                    $(this).removeClass("cell");
+                    cellindex = i;
+  
+                    break;
+  
+  
+                }
+                var a_val = $('#g_val').val();
+                var a_val_num = $('#g_nextnum').val();
+                
+                if($('#g_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br/>" + $('#g_nextnum_second').val();
+                }
+                else {
+                    var a_val_2 = "";
+                }
+                if($('#g_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br/>" + $('#g_nextnum_third').val();
+                }
+                else {
+                    var a_val_3 = "";
+                }
+
+               
+                
+                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                var a_rooms = $('#g_rooms');
+  
+            }
+  
+  
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+  
+  
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                V = "";
+                for (var j = 0; j <= cellindex; j++) {
+                    Z = i;
+  
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            V = $('#g_val').val() + parseFloat($('#g_nextnum').val().replace(/\D/g,''));
+  
+  
+            posX = $(this).closest('tr').data("no")+1;
+            posY = $(this).index();
+  
+            $('#g_nextnum').val(z).replace(/\D/g,'');
+        }
+  
+    }
+  });
+  $("#H_").delegate('td', 'mouseover mouseleave click', function(e) {
+    var cellindex = 0;
+    let rooms = "";
+  
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+  
+  
+            var cells = $(this).parent().children("td");
+            var tds = $('#H .table_size_chooser td').removeClass("SizeChooser-clicked")
+  
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                } else {
+                    $(this).addClass("nowork"); $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                }
+  
+            }
+  
+        } else if ($(this).hasClass("noindex")) {
+            z = 0;
+            $('#h_nextnum').val(z).replace(/\D/g,'');
+        } else if ($(this).find('input').prop('checked') == false) {
+            z -= 1;
+            $(this).find('input').val("");
+            $(this).find('label').text("");
+            $('#h_nextnum').val(z).replace(/\D/g,'');
+        } else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#H .table_size_chooser td').removeClass("SizeChooser-clicked")
+
+>>>>>>> Stashed changes
             
         } 
         else {
@@ -861,8 +1388,15 @@ $('td').mouseover(function() {
                     break;
                 }
             }
+<<<<<<< Updated upstream
             Vc = $('#c_val').val() + parseFloat($('#c_nextnum').val().replace(/\D/g, ''));
             posX = $(this).parent().data("no");
+=======
+            V = $('#h_val').val() + parseFloat($('#h_nextnum').val().replace(/\D/g,''));
+  
+  
+            posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
             posY = $(this).index();
 
             zc_letter = toAlpha(zc_alphabet).toUpperCase();
@@ -2021,8 +2555,13 @@ $('td').mouseover(function() {
 //                 V = parseFloat($('#a_val').val()) + 1;
   
   
+<<<<<<< Updated upstream
 //                 posX = $(this).parent().data("no");
 //                 posY = $(this).index();
+=======
+                posX = $(this).closest('tr').data("no")+1;
+                posY = $(this).index();
+>>>>>>> Stashed changes
                 
 //                 $('#a_nextnum').val(za);
 //             }
@@ -2124,8 +2663,13 @@ $('td').mouseover(function() {
 //                 V = $('#b_val').val() + parseFloat($('#b_nextnum').val().replace(/\D/g,''));
   
   
+<<<<<<< Updated upstream
 //                 posX = $(this).parent().data("no");
 //                 posY = $(this).index();
+=======
+                posX = $(this).closest('tr').data("no")+1;
+                posY = $(this).index();
+>>>>>>> Stashed changes
   
 //                 $('#b_nextnum').val(zb);
 //             }
@@ -2231,16 +2775,527 @@ $('td').mouseover(function() {
 //                 V = $('#c_val').val() + parseFloat($('#c_nextnum').val().replace(/\D/g,''));
   
   
+<<<<<<< Updated upstream
 //                 posX = $(this).parent().data("no");
 //                 posY = $(this).index();
+=======
+                posX = $(this).closest('tr').data("no")+1;
+                posY = $(this).index();
+>>>>>>> Stashed changes
   
 //                 $('#c_nextnum').val(zc);
 //             }
   
+<<<<<<< Updated upstream
 //         }
 //     });
    
 //   });
+=======
+        }
+    });
+    $("#D_").delegate('td', 'mouseover mouseleave click', function(e) {
+        var cellindex = 0;
+        let rooms = "";
+  
+        if (e.type == 'click') {
+            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+                $(this).removeClass("nowork");
+            } else if ($('input#pohjakierros').is(':checked')) {
+                console.log("Pohja checkattu");
+  
+  
+                var cells = $(this).parent().children("td");
+                var tds = $('#D .table_sizde_chooser td').removeClass("SizdeChooser-clicked")
+  
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(this).find('label').text().length > 1) {
+                        $(this).removeClass("nowork");
+                        $(this).find('label').text("");
+                        cellindex = i;
+                    } else {
+                        $(this).addClass("nowork"); $(this).removeClass("checked");
+                        $(this).find('label').val("");
+                    }
+  
+                }
+  
+            } else if ($(this).hasClass("noindex")) {
+                zd -= 0;
+                $('#d_nextnum').val(zd);
+            } else if ($(this).find('input').prop('checked') == false) {
+                zd -= 1;
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#d_nextnum').val(zd);
+            } else {
+                $(this).addClass("checked");
+                var cells = $(this).parent().children("td");
+                var tds = $('#D .table_sizde_chooser td').removeClass("SizdeChooser-clicked")
+                zd = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
+                zd += 1;
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(cells[i]).hasClass("cell")) {
+                        $(this).removeClass("cell");
+                        cellindex = i;
+  
+                        break;
+  
+  
+                    }
+                    var a_val = $('#d_val').val();
+                    var a_val_num = $('#d_nextnum').val();
+                    if($('#d_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#d_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#d_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#d_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+    
+                   
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                    var a_rooms = $('#d_rooms');
+  
+                }
+  
+  
+                $(this).parent().addClass("row");
+                var rows = $(this).parent().parent().children("tr");
+  
+  
+                for (var i = 0; i < rows.length; i++) {
+                    var tds = $(rows[i]).children("label");
+                    V = "";
+                    for (var j = 0; j <= cellindex; j++) {
+                        ZD = i;
+  
+                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                    }
+                    if ($(rows[i]).hasClass("row")) {
+                        $(this).parent().removeClass("row");
+                        break;
+                    }
+                }
+                V = $('#d_val').val() + parseFloat($('#d_nextnum').val().replace(/\D/g,''));
+  
+  
+                posX = $(this).closest('tr').data("no")+1;
+                posY = $(this).index();
+                $('#d_nextnum').val(zd);
+            }
+  
+        }
+    });
+    $("#E_").delegate('td', 'mouseover mouseleave click', function(e) {
+        var cellindex = 0;
+        let rooms = "";
+  
+        if (e.type == 'click') {
+            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+                $(this).removeClass("nowork");
+            } else if ($('input#pohjakierros').is(':checked')) {
+                console.log("Pohja checkattu");
+  
+  
+                var cells = $(this).parent().children("td");
+                var tds = $('#E .table_sizee_chooser td').removeClass("SizeeChooser-clicked")
+  
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(this).find('label').text().length > 1) {
+                        $(this).removeClass("nowork");
+                        $(this).find('label').text("");
+                        cellindex = i;
+                    } else {
+                        $(this).addClass("nowork"); $(this).removeClass("checked");
+                        $(this).find('label').val("");
+                    }
+  
+                }
+  
+            } else if ($(this).hasClass("noindex")) {
+                ze -= 0;
+                $('#e_nextnum').val(ze);
+            } else if ($(this).find('input').prop('checked') == false) {
+                ze -= 1;
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#e_nextnum').val(ze);
+            } else {
+                $(this).addClass("checked");
+                var cells = $(this).parent().children("td");
+                var tds = $('#E .table_sizee_chooser td').removeClass("SizeeChooser-clicked")
+                ze = parseFloat($('#e_nextnum').val().replace(/\D/g,''));
+                ze += 1;
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(cells[i]).hasClass("cell")) {
+                        $(this).removeClass("cell");
+                        cellindex = i;
+  
+                        break;
+  
+  
+                    }
+                    var a_val = $('#e_val').val();
+                    var a_val_num = $('#e_nextnum').val();
+    
+                    if($('#e_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#e_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#e_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#e_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+    
+                   
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                    var a_rooms = $('#e_rooms');
+  
+                }
+  
+  
+                $(this).parent().addClass("row");
+                var rows = $(this).parent().parent().children("tr");
+  
+  
+                for (var i = 0; i < rows.length; i++) {
+                    var tds = $(rows[i]).children("label");
+                    V = "";
+                    for (var j = 0; j <= cellindex; j++) {
+                        ZE = i;
+  
+                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                    }
+                    if ($(rows[i]).hasClass("row")) {
+                        $(this).parent().removeClass("row");
+                        break;
+                    }
+                }
+                V = $('#e_val').val() + parseFloat($('#e_nextnum').val().replace(/\D/g,''));
+  
+                posX = $(this).closest('tr').data("no")+1;
+                posY = $(this).index();
+  
+                $('#e_nextnum').val(ze);
+            }
+  
+        }
+    });
+    $("#F_").delegate('td', 'mouseover mouseleave click', function(e) {
+        var cellindex = 0;
+        let rooms = "";
+  
+        if (e.type == 'click') {
+            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+                $(this).removeClass("nowork");
+            } else if ($('input#pohjakierros').is(':checked')) {
+                console.log("Pohja checkattu");
+  
+  
+                var cells = $(this).parent().children("td");
+                var tds = $('#F .table_sizfe_chooser td').removeClass("SizfeChooser-clicked")
+  
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(this).find('label').text().length > 1) {
+                        $(this).removeClass("nowork");
+                        $(this).find('label').text("");
+                        cellindex = i;
+                    } else {
+                        $(this).addClass("nowork"); $(this).removeClass("checked");
+                        $(this).find('label').val("");
+                    }
+  
+                }
+  
+            } else if ($(this).hasClass("noindex")) {
+                zf -= 0;
+                $('#f_nextnum').val(zf);
+            } else if ($(this).find('input').prop('checked') == false) {
+                zf -= 1;
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#f_nextnum').val(zf);
+            } else {
+                $(this).addClass("checked");
+                var cells = $(this).parent().children("td");
+                var tds = $('#F .table_sizfe_chooser td').removeClass("SizfeChooser-clicked")
+                zf = parseFloat($('#f_nextnum').val().replace(/\D/g,''));
+                zf += 1;
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(cells[i]).hasClass("cell")) {
+                        $(this).removeClass("cell");
+                        cellindex = i;
+  
+                        break;
+  
+  
+                    }
+                    var a_val = $('#f_val').val();
+                    var a_val_num = $('#f_nextnum').val();
+                    if($('#f_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#f_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#f_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#f_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+
+                
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                    var a_rooms = $('#f_rooms');
+  
+                }
+  
+  
+                $(this).parent().addClass("row");
+                var rows = $(this).parent().parent().children("tr");
+  
+  
+                for (var i = 0; i < rows.length; i++) {
+                    var tds = $(rows[i]).children("label");
+                    V = "";
+                    for (var j = 0; j <= cellindex; j++) {
+                        ZF = i;
+  
+                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                    }
+                    if ($(rows[i]).hasClass("row")) {
+                        $(this).parent().removeClass("row");
+                        break;
+                    }
+                }
+                V = $('#f_val').val() + parseFloat($('#f_nextnum').val().replace(/\D/g,''));
+  
+  
+                posX = $(this).closest('tr').data("no")+1;
+                posY = $(this).index();
+                $('#f_nextnum').val(zf);
+            }
+  
+        }
+    });
+    $("#G_").delegate('td', 'mouseover mouseleave click', function(e) {
+        var cellindex = 0;
+        let rooms = "";
+  
+        if (e.type == 'click') {
+            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+                $(this).removeClass("nowork");
+            } else if ($('input#pohjakierros').is(':checked')) {
+                console.log("Pohja checkattu");
+  
+  
+                var cells = $(this).parent().children("td");
+                var tds = $('#G .table_sizge_chooser td').removeClass("SizgeChooser-clicked")
+  
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(this).find('label').text().length > 1) {
+                        $(this).removeClass("nowork");
+                        $(this).find('label').text("");
+                        cellindex = i;
+                    } else {
+                        $(this).addClass("nowork"); $(this).removeClass("checked");
+                        $(this).find('label').val("");
+                    }
+  
+                }
+  
+            } else if ($(this).hasClass("noindex")) {
+                zg -= 0;
+                $('#g_nextnum').val(zg);
+            } else if ($(this).find('input').prop('checked') == false) {
+                zg -= 1;
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#g_nextnum').val(zg);
+            } else {
+                $(this).addClass("checked");
+                var cells = $(this).parent().children("td");
+                var tds = $('#G .table_sizge_chooser td').removeClass("SizgeChooser-clicked")
+                zg = parseFloat($('#g_nextnum').val().replace(/\D/g,''));
+                zg += 1;
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(cells[i]).hasClass("cell")) {
+                        $(this).removeClass("cell");
+                        cellindex = i;
+  
+                        break;
+  
+  
+                    }
+                    var a_val = $('#g_val').val();
+                    var a_val_num = $('#g_nextnum').val();
+                    
+                    if($('#g_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#g_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#g_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#g_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+    
+                   
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                    var a_rooms = $('#g_rooms');
+  
+                }
+  
+  
+                $(this).parent().addClass("row");
+                var rows = $(this).parent().parent().children("tr");
+  
+  
+                for (var i = 0; i < rows.length; i++) {
+                    var tds = $(rows[i]).children("label");
+                    V = "";
+                    for (var j = 0; j <= cellindex; j++) {
+                        ZG = i;
+  
+                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                    }
+                    if ($(rows[i]).hasClass("row")) {
+                        $(this).parent().removeClass("row");
+                        break;
+                    }
+                }
+                V = $('#g_val').val() + parseFloat($('#g_nextnum').val().replace(/\D/g,''));
+  
+  
+                posX = $(this).closest('tr').data("no")+1;
+                posY = $(this).index();
+  
+                $('#g_nextnum').val(zg);
+            }
+  
+        }
+    });
+    $("#H_").delegate('td', 'mouseover mouseleave click', function(e) {
+        var cellindex = 0;
+        let rooms = "";
+  
+        if (e.type == 'click') {
+            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+                $(this).removeClass("nowork");
+            } else if ($('input#pohjakierros').is(':checked')) {
+                console.log("Pohja checkattu");
+  
+  
+                var cells = $(this).parent().children("td");
+                var tds = $('#H .table_sizhe_chooser td').removeClass("SizheChooser-clicked")
+  
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(this).find('label').text().length > 1) {
+                        $(this).removeClass("nowork");
+                        $(this).find('label').text("");
+                        cellindex = i;
+                    } else {
+                        $(this).addClass("nowork"); $(this).removeClass("checked");
+                        $(this).find('label').val("");
+                    }
+  
+                }
+  
+            } else if ($(this).hasClass("noindex")) {
+                zh -= 0;
+                $('#h_nextnum').val(zh);
+            } else if ($(this).find('input').prop('checked') == false) {
+                zh -= 1;
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#h_nextnum').val(zh);
+            } else {
+                $(this).addClass("checked");
+                var cells = $(this).parent().children("td");
+                var tds = $('#H .table_sizhe_chooser td').removeClass("SizheChooser-clicked")
+                zh = parseFloat($('#h_nextnum').val().replace(/\D/g,''));
+                zh += 1;
+                for (var i = 0; i < cells.length; i++) {
+                    if ($(cells[i]).hasClass("cell")) {
+                        $(this).removeClass("cell");
+                        cellindex = i;
+  
+                        break;
+  
+  
+                    }
+                    var a_val = $('#h_val').val();
+                    var a_val_num = $('#h_nextnum').val();
+
+                    if($('#h_nextnum_second').val().length >= 1) {
+                        var a_val_2 = "<br/>" + $('#h_nextnum_second').val();
+                    }
+                    else {
+                        var a_val_2 = "";
+                    }
+                    if($('#h_nextnum_third').val().length >= 1) {
+                        var a_val_3 = "<br/>" + $('#h_nextnum_third').val();
+                    }
+                    else {
+                        var a_val_3 = "";
+                    }
+
+                
+                    
+                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                    var a_rooms = $('#h_rooms');
+  
+                }
+  
+  
+                $(this).parent().addClass("row");
+                var rows = $(this).parent().parent().children("tr");
+  
+  
+                for (var i = 0; i < rows.length; i++) {
+                    var tds = $(rows[i]).children("label");
+                    V = "";
+                    for (var j = 0; j <= cellindex; j++) {
+                        ZH = i;
+  
+                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                    }
+                    if ($(rows[i]).hasClass("row")) {
+                        $(this).parent().removeClass("row");
+                        break;
+                    }
+                }
+                V = $('#h_val').val() + parseFloat($('#h_nextnum').val().replace(/\D/g,''));
+  
+  
+                posX = $(this).closest('tr').data("no")+1;
+                posY = $(this).index();
+  
+                $('#h_nextnum').val(zh);
+            }
+  
+        }
+    });
+  });
+>>>>>>> Stashed changes
   
   
   
@@ -2441,7 +3496,11 @@ $('td').mouseover(function() {
   
   
     $("#A_ .checked").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = $(this).find("label").html();
   
@@ -2463,7 +3522,11 @@ $('td').mouseover(function() {
     });
   
     $("#A_ .nowork").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = "NOWORK";
         a_.push({
@@ -2475,7 +3538,11 @@ $('td').mouseover(function() {
     });
   
     $("#B_ .checked").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = $(this).find("label").html();
   
@@ -2498,7 +3565,11 @@ $('td').mouseover(function() {
     });
   
     $("#B_ .nowork").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = "";
         b_.push({
@@ -2510,7 +3581,11 @@ $('td').mouseover(function() {
     });
   
     $("#C_ .checked").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = $(this).find("label").html();
   
@@ -2533,7 +3608,11 @@ $('td').mouseover(function() {
     });
   
     $("#C_ .nowork").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = "";
         c_.push({
@@ -2545,7 +3624,11 @@ $('td').mouseover(function() {
     });
   
     $("#D_ .checked").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = $(this).find("label").html();
   
@@ -2568,7 +3651,11 @@ $('td').mouseover(function() {
     });
   
     $("#D_ .nowork").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = "";
         d_.push({
@@ -2580,7 +3667,11 @@ $('td').mouseover(function() {
     });
   
     $("#E_ .checked").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = $(this).find("label").html();
   
@@ -2603,7 +3694,11 @@ $('td').mouseover(function() {
     });
   
     $("#E_ .nowork").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = "";
         e_.push({
@@ -2615,7 +3710,11 @@ $('td').mouseover(function() {
     });
   
     $("#F_ .checked").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = $(this).find("label").html();
   
@@ -2637,7 +3736,11 @@ $('td').mouseover(function() {
     });
   
     $("#F_ .nowork").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = "";
         f_.push({
@@ -2649,7 +3752,11 @@ $('td').mouseover(function() {
     });
   
     $("#G_ .checked").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = $(this).find("label").html();
         if (nam.length > 2) {
@@ -2671,7 +3778,11 @@ $('td').mouseover(function() {
     });
   
     $("#G_ .nowork").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = "";
         g_.push({
@@ -2683,7 +3794,11 @@ $('td').mouseover(function() {
     });
   
     $("#H_ .checked").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = $(this).find("label").html();
   
@@ -2706,7 +3821,11 @@ $('td').mouseover(function() {
     });
   
     $("#H .nowork").each(function(index) {
+<<<<<<< Updated upstream
         posX = $(this).parent().data("no");
+=======
+        posX = $(this).closest('tr').data("no")+1;
+>>>>>>> Stashed changes
         posY = $(this).index();
         nam = "";
         h_.push({
@@ -2719,7 +3838,7 @@ $('td').mouseover(function() {
   
   
   
-    $('#new_project__form').submit();
+    // $('#new_project__form').submit();
   });
   
   
@@ -2824,6 +3943,7 @@ function change__byhands(elem) {
     }
 }
 
+<<<<<<< Updated upstream
 function change__toggling(elem,lvl) {
     f = elem.dataset.alt.split("|")[0];
     s = elem.dataset.alt.split("|")[1];
@@ -2841,12 +3961,32 @@ function change__toggling(elem,lvl) {
 
 function open_ak(elem) {
     let _AK_shits_ = elem.parentElement.querySelectorAll(".AK > td");
+=======
+function open_nowork(elem) {
+    let _AK_shits_ = elem.parentElement.querySelectorAll("td");
+    _AK_shits_.forEach(myFunction);
+
+    function myFunction(item) {
+        item.classList.remove("hidden");
+        item.classList.add("nowork");
+    }
+
+}
+
+
+function pohjakierros_function() {
+      
+}
+function open_ak() {
+    let _AK_shits_ = document.querySelectorAll(".AK > td");
+>>>>>>> Stashed changes
     _AK_shits_.forEach(myFunction);
 }
 function open_k(elem) {
     let _K_shits_ = elem.parentElement.querySelectorAll(".K > td");
     _K_shits_.forEach(myFunction);
 }
+<<<<<<< Updated upstream
 function myFunction(item) {
     if(item.classList.contains("noindex")) {}
     else {
@@ -2860,6 +4000,8 @@ function myFunction(item) {
 function pohjakierros_function() {
       
 }
+=======
+>>>>>>> Stashed changes
 
 function add_new_lvl(elem) {
     gp = elem.parentElement.parentElement.parentElement;
@@ -2868,8 +4010,12 @@ function add_new_lvl(elem) {
     len = gp.querySelectorAll("tr").length;
     var tr = document.createElement('tr');
     tr.dataset.no = parseFloat(gp.querySelectorAll("tr")[0].dataset.no) +1;
+<<<<<<< Updated upstream
 
     if(len > 50) {
+=======
+    if(len > 10) {
+>>>>>>> Stashed changes
         alert("Kerrosten maksimimäärä saavutettu");
         return
     }

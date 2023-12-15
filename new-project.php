@@ -355,6 +355,7 @@ include('header.php');
                   </div>    
                   <div class="table_size_chooser sizer">
                       <div class="SizeChooser">
+<<<<<<< Updated upstream
                         <table class="table">
                            <tbody>
                               <?php
@@ -366,6 +367,47 @@ include('header.php');
                                           echo '<td class="noindex"><label>'.$i_.'</label></td>';
                                        }
                                        echo '<td ><input type="checkbox" name="room_name"><label></label></td>';
+=======
+                          <table class="table">
+                              <tbody>
+                                  <?php
+                                    for ($i=1; $i >= -1; $i--) { 
+                                       if($i == 0) {
+                                          echo '<tr class="K" data-no="'.$i.'">';
+                                          $i_ = "K?";
+                                       }
+                                       else if($i == -1) {
+                                          echo '<tr class="AK" data-no="'.$i.'">';
+                                          $i_ = "AK?";
+                                       }
+                                       else {
+                                          echo '<tr data-no="'.$i.'">';
+                                          $i_ = $i;
+                                       }
+                                       
+                                       
+                                       for ($a=1; $a < 30; $a++) { 
+                                          if($i == 0 && $a == 1) {
+                                             echo '<td class="K" onclick="open_nowork(this);">';
+                                             $i_ = "K?";
+                                             echo '<label>'.$i_.'</label></td>';
+                                          }
+                                          elseif($i == -1 && $a == 1) {
+                                             echo '<td class="AK" onclick="open_nowork(this);">';
+                                             $i_ = "AK?";
+                                             echo '<label>'.$i_.'</label></td>';
+                                          }
+
+                                          elseif($a == 1) {
+                                             echo '<td class="noindex"><label>'.$i_.'</label></td>';
+                                          }
+                                          else {
+                                             echo '<td><input type="checkbox" name="room_name"><label></label></td>';
+                                          }
+                                          
+                                       }
+                                       echo "</tr>";
+>>>>>>> Stashed changes
                                     }
                                     echo "</tr>";
                                  }

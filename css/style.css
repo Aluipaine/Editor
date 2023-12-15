@@ -6475,6 +6475,7 @@ div.x_del.hidden {
   white-space:normal;
   overflow-wrap: anywhere;
   padding: 2px 1px;
+<<<<<<< Updated upstream
   cursor: pointer;
 
   -webkit-touch-callout: none; /* Safari */
@@ -6482,6 +6483,8 @@ div.x_del.hidden {
      -moz-user-select: none; /* Firefox */
       -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none; 
+=======
+>>>>>>> Stashed changes
 }
 .project__buildingcoordinates li.additionalfloor__ak,.project__buildingcoordinates li.additionalfloor__k {
   display: none;
@@ -6501,8 +6504,11 @@ div.x_del.hidden {
 .project__buildingcoordinates li {
   line-height: 80px;
   font-size: 16px;
+<<<<<<< Updated upstream
   z-index: 3;
   position: relative;
+=======
+>>>>>>> Stashed changes
 
   display: block;
   opacity: 0;

@@ -1,7 +1,16 @@
+<<<<<<< Updated upstream
 <section class="popup__statuses">
   <div class="row">
     <div class="col-6">
       <h3 style="text-align: right;">5. Paina tästä -></h3>
+=======
+
+<section class="popup__statuses">
+  <div class="container row">
+    <div class="col-2 popup__statuses_a">
+      <div class="c_meaning c_meaning_2"><i>KESKEN </i></div>
+      <div class="c_meaning c_meaning_1"><i>EI TYÖTÄ</i></div>
+>>>>>>> Stashed changes
     </div>
     <div class="col-6">
       <div class="p_meaning_end btn">TALLENNA JA SULJE</div>
@@ -285,8 +294,22 @@
               <div class="project__buildingcoordinates">
                 <ul>
                   <?php
+<<<<<<< Updated upstream
                     for ($i=50; $i >= 1; $i--) { 
                       echo "<li class='floor__".$i."'>" . $i . "</li>";                      
+=======
+                    for ($i=50; $i >= -1; $i--) { 
+                      if($i == -1) {
+                        echo "<li class='additionalfloor__ak'>AK</li>";
+                      }
+                      elseif($i == 0) {
+                        echo "<li class='additionalfloor__k'>K</li>";
+                      }
+                      else {
+                        echo "<li class='floor__".$i."'>" . $i . "</li>";
+                      }
+                      
+>>>>>>> Stashed changes
                     }
                   ?>
                 </ul>
@@ -299,12 +322,18 @@
 
                   $a_da_nowork_ = explode("},{", $a_data_nowork);
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
                   foreach ($a_da_nowork_ as $a_key_nowork) {
 
                     $da_child = explode(",", $a_key_nowork);
                     $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                     $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+<<<<<<< Updated upstream
                       if($key1 == "K") {
                         echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                         $remove_overflowY = true;
@@ -318,6 +347,10 @@
                         echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                       }
                       
+=======
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+
+>>>>>>> Stashed changes
                   }
               
                   $a_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'a_rooms'");
@@ -346,6 +379,7 @@
                     $lroom = str_replace('l_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8])))));
                     
                     $classname = str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))));
+<<<<<<< Updated upstream
 
                     if(explode("~",$aroom)[1] === explode("~",$broom)[1] && explode("~",$croom)[1]  === explode("~",$kroom)[1]) {
                       $additionalclass = explode("~",$aroom)[1];
@@ -371,6 +405,21 @@
 
 
 
+=======
+                    
+                    
+                    
+                    
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    $floornum = 52 - intval($key1);
+                    echo '<script>document.querySelector("#A > div > div > div.project__buildingcoordinates > ul > li:nth-child('.$floornum.')").style.display = "block";</script>';
+                    echo '<script>document.querySelector("#A > div > div > div.project__buildingcoordinates > ul > li:nth-child('.$floornum.')").style.opacity = "1";</script>';
+
+              }
+
+
+
+>>>>>>> Stashed changes
             ?>
               <section class="project__building_grid">
                 <?php 
@@ -396,6 +445,7 @@
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $b_colc ?>; -->
               <div class="project__buildingcoordinates">
                 <ul>
+<<<<<<< Updated upstream
                   <?php
                     for ($i=50; $i >= 1; $i--) { 
                       echo "<li class='floor__".$i."'>" . $i . "</li>";                      
@@ -432,6 +482,33 @@
                     }
                     
 
+=======
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <?php 
+
+                  $b_datb_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'b_rooms_nowork'");
+                  $b_db_nowork = mysqli_fetch_all($b_datb_nowork);
+                  $b_datb_nowork = $b_db_nowork[0][3];
+
+                  $b_db_nowork_ = explode("},{", $b_datb_nowork);
+                  foreach ($b_db_nowork_ as $b_key_nowork) {
+                    $db_child = explode(",", $b_key_nowork);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[2]))))));
+                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);'>".$key0."</div>";
+>>>>>>> Stashed changes
                   }
 
                   $b_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'b_rooms'");
@@ -453,6 +530,7 @@
                     $tila__bottomcord = intval($key1) -1;
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
                     
+<<<<<<< Updated upstream
                     $aroom = str_replace('a_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3])))));
                     $broom = str_replace('b_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4])))));
                     $croom = str_replace('c_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5])))));
@@ -482,6 +560,14 @@
                       echo '<script>if(document.querySelector("#B ul > li:nth-child('.$floornum.')")) {document.querySelector("#B ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
                     }
                   }
+=======
+                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                  }
+
+                  
+
+>>>>>>> Stashed changes
             ?>
               <section class="project__building_grid">
                 <?php 
@@ -509,11 +595,24 @@
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $c_colc ?>; -->
               <div class="project__buildingcoordinates">
                 <ul>
+<<<<<<< Updated upstream
                   <?php
                     for ($i=50; $i >= 1; $i--) { 
                       echo "<li class='floor__".$i."'>" . $i . "</li>";                      
                     }
                   ?>
+=======
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+>>>>>>> Stashed changes
                 </ul>
               </div>
               <?php 
@@ -522,6 +621,7 @@
                   $c_data_nowork = $c_da_nowork[0][3];
 
                   $c_da_nowork_ = explode("},{", $c_data_nowork);
+<<<<<<< Updated upstream
                   foreach ($c_da_nowork_ as $c_key_nowork) {
 
                     $da_child = explode(",", $c_key_nowork);
@@ -544,6 +644,18 @@
 
                   }
               
+=======
+
+
+                  foreach ($c_da_nowork_ as $c_key_nowork) {
+                    $da_child = explode(",", $c_key_nowork);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);'>".$key0."</div>";
+                  }
+
+>>>>>>> Stashed changes
                   $c_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'c_rooms'");
                   $c_da = mysqli_fetch_all($c_data);
                   $c_data = $c_da[0][3];
@@ -563,6 +675,7 @@
                     $tila__bottomcord = intval($key1) -1;
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
                     
+<<<<<<< Updated upstream
                     $aroom = str_replace('a_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3])))));
                     $broom = str_replace('b_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4])))));
                     $croom = str_replace('c_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5])))));
@@ -593,6 +706,12 @@
                     }
                   }
 
+=======
+                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>"; 
+                  }
+
+>>>>>>> Stashed changes
               
             ?>
               <section class="project__building_grid">
@@ -621,6 +740,7 @@
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $d_colc ?>; -->
               <div class="project__buildingcoordinates">
                 <ul>
+<<<<<<< Updated upstream
                   <?php
                     for ($i=50; $i >= 1; $i--) { 
                       echo "<li class='floor__".$i."'>" . $i . "</li>";                      
@@ -632,6 +752,39 @@
                 $d_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'd_rooms_nowork'");
                 $d_da_nowork = mysqli_fetch_all($d_data_nowork);
                 $d_data_nowork = $d_da_nowork[0][3];
+=======
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <?php 
+              $d_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'd_rooms_nowork'");
+              $d_da_nowork = mysqli_fetch_all($d_data_nowork);
+              $d_data_nowork = $d_da_nowork[0][3];
+
+              $d_da_nowork_ = explode("},{", $d_data_nowork);
+
+
+                foreach ($d_da_nowork_ as $d_key_nowork) {
+                  $da_child = explode(",", $d_key_nowork);
+                  $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                  $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                  $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                    echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);'>".$key0."</div>";
+                }
+
+                  $d_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'd_rooms'");
+                  $d_da = mysqli_fetch_all($d_data);
+                  $d_data = $d_da[0][3];
+>>>>>>> Stashed changes
 
                 $d_da_nowork_ = explode("},{", $d_data_nowork);
                 foreach ($d_da_nowork_ as $d_key_nowork) {
@@ -658,6 +811,7 @@
                 $d_da = mysqli_fetch_all($d_data);
                 $d_data = $d_da[0][3];
 
+<<<<<<< Updated upstream
                 $d_da_ = explode("},{", $d_data);
                 
 
@@ -700,6 +854,23 @@
                     echo '<script>if(document.querySelector("#D ul > li:nth-child('.$floornum.')")) {document.querySelector("#D ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
                   }
                 }
+=======
+                  if (strlen($d_data) <= 2){
+                      echo "<style>#D {display:none}</style>";
+                  } 
+
+
+                foreach ($d_da_ as $d_key) {
+                  $da_child = explode(",", $d_key);
+                  $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                  $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                  $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                  
+                    $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                }   
+
+>>>>>>> Stashed changes
               
             ?>
               <section class="project__building_grid">
@@ -728,6 +899,7 @@
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $e_colc ?>; -->
               <div class="project__buildingcoordinates">
                 <ul>
+<<<<<<< Updated upstream
                   <?php
                     for ($i=50; $i >= 1; $i--) { 
                       echo "<li class='floor__".$i."'>" . $i . "</li>";                      
@@ -762,10 +934,42 @@
 
                   }
               
+=======
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <?php 
+              $e_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'e_rooms_nowork'");
+              $e_da_nowork = mysqli_fetch_all($e_data_nowork);
+              $e_data_nowork = $e_da_nowork[0][3];
+
+              $e_da_nowork_ = explode("},{", $e_data_nowork);
+
+
+              foreach ($e_da_nowork_ as $e_key_nowork) {
+                $da_child = explode(",", $e_key_nowork);
+                $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                  echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);'>".$key0."</div>";
+            
+              }
+
+>>>>>>> Stashed changes
                   $e_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'e_rooms'");
                   $e_da = mysqli_fetch_all($e_data);
                   $e_data = $e_da[0][3];
 
+<<<<<<< Updated upstream
                   $e_da_ = explode("},{", $e_data);
                   
 
@@ -810,6 +1014,27 @@
                       echo '<script>if(document.querySelector("#E ul > li:nth-child('.$floornum.')")) {document.querySelector("#E ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
                     }
                   }
+=======
+                  if (strlen($e_data) <= 2){
+                      echo "<style>#E {display:none}</style>";
+                  } 
+
+                  $e_da_ = explode("},{", $e_data);
+
+
+                  foreach ($e_da_ as $e_key) {
+                    $da_child = explode(",", $e_key);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                    
+                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    
+              }
+
+              
+>>>>>>> Stashed changes
             ?>
               <section class="project__building_grid">
                 <?php 
@@ -837,6 +1062,7 @@
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $f_colc ?>; -->
               <div class="project__buildingcoordinates">
                 <ul>
+<<<<<<< Updated upstream
                   <?php
                     for ($i=50; $i >= 1; $i--) { 
                       echo "<li class='floor__".$i."'>" . $i . "</li>";                      
@@ -923,6 +1149,61 @@
               }
                  
               ?>
+=======
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <?php 
+
+                    $f_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'f_rooms_nowork'");
+                    $f_da_nowork = mysqli_fetch_all($f_data_nowork);
+                    $f_data_nowork = $f_da_nowork[0][3];
+
+                    $f_da_nowork_ = explode("},{", $f_data_nowork);
+
+
+                    foreach ($f_da_nowork_ as $f_key_nowork) {
+                      $da_child = explode(",", $f_key_nowork);
+                      $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                      $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                      $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                        echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);'>".$key0."</div>";
+
+                    }
+
+                  $f_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'f_rooms'");
+                  $f_da = mysqli_fetch_all($f_data);
+                  $f_data = $f_da[0][3];
+
+                  if (strlen($f_data) <= 2){
+                      echo "<style>#F {display:none}</style>";
+                  } 
+
+                  $f_da_ = explode("},{", $f_data);
+
+
+                  foreach ($f_da_ as $f_key) {
+                    $da_child = explode(",", $f_key);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(' <br>','',str_replace('<br> ','',str_replace(' ','', str_replace('<br>','', mb_convert_encoding($classname,'HTML-ENTITIES','utf-8')))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    
+              }
+
+              
+            ?>
+>>>>>>> Stashed changes
               <section class="project__building_grid">
                 <?php 
                   for ($i=0; $i < 1500; $i++) { 
@@ -949,6 +1230,7 @@
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $g_colc ?>; -->
               <div class="project__buildingcoordinates">
                 <ul>
+<<<<<<< Updated upstream
                   <?php
                     for ($i=50; $i >= 1; $i--) { 
                       echo "<li class='floor__".$i."'>" . $i . "</li>";                      
@@ -957,11 +1239,28 @@
                 </ul>
               </div>
               <?php
+=======
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <?php
+              
+>>>>>>> Stashed changes
                   $g_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'g_rooms_nowork'");
                   $g_da_nowork = mysqli_fetch_all($g_data_nowork);
                   $g_data_nowork = $g_da_nowork[0][3];
 
                   $g_da_nowork_ = explode("},{", $g_data_nowork);
+<<<<<<< Updated upstream
                   foreach ($g_da_nowork_ as $g_key_nowork) {
 
                     $da_child = explode(",", $g_key_nowork);
@@ -983,10 +1282,23 @@
                       }
                   }
               
+=======
+
+
+                  foreach ($g_da_nowork_ as $g_key_nowork) {
+                    $da_child = explode(",", $g_key_nowork);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);'>".$key0."</div>";
+                  }
+
+>>>>>>> Stashed changes
                   $g_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'g_rooms'");
                   $g_da = mysqli_fetch_all($g_data);
                   $g_data = $g_da[0][3];
 
+<<<<<<< Updated upstream
                   $g_da_ = explode("},{", $g_data);
                   
 
@@ -1030,6 +1342,26 @@
                       echo '<script>if(document.querySelector("#G ul > li:nth-child('.$floornum.')")) {document.querySelector("#G ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
                     }
                   }
+=======
+                  if (strlen($g_data) <= 2){
+                      echo "<style>#G {display:none}</style>";
+                  } 
+
+                  $g_da_ = explode("},{", $g_data);
+
+
+                  foreach ($g_da_ as $g_key) {
+                    $da_child = explode(",", $g_key);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    
+              }
+
+              
+>>>>>>> Stashed changes
             ?>
               <section class="project__building_grid">
                 <?php 
@@ -1057,6 +1389,7 @@
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $h_colc ?>; -->
               <div class="project__buildingcoordinates">
                 <ul>
+<<<<<<< Updated upstream
                   <?php
                     for ($i=50; $i >= 1; $i--) { 
                       echo "<li class='floor__".$i."'>" . $i . "</li>";                      
@@ -1070,6 +1403,41 @@
                 $h_data_nowork = $h_da_nowork[0][3];
                 $h_da_nowork_ = explode("},{", $h_data_nowork);
                 foreach ($h_da_nowork_ as $h_key_nowork) {
+=======
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <?php 
+
+                  $h_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'h_rooms_nowork'");
+                  $h_da_nowork = mysqli_fetch_all($h_data_nowork);
+                  $h_data_nowork = $h_da_nowork[0][3];
+
+                  $h_da_nowork_ = explode("},{", $h_data_nowork);
+
+
+                  foreach ($h_da_nowork_ as $h_key_nowork) {
+                    $da_child = explode(",", $h_key_nowork);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $key1 . "px*80);left:calc(". $key2 . "px*80);'>".$key0."</div>";
+
+                  }
+
+                  $h_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'h_rooms'");
+                  $h_da = mysqli_fetch_all($h_data);
+                  $h_data = $h_da[0][3];
+>>>>>>> Stashed changes
 
                   $da_child = explode(",", $h_key_nowork);
                   $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
@@ -1098,6 +1466,7 @@
                 $h_da_ = explode("},{", $h_data);
 
 
+<<<<<<< Updated upstream
 
                 if (strlen($h_data) < 3) {
                     echo "<style>#H {display:none}</style>";
@@ -1139,6 +1508,20 @@
                   }
                 }
               ?>
+=======
+                  foreach ($h_da_ as $h_key) {
+                    $da_child = explode(",", $h_key);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='bottom: calc(" . $key1 . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    
+              }
+
+              
+            ?>
+>>>>>>> Stashed changes
               <section class="project__building_grid">
                 <?php 
                   for ($i=0; $i < 1500; $i++) { 

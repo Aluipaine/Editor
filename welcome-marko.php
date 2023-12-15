@@ -1432,4 +1432,6 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
 
 <script>
 </script>
+<script src="js/jstemplates/mrarko.js"></script>
+
 <?php include('./footer.php') ?>
