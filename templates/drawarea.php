@@ -10,8 +10,8 @@
             <div class="wall_prev">&larr;</div>
             <div class="wall_next">&rarr;</div>
          </div>
-         <div class="drawarea__mm drawarea__height"><input type="tel" value="<?= $post["room_one_a-h"]; ?>" class="lineinput" id="box_h" onchange="changesize__bottom(parseFloat(this.value)+'|y');updatearea(parseFloat(this.value)+'|y')" max="3650"> </div>
-         <div class="drawarea__mm drawarea__lenght"> <input type="tel" value="<?= $post["room_one_a-w"]; ?>" class="lineinput" id="box_w" onchange="changesize__bottom(parseFloat(this.value)+'|x');updatearea(parseFloat(this.value)+'|x')" max="9975"></div>
+         <div class="drawarea__mm drawarea__height"><input type="tel" value="<?= $post["room_one_a-h"]; ?>" class="lineinput" id="box_h" oninput="changesize__bottom(parseFloat(this.value)+'|y');updatearea(parseFloat(this.value)+'|y')" max="3650"> </div>
+         <div class="drawarea__mm drawarea__lenght"> <input type="tel" value="<?= $post["room_one_a-w"]; ?>" class="lineinput" id="box_w" oninput="changesize__bottom(parseFloat(this.value)+'|x');updatearea(parseFloat(this.value)+'|x')" max="9975"></div>
          <div class="drawarea__control drawarea__left">
            <div class="drawarea__left_container">
             <div class="drawarea__h_cord">
@@ -50,25 +50,11 @@
              <!-- <div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = this.innerHTML.replace('IV ','');">IV 160</div> -->
 
              <!-- Start of custom buttons -->
-              <?php
-              $sy = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `projectmeta` WHERE `id`=100 AND `meta_key`="s_settings"')->fetch_assoc()["meta_value"], true);
-
-              for($i = 9; $i <= 23; $i++) {
-                if($sy[$i][3] != "") {
-                  if(count(explode("x", $sy[$i][3])) > 1) {
-                    echo '<div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;border-radius: 0px;" onclick="settings__mitta();document.querySelector(\'#lapiviennit__sade_muucord\').value = ' . $sy[$i][2] . ';">' . $sy[$i][1] . '</div>';
-                  } else {
-                    echo '<div class="drawarea__top_item drawarea__top_circle" style="font-size: 10px;align-items: center;background: #eee;" onclick="settings__mitta();document.querySelector(\'#lapiviennit__sade_muucord\').value = ' . $sy[$i][2] . ';">' . $sy[$i][1] . '</div>';
-                  }
-                }
-              }
-              ?>
+              
+              
 
               <!-- End  of custom buttons -->
 
-               <div class="drawarea__top_item drawarea__top_circle drawarea__top_custom" style="background: #eee;" onclick="settings__mitta();">x</div>
-
-               <div class="drawarea__top_item drawarea__top_circle drawarea__top_custom" style="border-radius: 0;background: #eee;" onclick="settings__mitta();">x</div>
 
             <!-- <div class="drawarea__top_item drawarea__top_itemeight m_btn" onclick="document.querySelector('#reclamation__item_first').checked = true; create__reclamation();">Naarmu</div>
             <div class="drawarea__top_item drawarea__top_itemeight m_btn" onclick="document.querySelector('#reclamation__item_second').checked = true; create__reclamation();">Ruuvi puuttuu</div>
@@ -1765,16 +1751,23 @@
 
     
     <?php 
-      if(isset($_GET["role"]) && $_GET["role"] == 'mittaus'){
+
+    $usr = $_GET["user"];
+    $usr_role = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr'; ");
+    $usr_role = mysqli_fetch_all($usr_role)[0];
+    $usr_role = $usr_role[3];
+
+
+      if(isset($usr_role) && $usr_role == 'mittaus'){
         include('./templates/da_controls_1.php');
-      include('./templates/da_controls_2.php');
-      include('./templates/da_controls_3.php');
-      include('./templates/da_controls_4.php');
-      include('./templates/da_controls_5.php');
-      include('./templates/da_controls_5-5.php');
-      include('./templates/da_controls_5-esikatselu.php');
-      include('./templates/da_controls_6.php');
-      include('./templates/da_controls_7.php');
+        include('./templates/da_controls_2.php');
+        include('./templates/da_controls_3.php');
+        include('./templates/da_controls_4.php');
+        include('./templates/da_controls_5.php');
+        include('./templates/da_controls_5-5.php');
+        include('./templates/da_controls_5-esikatselu.php');
+        include('./templates/da_controls_6.php');
+        include('./templates/da_controls_7.php');
       }
       else {
         include('./templates/da_controls_commenting.php');

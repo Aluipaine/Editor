@@ -5,7 +5,7 @@
    </div> -->
    <!-- <div  class="drawarea__controls_btn drawarea__controls_settingsbtn" >Ylä- ja alakiinnikkeet</div>
    <div  class="drawarea__controls_btn drawarea__controls_settingsbtn" >Välikiinnikkeet</div> -->
-    <div class="aukko_settingsbtn" onclick="open_aukko_settings(true);">
+    <div class="aukko_settingsbtn" onclick="settings__modal_open(this);" data-asmodal_mode="rankalista_as">
      Lista- ja ranka-asetuksia
   </div>
    <div class="drawarea__controls_btn" onclick="$('#step_drawscreen').val('drawscreen_section_six');refresh__drawcontrols();updatearea(); ">

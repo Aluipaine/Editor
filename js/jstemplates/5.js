@@ -2,12 +2,12 @@ function luo__levy(h, w, dex, col, b, l) {
   dex += 1;
   var ind;
   title_index = h + "," + w + "," + b + "," + l;
-  roomname = document.querySelector(".room").value;
-  wallname = document.querySelector(".wall").value;
+  roomname = document.querySelector("#roomname_1").value.replaceAll(" ","");
+
   if (roomname == "") {
     roomname = "Seinän levy";
   }
-  r = wallname.replace("SEINÄ ", "").replace("1. ", "").replace("2. ", "").replace("3. ", "").replace("4. ", "").replace("5. ", "").replace("6. ", "").replace(
+  r = roomname+"_"+current_room.toUpperCase().replace("SEINÄ ", "").replace("1. ", "").replace("2. ", "").replace("3. ", "").replace("4. ", "").replace("5. ", "").replace("6. ", "").replace(
     "KATTO ", "").replace("LATTIA ", "");
   var levy__interval_horizontal = parseFloat(h) / 5 + 1;
   var levy__interval_vertical = parseFloat(w) / 5 + 1;
@@ -21,21 +21,24 @@ function luo__levy(h, w, dex, col, b, l) {
   levy_name.classList.add("levy_name");
   if (document.getElementById("settings__sauma_pysty").checked) {
     levy.classList.add("dir_y");
+    levy_w.innerHTML = h
+    levy_h.innerHTML = w;
   }
   else if (document.getElementById("settings__sauma_vaaka").checked) {
     levy.classList.add("dir_x");
+    levy_w.innerHTML = h
+    levy_h.innerHTML = w;
   }
   ind = String.fromCharCode(65 + col);
-  levy_h.innerHTML = h
-  levy_w.innerHTML = w;
+
   levy_name.innerHTML = r + "_" + ind + dex;
   levy.innerHTML = "<b> <div class='levy_name'> " + levy_name.innerHTML + "</div><i>" + h + "x" + w + "mm</i></b>";
   levy.setAttribute("title", title_index);
   levy.style.height = (parseFloat(levy__interval_vertical)) + 'px';
   // levy.style.width = (parseFloat(levy__interval_horizontal)) + 'px';
   levy.style.width = (parseFloat(levy__interval_horizontal)) + 'px';
-  levy_h.style.display = "none";
-  levy_w.style.display = "none";
+  // levy_h.style.display = "none";
+  // levy_w.style.display = "none";
   levy.appendChild(levy_h);
   levy.appendChild(levy_w);
   levy.style.position = "absolute";
@@ -53,6 +56,13 @@ function luo__levy(h, w, dex, col, b, l) {
 
   if(parseFloat(levy.style.width)*5 < 300) {
     levy.classList.add("levytext_inverted");
+  }
+
+  if(levy_bg != null) {
+    levy.style.backgroundImage = "url('/uploads/"+levy_bg+"')";
+    levy.dataset.sku = levy_sku;
+    levy.dataset.thickness = levy_thickness;
+    levy.dataset.structure = levy_structure;
   }
   // levy.appendChild(levy_name);
   var l_meta = document.createElement("input");
@@ -107,19 +117,19 @@ function levyta(priority) {
   j = 0;
   levycount = parseFloat(vaakamitat.length * pystymitat.length);
   if (document.getElementById("settings__sauma_pysty").checked) {
-    document.querySelector("#settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
-    document.querySelector("#settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
-    document.querySelector("#k_settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
-    document.querySelector("#k_settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
+    // document.querySelector("#settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
+    // document.querySelector("#settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
+    // document.querySelector("#k_settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
+    // document.querySelector("#k_settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
     if (drawarea.querySelector("#drawscreen_section_tyostot .visible")) {
       drawarea.querySelector("#drawscreen_section_tyostot .visible").classList.add("dir_y");
     }
   }
   else if (document.getElementById("settings__sauma_vaaka").checked) {
-    document.querySelector("#settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
-    document.querySelector("#settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
-    document.querySelector("#k_settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
-    document.querySelector("#k_settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
+    // document.querySelector("#settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
+    // document.querySelector("#settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
+    // document.querySelector("#k_settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
+    // document.querySelector("#k_settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
     if (drawarea.querySelector("#drawscreen_section_tyostot .visible")) {
       drawarea.querySelector("#drawscreen_section_tyostot .visible").classList.add("dir_x");
     }
@@ -136,14 +146,14 @@ function levyta(priority) {
       levysarake.classList.add("levysarake");
       levysarake.setAttribute("title", "s" + i);
       prev_b += parseFloat(vaakamitat[i].innerHTML);
-      b = prev_b - parseFloat(vaakamitat[i].innerHTML) + 10 * [i] + 5;
+      b = prev_b - parseFloat(vaakamitat[i].innerHTML) + saumaset_hm * [i] + 5;
       preh_l = 0;
       //LEFT
       for (var j = 0; j < pystymitat.length; j++) {
         h = parseFloat(pystymitat[j].innerHTML);
         w = parseFloat(vaakamitat[i].innerHTML);
         preh_l += parseFloat(pystymitat[j].innerHTML);
-        l = preh_l - parseFloat(pystymitat[j].innerHTML) + 10 * [j] + 5;
+        l = preh_l - parseFloat(pystymitat[j].innerHTML) + saumaset_vm * [j] + 5;
         levyt.append(luo__levy(h, w, i, j, b, l))
         // levy_array.push(luo__levy(h,w,i,j,b,l))
       }
@@ -184,6 +194,25 @@ function levyta(priority) {
     }
   }
     aukkojenallapoisto();
+
+    levy = canvas.querySelectorAll(".levy");
+    for (var i = 0; i < levy.length; i += 1) {
+      if(canvas.querySelector(".levyt").offsetTop > levy[i].offsetTop) { 
+        levy[i].remove();
+      }
+    }
+
+    for (var i = 0; i < levy.length; i += 1) {
+      if(canvas.querySelector(".levyt").offsetRight > levy[i].offsetRight) { 
+        levy[i].remove();
+      }
+    }
+
+    for (var i = 0; i < levy.length; i += 1) {
+      if(canvas.querySelector(".levyt").offsetWidth < levy[i].offsetLeft) { 
+        levy[i].remove();
+      }
+    }
 }
 
 function poista__aukkoala() {
@@ -305,6 +334,8 @@ function closer_left(me) {
     hcord = (parseFloat(prev.style.height)*5)-5;
     wcord = (parseFloat(prev.style.width)*5)-5;
     prev.querySelector("i").innerHTML = hcord +"x"+wcord;
+    prev.querySelector(".levy_h").innerHTML = hcord;
+    prev.querySelector(".levy_w").innerHTML = wcord;
     prev.setAttribute("title", wcord +","+ hcord+","+parseFloat(prev.style.bottom)*5+","+parseFloat(prev.style.left)*5);
 
     prev.querySelector(".levy_h").innerHTML  = parseFloat(hcord);
@@ -362,17 +393,23 @@ function closer_top(me) {
   hcord = (parseFloat(prev.style.height)*5)-5;
   wcord = (parseFloat(prev.style.width)*5)-5;
   prev.querySelector("i").innerHTML = hcord +"x"+wcord;
-  prev.setAttribute("title", hcord +","+ wcord+","+parseFloat(prev.style.bottom)*5+","+parseFloat(prev.style.left)*5);
+  prev.querySelector(".levy_h").innerHTML = hcord;
+  prev.querySelector(".levy_w").innerHTML = wcord;
+  // prev.setAttribute("title", hcord +","+ wcord+","+parseFloat(prev.style.bottom)*5+","+parseFloat(prev.style.left)*5);
   me.remove();
 
 
   if (document.getElementById("settings__sauma_pysty").checked) {
     v_i = parseFloat(document.querySelector("#settings__sauma_interval_x").value);
     h_i = parseFloat(document.querySelector("#settings__sauma_interval_y").value);
+    prev.setAttribute("title", wcord +","+ hcord+","+parseFloat(prev.style.bottom)*5+","+parseFloat(prev.style.left)*5);
+
   }
   if (document.getElementById("settings__sauma_vaaka").checked) {
     v_i = parseFloat(document.querySelector("#settings__sauma_interval_y").value);
     h_i = parseFloat(document.querySelector("#settings__sauma_interval_x").value);
+    prev.setAttribute("title", hcord +","+ wcord+","+parseFloat(prev.style.bottom)*5+","+parseFloat(prev.style.left)*5);
+
   }
 
   if (document.getElementById("settings__sauma_pysty").checked && parseFloat(prev.style.height)*5 > h_i || document.getElementById("settings__sauma_vaaka").checked && parseFloat(prev.style.height)*5 > h_i) {
@@ -429,8 +466,8 @@ function luo__levy_restore(mod_nam, mod_type, mod_b, mod_left, mod_height, mod_w
   levy.style.height = (parseFloat(mod_height))/5 + 'px';
   // levy.style.width = (parseFloat(levy__interval_horizontal)) + 'px';
   levy.style.width = (parseFloat(mod_width))/5 + 'px';
-  levy_h.style.display = "none";
-  levy_w.style.display = "none";
+  // levy_h.style.display = "none";
+  // levy_w.style.display = "none";
   levy.appendChild(levy_h);
   levy.appendChild(levy_w);
   levy.style.position = "absolute";

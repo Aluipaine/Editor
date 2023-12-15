@@ -15,6 +15,10 @@ function saumoita() {
     
     s_v = 0;
     s_h = 0;
+
+    saumaset_vm = parseFloat(document.querySelector(".saumapysty__tbody td:nth-child(2) > input").value);
+    saumaset_hm = parseFloat(document.querySelector(".saumavaaka__tbody td:nth-child(2) > input").value);
+
     pystyhanta_oikealle = false;
     pystyhanta_oikealle_am = false;
     vaakahanta_alas = false;
@@ -23,15 +27,15 @@ function saumoita() {
     h = parseFloat(document.querySelector("#box_h").value);
     w = parseFloat(document.querySelector("#box_w").value);
 
-    if(parseFloat(document.querySelector("#settings__sauma_interval_x").value) > parseFloat(h)) {
-        document.querySelector("#settings__sauma_interval_x").value = h;
-        document.querySelector("#settings__sauma_intervalx").value = h;
-    }
+    // if(parseFloat(document.querySelector("#settings__sauma_interval_x").value) > parseFloat(h)) {
+    //     document.querySelector("#settings__sauma_interval_x").value = h;
+    //     document.querySelector("#settings__sauma_intervalx").value = h;
+    // }
 
-    if(parseFloat(document.querySelector("#settings__sauma_interval_y").value) > parseFloat(w)) {
-        document.querySelector("#settings__sauma_interval_y").value = w;
-        document.querySelector("#settings__sauma_intervaly").value = w;
-    }
+    // if(parseFloat(document.querySelector("#settings__sauma_interval_y").value) > parseFloat(w)) {
+    //     document.querySelector("#settings__sauma_interval_y").value = w;
+    //     document.querySelector("#settings__sauma_intervaly").value = w;
+    // }
     
     var newrow_horizontal = document.createElement("div");
     var newrow_vertical = document.createElement("div");
@@ -138,6 +142,7 @@ function saumoita() {
     }
 
     calculateamounts();
+    saumoitus__additionalcord();
 }
 // 1 SAUMAKUVAT, V/H
 function saumoitus__examplephoto() {
@@ -239,7 +244,7 @@ function sauma__del(e) {
             next_sauma = document.querySelectorAll('.sauma__vertical')[currentIndex + 1];
             next_sauma_value = parseFloat(next_sauma.querySelector("input").value) + parseFloat(sauma.querySelector("input").value);
             next_sauma.querySelector("input").value = next_sauma_value;
-            next_sauma.querySelector(".sauma__vertical_ctrldown").innerText = next_sauma_value - 10;
+            next_sauma.querySelector(".sauma__vertical_ctrldown").innerText = next_sauma_value - saumaset_vm;
             next_upperinput = next_sauma.querySelector("input");
             next_lowerinput = next_sauma.querySelector(".sauma__vertical_ctrldown");
             next_upperinput.style.width = next_sauma_value / 5 + "px";
@@ -251,7 +256,7 @@ function sauma__del(e) {
             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value) + parseFloat(sauma.querySelector("input").value);
             prev_sauma_cord = sauma.style.left;
             prev_sauma.querySelector("input").value = prev_sauma_value;
-            prev_sauma.querySelector(".sauma__vertical_ctrldown").innerText = prev_sauma_value - 10;
+            prev_sauma.querySelector(".sauma__vertical_ctrldown").innerText = prev_sauma_value - saumaset_hm;
             prev_upperinput = prev_sauma.querySelector("input");
             preh_lowerinput = prev_sauma.querySelector(".sauma__vertical_ctrldown");
             prev_sauma.style.left = prev_sauma_cord;
@@ -276,7 +281,7 @@ function sauma__del(e) {
             prev_h_sauma_cord = h_sauma.style.bottom;
             prev_h_sauma.style.bottom = prev_h_sauma_cord;
             prev_h_sauma.querySelector("input").value = prev_h_sauma_value;
-            prev_h_sauma.querySelector(".sauma__horizontal_ctrldown").innerText = prev_h_sauma_value - 10;
+            prev_h_sauma.querySelector(".sauma__horizontal_ctrldown").innerText = prev_h_sauma_value - saumaset_hm;
             prev_h_upperinput = prev_h_sauma.querySelector("input");
             prev_h_lowerinput = prev_h_sauma.querySelector(".sauma__horizontal_ctrldown");
             prev_h_upperinput.style.height = prev_h_sauma_value / 5 + "px";
@@ -293,7 +298,7 @@ function sauma__del(e) {
             next_h_sauma = document.querySelectorAll('.sauma__horizontal')[h_currentIndex];
             next_h_sauma_value = parseFloat(next_h_sauma.querySelector("input").value) + parseFloat(h_sauma.querySelector("input").value);
             next_h_sauma.querySelector("input").value = next_h_sauma_value;
-            next_h_sauma.querySelector(".sauma__horizontal_ctrldown").innerText = next_h_sauma_value - 10;
+            next_h_sauma.querySelector(".sauma__horizontal_ctrldown").innerText = next_h_sauma_value - saumaset_hm;
             next_h_upperinput = next_h_sauma.querySelector("input");
             next_h_lowerinput = next_h_sauma.querySelector(".sauma__horizontal_ctrldown");
             next_h_upperinput.style.height = next_h_sauma_value / 5 + "px";
@@ -362,10 +367,10 @@ function changedimensions_sauma(input) {
                     old_value_cord = (old_cord - initialcord) / 5;
                     changed_value = oldvalue + (newvalue - oldvalue);
                     new_cord = (parseFloat(initialcord) + changed_value) / 5 + "px";
-                    sauma.querySelector(".sauma__control_down").innerHTML = changed_value - 10;
+                    sauma.querySelector(".sauma__control_down").innerHTML = changed_value - saumaset_vm;
                     sauma.style.left = new_cord;
                     input.dataset.from = newvalue;
-                    sauma.querySelector(".sauma__controls > b").innerHTML = newvalue - 10;
+                    sauma.querySelector(".sauma__controls > b").innerHTML = newvalue - saumaset_vm;
                     erotus = newvalue - oldvalue;
                     //console.log("old_cord " + old_cord);
                     //console.log("newvalue " + newvalue);
@@ -380,7 +385,7 @@ function changedimensions_sauma(input) {
                             next_sauma_value = parseFloat(next_sauma.querySelector("input").value);
                             next_sauma_newvalue = parseFloat(next_sauma_value - erotus);
                             next_sauma.querySelector("input").value = parseFloat(next_sauma_newvalue);
-                            next_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(next_sauma_newvalue) - 10;
+                            next_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(next_sauma_newvalue) - saumaset_vm;
                             next_sauma.style.left = (parseFloat(initialcord) + parseFloat(changed_value) + parseFloat(next_sauma_newvalue)) / 5 + "px";
                             sauma.querySelector(".sauma__controls > b").style.width = parseFloat(newvalue) / 5 + "px";
                             sauma.querySelector("input").style.width = parseFloat(newvalue) / 5 + "px";
@@ -395,7 +400,7 @@ function changedimensions_sauma(input) {
                             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value);
                             prev_sauma_newvalue = parseFloat(prev_sauma_value - erotus);
                             prev_sauma.querySelector("input").value = parseFloat(prev_sauma_newvalue);
-                            prev_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(prev_sauma_newvalue) - 10;
+                            prev_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(prev_sauma_newvalue) - saumaset_vm;
                             prev_sauma.style.left = (parseFloat(initialcord) + parseFloat(changed_value) + parseFloat(prev_sauma_newvalue)) / 5 + "px";
                             sauma.querySelector(".sauma__controls > b").style.width = parseFloat(newvalue) / 5 + "px";
                             sauma.querySelector("input").style.width = parseFloat(newvalue) / 5 + "px";
@@ -412,7 +417,7 @@ function changedimensions_sauma(input) {
                             next_sauma_value = parseFloat(next_sauma.querySelector("input").value);
                             next_sauma_newvalue = parseFloat(next_sauma_value - erotus);
                             next_sauma.querySelector("input").value = parseFloat(next_sauma_newvalue);
-                            next_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(next_sauma_newvalue) - 10;
+                            next_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(next_sauma_newvalue) - saumaset_vm;
                             next_sauma.style.left = (parseFloat(initialcord) + parseFloat(changed_value) + parseFloat(next_sauma_newvalue)) / 5 + "px";
                             sauma.querySelector(".sauma__controls > b").style.width = parseFloat(newvalue) / 5 + "px";
                             sauma.querySelector("input").style.width = parseFloat(newvalue) / 5 + "px";
@@ -427,7 +432,7 @@ function changedimensions_sauma(input) {
                             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value);
                             prev_sauma_newvalue = parseFloat(prev_sauma_value - erotus);
                             prev_sauma.querySelector("input").value = parseFloat(prev_sauma_newvalue);
-                            prev_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(prev_sauma_newvalue) - 10;
+                            prev_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(prev_sauma_newvalue) - saumaset_vm;
                             prev_sauma.style.left = (parseFloat(initialcord) + parseFloat(changed_value) + parseFloat(prev_sauma_newvalue)) / 5 + "px";
                             sauma.querySelector(".sauma__controls > b").style.width = parseFloat(newvalue) / 5 + "px";
                             sauma.querySelector("input").style.width = parseFloat(newvalue) / 5 + "px";
@@ -461,10 +466,10 @@ function changedimensions_sauma(input) {
                     initialcord = old_cord - oldvalue;
                     changed_value = oldvalue + (newvalue - oldvalue);
                     new_cord = (parseFloat(initialcord) + changed_value) / 5 + "px";
-                    sauma.querySelector(".sauma__control_down").innerHTML = changed_value - 10;
+                    sauma.querySelector(".sauma__control_down").innerHTML = changed_value - saumaset_hm;
                     sauma.style.bottom = new_cord;
                     input.dataset.from = newvalue;
-                    sauma.querySelector(".sauma__controls > b").innerHTML = newvalue - 10;
+                    sauma.querySelector(".sauma__controls > b").innerHTML = newvalue - saumaset_hm;
                     // //console.log("HORIZONTAL");
                     // //console.log("h_elements" + h_elements);
                     // //console.log("currentIndex" + currentIndex);
@@ -481,7 +486,7 @@ function changedimensions_sauma(input) {
                             next_sauma_value = parseFloat(next_sauma.querySelector("input").value);
                             next_sauma_newvalue = parseFloat(next_sauma_value - erotus);
                             next_sauma.querySelector("input").value = parseFloat(next_sauma_newvalue);
-                            next_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(next_sauma_newvalue) - 10;
+                            next_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(next_sauma_newvalue) - saumaset_hm;
                             next_sauma.style.bottom = (parseFloat(initialcord) + parseFloat(changed_value) + parseFloat(next_sauma_newvalue)) / 5 + "px";
                             sauma.querySelector(".sauma__controls > b").style.height = parseFloat(newvalue) / 5 + "px";
                             sauma.querySelector("input").style.height = parseFloat(newvalue) / 5 + "px";
@@ -496,7 +501,7 @@ function changedimensions_sauma(input) {
                             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value);
                             prev_sauma_newvalue = parseFloat(prev_sauma_value - erotus);
                             prev_sauma.querySelector("input").value = parseFloat(prev_sauma_newvalue);
-                            prev_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(prev_sauma_newvalue) - 10;
+                            prev_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(prev_sauma_newvalue) - saumaset_hm;
                             prev_sauma.style.bottom = (parseFloat(initialcord) + parseFloat(changed_value) + parseFloat(prev_sauma_newvalue)) / 5 + "px";
                             sauma.querySelector(".sauma__controls > b").style.height = parseFloat(newvalue) / 5 + "px";
                             sauma.querySelector("input").style.height = parseFloat(newvalue) / 5 + "px";
@@ -513,7 +518,7 @@ function changedimensions_sauma(input) {
                             next_sauma_value = parseFloat(next_sauma.querySelector("input").value);
                             next_sauma_newvalue = parseFloat(next_sauma_value - erotus);
                             next_sauma.querySelector("input").value = parseFloat(next_sauma_newvalue);
-                            next_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(next_sauma_newvalue) - 10;
+                            next_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(next_sauma_newvalue) - saumaset_hm;
                             next_sauma.style.bottom = (parseFloat(initialcord) + parseFloat(changed_value) + parseFloat(next_sauma_newvalue)) / 5 + "px";
                             sauma.querySelector(".sauma__controls > b").style.height = parseFloat(newvalue) / 5 + "px";
                             sauma.querySelector("input").style.height = parseFloat(newvalue) / 5 + "px";
@@ -528,7 +533,7 @@ function changedimensions_sauma(input) {
                             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value);
                             prev_sauma_newvalue = parseFloat(prev_sauma_value - erotus);
                             prev_sauma.querySelector("input").value = parseFloat(prev_sauma_newvalue);
-                            prev_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(prev_sauma_newvalue) - 10;
+                            prev_sauma.querySelector(".sauma__controls > b").innerHTML = parseFloat(prev_sauma_newvalue) - saumaset_hm;
                             prev_sauma.style.bottom = (parseFloat(initialcord) + parseFloat(changed_value) + parseFloat(prev_sauma_newvalue)) / 5 + "px";
                             sauma.querySelector(".sauma__controls > b").style.height = parseFloat(newvalue) / 5 + "px";
                             sauma.querySelector("input").style.height = parseFloat(newvalue) / 5 + "px";
@@ -654,7 +659,7 @@ function change__cord_raahaus(uusi) {
           pystysauma.forEach(function(j) {
               saumawidth = parseFloat(j.style.left) * 5 - vs_summ;
               j.querySelector("input").value = saumawidth;
-              j.querySelector(".sauma__vertical_ctrldown").innerHTML = saumawidth - 10;
+              j.querySelector(".sauma__vertical_ctrldown").innerHTML = saumawidth - saumaset_vm;
               j.querySelector(".sauma__vertical_ctrldown").style.width = saumawidth / 5 + "px";
               j.querySelector(".sauma__vertical_ctrldown").style.left = (-1) * saumawidth / 5 + "px";
               j.querySelector(".sauma__vertical_ctrl").style.width = saumawidth / 5 + "px";
@@ -663,7 +668,7 @@ function change__cord_raahaus(uusi) {
               j.dataset.from = roundToNearest25(saumawidth);
               if (j.classList.contains("sauma__vertical_hanta") !== true) {
                   j.querySelector("input").value = roundToNearest25(saumawidth);
-                  j.querySelector(".sauma__vertical_ctrldown").innerHTML = roundToNearest25(saumawidth) - 10;
+                  j.querySelector(".sauma__vertical_ctrldown").innerHTML = roundToNearest25(saumawidth) - saumaset_vm;
                   j.querySelector("input").dataset.from = roundToNearest25(saumawidth);
                   vs_summ += saumawidth;
               }
@@ -676,10 +681,10 @@ function change__cord_raahaus(uusi) {
               j.querySelector(".sauma__vertical_ctrldown").style.width = hantawidth / 5 + "px";
               j.querySelector(".sauma__vertical_ctrl").style.width = hantawidth / 5 + "px";
               j.querySelector("input").value = roundToNearest25(hantawidth);
-              j.querySelector(".sauma__vertical_ctrldown").innerHTML = roundToNearest25(hantawidth) - 10;
+              j.querySelector(".sauma__vertical_ctrldown").innerHTML = roundToNearest25(hantawidth) - saumaset_vm;
               j.querySelector("input").dataset.from = roundToNearest25(hantawidth);
 
-              sauma_downheight = parseFloat(hantawidth) - 10;
+              sauma_downheight = parseFloat(hantawidth) - saumaset_vm;
               // j.querySelector(".sauma__vertical_ctrldown").innerHTML = "<div>"+sauma_downheight+"</div>";
           }
           // }
@@ -695,7 +700,7 @@ function change__cord_raahaus(uusi) {
               if (j.classList.contains("sauma__horizontal_hanta") !== true) {
                   j.querySelector(".sauma__horizontal_ctrl").value = roundToNearest25(saumaHeight);
 
-                  sauma_downheight = roundToNearest25(saumaHeight) - 10;
+                  sauma_downheight = roundToNearest25(saumaHeight) - saumaset_hm;
                   j.querySelector(".sauma__horizontal_ctrldown").innerHTML = "<div>" + sauma_downheight + "</div>";
 
                   // j.querySelector(".sauma__horizontal_ctrldown").innerHTML = roundToNearest25(saumaHeight) - 10;
@@ -714,7 +719,7 @@ function change__cord_raahaus(uusi) {
               j.querySelector(".sauma__horizontal_ctrl").style.height = hantawidth / 5 + "px";
               j.querySelector(".sauma__horizontal_ctrl").value = roundToNearest25(hantawidth);
 
-              sauma_downheight = roundToNearest25(hantawidth) - 10;
+              sauma_downheight = roundToNearest25(hantawidth) - saumaset_hm;
               j.querySelector(".sauma__horizontal_ctrldown").innerHTML = "<div>" + sauma_downheight + "</div>";
 
               // j.querySelector(".sauma__horizontal_ctrldown").innerHTML = hantawidth - 10;
@@ -754,12 +759,7 @@ function change__cord_raahaus(uusi) {
 }
 // 7 POISTAA VIALLISET SAUMAT, V/H
 function saumoitus__deleterest() {
-    // if (document.querySelector(".verticalrow_saumat")) {
-    //   let verticalrow_saumat = document.querySelectorAll(".verticalrow_saumat");
-    //   for (var i=0;i<verticalrow_saumat.length;i+=1){
-    //     verticalrow_saumat[i].remove();
-    //   }
-    // }
+
     if (document.querySelector(".drawarea__controls_four-pysty > li")) {
         let p_li_p = document.querySelectorAll(".drawarea__controls_four-pysty > li");
         for (var i = 0; i < p_li_p.length; i += 1) {
@@ -843,6 +843,7 @@ function saumoitus__deleterest() {
         for (var i = 0; i < levys.length; i += 1) {
             levys[i].remove();
         }
+        
         let verticalrow_saumats = canvas.querySelectorAll(".verticalrow_saumat");
         for (var i = 0; i < verticalrow_saumats.length; i += 1) {
             verticalrow_saumats[i].remove();
@@ -912,47 +913,7 @@ function fixmissing__saumoitus() {
             }
         }
     }
-    // Unstable?
-    // if(s_x) {
-    //   s_xs = document.querySelectorAll(".verticalrow_saumat > .seina_patka_x");
-    //   for (var i = s_xs.length - 1; i >= 0; i--) {
-    //     s_xs[i].title;
-    //   }
-    //   $('.seina_patka_x').each(function () {
-    //       var ids = $('[title="' + this.title + '"]');
-    //       if (ids.length > 1 && ids[0] == this) {
-    //           $(ids[1]).remove();
-    //       }
-    //   });
-    //    s_xs = document.querySelectorAll(".verticalrow_saumat > .seina_patka_x");
-    //    title_summ = new Array();
-    //    for (var i = s_xs.length - 1; i >= 0; i--) {
-    //      title = parseFloat(s_xs[i].style.width);
-    //      title_summ.push(title);
-    //    }
-    //     title_summ.sort( function( a , b){
-    //         if(a > b) return 1;
-    //         if(a < b) return -1;
-    //         return 0;
-    //     });
-    //     width = w/5 + 1;
-    //    for (var i=0;i<title_summ.length;i+=1) {
-    //       width-=title_summ[i];
-    //       if(parseFloat(width)<0) {
-    //         //console.log(width);
-    //         for (var j = s_xs.length - 1; j >= 0; j--) {
-    //           s = parseFloat(s_xs[j].style.width);
-    //           if(s == title_summ[i]) {
-    //             s_xs[j].remove();
-    //             break;
-    //           }
-    //         }
-    //       }
-    //       else {
-    //         continue
-    //       }
-    //    }
-    // }
+
     height__check = h - horizontal;
     width__check = w - vertical;
     var sauma__horizontal_ctrl_down, sauma__vertical_ctrl_down;
@@ -966,7 +927,7 @@ function fixmissing__saumoitus() {
                 sauma__horizontal_ctrl_.style.height = height__check / 5 + "px";
                 aukko = sauma__horizontal_ctrl_.parentElement;
                 sauma__horizontal_ctrl_down = aukko.querySelector(".sauma__control_down");
-                sauma__horizontal_ctrl_down.innerHTML = height__check - 10;
+                sauma__horizontal_ctrl_down.innerHTML = height__check - saumaset_hm;
                 sauma__horizontal_ctrl_down.style.height = height__check / 5 + "px";
                 if (document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked ||
                     vaakahanta_alas === true) {
@@ -996,7 +957,6 @@ function fixmissing__saumoitus() {
             verticalrow_saumat = document.createElement("div");
             verticalrow_saumat.classList.add("verticalrow_saumat");
             saumat.append(verticalrow_saumat);
-
         }
         if (canvas.querySelector(".horizontalrow_saumat")) {
             horizontalrow_saumat = canvas.querySelector(".horizontalrow_saumat");
@@ -1595,6 +1555,15 @@ function calculateamounts(aukoitusparam) {
             dels[i].appendChild(delmeasure);
         }
     }
+
+    setTimeout(() => {
+        if(document.querySelector(".fakesauma_v .delmeasure")) {
+            document.querySelector(".fakesauma_v .delmeasure").innerHTML = 0;
+            document.querySelector(".fakesauma_v .delmeasure").classList.add("delmeasure_vertical");
+            document.querySelector(".fakesauma_h .delmeasure").innerHTML = 0;
+            document.querySelector(".fakesauma_h .delmeasure").classList.add("delmeasure_horizontal");
+        }
+    }, 1500);
 }
 
 col_ = 0;
@@ -1755,6 +1724,7 @@ function pystysaumat__aukkojenyli() {
     // }
     var newrow_horizontal = document.createElement("div");
     var newrow_vertical = document.createElement("div");
+    newrow_vertical.classList.add("verticalrow_saumat");
     var canvas = document.querySelector("#box-wrapper > main");
     var aukkos = document.getElementsByClassName("aukko");
     myDivs_horizontal = [],
@@ -1773,7 +1743,7 @@ function pystysaumat__aukkojenyli() {
         var numOfDivs__vertical;
         numOfDivs__vertical = Math.floor(w / sauma__interval_vertical);
         for (i = 0; i < numOfDivs__vertical; i++) {
-            newrow_vertical.classList.add("verticalrow_saumat");
+            
             // newrow_vertical.style.width = w/5 + "px";
             newrow_vertical.append(luo__sauma_vertical(sauma__interval_vertical, "", ""));
         }
@@ -1792,7 +1762,6 @@ function pystysaumat__aukkojenyli() {
         // //console.log("sauma__modcount " + sauma__modcount);
         // //console.log("tas_li " + v_tas_li);
         for (i = 0; i < numOfDivs__vertical; i++) {
-            newrow_vertical.classList.add("verticalrow_saumat");
             newrow_vertical.append(luo__sauma_vertical(w, v_tas_li, area__modcount));
         }
         sauma = canvas.querySelectorAll(".sauma__vertical");
@@ -1829,7 +1798,7 @@ function pystysaumat__aukkojenmukaan() {
             myDivs_vertical = [],
             i = 0;
         var verticalrow_saumat = document.createElement("div");
-        // verticalrow_saumat.classList.add("verticalrow_saumat");
+        verticalrow_saumat.classList.add("verticalrow_saumat");
 
         if (canvas.querySelector(".saumat__grandrow")) {
             saumat = canvas.querySelector(".saumat__grandrow");
@@ -1911,10 +1880,12 @@ function pystysaumat__aukkojenmukaan() {
 
             for (var a = v_area.length - 1; a >= 0; a--) {
                 var newrow_vertical = document.createElement("div");
+                newrow_vertical.classList.add("verticalrow_saumat");
                 numOfDivs__vertical = Math.trunc(v_area[a][1] / sauma__interval_vertical);
                 s_v = 0;
                 s_h = 0;
                 g = 0;
+                newrow_vertical.classList.add("verticalrow_saumat");
                 newrow_vertical.classList.add("newrow_vertical");
                 newrow_vertical.classList.add("seina_patka" + a);
                 newrow_vertical.classList.add("seina_patka_x");
@@ -1933,7 +1904,7 @@ function pystysaumat__aukkojenmukaan() {
         
                 if (document.querySelector("#settings__saumahanta-oik").checked || document.querySelector("#settings__saumahanta-vas").checked) {
                     for (var g = 0; g < numOfDivs__vertical; g++) {
-                        newrow_vertical.classList.add("verticalrow_saumat");
+                        
                         newrow_vertical.append(luo__sauma_vertical(sauma__interval_vertical));
                     }
 
@@ -1950,7 +1921,7 @@ function pystysaumat__aukkojenmukaan() {
                     var formatted_pituus = parseFloat(v_area[a][1]) - tas_li;
                    
                     for (z = 1; z < numOfDivs__vertical; z++) {
-                        newrow_vertical.classList.add("verticalrow_saumat");
+                        
                         newrow_vertical.append(luo__sauma_vertical(formatted_pituus, tas_li, z));
                     }
                     newrow_vertical.append(luo__lastsauma_vertical(v_area[a][1]));
@@ -2035,8 +2006,8 @@ function luo__sauma_vertical(saumaWidth, tas_li, modcount) {
             saumcount = Math.ceil(w / sauma__interval_vertical);
             sauma.style.left= s_v * parseFloat(saumaWidth / 5) + "px";
             sauma__control.value = saumaWidth;
-            sauma__control_down.innerHTML = saumaWidth - 10;
-            sauma.style.marginLeft = "unset";
+            sauma__control_down.innerHTML = saumaWidth - saumaset_vm;
+            //sauma.style.marginLeft = "unset";
             sauma__control_down.style.marginLeft = "unset";
             // //console.log("VAAKASAUMOITUS AUKKOJEN YLI, HÄNTÄ YLÄ ");
         } else if (document.getElementById("settings__saumahanta-vas").checked) {
@@ -2045,7 +2016,7 @@ function luo__sauma_vertical(saumaWidth, tas_li, modcount) {
             sauma.style.right = s_v * parseFloat(saumaWidth / 5) + "px";
             sauma__control.value = saumaWidth;
             console.log("saumaWidth: " + saumaWidth);
-            sauma__control_down.innerHTML = saumaWidth - 10;
+            sauma__control_down.innerHTML = saumaWidth - saumaset_vm;
             // sauma.style.marginLeft = "-5px";
             // sauma__control_down.style.marginLeft = "10px";
         } else if (document.getElementById("settings__saumahanta-tasoitus").checked) {
@@ -2054,28 +2025,28 @@ function luo__sauma_vertical(saumaWidth, tas_li, modcount) {
             
             sauma.style.left= s_v * parseFloat(tas_li / 5) + "px";
             sauma__control.value = tas_li;
-            sauma__control_down.innerHTML = tas_li - 10;
-            sauma.style.marginLeft = "unset";
+            sauma__control_down.innerHTML = tas_li - saumaset_vm;
+            //sauma.style.marginLeft = "unset";
             sauma__control_down.style.marginLeft = "unset";
         }
     } else if (document.getElementById("saumoitus__sauma_two").checked) {
         if (document.getElementById("settings__saumahanta-oik").checked) {
             sauma.style.left= s_v * parseFloat(saumaWidth / 5) + "px";
             sauma__control.value = saumaWidth;
-            sauma__control_down.innerHTML = saumaWidth - 10;
-            sauma.style.marginLeft = "unset";
+            sauma__control_down.innerHTML = saumaWidth - saumaset_vm;
+            //sauma.style.marginLeft = "unset";
             sauma__control_down.style.marginLeft = "unset";
         } else if (document.getElementById("settings__saumahanta-vas").checked) {
             sauma.style.right = s_v * parseFloat(saumaWidth / 5) + "px";
             sauma__control.value = saumaWidth;
-            sauma__control_down.innerHTML = saumaWidth - 10;
+            sauma__control_down.innerHTML = saumaWidth - saumaset_vm;
             sauma.style.marginLeft = "-5px";
             sauma__control_down.style.marginLeft = "10px";
         } else if (document.getElementById("settings__saumahanta-tasoitus").checked) {
             sauma.style.left= modcount * parseFloat(tas_li / 5) + "px";
             sauma__control.value = saumaWidth;
-            sauma__control_down.innerHTML = tas_li - 10;
-            sauma.style.marginLeft = "unset";
+            sauma__control_down.innerHTML = tas_li - saumaset_vm;
+            //sauma.style.marginLeft = "unset";
             sauma__control_down.style.marginLeft = "unset";
         }
     }
@@ -2168,7 +2139,7 @@ function luo__lastsauma_vertical(aukko) {
             sauma__control.style.width = factual_cord / 5 + "px";
             sauma__control_down.style.width = factual_cord / 5 + "px";
             sauma__control.style.left = factual_cord / 5 + "px";
-            sauma.style.marginRight = "unset";
+            ////sauma.style.marginRight = "unset";
             sauma__control_down.style.marginRight = "unset";
             sauma__control.value = factual_cord;
             sauma__control_down.innerHTML = w - s_summ;
@@ -2194,7 +2165,7 @@ function luo__lastsauma_vertical(aukko) {
             sauma__control.style.width = factual_cord / 5 + "px";
             sauma__control_down.style.width = factual_cord / 5 + "px";
             sauma__control.style.left = factual_cord / 5 + "px";
-            sauma.style.marginRight = "unset";
+            //sauma.style.marginRight = "unset";
             sauma__control.value = factual_cord;
             sauma__control_down.innerHTML = w - s_summ;
             // //console.log("VAAKASAUMOITUS AUKKOJEN MUKAAN, HÄNTÄ YLÄ (HÄNTÄ)");
@@ -2238,7 +2209,7 @@ function luo__scord_vertical(sauma, id, name) {
     sauma__controls.innerHTML = "";
     sauma__control_down.innerHTML = "0";
     sauma__control.value = sauma;
-    sauma__control_down.innerHTML = parseFloat(sauma) - 10;
+    sauma__control_down.innerHTML = parseFloat(sauma) - saumaset_vm;
     // sauma__controls_type.value = "sauma";
     // sauma__controls_type.type = "text";
     sauma__control.setAttribute("name", id);
@@ -2737,7 +2708,7 @@ function luo__sauma_horizontal(saumaheight, tas_li, modcount) {
             saumcount = Math.ceil(h / sauma__interval_horizontal);
             sauma.style.bottom = s_h * parseFloat(saumaheight / 5) + "px";
             sauma__control.value = saumaheight;
-            sauma__control_down.innerHTML = saumaheight - 10;
+            sauma__control_down.innerHTML = saumaheight - saumaset_hm;
             sauma.style.marginTop = "unset";
             sauma__control_down.style.marginTop = "unset";
             // //console.log("VAAKASAUMOITUS AUKKOJEN YLI, HÄNTÄ YLÄ ");
@@ -2746,7 +2717,7 @@ function luo__sauma_horizontal(saumaheight, tas_li, modcount) {
             //sauma__control.style.bottom = s_h * parseFloat(korkeus/5) + "px";
             sauma.style.top = s_h * parseFloat(saumaheight / 5) + "px";
             sauma__control.value = saumaheight;
-            sauma__control_down.innerHTML = saumaheight - 10;
+            sauma__control_down.innerHTML = saumaheight - saumaset_hm;
             sauma.style.marginTop = "-5px";
             sauma__control_down.style.marginTop = "10px";
         } else if (document.getElementById("settings__saumahanta-vaakatasoitus").checked) {
@@ -2754,7 +2725,7 @@ function luo__sauma_horizontal(saumaheight, tas_li, modcount) {
             //sauma__control.style.bottom = s_h * parseFloat(korkeus/5) + "px";
             sauma.style.bottom = modcount * parseFloat(tas_li / 5) + "px";
             sauma__control.value = saumaheight;
-            sauma__control_down.innerHTML = tas_li - 10;
+            sauma__control_down.innerHTML = tas_li - saumaset_hm;
             sauma.style.marginTop = "unset";
             sauma__control_down.style.marginTop = "unset";
         }
@@ -2762,19 +2733,19 @@ function luo__sauma_horizontal(saumaheight, tas_li, modcount) {
         if (document.getElementById("settings__saumahanta-yla").checked) {
             sauma.style.bottom = s_h * parseFloat(saumaheight / 5) + "px";
             sauma__control.value = saumaheight;
-            sauma__control_down.innerHTML = saumaheight - 10;
+            sauma__control_down.innerHTML = saumaheight - saumaset_hm;
             sauma.style.marginTop = "unset";
             sauma__control_down.style.marginTop = "unset";
         } else if (document.getElementById("settings__saumahanta-ala").checked) {
             sauma.style.top = s_h * parseFloat(saumaheight / 5) + "px";
             sauma__control.value = saumaheight;
-            sauma__control_down.innerHTML = saumaheight - 10;
+            sauma__control_down.innerHTML = saumaheight - saumaset_hm;
             sauma.style.marginTop = "-5px";
             sauma__control_down.style.marginTop = "10px";
         } else if (document.getElementById("settings__saumahanta-vaakatasoitus").checked) {
             sauma.style.bottom = modcount * parseFloat(tas_li / 5) + "px";
             sauma__control.value = saumaheight;
-            sauma__control_down.innerHTML = tas_li - 10;
+            sauma__control_down.innerHTML = tas_li - saumaset_hm;
             sauma.style.marginTop = "unset";
             sauma__control_down.style.marginTop = "unset";
         }
@@ -2930,7 +2901,7 @@ function luo__scord_horizontal(saumaheight, id, name) {
     sauma__controls.innerHTML = "";
     sauma__control_down.innerHTML = "0";
     sauma__control.value = saumaheight;
-    sauma_downheight = parseFloat(saumaheight) - 10;
+    sauma_downheight = parseFloat(saumaheight) - saumaset_hm;
     sauma__control_down.innerHTML = "<div>" + sauma_downheight + "</div>";
     sauma__controls_type.value = "ST1";
     sauma__controls_type.type = "text";
@@ -3562,8 +3533,8 @@ function siirto_ladonta() {
             if (canvas.querySelector("div.saumat__grandrow")) {
                 canvas.querySelector("div.saumat__grandrow").remove();
             }
-            if (canvas.querySelector("div.tyostot__grandrow")) {
-                canvas.querySelector("div.tyostot__grandrow").remove();
+            if (canvas.querySelector("div.rangat__grandrow")) {
+                canvas.querySelector("div.rangat__grandrow").remove();
             }
             if (canvas.querySelector("div.listat__grandrow")) {
                 canvas.querySelector("div.listat__grandrow").remove();
@@ -3671,7 +3642,7 @@ function luo__sauma_restore(mod_nam, mod_type, mod_b, mod_left, mod_cord, mod_na
         newDiv__comment_del.innerHTML = "";
         sauma__control.value = roundToNearest25(mod_cord);
         sauma__control.setAttribute("data-from", parseFloat(roundToNearest25(mod_cord)));
-        sauma__control_down.innerHTML = parseFloat(roundToNearest25(mod_cord)) - 10;
+        sauma__control_down.innerHTML = parseFloat(roundToNearest25(mod_cord)) - saumaset_vm;
         sauma__controls_type.value = "ST1";
         sauma__controls_type.type = "text";
         newDiv__comment.setAttribute("name", id);
@@ -3744,7 +3715,7 @@ function luo__sauma_restore(mod_nam, mod_type, mod_b, mod_left, mod_cord, mod_na
         sauma__control.setAttribute("onclick", "clearcord(this,'sau');");
         sauma.style.bottom = mod_b + "px";
         sauma__control.value = parseFloat(roundToNearest25(mod_cord));
-        sauma__control_down.innerHTML = "<div>" + sauma__control.value - 10 + "</div>";
+        sauma__control_down.innerHTML = "<div>" + sauma__control.value - saumaset_hm + "</div>";
         sauma.style.marginTop = "unset";
         sauma__control_down.style.marginTop = "unset";
         document.querySelector(".drawarea__controls_four-vaaka").prepend(newDiv__comment);
@@ -3764,4 +3735,90 @@ function clearcord(cord, type) {
         cord.value = "";
     }
 
+}
+levy_bg = null;
+levy_sku = null;
+levy_thickness = null;
+levy_structure = null;
+function change__sauma_koko(e) {
+    sauma_wcord = e.dataset.w;
+    sauma_hcord = e.dataset.h;
+    sauma_aihiowcord = e.dataset.aihiow;
+    sauma_aihiohcord = e.dataset.aihioh;
+
+
+    
+
+    if(e.dataset.levyimg.length > 3) {
+       levy_bg = e.dataset.levyimg; 
+       levy_sku = e.dataset.levysku; 
+       levy_thickness = e.dataset.levythickness; 
+       levy_structure = e.dataset.levystructure; 
+    }
+    else {
+        levy_bg = null;
+        levy_sku = null;
+        levy_thickness = null;
+        levy_structure = null;
+    }
+    
+
+    document.querySelector("#settings__sauma_intervalx").value = parseFloat(sauma_hcord);
+    document.querySelector("#settings__sauma_intervaly").value = parseFloat(sauma_wcord);
+    document.querySelector("#settings__sauma_interval_x").value = parseFloat(sauma_hcord);
+    document.querySelector("#settings__sauma_interval_y").value = parseFloat(sauma_wcord);
+    document.querySelector("#settings__sauma_aihioleveys").value = parseFloat(sauma_aihiowcord);
+    document.querySelector("#settings__sauma_aihiopituus").value = parseFloat(sauma_aihiohcord);
+}
+
+
+function saumoitus__additionalcord() {
+    // Made 0812
+    verticals = document.querySelectorAll(".verticalrow_saumat > div");
+    horizontals = document.querySelectorAll(".horizontalrow_saumat > div");
+     
+    verticals.forEach(v => {
+        vertical_module = document.createElement("div");
+        vertical_module.classList.add("vertical_module");
+        vertical_module.innerHTML = "s";
+        v.appendChild(vertical_module);
+    });
+
+    horizontals.forEach(h => {
+        horizontal_module = document.createElement("div");
+        horizontal_module.classList.add("horizontal_module");
+        horizontal_module.innerHTML = "s";
+        h.appendChild(horizontal_module);
+    });
+
+
+    if(document.querySelector(".db_saumatable")) {
+        document.querySelector(".db_saumatable").remove();
+    }
+    else {
+        
+    }
+    db_saumatable = document.createElement("div");
+    db_saumatable.classList = "db_saumatable";
+    s_pset = "S=<b class='saumaset_vm'>" +document.querySelector(".saumapysty__tbody td:nth-child(2) > input").value + "</b>";
+    s_vset = "S=<b class='saumaset_hm'>" +document.querySelector(".saumavaaka__tbody td:nth-child(2) > input").value + "</b>";
+    db_saumatable.innerHTML = `
+        <div class="vertical_module">${s_pset}</div>
+        <div class="horizontal_module">${s_vset}</div>
+    `;
+    document.querySelector(".drawarea__bottom").appendChild(db_saumatable);
+    document.querySelector(".drawarea__bottom").style.zIndex = "0";
+
+    
+
+    document.querySelectorAll(".fakesauma .horizontal_module").forEach(vm => {
+        vm.innerHTML = saumaset_hm/2;
+    }); 
+
+    document.querySelectorAll(".fakesauma .vertical_module").forEach(vm => {
+        vm.innerHTML = saumaset_vm/2;
+    });
+
+    document.querySelector(".sauma__vertical_last .vertical_module").innerHTML = saumaset_vm/2;
+    document.querySelector(".sauma__horizontal_last .horizontal_module").innerHTML = saumaset_hm/2;
 }

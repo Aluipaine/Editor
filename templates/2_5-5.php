@@ -10,7 +10,7 @@
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();" class="nav__comleted">Läpiviennit</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();" class="nav__comleted">Saumat</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();" class="nav_current">Kiinnikkeet</div></li>
-          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();" class="">Ladonta</div></li>
+          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();" class="">Korjailu</div></li>
           
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();updatearea(); osittainen_siirto_muualle();">Seinät</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();">Levyt</div></li>
@@ -23,7 +23,7 @@
 </section>
 
 <div class="ladonta_container">
-  <div class="modal-background">
+  <div class="modal-background kin_as">
       <div class="modal">
          <div class="modal_close_btn" onclick="open_ladonta_settings(false)"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
          <div class="row">
@@ -260,28 +260,26 @@
                       
                        <fieldset class="kiinniketys">
                          <div class="row">
-                           <div class="col-6 trow">
-                             <input type="checkbox" id="kiinniketys__pkiinnike_one" name="levy_porautus" value="Häntä vasen" checked>
+                           <fieldset class="col-6 trow">
+                             <input type="radio" id="kiinniketys__pkiinnike_one" name="levy_porautus_vertical" value="Häntä vasen">
                              <label for="kiinniketys__pkiinnike_one">Häntä vasen</label>
-                             <input type="checkbox" id="kiinniketys__pkiinnike_two" name="levy_porautus" value="Häntä oikea">
+                             <input type="radio" id="kiinniketys__pkiinnike_two" name="levy_porautus_vertical" value="Häntä oikea" checked>
                              <label for="kiinniketys__pkiinnike_two">Häntä oikea</label>
-
-                             
-                             <input type="checkbox" id="kiinniketys__pkiinnike_three" name="levy_porautus" value="Tasamalli">
-                             <label for="kiinniketys__pkiinnike_three">Tasamalli pysty </label>
-                             <input type="checkbox" id="kiinniketys__pkiinnike_four" name="levy_porautus" value="Pariton tasa">
-                             <label for="kiinniketys__pkiinnike_four">Pariton tasa pysty</label>
-                           </div>
-                           <div class="col-6 trow">
-                            <input type="checkbox" id="kiinniketys__vkiinnike_one" name="levy_porautus" value="Häntä ylä" checked>
+                             <input style="display:none;" type="radio" id="kiinniketys__pkiinnike_three" name="levy_porautus_vertical" value="Tasamalli">
+                             <label style="display:none;" for="kiinniketys__pkiinnike_three">Tasamalli pysty (epävakaa) </label>
+                             <input style="display:none;" type="radio" id="kiinniketys__pkiinnike_four" name="levy_porautus_vertical" value="Pariton tasa">
+                             <label style="display:none;" for="kiinniketys__pkiinnike_four">Pariton tasa pysty (epävakaa)</label>
+                           </fieldset>
+                           <fieldset class="col-6 trow">
+                            <input type="radio" id="kiinniketys__vkiinnike_one" name="levy_porautus_horizontal" value="Häntä ylä" checked>
                              <label for="kiinniketys__vkiinnike_one">Häntä ylä</label>
-                             <input type="checkbox" id="kiinniketys__vkiinnike_two" name="levy_porautus" value="Häntä ala">
+                             <input type="radio" id="kiinniketys__vkiinnike_two" name="levy_porautus_horizontal" value="Häntä ala">
                              <label for="kiinniketys__vkiinnike_two">Häntä ala</label>
-                             <input type="checkbox" id="kiinniketys__vkiinnike_three" name="levy_porautus" value="Tasamalli">
-                             <label for="kiinniketys__vkiinnike_three">Tasamalli vaaka</label>
-                             <input type="checkbox" id="kiinniketys__vkiinnike_four" name="levy_porautus" value="Pariton tasa">
-                             <label for="kiinniketys__vkiinnike_four">Pariton tasa vaaka</label>
-                           </div>
+                             <input style="display:none;" type="radio" id="kiinniketys__vkiinnike_three" name="levy_porautus_horizontal" value="Tasamalli">
+                             <label style="display:none;" for="kiinniketys__vkiinnike_three">Tasamalli vaaka (epävakaa)</label>
+                             <input style="display:none;" type="radio" id="kiinniketys__vkiinnike_four" name="levy_porautus_horizontal" value="Pariton tasa">
+                             <label style="display:none;" for="kiinniketys__vkiinnike_four">Pariton tasa vaaka (epävakaa)</label>
+                           </fieldset>
                          </div>
                          
                          
@@ -381,40 +379,6 @@
               <!-- <div class="tyosto_measure"><input type="text" name="_levymod" value="37.5" class="lineinput drawarea__mm levy_input" id="lt-k_armod" onchange="change__levykiinnike();aloita_tyosto_kiinnikkeet();"><label for="">AR MOD</label></div> -->
               <!-- <div style="" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="lt-k_arlevy" onchange="change__levykiinnike();"><label for="">AR LEVY</label></div> -->
             </div>
-          </div>
-          <div>
-            <table class="myinfo" style="margin-top: 190px;">
-              <tr>
-                <td>Tyyppi</td>
-                <td>Nimi</td>
-                <td>Väri</td>
-                <td>Väli </td>
-              </tr>
-              <tr>
-                <td>Saumaranka: </td>
-                <td></td>
-                <td>Punainen</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Levyn väliranka: </td>
-                <td></td>
-                <td>Vihreä</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Ikkunaranka: </td>
-                <td></td>
-                <td>Oranssi</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Erikoisranka: </td>
-                <td></td>
-                <td>Lila</td>
-                <td></td>
-              </tr>
-            </table>
           </div>
         </div>
         <div class="col-6" style="position: relative;display: none;">

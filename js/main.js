@@ -2,7 +2,61 @@
 current_room = null;
 apartment = null;
 
+current_asiakas = document.querySelector("#current_asiakas").value;
 all_apartments = document.querySelectorAll('.project__building_room');
+
+const convertLetter = (str) => {
+  const map = {
+     a:'α',b:'β',d:'δ',e:'ε',
+     i:'ι',k:'κ',n:'η',o:'θ',
+     p:'ρ',r:'π',t:'τ',u:'μ',
+     char:'υ',w:'ω',x:'χ',y:'γ'
+  };
+  return str.replace(/./g, char => {
+     if (map[char.toLowerCase()]){
+        return char === char.toUpperCase() ? map[char.toLowerCase()] : map[char];
+     };
+     return char.toLowerCase();
+
+  });
+};
+
+function encode_utf8(s) {
+  return unescape(encodeURIComponent(s));
+}
+
+function decode_utf8(s) {
+  return decodeURIComponent(escape(s));
+}
+
+function givenewtype() {
+  setTimeout(() => {
+    
+  
+    atypes = document.querySelectorAll(".ovi__asetusheading > b");
+    btypes = document.querySelectorAll(".ikkuna__asetusheading > b");
+    ctypes = document.querySelectorAll(".pilari__asetusheading > b");
+    dtypes = document.querySelectorAll(".palkki__asetusheading > b");
+    etypes = document.querySelectorAll(".ilmastointi__asetusheading > b");
+
+    for (let i = 0; i < atypes.length; i++) {
+      atypes[i].innerHTML = convertLetter(String.fromCharCode(65 + i).toLowerCase());
+    }
+    for (let i = 0; i < btypes.length; i++) {
+      btypes[i].innerHTML = convertLetter(String.fromCharCode(65 + i).toLowerCase());
+    }
+    for (let i = 0; i < ctypes.length; i++) {
+      ctypes[i].innerHTML = convertLetter(String.fromCharCode(65 + i).toLowerCase());
+    }
+    for (let i = 0; i < dtypes.length; i++) {
+      dtypes[i].innerHTML = convertLetter(String.fromCharCode(65 + i).toLowerCase());
+    }
+    for (let i = 0; i < etypes.length; i++) {
+      etypes[i].innerHTML = convertLetter(String.fromCharCode(65 + i).toLowerCase());
+    }
+
+  }, 100);
+}
 if(document.querySelector("#open_comments")) {
   // for (let i = 0; i < all_apartments.length; i++) {
   //   if(all_apartments[i].dataset.aroom.split(",")[1] == "prob" || all_apartments[i].dataset.broom.split(",")[1] == "prob" || all_apartments[i].dataset.croom.split(",")[1] == "prob" || all_apartments[i].dataset.droom.split(",")[1] == "prob" || all_apartments[i].dataset.kroom.split(",")[1] == "prob" || all_apartments[i].dataset.lroom.split(",")[1] == "prob") {
@@ -13,26 +67,26 @@ if(document.querySelector("#open_comments")) {
 else {
   for (let i = 0; i < all_apartments.length; i++) {
     if(all_apartments[i].dataset.aroom && all_apartments[i].dataset.broom && all_apartments[i].dataset.croom && all_apartments[i].dataset.droom && all_apartments[i].dataset.kroom && all_apartments[i].dataset.lroom) {
-      if(all_apartments[i].dataset.aroom.split(",")[1] == "problem" || all_apartments[i].dataset.broom.split(",")[1] == "problem" || all_apartments[i].dataset.croom.split(",")[1] == "problem" || all_apartments[i].dataset.droom.split(",")[1] == "problem" || all_apartments[i].dataset.kroom.split(",")[1] == "problem" || all_apartments[i].dataset.lroom.split(",")[1] == "problem") {
+      if(all_apartments[i].dataset.aroom.split("~")[1] == "problem" || all_apartments[i].dataset.broom.split("~")[1] == "problem" || all_apartments[i].dataset.croom.split("~")[1] == "problem" || all_apartments[i].dataset.droom.split("~")[1] == "problem" || all_apartments[i].dataset.kroom.split("~")[1] == "problem" || all_apartments[i].dataset.lroom.split("~")[1] == "problem") {
           all_apartments[i].classList.add("problem");
       }
-      else if(all_apartments[i].dataset.aroom.split(",")[1] == "prob" || all_apartments[i].dataset.broom.split(",")[1] == "prob" || all_apartments[i].dataset.croom.split(",")[1] == "prob" || all_apartments[i].dataset.droom.split(",")[1] == "prob" || all_apartments[i].dataset.kroom.split(",")[1] == "prob" || all_apartments[i].dataset.lroom.split(",")[1] == "prob") {
+      else if(all_apartments[i].dataset.aroom.split("~")[1] == "prob" || all_apartments[i].dataset.broom.split("~")[1] == "prob" || all_apartments[i].dataset.croom.split("~")[1] == "prob" || all_apartments[i].dataset.droom.split("~")[1] == "prob" || all_apartments[i].dataset.kroom.split("~")[1] == "prob" || all_apartments[i].dataset.lroom.split("~")[1] == "prob") {
           all_apartments[i].classList.add("prob");
       }
 
-      else if(all_apartments[i].dataset.aroom.split(",")[1] == "measured" || all_apartments[i].dataset.broom.split(",")[1] == "measured" || all_apartments[i].dataset.croom.split(",")[1] == "measured" || all_apartments[i].dataset.droom.split(",")[1] == "measured" || all_apartments[i].dataset.kroom.split(",")[1] == "measured" || all_apartments[i].dataset.lroom.split(",")[1] == "measured") {
+      else if(all_apartments[i].dataset.aroom.split("~")[1] == "measured" || all_apartments[i].dataset.broom.split("~")[1] == "measured" || all_apartments[i].dataset.croom.split("~")[1] == "measured" || all_apartments[i].dataset.droom.split("~")[1] == "measured" || all_apartments[i].dataset.kroom.split("~")[1] == "measured" || all_apartments[i].dataset.lroom.split("~")[1] == "measured") {
           all_apartments[i].classList.add("measured");
       }
 
-      else if(all_apartments[i].dataset.aroom.split(",")[1] == "rangatok" || all_apartments[i].dataset.broom.split(",")[1] == "rangatok" || all_apartments[i].dataset.croom.split(",")[1] == "rangatok" || all_apartments[i].dataset.droom.split(",")[1] == "rangatok" || all_apartments[i].dataset.kroom.split(",")[1] == "rangatok" || all_apartments[i].dataset.lroom.split(",")[1] == "rangatok") {
+      else if(all_apartments[i].dataset.aroom.split("~")[1] == "rangatok" || all_apartments[i].dataset.broom.split("~")[1] == "rangatok" || all_apartments[i].dataset.croom.split("~")[1] == "rangatok" || all_apartments[i].dataset.droom.split("~")[1] == "rangatok" || all_apartments[i].dataset.kroom.split("~")[1] == "rangatok" || all_apartments[i].dataset.lroom.split("~")[1] == "rangatok") {
           all_apartments[i].classList.add("rangatok");
       }
 
-      else if(all_apartments[i].dataset.aroom.split(",")[1] == "nowork" || all_apartments[i].dataset.broom.split(",")[1] == "nowork" || all_apartments[i].dataset.croom.split(",")[1] == "nowork" || all_apartments[i].dataset.droom.split(",")[1] == "nowork" || all_apartments[i].dataset.kroom.split(",")[1] == "nowork" || all_apartments[i].dataset.lroom.split(",")[1] == "nowork") {
+      else if(all_apartments[i].dataset.aroom.split("~")[1] == "nowork" || all_apartments[i].dataset.broom.split("~")[1] == "nowork" || all_apartments[i].dataset.croom.split("~")[1] == "nowork" || all_apartments[i].dataset.droom.split("~")[1] == "nowork" || all_apartments[i].dataset.kroom.split("~")[1] == "nowork" || all_apartments[i].dataset.lroom.split("~")[1] == "nowork") {
           all_apartments[i].classList.add("nowork");
       }
       
-      else if(all_apartments[i].dataset.aroom.split(",")[1] == "undone" || all_apartments[i].dataset.broom.split(",")[1] == "undone" || all_apartments[i].dataset.croom.split(",")[1] == "undone" || all_apartments[i].dataset.droom.split(",")[1] == "undone" || all_apartments[i].dataset.kroom.split(",")[1] == "undone" || all_apartments[i].dataset.lroom.split(",")[1] == "undone") {
+      else if(all_apartments[i].dataset.aroom.split("~")[1] == "undone" || all_apartments[i].dataset.broom.split("~")[1] == "undone" || all_apartments[i].dataset.croom.split("~")[1] == "undone" || all_apartments[i].dataset.droom.split("~")[1] == "undone" || all_apartments[i].dataset.kroom.split("~")[1] == "undone" || all_apartments[i].dataset.lroom.split("~")[1] == "undone") {
           all_apartments[i].classList.add("undone");
       }
       else {
@@ -86,12 +140,12 @@ function changeWalls_all() {
     kroom_data = apartment.dataset.kroom;
     lroom_data = apartment.dataset.lroom;
 
-    aroom_data_ = aroom_data.split(",");
-    broom_data_ = broom_data.split(",");
-    croom_data_ = croom_data.split(",");
-    droom_data_ = droom_data.split(",");
-    kroom_data_ = kroom_data.split(",");
-    lroom_data_ = lroom_data.split(",");
+    aroom_data_ = aroom_data.split("~");
+    broom_data_ = broom_data.split("~");
+    croom_data_ = croom_data.split("~");
+    droom_data_ = droom_data.split("~");
+    kroom_data_ = kroom_data.split("~");
+    lroom_data_ = lroom_data.split("~");
 
     arsz = parseFloat(document.querySelector(".house__wall_a .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_a .wall_width").value);
     brsz = parseFloat(document.querySelector(".house__wall_b .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_b .wall_width_2").value);
@@ -101,12 +155,12 @@ function changeWalls_all() {
     lrsz = parseFloat(document.querySelector(".house__wall_l .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_l .wall_width").value);
 
 
-    ad = aroom_data_[0] + "," + aroom_data_[1] + "," + arsz + "," + aroom_data_[3] + "," + aroom_data_[4] + "," + aroom_data_[5] + "," + aroom_data_[6] + "," + aroom_data_[7];
-    bd = broom_data_[0] + "," + broom_data_[1] + "," + brsz + "," + broom_data_[3] + "," + broom_data_[4] + "," + broom_data_[5] + "," + broom_data_[6] + "," + broom_data_[7];
-    cd = croom_data_[0] + "," + croom_data_[1] + "," + crsz + "," + croom_data_[3] + "," + croom_data_[4] + "," + croom_data_[5] + "," + croom_data_[6] + "," + croom_data_[7];
-    dd = droom_data_[0] + "," + droom_data_[1] + "," + drsz + "," + droom_data_[3] + "," + droom_data_[4] + "," + droom_data_[5] + "," + droom_data_[6] + "," + droom_data_[7];
-    kd = kroom_data_[0] + "," + kroom_data_[1] + "," + krsz + "," + kroom_data_[3] + "," + kroom_data_[4] + "," + kroom_data_[5] + "," + kroom_data_[6] + "," + kroom_data_[7];
-    ld = lroom_data_[0] + "," + lroom_data_[1] + "," + lrsz + "," + lroom_data_[3] + "," + lroom_data_[4] + "," + lroom_data_[5] + "," + lroom_data_[6] + "," + lroom_data_[7];
+    ad = aroom_data_[0] + "~" + aroom_data_[1] + "~" + arsz + "~" + aroom_data_[3] + "~" + aroom_data_[4] + "~" + aroom_data_[5] + "~" + aroom_data_[6] + "~" + aroom_data_[7];
+    bd = broom_data_[0] + "~" + broom_data_[1] + "~" + brsz + "~" + broom_data_[3] + "~" + broom_data_[4] + "~" + broom_data_[5] + "~" + broom_data_[6] + "~" + broom_data_[7];
+    cd = croom_data_[0] + "~" + croom_data_[1] + "~" + crsz + "~" + croom_data_[3] + "~" + croom_data_[4] + "~" + croom_data_[5] + "~" + croom_data_[6] + "~" + croom_data_[7];
+    dd = droom_data_[0] + "~" + droom_data_[1] + "~" + drsz + "~" + droom_data_[3] + "~" + droom_data_[4] + "~" + droom_data_[5] + "~" + droom_data_[6] + "~" + droom_data_[7];
+    kd = kroom_data_[0] + "~" + kroom_data_[1] + "~" + krsz + "~" + kroom_data_[3] + "~" + kroom_data_[4] + "~" + kroom_data_[5] + "~" + kroom_data_[6] + "~" + kroom_data_[7];
+    ld = lroom_data_[0] + "~" + lroom_data_[1] + "~" + lrsz + "~" + lroom_data_[3] + "~" + lroom_data_[4] + "~" + lroom_data_[5] + "~" + lroom_data_[6] + "~" + lroom_data_[7];
 
     apartment.dataset.aroom = ad;
     apartment.dataset.broom = bd;
@@ -239,6 +293,8 @@ function refresh__drawcontrols() {
       $('.drawarea__section').hide();
     }
 
+
+
     let rooms = document.querySelectorAll(".project__building_room");
 
     for (let a = 0; a < rooms.length; a++) {
@@ -256,12 +312,12 @@ function refresh__drawcontrols() {
         statuses = "";
 
         // console.log(t);
-        statuses += t.dataset.aroom.split(",")[1] + " __ ";
-        statuses += t.dataset.broom.split(",")[1] + " __ ";
-        statuses += t.dataset.croom.split(",")[1] + " __ ";
-        statuses += t.dataset.droom.split(",")[1] + " __ ";
-        statuses += t.dataset.kroom.split(",")[1] + " __ ";
-        statuses += t.dataset.lroom.split(",")[1] + " __ ";
+        statuses += t.dataset.aroom.split("~")[1] + " __ ";
+        statuses += t.dataset.broom.split("~")[1] + " __ ";
+        statuses += t.dataset.croom.split("~")[1] + " __ ";
+        statuses += t.dataset.droom.split("~")[1] + " __ ";
+        statuses += t.dataset.kroom.split("~")[1] + " __ ";
+        statuses += t.dataset.lroom.split("~")[1] + " __ ";
 
         if(statuses.includes("undone") && statuses.includes("measured") && statuses.includes("tomeasure")) {
             element.classList.add("bg-1");
@@ -283,7 +339,7 @@ function refresh__drawcontrols() {
     }
 
 
-    // submitprogress('', 'save');
+    submitprogress('', 'save');
     if (input_step === 'rooms') {
       $('.drawarea__section').hide();
       if (document.querySelector(".saumat__grandrow")) {
@@ -292,8 +348,8 @@ function refresh__drawcontrols() {
       if (document.querySelector(".listat__grandrow")) {
         document.querySelector(".listat__grandrow").remove();
       }
-      if (canvas.querySelector("div.tyostot__grandrow")) {
-        document.querySelector("div.tyostot__grandrow").remove();
+      if (canvas.querySelector("div.rangat__grandrow")) {
+        document.querySelector("div.rangat__grandrow").remove();
       }
       if (document.querySelector("div.levyt")) {
 
@@ -311,6 +367,12 @@ function refresh__drawcontrols() {
       for (var i = 0; i < lapiviennit.length; i++) {
         lapiviennit[i].remove();
       }
+
+      if(parseFloat(document.querySelector("#house div.house__wall.house__wall_three.house__wall_c").offsetLeft) > 0) {
+        document.querySelector("#house .house__wall_roof").style.left = (-35) + document.querySelector("#house div.house__wall.house__wall_three.house__wall_c").offsetLeft + "px";
+        document.querySelector("#house .house__wall_floor").style.left = (-35) + document.querySelector("#house div.house__wall.house__wall_three.house__wall_c").offsetLeft + "px";
+      }
+
       $("#rooms").show();
       $("#rooms").slideDown(200);
     }
@@ -458,7 +520,8 @@ function refresh__drawcontrols() {
 
 
       room_status = 'tomeasure';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      document.querySelector("input.room_status").value = room_status;
+      // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
 
       if(document.querySelector("#open_comments")) {
       }
@@ -467,6 +530,7 @@ function refresh__drawcontrols() {
         try { document.querySelector(".walls_content").value = walls_content; } catch(e) { console.log("TRY-CATCH ERROR:", e ) }
         // degradate_url(3);
       }
+      rangat__navigation(false);
 
 
 
@@ -593,7 +657,9 @@ function refresh__drawcontrols() {
       }
 
       room_status = 'tomeasure';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      document.querySelector("input.room_status").value = room_status; 
+      rangat__navigation(false);
+      // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     if (input_step == 'drawscreen_section_three') {
       $('.drawarea__section').show();
@@ -681,7 +747,9 @@ function refresh__drawcontrols() {
       }
 
       room_status = 'tomeasure';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      document.querySelector("input.room_status").value = room_status;
+      rangat__navigation(false);
+      // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     if (input_step == 'drawscreen_section_four') {
       $('.drawarea__section').show();
@@ -788,6 +856,10 @@ function refresh__drawcontrols() {
       }
       document.querySelector(".drawarea__bottom").style.marginBottom = "-70px";
       document.querySelector(".drawarea__left").style.marginLeft = "-70px";
+      document.querySelector(".drawarea__left .end_measure").style.left = "30px";
+
+      document.querySelector(".drawarea__bottom").style.zIndex = "0";
+      // document.querySelector(".drawarea__left").style.opacity = "0.2";
       navs = document.querySelectorAll(".nav");
       for (var i = 0; i < navs.length; i++) {
         navs[i].style.top = "40px";
@@ -989,7 +1061,9 @@ function refresh__drawcontrols() {
       }
 
       room_status = 'saumatok';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      document.querySelector("input.room_status").value = room_status; 
+      rangat__navigation(false);
+      // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     else {
       let closer = document.querySelectorAll(".closer");
@@ -1014,6 +1088,7 @@ function refresh__drawcontrols() {
 
 
       kiinnikkeet__siirto();
+      document.querySelector(".drawarea__left").style.marginLeft = "-40px";
 
 
       let tyostot = document.querySelectorAll(".levy_input");
@@ -1402,11 +1477,12 @@ function refresh__drawcontrols() {
 
 
       for (var i = k_levys.length - 1; i >= 0; i--) {
-        fixkiinnikkeet(k_levys[i]);
+        give__tyosto_cord(k_levys[i]);
       }
 
       room_status = 'saumatok';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      document.querySelector("input.room_status").value = room_status;
+      // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
 
 
       t3 = canvas.querySelectorAll(".secondcord");
@@ -1422,6 +1498,9 @@ function refresh__drawcontrols() {
         }
       }
 
+      document.querySelector("#kin_toggle_1").checked = true;
+      rangat__navigation(false);
+
     }
     else {
       sauma__controls = canvas.querySelectorAll(".sauma__controls");
@@ -1435,6 +1514,19 @@ function refresh__drawcontrols() {
       if (document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled")) {
         document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled").style.borderLeft = "1px solid black";
         document.querySelector("#box-wrapper > div.drawarea__control.drawarea__top.disabled").style.borderBottom = "1px solid black";
+      }
+
+      if(canvas.querySelector(".tyostot__tyosto input:not(.secondcord)")) {
+        input = canvas.querySelectorAll(".tyostot__tyosto input:not(.secondcord)");
+        for (var i = input.length - 1; i >= 0; i--) {
+          input[i].remove();
+        }
+      }
+      if(canvas.querySelector(".tyostot__tyosto input.secondcord")) {
+        input = canvas.querySelectorAll(".tyostot__tyosto input.secondcord");
+        for (var i = input.length - 1; i >= 0; i--) {
+          input[i].style.opacity = 0;
+        }
       }
     }
     
@@ -1453,6 +1545,8 @@ function refresh__drawcontrols() {
         updatearea();
         return;
       }
+
+      document.querySelector(".drawarea__left").style.marginLeft = "-40px";
       
       $("#drawscreen_section_five").show();
       $('.drawarea__controls_five').show();
@@ -1586,8 +1680,12 @@ function refresh__drawcontrols() {
 
 
       room_status = 'saumatok';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      document.querySelector("input.room_status").value = room_status; 
+      // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
       create__ladontaoptions();
+
+      rangat__navigation(false);
+
     }
     else {
       // if(canvas.querySelector(".closer")) {
@@ -1608,6 +1706,8 @@ function refresh__drawcontrols() {
       for (var i = 0; i < sauma__controls.length; i++) {
         sauma__controls[i].style.opacity = 0;
       }
+
+      document.querySelector(".drawarea__left").style.marginLeft = "-40px";
       $("#drawscreen_section_esikatselu").show();
       $('.drawarea__controls_esikatselu').show();
       $('.drawarea__navigation').show();
@@ -1639,6 +1739,9 @@ function refresh__drawcontrols() {
         sauma__controllers[i].style.opacity = "0.3";
         sauma__controllers[i].style.cursor = "not-allowed";
       }
+
+      current_tila = document.querySelector("#roomname_1").value + "_" + document.querySelector("#roomname_2").value + "_" + document.querySelector("#roomname_3").value;
+      current_tila = current_tila.replaceAll(" ","");
       // Drawarea limit
       document.querySelector("#box_upper__bottom-mid").style.display = 'none';
       document.querySelector("#box_lower__top-mid").style.display = 'none';
@@ -1675,7 +1778,7 @@ function refresh__drawcontrols() {
       }
       let k_levys = canvas.querySelectorAll(".levy");
       for (var i = k_levys.length - 1; i >= 0; i--) {
-        fixkiinnikkeet(k_levys[i]);
+        give__tyosto_cord(k_levys[i]);
         countdown__kiinnikkeet(k_levys[i]);
       }
       tyostot__tyosto_pysty = canvas.querySelectorAll(".levy_tyostot_x > div");
@@ -1701,7 +1804,8 @@ function refresh__drawcontrols() {
       }
 
       room_status = 'saumatok';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      document.querySelector("input.room_status").value = room_status;
+      // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
 
 
       // draggable measure
@@ -1761,9 +1865,12 @@ function refresh__drawcontrols() {
       $('.drawarea__section').css('display', 'flex');
       $('.levy__section').css('display', 'none');
       document.querySelector("#box-wrapper > main").style.display = "block";
-      if (canvas.querySelector("div.tyostot__grandrow")) {
-        canvas.querySelector("div.tyostot__grandrow").style.opacity = 1;
+      if (canvas.querySelector("div.rangat__grandrow")) {
+        canvas.querySelector("div.rangat__grandrow").style.opacity = 1;
       }
+      current_tila = document.querySelector("#roomname_1").value + "_" + document.querySelector("#roomname_2").value + "_" + document.querySelector("#roomname_3").value;
+      current_tila = current_tila.replaceAll(" ","");
+      document.querySelector(".drawarea__left").style.marginLeft = "-40px";
       document.querySelector(".drawarea__section").style.display = 'flex';
       document.querySelector("#box-wrapper").style.display = 'block';
       var drawarea__left = document.querySelector(".drawarea__left");
@@ -1802,6 +1909,7 @@ function refresh__drawcontrols() {
       document.querySelector(".box__lower_lowerdecor").style.display = 'none';
       // Disable drawarea controls for 2.4-2.7
       document.querySelector(".drawarea__right").classList.add("disabled");
+      document.querySelector(".drawarea__right").style.border = "unset";
       document.querySelector(".drawarea__top").classList.add("disabled");
       document.querySelector(".drawarea__right").classList.remove("m_btn");
       document.querySelector(".drawarea__top").classList.remove("m_btn");
@@ -1820,23 +1928,37 @@ function refresh__drawcontrols() {
           closers[i].style.zIndex = -1;
         }
       }
+
+      levyt = canvas.querySelectorAll(".levy");
+      listat__grandrow = canvas.querySelector(".listat__grandrow");
+
+      for (var i = 0; i < levyt.length; i++) {
+        levyt[i].classList.add("six_hidden");
+      }
+      if (listat__grandrow) {
+        listat__grandrow.classList.add("six_hidden");
+      }
+
       rangoita();
       room_status = 'rangatok';
-      document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+      document.querySelector("input.room_status").value = room_status;
+      // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     else {
-      if (canvas.querySelector("div.tyostot__grandrow")) {
-        canvas.querySelector("div.tyostot__grandrow").style.opacity = 0;
+      if (canvas.querySelector("div.rangat__grandrow")) {
+        canvas.querySelector("div.rangat__grandrow").style.opacity = 0;
       }
     }
     if (input_step == 'drawscreen_section_seven') {
-      if (canvas.querySelector("div.tyostot__grandrow")) {
+      document.querySelector(".drawarea__left").style.marginLeft = "-40px";
+      if (canvas.querySelector("div.rangat__grandrow")) {
         $('.drawarea__section').show();
         $("#drawscreen_section_seven").show();
         $('.drawarea__controls_seven').show();
         $("#drawscreen_section_seven").slideDown(200);
         $('.drawarea__section').css('display', 'flex');
         $('.levy__section').css('display', 'none');
+        
         document.querySelector("#box-wrapper > main").style.display = "block";
         document.querySelector(".drawarea__section").style.display = 'flex';
         document.querySelector("#box-wrapper").style.display = 'block';
@@ -1852,7 +1974,10 @@ function refresh__drawcontrols() {
         for (var i = 0; i < drawarea__top_circle.length; i++) {
           drawarea__top_circle[i].style.display = "none";
         }
-        if (document.querySelector("div.listat__grandrow")) {
+
+
+
+        if (canvas.querySelector("div.listat__grandrow")) {
           canvas.querySelector("div.listat__grandrow").style.opacity = 1;
         }
         // Enable/disable levytysalue controls
@@ -1911,7 +2036,7 @@ function refresh__drawcontrols() {
             sauma__controls_dels[i].style.display = "none";
           }
         }
-        tyostot_grandrow = canvas.querySelector(".tyostot__grandrow");
+        tyostot_grandrow = canvas.querySelector(".rangat__grandrow");
         if (document.querySelector(".listat__grandrow")) {
           document.querySelector(".listat__grandrow").remove();
         }
@@ -1922,16 +2047,15 @@ function refresh__drawcontrols() {
             closers[i].style.zIndex = -1;
           }
         }
-
-
         listat__grandrow = document.createElement("div");
         listat__grandrow.classList.add("listat__grandrow");
         canvas.prepend(listat__grandrow);
         listat__grandrow.innerHTML = tyostot_grandrow.innerHTML;
         listoitettu = false;
         listoitus();
+        rangat__navigation(false);
 
-              }
+      }
       else {
         $('#step_drawscreen').val('drawscreen_section_six');
         refresh__drawcontrols();
@@ -1943,7 +2067,8 @@ function refresh__drawcontrols() {
       }
       else {
         room_status = 'measured';
-        document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+        document.querySelector("input.room_status").value = room_status;
+        // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
 
       }
       
@@ -1983,6 +2108,8 @@ function refresh__drawcontrols() {
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.display = "none";
       }
+      body = document.body;
+      body.classList.remove("bg");
       
       // document.querySelector(".drawarea__controls_eight").style.display = 'none';
       // Drawarea limit
@@ -2047,10 +2174,11 @@ function refresh__drawcontrols() {
       }
       else {
         room_status = 'measured';
-        document.querySelector("input.room_status").value = room_status; document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+        document.querySelector("input.room_status").value = room_status;
+        // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
       }
       
-
+      rangat__navigation(false);
 
     }
     else {
@@ -2082,43 +2210,45 @@ function refresh__drawcontrols() {
 
     changeheights();
 
-    if (da_b.querySelector(".end_measure")) {
-      b_end_measure.innerHTML = parseFloat(document.querySelector("#box_w").value) + 10;
-    }
-    else {
-      b_start_measure = document.createElement("b");
-      b_start_measure.innerHTML = "0";
-      b_end_measure = document.createElement("b");
-      b_end_measure.innerHTML = parseFloat(document.querySelector("#box_w").value) + 10;
-      b_end_measure.style.right = -10 + "px";
+    setTimeout(() => {
+      if (da_b.querySelector(".end_measure")) {
+        b_end_measure.innerHTML = parseFloat(document.querySelector("#box_w").value) - saumaset_vm;
+      }
+      else {
+        b_start_measure = document.createElement("b");
+        // b_start_measure.innerHTML = "0";
+        b_end_measure = document.createElement("b");
+        b_end_measure.innerHTML = parseFloat(document.querySelector("#box_w").value) - saumaset_vm;
+        b_end_measure.style.right = -10 + "px";
 
-      b_start_measure.classList.add("start_measure");
-      b_end_measure.classList.add("end_measure");
-      b_start_measure.classList.add("aukko__cord");
-      b_end_measure.classList.add("aukko__cord");
+        b_start_measure.classList.add("start_measure");
+        b_end_measure.classList.add("end_measure");
+        b_start_measure.classList.add("aukko__cord");
+        b_end_measure.classList.add("aukko__cord");
 
-      da_b.appendChild(b_start_measure);
-      da_b.appendChild(b_end_measure);
-    }
+        da_b.appendChild(b_start_measure);
+        da_b.appendChild(b_end_measure);
+      }
 
-    if (da_l.querySelector(".end_measure")) {
-      end_measure.innerHTML = parseFloat(document.querySelector("#box_h").value) + 10;
-    }
-    else {
-      start_measure = document.createElement("b");
-      start_measure.innerHTML = "0";
-      end_measure = document.createElement("b");
-      end_measure.innerHTML = parseFloat(document.querySelector("#box_h").value) + 10;
-      end_measure.style.top = -10 + "px";
+      if (da_l.querySelector(".end_measure")) {
+        end_measure.innerHTML = parseFloat(document.querySelector("#box_h").value) - saumaset_hm;
+      }
+      else {
+        start_measure = document.createElement("b");
+        // start_measure.innerHTML = "0";
+        end_measure = document.createElement("b");
+        end_measure.innerHTML = parseFloat(document.querySelector("#box_h").value) - saumaset_hm;
+        // end_measure.style.left = -40 + "px";
 
-      start_measure.classList.add("start_measure");
-      end_measure.classList.add("end_measure");
-      start_measure.classList.add("aukko__cord");
-      end_measure.classList.add("aukko__cord");
+        start_measure.classList.add("start_measure");
+        end_measure.classList.add("end_measure");
+        start_measure.classList.add("aukko__cord");
+        end_measure.classList.add("aukko__cord");
 
-      da_l.appendChild(start_measure);
-      da_l.appendChild(end_measure);
-    }
+        da_l.appendChild(start_measure);
+        da_l.appendChild(end_measure);
+      }
+    }, 1350);
 
     // Modal button
     var m_btn = document.getElementsByClassName("m_btn");
@@ -2145,23 +2275,28 @@ function refresh__drawcontrols() {
     });
     // Modal button
     var recl_btn = document.getElementsByClassName("recl_btn");
-    var reclamation__popup = document.querySelector("#reclamation__popup");
-    document.querySelectorAll('.recl_btn').forEach(recl_modal => {
-      recl_modal.addEventListener('click', event => {
-        if (recl_modal.classList.contains('recl_btn')) {
-          reclamation__popup.classList.add("two");
-          reclamation__popup.classList.remove("out");
-          document.querySelector("body").classList.add("modal-active");
-        }
+    if(document.querySelector("#reclamation__popup")) {
+
+    
+      var reclamation__popup = document.querySelector("#reclamation__popup");
+      document.querySelectorAll('.recl_btn').forEach(recl_modal => {
+        recl_modal.addEventListener('click', event => {
+          if (recl_modal.classList.contains('recl_btn')) {
+            reclamation__popup.classList.add("two");
+            reclamation__popup.classList.remove("out");
+            document.querySelector("body").classList.add("modal-active");
+          }
+        });
       });
-    });
-    document.querySelectorAll('.modal_close_btn').forEach(recl_modal => {
-      recl_modal.addEventListener('click', event => {
-        reclamation__popup.classList.remove("two");
-        reclamation__popup.classList.add("out");
-        document.querySelector("body").classList.remove("modal-active");
+      document.querySelectorAll('.modal_close_btn').forEach(recl_modal => {
+        recl_modal.addEventListener('click', event => {
+          reclamation__popup.classList.remove("two");
+          reclamation__popup.classList.add("out");
+          document.querySelector("body").classList.remove("modal-active");
+        });
       });
-    });
+    }
+
     // function drawarea__left__sauma() {
     //   alert ("Hello World!");
     // }
@@ -2180,703 +2315,10 @@ var addFunctionOnWindowLoad = function (callback) {
 }
 addFunctionOnWindowLoad(refresh__drawcontrols);
 
-function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
+
+function nav_betweenwalls(elem) {
   setTimeout(function () {
-    var input_step = $('#step_drawscreen').val();
-    $('.id').each(function (i, obj) {
-      value = $("#project__building_id").text();
-      $(obj).val(value);
-      var _id = value;
-    });
-    var _id = value;
-    $('.wall').each(function (i, obj) {
-      value = $(b).text();
-      $(obj).val(value);
-      var _wall = value;
-    });
-    var _wall = value;
-    $('.room').each(function (i, obj) {
-      value = $('#roomname').val();
-      $(obj).val(value);
-      var _room = value;
-    });
-    var _room = value;
-    $('.step').each(function (i, obj) {
-      value = "drawscreen_section_zero";
-      $(obj).val(value);
-      var _step = value;
-    });
-    var _step = value;
-    $('.settings').each(function (i, obj) {
-      value = "{}";
-      $(obj).val(value);
-      var _settings = value;
-    });
-    var _settings = value;
-    $('.kokonaisalue').each(function (i, obj) {
-      h = $(this).parent().find('input.wall_height').val();
-      w = $(this).parent().find('input.wall_width').val();
-      value = h + " " + w;
-      $(obj).val(value);
-      var _kokonaisalue = value;
-    });
-    value = h + "|" + w;
-    var _kokonaisalue = value;
-    $('.levytettava_alue').each(function (i, obj) {
-      h = $('.drawarea__h_cord').text();
-      w = $('.drawarea__w_cord').text();
-      value = h + " " + w;
-      $(obj).val(value);
-    });
-    var _levytettava_alue = value;
-    $('.poisjaava_alue').each(function (i, obj) {
-      u = $('.box__upper_mm').text();
-      r = $('.box__right_mm').text();
-      _u = $('.box__lower_mm').text();
-      _r = $('.box__left_mm').text();
-      value = u + "," + r + "," + _u + "," + _r;
-      $(obj).val(value);
-    });
-    var _poisjaava_alue = value;
-    $('.keskusmittapiste_cord').each(function (i, obj) {
-      l = $("#drawarea__origo_central").css("left");
-      t = $("#drawarea__origo_central").css("bottom");
-      value = l + "," + t;
-      $(obj).val(value);
-    });
-    $('.room_status').each(function (i, obj) {
-     
-      value = room_status;
-      $(obj).val(value);
-    });
-    var _keskusmittapiste_cord = value;
-    const x = [];
-    $('.reklamaatiot').each(function (i, obj) {
-      if ($("#mitta__huomiot")) {
-        if ($('#m__a_sahko').is(':checked')) {
-          x.push("sahko,");
-        }
-        else if ($('#m__a_putki').is(':checked')) {
-          x.push("putki,");
-        }
-        else if ($('#m__a_tornado').is(':checked')) {
-          x.push("jotain,");
-        }
-        else if ($('#comment__importance').is(':checked')) {
-          x.push("tarkea");
-        }
-        x.push($('#mitta__huomiot').val());
-        x.push($('#mittapiste_comment').val());
-        x.push($('#mittapiste_comment_from').val());
-        x.push($('#mittapiste_comment_to').val());
-        $(obj).val(x);
-      }
-    });
-    var _reklamaatiot = x;
-    var _listat = value;
-  }, 1000);
-  if (moddingtype === "adding") {
-    prevdata = array;
-    if (type === "mp") {
-      mps = document.querySelector("input.mittapisteet");
-      mps.value += array;
-    }
-    if (type === "aukot") {
-      aukkos = document.querySelector("input.aukot");
-      aukkos.value += array;
-    }
-    if (type === "lv") {
-      lapiviennit = document.querySelector("input.lapiviennit");
-      lapiviennit.value += array;
-    }
-    // if (type === "sau") {
-    //   array = [];
-    //   saumat_data = document.querySelector("input.saumat_data");
-
-
-    //   if (saumat_data.value.length > 2) {
-    //     document.querySelector("input.saumat_dataforback").value = saumat_data.value;
-    //   }
-    //   saumat_data.value = "";
-    //   v_s = document.querySelectorAll('.verticalrow_saumat > div');
-    //   h_s = document.querySelectorAll('.horizontalrow_saumat > div');
-    //   for (var i = 0; i < v_s.length; i++) {
-    //     vs_name = parseFloat(v_s[i].dataset.no);
-    //     vs_type = "pysty";
-    //     vs_b = 0;
-    //     vs_left = parseFloat(v_s[i].style.left);
-    //     vs_cord = v_s[i].querySelector(".sauma__vertical_ctrl").value;
-    //     array += vs_name + "|" + vs_type + "|" + vs_b + "|" + vs_left + "|" + vs_cord + "|" + vs_name + "__";
-    //   }
-    //   for (var i = 0; i < h_s.length; i++) {
-    //     vs_name = h_s[i].dataset.no;
-    //     vs_type = "vaaka";
-    //     vs_b = parseFloat(h_s[i].style.bottom);
-    //     vs_left = 0;
-    //     vs_cord = h_s[i].querySelector(".sauma__horizontal_ctrl").value;
-    //     array += vs_name + "|" + vs_type + "|" + vs_b + "|" + vs_left + "|" + vs_cord + "|" + vs_name + "__";
-    //   }
-    //   saumat_data = document.querySelector("input.saumat_data");
-    //   saumat_data.value = array;
-    //   realval = saumat_data.value;
-    //   saumat_data.value = realval.replace(",", "__");
-
-
-    //   prevdata = document.querySelector("input.saumat_dataforback").value;
-    // }
-    // if (type === "lev") {
-    //   levy_array = [];
-    //   levyt_data = document.querySelector("input.levyt_data");
-    //   levyt_data.value = "";
-    //   levy_item = canvas.querySelectorAll('.levy');
-    //   for (var i = 0; i < levy_item.length; i++) {
-
-    //     l_name = levy_item[i].querySelector(".levy_name").innerHTML;
-    //     if (levy_item[i].classList.contains("dir_y")) {
-    //       l_type = "pysty";
-    //     }
-    //     else if (levy_item[i].classList.contains("dir_x")) {
-    //       l_type = "vaaka";
-    //     }
-    //     l_title = levy_item[i].title;
-
-    //     l_b = parseFloat(levy_item[i].style.bottom) * 5;
-    //     l_l = parseFloat(levy_item[i].style.left) * 5;
-    //     l_w = parseFloat(levy_item[i].style.width) * 5;
-    //     l_h = parseFloat(levy_item[i].style.height) * 5;
-
-    //     l_title = parseFloat(l_h) + "--" + parseFloat(l_w) + "--" + parseFloat(l_b) + "--" + parseFloat(l_l);
-
-    //     l_no = levy_item[i].dataset.levy;
-
-    //     l_tyostot_y = "";
-    //     l_tyostot_x = "";
-
-
-    //     levy_array += l_name + "|" + l_type + "|" + l_b + "|" + l_l + "|" + l_h + "|" + l_w + "|" + l_title + "|" + l_no + "|" + l_tyostot_y + "|" + l_tyostot_x + "|";
-    //   }
-    //   levyt_data = document.querySelector("input.levyt_data");
-    //   levyt_data.value = levy_array;
-    //   realval = levyt_data.value;
-    //   levyt_data.value = realval.replace("_", " ");
-    //   prevdata = levyt_data.value;
-    // }
-    // if (type === "rangat") {
-    //   rangat = document.querySelector("input.rangat");
-    //   rangat.value += array;
-    // }
-    // if (type === "listat") {
-    //   listat = document.querySelector("input.listat");
-    //   listat.value += array;
-    // }
-  }
-  if (moddingtype === "cancel") {
-    if (type === "mp") {
-      cur_mp = document.querySelector('#' + id);
-      cur_mp.remove();
-      names = document.getElementsByName(id);
-      for (var i = 0; i < names.length; i++) {
-        names[i].remove();
-      }
-      inpu = document.querySelector(".mittapisteet");
-      val = inpu.value;
-      pdata = array.replace('"', '');
-      inpu.value = val.replace(pdata, "");
-      mp_previous_vord = pdata.split("|")[1] + "|" + pdata.split("|")[2];
-    }
-    if (type === 'aukot') {
-      inpu = document.querySelector(".aukot");
-      val = inpu.value;
-      pdata = array.replace('"', '');
-      inpu.value = val.replace(pdata, "");
-
-      names = document.getElementsByName(id);
-      for (var i = 0; i < names.length; i++) {
-        names[i].remove();
-      }
-    }
-    if (type === 'lv') {
-      inpu = document.querySelector(".lapiviennit");
-      val = inpu.value;
-      pdata = array.replace('"', '');
-      inpu.value = val.replace(pdata, "");
-
-      names = document.getElementsByName(id);
-      for (var i = 0; i < names.length; i++) {
-        names[i].remove();
-      }
-    }
-  }
-  if (moddingtype === "back") {
-    // if(array) {
-    //    prevdata = array;
-    // }
-    if (prevdata !== null) {
-      if (type === "mp") {
-        inpu = document.querySelector(".mittapisteet");
-        val = inpu.value;
-        if (val.includes(prevdata)) {
-          obj = prevdata.split("|")[4].replace("__", "").toLowerCase();
-          if (document.querySelector('#' + obj) && document.querySelector('#' + obj).dataset.prevcord) {
-            document.querySelector('#' + obj).style.bottom = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[1]) / 5 +
-              "px";
-            document.querySelector('#' + obj).style.left = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[2]) / 5 + "px";
-          }
-          else {
-            if (document.querySelector('#' + obj)) {
-              document.querySelector('#' + obj).remove();
-              mittapiste_count -= 1;
-            }
-            if (document.getElementsByName(obj)) {
-              names = document.getElementsByName(obj);
-              for (var i = 0; i < names.length; i++) {
-                names[i].remove();
-              }
-            }
-            pdata = prevdata.replace('"', '');
-            inpu.value = val.replace(pdata, "");
-          }
-        }
-      }
-      if (type === "aukot") {
-        inpu = document.querySelector(".aukot");
-        val = inpu.value;
-        if (val.includes(prevdata)) {
-          pdata = prevdata.replace('"', '');
-          inpu.value = val.replace(pdata, "");
-          og_id = pdata.split("|")[4].replace('__', '').toLowerCase();
-          aukko = canvas.querySelector("#" + og_id);
-          if (document.querySelector('#' + og_id) && document.querySelector('#' + og_id).dataset.prevcord) {
-            aukko.style.bottom = parseFloat(aukko.dataset.prevcord.split("|")[1]) / 5 + "px";
-            aukko.style.left = parseFloat(aukko.dataset.prevcord.split("|")[2]) / 5 + "px";
-            aukko.style.width = parseFloat(aukko.dataset.prevcord.split("|")[3]) / 5 + "px";
-            aukko.style.height = parseFloat(aukko.dataset.prevcord.split("|")[4]) / 5 + "px";
-            document.querySelector('#' + og_id + ' > .newDiv__height').innerHTML = parseFloat(aukko.style.height) * 5;
-            document.querySelector('#' + og_id + ' > .aukko_inner_lcord').style.bottom = -30 + parseFloat(aukko.style.height) + "px";
-            document.querySelector('#' + og_id + ' > .newDiv__width').innerHTML = parseFloat(aukko.style.width) * 5;
-            document.querySelector('#' + og_id + ' > .aukko_inner_rcord').style.bottom = -30 + parseFloat(aukko.style.height) + "px";
-            document.querySelector('#' + og_id + ' > .aukko_inner_rcord').style.left = -30 + parseFloat(aukko.style.width) + "px";
-            document.querySelector('#' + og_id + ' > .newDiv__y').innerHTML = "Y: " + (parseFloat(aukko.dataset.prevcord.split("|")[1]) +
-              parseFloat(aukko.dataset.prevcord.split("|")[4]));
-            document.querySelector('#' + og_id + ' > .newDiv__x').innerHTML = "X: " + (parseFloat(aukko.style.left) + parseFloat(aukko.style
-              .width));
-          }
-          else {
-            aukko_del(aukko, "");
-          }
-        }
-      }
-      if (type === "lv") {
-        inpu = document.querySelector(".lapiviennit");
-        val = inpu.value;
-        if (val.includes(prevdata)) {
-          pdata = prevdata.replace('"', '');
-          inpu.value = val.replace(pdata, "");
-          obj = prevdata.split("|")[4].replace("__", "");
-          if (document.querySelector('#' + obj) && document.querySelector('#' + obj).dataset.prevcord) {
-            document.querySelector('#' + obj).style.bottom = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[1]) / 5 +
-              "px";
-            document.querySelector('#' + obj).style.left = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[2]) / 5 + "px";
-
-            real_lv = document.querySelector('#' + obj);
-
-            real_lv.querySelector(".lv_lcord").innerHTML = parseFloat(document.querySelector('#' + obj).style.bottom) * 5;
-            real_lv.querySelector(".lv_bcord").innerHTML = parseFloat(document.querySelector('#' + obj).style.left) * 5;
-
-          }
-          else {
-            if (document.querySelector('#' + obj)) {
-              document.querySelector('#' + obj).remove();
-              lapivienti_count -= 1;
-            }
-            if (document.getElementsByName(obj)) {
-              names = document.getElementsByName(obj);
-              for (var i = 0; i < names.length; i++) {
-                names[i].remove();
-              }
-            }
-          }
-        }
-      }
-    }
-    if (type === "sau") {
-      ir_sau_ = document.querySelector(".saumat_dataforback").value;
-      somat = canvas.querySelectorAll(".sauma");
-
-      for (var i = 0; i < somat.length; i++) {
-        somat[i].remove();
-      }
-      document.querySelector(".drawarea__controls_four-pysty").innerHTML = "";
-      document.querySelector(".drawarea__controls_four-vaaka").innerHTML = "";
-
-      ir_sau = ir_sau_.split("__");
-      //SAUMAT 
-      if (ir_sau.length > 1) {
-        for (var i = ir_sau.length - 1; i >= 0; i--) {
-
-          sau_data = ir_sau[i].split("|");
-          if (sau_data.length > 1) {
-            sau_name = sau_data[0];
-            sau_type = sau_data[1];
-            sau_b = sau_data[2];
-            sau_left = sau_data[3];
-            sau_cord = sau_data[4];
-            sau_name = sau_data[5];
-            luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
-            if (sau_type == 'pysty') { }
-            if (sau_type == 'vaaka') { }
-          }
-
-        }
-        alkusaumat();
-        calculateamounts();
-        sauma__verticals = canvas.querySelectorAll(".sauma__vertical");
-        sauma__horizontals = canvas.querySelectorAll(".sauma__horizontal");
-        if (canvas.querySelector(".sauma__vertical")) {
-          for (var i = 0; i < sauma__verticals.length; i++) {
-            if (sauma__verticals[i].querySelector(".sauma__controls_del")) {
-              sauma__verticals[i].querySelector(".sauma__controls_del").innerHTML = i + 1;
-              sauma__verticals[i].dataset.no = i + 1;
-            }
-          }
-          s_v = i + 1;
-        }
-        if (canvas.querySelector(".sauma__horizontal")) {
-          for (var i = 0; i < sauma__horizontals.length; i++) {
-            if (sauma__horizontals[i].querySelector(".sauma__controls_del")) {
-              sauma__horizontals[i].querySelector(".sauma__controls_del").innerHTML = String.fromCharCode(65 + parseFloat(i + 1));
-              sauma__horizontals[i].dataset.no = String.fromCharCode(65 + parseFloat(i + 1));
-            }
-          }
-          s_h = i + 1;
-        }
-
-        dels = canvas.querySelectorAll(".sauma__controls_del");
-
-        for (var i = dels.length - 1; i >= 0; i--) {
-          sauma = dels[i].parentElement.parentElement;
-          if (dels[i].querySelector(".delmeasure")) {
-            delmeasure = dels[i].querySelector(".delmeasure");
-            if (sauma.classList.contains("sauma__vertical")) {
-              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
-            }
-            else if (sauma.classList.contains("sauma__horizontal")) {
-              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
-            }
-          }
-          else {
-
-            delmeasure = document.createElement("div");
-            delmeasure.classList.add("delmeasure");
-            if (sauma.classList.contains("sauma__vertical")) {
-              delmeasure.classList.add("delmeasure_vertical");
-              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
-            }
-            else if (sauma.classList.contains("sauma__horizontal")) {
-              delmeasure.classList.add("delmeasure_horizontal");
-              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
-            }
-
-            dels[i].appendChild(delmeasure);
-          }
-        }
-
-
-
-        saumasize__checkup();
-
-        // sauma_h = canvas.querySelectorAll(".sauma__horizontal");
-        // sauma_v = canvas.querySelectorAll(".sauma__vertical");
-        // sauma_h.forEach(function(j) {
-        //   j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-        //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-        //   });
-        //   j.addEventListener('touchmove', (e) => {
-        //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-        //   });
-        // });
-
-        // sauma_v.forEach(function(j) {
-        //   j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-        //       resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
-        //   });
-        //   j.addEventListener('touchmove', (e) => {
-        //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
-        //   });
-        // });
-
-        setTimeout(function () { levyta(); console.log("LEVYTÄ FIRED") }, 1000);
-
-        calculateamounts();
-      }
-    }
-    prevdata = null;
-  }
-  if (moddingtype === "save") {
-    setTimeout(function () {
-      $('.id').each(function (i, obj) {
-        value = $("#project__building_id").text();
-        $(obj).val(value);
-        var _id = value;
-      });
-
-      var _id = value;
-      saving_array = [];
-      saving_id = $('.id').val();
-      if(document.querySelector("#open_comments")) {
-        room_status = 'prob';
-      }
-      else {
-        room_status = 'measured';
-        if(current_room) {
-          if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("problem")) {
-            room_status = 'problem';
-          }
-          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("prob")) {
-            room_status = 'prob';
-          }
-          else if (document.querySelector(".house__wall_" + current_room.toLowerCase()).classList.contains("hidden")) {
-            room_status = 'hidden';
-          }
-          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("done")) {
-            room_status = 'done';
-          }
-          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("rangatok")) {
-            room_status = 'rangatok';
-          }
-          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("measured")) {
-            room_status = 'measured';
-          }
-          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("nowork")) {
-            room_status = 'nowork';
-          }
-          else {
-            room_status = 'undone';
-          }
-        }
-      }
-      
-      
-
-      saving_origo = parseFloat(document.querySelector("#drawarea__origo_central").style.left) + "|" + parseFloat(document.querySelector(
-        "#drawarea__origo_central").style.bottom);
-      try { _saving_walls = $('.walls_content').val(); } catch(e) { console.log("TRY-CATCH ERROR:", e ); }
-      _a_asetukset = $('.a_asetukset').val();
-      saving_mps = $('.mittapisteet').val();
-      saving_aus = $('.aukot').val();
-      saving_lv = $('.lapiviennit').val();
-      saving_sau = $('.saumat_data').val();
-      saving_lev = $('.levyt_data').val();
-      saving_w = $('#box_w').val();
-      saving_h = $('#box_h').val();
-      saving_cord = saving_h + "|" + saving_w;
-
-      saving_array.push(saving_id);
-      saving_array.push(room_status);
-      saving_array.push(saving_origo);
-      saving_array.push(saving_cord);
-      saving_array.push(saving_mps);
-      saving_array.push(saving_aus);
-      saving_array.push(saving_lv);
-      saving_array.push(saving_sau);
-      saving_array.push(saving_lev);
-      //current_room = 'C';  TEMPORARY FOR TESTING
-
-      if (current_room != null) {
-        if (current_room.toLowerCase() == 'a') {
-          apartment.dataset.aroom = saving_array;
-        }
-        if (current_room.toLowerCase() == 'b') {
-          apartment.dataset.broom = saving_array;
-        }
-        if (current_room.toLowerCase() == 'c') {
-          apartment.dataset.croom = saving_array;
-        }
-        if (current_room.toLowerCase() == 'd') {
-          apartment.dataset.droom = saving_array;
-        }
-        if (current_room.toLowerCase() == 'k') {
-          apartment.dataset.kroom = saving_array;
-        }
-        if (current_room.toLowerCase() == 'l') {
-          apartment.dataset.lroom = saving_array;
-        }
-      }
-      if (document.querySelectorAll("#A")) {
-        a_rooms_ = document.querySelectorAll("#A .project__building_room");
-
-        a_rooms = '';
-
-        for (let i = 0; i < a_rooms_.length; i++) {
-          _name = a_rooms_[i].dataset.room.replaceAll(",", "~").replaceAll("   ", " ");;
-          positionX = a_rooms_[i].dataset.x.replaceAll(",", "~").replaceAll("   ", " ");
-          positionY = a_rooms_[i].dataset.y.replaceAll(",", "~").replaceAll("   ", " ");;
-          a_room = a_rooms_[i].dataset.aroom.replaceAll(",", "~").replaceAll("   ", " ");;
-          b_room = a_rooms_[i].dataset.broom.replaceAll(",", "~").replaceAll("   ", " ");;
-          c_room = a_rooms_[i].dataset.croom.replaceAll(",", "~").replaceAll("   ", " ");;
-          d_room = a_rooms_[i].dataset.droom.replaceAll(",", "~").replaceAll("   ", " ");;
-          k_room = a_rooms_[i].dataset.kroom.replaceAll(",", "~").replaceAll("   ", " ");;
-          l_room = a_rooms_[i].dataset.lroom.replaceAll(",", "~").replaceAll("   ", " ");;
-
-          element = '{"name": "' + _name.toUpperCase() + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
-          a_rooms += element;
-        }
-
-      }
-      else {
-        a_rooms = '';
-      }
-      b_rooms = '';
-      // if(document.querySelectorAll("#B")) {
-      //   b_rooms_ = document.querySelectorAll("#B .project__building_room");
-      //   b_rooms = '';
-
-      //   for (let i = 0; i < b_rooms_.length; i++) {     
-      //     _name = b_rooms_[i].dataset.room.replace(",","~").replace('"','').replace("'","");
-      //     positionX = b_rooms_[i].dataset.x.replace(",","~").replace('"','').replace("'","");
-      //     positionY = b_rooms_[i].dataset.y.replace(",","~").replace('"','').replace("'","");
-      //     a_room = b_rooms_[i].dataset.aroom.replace(",","~").replace('"','').replace("'","");
-      //     b_room = b_rooms_[i].dataset.broom.replace(",","~").replace('"','').replace("'","");
-      //     c_room = b_rooms_[i].dataset.croom.replace(",","~").replace('"','').replace("'","");
-      //     d_room = b_rooms_[i].dataset.droom.replace(",","~").replace('"','').replace("'","");
-      //     k_room = b_rooms_[i].dataset.kroom.replace(",","~").replace('"','').replace("'","");
-      //     l_room = b_rooms_[i].dataset.lroom.replace(",","~").replace('"','').replace("'","");
-
-      //     element = '{"name": "'+_name+'","positionX": '+positionX+',"positionY": '+positionY+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
-      //     b_rooms+=element;
-      //   }
-
-      // }
-      // else {
-      //   b_rooms = '';
-      // }
-      c_rooms = '';
-      // if(document.querySelectorAll("#C")) {
-      //   c_rooms_ = document.querySelectorAll("#C .project__building_room");
-      //   c_rooms = '';
-
-      //   for (let i = 0; i < c_rooms_.length; i++) {     
-      //     _name = c_rooms_[i].dataset.room.replace(",","~").replace('"','').replace("'","");
-      //     positionX = c_rooms_[i].dataset.x.replace(",","~").replace('"','').replace("'","");
-      //     positionY = c_rooms_[i].dataset.y.replace(",","~").replace('"','').replace("'","");
-      //     a_room = c_rooms_[i].dataset.aroom.replace(",","~").replace('"','').replace("'","");
-      //     b_room = c_rooms_[i].dataset.broom.replace(",","~").replace('"','').replace("'","");
-      //     c_room = c_rooms_[i].dataset.croom.replace(",","~").replace('"','').replace("'","");
-      //     d_room = c_rooms_[i].dataset.droom.replace(",","~").replace('"','').replace("'","");
-      //     k_room = c_rooms_[i].dataset.kroom.replace(",","~").replace('"','').replace("'","");
-      //     l_room = c_rooms_[i].dataset.lroom.replace(",","~").replace('"','').replace("'","");
-
-      //     element = '{"name": "'+_name+'","positionX": '+positionX+',"positionY": '+positionY+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
-      //     c_rooms+=element;
-      //   }
-      // }
-      // else {
-      //   c_rooms = '';
-      // }
-
-      if (document.querySelectorAll("#D")) {
-        d_rooms = document.querySelectorAll("#D .project__building_room");
-      }
-      else {
-        d_rooms = '';
-      }
-
-      if (document.querySelectorAll("#E")) {
-        e_rooms = document.querySelectorAll("#E .project__building_room");
-      }
-      else {
-        e_rooms = '';
-      }
-
-      if (document.querySelectorAll("#F")) {
-        f_rooms = document.querySelectorAll("#F .project__building_room");
-      }
-      else {
-        f_rooms = '';
-      }
-
-      if (document.querySelectorAll("#G")) {
-        g_rooms = document.querySelectorAll("#G .project__building_room");
-      }
-      else {
-        g_rooms = '';
-      }
-
-      if (document.querySelectorAll("#H")) {
-        h_rooms = document.querySelectorAll("#H .project__building_room");
-      }
-      else {
-        h_rooms = '';
-      }
-
-      _saving_a_rooms = "[" + a_rooms.replace("'", "") + "]";
-      _saving_b_rooms = "[" + b_rooms.replace("'", "") + "]";
-      _saving_c_rooms = "[" + c_rooms.replace("'", "") + "]";
-      // _saving_d_rooms
-      // _saving_e_rooms
-      // _saving_f_rooms
-      // _saving_g_rooms
-      // _saving_h_rooms
-      settings_aukot_array = document.querySelector("#aukko_settings").value;
-      
-      a_asetukset = _a_asetukset.replace('"', '').replace("'", "");
-      formData = {
-        id: _id.replace('"', '').replace("'", ""),
-        saving_a_rooms: _saving_a_rooms,
-        saving_b_rooms: _saving_b_rooms,
-        saving_c_rooms: _saving_c_rooms,
-        settings: settings_aukot_array.toString(),
-        // saving_d_rooms: _saving_d_rooms,
-        // saving_e_rooms: _saving_e_rooms, 
-        // saving_f_rooms: _saving_f_rooms, 
-        // saving_g_rooms: _saving_g_rooms, 
-        // saving_h_rooms: _saving_h_rooms
-      };
-
-
-      if(aukkotallennus) {
-        if(aukkotallennus == 'aukkotallennus') {
-          settings_aukot = document.querySelectorAll(".aukko__toindex");
-          settings_aukot_array = [];
-          for (let s = 0; s < settings_aukot.length; s++) {
-            settings_aukot_array.push(settings_aukot[s].value);
-          }
-          
-          document.querySelector("#aukko_settings").value = settings_aukot_array.toString();
-          formData = {
-            id: _id.replace('"', '').replace("'", ""),
-            username: document.querySelector("#current_user").value,
-            saving_a_rooms: _saving_a_rooms,
-            saving_b_rooms: _saving_b_rooms,
-            saving_c_rooms: _saving_c_rooms,
-            settings: settings_aukot_array.toString(),
-            // saving_d_rooms: _saving_d_rooms,
-            // saving_e_rooms: _saving_e_rooms, 
-            // saving_f_rooms: _saving_f_rooms, 
-            // saving_g_rooms: _saving_g_rooms, 
-            // saving_h_rooms: _saving_h_rooms
-          };
-        }
-        
-      }
-
-      $.ajax({
-        type: "POST",
-        url: "/updateproject.php",
-        data: formData,
-        error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
-        }
-      }).done(function (data) {
-        // alert('Seinä ' + current_room + ' tallennettu');
-        // console.log("saved Data: " + data);
-      });
-    }, 500);
-  }
-}
-
-function nav_betweenwalls(b) {
-  setTimeout(function () {
+   
     rooms_array = [];
     $('#house .house__wall').each(function (i, obj) {
       wall_name = $(this).find(".house__wall_status").data("room");
@@ -2885,22 +2327,41 @@ function nav_betweenwalls(b) {
       wall_class = $(this).find('.house__wall_status').attr("class");
       rooms_array.push(wall_name + "|" + wall_h + "|" + wall_w + "|" + wall_class);
     });
-    da_houses = document.querySelectorAll(".drawarea__house");
-    for (var a = da_houses.length - 1; a >= 0; a--) {
-      for (var i = 0; i < rooms_array.length; i++) {
-        da_houses[a].querySelectorAll(".house__wall_status")[i].innerHTML = rooms_array[i].split("|")[0].replace("Seinä", "").replace("KATTO",
-          "K").replace("LATTIA", "L").replace(" ", "");
-        classes = rooms_array[i].split("|")[3].split(" ");
-        for (var b = 0; b < classes.length; b++) {
-          da_houses[a].querySelectorAll(".house__wall_status")[i].classList.add(classes[b]);
-        }
-        da_houses[a].querySelectorAll(".wall_height")[i].value = parseFloat(rooms_array[i].split("|")[1]);
-        da_houses[a].querySelectorAll(".wall_width")[i].value = parseFloat(rooms_array[i].split("|")[2]);
-      }
-    }
+    totransfer_elem=elem;
+    wallh_cord = elem.parentElement.querySelector(".wall_height").value;
+    wallw_cord = elem.parentElement.querySelector(".wall_width").value;
+    changesize();
+
+    // da_houses = document.querySelectorAll(".drawarea__house");
+    // for (var a = da_houses.length - 1; a >= 0; a--) {
+    //   for (var i = 0; i < rooms_array.length; i++) {
+    //     da_houses[a].querySelectorAll(".house__wall_status")[i].innerHTML = rooms_array[i].split("|")[0].replace("Seinä", "").replace("KATTO",
+    //       "K").replace("LATTIA", "L").replace(" ", "");
+    //     classes = rooms_array[i].split("|")[3].split(" ");
+    //     for (var b = 0; b < classes.length; b++) {
+    //       da_houses[a].querySelectorAll(".house__wall_status")[i].classList.add(classes[b]);
+    //     }
+    //     da_houses[a].querySelectorAll(".wall_height")[i].value = parseFloat(rooms_array[i].split("|")[1]);
+    //     da_houses[a].querySelectorAll(".wall_width")[i].value = parseFloat(rooms_array[i].split("|")[2]);
+    //   }
+    // }
+
+    // document.querySelector(".tohide__room_"+current_room.toLowerCase() + " .wall_height").value = wallh_cord;
+    // document.querySelector(".tohide__room_"+current_room.toLowerCase() + " .wall_width").value = wallw_cord;
+  
+    
+    // drawarea_h.value = wallh_cord;
+    // drawarea_w.value = wallw_cord;
+
+    // console.log()
+
+    // changesize();
+    // transfer__height_cords(totransfer_elem);
     $('.walls').val(rooms_array);
     
-  }, 1000);
+
+    
+  }, 2000);
 }
 
 function initializeroom(room, menu) {
@@ -2939,7 +2400,7 @@ function initializeroom(room, menu) {
   }
 
 
-  room_status = ir_value.split(",")[1];
+  room_status = ir_value.replaceAll(",","~").split("~")[1];
   // INITIALIZE CURRENT STATUS DA
   da_roomnav = document.querySelectorAll(".house__wall");
   for (var i = da_roomnav.length - 1; i >= 0; i--) {
@@ -2976,7 +2437,7 @@ function initializeroom(room, menu) {
       ir_value = apartment.dataset.lroom;
     }
 
-    room_status = ir_value.split(",")[1];
+    room_status = ir_value.replaceAll(",","~").split("~")[1];
     // INITIALIZE CURRENT STATUS DA
     da_roomnav = document.querySelectorAll(".house__wall");
     for (var i = da_roomnav.length - 1; i >= 0; i--) {
@@ -3098,15 +2559,15 @@ function initializeroom(room, menu) {
       }
       // document.querySelector("div.levyt").remove();
     }
-    if (canvas.querySelector(".tyostot__grandrow") && input_step != 'drawscreen_section_six' && input_step != 'drawscreen_section_seven' && input_step != 'drawscreen_section_eight' && input_step != 'drawscreen_section_nine' && input_step != 'drawscreen_section_esikatselu') {
-      canvas.querySelector(".tyostot__grandrow").remove();
+    if (canvas.querySelector(".rangat__grandrow") && input_step != 'drawscreen_section_six' && input_step != 'drawscreen_section_seven' && input_step != 'drawscreen_section_eight' && input_step != 'drawscreen_section_nine' && input_step != 'drawscreen_section_esikatselu') {
+      canvas.querySelector(".rangat__grandrow").remove();
     }
     if (canvas.querySelector(".listat__grandrow")) {
       canvas.querySelector(".listat__grandrow").remove();
     }
     // STOP CLEARING
     if (ir_value.length > 5) {
-      ir_splitted = ir_value.split(",");
+      ir_splitted = ir_value.replaceAll(",","~").split("~");
       ir_id = ir_splitted[0];
       ir_status = ir_splitted[1];
       ir_origo = ir_splitted[2];
@@ -3148,8 +2609,8 @@ function initializeroom(room, menu) {
       ir_mps = ir_splitted[4].split("__");
       ir_aus = ir_splitted[5].split("__");
       ir_lv = ir_splitted[6].split("__");
-      ir_sau = ir_splitted[7].split("__");
-      ir_lev = ir_splitted[8].split("__");
+      ir_sau = ""; // ir_splitted[7].split("__");
+      ir_lev = ""; // ir_splitted[8].split("__");
       ir_kin = ""; //ir_splitted[5].split("__");
       ir_ran = ""; //ir_splitted[5].split("__");
       ir_lis = ""; //ir_splitted[5].split("__");
@@ -3866,15 +3327,15 @@ function takeshot(arg) {
   let div = document.querySelector("body > section.row.drawarea__section > div.drawarea__section_container");
   if (arg === 0) {
     output = document.getElementById('levyt__havainnekuva');
-    img_name = "Havainnekuva_Levyt"
+    img_name = current_tila+"_Seina_"+current_room+"_Levyt";
   }
   else if (arg === 1) {
     output = document.getElementById('rangat__havainnekuva');
-    img_name = "Havainnekuva_Rangat"
+    img_name = current_tila+"_Seina_"+current_room+"_Rangat";
   }
   else if (arg === 2) {
     output = document.getElementById('listat__havainnekuva');
-    img_name = "Havainnekuva_Listat"
+    img_name = current_tila+"_Seina_"+current_room+"_Listat";
   }
   // else if(arg === 3) {
   //    output = document.getElementById('ikkunalistat__havainnekuva');
@@ -4150,3 +3611,1969 @@ function kumoa() {
   });
 }
 
+
+
+function send__value(val, metakey) {
+  formData = {
+      pr_id: document.querySelector("#current_project_id").value,
+      meta: metakey,
+      value: val
+  },
+
+  $.ajax({
+    type: "POST",
+    url: "/vendor/updatemeta.php",
+    data: formData,
+    error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+    }
+  }).done(function (data) {
+
+  });
+}
+
+
+function initializecropping() {
+  tables = document.querySelectorAll(".tablepreview");
+
+  for (let t = 0; t < tables.length; t++) {
+    if(tables[t].querySelectorAll(".project__building_room").length > 1) {
+      pbr = tables[t].querySelectorAll(".project__building_room");
+      pbr_array = [];
+      pbr_array_x = [];
+      for (let r = 0; r < pbr.length; r++) {
+        if(isNaN(parseFloat(pbr[r].dataset.y)) === false) {
+          pbr_array.push(parseFloat(pbr[r].dataset.y));
+        }
+      }
+
+      for (let r = 0; r < pbr.length; r++) {
+        if(isNaN(parseFloat(pbr[r].dataset.x)) == false) {
+          pbr_array_x.push(parseFloat(pbr[r].dataset.x));
+        }
+      }
+      max_pbrarray = Math.max(...pbr_array);
+      max_pbrarray_x = Math.max(...pbr_array_x);
+      rowcount = 1+ max_pbrarray;
+      rowcount_x = max_pbrarray_x+1;
+      tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
+      tables[t].querySelector(".project__building").style.height = tables[t].style.maxHeight;
+      tables[t].style.maxWidth = "calc("+rowcount_x+"*80px + 3px)";
+      tables[t].style.overflowX = "clip";
+    }
+    
+
+    // clip-pathinset(0 0 240px 0)
+    
+  }
+}
+
+function settings__modal_open(e) {
+  asmodal_mode = e.dataset.asmodal_mode;
+
+  document.querySelector("."+asmodal_mode).classList.add("two");
+  document.querySelector("."+asmodal_mode).classList.remove("out");
+}
+
+initializecropping(); 
+
+function initializesettings__mittaus() {
+
+  
+
+  formData = {
+      pr_id: parseFloat(document.querySelector("#current_project_id").value),
+      key: 's_settings'
+  };
+
+  $.ajax({
+    type: "POST",
+    url: "vendor/get-presetid.php",
+    data: formData,
+    error: function (jqxhr, status, exception) {
+      //alert('Tietokantavirhe, soita numeroon +358449782028');
+    }
+  }).done(function (settings) {
+    preset_id = settings;
+  });
+
+  rankatype_array = ["","Saumaranka","Väliranka","Päättöranka","Kulmaranka","ikkunaranka"];
+  
+  trs =["lapiviennit__tbody","systems__tbody","reikaframe__tbody","levytysreunat__tbody","ranka__tbody_eight","ranka__tbody_seven","ranka__tbody_six","ranka__tbody_five","ranka__tbody_four","ranka__tbody_three","ranka__tbody_two","ranka__tbody_one","materials__tbody","saumapysty__tbody","saumavaaka__tbody","ranka__tbody","listapysty__tbody","listavaaka__tbody"];
+  for (let a = 0; a < trs.length; a++) {
+    tds = document.querySelectorAll("."+trs[a]+" tr:not(.headingrow)");
+
+    tds.forEach(td => {
+      td.remove();
+    });
+  }
+
+  hs = document.querySelector("#hole_set");
+  hs.innerHTML = "";
+  
+  setTimeout(() => {
+    formData = {
+        preset_id: preset_id
+    };
+    $.ajax({
+      type: "POST",
+      url: "vendor/get-presetsettings.php",
+      data: formData,
+      error: function (jqxhr, status, exception) {
+        //alert('Tietokantavirhe, soita numeroon +358449782028');
+      }
+    }).done(function (settings) {
+      let settings_array = settings.split("],[");
+
+      settings.split("],[").forEach((setting) => {
+        
+        key = setting.split('","')[2];
+        v_ = setting.replaceAll(String.fromCharCode(92),"").replaceAll(/u00f6/g,decode_utf8(encode_utf8('\u00f6'))).replaceAll(/u00e4/g,decode_utf8(encode_utf8('\u00e4'))).replaceAll("[","").replaceAll("]","").split('","')[3];
+        
+        if(key == 's_materials') {
+          t = document.querySelector(".materials__tbody");
+          v_.split("~~").forEach((v) => {
+            v=v.replaceAll('"','').split(",");
+  
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+
+              sauma__presets = document.querySelector("#sauma__presets");
+              sauma__presets_2 = document.querySelector("#sauma__presets_2");
+
+              img = "";
+              if(v[8].length > 4) {
+                img = `style="background-image: url('/uploads/${v[8]}');"`;
+              }
+              sauma__presets.innerHTML += `
+              <td>
+              <input type="radio" data-levysku="${v[1]}" data-levystructure="${v[7]}" data-levythickness="${v[6]}" data-levyimg="${v[8]}" data-h="${v[2]}" data-w="${v[3]}" data-aihioh="${v[4]}" data-aihiow="${v[5]}" name="sauma_material" onclick="change__sauma_koko(this);" id="sauma_material`+count+`">
+                <label for="sauma_material`+count+`" ${img}>${v[1]}</label>
+              </td>`;
+              sauma__presets_2.innerHTML += `
+              <td>
+                <input type="radio" data-sku="${v[1]}" data-structure="${v[7]}" data-thickness="${v[6]}" data-img="${v[8]}" data-h="${v[2]}" data-w="${v[3]}" data-aihioh="${v[4]}" data-aihiow="${v[5]}" name="levyn_vari" id="levy_vari_`+count+`">
+                <label onclick="levy__interaction(1,this);" class="levy__label" for="levy_vari_`+count+`" ${img}>${v[1]}</label>
+              </td>`;
+            }
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" name="admin_material" value="" onclick="this.checked ? this.value = 'on' : this.value = '';" id="material_`+count+`" ${checked}>
+                <label for="material_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+                <td>
+                    <input type="text" value="${v[1]}" class="lineinput" oninput="">
+                </td>
+                <td>
+                    <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                </td>
+                <td>
+                    <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                </td>
+                <td>
+                    <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                </td>
+                <td>
+                    <input type="text" value="${v[5]}" class="lineinput" oninput="">
+                </td>
+                <td>
+                    <input type="text" value="${v[6]}" class="lineinput" oninput="">
+                </td>
+                <td>
+                    <input type="text" value="${v[7]}" class="lineinput" oninput="">
+                </td>
+                `;
+  
+              if(v.length > 5 && v[8].length > 5) {
+                row.innerHTML += '<td><img src="/uploads/'+v[8]+'" style="max-width: 100px"><input type="hidden" class="fileinput_value" value="'+v[8]+'"></td>';
+              }
+              else {
+                row.innerHTML += `
+                  <td>
+                      <input type="file" class="fileinput">
+                      <input type="hidden" class="fileinput_value" value="">
+                      <div class="send_material_btn">Ammu kuva sisään</div>
+                  </td>`;
+              }
+            t.appendChild(row);
+          });
+        }
+        
+        if(key == 's_levytysreunat') {
+          t = document.querySelector(".levytysreunat__tbody");
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+            }
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="lvreunat_`+count+`" ${checked}>
+                <label for="lvreunat_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[5]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[6]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[12]}" class="lineinput">
+              </td>
+              <td>
+                  <input type="text" value="${v[13]}" class="lineinput">
+              </td>
+              `;
+            t.appendChild(row);
+          });
+        }
+
+        for (let i = 1; i < 6; i++) {
+     
+          if(key == 's_aukot_'+i) {
+            if(i == 1) {
+              h2 = '<h2>Oviaukon asetukset</h2>';
+              typeclass = 'ovi';
+            }
+            else if(i == 2) {
+              h2 = '<h2>Ikkuna-aukon asetukset</h2>';
+              typeclass = 'ikkuna';
+            }
+            
+            else if(i == 3) {
+              h2 = '<h2>Pilariaukon asetukset</h2>';
+              typeclass = 'pilari';
+            }
+            
+            else if(i == 4) {
+              h2 = '<h2>Palkkiaukon asetukset</h2>';
+              typeclass = 'palkki';
+            }
+            
+            else if(i == 5) {
+              h2 = '<h2>Ilmastointiaukon asetukset</h2>';
+              typeclass = 'ilmastointi';
+            }
+  
+            newsection = document.createElement("section");
+            newsection.classList = typeclass+"_section";
+            newsection.dataset.aukkotype = typeclass;
+            newsection.dataset.count = i;
+  
+            newsection_h4 = document.createElement("h4");
+            newsection_h4.classList = typeclass+"__asetusheading";
+            newsection_h4.innerHTML = typeclass+" aukko-asetus, Tyyppi <b></b>";
+  
+            newsection_table = document.createElement("table");
+            newsection_table.classList.add("tabs__target_table");
+            newsection_table.classList.add("aukko-table");
+            newtr = document.createElement("tr");
+            newtr.classList = "headingrow";
+            newtr.innerHTML = `
+                  <td>Aukkojen tyypit</td>
+                  <td>Max</td>
+                  <td>Min</td>
+                  <td>Ranka</td>
+                  <td>Rangan pituus</td>
+                  <td>+	Rangan laatu</td>
+                  <td>Lisäranka</td>
+                  <td>Listat</td>
+                  <td>Listan pituus +</td>
+                  <td>Listan laatu</td>`;
+  
+            count_rows = 0;
+  
+            newsection.appendChild(newsection_h4);
+            newsection.appendChild(newsection_table);
+            newsection_table.appendChild(newtr);
+            
+            v_.split("~~").forEach((v) => {
+              counting_item = 0;
+              if(count_rows == 4) {
+                newsection_h4 = document.createElement("h4");
+                newsection_h4.classList = typeclass+"__asetusheading";
+                newsection_h4.innerHTML = typeclass+" aukko-asetus, Tyyppi <b></b>";
+  
+                newsection_table = document.createElement("table");
+                newsection_table.classList.add("tabs__target_table");
+                newsection_table.classList.add("aukko-table");
+                newtr = document.createElement("tr");
+                newtr.classList = "headingrow";
+                newtr.innerHTML = `
+                      <td>Aukkojen tyypit</td>
+                      <td>Max</td>
+                      <td>Min</td>
+                      <td>Ranka</td>
+                      <td>Rangan pituus</td>
+                      <td>+	Rangan laatu</td>
+                      <td>Lisäranka</td>
+                      <td>Listat</td>
+                      <td>Listan pituus +</td>
+                      <td>Listan laatu</td>`;
+                  newsection_table.appendChild(newtr);
+                    
+  
+                count_rows = 0;
+                newsection.appendChild(newsection_h4);
+                newsection.appendChild(newsection_table);
+  
+                count_rows=0;
+              }
+              v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+              newtr = document.createElement("tr");
+              if(v.length > 1) {
+                v.forEach(vchild => {
+                  counting_item +=1;
+                  if(counting_item == 2 || counting_item == 3) {
+                    newtr.innerHTML += `
+                    <td>
+                      <input type="number" data-key="s_aukot_${i}" value="${vchild}" class='lineinput'>
+                    </td>`;
+                  }
+                  else {
+                    newtr.innerHTML += `
+                      <td>
+                        <input type='text' data-key="s_aukot_${i}" value="${vchild}" class='lineinput'>
+                      </td>`;
+                  }
+                });
+              }
+              newsection_table.appendChild(newtr);
+              count_rows+=1;
+            });
+  
+            newdiv = document.createElement("div");
+            newdiv.classList = "newtableshere";
+            newsection.appendChild(newdiv);
+            hs.appendChild(newsection);
+            
+          }
+         
+        }
+
+        if(key == 's_reikaframe') {
+          t = document.querySelector(".reikaframe__tbody");
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[1] == 'on') {
+              checked = 'checked';
+            }
+            row.innerHTML += `
+             
+              
+              <td>
+                  <input type="text" value="${v[0]}" class="lineinput" oninput="">
+              </td>
+              
+              <td>
+                <input type="checkbox" value="${v[1]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="reikaframe_`+count+`" ${checked}>
+                <label for="reikaframe_`+count+`"></label>
+              </td>
+              
+              `;
+            t.appendChild(row);
+          });
+        }
+  
+        if(key == 's_lapiviennit') {
+          dt = document.querySelector(".drawarea__top");
+          t = document.querySelector(".lapiviennit__tbody");
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+
+              additional_lvclass = "";
+              measurements = "";
+
+              if(v[3].length > 0 && v[4].length > 0) {
+                additional_lvclass = "drawarea__top_circle drawarea__top_rect";
+                measurements = "'"+v[3] + "x" + v[4]+"'";
+              }
+              else if(v[3].length > 0) {
+                additional_lvclass = "drawarea__top_circle";
+                measurements = v[3];
+              }
+              dt.innerHTML += `<div class="drawarea__top_item ${additional_lvclass}" style="background: #eee;display:flex;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = ${measurements};">${v[1]}</div>`;
+
+            }
+            else {
+              return
+            }
+            checked2 = '';
+            if(v[5] == 'on') {
+              checked2 = 'checked';
+            }
+            
+             
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="lapivienti_`+count+`" ${checked}>
+                <label for="lapivienti_`+count+`"></label>
+              </td>
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                <input type="checkbox" value="${v[5]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="lapivienti_dust_`+count+`" ${checked2}>
+                <label for="lapivienti_dust_`+count+`"></label>
+              </td>
+              `;
+            t.appendChild(row);
+
+
+          });
+
+          dt.innerHTML += `<div class="drawarea__top_item drawarea__top_circle drawarea__top_custom" style="background: #eee;" onclick="document.querySelector('#lapiviennit__sade_muucord').value = '';settings__mitta();">x</div>`;
+          dt.innerHTML += `<div class="drawarea__top_item drawarea__top_circle drawarea__top_custom" style="border-radius: 0;background: #eee;" onclick="document.querySelector('#lapiviennit__sade_muucord').value = '100x100';settings__mitta();">x</div>`
+
+        }
+
+        if(key == 's_saumakulku') {
+          sauma__xkulku = document.getElementsByName("sauma__saumoitus_x");
+          sauma__ykulku = document.getElementsByName("sauma__saumoitus_y");
+  
+          v_ = v_.replaceAll('"','');
+  
+          if(v_.split("~~")[0] == 'yli') {
+            sauma__xkulku[0].checked = true;
+          }
+          else if(v_.split("~~")[0] == 'mukaan') {
+            sauma__xkulku[1].checked = true;
+          }
+  
+          if(v_.split("~~")[1] == 'yli') {
+            sauma__ykulku[0].checked = true;
+          }
+          else if(v_.split("~~")[1] == 'mukaan') {
+            sauma__ykulku[1].checked = true;
+          }
+        }
+  
+        if(key == 's_saumasuunta') {
+          v_ = v_.replaceAll('"','');
+  
+          if(v_ == 'levytys_pystyyn') {
+            document.querySelector("#settings__sauma_pysty").checked = true;
+          }
+          else if(v_ == 'levytys_vaakaan') {
+            document.querySelector("#settings__sauma_vaaka").checked = true;
+          }
+        }
+  
+        if(key == 's_saumatyyppi') {
+  
+          saumat__xkulku = document.getElementsByName("sauma__xtype");
+          saumat__ykulku = document.getElementsByName("sauma__ytype");
+  
+          v_ = v_.replaceAll('"','');
+  
+          if(v_.split("~~")[0] == 'oik') {
+            saumat__xkulku[0].checked = true;
+          }
+          else if(v_.split("~~")[0] == 'vas') {
+            saumat__xkulku[1].checked = true;
+          }
+          else if(v_.split("~~")[0] == 'tasoitus') {
+            saumat__xkulku[2].checked = true;
+          }
+          if(v_.split("~~")[1] == 'yla') {
+            saumat__ykulku[0].checked = true;
+          }
+          else if(v_.split("~~")[1] == 'ala') {
+            saumat__ykulku[1].checked = true;
+          }
+          else if(v_.split("~~")[1] == 'vaakatasoitus') {
+            saumat__ykulku[2].checked = true;
+          }
+  
+        }
+
+        if(key == 's_saumatpysty') {
+          t = document.querySelector(".saumapysty__tbody");
+          v_.split("~~").forEach((v) => {
+            v=v.replaceAll('"','').split(",");
+  
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+            }
+            else {
+              return
+            }
+           
+            row.innerHTML += `
+                <td>
+                    <input type="text" value="${v[1]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" value="${v[2]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" value="${v[3]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" value="${v[4]}" class="lineinput">
+                </td>
+                `;
+            t.appendChild(row);
+          });
+          saumaset_vm = parseFloat(document.querySelector(".saumapysty__tbody td:nth-child(2) > input").value);
+        }
+  
+        if(key == 's_saumatvaaka') {
+          t = document.querySelector(".saumavaaka__tbody");
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+  
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+
+            }
+            else {
+              return
+            }
+           
+            row.innerHTML += `
+                <td>
+                    <input type="text" value="${v[1]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" value="${v[2]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" value="${v[3]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" value="${v[4]}" class="lineinput">
+                </td>
+                `;
+            t.appendChild(row);
+          });
+          saumaset_hm = parseFloat(document.querySelector(".saumavaaka__tbody td:nth-child(2) > input").value);
+        }
+
+        if(key == 's_rangat_1') {
+          t = document.querySelector(".ranka__tbody_one");
+          t.style.display = "none";
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+  
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+              t.style.display = "table";
+            }
+            else {
+              return
+            }
+  
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+              if(v[13] == rankatype_array[i]) {
+                r_options += "<option selected>"+rankatype_array[i]+"</option>";
+              }
+              else {
+                r_options += "<option>"+rankatype_array[i]+"</option>";
+  
+              }            
+            }
+            
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_one_`+count+`" ${checked}>
+                <label for="ranka_one_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              
+              `;
+            t.appendChild(row);
+  
+          });
+        }
+        if(key == 's_rangat_2') {
+          t = document.querySelector(".ranka__tbody_two");
+          t.style.display = "none";
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+              t.style.display = "table";
+            }
+            else {
+              return
+            }
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+              if(v[13] == rankatype_array[i]) {
+                r_options += "<option selected>"+rankatype_array[i]+"</option>";
+              }
+              else {
+                r_options += "<option>"+rankatype_array[i]+"</option>";
+  
+              }            
+            }
+  
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_two_`+count+`" ${checked}>
+                <label for="ranka_two_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              
+              
+              `;
+            t.appendChild(row);
+        
+  
+          });
+        }
+        if(key == 's_rangat_3') {
+          t = document.querySelector(".ranka__tbody_three");
+          t.style.display = "none";
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+              t.style.display = "table";
+            }
+            else {
+              return
+            }
+  
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+              if(v[13] == rankatype_array[i]) {
+                r_options += "<option selected>"+rankatype_array[i]+"</option>";
+              }
+              else {
+                r_options += "<option>"+rankatype_array[i]+"</option>";
+  
+              }            
+            }
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_three_`+count+`" ${checked}>
+                <label for="ranka_three_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              
+              `;
+            t.appendChild(row);
+        
+  
+          });
+        }
+        if(key == 's_rangat_4') {
+          t = document.querySelector(".ranka__tbody_four");
+          t.style.display = "none";
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+              t.style.display = "table";
+            }
+            else {
+              return
+            }
+  
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+              if(v[13] == rankatype_array[i]) {
+                r_options += "<option selected>"+rankatype_array[i]+"</option>";
+              }
+              else {
+                r_options += "<option>"+rankatype_array[i]+"</option>";
+  
+              }            
+            }
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_four_`+count+`" ${checked}>
+                <label for="ranka_four_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              
+              `;
+            t.appendChild(row);
+        
+  
+          });
+        }
+        if(key == 's_rangat_5') {
+          t = document.querySelector(".ranka__tbody_five");
+          t.style.display = "none";
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+              t.style.display = "table";
+            }
+            else {
+              return
+            }
+  
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+              if(v[13] == rankatype_array[i]) {
+                r_options += "<option selected>"+rankatype_array[i]+"</option>";
+              }
+              else {
+                r_options += "<option>"+rankatype_array[i]+"</option>";
+  
+              }            
+            }
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_five_`+count+`" ${checked}>
+                <label for="ranka_five_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              
+              `;
+            t.appendChild(row);
+        
+  
+          });
+        }
+        if(key == 's_rangat_6') {
+          t = document.querySelector(".ranka__tbody_six");
+          t.style.display = "none";
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+              t.style.display = "table";
+            }
+            else {
+              return
+            }
+  
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+              if(v[13] == rankatype_array[i]) {
+                r_options += "<option selected>"+rankatype_array[i]+"</option>";
+              }
+              else {
+                r_options += "<option>"+rankatype_array[i]+"</option>";
+  
+              }            
+            }
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_six_`+count+`" ${checked}>
+                <label for="ranka_six_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              
+              `;
+            t.appendChild(row);
+        
+  
+          });
+        }
+        if(key == 's_rangat_7') {
+          t = document.querySelector(".ranka__tbody_seven");
+          t.style.display = "none";
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+              t.style.display = "table";
+            }
+            else {
+              return
+            }
+  
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+              if(v[13] == rankatype_array[i]) {
+                r_options += "<option selected>"+rankatype_array[i]+"</option>";
+              }
+              else {
+                r_options += "<option>"+rankatype_array[i]+"</option>";
+  
+              }            
+            }
+  
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_seven_`+count+`" ${checked}>
+                <label for="ranka_seven_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              
+              `;
+            t.appendChild(row);
+        
+  
+          });
+        }
+        if(key == 's_rangat_8') {
+          t = document.querySelector(".ranka__tbody_eight");
+          t.style.display = "none";
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+              t.style.display = "table";
+            }
+            else {
+              return
+            }
+  
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+              if(v[13] == rankatype_array[i]) {
+                r_options += "<option selected>"+rankatype_array[i]+"</option>";
+              }
+              else {
+                r_options += "<option>"+rankatype_array[i]+"</option>";
+  
+              }            
+            }
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_eight_`+count+`" ${checked}>
+                <label for="ranka_eight_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              
+              `;
+            t.appendChild(row);
+        
+  
+          });
+        }
+
+        if(key == 's_listatpysty') {
+          t = document.querySelector(".listapysty__tbody");
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+            }
+            else {
+              return
+            }
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="listatpysty_`+count+`" ${checked}>
+                <label for="listatpysty_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              `;
+            t.appendChild(row);
+          });
+        }
+  
+        if(key == 's_listatvaaka') {
+          t = document.querySelector(".listavaaka__tbody");
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+        
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+              checked = 'checked';
+            }
+            else {
+              return
+            }
+            row.innerHTML += `
+              <td>
+                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="listatvaaka_`+count+`" ${checked}>
+                <label for="listatvaaka_`+count+`"></label>
+              </td>`;
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[1]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              `;
+            t.appendChild(row);
+          });
+        }
+
+
+
+      });
+
+    });
+    givenewtype();
+  },1250);
+
+  
+}
+initializesettings__mittaus();
+
+
+function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
+  setTimeout(function () {
+    var input_step = $('#step_drawscreen').val();
+    $('.id').each(function (i, obj) {
+      value = $("#project__building_id").text();
+      $(obj).val(value);
+      var _id = value;
+    });
+    var _id = value;
+    $('.wall').each(function (i, obj) {
+      value = $(b).text();
+      $(obj).val(value);
+      var _wall = value;
+    });
+    var _wall = value;
+    $('.room').each(function (i, obj) {
+      value = $('#roomname').val();
+      $(obj).val(value);
+      var _room = value;
+    });
+    var _room = value;
+    $('.step').each(function (i, obj) {
+      value = "drawscreen_section_zero";
+      $(obj).val(value);
+      var _step = value;
+    });
+    var _step = value;
+    $('.settings').each(function (i, obj) {
+      value = "{}";
+      $(obj).val(value);
+      var _settings = value;
+    });
+    var _settings = value;
+    $('.kokonaisalue').each(function (i, obj) {
+      h = $(this).parent().find('input.wall_height').val();
+      w = $(this).parent().find('input.wall_width').val();
+      value = h + " " + w;
+      $(obj).val(value);
+      var _kokonaisalue = value;
+    });
+    value = h + "|" + w;
+    var _kokonaisalue = value;
+    $('.levytettava_alue').each(function (i, obj) {
+      h = $('.drawarea__h_cord').text();
+      w = $('.drawarea__w_cord').text();
+      value = h + " " + w;
+      $(obj).val(value);
+    });
+    var _levytettava_alue = value;
+    $('.poisjaava_alue').each(function (i, obj) {
+      u = $('.box__upper_mm').text();
+      r = $('.box__right_mm').text();
+      _u = $('.box__lower_mm').text();
+      _r = $('.box__left_mm').text();
+      value = u + "," + r + "," + _u + "," + _r;
+      $(obj).val(value);
+    });
+    var _poisjaava_alue = value;
+    $('.keskusmittapiste_cord').each(function (i, obj) {
+      l = $("#drawarea__origo_central").css("left");
+      t = $("#drawarea__origo_central").css("bottom");
+      value = l + "," + t;
+      $(obj).val(value);
+    });
+    $('.room_status').each(function (i, obj) {
+     
+      value = room_status;
+      $(obj).val(value);
+    });
+    var _keskusmittapiste_cord = value;
+    const x = [];
+    $('.reklamaatiot').each(function (i, obj) {
+      if ($("#mitta__huomiot")) {
+        if ($('#m__a_sahko').is(':checked')) {
+          x.push("sahko,");
+        }
+        else if ($('#m__a_putki').is(':checked')) {
+          x.push("putki,");
+        }
+        else if ($('#m__a_tornado').is(':checked')) {
+          x.push("jotain,");
+        }
+        else if ($('#comment__importance').is(':checked')) {
+          x.push("tarkea");
+        }
+        x.push($('#mitta__huomiot').val());
+        x.push($('#mittapiste_comment').val());
+        x.push($('#mittapiste_comment_from').val());
+        x.push($('#mittapiste_comment_to').val());
+        $(obj).val(x);
+      }
+    });
+    var _reklamaatiot = x;
+    var _listat = value;
+  }, 1000);
+  if (moddingtype === "adding") {
+    prevdata = array;
+    if (type === "mp") {
+      mps = document.querySelector("input.mittapisteet");
+      mps.value += array;
+    }
+    if (type === "aukot") {
+      aukkos = document.querySelector("input.aukot");
+      aukkos.value += array;
+    }
+    if (type === "lv") {
+      lapiviennit = document.querySelector("input.lapiviennit");
+      lapiviennit.value += array;
+    }
+    // if (type === "sau") {
+    //   array = [];
+    //   saumat_data = document.querySelector("input.saumat_data");
+
+
+    //   if (saumat_data.value.length > 2) {
+    //     document.querySelector("input.saumat_dataforback").value = saumat_data.value;
+    //   }
+    //   saumat_data.value = "";
+    //   v_s = document.querySelectorAll('.verticalrow_saumat > div');
+    //   h_s = document.querySelectorAll('.horizontalrow_saumat > div');
+    //   for (var i = 0; i < v_s.length; i++) {
+    //     vs_name = parseFloat(v_s[i].dataset.no);
+    //     vs_type = "pysty";
+    //     vs_b = 0;
+    //     vs_left = parseFloat(v_s[i].style.left);
+    //     vs_cord = v_s[i].querySelector(".sauma__vertical_ctrl").value;
+    //     array += vs_name + "|" + vs_type + "|" + vs_b + "|" + vs_left + "|" + vs_cord + "|" + vs_name + "__";
+    //   }
+    //   for (var i = 0; i < h_s.length; i++) {
+    //     vs_name = h_s[i].dataset.no;
+    //     vs_type = "vaaka";
+    //     vs_b = parseFloat(h_s[i].style.bottom);
+    //     vs_left = 0;
+    //     vs_cord = h_s[i].querySelector(".sauma__horizontal_ctrl").value;
+    //     array += vs_name + "|" + vs_type + "|" + vs_b + "|" + vs_left + "|" + vs_cord + "|" + vs_name + "__";
+    //   }
+    //   saumat_data = document.querySelector("input.saumat_data");
+    //   saumat_data.value = array;
+    //   realval = saumat_data.value;
+    //   saumat_data.value = realval.replace(",", "__");
+
+
+    //   prevdata = document.querySelector("input.saumat_dataforback").value;
+    // }
+    // if (type === "lev") {
+    //   levy_array = [];
+    //   levyt_data = document.querySelector("input.levyt_data");
+    //   levyt_data.value = "";
+    //   levy_item = canvas.querySelectorAll('.levy');
+    //   for (var i = 0; i < levy_item.length; i++) {
+
+    //     l_name = levy_item[i].querySelector(".levy_name").innerHTML;
+    //     if (levy_item[i].classList.contains("dir_y")) {
+    //       l_type = "pysty";
+    //     }
+    //     else if (levy_item[i].classList.contains("dir_x")) {
+    //       l_type = "vaaka";
+    //     }
+    //     l_title = levy_item[i].title;
+
+    //     l_b = parseFloat(levy_item[i].style.bottom) * 5;
+    //     l_l = parseFloat(levy_item[i].style.left) * 5;
+    //     l_w = parseFloat(levy_item[i].style.width) * 5;
+    //     l_h = parseFloat(levy_item[i].style.height) * 5;
+
+    //     l_title = parseFloat(l_h) + "--" + parseFloat(l_w) + "--" + parseFloat(l_b) + "--" + parseFloat(l_l);
+
+    //     l_no = levy_item[i].dataset.levy;
+
+    //     l_tyostot_y = "";
+    //     l_tyostot_x = "";
+
+
+    //     levy_array += l_name + "|" + l_type + "|" + l_b + "|" + l_l + "|" + l_h + "|" + l_w + "|" + l_title + "|" + l_no + "|" + l_tyostot_y + "|" + l_tyostot_x + "|";
+    //   }
+    //   levyt_data = document.querySelector("input.levyt_data");
+    //   levyt_data.value = levy_array;
+    //   realval = levyt_data.value;
+    //   levyt_data.value = realval.replace("_", " ");
+    //   prevdata = levyt_data.value;
+    // }
+    // if (type === "rangat") {
+    //   rangat = document.querySelector("input.rangat");
+    //   rangat.value += array;
+    // }
+    // if (type === "listat") {
+    //   listat = document.querySelector("input.listat");
+    //   listat.value += array;
+    // }
+  }
+  if (moddingtype === "cancel") {
+    if (type === "mp") {
+      cur_mp = document.querySelector('#' + id);
+      cur_mp.remove();
+      names = document.getElementsByName(id);
+      for (var i = 0; i < names.length; i++) {
+        names[i].remove();
+      }
+      inpu = document.querySelector(".mittapisteet");
+      val = inpu.value;
+      pdata = array.replace('"', '');
+      inpu.value = val.replace(pdata, "");
+      mp_previous_vord = pdata.split("|")[1] + "|" + pdata.split("|")[2];
+    }
+    if (type === 'aukot') {
+      inpu = document.querySelector(".aukot");
+      val = inpu.value;
+      pdata = array.replace('"', '');
+      inpu.value = val.replace(pdata, "");
+
+      names = document.getElementsByName(id);
+      for (var i = 0; i < names.length; i++) {
+        names[i].remove();
+      }
+    }
+    if (type === 'lv') {
+      inpu = document.querySelector(".lapiviennit");
+      val = inpu.value;
+      pdata = array.replace('"', '');
+      inpu.value = val.replace(pdata, "");
+
+      names = document.getElementsByName(id);
+      for (var i = 0; i < names.length; i++) {
+        names[i].remove();
+      }
+    }
+  }
+  if (moddingtype === "back") {
+    // if(array) {
+    //    prevdata = array;
+    // }
+    if (prevdata !== null) {
+      if (type === "mp") {
+        inpu = document.querySelector(".mittapisteet");
+        val = inpu.value;
+        if (val.includes(prevdata)) {
+          obj = prevdata.split("|")[4].replace("__", "").toLowerCase();
+          if (document.querySelector('#' + obj) && document.querySelector('#' + obj).dataset.prevcord) {
+            document.querySelector('#' + obj).style.bottom = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[1]) / 5 +
+              "px";
+            document.querySelector('#' + obj).style.left = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[2]) / 5 + "px";
+          }
+          else {
+            if (document.querySelector('#' + obj)) {
+              document.querySelector('#' + obj).remove();
+              mittapiste_count -= 1;
+            }
+            if (document.getElementsByName(obj)) {
+              names = document.getElementsByName(obj);
+              for (var i = 0; i < names.length; i++) {
+                names[i].remove();
+              }
+            }
+            pdata = prevdata.replace('"', '');
+            inpu.value = val.replace(pdata, "");
+          }
+        }
+      }
+      if (type === "aukot") {
+        inpu = document.querySelector(".aukot");
+        val = inpu.value;
+        if (val.includes(prevdata)) {
+          pdata = prevdata.replace('"', '');
+          inpu.value = val.replace(pdata, "");
+          og_id = pdata.split("|")[4].replace('__', '').toLowerCase();
+          aukko = canvas.querySelector("#" + og_id);
+          if (document.querySelector('#' + og_id) && document.querySelector('#' + og_id).dataset.prevcord) {
+            aukko.style.bottom = parseFloat(aukko.dataset.prevcord.split("|")[1]) / 5 + "px";
+            aukko.style.left = parseFloat(aukko.dataset.prevcord.split("|")[2]) / 5 + "px";
+            aukko.style.width = parseFloat(aukko.dataset.prevcord.split("|")[3]) / 5 + "px";
+            aukko.style.height = parseFloat(aukko.dataset.prevcord.split("|")[4]) / 5 + "px";
+            document.querySelector('#' + og_id + ' > .newDiv__height').innerHTML = parseFloat(aukko.style.height) * 5;
+            document.querySelector('#' + og_id + ' > .aukko_inner_lcord').style.bottom = -30 + parseFloat(aukko.style.height) + "px";
+            document.querySelector('#' + og_id + ' > .newDiv__width').innerHTML = parseFloat(aukko.style.width) * 5;
+            document.querySelector('#' + og_id + ' > .aukko_inner_rcord').style.bottom = -30 + parseFloat(aukko.style.height) + "px";
+            document.querySelector('#' + og_id + ' > .aukko_inner_rcord').style.left = -30 + parseFloat(aukko.style.width) + "px";
+            document.querySelector('#' + og_id + ' > .newDiv__y').innerHTML = "Y: " + (parseFloat(aukko.dataset.prevcord.split("|")[1]) +
+              parseFloat(aukko.dataset.prevcord.split("|")[4]));
+            document.querySelector('#' + og_id + ' > .newDiv__x').innerHTML = "X: " + (parseFloat(aukko.style.left) + parseFloat(aukko.style
+              .width));
+          }
+          else {
+            aukko_del(aukko, "");
+          }
+        }
+      }
+      if (type === "lv") {
+        inpu = document.querySelector(".lapiviennit");
+        val = inpu.value;
+        if (val.includes(prevdata)) {
+          pdata = prevdata.replace('"', '');
+          inpu.value = val.replace(pdata, "");
+          obj = prevdata.split("|")[4].replace("__", "");
+          if (document.querySelector('#' + obj) && document.querySelector('#' + obj).dataset.prevcord) {
+            document.querySelector('#' + obj).style.bottom = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[1]) / 5 +
+              "px";
+            document.querySelector('#' + obj).style.left = parseFloat(document.querySelector('#' + obj).dataset.prevcord.split("|")[2]) / 5 + "px";
+
+            real_lv = document.querySelector('#' + obj);
+
+            real_lv.querySelector(".lv_lcord").innerHTML = parseFloat(document.querySelector('#' + obj).style.bottom) * 5;
+            real_lv.querySelector(".lv_bcord").innerHTML = parseFloat(document.querySelector('#' + obj).style.left) * 5;
+
+          }
+          else {
+            if (document.querySelector('#' + obj)) {
+              document.querySelector('#' + obj).remove();
+              lapivienti_count -= 1;
+            }
+            if (document.getElementsByName(obj)) {
+              names = document.getElementsByName(obj);
+              for (var i = 0; i < names.length; i++) {
+                names[i].remove();
+              }
+            }
+          }
+        }
+      }
+    }
+    if (type === "sau") {
+      ir_sau_ = document.querySelector(".saumat_dataforback").value;
+      somat = canvas.querySelectorAll(".sauma");
+
+      for (var i = 0; i < somat.length; i++) {
+        somat[i].remove();
+      }
+      document.querySelector(".drawarea__controls_four-pysty").innerHTML = "";
+      document.querySelector(".drawarea__controls_four-vaaka").innerHTML = "";
+
+      ir_sau = ir_sau_.split("__");
+      //SAUMAT 
+      if (ir_sau.length > 1) {
+        for (var i = ir_sau.length - 1; i >= 0; i--) {
+
+          sau_data = ir_sau[i].split("|");
+          if (sau_data.length > 1) {
+            sau_name = sau_data[0];
+            sau_type = sau_data[1];
+            sau_b = sau_data[2];
+            sau_left = sau_data[3];
+            sau_cord = sau_data[4];
+            sau_name = sau_data[5];
+            luo__sauma_restore(sau_name, sau_type, sau_b, sau_left, sau_cord, sau_name);
+            if (sau_type == 'pysty') { }
+            if (sau_type == 'vaaka') { }
+          }
+
+        }
+        alkusaumat();
+        calculateamounts();
+        sauma__verticals = canvas.querySelectorAll(".sauma__vertical");
+        sauma__horizontals = canvas.querySelectorAll(".sauma__horizontal");
+        if (canvas.querySelector(".sauma__vertical")) {
+          for (var i = 0; i < sauma__verticals.length; i++) {
+            if (sauma__verticals[i].querySelector(".sauma__controls_del")) {
+              sauma__verticals[i].querySelector(".sauma__controls_del").innerHTML = i + 1;
+              sauma__verticals[i].dataset.no = i + 1;
+            }
+          }
+          s_v = i + 1;
+        }
+        if (canvas.querySelector(".sauma__horizontal")) {
+          for (var i = 0; i < sauma__horizontals.length; i++) {
+            if (sauma__horizontals[i].querySelector(".sauma__controls_del")) {
+              sauma__horizontals[i].querySelector(".sauma__controls_del").innerHTML = String.fromCharCode(65 + parseFloat(i + 1));
+              sauma__horizontals[i].dataset.no = String.fromCharCode(65 + parseFloat(i + 1));
+            }
+          }
+          s_h = i + 1;
+        }
+
+        dels = canvas.querySelectorAll(".sauma__controls_del");
+
+        for (var i = dels.length - 1; i >= 0; i--) {
+          sauma = dels[i].parentElement.parentElement;
+          if (dels[i].querySelector(".delmeasure")) {
+            delmeasure = dels[i].querySelector(".delmeasure");
+            if (sauma.classList.contains("sauma__vertical")) {
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
+            }
+            else if (sauma.classList.contains("sauma__horizontal")) {
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
+            }
+          }
+          else {
+
+            delmeasure = document.createElement("div");
+            delmeasure.classList.add("delmeasure");
+            if (sauma.classList.contains("sauma__vertical")) {
+              delmeasure.classList.add("delmeasure_vertical");
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.left) * 5);
+            }
+            else if (sauma.classList.contains("sauma__horizontal")) {
+              delmeasure.classList.add("delmeasure_horizontal");
+              delmeasure.innerHTML = roundToNearest25(parseFloat(sauma.style.bottom) * 5);
+            }
+
+            dels[i].appendChild(delmeasure);
+          }
+        }
+
+
+
+        saumasize__checkup();
+
+        // sauma_h = canvas.querySelectorAll(".sauma__horizontal");
+        // sauma_v = canvas.querySelectorAll(".sauma__vertical");
+        // sauma_h.forEach(function(j) {
+        //   j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
+        //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
+        //   });
+        //   j.addEventListener('touchmove', (e) => {
+        //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
+        //   });
+        // });
+
+        // sauma_v.forEach(function(j) {
+        //   j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
+        //       resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+        //   });
+        //   j.addEventListener('touchmove', (e) => {
+        //     resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "h");
+        //   });
+        // });
+
+        setTimeout(function () { levyta(); console.log("LEVYTÄ FIRED") }, 1000);
+
+        calculateamounts();
+      }
+    }
+    prevdata = null;
+  }
+  if (moddingtype === "save") {
+    setTimeout(function () {
+      $('.id').each(function (i, obj) {
+        value = $("#project__building_id").text();
+        $(obj).val(value);
+        var _id = value;
+      });
+
+      var _id = value;
+      saving_array = [];
+      saving_id = $('.id').val();
+      if(document.querySelector("#open_comments")) {
+        room_status = 'prob';
+      }
+      else {
+        room_status = 'measured';
+        if(current_room) {
+          if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("problem")) {
+            room_status = 'problem';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("prob")) {
+            room_status = 'prob';
+          }
+          else if (document.querySelector(".house__wall_" + current_room.toLowerCase()).classList.contains("hidden")) {
+            room_status = 'hidden';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("done")) {
+            room_status = 'done';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("rangatok")) {
+            room_status = 'rangatok';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("measured")) {
+            room_status = 'measured';
+          }
+          else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("nowork")) {
+            room_status = 'nowork';
+          }
+          else {
+            room_status = 'undone';
+          }
+        }
+      }
+      
+      
+
+      saving_origo = parseFloat(document.querySelector("#drawarea__origo_central").style.left) + "|" + parseFloat(document.querySelector(
+        "#drawarea__origo_central").style.bottom);
+      try { _saving_walls = $('.walls_content').val(); } catch(e) { console.log("TRY-CATCH ERROR:", e ); }
+
+      saving_mps = $('.mittapisteet').val();
+      saving_aus = $('.aukot').val();
+      saving_lv = $('.lapiviennit').val();
+      saving_sau = $('.saumat_data').val();
+      saving_lev = $('.levyt_data').val();
+      saving_w = $('#box_w').val();
+      saving_h = $('#box_h').val();
+      saving_cord = saving_h + "|" + saving_w;
+
+      saving_array.push(saving_id);
+      saving_array.push(room_status);
+      saving_array.push(saving_origo);
+      saving_array.push(saving_cord);
+      saving_array.push(saving_mps);
+      saving_array.push(saving_aus);
+      saving_array.push(saving_lv);
+      saving_array.push(saving_sau);
+      saving_array.push(saving_lev);
+      //current_room = 'C';  TEMPORARY FOR TESTING
+
+      if (current_room != null) {
+        if (current_room.toLowerCase() == 'a') {
+          apartment.dataset.aroom = saving_array;
+        }
+        if (current_room.toLowerCase() == 'b') {
+          apartment.dataset.broom = saving_array;
+        }
+        if (current_room.toLowerCase() == 'c') {
+          apartment.dataset.croom = saving_array;
+        }
+        if (current_room.toLowerCase() == 'd') {
+          apartment.dataset.droom = saving_array;
+        }
+        if (current_room.toLowerCase() == 'k') {
+          apartment.dataset.kroom = saving_array;
+        }
+        if (current_room.toLowerCase() == 'l') {
+          apartment.dataset.lroom = saving_array;
+        }
+      }
+      if (document.querySelectorAll("#A")) {
+        a_rooms_ = document.querySelectorAll("#A .project__building_room");
+
+        a_rooms = '';
+
+        for (let i = 0; i < a_rooms_.length; i++) {
+          _name = a_rooms_[i].dataset.room.replaceAll(",", "~").replaceAll("   ", " ");;
+          positionX = a_rooms_[i].dataset.x.replaceAll(",", "~").replaceAll("   ", " ");
+          positionY = a_rooms_[i].dataset.y.replaceAll(",", "~").replaceAll("   ", " ");;
+          a_room = a_rooms_[i].dataset.aroom.replaceAll(",", "~").replaceAll("   ", " ");;
+          b_room = a_rooms_[i].dataset.broom.replaceAll(",", "~").replaceAll("   ", " ");;
+          c_room = a_rooms_[i].dataset.croom.replaceAll(",", "~").replaceAll("   ", " ");;
+          d_room = a_rooms_[i].dataset.droom.replaceAll(",", "~").replaceAll("   ", " ");;
+          k_room = a_rooms_[i].dataset.kroom.replaceAll(",", "~").replaceAll("   ", " ");;
+          l_room = a_rooms_[i].dataset.lroom.replaceAll(",", "~").replaceAll("   ", " ");;
+
+          element = '{"name": "' + _name.toUpperCase() + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+          a_rooms += element;
+        }
+
+      }
+      else {
+        a_rooms = '';
+      }
+      b_rooms = '';
+      if(document.querySelectorAll("#B")) {
+        b_rooms_ = document.querySelectorAll("#B .project__building_room");
+        b_rooms = '';
+
+        for (let i = 0; i < b_rooms_.length; i++) {     
+          _name = b_rooms_[i].dataset.room.replaceAll(",","~").replace('"','').replace("'","");
+          positionX = b_rooms_[i].dataset.x.replaceAll(",","~").replace('"','').replace("'","");
+          positionY = b_rooms_[i].dataset.y.replaceAll(",","~").replace('"','').replace("'","");
+          a_room = b_rooms_[i].dataset.aroom.replaceAll(",","~").replace('"','').replace("'","");
+          b_room = b_rooms_[i].dataset.broom.replaceAll(",","~").replace('"','').replace("'","");
+          c_room = b_rooms_[i].dataset.croom.replaceAll(",","~").replace('"','').replace("'","");
+          d_room = b_rooms_[i].dataset.droom.replaceAll(",","~").replace('"','').replace("'","");
+          k_room = b_rooms_[i].dataset.kroom.replaceAll(",","~").replace('"','').replace("'","");
+          l_room = b_rooms_[i].dataset.lroom.replaceAll(",","~").replace('"','').replace("'","");
+
+          element = '{"name": "'+_name+'","positionX": '+positionX+',"positionY": '+positionY+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
+          b_rooms+=element;
+        }
+
+      }
+      else {
+        b_rooms = '';
+      }
+      c_rooms = '';
+      if(document.querySelectorAll("#C")) {
+        c_rooms_ = document.querySelectorAll("#C .project__building_room");
+        c_rooms = '';
+
+        for (let i = 0; i < c_rooms_.length; i++) {     
+          _name = c_rooms_[i].dataset.room.replaceAll(",","~").replace('"','').replace("'","");
+          positionX = c_rooms_[i].dataset.x.replaceAll(",","~").replace('"','').replace("'","");
+          positionY = c_rooms_[i].dataset.y.replaceAll(",","~").replace('"','').replace("'","");
+          a_room = c_rooms_[i].dataset.aroom.replaceAll(",","~").replace('"','').replace("'","");
+          b_room = c_rooms_[i].dataset.broom.replaceAll(",","~").replace('"','').replace("'","");
+          c_room = c_rooms_[i].dataset.croom.replaceAll(",","~").replace('"','').replace("'","");
+          d_room = c_rooms_[i].dataset.droom.replaceAll(",","~").replace('"','').replace("'","");
+          k_room = c_rooms_[i].dataset.kroom.replaceAll(",","~").replace('"','').replace("'","");
+          l_room = c_rooms_[i].dataset.lroom.replaceAll(",","~").replace('"','').replace("'","");
+
+          element = '{"name": "'+_name+'","positionX": '+positionX+',"positionY": '+positionY+',"a_room": "'+a_room+'","b_room": "'+b_room+'","c_room": "'+c_room+'","d_room": "'+d_room+'","k_room": "'+k_room+'","l_room": "'+l_room+'"},';
+          c_rooms+=element;
+        }
+      }
+      else {
+        c_rooms = '';
+      }
+
+      // if (document.querySelectorAll("#D")) {
+      //   d_rooms = document.querySelectorAll("#D .project__building_room");
+      // }
+      // else {
+      //   d_rooms = '';
+      // }
+
+      // if (document.querySelectorAll("#E")) {
+      //   e_rooms = document.querySelectorAll("#E .project__building_room");
+      // }
+      // else {
+      //   e_rooms = '';
+      // }
+
+      // if (document.querySelectorAll("#F")) {
+      //   f_rooms = document.querySelectorAll("#F .project__building_room");
+      // }
+      // else {
+      //   f_rooms = '';
+      // }
+
+      // if (document.querySelectorAll("#G")) {
+      //   g_rooms = document.querySelectorAll("#G .project__building_room");
+      // }
+      // else {
+      //   g_rooms = '';
+      // }
+
+      // if (document.querySelectorAll("#H")) {
+      //   h_rooms = document.querySelectorAll("#H .project__building_room");
+      // }
+      // else {
+      //   h_rooms = '';
+      // }
+
+      _saving_a_rooms = "[" + a_rooms.replace("'", "") + "]";
+      _saving_b_rooms = "[" + b_rooms.replace("'", "") + "]";
+      _saving_c_rooms = "[" + c_rooms.replace("'", "") + "]";
+      // _saving_d_rooms
+      // _saving_e_rooms
+      // _saving_f_rooms
+      // _saving_g_rooms
+      // _saving_h_rooms
+      
+
+      formData = {
+        id: _id.replace('"', '').replace("'", ""),
+        saving_a_rooms: _saving_a_rooms,
+        saving_b_rooms: _saving_b_rooms,
+        saving_c_rooms: _saving_c_rooms,
+        // saving_d_rooms: _saving_d_rooms,
+        // saving_e_rooms: _saving_e_rooms, 
+        // saving_f_rooms: _saving_f_rooms, 
+        // saving_g_rooms: _saving_g_rooms, 
+        // saving_h_rooms: _saving_h_rooms
+      };
+
+
+      if(aukkotallennus) {
+        if(aukkotallennus == 'aukkotallennus') {
+          settings_aukot = document.querySelectorAll(".aukko__toindex");
+
+          
+          formData = {
+            id: _id.replace('"', '').replace("'", ""),
+            username: document.querySelector("#current_user").value,
+            saving_a_rooms: _saving_a_rooms,
+            saving_b_rooms: _saving_b_rooms,
+            saving_c_rooms: _saving_c_rooms,
+            // saving_d_rooms: _saving_d_rooms,
+            // saving_e_rooms: _saving_e_rooms, 
+            // saving_f_rooms: _saving_f_rooms, 
+            // saving_g_rooms: _saving_g_rooms, 
+            // saving_h_rooms: _saving_h_rooms
+          };
+        }
+        
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "/updateproject.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+      }).done(function (data) {
+        // alert('Seinä ' + current_room + ' tallennettu');
+        // console.log("saved Data: " + data);
+      });
+    }, 500);
+  }
+}
+
+
+setTimeout(() => {
+  change__sauma_koko(document.querySelector("#sauma_material1"));
+  document.querySelector("#sauma_material1").checked = true;
+}, 3350);

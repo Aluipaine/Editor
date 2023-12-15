@@ -27,7 +27,7 @@
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();" class="nav__comleted">Läpiviennit</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();" class="nav_current">Saumat</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();">Kiinnikkeet</div></li>
-          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();submitprogress('', 'adding', '', 'sau');">Ladonta</div></li>
+          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();submitprogress('', 'adding', '', 'sau');">Korjailu</div></li>
           
           <li><div onclick="alert('Onnistuu kiinnikkeet-kohdasta');">Seinät</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();">Levyt</div></li>
@@ -41,14 +41,14 @@
 
     </section>
 
-  <div class="modal-container">
+  <div class="modal-container sauma_as">
    <div class="modal-background">
      <div class="modal">
         <div class="modal_close_btn"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"/></svg></div>
         <h2>Sauma-asetukset</h2>
         <section>
           <?php
-          $sy = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `projectmeta` WHERE `id`=100 AND `meta_key`="s_settings"')->fetch_assoc()["meta_value"], true);
+          $sy = json_decode(mysqli_query($db, 'SELECT `meta_value` FROM `settingsmeta` WHERE `id`=100 AND `meta_key`="s_settings"')->fetch_assoc()["meta_value"], true);
           ?>
           <h4>Levytyksen suunta</h4>
           <fieldset>
@@ -108,18 +108,64 @@
 
         <section>
             <h4>Tavoitelu levyn koko (modulissa, mm) </h4>
-            <!-- <i>Muistathan lisätä +10mm saumaa varten.</i> -->
-            <fieldset style="display: flex;flex-direction: column;">
+            <fieldset id="sauma__presets">
+
+            </fieldset>
+            <fieldset class="row sauma__setting_row">
+            <div class="col-6" style="flex-direction: column;">
               <label for="settings__sauma_intervalx">Leveys</label>
-              <input type="number" id="settings__sauma_intervalx" min="0" step="15" placeholder="numero tähän.." onchange="document.querySelector('#settings__sauma_interval_x').value = this.value" value="1250">
+              <input type="number" id="settings__sauma_intervalx" min="0" placeholder="numero tähän.." onchange="document.querySelector('#settings__sauma_interval_x').value = this.value" value="1250">
               
               <label for="settings__sauma_intervaly">Pituus</label>
-              <input type="number" id="settings__sauma_intervaly" min="0" step="15" placeholder="numero tähän.." onchange="document.querySelector('#settings__sauma_interval_y').value = this.value" value="3000">
+              <input type="number" id="settings__sauma_intervaly" min="0" placeholder="numero tähän.." onchange="document.querySelector('#settings__sauma_interval_y').value = this.value" value="3000">
 
               <input type="hidden" id="settings__sauma_interval_x" value="1260">
               <input type="hidden" id="settings__sauma_interval_y" value="3010">
+            </div>
+            <div class="col-6" style="flex-direction: column;">
+              <label for="settings__sauma_aihiopituus">Aihioleveys</label>
+              <input type="number" id="settings__sauma_aihiopituus" min="0">
+              <label for="settings__sauma_aihioleveys">Aihiopituus</label>
+              <input type="number" id="settings__sauma_aihioleveys" min="0">
+            </div>
+              
             </fieldset>
         </section>
+
+        <section>
+            <h4>
+              Pystysaumojen asetukset
+            </h4>
+            <table>
+              <tbody class="saumapysty__tbody tabs__target_table">			
+                <tr class="headingrow">
+                  <td>Nimi</td>
+                  <td>Paksuus</td>
+                  <td>Lista</td>
+                  <td>Laatu</td>
+                  
+                </tr>
+              </tbody>
+            </table>
+
+          </section>
+          <section>
+            <h4>
+              Vaakasaumojen asetukset
+            </h4>
+            <table>
+              <tbody class="saumavaaka__tbody tabs__target_table">			
+                <tr class="headingrow">
+                  <td>Nimi</td>
+                  <td>Paksuus</td>
+                  <td>Materiaali</td>
+                  <td>Laatu</td>                  
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+
         <!-- <script>saumoitus__examplephoto();</script> -->
        <div class="modal_close_btn drawarea__controls_btn" onclick="saumoita();refresh__drawcontrols();updatearea();submitprogress('','adding','','sau');">Saumoita</div>
      </div>

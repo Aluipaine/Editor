@@ -1,12 +1,12 @@
 <div class="drawarea__controls da_controls_commenting">
-   <h1>Kommentit</h1>
+   <!-- <h1>Kommentit</h1> -->
    <div class="drawarea__controls_elementsone drawarea__things">
       
    </div>
    <div class="drawarea__controls_btns">
-      <div class="drawarea__controls_btn m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();document.querySelector('#comment__answer_to').value = '';">
+      <!-- <div class="drawarea__controls_btn m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();document.querySelector('#comment__answer_to').value = '';">
        UUSI KOMMENTTI
-      </div>
+      </div> -->
    </div>
    <?php include("./templates/house_nav.php");  ?>
    <section class="nav">

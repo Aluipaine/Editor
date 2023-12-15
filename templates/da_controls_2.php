@@ -3,10 +3,10 @@
    <div class="drawarea__controls_elementstwo drawarea__things">
    </div>
    <div class="drawarea__controls_btns">
-      <div class="aukko_settingsbtn" onclick="open_aukko_settings(true);">
+      <div class="aukko_settingsbtn" onclick="settings__modal_open(this);" data-asmodal_mode="aukkoas">
          Aukon ylitys asetuksia
       </div>
-      <div class="drawarea__controls_btn m_btn" onclick="settings__aukko();change__newdiv_cord();document.querySelector('#type__door').click(); document.querySelector('#aukko_comment_from').value = user">
+      <div class="drawarea__controls_btn" onclick="settings__aukko();change__newdiv_cord();document.querySelector('#type__door').click(); document.querySelector('#aukko_comment_from').value = user;settings__modal_open(this);" data-asmodal_mode="uusiaukko">
          Lisää uusi aukko
       </div>
 

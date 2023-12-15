@@ -1,74 +1,324 @@
-
-<section class="popup__statuses active">
-  <div class="container row">
-    <div class="col-2 popup__statuses_a">
-      <div class="c_meaning c_meaning_2"><i>KESKEN </i></div>
-      <div class="c_meaning c_meaning_1"><i>EI TYÖTÄ</i></div>
+<section class="popup__statuses">
+  <div class="row">
+    <div class="col-6">
+      <h3 style="text-align: right;">5. Paina tästä -></h3>
     </div>
-    <div class="col-2 popup__statuses_b">
-      <div class="c_meaning"><i>L4 TILATTU</i></div>
-      <div class="c_meaning"><i>L4 TYÖMAALLA</i></div>
-      <div class="c_meaning"><i>L4 ASENNETTU</i></div>
-    </div>
-    <div class="col-2 popup__statuses_c">
-      <div class="c_meaning"><i>L3 TILATTU</i></div>
-      <div class="c_meaning"><i>L3 TYÖMAALLA</i></div>
-      <div class="c_meaning"><i>L3 ASENNETTU</i></div>
-    </div>
-    <div class="col-2 popup__statuses_d">
-      <div class="c_meaning"><i>L2 TILATTU</i></div>
-      <div class="c_meaning"><i>L2 TYÖMAALLA</i></div>
-      <div class="c_meaning"><i>L2 ASENNETTU</i></div>
-    </div>
-    <div class="col-2 popup__statuses_e">
-      <div class="c_meaning"><i>L1 TILATTU</i></div>
-      <div class="c_meaning"><i>L1 TYÖMAALLA</i></div>
-      <div class="c_meaning"><i>L1 ASENNETTU</i></div>
-    </div>
-    <div class="col-2 popup__statuses_f">
-      <div class="c_meaning c_meaning_6"><i>HYVÄKSYTTÄVÄ</i></div>
-      <div class="c_meaning c_meaning_7"><i>VALMIS</i></div>
-      <div class="c_meaning c_meaning_8"><i>ONGELMA</i></div>
-      <div class="c_meaning c_meaning_9"><i>KRIITTINEN ONGELMA</i></div>
+    <div class="col-6">
+      <div class="p_meaning_end btn">TALLENNA JA SULJE</div>
     </div>
   </div>
+  
+  
 </section>
+<?php  
+  $statuses_text = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'statuses__text'");
+  $s_text = mysqli_fetch_all($statuses_text);
+  $statuses_text = $s_text[0][3];
+  $remove_overflowY = false;
+
+  $st_slplit = explode("~~" ,$statuses_text);
+?>
 <section id="project_start" class="project__roomcount" > 
   <div class="container">
     <div class="row">
-      <div class="col-6"><h1 class="project_start_heading">Seinäeditori <!-- / < ? = $post["project_type"]; ? >  --><br> Kohde <?= $post["title"]; ?></h1></div>
+      <div class="col-6"><h1 class="project_start_heading">Kohde <?= $post["title"]; ?></h1></div>
       <div class="col-6">
         <table>
           <tr>
             <td>Yhteensä työtunteja:</td>
             <td id="hours__estimate"></td>
           </tr>
-        </table></div>
+          <tr>
+            
+          </tr>
+        </table>
+        <div class="project__start_elaborate" onclick="open__workelab();">Kuittaa työt</div>
+        
+      </div>  
     </div>
+  </div>
+ 
+  <div class="container elab__statuses">
+    <div class="row t_users">
+      <h3>1. Kuittaamassa:</h3> 
+      <ul>
+        <?php
+          $prid = $_GET["id"];
+          $users = mysqli_query($db, "SELECT * FROM `addedusers` WHERE `project_id`='$prid';");
+          
+          $users = mysqli_fetch_all($users);
+          $usr_array = array();
+          foreach ($users as $p) { 
+            $hours = mysqli_query($db, "SELECT `h_remaining` FROM `comments` WHERE `comment_to`='$p[1]'");
+            $hours = mysqli_fetch_all($hours);
+            
+            $usr_summarum = 0;
+            foreach ($hours as $h) { 
+              $usr_summarum+=$h[0];
+            }
+            $usr_array+= array($p[1] => $usr_summarum);
+            // array_push($usr_array, $p[1]=>$usr_summarum);              
+          }
+          // print_r($usr_array);
+          arsort($usr_array);
+
+          foreach($usr_array as $x => $x_value) {
+            // echo "Key=" . $x . ", Value=" . $x_value;
+            // echo "<br>";
+            if(strtolower($x) == "sahko") {
+              $photo = '<img src="/img/comroles/light.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "sahkos") {
+              $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "rakennustyo") {
+              $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "rakennustyo3") {
+              $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "rakennustyo2") {
+              $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "ilmastointi") {
+              $photo = '<img src="/img/comroles/ventilation.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "putki_ivs") {
+              $photo = '<img src="/img/comroles/ventilation.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "vesi") {
+              $photo = '<img src="/img/comroles/water.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "vesis") {
+              $photo = '<img src="/img/comroles/water.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "siivous") {
+              $photo = '<img src="/img/comroles/siivous.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "purku") {
+              $photo = '<img src="/img/comroles/purku.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "westface") {
+              $photo = '<img src="/img/comroles/wf.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "myynti") {
+              $photo = '<img src="/img/comroles/myynti.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "lukkomies") {
+              $photo = '<img src="/img/comroles/lock.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "suunnittelu") {
+              $photo = '<img src="/img/comroles/suunnittelu.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "arak") {
+              $photo = '<img src="/img/comroles/cup.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "rak") {
+              $photo = '<img src="/img/comroles/cup.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else if(strtolower($x) == "pu") {
+              $photo = '<img src="/img/comroles/cup.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            else {
+              $photo = '<img src="/img/comroles/others.png" style="width:24px; height: 21px;margin-top: -8px;">';
+            }
+            if($x != "tyonjohto123") { 
+              echo '<li onclick="toggle__pusers(this);enable__elabelems();" class="p_li">'. $photo.$x.'</li>';
+            }
+          }
+              
+        ?>
+      </ul>
+    </div>
+    <div class="t_elabday elab__status_hidden">
+      <h3>2. Minä päivänä tehty?</h3>
+      <div class="row">
+        <?php    
+          echo '<b class="status__report_b"><input name="deadline_time" class="status__report_from" type="date" value="'.date("Y-m-d").'"></b>';
+        ?>
+      </div>
+    </div>
+    <div class="t_elabstatus elab__status_hidden">
+      <h3>3. Paina pitkään haluttua statusta:</h3>
+      <div class="row">
+        <div class="col-2 popup__statuses_a">
+          <div class="c_meaning p_meaning c_meaning_2" data-action="undone"><i data-action="undone" class="p_meaning"><?= $st_slplit[0]; ?> </i></div>
+          <div class="c_meaning p_meaning c_meaning_1" data-action="nowork"><i data-action="nowork" class="p_meaning"><?= $st_slplit[1]; ?></i></div>
+          <div class="c_meaning p_meaning c_meaning_8 problemo" data-action="problemo"><i data-action="problemo" class="p_meaning problemo"><?= $st_slplit[2]; ?></i></div>
+          <div class="c_meaning p_meaning c_meaning_9 grande_problemo" data-action="grande_problemo"><i data-action="grande_problemo" class="p_meaning grande_problemo"><?= $st_slplit[3]; ?></i></div>
+
+        </div>
+        <div class="col-2 popup__statuses_f">
+          <div class="c_meaning p_meaning" data-action="l5_a"><i data-action="l5_a" class="p_meaning"><?= $st_slplit[4]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l5_b"><i data-action="l5_b" class="p_meaning"><?= $st_slplit[5]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l5_c"><i data-action="l5_c" class="p_meaning"><?= $st_slplit[6]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l5_d"><i data-action="l5_d" class="p_meaning"><?= $st_slplit[7]; ?></i></div>
+        </div>
+        <div class="col-2 popup__statuses_b">
+          <div class="c_meaning p_meaning" data-action="l4_a"><i data-action="l4_a" class="p_meaning"><?= $st_slplit[8]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l4_b"><i data-action="l4_b" class="p_meaning"><?= $st_slplit[9]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l4_c"><i data-action="l4_c" class="p_meaning"><?= $st_slplit[10]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l4_d"><i data-action="l4_d" class="p_meaning"><?= $st_slplit[11]; ?></i></div>
+        </div>
+        <div class="col-2 popup__statuses_c">
+          <div class="c_meaning p_meaning" data-action="l3_a"><i data-action="l3_a" class="p_meaning"><?= $st_slplit[12]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l3_b"><i data-action="l3_b" class="p_meaning"><?= $st_slplit[13]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l3_c"><i data-action="l3_c" class="p_meaning"><?= $st_slplit[14]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l3_d"><i data-action="l3_d" class="p_meaning"><?= $st_slplit[15]; ?></i></div>
+        </div>
+        <div class="col-2 popup__statuses_d">
+          <div class="c_meaning p_meaning" data-action="l2_a"><i data-action="l2_a" class="p_meaning"><?= $st_slplit[16]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l2_b"><i data-action="l2_b" class="p_meaning"><?= $st_slplit[17]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l2_c"><i data-action="l2_c" class="p_meaning"><?= $st_slplit[18]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l2_d"><i data-action="l2_d" class="p_meaning"><?= $st_slplit[19]; ?></i></div>
+        </div>
+        <div class="col-2 popup__statuses_e">
+          <div class="c_meaning p_meaning" data-action="l1_a"><i data-action="l1_a" class="p_meaning"><?= $st_slplit[20]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l1_b"><i data-action="l1_b" class="p_meaning"><?= $st_slplit[21]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l1_c"><i data-action="l1_c" class="p_meaning"><?= $st_slplit[22]; ?></i></div>
+          <div class="c_meaning p_meaning" data-action="l1_d"><i data-action="l1_d" class="p_meaning"><?= $st_slplit[23]; ?></i></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="status__elab_problem elab__status_hidden ">
+      <?php
+
+      $available_users = '';
+    
+      if(strtolower($_GET["user"]) == "tyonjohto") {
+
+        $role = $_GET['user'];
+        $_id = $_GET['id'];
+
+        $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id");
+        $userslist = mysqli_fetch_all($_userslist);
+        
+
+        $ul="";
+        
+        foreach ($userslist as $usern) {
+          $ul.='<option value="'.ucfirst($usern[0]).'">'.ucfirst($usern[0]).'</option>';
+        }
+
+        $ddate = date("Y-m-d");
+        $date = new DateTime($ddate);
+        $week = $date->format("W");
+        $weekcount = $week;
+        $cur_week = $week;
+
+        
+        echo '
+          <div class="row">
+            <h2 style="width: 100%;">Jätä työ</h2>
+            <hr style="margin-top: 50px;">
+            <section class="commentbox commentbox__new commentbox__newfirst">
+              <div class="row">
+                <div class="col-6">  
+                  <h2><input type="text" value="" class="lineinput kommentti__name" placeholder="Mikä murehduttaa?" onchange="window.scrollTo(0, 150);"></h2>
+                  
+                </div>
+                <div class="col-3">  
+                  <h6>Deadline:</h6>
+                  <input name="deadline_time" class="comment__deadline newcomment__deadline" type="date" min="' .  date("Y-m-d") . '" value="'.date("Y-m-t", strtotime(date("Y-m-d"))).'" onchange="this.parentElement.parentElement.parentElement.querySelector(`.newcomment__vko`).value= new Date(this.value).getWeek();">
+                </div>
+                <div class="col-3">  
+                    <h6>Arvio työtunneista</h6>
+                    <input name="time_estimate" class="time_estimate newcomment__estimatehours" type="number" pattern="\d*"/ value="0" style="max-width: 70px;" min="0">h
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                <div class="form-group">
+                      <h6>Lisää tiedostot:</h6>
+                      <input type="file" class="comment__files newcomment__files newcomment__files_input" name="comment__files[]" multiple>
+                      <div class="comment__preview_files newcomment__previewfiles"></div>
+                  </div>
+                  <h6>Keneltä</h6>
+                  <input name="kommentti_comment_from" class="kommentti_comment_from" type="text" value="' . $role . '">
+                    
+                    
+                </div>
+                <div class="col-6">
+                    <h6>Tehdään viikolla</h6>
+                    <input name="vko_estimate" class="vko_estimate newcomment__vko" type="number" pattern="\d*"/ value="'.$cur_week.'" min="1" max="52" style="max-width: 70px;">
+                    <div class="row elevated_spaces">
+                      <div class="col-6">
+                        <h6>Kenelle</h6>
+                        <select name="kommentti_comment_to" class="kommentti_comment_to kommentti_comment_newto" multiple>'.$ul.'</select>
+                      </div>
+                    
+                    </div>
+                </div>
+              </div>
+              <div class="commentbox__text">
+                <h4>Sisältö</h4>
+                <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
+                <div class="row pohjakierros">
+                  <input id="is_thecomment_critical2" class="is_thecomment_critical" type="checkbox" value="Critical">
+                  <label for="is_thecomment_critical2">Onko kriittinen?</label>
+                </div>
+              </div>
+            </section>
+          </div>';
+        } 
+      ?>
+
+
+    </div> 
+    <h3 class="status__elab_noproblem elab__status_hidden">4. Valitse kohde/kohteet:</h3>
+    
+        
   </div>
   <div class="container rappus">
     <div class="per50 floatleft coderdy rappu-1" id="A" style="opacity: 1;">
         <div class="tablepreview">
             
-            
-            <h2>RAPPU A </h2>
+            <?php
+              $roomtitle = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'a_rooms_title'");
+              $rooms_t = mysqli_fetch_all($roomtitle);
+              $roomtitle = $rooms_t[0][3];
+            ?>
+            <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $a_colc ?>; -->
               <div class="project__buildingcoordinates">
-                <ol reversed>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ol>
+                <ul>
+                  <?php
+                    for ($i=50; $i >= 1; $i--) { 
+                      echo "<li class='floor__".$i."'>" . $i . "</li>";                      
+                    }
+                  ?>
+                </ul>
               </div>
               <?php 
+
+                  $a_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'a_rooms_nowork'");
+                  $a_da_nowork = mysqli_fetch_all($a_data_nowork);
+                  $a_data_nowork = $a_da_nowork[0][3];
+
+                  $a_da_nowork_ = explode("},{", $a_data_nowork);
+
+                  foreach ($a_da_nowork_ as $a_key_nowork) {
+
+                    $da_child = explode(",", $a_key_nowork);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                      if($key1 == "K") {
+                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                        $remove_overflowY = true;
+                      }
+                      else if($key1 == "AK") {
+                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                        $remove_overflowY = true;
+                      }
+                      else {
+                        $tila__bottomcord = intval($key1) -1;
+                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      }
+                      
+                  }
               
                   $a_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'a_rooms'");
                   $a_da = mysqli_fetch_all($a_data);
@@ -78,12 +328,11 @@
                   
 
 
-                  if (strlen($a_data) < 2) {
+                  if (strlen($a_data) < 3) {
                       echo "<style>#A {display:none}</style>";
                   } 
                   
                   foreach ($a_da_ as $a_key) {
-
                     $da_child = explode(',', $a_key);
                     $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                     $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
@@ -97,455 +346,38 @@
                     $lroom = str_replace('l_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8])))));
                     
                     $classname = str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))));
-                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
-                
-              }
 
-              $a_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'a_rooms_nowork'");
-                  $a_da_nowork = mysqli_fetch_all($a_data_nowork);
-                  $a_data_nowork = $a_da_nowork[0][3];
+                    if(explode("~",$aroom)[1] === explode("~",$broom)[1] && explode("~",$croom)[1]  === explode("~",$kroom)[1]) {
+                      $additionalclass = explode("~",$aroom)[1];
+                    }
+                    if($key1 == "K") {
+                       $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='K' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else if($key1 == "AK") {
+                       $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='AK' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else {
+                      $tila__bottomcord = intval($key1) -1;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      $floornum = 50 - intval($tila__bottomcord);
+  
+                      echo '<script>if(document.querySelector("#A ul > li:nth-child('.$floornum.')")) {document.querySelector("#A ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
+                      echo '<script>if(document.querySelector("#A ul > li:nth-child('.$floornum.')")) {document.querySelector("#A ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
+                    }
+                    
+                  }
 
-                  $a_da_nowork_ = explode("},{", $a_data_nowork);
-
-                
-
-                  foreach ($a_da_nowork_ as $a_key_nowork) {
-
-                    $da_child = explode(",", $a_key_nowork);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
-                
-              }
 
 
-              // $a_pr_rap = $da[0][3];
-              // if ($a_pr_rap == 1 || $a_pr_rap == 0 ) {
-              //     $a_colc = "auto";
-              // } elseif ($a_pr_rap == 2) {
-              //     $a_colc = "auto auto";
-              // } elseif ($a_pr_rap == 3) {
-              //     $a_colc = "auto auto auto";
-              // } elseif ($a_pr_rap == 4) {
-              //     $a_colc = "auto auto auto auto";
-              // } elseif ($a_pr_rap == 5) {
-              //     $a_colc = "auto auto auto auto auto";
-              // } elseif ($a_pr_rap == 6) {
-              //     $a_colc = "auto auto auto auto auto auto";
-              // } elseif ($a_pr_rap == 7) {
-              //     $a_colc = "auto auto auto auto auto auto auto";
-              // } elseif ($a_pr_rap == 8) {
-              //     $a_colc = "auto auto auto auto auto auto auto auto";
-              // } elseif ($a_pr_rap == 9) {
-              //     $a_colc = "auto auto auto auto auto auto auto auto auto";
-              // } elseif ($a_pr_rap == 10) {
-              //     $a_colc = "auto auto auto auto auto auto auto auto auto auto";
-              // } elseif ($a_pr_rap == 11) {
-              //     $a_colc = "auto auto auto auto auto auto auto auto auto auto auto";
-              // }
             ?>
               <section class="project__building_grid">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <?php 
+                  for ($i=0; $i < 1500; $i++) { 
+                    echo "<div></div>";
+                  }
+                ?>
               </section>
             </div>
             
@@ -553,490 +385,110 @@
         </div>
     </div>
     <div class="per50 floatleft coderdy rappu-2" id="B" style="opacity: 1;">
+        <?php
+          $roomtitle = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'b_rooms_title'");
+          $rooms_t = mysqli_fetch_all($roomtitle);
+          $roomtitle = $rooms_t[0][3];
+        ?>
         <div class="tablepreview">
-            <h2>RAPPU B </h2>
+            <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $b_colc ?>; -->
               <div class="project__buildingcoordinates">
-                <ol reversed>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ol>
+                <ul>
+                  <?php
+                    for ($i=50; $i >= 1; $i--) { 
+                      echo "<li class='floor__".$i."'>" . $i . "</li>";                      
+                    }
+                  ?>
+                </ul>
               </div>
               <?php 
+                  $b_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'b_rooms_nowork'");
+                  $b_da_nowork = mysqli_fetch_all($b_data_nowork);
+                  $b_data_nowork = $b_da_nowork[0][3];
+
+                  $b_da_nowork_ = explode("},{", $b_data_nowork);
+                  foreach ($b_da_nowork_ as $b_key_nowork) {
+
+                    
+
+                    $da_child = explode(",", $b_key_nowork);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                    
+                    if($key1 == "K") {
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      $remove_overflowY = true;
+                    }
+                    else if($key1 == "AK") {
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      $remove_overflowY = true;
+                    }
+                    else {
+                      $tila__bottomcord = intval($key1) -1;
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    }
+                    
+
+                  }
+
                   $b_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'b_rooms'");
                   $b_da = mysqli_fetch_all($b_data);
                   $b_data = $b_da[0][3];
-                  if (strlen($b_data) <= 2){
+
+                  $b_da_ = explode("},{", $b_data);
+
+
+
+                  if (strlen($b_data) < 3) {
                       echo "<style>#B {display:none}</style>";
                   } 
 
-                  $b_db_ = explode("},{", $b_data);
-
-
-                  foreach ($b_db_ as $b_key) {
-                    $db_child = explode(",", $b_key);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[2]))))));
+                  foreach ($b_da_ as $b_key) {
+                    $da_child = explode(',', $b_key);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $tila__bottomcord = intval($key1) -1;
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
                     
-                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
-            
-              }
+                    $aroom = str_replace('a_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3])))));
+                    $broom = str_replace('b_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4])))));
+                    $croom = str_replace('c_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5])))));
+                    $droom = str_replace('d_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[6])))));
+                    $kroom = str_replace('k_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[7])))));
+                    $lroom = str_replace('l_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8])))));
+                    
+                    $classname = str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))));
 
-              $b_datb_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'b_rooms_nowork'");
-                  $b_db_nowork = mysqli_fetch_all($b_datb_nowork);
-                  $b_datb_nowork = $b_db_nowork[0][3];
+                    if(explode("~",$aroom)[1] === explode("~",$broom)[1] && explode("~",$croom)[1]  === explode("~",$kroom)[1]) {
+                      $additionalclass = explode("~",$aroom)[1];
+                    }
 
-                  $b_db_nowork_ = explode("},{", $b_datb_nowork);
+                    if($key1 == "K") {
+                      $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='K' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else if($key1 == "AK") {
+                      $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='AK' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else {
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      $floornum = 50 - intval($tila__bottomcord);
 
-
-                  foreach ($b_db_nowork_ as $b_key_nowork) {
-                    $db_child = explode(",", $b_key_nowork);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $db_child[2]))))));
-                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);'>".$key0."</div>";
-                
-              }
-
-
-
-              // $b_pr_rap = $da[0][3];
-              // if ($b_pr_rap == 1 || $b_pr_rap == 0 ) {
-              //     $b_colc = "auto";
-              // } elseif ($b_pr_rap == 2) {
-              //     $b_colc = "auto auto";
-              // } elseif ($b_pr_rap == 3) {
-              //     $b_colc = "auto auto auto";
-              // } elseif ($b_pr_rap == 4) {
-              //     $b_colc = "auto auto auto auto";
-              // } elseif ($b_pr_rap == 5) {
-              //     $b_colc = "auto auto auto auto auto";
-              // } elseif ($b_pr_rap == 6) {
-              //     $b_colc = "auto auto auto auto auto auto";
-              // } elseif ($b_pr_rap == 7) {
-              //     $b_colc = "auto auto auto auto auto auto auto";
-              // } elseif ($b_pr_rap == 8) {
-              //     $b_colc = "auto auto auto auto auto auto auto auto";
-              // } elseif ($b_pr_rap == 9) {
-              //     $b_colc = "auto auto auto auto auto auto auto auto auto";
-              // } elseif ($b_pr_rap == 10) {
-              //     $b_colc = "auto auto auto auto auto auto auto auto auto auto";
-              // } elseif ($b_pr_rap == 11) {
-              //     $b_colc = "auto auto auto auto auto auto auto auto auto auto auto";
-              // }
+                      echo '<script>if(document.querySelector("#B ul > li:nth-child('.$floornum.')")) {document.querySelector("#B ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
+                      echo '<script>if(document.querySelector("#B ul > li:nth-child('.$floornum.')")) {document.querySelector("#B ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
+                    }
+                  }
             ?>
               <section class="project__building_grid">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <?php 
+                  for ($i=0; $i < 1500; $i++) { 
+                    echo "<div></div>";
+                  }
+                ?>
               </section>
             </div>
             
@@ -1044,466 +496,111 @@
         </div>
     </div>
     <div class="per50 floatleft coderdy rappu-3" id="C" style="opacity: 1;">
+        <?php
+          $roomtitle = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'c_rooms_title'");
+          $rooms_t = mysqli_fetch_all($roomtitle);
+          $roomtitle = $rooms_t[0][3];
+        ?>
         <div class="tablepreview">
             
             
-            <h2>RAPPU C </h2>
+            <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $c_colc ?>; -->
               <div class="project__buildingcoordinates">
-                <ol reversed>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ol>
+                <ul>
+                  <?php
+                    for ($i=50; $i >= 1; $i--) { 
+                      echo "<li class='floor__".$i."'>" . $i . "</li>";                      
+                    }
+                  ?>
+                </ul>
               </div>
               <?php 
+                  $c_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'c_rooms_nowork'");
+                  $c_da_nowork = mysqli_fetch_all($c_data_nowork);
+                  $c_data_nowork = $c_da_nowork[0][3];
+
+                  $c_da_nowork_ = explode("},{", $c_data_nowork);
+                  foreach ($c_da_nowork_ as $c_key_nowork) {
+
+                    $da_child = explode(",", $c_key_nowork);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                    if($key1 == "K") {
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      $remove_overflowY = true;
+                    }
+                    else if($key1 == "AK") {
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      $remove_overflowY = true;
+                    }
+                    else {
+                      $tila__bottomcord = intval($key1) -1;
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    }
+
+                  }
+              
                   $c_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'c_rooms'");
                   $c_da = mysqli_fetch_all($c_data);
                   $c_data = $c_da[0][3];
 
                   $c_da_ = explode("},{", $c_data);
+                  
 
-                  if (strlen($c_data) <= 2){
+
+                  if (strlen($c_data) < 3) {
                       echo "<style>#C {display:none}</style>";
+                     
                   } 
-
-
                   foreach ($c_da_ as $c_key) {
-                    $da_child = explode(",", $c_key);
+                    $da_child = explode(',', $c_key);
                     $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                     $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $tila__bottomcord = intval($key1) -1;
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
                     
-                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    $aroom = str_replace('a_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3])))));
+                    $broom = str_replace('b_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4])))));
+                    $croom = str_replace('c_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5])))));
+                    $droom = str_replace('d_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[6])))));
+                    $kroom = str_replace('k_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[7])))));
+                    $lroom = str_replace('l_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8])))));
                     
-              }
+                    $classname = str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))));
 
-              $c_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'c_rooms_nowork'");
-                  $c_da_nowork = mysqli_fetch_all($c_data_nowork);
-                  $c_data_nowork = $c_da_nowork[0][3];
+                    if(explode("~",$aroom)[1] === explode("~",$broom)[1] && explode("~",$croom)[1]  === explode("~",$kroom)[1]) {
+                      $additionalclass = explode("~",$aroom)[1];
+                    }
 
-                  $c_da_nowork_ = explode("},{", $c_data_nowork);
+                    if($key1 == "K") {
+                      $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='K' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else if($key1 == "AK") {
+                      $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='AK' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else {
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      $floornum = 50 - intval($tila__bottomcord);
 
+                      echo '<script>if(document.querySelector("#C ul > li:nth-child('.$floornum.')")) {document.querySelector("#C ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
+                      echo '<script>if(document.querySelector("#C ul > li:nth-child('.$floornum.')")) {document.querySelector("#C ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
+                    }
+                  }
 
-                  foreach ($c_da_nowork_ as $c_key_nowork) {
-                    $da_child = explode(",", $c_key_nowork);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);'>".$key0."</div>";
-                
-              }
+              
             ?>
               <section class="project__building_grid">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <?php 
+                  for ($i=0; $i < 1500; $i++) { 
+                    echo "<div></div>";
+                  }
+                ?>
               </section>
             </div>
             
@@ -1511,466 +608,106 @@
         </div>
     </div>
     <div class="per50 floatleft coderdy rappu-4" id="D" style="opacity: 1;">
+       <?php
+          $roomtitle = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'd_rooms_title'");
+          $rooms_t = mysqli_fetch_all($roomtitle);
+          $roomtitle = $rooms_t[0][3];
+        ?>
         <div class="tablepreview">
             
             
-            <h2>RAPPU D </h2>
+            <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $d_colc ?>; -->
               <div class="project__buildingcoordinates">
-                <ol reversed>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ol>
+                <ul>
+                  <?php
+                    for ($i=50; $i >= 1; $i--) { 
+                      echo "<li class='floor__".$i."'>" . $i . "</li>";                      
+                    }
+                  ?>
+                </ul>
               </div>
               <?php 
-                  $d_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'd_rooms'");
-                  $d_da = mysqli_fetch_all($d_data);
-                  $d_data = $d_da[0][3];
+                $d_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'd_rooms_nowork'");
+                $d_da_nowork = mysqli_fetch_all($d_data_nowork);
+                $d_data_nowork = $d_da_nowork[0][3];
 
-                  $d_da_ = explode("},{", $d_data);
+                $d_da_nowork_ = explode("},{", $d_data_nowork);
+                foreach ($d_da_nowork_ as $d_key_nowork) {
+                  $da_child = explode(",", $d_key_nowork);
+                  $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                  $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                 
+                  $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                  if($key1 == "K") {
+                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    $remove_overflowY = true;
+                  }
+                  else if($key1 == "AK") {
+                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    $remove_overflowY = true;
+                  }
+                  else {
+                    $tila__bottomcord = intval($key1) -1;
+                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                  }
+                }
+            
+                $d_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'd_rooms'");
+                $d_da = mysqli_fetch_all($d_data);
+                $d_data = $d_da[0][3];
 
-                  if (strlen($d_data) <= 2){
-                      echo "<style>#D {display:none}</style>";
-                  } 
-
-
-                  foreach ($d_da_ as $d_key) {
-                    $da_child = explode(",", $d_key);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                    
-                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
-                    
-              }
-
-              $d_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'd_rooms_nowork'");
-                  $d_da_nowork = mysqli_fetch_all($d_data_nowork);
-                  $d_data_nowork = $d_da_nowork[0][3];
-
-                  $d_da_nowork_ = explode("},{", $d_data_nowork);
-
-
-                  foreach ($d_da_nowork_ as $d_key_nowork) {
-                    $da_child = explode(",", $d_key_nowork);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);'>".$key0."</div>";
+                $d_da_ = explode("},{", $d_data);
                 
-              }
+
+
+                if (strlen($d_data) < 3) {
+                    echo "<style>#D {display:none}</style>";
+                } 
+                
+                foreach ($d_da_ as $d_key) {
+                  $da_child = explode(',', $d_key);
+                  $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                  $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                  $tila__bottomcord = intval($key1) -1;
+                  $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                  
+                  $aroom = str_replace('a_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3])))));
+                  $broom = str_replace('b_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4])))));
+                  $croom = str_replace('c_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5])))));
+                  $droom = str_replace('d_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[6])))));
+                  $kroom = str_replace('k_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[7])))));
+                  $lroom = str_replace('l_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8])))));
+                  
+                  $classname = str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))));
+
+                  if(explode("~",$aroom)[1] === explode("~",$broom)[1] && explode("~",$croom)[1]  === explode("~",$kroom)[1]) {
+                    $additionalclass = explode("~",$aroom)[1];
+                  }
+                  if($key1 == "K") {
+                    $remove_overflowY = true;
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='K' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                  }
+                  else if($key1 == "AK") {
+                    $remove_overflowY = true;
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='AK' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                  }
+                  else {
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    $floornum = 50 - intval($tila__bottomcord);
+                    echo '<script>if(document.querySelector("#D ul > li:nth-child('.$floornum.')")) {document.querySelector("#D ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
+                    echo '<script>if(document.querySelector("#D ul > li:nth-child('.$floornum.')")) {document.querySelector("#D ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
+                  }
+                }
+              
             ?>
               <section class="project__building_grid">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <?php 
+                  for ($i=0; $i < 1500; $i++) { 
+                    echo "<div></div>";
+                  }
+                ?>
               </section>
             </div>
             
@@ -1978,466 +715,108 @@
         </div>
     </div>
     <div class="per50 floatleft coderdy rappu-5" id="E" style="opacity: 1;">
+        <?php
+          $roomtitle = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'e_rooms_title'");
+          $rooms_t = mysqli_fetch_all($roomtitle);
+          $roomtitle = $rooms_t[0][3];
+        ?>
         <div class="tablepreview">
             
             
-            <h2>RAPPU E </h2>
+            <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $e_colc ?>; -->
               <div class="project__buildingcoordinates">
-                <ol reversed>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ol>
+                <ul>
+                  <?php
+                    for ($i=50; $i >= 1; $i--) { 
+                      echo "<li class='floor__".$i."'>" . $i . "</li>";                      
+                    }
+                  ?>
+                </ul>
               </div>
               <?php 
-                  $e_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'e_rooms'");
-                  $e_da = mysqli_fetch_all($e_data);
-                  $e_data = $e_da[0][3];
-
-                  if (strlen($e_data) <= 2){
-                      echo "<style>#E {display:none}</style>";
-                  } 
-
-                  $e_da_ = explode("},{", $e_data);
-
-
-                  foreach ($e_da_ as $e_key) {
-                    $da_child = explode(",", $e_key);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                    
-                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
-                    
-              }
-
-              $e_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'e_rooms_nowork'");
+                  $e_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'e_rooms_nowork'");
                   $e_da_nowork = mysqli_fetch_all($e_data_nowork);
                   $e_data_nowork = $e_da_nowork[0][3];
 
                   $e_da_nowork_ = explode("},{", $e_data_nowork);
-
-
                   foreach ($e_da_nowork_ as $e_key_nowork) {
                     $da_child = explode(",", $e_key_nowork);
                     $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                     $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);'>".$key0."</div>";
-                
-              }
+                    if($key1 == "K") {
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      $remove_overflowY = true;
+                    }
+                    else if($key1 == "AK") {
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      $remove_overflowY = true;
+                    }
+                    else {
+                      $tila__bottomcord = intval($key1) -1;
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    }
+
+                  }
+              
+                  $e_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'e_rooms'");
+                  $e_da = mysqli_fetch_all($e_data);
+                  $e_data = $e_da[0][3];
+
+                  $e_da_ = explode("},{", $e_data);
+                  
+
+
+                  if (strlen($e_data) < 3) {
+                      echo "<style>#E {display:none}</style>";
+                  } 
+                  
+                  foreach ($e_da_ as $e_key) {
+                    $da_child = explode(',', $e_key);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $tila__bottomcord = intval($key1) -1;
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                    
+                    $aroom = str_replace('a_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3])))));
+                    $broom = str_replace('b_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4])))));
+                    $croom = str_replace('c_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5])))));
+                    $droom = str_replace('d_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[6])))));
+                    $kroom = str_replace('k_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[7])))));
+                    $lroom = str_replace('l_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8])))));
+                    
+                    $classname = str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))));
+
+                    if(explode("~",$aroom)[1] === explode("~",$broom)[1] && explode("~",$croom)[1]  === explode("~",$kroom)[1]) {
+                      $additionalclass = explode("~",$aroom)[1];
+                    }
+
+                    if($key1 == "K") {
+                      $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='K' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else if($key1 == "AK") {
+                      $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='AK' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else {
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      $floornum = 50 - intval($tila__bottomcord);
+
+                      echo '<script>if(document.querySelector("#E ul > li:nth-child('.$floornum.')")) {document.querySelector("#E ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
+                      echo '<script>if(document.querySelector("#E ul > li:nth-child('.$floornum.')")) {document.querySelector("#E ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
+                    }
+                  }
             ?>
               <section class="project__building_grid">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <?php 
+                  for ($i=0; $i < 1500; $i++) { 
+                    echo "<div></div>";
+                  }
+                ?>
               </section>
             </div>
             
@@ -2445,465 +824,111 @@
         </div>
     </div>
     <div class="per50 floatleft coderdy rappu-6" id="F" style="opacity: 1;">
+        <?php
+          $roomtitle = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'f_rooms_title'");
+          $rooms_t = mysqli_fetch_all($roomtitle);
+          $roomtitle = $rooms_t[0][3];
+        ?>
         <div class="tablepreview">
             
             
-            <h2>RAPPU F </h2>
+            <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $f_colc ?>; -->
               <div class="project__buildingcoordinates">
-                <ol reversed>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ol>
+                <ul>
+                  <?php
+                    for ($i=50; $i >= 1; $i--) { 
+                      echo "<li class='floor__".$i."'>" . $i . "</li>";                      
+                    }
+                  ?>
+                </ul>
               </div>
               <?php 
-                  $f_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'f_rooms'");
-                  $f_da = mysqli_fetch_all($f_data);
-                  $f_data = $f_da[0][3];
-
-                  if (strlen($f_data) <= 2){
-                      echo "<style>#F {display:none}</style>";
-                  } 
-
-                  $f_da_ = explode("},{", $f_data);
-
-
-                  foreach ($f_da_ as $f_key) {
-                    $da_child = explode(",", $f_key);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);' data-room='".str_replace(' <br>','',str_replace('<br> ','',str_replace(' ','', str_replace('<br>','', mb_convert_encoding($classname,'HTML-ENTITIES','utf-8')))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
-                    
-              }
 
               $f_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'f_rooms_nowork'");
-                  $f_da_nowork = mysqli_fetch_all($f_data_nowork);
-                  $f_data_nowork = $f_da_nowork[0][3];
+              $f_da_nowork = mysqli_fetch_all($f_data_nowork);
+              $f_data_nowork = $f_da_nowork[0][3];
 
-                  $f_da_nowork_ = explode("},{", $f_data_nowork);
+              $f_da_nowork_ = explode("},{", $f_data_nowork);
+              foreach ($f_da_nowork_ as $f_key_nowork) {
 
-
-                  foreach ($f_da_nowork_ as $f_key_nowork) {
-                    $da_child = explode(",", $f_key_nowork);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);'>".$key0."</div>";
+                $da_child = explode(",", $f_key_nowork);
+                $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                 
+                $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                if($key1 == "K") {
+                  echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                  $remove_overflowY = true;
+                }
+                else if($key1 == "AK") {
+                  echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                  $remove_overflowY = true;
+                }
+                else {
+                  $tila__bottomcord = intval($key1) -1;
+                  echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                }
+
               }
-            ?>
+          
+              $f_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'f_rooms'");
+              $f_da = mysqli_fetch_all($f_data);
+              $f_data = $f_da[0][3];
+
+              $f_da_ = explode("},{", $f_data);
+              
+
+
+              if (strlen($f_data) < 3) {
+                  echo "<style>#F {display:none}</style>";
+              } 
+              
+              foreach ($f_da_ as $f_key) {
+                $da_child = explode(',', $f_key);
+                $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                $tila__bottomcord = intval($key1) -1;
+                $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                
+                $aroom = str_replace('a_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3])))));
+                $broom = str_replace('b_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4])))));
+                $croom = str_replace('c_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5])))));
+                $droom = str_replace('d_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[6])))));
+                $kroom = str_replace('k_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[7])))));
+                $lroom = str_replace('l_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8])))));
+                
+                $classname = str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))));
+
+                if(explode("~",$aroom)[1] === explode("~",$broom)[1] && explode("~",$croom)[1]  === explode("~",$kroom)[1]) {
+                  $additionalclass = explode("~",$aroom)[1];
+                }
+
+                if($key1 == "K") {
+                  $remove_overflowY = true;
+                  echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='K' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                }
+                else if($key1 == "AK") {
+                  $remove_overflowY = true;
+                  echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='AK' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                }
+                else {
+                  echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                  $floornum = 50 - intval($tila__bottomcord);
+
+                  echo '<script>if(document.querySelector("#F ul > li:nth-child('.$floornum.')")) {document.querySelector("#F ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
+                  echo '<script>if(document.querySelector("#F ul > li:nth-child('.$floornum.')")) {document.querySelector("#F ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
+                }
+              }
+                 
+              ?>
               <section class="project__building_grid">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <?php 
+                  for ($i=0; $i < 1500; $i++) { 
+                    echo "<div></div>";
+                  }
+                ?>
               </section>
             </div>
             
@@ -2911,465 +936,107 @@
         </div>
     </div>
     <div class="per50 floatleft coderdy rappu-7" id="G" style="opacity: 1;">
+        <?php
+          $roomtitle = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'g_rooms_title'");
+          $rooms_t = mysqli_fetch_all($roomtitle);
+          $roomtitle = $rooms_t[0][3];
+        ?>
         <div class="tablepreview">
             
             
-            <h2>RAPPU G </h2>
+            <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $g_colc ?>; -->
               <div class="project__buildingcoordinates">
-                <ol reversed>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ol>
+                <ul>
+                  <?php
+                    for ($i=50; $i >= 1; $i--) { 
+                      echo "<li class='floor__".$i."'>" . $i . "</li>";                      
+                    }
+                  ?>
+                </ul>
               </div>
-              <?php 
-                  $g_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'g_rooms'");
-                  $g_da = mysqli_fetch_all($g_data);
-                  $g_data = $g_da[0][3];
-
-                  if (strlen($g_data) <= 2){
-                      echo "<style>#G {display:none}</style>";
-                  } 
-
-                  $g_da_ = explode("},{", $g_data);
-
-
-                  foreach ($g_da_ as $g_key) {
-                    $da_child = explode(",", $g_key);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
-                    
-              }
-
-              $g_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'g_rooms_nowork'");
+              <?php
+                  $g_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'g_rooms_nowork'");
                   $g_da_nowork = mysqli_fetch_all($g_data_nowork);
                   $g_data_nowork = $g_da_nowork[0][3];
 
                   $g_da_nowork_ = explode("},{", $g_data_nowork);
-
-
                   foreach ($g_da_nowork_ as $g_key_nowork) {
+
                     $da_child = explode(",", $g_key_nowork);
                     $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
                     $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);'>".$key0."</div>";
-                
-              }
+                      if($key1 == "K") {
+                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                        $remove_overflowY = true;
+                      }
+                      else if($key1 == "AK") {
+                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                        $remove_overflowY = true;
+                      }
+                      else {
+                        $tila__bottomcord = intval($key1) -1;
+                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      }
+                  }
+              
+                  $g_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'g_rooms'");
+                  $g_da = mysqli_fetch_all($g_data);
+                  $g_data = $g_da[0][3];
+
+                  $g_da_ = explode("},{", $g_data);
+                  
+
+
+                  if (strlen($g_data) < 3) {
+                      echo "<style>#G {display:none}</style>";
+                  } 
+                  
+                  foreach ($g_da_ as $g_key) {
+                    $da_child = explode(',', $g_key);
+                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                    $tila__bottomcord = intval($key1) -1;
+                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                    
+                    $aroom = str_replace('a_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3])))));
+                    $broom = str_replace('b_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4])))));
+                    $croom = str_replace('c_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5])))));
+                    $droom = str_replace('d_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[6])))));
+                    $kroom = str_replace('k_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[7])))));
+                    $lroom = str_replace('l_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8])))));
+                    
+                    $classname = str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))));
+
+                    if(explode("~",$aroom)[1] === explode("~",$broom)[1] && explode("~",$croom)[1]  === explode("~",$kroom)[1]) {
+                      $additionalclass = explode("~",$aroom)[1];
+                    }
+                    if($key1 == "K") {
+                      $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='K' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else if($key1 == "AK") {
+                      $remove_overflowY = true;
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='AK' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    }
+                    else {
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      $floornum = 50 - intval($tila__bottomcord);
+
+                      echo '<script>if(document.querySelector("#G ul > li:nth-child('.$floornum.')")) {document.querySelector("#G ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
+                      echo '<script>if(document.querySelector("#G ul > li:nth-child('.$floornum.')")) {document.querySelector("#G ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
+                    }
+                  }
             ?>
               <section class="project__building_grid">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <?php 
+                  for ($i=0; $i < 1500; $i++) { 
+                    echo "<div></div>";
+                  }
+                ?>
               </section>
             </div>
             
@@ -3377,491 +1044,167 @@
         </div>
     </div>
     <div class="per50 floatleft coderdy rappu-8" id="H" style="opacity: 1;">
+        <?php
+          $roomtitle = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'h_rooms_title'");
+          $rooms_t = mysqli_fetch_all($roomtitle);
+          $roomtitle = $rooms_t[0][3];
+        ?>
         <div class="tablepreview">
             
             
-            <h2>RAPPU H </h2>
+            <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $h_colc ?>; -->
               <div class="project__buildingcoordinates">
-                <ol reversed>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ol>
+                <ul>
+                  <?php
+                    for ($i=50; $i >= 1; $i--) { 
+                      echo "<li class='floor__".$i."'>" . $i . "</li>";                      
+                    }
+                  ?>
+                </ul>
               </div>
               <?php 
-                  $h_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'h_rooms'");
-                  $h_da = mysqli_fetch_all($h_data);
-                  $h_data = $h_da[0][3];
+                $h_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'h_rooms_nowork'");
+                $h_da_nowork = mysqli_fetch_all($h_data_nowork);
+                $h_data_nowork = $h_da_nowork[0][3];
+                $h_da_nowork_ = explode("},{", $h_data_nowork);
+                foreach ($h_da_nowork_ as $h_key_nowork) {
 
-                  $h_da_ = explode("},{", $h_data);
+                  $da_child = explode(",", $h_key_nowork);
+                  $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                  $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                  
+                  $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                  if($key1 == "K") {
+                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    $remove_overflowY = true;
+                  }
+                  else if($key1 == "AK") {
+                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    $remove_overflowY = true;
+                  }
+                  else {
+                    $tila__bottomcord = intval($key1) -1;
+                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                  }
 
-                  if (strlen($h_data) <= 2){
-                      echo "<style>#H {display:none}</style>";
-                  } 
+                }
+
+                $h_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'h_rooms'");
+                $h_da = mysqli_fetch_all($h_data);
+                $h_data = $h_da[0][3];
+
+                $h_da_ = explode("},{", $h_data);
 
 
-                  foreach ($h_da_ as $h_key) {
-                    $da_child = explode(",", $h_key);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))))))));
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
-                    
-              }
 
-              $h_data_nowork = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`=$id AND `meta_key` = 'h_rooms_nowork'");
-                  $h_da_nowork = mysqli_fetch_all($h_data_nowork);
-                  $h_data_nowork = $h_da_nowork[0][3];
+                if (strlen($h_data) < 3) {
+                    echo "<style>#H {display:none}</style>";
+                } 
 
-                  $h_da_nowork_ = explode("},{", $h_data_nowork);
+                foreach ($h_da_ as $h_key) {
+                  $da_child = explode(',', $h_key);
+                  $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
+                  $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
+                  $tila__bottomcord = intval($key1) -1;
+                  $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
+                  
+                  $aroom = str_replace('a_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[3])))));
+                  $broom = str_replace('b_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[4])))));
+                  $croom = str_replace('c_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[5])))));
+                  $droom = str_replace('d_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[6])))));
+                  $kroom = str_replace('k_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[7])))));
+                  $lroom = str_replace('l_room:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[8])))));
+                  
+                  $classname = str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($key0)))))))))));
 
+                  if(explode("~",$aroom)[1] === explode("~",$broom)[1] && explode("~",$croom)[1]  === explode("~",$kroom)[1]) {
+                    $additionalclass = explode("~",$aroom)[1];
+                  }
+                  if($key1 == "K") {
+                    $remove_overflowY = true;
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='K' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                  }
+                  else if($key1 == "AK") {
+                    $remove_overflowY = true;
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='AK' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                  }
+                  else {
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    $floornum = 50 - intval($tila__bottomcord);
 
-                  foreach ($h_da_nowork_ as $h_key_nowork) {
-                    $da_child = explode(",", $h_key_nowork);
-                    $key0 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[0]))))));
-                    $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
-                    $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
-                      echo "<div data-room='".strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))."' data-y='".$key1."' data-x='".$key2."' class='nowork ".strtolower(str_replace('Tila ','',$key0))."' style='margin-top: calc(" . $key1 . "px*80);margin-left:calc(".$key2 . "px*80);'>".$key0."</div>";
-                
-              }
-            ?>
+                    echo '<script>if(document.querySelector("#H ul > li:nth-child('.$floornum.')")) {document.querySelector("#H ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
+                    echo '<script>if(document.querySelector("#H ul > li:nth-child('.$floornum.')")) {document.querySelector("#H ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
+                  }
+                }
+              ?>
               <section class="project__building_grid">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <?php 
+                  for ($i=0; $i < 1500; $i++) { 
+                    echo "<div></div>";
+                  }
+                ?>
               </section>
             </div>
             
             <!-- end of sizer -->    
         </div>
     </div>
+
+    <?php
+    if(strtolower($_GET["user"]) == "tyonjohto") {
+      echo '<div class="rappus__plusbtn" onclick="next_rabbu();">UUSI</div>';
+    }
+    ?>
   </div>
   <div class="container colormeanings">
-    <div class="row">
-        <div class="c_meaning c_meaning_1"><i>EI TYÖTÄ</i></div>
-        <div class="c_meaning c_meaning_2"><i>ALOITTAMATTA </i></div>
-        <div class="c_meaning c_meaning_3"><i>MITTAUS KESKEN</i></div>
-        <div class="c_meaning c_meaning_4"><i>MATERIAALIT TILATTU</i></div>
-        <div class="c_meaning c_meaning_4-5"><i>MATERIAALIT TYÖMAALLA</i></div>
-        <div class="c_meaning c_meaning_5"><i>ASENNETTU</i></div>
-        <div class="c_meaning c_meaning_6"><i>HYVÄKSYTTÄVÄ</i></div>
-        <div class="c_meaning c_meaning_7"><i>VALMIS</i></div>
-        <div class="c_meaning c_meaning_8"><i>ONGELMA</i></div>
-        <div class="c_meaning c_meaning_9"><i>KRIITTINEN ONGELMA</i></div>
+    <div class="row colormeaningsimps">
+      <div class="col-2 popup__statuses_a">
+        <div class="c_meaning c_meaning_2" data-action="undone"><input oninput="change__stsplit(this)" data-action="undone" class="lineinput" value="<?= $st_slplit[0]; ?>" /></div>
+        <div class="c_meaning c_meaning_1" data-action="nowork"><input oninput="change__stsplit(this)" data-action="nowork" class="lineinput" value="<?= $st_slplit[1]; ?>" /></div>
+        <div class="c_meaning c_meaning_8" data-action="prob"><input oninput="change__stsplit(this)" data-action="prob"  class="lineinput" value="<?= $st_slplit[2]; ?>" /></div>
+        <div class="c_meaning c_meaning_9" data-action="problem"><input oninput="change__stsplit(this)" data-action="problem" class="lineinput" value="<?= $st_slplit[3]; ?>" /></div>
+
+      </div>
+      <div class="col-2 popup__statuses_f">
+        <div class="c_meaning" data-action="l5_a"><input oninput="change__stsplit(this)" data-action="l5_a" class="lineinput" value="<?= $st_slplit[4]; ?>" /></div>
+        <div class="c_meaning" data-action="l5_b"><input oninput="change__stsplit(this)" data-action="l5_b" class="lineinput" value="<?= $st_slplit[5]; ?>" /></div>
+        <div class="c_meaning" data-action="l5_c"><input oninput="change__stsplit(this)" data-action="l5_c" class="lineinput" value="<?= $st_slplit[6]; ?>" /></div>
+        <div class="c_meaning" data-action="l5_d"><input oninput="change__stsplit(this)" data-action="l5_d" class="lineinput" value="<?= $st_slplit[7]; ?>" /></div>
+      </div>
+      <div class="col-2 popup__statuses_b">
+        <div class="c_meaning" data-action="l4_a"><input oninput="change__stsplit(this)" data-action="l4_a" class="lineinput" value="<?= $st_slplit[8]; ?>" /></div>
+        <div class="c_meaning" data-action="l4_b"><input oninput="change__stsplit(this)" data-action="l4_b" class="lineinput" value="<?= $st_slplit[9]; ?>" /></div>
+        <div class="c_meaning" data-action="l4_c"><input oninput="change__stsplit(this)" data-action="l4_c" class="lineinput" value="<?= $st_slplit[10]; ?>" /></div>
+        <div class="c_meaning" data-action="l4_d"><input oninput="change__stsplit(this)" data-action="l4_d" class="lineinput" value="<?= $st_slplit[11]; ?>" /></div>
+      </div>
+      <div class="col-2 popup__statuses_c">
+        <div class="c_meaning" data-action="l3_a"><input oninput="change__stsplit(this)" data-action="l3_a" class="lineinput" value="<?= $st_slplit[12]; ?>" /></div>
+        <div class="c_meaning" data-action="l3_b"><input oninput="change__stsplit(this)" data-action="l3_b" class="lineinput" value="<?= $st_slplit[13]; ?>" /></div>
+        <div class="c_meaning" data-action="l3_c"><input oninput="change__stsplit(this)" data-action="l3_c" class="lineinput" value="<?= $st_slplit[14]; ?>" /></div>
+        <div class="c_meaning" data-action="l3_d"><input oninput="change__stsplit(this)" data-action="l3_d" class="lineinput" value="<?= $st_slplit[15]; ?>" /></div>
+      </div>
+      <div class="col-2 popup__statuses_d">
+        <div class="c_meaning" data-action="l2_a"><input oninput="change__stsplit(this)" data-action="l2_a" class="lineinput" value="<?= $st_slplit[16]; ?>" /></div>
+        <div class="c_meaning" data-action="l2_b"><input oninput="change__stsplit(this)" data-action="l2_b" class="lineinput" value="<?= $st_slplit[17]; ?>" /></div>
+        <div class="c_meaning" data-action="l2_c"><input oninput="change__stsplit(this)" data-action="l2_c" class="lineinput" value="<?= $st_slplit[18]; ?>" /></div>
+        <div class="c_meaning" data-action="l2_d"><input oninput="change__stsplit(this)" data-action="l2_d" class="lineinput" value="<?= $st_slplit[19]; ?>" /></div>
+      </div>
+      <div class="col-2 popup__statuses_e">
+        <div class="c_meaning" data-action="l1_a"><input oninput="change__stsplit(this)" data-action="l1_a" class="lineinput" value="<?= $st_slplit[20]; ?>" /></div>
+        <div class="c_meaning" data-action="l1_b"><input oninput="change__stsplit(this)" data-action="l1_b" class="lineinput" value="<?= $st_slplit[21]; ?>" /></div>
+        <div class="c_meaning" data-action="l1_c"><input oninput="change__stsplit(this)" data-action="l1_c" class="lineinput" value="<?= $st_slplit[22]; ?>" /></div>
+        <div class="c_meaning" data-action="l1_d"><input oninput="change__stsplit(this)" data-action="l1_d" class="lineinput" value="<?= $st_slplit[23]; ?>" /></div>
+      </div>
+      
     </div>
     <?php
 
     if(strtolower($_GET["user"]) == "tyonjohto") {
       echo'
       <div class="row">
-        <h3>Kommentit</h3>
+        <h3>Työt</h3>
         <div class="cr_meaning cr_meaning_1">
           <div class="form-group">
               <input type="radio" checked name="commentroles" id="cr_meaning_1" onclick="initializebuilding_comments(`all`);">
@@ -4170,11 +1513,13 @@
 
     <?php 
 
-    $available_users = '';
+      $available_users = '';
+    
       if(strtolower($_GET["user"]) == "tyonjohto") {
+
         $role = $_GET['user'];
 
-        $_userslist = mysqli_query($db, "SELECT `username` FROM `users`");
+        $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id");
         $userslist = mysqli_fetch_all($_userslist);
         
 
@@ -4185,9 +1530,9 @@
         }
         echo '
           <div class="row">
-           <h2>Jätä kommentti</h2>
-           <hr style="margin-top: 50px;">
-            <section class="commentbox commentbox__new">
+            <h2 style="width: 100%;">Jätä työ</h2>
+            <hr style="margin-top: 50px;">
+            <section class="commentbox commentbox__new commentbox__newsecond">
               <div class="row">
                 <div class="col-6">  
                   <h2><input type="text" value="" class="lineinput kommentti__name" placeholder="Mikä murehduttaa?" onchange="window.scrollTo(0, 150);"></h2>
@@ -4195,18 +1540,18 @@
                 </div>
                 <div class="col-3">  
                   <h6>Deadline:</h6>
-                  <input name="deadline_time" class="comment__deadline" type="date" min="' .  date("Y-m-d") . '" value="'.date("Y-m-t", strtotime(date("Y-m-d"))).'" onchange="document.querySelector(`#newcomment__vko`).value= new Date(this.value).getWeek();" id="newcomment__deadline">
+                  <input name="deadline_time" class="comment__deadline newcomment__deadline" type="date" min="' .  date("Y-m-d") . '" value="'.date("Y-m-t", strtotime(date("Y-m-d"))).'" onchange="this.parentElement.parentElement.parentElement.querySelector(`.newcomment__vko`).value= new Date(this.value).getWeek();">
                 </div>
                 <div class="col-3">  
                     <h6>Arvio työtunneista</h6>
-                    <input name="time_estimate" class="time_estimate" type="number" pattern="\d*"/ value="0" style="max-width: 70px;" id="newcomment__estimatehours" min="0">h
+                    <input name="time_estimate" class="time_estimate newcomment__estimatehours" type="number" pattern="\d*"/ value="0" style="max-width: 70px;" min="0">h
                 </div>
               </div>
               <div class="row">
                 <div class="col-6">
-                 <div class="form-group">
+                <div class="form-group">
                       <h6>Lisää tiedostot:</h6>
-                      <input type="file" class="comment__files newcomment__files" name="comment__files[]" id="newcomment__files" multiple>
+                      <input type="file" class="comment__files newcomment__files newcomment__files_input" name="comment__files[]" multiple>
                       <div class="comment__preview_files newcomment__previewfiles"></div>
                   </div>
                   <h6>Keneltä</h6>
@@ -4216,7 +1561,7 @@
                 </div>
                 <div class="col-6">
                     <h6>Tehdään viikolla</h6>
-                    <input name="vko_estimate" class="vko_estimate" type="number" pattern="\d*"/ value="1" min="1" max="52" style="max-width: 70px;" id="newcomment__vko">
+                    <input name="vko_estimate" class="vko_estimate newcomment__vko" type="number" pattern="\d*"/ value="'.$cur_week.'" min="1" max="52" style="max-width: 70px;">
                     <div class="row elevated_spaces">
                       <div class="col-6">
                         <h6>Kenelle</h6>
@@ -4230,113 +1575,75 @@
                 <h4>Sisältö</h4>
                 <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
                 <div class="row pohjakierros">
-                  <input id="is_thecomment_critical" type="checkbox" value="Critical">
+                  <input id="is_thecomment_critical" class="is_thecomment_critical" type="checkbox" value="Critical">
                   <label for="is_thecomment_critical">Onko kriittinen?</label>
                 </div>
               </div>
-              <div class="commentbox_btn drawarea__controls_btn btn commentreadyready_btn sendcommentfiles"  onclick="comment__create_new();">Lähetä</div>
+              <div class="commentbox_btn drawarea__controls_btn btn commentreadyready_btn sendcommentfiles"  onclick="comment__create_new(this.parentElement.parentElement);">Lähetä</div>
             </section>
           </div>';
-      } 
+        } 
       ?>  
            <div class="row">
             <h3>Seinän nimen taustaväri</h3>
-              <div class="c_meaning c_meaning_1"><i>EI TYÖTÄ</i></div>
-              <div class="c_meaning c_meaning_2"><i>ALOITTAMATTA </i></div>
-              <div class="c_meaning c_meaning_3"><i>MITTAUS KESKEN</i></div>
-              <div class="c_meaning c_meaning_4"><i>MATERIAALIT TILATTU</i></div>
-              <div class="c_meaning c_meaning_4-5"><i>MATERIAALIT TYÖMAALLA</i></div>
-              <div class="c_meaning c_meaning_5"><i>ASENNETTU</i></div>
-              <div class="c_meaning c_meaning_6"><i>HYVÄKSYTTÄVÄ</i></div>
-              <div class="c_meaning c_meaning_7"><i>VALMIS</i></div>
-              <div class="c_meaning c_meaning_8"><i>ONGELMA</i></div>
-              <div class="c_meaning c_meaning_9"><i>KRIITTINEN ONGELMA</i></div>
-          </div>
-          
-          <div id="house" class="house">
+            
+            <div class="col-2 popup__statuses_a">
+        <div class="c_meaning c_meaning_2" data-action="undone"><i data-action="undone"><?= $st_slplit[0]; ?> </i></div>
+        <div class="c_meaning c_meaning_1" data-action="nowork"><i data-action="nowork"><?= $st_slplit[1]; ?> </i></div>
+        <div class="c_meaning c_meaning_8" data-action="prob"><i data-action="prob" ><?= $st_slplit[2]; ?> </i></div>
+        <div class="c_meaning c_meaning_9" data-action="problem"><i data-action="problem"><?= $st_slplit[3]; ?> </i></div>
 
-          <?php 
-            // project_type
-            $id = $post['id'];
+      </div>
+      <div class="col-2 popup__statuses_f">
+        <div class="c_meaning" data-action="l5_a"><i data-action="l5_a"><?= $st_slplit[4]; ?></i></div>
+        <div class="c_meaning" data-action="l5_b"><i data-action="l5_b"><?= $st_slplit[5]; ?></i></div>
+        <div class="c_meaning" data-action="l5_c"><i data-action="l5_c"><?= $st_slplit[6]; ?></i></div>
+        <div class="c_meaning" data-action="l5_d"><i data-action="l5_d"><?= $st_slplit[7]; ?></i></div>
+      </div>
+      <div class="col-2 popup__statuses_b">
+        <div class="c_meaning" data-action="l4_a"><i data-action="l4_a"><?= $st_slplit[8]; ?></i></div>
+        <div class="c_meaning" data-action="l4_b"><i data-action="l4_b"><?= $st_slplit[9]; ?></i></div>
+        <div class="c_meaning" data-action="l4_c"><i data-action="l4_c"><?= $st_slplit[10]; ?></i></div>
+        <div class="c_meaning" data-action="l4_d"><i data-action="l4_d"><?= $st_slplit[11]; ?></i></div>
+      </div>
+      <div class="col-2 popup__statuses_c">
+        <div class="c_meaning" data-action="l3_a"><i data-action="l3_a"><?= $st_slplit[12]; ?></i></div>
+        <div class="c_meaning" data-action="l3_b"><i data-action="l3_b"><?= $st_slplit[13]; ?></i></div>
+        <div class="c_meaning" data-action="l3_c"><i data-action="l3_c"><?= $st_slplit[14]; ?></i></div>
+        <div class="c_meaning" data-action="l3_d"><i data-action="l3_d"><?= $st_slplit[15]; ?></i></div>
+      </div>
+      <div class="col-2 popup__statuses_d">
+        <div class="c_meaning" data-action="l2_a"><i data-action="l2_a"><?= $st_slplit[16]; ?> </i></div>
+        <div class="c_meaning" data-action="l2_b"><i data-action="l2_b"><?= $st_slplit[17]; ?> </i></div>
+        <div class="c_meaning" data-action="l2_c"><i data-action="l2_c"><?= $st_slplit[18]; ?> </i></div>
+        <div class="c_meaning" data-action="l2_d"><i data-action="l2_d"><?= $st_slplit[19]; ?> </i></div>
+      </div>
+      <div class="col-2 popup__statuses_e">
+        <div class="c_meaning" data-action="l1_a"><i data-action="l1_a"><?= $st_slplit[20]; ?> </i></div>
+        <div class="c_meaning" data-action="l1_b"><i data-action="l1_b"><?= $st_slplit[21]; ?> </i></div>
+        <div class="c_meaning" data-action="l1_c"><i data-action="l1_c"><?= $st_slplit[22]; ?> </i></div>
+        <div class="c_meaning" data-action="l1_d"><i data-action="l1_d"><?= $st_slplit[23]; ?> </i></div>
+      </div>
+    </div>
 
-            $bosts = mysqli_query($db, "SELECT * FROM `projects` WHERE `id`=$id");
-            $bosts = mysqli_fetch_all($bosts);
-            foreach ($bosts as $p) {
 
-              if($p[4] == 'after_measure_comment') {
-                
-                echo '<div class="house__wall house__wall_one house__wall_a" style="width: 340px; height: 240px;">
-                    <div class="house__wall_status house__wall_status_a" data-room="A" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä A</div>
-                    <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_a_h" id="wall_one_a_h" onchange="change_a();">
-                    <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000" name="wall_one_a_w" id="wall_one_a_w" onchange="change_a();">
-                    <div class="house__wallspecial">
-                      <div class="house__wall_asjarj asjarja">1</div>
-                      <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="a"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                    </div>
-                </div>
-                <div class="house__wall house__wall_two house__wall_b" style="width: 240px; height: 240px;">
-                  <div class="house__wall_status house__wall_status_b" data-room="B" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä B</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_b_h" id="wall_one_b_h" onchange="change_b();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_b_w" id="wall_one_b_w" onchange="change_b();">
-                  <div class="house__wallspecial">
-                      <div class="house__wall_asjarj asjarjb">2</div>
-                      <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="b"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                    </div>
-                </div>
-                <div class="house__wall house__wall_three house__wall_c" style="width: 340px; height: 240px;">
-                  <div class="house__wall_status house__wall_status_c" data-room="C" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä C</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_c_h" id="wall_one_c_h" onchange="change_c();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_c_w" id="wall_one_c_w" onchange="change_c();">
-                  <div class="house__wallspecial">
-                      <div class="house__wall_asjarj asjarjc">3</div>
-                      <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="c"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                    </div>
-                </div>
-                <div class="house__wall house__wall_four house__wall_d" style="width: 240px; height: 240px;">
-                  <div class="house__wall_status house__wall_status_d" data-room="D" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä D</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_d_h" id="wall_one_d_h" onchange="change_d();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_d_w" id="wall_one_d_w" onchange="change_d();">
-                  <div class="house__wallspecial">
-                      <div class="house__wall_asjarj asjarjd">4</div>
-                      <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="d"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                    </div>
-                </div>
-                <div class="house__wall house__wall_roof house__wall_k" style="width: 340px; height: 240px;">
-                  <div class="house__wall_status house__wall_status_k" data-room="K" onclick="input_step = `drawscreen_section_one`;submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);refresh__drawcontrols();">KATTO</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof();">
-                
-                  <div class="house__wallspecial">
-                    <div class="house__wall_asjarj asjarjk">5</div>
-                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="k"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                  </div>
-                </div>
-                <div class="house__wall house__wall_floor house__wall_l" style="width: 340px; height: 240px;">
-                  <div class="house__wall_status house__wall_status_l" data-room="L" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">LATTIA</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_floor_h" id="wall_one_floor_h" onchange="change_floor();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_floor_w" id="wall_one_floor_w" onchange="change_floor();">
-                  <div class="house__wallspecial">
-                    <div class="house__wall_asjarj asjarjl">6</div>
-                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="l"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                  </div>
-                </div>';
-              }
-                
-            }
-          
-          ?>
-              
-        </div>
+       
       </div>
       <div class="col-6">
         <?php
-          if(strtolower($_GET["role"]) == "kommentointi") {}
+          $usr = $_GET["user"];
+
+          $usr_role = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr'; ");
+          $usr_role_ = mysqli_fetch_all($usr_role)[0];
+          
+          $usr_role = $usr_role_[3];
+        
+          if(strtolower($usr_role) == "kommentointi") {}
           else {
-            echo '
-        <div id="types" class="house__types">
-          <h2>Parveketyypit</h2>
-          <div class="house__types_row row">'; ?>
-            <?php 
+            echo '<div id="types" class="house__types">
+            <h2>Parveketyypit</h2>
+            <div class="house__types_row row">'; 
+            
               $alphabet = range('A', 'Z');            
               $p_data = mysqli_query($db, "SELECT * FROM `pohjat`");
               $p_da = mysqli_fetch_all($p_data);
@@ -4358,53 +1665,55 @@
             
 
             echo '
-          </div>
-          <div class="house__types_button" onclick="initialize__housetempla(this,2);">
-            Tallenna tämä asunto pohjaksi
-          </div>
-        </div>';
-        echo '
-        <div class="col-table">
-           <h2>Seinien asennusjärjestys</h2>
-           <table>
-             <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-1" maxlength="1" name="wall_one_asjarj asjarj" id="wall_order_a" data-tochange="a" onchange="rooms__change_asjarj(this); " value="1" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="a" name="wall_one_a" id="wall_one_a" value="SEINÄ A" data-tochange="a" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_a_desc" id="wall_desc_a" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-             </tr>
-             <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-2" maxlength="1" name="wall_two_asjarj asjarj" id="wall_order_b" data-tochange="b" onchange="rooms__change_asjarj(this); "value="2" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="b" name="wall_one_b" id="wall_one_b" value="SEINÄ B" data-tochange="b"  class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_b_desc" id="wall_desc_b" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-             </tr>
-             <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-3" maxlength="1" name="wall_three_asjarj asjarj" id="wall_order_c" data-tochange="c" onchange="rooms__change_asjarj(this); "value="3" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="c" name="wall_one_c" id="wall_one_c" value="SEINÄ C" data-tochange="c" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_c_desc" id="wall_desc_c" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-             </tr>
-             <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-4" maxlength="1" name="wall_four_asjarj asjarj" id="wall_order_d" data-tochange="d" onchange="rooms__change_asjarj(this); "value="4" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="d" name="wall_one_d" id="wall_one_d" value="SEINÄ D"  data-tochange="d" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_d_desc" id="wall_desc_d" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-             </tr>
-             <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-5" maxlength="1" name="wall_five_asjarj asjarj" id="wall_order_roof" data-tochange="k" onchange="rooms__change_asjarj(this); "value="5" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="roof" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="r" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_roof_desc" id="wall_desc_roof" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-             </tr>
-             <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-6" maxlength="1" name="wall_six_asjarj asjarj" id="wall_order_floor" data-tochange="l" onchange="rooms__change_asjarj(this); "value="6" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="floor" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_floor_desc" id="wall_desc_floor" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-             </tr>
-           </table>
-           <!--<div class="kumoa" onclick="kumoa();">Kumoa</div>-->
-        </div> ';
-      }
+              </div>
+              <div class="house__types_button" onclick="initialize__housetempla(this,2);">
+                Tallenna tämä asunto pohjaksi
+              </div>
+            </div>';
+            echo '
+            <div class="col-table">
+              <h2>Seinien asennusjärjestys</h2>
+              <table>
+                <tr>
+                    <td><input type="number" pattern="\d*"/ data-room="asjarj-1" maxlength="1" name="wall_one_asjarj asjarj" id="wall_order_a" data-tochange="a" onchange="rooms__change_asjarj(this); " value="1" class="lineinput inputname" required/></td>
+                    <td><input type="text" data-room="a" name="wall_one_a" id="wall_one_a" value="SEINÄ A" data-tochange="a" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                    <td><input type="text" name="wall_one_a_desc" id="wall_desc_a" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" pattern="\d*"/ data-room="asjarj-2" maxlength="1" name="wall_two_asjarj asjarj" id="wall_order_b" data-tochange="b" onchange="rooms__change_asjarj(this); "value="2" class="lineinput inputname" required/></td>
+                    <td><input type="text" data-room="b" name="wall_one_b" id="wall_one_b" value="SEINÄ B" data-tochange="b"  class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                    <td><input type="text" name="wall_one_b_desc" id="wall_desc_b" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" pattern="\d*"/ data-room="asjarj-3" maxlength="1" name="wall_three_asjarj asjarj" id="wall_order_c" data-tochange="c" onchange="rooms__change_asjarj(this); "value="3" class="lineinput inputname" required/></td>
+                    <td><input type="text" data-room="c" name="wall_one_c" id="wall_one_c" value="SEINÄ C" data-tochange="c" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                    <td><input type="text" name="wall_one_c_desc" id="wall_desc_c" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" pattern="\d*"/ data-room="asjarj-4" maxlength="1" name="wall_four_asjarj asjarj" id="wall_order_d" data-tochange="d" onchange="rooms__change_asjarj(this); "value="4" class="lineinput inputname" required/></td>
+                    <td><input type="text" data-room="d" name="wall_one_d" id="wall_one_d" value="SEINÄ D"  data-tochange="d" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                    <td><input type="text" name="wall_one_d_desc" id="wall_desc_d" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" pattern="\d*"/ data-room="asjarj-5" maxlength="1" name="wall_five_asjarj asjarj" id="wall_order_roof" data-tochange="k" onchange="rooms__change_asjarj(this); "value="5" class="lineinput inputname" required/></td>
+                    <td><input type="text" data-room="roof" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="r" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                    <td><input type="text" name="wall_one_roof_desc" id="wall_desc_roof" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" pattern="\d*"/ data-room="asjarj-6" maxlength="1" name="wall_six_asjarj asjarj" id="wall_order_floor" data-tochange="l" onchange="rooms__change_asjarj(this); "value="6" class="lineinput inputname" required/></td>
+                    <td><input type="text" data-room="floor" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                    <td><input type="text" name="wall_one_floor_desc" id="wall_desc_floor" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                </tr>
+              </table>
+              <!--<div class="kumoa" onclick="kumoa();">Kumoa</div>-->
+            </div> ';
+
+            
+          }
         ?>
 
         <div id="house__intro_commenting">
-          <h3>Kommentit</h3>
+          <h3>Työt</h3>
           <div class="house__intro_comments">
               <?php 
                 $id = $post['id'];
@@ -4424,7 +1733,7 @@
                     $_z = "";
                     foreach ($_p as $v) {
                       if(strlen($v) >= 7 ) {
-                        $_z .= "<li><a href=https://" . $v . " target=`_blank`> <img style='max-width: 200px' src=https://" . $v . " /></a></li>";
+                        $_z .= "<li><a href=https://" . $v . " target=`_blank`> <img style='max-width: 200px' src='https://" . $v . "' /></a></li>";
                       }
                     }
                     if(strtolower($_GET["user"]) == "tyonjohto") {
@@ -4522,7 +1831,7 @@
 
                     
 
-                    $_userslist = mysqli_query($db, "SELECT `username` FROM `users`");
+                    $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id ");
                     $userslist = mysqli_fetch_all($_userslist);
                     
 
@@ -4703,7 +2012,7 @@
                       $_z2 = "";
                       foreach ($_p2 as $v2) {
                         if(strlen($v2) >= 7 ) {
-                          $_z2 .= "<li><a href=https://" . $v2 . " target=`_blank`> <img style='max-width: 200px' src=https://" . $v2 . " /></a></li>";
+                          $_z2 .= "<li><a href=https://" . $v2 . " target=`_blank`> <img style='max-width: 200px' src='https://" . $v2 . "' /></a></li>";
                         }
                       }
                       echo '<section class="commentbox commentbox__helpticket ' . $p[0] . ' ' . $p[9] . '" data-room="' . $p[2] . '" data-name="' . $p[0] . '">
@@ -4743,8 +2052,88 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    
+    <div id="house" class="house" style="">
 
+      <?php 
+        // project_type
+        $id = $post['id'];
+
+        $bosts = mysqli_query($db, "SELECT * FROM `projects` WHERE `id`=$id");
+        $bosts = mysqli_fetch_all($bosts);
+        foreach ($bosts as $p) {
+
+          if($p[4] == 'after_measure_comment') {
+            echo '
+            <div class="row">
+              <div class="house__wall house__wall_roof house__wall_k" style="width: 170px; height: 120px;">
+                <div class="house__wall_status house__wall_status_k" data-room="K" onclick="input_step = `drawscreen_section_one`;submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);refresh__drawcontrols();">KATTO</div>
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof();">
+              
+                <div class="house__wallspecial">
+                  <div class="house__wall_asjarj asjarjk">5</div>
+                  <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="k"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                </div>
+              </div>
+            </div>';
+            echo '
+            <div class="row">
+              <div class="house__wall house__wall_one house__wall_a" style="width: 170px; height: 120px;">
+                  <div class="house__wall_status house__wall_status_a" data-room="A" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä A</div>
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_a_h" id="wall_one_a_h" onchange="change_a();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000" name="wall_one_a_w" id="wall_one_a_w" onchange="change_a();">
+                  <div class="house__wallspecial">
+                    <div class="house__wall_asjarj asjarja">1</div>
+                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="a"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                  </div>
+              </div>
+              <div class="house__wall house__wall_two house__wall_b" style="width: 120px; height: 120px;">
+                <div class="house__wall_status house__wall_status_b" data-room="B" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä B</div>
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_b_h" id="wall_one_b_h" onchange="change_b();">
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_b_w" id="wall_one_b_w" onchange="change_b();">
+                <div class="house__wallspecial">
+                    <div class="house__wall_asjarj asjarjb">2</div>
+                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="b"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                  </div>
+              </div>
+              <div class="house__wall house__wall_three house__wall_c" style="width: 170px; height: 120px;">
+                <div class="house__wall_status house__wall_status_c" data-room="C" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä C</div>
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_c_h" id="wall_one_c_h" onchange="change_c();">
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_c_w" id="wall_one_c_w" onchange="change_c();">
+                <div class="house__wallspecial">
+                    <div class="house__wall_asjarj asjarjc">3</div>
+                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="c"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                  </div>
+              </div>
+              <div class="house__wall house__wall_four house__wall_d" style="width: 120px; height: 120px;">
+                <div class="house__wall_status house__wall_status_d" data-room="D" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä D</div>
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_d_h" id="wall_one_d_h" onchange="change_d();">
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_d_w" id="wall_one_d_w" onchange="change_d();">
+                <div class="house__wallspecial">
+                    <div class="house__wall_asjarj asjarjd">4</div>
+                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="d"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                  </div>
+              </div>
+            </div>';
+            echo '
+            <div class="row">
+              <div class="house__wall house__wall_floor house__wall_l" style="width: 170px; height: 120px;">
+                <div class="house__wall_status house__wall_status_l" data-room="L" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">LATTIA</div>
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_floor_h" id="wall_one_floor_h" onchange="change_floor();">
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_floor_w" id="wall_one_floor_w" onchange="change_floor();">
+                <div class="house__wallspecial">
+                  <div class="house__wall_asjarj asjarjl">6</div>
+                  <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="l"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                </div>
+              </div>
+            </div>';
+          }
+            
+        }
+
+      ?>
+          
       </div>
   </div>
   <div class="modal-container">
@@ -4766,18 +2155,55 @@
 <input type="text" hidden id="skipping_room" value="<?php echo $_GET['room']?>">
 <input type="text" hidden id="skipping_step" value="<?php echo $_GET['step']?>">
 
- <div class="question-container recl-container out" id="question__popup">
-    <div class="modal-background">
-      <div class="modal">
-        <section class="comment__section">
-           <h2>Levytetäänkö muutkin seinät?</h2>
-            <div class="modal_close_btn modal-no" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeWalls_all();">Ei</div>
-            <div class="modal_close_btn modal-yes" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeWalls_all();">Kyllä</div>
-        </section>
-      </div>
+<div class="question-container recl-container out" id="question__popup">
+  <div class="modal-background">
+    <div class="modal">
+      <section class="comment__section">
+          <h2>Levytetäänkö muutkin seinät?</h2>
+          <div class="modal_close_btn modal-no" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeWalls_all();">Ei</div>
+          <div class="modal_close_btn modal-yes" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeWalls_all();">Kyllä</div>
+      </section>
     </div>
   </div>
+</div>
+<?php
+  if(strtolower($_GET["user"]) == "valinta") {
+    $classvalinta = "two";
+  }
+  else {
+    $classvalinta = "";
+  }
+  $prid = $_GET["id"];
+  $options = "";
+  $users = mysqli_query($db, "SELECT * FROM `addedusers` WHERE `project_id`='$prid';");
+  $users = mysqli_fetch_all($users);
+  $options.='<option value="-">-</option>';
+  foreach ($users as $p) { 
+    $options.='<option value="'.$p[1].'">'.$p[1].'</option>';
+  }
 
+?>
+<div class="zero_popup cus-container <?= $classvalinta; ?>">
+  <div class="modal-background">
+    <div class="modal">
+      <div class="modal_close_btn hidden" onclick="zero_controls_close();">
+      <b><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"/></svg></b></div>
+      <section style="border-bottom: 1px solid lightgray">
+        <div class="row">
+          <div class="col-6"><h6>Olen:</h6></div>
+          <div class="col-6">
+            <?php 
+              echo '<select id="usr__selection" onchange="zero_controls(this);">
+              '.$options.'
+                </select>'; 
+            ?>
+          </div>
+        </div>
+      </section>
+      <div class="modal_close_btn drawarea__controls_btn btn hidden" onclick="zero_controls_close();" style="text-align: center; width: 100%;">Valmis</div>
+    </div>
+  </div>
+</div>
 <div class="first_popup cus-container">
   <div class="modal-background">
     <div class="modal">
@@ -4975,7 +2401,7 @@
           <div class="laskutusrivit_kannatuspalvelu">
             <h6></h6>
             <table id="laskutusrivit_kannatuspalvelu">
-            
+            ""
             </table>
           </div>
           <div class="laskutusrivit_toimisto">
@@ -5051,35 +2477,59 @@
 <div class="five_popup cus-container">
   <div class="modal-background">
     <div class="modal">
+    <div class="modal_close_btn" onclick="document.querySelector('.five_popup').classList.add('out');document.querySelector('.five_popup').classList.remove('two');">
+      <b><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"/></svg></b></div>
       <section class="commentasking__section">
         <h3>Muokkaa projektia:</h3>
         <div class="per50 floatleft rappu-1" id="A_" style="opacity: 1;" maxlength="5">
           <div class="tablepreviewz">
-              <div class="roomconfig_second_prefixes">
-                <h2><input type="text" maxlength="10" list="" id="a_val" name="a_prefix" value="ARAK-"></h2>
-                <h2><input type="text" maxlength="10" list="" id="a_nextnum" name="a_nextnum" value="1" class="prefixnum" onclick="change__byhands(this)"></h2>
-                <h5><input type="text" maxlength="10" list="" id="a_nextnum_second" name="a_nextnum_second" value="" class="prefixnum prefixnum_second"></h5>
-                <h5><input type="text" maxlength="10" list="" id="a_nextnum_third" name="a_nextnum_third" value="" class="prefixnum prefixnum_second"></h5>
-              </div>
-                
+            <div class="roomconfig_second_prefixes roomconfig__titlerow">
+              <h5>R1 <br> <input type="text" maxlength="15" list="" id="a_val" name="a_prefix" value="ARAK-"></h5>
+              <h5>R1 nro 
+                <br>
+                <input type="number" onchange="z=parseFloat(this.value);" maxlength="15" list="" id="a_nextnum" name="a_nextnum" value="1" class="prefixnum" onclick="change__byhands(this)"  data-alt="a_nextnum_2|a_nextnum_3" oninput="change__toggling(this,1)">
+                <br> TAI R1 kirjain <br>
+                <input type="text" onchange="z_alphabet=this.value.charCodeAt(0) - 64;"  maxlength="15" list="" id="a_nextnum_2" name="a_nextnum_2" value="" data-alt="a_nextnum|a_nextnum_3" class="prefixnum closed" oninput="change__toggling(this,2)">
+                <br>TAI R1 custom <br>
+                <input type="text" maxlength="15" list="" id="a_nextnum_3" name="a_nextnum_3" value="" data-alt="a_nextnum_2|a_nextnum" class="prefixnum closed" oninput="change__toggling(this,3)"></h5>
+              <h5>R2 <br> <input type="text" maxlength="15" list="" id="a_nextnum_second" name="a_prefix" value=""></h5>
+              <h5>
+                R2 nro<br> 
+                <input type="number" maxlength="15" list="" onchange="z=parseFloat(this.value);" id="a_nextnum_second_1" name="a_nextnum_second_1" value="" class="prefixnum" data-alt="a_nextnum_second_2|a_nextnum_second_3" oninput="change__toggling(this,1)">
+                <br>TAI R2 kirjain<br>
+                <input type="text" maxlength="15" list="" onchange="z_alphabet=this.value.charCodeAt(0) - 64;" id="a_nextnum_second_2" name="a_nextnum_second_2" value="" class="prefixnum" data-alt="a_nextnum_second_1|a_nextnum_second_3" oninput="change__toggling(this,2)">
+                <br>TAI R2 custom <br>
+                <input type="text" maxlength="15" list="" id="a_nextnum_second_3" name="a_nextnum_second_3" value="" data-alt="a_nextnum_second_1|a_nextnum_second_2" class="prefixnum" oninput="change__toggling(this,3)">
+              </h5>
+              <h5>R3 <br> <input type="text" maxlength="15" list="" id="a_nextnum_third" name="a_nextnum_third" value="" class="prefixnum prefixnum_second"></h5>
+              <h5>
+                R3 nro<br> 
+                <input type="number" maxlength="15" onchange="z=parseFloat(this.value);" list="" id="a_nextnum_third_1" name="a_nextnum_third_1" value="" class="prefixnum" data-alt="a_nextnum_third_2|a_nextnum_third_3" oninput="change__toggling(this,1)">
+                <br>TAI R3 kirjain<br>
+                <input type="text" maxlength="15" onchange="z_alphabet=this.value.charCodeAt(0) - 64;" list="" id="a_nextnum_third_2" name="a_nextnum_third_2" value="" class="prefixnum" data-alt="a_nextnum_third_1|a_nextnum_third_3" oninput="change__toggling(this,2)">
+                <br>TAI R3 custom <br>
+                <input type="text" maxlength="15" list="" id="a_nextnum_third_3" name="a_nextnum_third_3" value="" data-alt="a_nextnum_third_1|a_nextnum_third_2" class="prefixnum" oninput="change__toggling(this,3)">
+              </h5>
+              <div class="greenbtn newproject__addinglvl" onclick="add_new_lvlproject(this);">Lisää uusi kerros</div>
+            </div>
               <div class="table_size_chooser sizer">
                 <div class="SizeChooser">
                   <table class="table">
                     <tbody>
                         <?php
-                          for ($i=10; $i >= -1; $i--) { 
-                            if($i == 0) {
-                                echo '<tr class="K" onclick="open_k();">';
-                                $i_ = "K?";
-                            }
-                            else if($i == -1) {
-                                echo '<tr class="AK" onclick="open_ak();">';
-                                $i_ = "AK?";
-                            }
-                            else {
-                                echo "<tr>";
+                          for ($i=50; $i >= 1; $i--) { 
+                            // if($i == 0) {
+                            //     echo '<tr  class="K" onclick="open_k();">';
+                            //     $i_ = "K?";
+                            // }
+                            // else if($i == -1) {
+                            //     echo '<tr  class="AK" onclick="open_ak();">';
+                            //     $i_ = "AK?";
+                            // }
+                            // else {
+                                echo "<tr style='display: none;' data-no='".$i."'>";
                                 $i_ = $i;
-                            }
+                            // }
 
 
                             for ($a=1; $a < 30; $a++) { 
@@ -5098,11 +2548,15 @@
               <div class="form-group pohjakierros">
                 <label for="pohjakierros">"Ei työtä"-merkkaus käyttöön</label><input type="checkbox" id="pohjakierros" onclick="pohjakierros_function();">
               </div>
+              
           </div>
         </div>
       </section>
-      <div class="modal_close_btn modal-yes" onclick="document.querySelector('.five_popup').classList.add('out');document.querySelector('.five_popup').classList.remove('two');send_new_aparts();">Tallenna</div>
-      <div class="modal_close_btn modal-no" onclick="document.querySelector('.five_popup').classList.add('out');document.querySelector('.five_popup').classList.remove('two');">Sulje</div>
+      <div class="row btnrow">
+        <div class="rappu-1_btn yellowbtn" onclick="plusone_room(1);" value="1" style="display: none;">Lisää uusi rappu</div>
+        <div class="modal_close_btn modal-yes" onclick="document.querySelector('.five_popup').classList.add('out');document.querySelector('.five_popup').classList.remove('two');send_new_aparts();">Tallenna</div>
+        <div class="modal_close_btn modal-no" onclick="document.querySelector('.five_popup').classList.add('out');document.querySelector('.five_popup').classList.remove('two');">Sulje</div>
+      </div>
     </div>
   </div>
 </div>
@@ -5124,7 +2578,14 @@ echo '<datalist id="prc_new_list">
 '.$options.'
 </datalist>';
 
-if(strtolower($_GET["role"]) == "kommentointi") {
+$usr = $_GET["user"];
+
+$usr_role = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr'; ");
+$usr_role = mysqli_fetch_all($usr_role)[0];
+
+$usr_role = $usr_role[3];
+
+if(strtolower($usr_role) == "kommentointi") {
   echo "<style>
   .house__intro .lineinput {
     pointer-events:none;
@@ -5132,6 +2593,14 @@ if(strtolower($_GET["role"]) == "kommentointi") {
   #types {
     display: none;
   }
+  </style>";
+}
+
+if($remove_overflowY === true) {
+  echo "<style>
+    #project_start .rappus {
+      overflow-y: visible;
+    }
   </style>";
 }
 ?>

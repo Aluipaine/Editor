@@ -2,18 +2,45 @@
 include('vendor/config.php');
 
 include('header.php');
+
 ?>
 
 <style>
    main {
       display: none;
    }
+
+   ul {
+      display: flex;
+      flex-direction: row;
+      /* justify-content: center; */
+      overflow-x: scroll;
+      width: 100%
+   }
+
+   ul li {
+      display: flex;
+      align-items: center;
+      width: 200px;
+      background: #fafafa;
+      padding: 10px 24px;
+      border-radius: 30px;
+
+      margin: 0 10px;
+   }
 </style>
 <form action="vendor/create.php" method="post" id="new_project__form">
-    <section id="new_project">
+   
+   <section id="new_project">
          <div class="form-subgroup main">
             <label>Projektin nimi: </label>
-            <input type="text" name="project_name" class="form-control" value="" required>   
+            <input type="text" name="project_name" class="form-control project_name_slugfrom" value="" required oninput="slugify__prname();">   
+         </div>    
+         <div class="form-subgroup main">
+            <label for="project_name_slugto">Projektin linkki: </label>
+            <div class="row project__linkrow">
+               <b>https://editori.westface.fi/</b><input type="text" name="project_slug" class="form-control project_name_slugto" id="project_name_slugto" value="">   
+            </div>
          </div>    
          <fieldset>
             <?php
@@ -130,7 +157,7 @@ include('header.php');
          </fieldset>
          <div onclick='$("#new_project").hide();$("#new_project").slideUp(200);$("#roomconfig_first").slideDown(200);$("#roomconfig_first").show();' class="next_btn btn ready_btn">Jatka eteenpäin</div>
       </div>     
-    </section>  
+   </section>  
 
    <section id="roomconfig_first">
       <h1>Lataa projektin Suunnitelmat</h1>
@@ -171,10 +198,10 @@ include('header.php');
       </div>
       <div class="row">
             <div class="col-6">
-               <a class="prev_btn" href="#roomconfig_first" onclick="$('#roomconfig_first').hide();$('#roomconfig_first').slideUp(200);$('#new_project').slideDown(200);$('#new_project').show();">Edellinen</a>
+               <div class="prev_btn" onclick="$('#roomconfig_first').hide();$('#roomconfig_first').slideUp(200);$('#new_project').slideDown(200);$('#new_project').show();">Edellinen</div>
             </div>
             <div class="col-6">
-               <a class="next_btn btn ready_btn" href="#roomconfig_second" onclick='$("#roomconfig_first").hide();$("#roomconfig_first").slideUp(200);$("#roomconfig_second").slideDown(200);$("#roomconfig_second").show();' class="next_btn btn ready_btn">Seuraava</a>
+               <div class="next_btn btn ready_btn" onclick='$("#roomconfig_first").hide();$("#roomconfig_first").slideUp(200);$("#roomconfig_second").slideDown(200);$("#roomconfig_second").show();' class="next_btn btn ready_btn">Seuraava</div>
             </div>
       </div>
    </section>
@@ -187,7 +214,7 @@ include('header.php');
 
             <?php 
 
-                  $s_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id` = '100' AND `meta_key` = 's_settings'");
+                  $s_data = mysqli_query($db, "SELECT * FROM `settingsmeta` WHERE `id` = '100' AND `meta_key` = 's_settings'");
                   $s_da = mysqli_fetch_all($s_data);
                   $s_data = $s_da[0][3];
 
@@ -240,7 +267,7 @@ include('header.php');
          <div class="col-6 row">
             <h3 style="width: 100%;">Materiaalit:</h3>
             <?php 
-          $s_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id` = '100' AND `meta_key` = 's_materials'");
+          $s_data = mysqli_query($db, "SELECT * FROM `settingsmeta` WHERE `id` = '100' AND `meta_key` = 's_materials'");
           $s_da = mysqli_fetch_all($s_data);
           $s_data = $s_da[0][3];
 
@@ -284,7 +311,7 @@ include('header.php');
          </div>
       </div>
       <div class="row">
-          <div class="col-6"><a class="prev_btn" href="#roomconfig_second" onclick="$('#roomconfig_second').hide();$('#roomconfig_second').slideUp(200);$('#roomconfig_first').slideDown(200);$('#roomconfig_first').show();">Edellinen</a></div>
+          <div class="col-6"><div class="prev_btn" onclick="$('#roomconfig_second').hide();$('#roomconfig_second').slideUp(200);$('#roomconfig_first').slideDown(200);$('#roomconfig_first').show();">Edellinen</div></div>
           <div class="col-6">
             <div onclick='$("#roomconfig_second").hide();$("#roomconfig_second").slideUp(200);$("#roomconfig_third").slideDown(200);$("#roomconfig_third").show();' class="next_btn btn ready_btn">Seuraava</div>
           </div>
@@ -294,48 +321,84 @@ include('header.php');
    <section id="roomconfig_third" class="project__roomcount">
       <h1>Kerrosten, rappujen, ja huoneiden valinta </h1>
       <div class="rappus">
-          <div class="per50 floatleft coderdy rappu-1" id="A_" style="opacity: 1;" maxlength="5">
+          <div class="per50 floatleft coderdy rappu-1" id="A_" style="opacity: 1;">
               <div class="showsizer tablepreview">
-                  <div class="roomconfig_second_prefixes">
-                     <h2><input type="text" maxlength="7" list="" id="a_val" name="a_prefix" value="ARAK-"></h2>
-                     <h2><input type="text" maxlength="5" list="" id="a_nextnum" name="a_nextnum" value="1" class="prefixnum" onclick="change__byhands(this)"></h2>
-                     <h5><input type="text" maxlength="10" list="" id="a_nextnum_second" name="a_nextnum_second" value="" class="prefixnum prefixnum_second"></h5>
-                     <h5><input type="text" maxlength="10" list="" id="a_nextnum_third" name="a_nextnum_third" value="" class="prefixnum prefixnum_second"></h5>
+                  <div class="roomconfig_second_prefixes roomconfig__titlerow">
+                     <h5>R1 <br> <input type="text" maxlength="15" list="" id="a_val" name="a_prefix" value="ARAK-"></h5>
+                     <h5>R1 nro 
+                        <br>
+                        <input type="number" onchange="z=parseFloat(this.value);" maxlength="15" list="" id="a_nextnum" name="a_nextnum" value="1" class="prefixnum" onclick="change__byhands(this)"  data-alt="a_nextnum_2|a_nextnum_3" oninput="change__toggling(this,1)">
+                        <br> TAI R1 kirjain <br>
+                        <input type="text" onchange="z_alphabet=this.value.charCodeAt(0) - 64;"  maxlength="15" list="" id="a_nextnum_2" name="a_nextnum_2" value="" data-alt="a_nextnum|a_nextnum_3" class="prefixnum closed" oninput="change__toggling(this,2)">
+                        <br>TAI R1 custom <br>
+                        <input type="text" maxlength="15" list="" id="a_nextnum_3" name="a_nextnum_3" value="" data-alt="a_nextnum_2|a_nextnum" class="prefixnum closed" oninput="change__toggling(this,3)"></h5>
+                     <h5>R2 <br> <input type="text" maxlength="15" list="" id="a_nextnum_second" name="a_prefix" value=""></h5>
+                     <h5>
+                        R2 nro<br> 
+                        <input type="number" maxlength="15" list="" onchange="z=parseFloat(this.value);" id="a_nextnum_second_1" name="a_nextnum_second_1" value="" class="prefixnum" data-alt="a_nextnum_second_2|a_nextnum_second_3" oninput="change__toggling(this,1)">
+                        <br>TAI R2 kirjain<br>
+                        <input type="text" maxlength="15" list="" onchange="z_alphabet=this.value.charCodeAt(0) - 64;" id="a_nextnum_second_2" name="a_nextnum_second_2" value="" class="prefixnum" data-alt="a_nextnum_second_1|a_nextnum_second_3" oninput="change__toggling(this,2)">
+                        <br>TAI R2 custom <br>
+                        <input type="text" maxlength="15" list="" id="a_nextnum_second_3" name="a_nextnum_second_3" value="" data-alt="a_nextnum_second_1|a_nextnum_second_2" class="prefixnum" oninput="change__toggling(this,3)">
+                        
+                     </h5>
+                     <h5>R3 <br> <input type="text" maxlength="15" list="" id="a_nextnum_third" name="a_nextnum_third" value="" class="prefixnum prefixnum_second"></h5>
+                     <h5>
+                        R3 nro<br> 
+                        <input type="number" maxlength="15" onchange="z=parseFloat(this.value);" list="" id="a_nextnum_third_1" name="a_nextnum_third_1" value="" class="prefixnum" data-alt="a_nextnum_third_2|a_nextnum_third_3" oninput="change__toggling(this,1)">
+                        <br>TAI R3 kirjain<br>
+                        <input type="text" maxlength="15" onchange="z_alphabet=this.value.charCodeAt(0) - 64;" list="" id="a_nextnum_third_2" name="a_nextnum_third_2" value="" class="prefixnum" data-alt="a_nextnum_third_1|a_nextnum_third_3" oninput="change__toggling(this,2)">
+                        <br>TAI R3 custom <br>
+                        <input type="text" maxlength="15" list="" id="a_nextnum_third_3" name="a_nextnum_third_3" value="" data-alt="a_nextnum_third_1|a_nextnum_third_2" class="prefixnum" oninput="change__toggling(this,3)">
+                     </h5>
                      <div class="greenbtn newproject__addinglvl" onclick="add_new_lvl(this);">Lisää uusi kerros</div>
-                  </div>
-                  
+                  </div>    
                   <div class="table_size_chooser sizer">
                       <div class="SizeChooser">
-                          <table class="table">
-                              <tbody>
-                                  <?php
-                                    for ($i=1; $i >= -1; $i--) { 
-                                       if($i == 0) {
-                                          echo '<tr class="K" onclick="open_k();">';
-                                          $i_ = "K?";
+                        <table class="table">
+                           <tbody>
+                              <?php
+                                 for ($i=1; $i >= 1; $i--) { 
+                                    echo '<tr data-no="'.$i.'">';
+                                    $i_ = $i;
+                                    for ($a=1; $a < 21; $a++) { 
+                                       if($a == 1) {
+                                          echo '<td class="noindex"><label>'.$i_.'</label></td>';
                                        }
-                                       else if($i == -1) {
-                                          echo '<tr class="AK" onclick="open_ak();">';
-                                          $i_ = "AK?";
-                                       }
-                                       else {
-                                          echo "<tr>";
-                                          $i_ = $i;
-                                       }
-                                       
-                                       
-                                       for ($a=1; $a < 30; $a++) { 
-                                          if($a == 1) {
-                                             echo '<td class="noindex"><label>'.$i_.'</label></td>';
-                                          }
-                                          echo '<td><input type="checkbox" name="room_name"><label></label></td>';
-                                       }
-                                       echo "</tr>";
+                                       echo '<td ><input type="checkbox" name="room_name"><label></label></td>';
                                     }
-                                  ?>
-                              </tbody>
-                          </table>
+                                    echo "</tr>";
+                                 }
+                              ?>
+                           </tbody>
+                        </table>
+                        <table class="table_downstairs table">  
+                           <tbody>
+                              <?php
+                                 for ($i=1; $i >= 0; $i--) { 
+                                    $i_="";
+                                    $_i = $i-1;
+                                    if($i == 1) {
+                                       $i_ = "K?";
+                                       echo '<tr class="K" data-no="K"><td class="noindex" onclick="open_k(this);"><label>'.$i_.'</label></td>';
+                                    }
+                                    else if($i == 0) {
+                                       $i_ = "AK?";
+                                       echo '<tr class="AK" data-no="AK"><td class="noindex" onclick="open_ak(this);"><label>'.$i_.'</label></td>';
+                                    }
+                                    
+                                    
+                                    for ($a=1; $a < 21; $a++) { 
+
+                                       echo '<td class="hidden"><input type="checkbox" name="room_name" style="display: none;"><label></label></td>';
+                                    }
+                                    echo "</tr>";
+                                 }
+                              ?>
+                           </tbody>
+                        </table>
                       </div>
+                     
                   </div>
                   <!-- <div class="topbar">
                       <span class="colcount">
@@ -355,6 +418,13 @@ include('header.php');
                   +
               </div>
           </div>
+          <div class="per50 floatleft coderdy rappu-2" id="B_"></div>
+          <div class="per50 floatleft coderdy rappu-3" id="C_"></div>
+          <div class="per50 floatleft coderdy rappu-4" id="D_"></div>
+          <div class="per50 floatleft coderdy rappu-5" id="E_"></div>
+          <div class="per50 floatleft coderdy rappu-6" id="F_"></div>
+          <div class="per50 floatleft coderdy rappu-7" id="G_"></div>
+          <div class="per50 floatleft coderdy rappu-8" id="H_"></div>
           <div class="clear"></div>
       </div>
       <div id="tabledisplay" class="per100" style="display: none;">
@@ -382,7 +452,7 @@ include('header.php');
       <input type="hidden" name="f_pr_rap" class="pr_rap f_pr_rap" value="">
       <input type="hidden" name="f_pr_krs" class="pr_krs f_pr_krs" value="">
       <div class="row">
-          <div class="col-6"><a class="prev_btn" href="#roomconfig_second" onclick="$('#roomconfig_third').hide();$('#roomconfig_third').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();">Edellinen</a></div>
+          <div class="col-6"><div class="prev_btn" onclick="$('#roomconfig_third').hide();$('#roomconfig_third').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();">Edellinen</div></div>
           <div class="col-6">
               <div class="col-6"><butto class="finalization_btn ready_btn">Aloita projekti</button></div>
           </div>
@@ -391,7 +461,7 @@ include('header.php');
 
    <section id="roomconfig_fourth">
       <div class="row">
-          <div class="col-6"><a class="prev_btn" href="#roomconfig_fourth" onclick="$('#roomconfig_fourth').hide();$('#roomconfig_fourth').slideUp(200);$('#roomconfig_third').slideDown(200);$('#roomconfig_third').show();">Edellinen</a></div>
+          <div class="col-6"><div class="prev_btn" onclick="$('#roomconfig_fourth').hide();$('#roomconfig_fourth').slideUp(200);$('#roomconfig_third').slideDown(200);$('#roomconfig_third').show();">Edellinen</div></div>
           <div class="col-6">
             <div onclick='$("#roomconfig_fourth").hide();$("#roomconfig_fourth").slideUp(200);$("#roomconfig_fifth").slideDown(200);$("#roomconfig_fifth").show();' class="next_btn btn ready_btn">Seuraava</div>
           </div>
@@ -400,7 +470,7 @@ include('header.php');
 
    <section id="roomconfig_fifth">
       <div class="row">
-         <div class="col-6"><a class="prev_btn" href="#roomconfig_fifth" onclick="$('#roomconfig_fifth').hide();$('#roomconfig_fifth').slideUp(200);$('#roomconfig_fourth').slideDown(200);$('#roomconfig_fourth').show();">Edellinen</a></div>
+         <div class="col-6"><div class="prev_btn"  onclick="$('#roomconfig_fifth').hide();$('#roomconfig_fifth').slideUp(200);$('#roomconfig_fourth').slideDown(200);$('#roomconfig_fourth').show();">Edellinen</div></div>
          <div class="col-6">
             <button class="ready_btn">Aloita projekti</button>
          </div>
@@ -423,37 +493,50 @@ include('header.php');
   </div>
 
 <div class="table_size_chooser sizer" id="hiddentocopy" style="display:none;">
-    <div class="SizeChooser">
-        <table class="table">
-            <tbody>
+   <div class="SizeChooser">
+      <table class="table">
+         <tbody>
                <?php
-                  for ($i=1; $i >= -1; $i--) { 
-                     if($i == 0) {
-                        echo '<tr class="K" onclick="open_k();">';
-                        $i_ = "K?";
+               for ($i=1; $i >= 1; $i--) { 
+                  echo '<tr data-no="'.$i.'">';
+                  $i_ = $i;
+                  for ($a=1; $a < 21; $a++) { 
+                     if($a == 1) {
+                        echo '<td class="noindex"><label>'.$i_.'</label></td>';
                      }
-                     else if($i == -1) {
-                        echo '<tr class="AK" onclick="open_ak();">';
-                        $i_ = "AK?";
-                     }
-                     else {
-                        echo "<tr>";
-                        $i_ = $i;
-                     }
-
-
-                     for ($a=1; $a < 30; $a++) { 
-                        if($a == 1) {
-                           echo '<td class="noindex"><label>'.$i_.'</label></td>';
-                        }
-                        echo '<td><input type="checkbox" name="room_name"><label></label></td>';
-                     }
-                     echo "</tr>";
+                     echo '<td ><input type="checkbox" name="room_name"><label></label></td>';
                   }
+                  echo "</tr>";
+               }
                ?>
-            </tbody>
-        </table>
-    </div>
+         </tbody>
+      </table>
+      <table class="table_downstairs table">
+         <tbody>
+            <?php
+               for ($i=1; $i >= 0; $i--) { 
+                  $i_="";
+                  $_i = $i-1;
+                  if($i == 1) {
+                     $i_ = "K?";
+                     echo '<tr class="K" data-no="K"><td class="noindex" onclick="open_k(this);"><label>'.$i_.'</label></td>';
+                  }
+                  else if($i == 0) {
+                     $i_ = "AK?";
+                     echo '<tr class="AK" data-no="AK"><td class="noindex" onclick="open_ak(this);"><label>'.$i_.'</label></td>';
+                  }
+                  
+                  
+                  for ($a=1; $a < 21; $a++) { 
+
+                     echo '<td class="hidden"><input type="checkbox" name="room_name" style="display: none;"><label></label></td>';
+                  }
+                  echo "</tr>";
+               }
+            ?>
+         </tbody>
+      </table>
+   </div>
 </div>
 <script>
    rappu=0
@@ -586,16 +669,43 @@ include('header.php');
 
       i1.setAttribute("id",plusone_rappu_O.toLowerCase()+"val");
       i1.setAttribute("name",plusone_rappu_O.toLowerCase()+"prefix");
-      i1.setAttribute("maxlength", 7);
+      i1.setAttribute("maxlength", 10);
 
 
       var i2 = document.createElement('input');
       // el.classList = "prefixnum";
       i2.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum");
       i2.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum");
+      i2.setAttribute("onchange","z" + plusone_rappu_O.toLowerCase()+"alphabet=this.value.charCodeAt(0) - 64;");
       i2.classList.add("prefixnum");
-      i2.setAttribute("maxlength", 5);
-      i2.value = "1";
+      i2.setAttribute("maxlength", 10);
+      i2.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum_2" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_3";
+      i2.setAttribute("oninput", "change__toggling(this,1)");
+      i2.setAttribute("value",1);
+
+
+      var i2_additional = document.createElement('input');
+      var i2_additional2 = document.createElement('input');
+      // el.classList = "prefixnum";
+
+      i2_additional.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_2");
+      i2_additional.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_2");
+      i2_additional.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_2");
+      i2_additional.classList.add("prefixnum");
+      i2_additional.classList.add("closed");
+      i2_additional.setAttribute("maxlength", 10);
+      i2_additional.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_3";
+      i2_additional.setAttribute("oninput", "change__toggling(this,2)");
+      i2_additional.value = "";
+
+      i2_additional2.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_3");
+      i2_additional2.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_3");
+      i2_additional2.classList.add("prefixnum");
+      i2_additional2.classList.add("closed");
+      i2_additional2.setAttribute("maxlength", 10);
+      i2_additional2.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_2";
+      i2_additional2.setAttribute("oninput", "change__toggling(this,3)");
+      i2_additional2.value = "";
 
       var i3 = document.createElement('input');
       // el.classList = "prefixnum";
@@ -604,12 +714,81 @@ include('header.php');
       i3.setAttribute("maxlength", 10);
       i3.value = "";
 
+      var i3_additional = document.createElement('input');
+      var i3_additional2 = document.createElement('input');
+      var i3_additional3 = document.createElement('input');
+
+      i3_additional.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_second_1");
+      i3_additional.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_second_1");
+      i3_additional.setAttribute("onchange","z" + plusone_rappu_O.toLowerCase().replace("_","")+"=parseFloat(this.value);");
+      i3_additional.classList.add("prefixnum");
+      // i3_additional.classList.add("");
+      i3_additional.setAttribute("maxlength", 10);
+      i3_additional.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum_second_3" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_second_2";
+      i3_additional.setAttribute("oninput", "change__toggling(this,1)");
+      i3_additional.value = "";
+      // el.classList = "prefixnum";
+
+      i3_additional2.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_second_2");
+      i3_additional2.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_second_2");
+      i3_additional2.setAttribute("onchange","z" + plusone_rappu_O.toLowerCase()+"alphabet=this.value.charCodeAt(0) - 64;");
+      i3_additional2.classList.add("prefixnum");
+      // i3_additional2.classList.add("");
+      i3_additional2.setAttribute("maxlength", 10);
+      i3_additional2.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum_second_1" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_second_3";
+      i3_additional2.setAttribute("oninput", "change__toggling(this,2)");
+      i3_additional2.value = "";
+
+      i3_additional3.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_second_3");
+      i3_additional3.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_second_3");
+      i3_additional3.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_second_3");
+
+      i3_additional3.classList.add("prefixnum");
+      // i3_additional3.classList.add("");
+      i3_additional3.setAttribute("maxlength", 10);
+      i3_additional3.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum_second_1" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_second_2";
+      i3_additional3.setAttribute("oninput", "change__toggling(this,3)");
+      i3_additional3.value = "";
+
       var i4 = document.createElement('input');
       // el.classList = "prefixnum";
       i4.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_third");
       i4.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_third");
       i4.setAttribute("maxlength", 10);
       i4.value = "";
+
+      var i4_additional = document.createElement('input');
+      var i4_additional2 = document.createElement('input');
+      var i4_additional3 = document.createElement('input');
+
+      i4_additional.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_third_1");
+      i4_additional.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_third_1");
+      i4_additional.setAttribute("onchange","z" + plusone_rappu_O.toLowerCase().replace("_","")+"=parseFloat(this.value);");
+      i4_additional.classList.add("prefixnum");
+      // i4_additional.classList.add("");
+      i4_additional.setAttribute("maxlength", 10);
+      i4_additional.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum_third_3" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_third_2";
+      i4_additional.setAttribute("oninput", "change__toggling(this,1)");
+      i4_additional.value = "";
+
+      i4_additional2.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_third_2");
+      i4_additional2.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_third_2");
+      i4_additional2.setAttribute("onchange","z" + plusone_rappu_O.toLowerCase()+"alphabet=this.value.charCodeAt(0) - 64;");
+      i4_additional2.classList.add("prefixnum");
+      // i4_additional2.classList.add("");
+      i4_additional2.setAttribute("maxlength", 10);
+      i4_additional2.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum_third_1" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_third_3";
+      i4_additional2.setAttribute("oninput", "change__toggling(this,2)");
+      i4_additional2.value = "";
+
+      i4_additional3.setAttribute("id",plusone_rappu_O.toLowerCase()+"nextnum_third_3");
+      i4_additional3.setAttribute("name",plusone_rappu_O.toLowerCase()+"nextnum_third_3");
+      i4_additional3.classList.add("prefixnum");
+      // i4_additional3.classList.add("");
+      i4_additional3.setAttribute("maxlength", 10);
+      i4_additional3.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum_third_1" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_third_2";
+      i4_additional3.setAttribute("oninput", "change__toggling(this,3)");
+      i4_additional3.value = "";
 
 
       var i5 = document.createElement('div');
@@ -618,24 +797,28 @@ include('header.php');
       i5.setAttribute("onclick",'add_new_lvl(this);');
       i5.innerHTML = "Lisää uusi kerros";
 
-      const grandparent = document.createElement("div");
-      grandparent.classList = ("per50 floatleft coderdy rappu-2");
-      grandparent.setAttribute('id', plusone_rappu_O);
-
+      const grandparent = document.querySelector("#"+plusone_rappu_O);
+      // grandparent.classList = ("per50 floatleft coderdy rappu-2");
+      // grandparent.setAttribute('id', plusone_rappu_O);
 
       const parent = document.createElement("div");
       parent.classList = ("showsizer tablepreview");
 
-
       const roomconfig_second_prefixes = document.createElement("div");
-      roomconfig_second_prefixes.classList = ("roomconfig_second_prefixes");
+      roomconfig_second_prefixes.classList.add("roomconfig_second_prefixes");
+      roomconfig_second_prefixes.classList.add("roomconfig__titlerow");
 
+      const roomgconfig_h2_1 = document.createElement("h5");
+      const roomgconfig_h2_2 = document.createElement("h5");
+      const roomgconfig_h2_3 = document.createElement("h5");
+      const roomgconfig_h2_3_a = document.createElement("h5");
+      const roomgconfig_h2_4 = document.createElement("h5");
+      const roomgconfig_h2_4_a = document.createElement("h5");
 
-      const roomgconfig_h2_1 = document.createElement("h2");
-      // roomgconfig_h2_1.innerHTML = i1;
-
-      const roomgconfig_h2_2 = document.createElement("h2");
-      // roomgconfig_h2_1.innerHTML = i2;
+      roomgconfig_h2_1.innerHTML = "R1 <br>";
+      roomgconfig_h2_2.innerHTML = "R1 nro <br>";
+      roomgconfig_h2_3.innerHTML = "R2 <br>";
+      roomgconfig_h2_4.innerHTML = "R3 <br>";
 
       let clonedMenu = document.querySelector("#hiddentocopy").cloneNode(true);
       clonedMenu.style.display = "block";
@@ -646,11 +829,35 @@ include('header.php');
       parent.appendChild(roomconfig_second_prefixes);
       parent.appendChild(clonedMenu);
       roomconfig_second_prefixes.appendChild(roomgconfig_h2_1);
+      roomconfig_second_prefixes.appendChild(roomgconfig_h2_1);
       roomconfig_second_prefixes.appendChild(roomgconfig_h2_2);
+      roomconfig_second_prefixes.appendChild(roomgconfig_h2_3);
+      roomconfig_second_prefixes.appendChild(roomgconfig_h2_3_a);
+      roomconfig_second_prefixes.appendChild(roomgconfig_h2_4);
+      roomconfig_second_prefixes.appendChild(roomgconfig_h2_4_a);
       roomgconfig_h2_1.appendChild(i1);
       roomgconfig_h2_2.appendChild(i2);
-      roomgconfig_h2_2.appendChild(i3);
-      roomgconfig_h2_2.appendChild(i4);
+
+      roomgconfig_h2_2.innerHTML += "<br>TAI R1 kirjain <br>";
+      roomgconfig_h2_2.appendChild(i2_additional);
+      roomgconfig_h2_2.innerHTML += "<br>TAI R1 custom <br>";
+      roomgconfig_h2_2.appendChild(i2_additional2);
+
+      roomgconfig_h2_3.appendChild(i3);
+      roomgconfig_h2_3_a.innerHTML += "R2 nro <br>";
+      roomgconfig_h2_3_a.appendChild(i3_additional);
+      roomgconfig_h2_3_a.innerHTML += "<br>TAI R2 kirjain <br>";
+      roomgconfig_h2_3_a.appendChild(i3_additional2);
+      roomgconfig_h2_3_a.innerHTML += "<br>TAI R2 custom <br>";
+      roomgconfig_h2_3_a.appendChild(i3_additional3);
+      roomgconfig_h2_4.appendChild(i4);
+
+      roomgconfig_h2_4_a.innerHTML += "R3 nro <br>";
+      roomgconfig_h2_4_a.appendChild(i4_additional);
+      roomgconfig_h2_4_a.innerHTML += "<br>TAI R3 kirjain <br>";
+      roomgconfig_h2_4_a.appendChild(i4_additional2);
+      roomgconfig_h2_4_a.innerHTML += "<br>TAI R3 custom <br>";
+      roomgconfig_h2_4_a.appendChild(i4_additional3);
       roomconfig_second_prefixes.appendChild(i5);
 
 
@@ -804,144 +1011,3 @@ include('header.php');
 </script>
 
 <?php include('footer.php') ?>
-
-
-    <!-- <section id="roomconfig_third" class="project__roomcount" style="display: none;">
-            <div class="container">
-              <h1>Anna huoneistojen määrä rapussa/krs</h1>   
-              <input type="number" placeholder="Huoneistojen määrä rapussa?" id="room_qty" name="rooms_per_rappu">
-            <div class="row">
-               <div class="col-6"><a class="prev_btn" href="#roomconfig_second" onclick="document.querySelector('#roomconfig_third').style.display = 'none';document.querySelector('#roomconfig_second').style.display = 'block';">Edellinen</a></div>
-               <div class="col-6"><a class="ready_btn" href="#rooms" onclick="document.querySelector('#roomconfig_third').style.display = 'none';document.querySelector('#rooms').style.display = 'block';create_rooms();">Siirry eteenpäin</a></div>
-            </div>
-    </section> -->
-    <!-- <section id="roomconfig_fourth" class="project__room project__roomselect" style="display: none;">
-        <h1>Valitse sinua kiinnostava huone </h1>
-          <section id="project__room" class="project__roomselect"> 
-              <h3 style="margin-bottom: 40px;text-align: center;">Tulossa seuraava</h3>
-          </section>
-          <div class="row">
-               <div class="col-6"><a class="prev_btn" href="#roomconfig_third" onclick="document.querySelector('#roomconfig_fourth').style.display = 'none';document.querySelector('#roomconfig_third').style.display = 'block';">Edellinen</a></div>
-               <div class="col-6"><a class="ready_btn" href="#rooms" onclick="document.querySelector('#roomconfig_fourth').style.display = 'none';document.querySelector('#rooms').style.display = 'block';">Siirry huoneen konfigurointiin</a></div>
-          </div>
-    </section> -->
-    <!-- <section id="rooms" style="display: none;border-bottom: 0px solid #000;">
-       <div class="container">
-        <div class="row house__intro">
-          <div class="col-6 col-with-table">
-            <h1>
-               <input type="text" list="" placeholder="Tilan nimi tähän" value="Tila" name="room_name" class="lineinput">
-            </h1>
-            <div class="col-table">
-               <h2>Seinien asennusjärjestys</h2>
-               <table>
-               <tr>
-                  <td><input type="text" list="" data-room="asjarj-1" maxlength="1" name="room_one_asjarj" value="1" class="lineinput inputname" required/></td>
-                  <td><input type="text" list="" data-room="a" name="room_one_a" value="SEINÄ A" class="lineinput inputname" required></td>
-                  <td><input type="text" list="" name="room_one_a_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-               </tr>
-               <tr>
-                  <td><input type="text" list="" data-room="asjarj-2" maxlength="1" name="room_two_asjarj" value="2" class="lineinput inputname" required/></td>
-                  <td><input type="text" list="" data-room="b" name="room_one_b" value="SEINÄ B" class="lineinput inputname" required></td>
-                  <td><input type="text" list="" name="room_one_b_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-               </tr>
-               <tr>
-                  <td><input type="text" list="" data-room="asjarj-3" maxlength="1" name="room_three_asjarj" value="3" class="lineinput inputname" required/></td>
-                  <td><input type="text" list="" data-room="c" name="room_one_c" value="SEINÄ C" class="lineinput inputname" required></td>
-                  <td><input type="text" list="" name="room_one_c_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-               </tr>
-               <tr>
-                  <td><input type="text" list="" data-room="asjarj-4" maxlength="1" name="room_four_asjarj" value="4" class="lineinput inputname" required/></td>
-                  <td><input type="text" list="" data-room="d" name="room_one_d" value="SEINÄ D" class="lineinput inputname" required></td>
-                  <td><input type="text" list="" name="room_one_d_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-               </tr>
-               <tr>
-                  <td><input type="text" list="" data-room="asjarj-5" maxlength="1" name="room_five_asjarj" value="5" class="lineinput inputname" required/></td>
-                  <td><input type="text" list="" data-room="roof" name="room_one_roof" value="KATTO" class="lineinput inputname" required></td>
-                  <td><input type="text" list="" name="room_one_roof_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-               </tr>
-               <tr>
-                  <td><input type="text" list="" data-room="asjarj-6" maxlength="1" name="room_six_asjarj" value="6" class="lineinput inputname" required/></td>
-                  <td><input type="text" list="" data-room="floor" name="room_one_floor" value="LATTIA" class="lineinput inputname" required></td>
-                  <td><input type="text" list="" name="room_one_floor_desc" value="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-               </tr>
-               </table>
-            </div>
-          </div>
-          <div class="col-6">
-            <div id="house" class="house">
-               <div class="row">
-                  <div class="house__wall house__wall_roof" style="width: 340px; height: 240px;right: calc(240px + 12px);margin-left: auto;">
-                   <div class="house__wall_status" data-room="roof" onclick="document.querySelector('#rooms').style.display = 'none';document.querySelector('#step_configuration').style.display = 'block';">KATTO</div>
-                   <input type="number" class="lineinput house__wall_param wall_height" value="2400"  name="room_one_roof_h" id="room_one_roof_h" onchange="change_roof();">
-                   <input type="number" class="lineinput house__wall_param wall_width" value="3400"  name="room_one_roof_w" id="room_one_roof_w" onchange="change_roof();">
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="house__wall house__wall_one" style="width: 340px; height: 240px;">
-                     <div class="house__wall_status" data-room="a" href="#step_configuration" onclick="document.querySelector('#rooms').style.display = 'none';document.querySelector('#step_configuration').style.display = 'block';">Seinä A</div>
-                     <input type="number" class="lineinput house__wall_param wall_height" value="2400" name="room_one_a_h" id="room_one_a_h" onchange="change_a();">
-                     <input type="number" class="lineinput house__wall_param wall_width" value="3400" name="room_one_a_w" id="room_one_a_w" onchange="change_a();">
-                  </div>
-                  <div class="house__wall house__wall_two" style="width: 240px; height: 240px;">
-                   <div class="house__wall_status" data-room="b" href="#step_configuration" onclick="document.querySelector('#rooms').style.display = 'none';document.querySelector('#step_configuration').style.display = 'block';">Seinä B</div>
-                   <input type="number" class="lineinput house__wall_param wall_height" value="2400" name="room_one_b_h" id="room_one_b_h" onchange="change_b();">
-                   <input type="number" class="lineinput house__wall_param wall_width_2" value="2400" name="room_one_b_w" id="room_one_b_w" onchange="change_b();">
-                  </div>
-                  <div class="house__wall house__wall_three" style="width: 340px; height: 240px;">
-                   <div class="house__wall_status" data-room="c" onclick="document.querySelector('#rooms').style.display = 'none';document.querySelector('#step_configuration').style.display = 'block';">Seinä C</div>
-                   <input type="number" class="lineinput house__wall_param wall_height" value="2400"  name="room_one_c_h" id="room_one_c_h" onchange="change_c();">
-                   <input type="number" class="lineinput house__wall_param wall_width" value="3400"  name="room_one_c_w" id="room_one_c_w" onchange="change_c();">
-                  </div>
-                  <div class="house__wall house__wall_four" style="width: 240px; height: 240px;">
-                   <div class="house__wall_status" data-room="d" href="#step_configuration" onclick="document.querySelector('#rooms').style.display = 'none';document.querySelector('#step_configuration').style.display = 'block';">Seinä D</div>
-                   <input type="number" class="lineinput house__wall_param wall_height" value="2400" name="room_one_d_h" id="room_one_d_h" onchange="change_d();">
-                   <input type="number" class="lineinput house__wall_param wall_width_2" value="2400" name="room_one_d_w" id="room_one_d_w" onchange="change_d();">
-                  </div>
-               </div>
-               <div class="row">
-                     <div class="house__wall house__wall_floor" style="width: 340px; height: 240px;right: calc(240px + 12px);margin-left: auto;">
-                      <div class="house__wall_status" data-room="floor" onclick="document.querySelector('#rooms').style.display = 'none';document.querySelector('#step_configuration').style.display = 'block';">LATTIA</div>
-                      <input type="number" class="lineinput house__wall_param wall_height" value="2400"  name="room_one_floor_h" id="room_one_floor_h" onchange="change_floor();">
-                      <input type="number" class="lineinput house__wall_param wall_width" value="3400"  name="room_one_floor_w" id="room_one_floor_w" onchange="change_floor();">
-                    </div>
-               </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-               <div class="col-6"><a class="prev_btn" href="#roomconfig_second" onclick="document.querySelector('#rooms').style.display = 'none';document.querySelector('#roomconfig_second').style.display = 'block';">Edellinen</a></div>
-               <div class="col-6"><button type="submit" class="ready_btn">Aloita projekti</button></div>
-          </div>
-      </div>
-    </section> -->
-
-
-
-
-    <!-- TYPES <div class="container">
-         <h1>Uusi projekti: Valitse tyyppi</h1>
-            <section id="project_types">
-               <div class="row">
-                  <a href="#roomconfig_second" class="product__types_type" onclick="$('#roomconfig_first').hide();$('#roomconfig_first').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();document.getElementById('project_type').value = 'Huone/seinä';">
-                     <h2>Huone/seinä</h2>
-                  </a>
-                  <a href="#roomconfig_second" class="product__types_type" onclick="$('#roomconfig_first').hide();$('#roomconfig_first').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();document.getElementById('project_type').value = 'Levytilaus';">
-                     <h2>Levytilaus</h2>
-                  </a>
-                  <a href="#roomconfig_second" class="product__types_type" onclick="$('#roomconfig_first').hide();$('#roomconfig_first').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();document.getElementById('project_type').value = 'Rivitalo';">
-                     <h2>Rivitalo</h2>
-                  </a>
-                  <a href="#roomconfig_second" class="product__types_type" onclick="$('#roomconfig_first').hide();$('#roomconfig_first').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();document.getElementById('project_type').value = 'Julkisivu';">
-                      <h2>Julkisivu</h2>
-                    </a>
-                    <a href="#roomconfig_second" class="product__types_type" onclick="$('#roomconfig_first').hide();$('#roomconfig_first').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();document.getElementById('project_type').value = 'Tehosteet';">
-                      <h2>Tehosteet</h2>
-                    </a>
-                    <a href="#roomconfig_second" class="product__types_type" onclick="$('#roomconfig_first').hide();$('#roomconfig_first').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();document.getElementById('project_type').value = 'Muu';">
-                      <h2>Muu</h2>
-                    </a>
-                  </div>
-                </section>
-      </div>
-      <input type="hidden" name="project_type" id="project_type" value="" required> -->

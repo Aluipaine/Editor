@@ -13,8 +13,17 @@
   <link rel="icon" type="image/x-icon" href="/css/favicon.ico">
 
   <?php 
-    if($_GET["role"]) {
-      if($_GET["role"] != 'mittaus') {
+
+
+    $usr = $_GET["user"];
+
+    $usr_role = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr'; ");
+    $usr_role = mysqli_fetch_all($usr_role);
+
+    $usr_role = $usr_role[3];
+
+    if($usr_role) {
+      if($usr_role != 'mittaus') {
         echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
         
       }

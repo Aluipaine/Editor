@@ -28,7 +28,7 @@
          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();" class="nav_current">Läpiviennit</div></li>
          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();">Saumat</div></li>
          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();">Kiinnikkeet</div></li>
-         <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();">Ladonta</div></li>
+         <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();">Korjailu</div></li>
          
          <li><div onclick="alert('Onnistuu kiinnikkeet-kohdasta');">Seinät</div></li>
          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();">Levyt</div></li>
@@ -61,8 +61,8 @@
                 <input name="lv__sade" type="radio" id="lapiviennit__sade_fifth" onchange="change__lapivienti_sizecord(this);" value="125">
                 <label for="lapiviennit__sade_fifth">125</label>
 
-                <input type="tel" placeholder="arvo..." id="lapiviennit__sade_muucord" value="75"></fieldset>
-
+                <input type="text" placeholder="arvo..." id="lapiviennit__sade_muucord" value=""></fieldset>
+                  <i>Mikäli haluat luoda neliön, käytä muotoa *korkeus*x*leveys*</i>
              </div>
             
             
@@ -126,6 +126,38 @@
        </div>
      </div>
     </div>
+
+    <div class="as-container out lvas asetustaulu">
+      <div class="modal-background">
+         <div class="modal">
+            <div class="modal_close_btn" onclick="this.parentElement.parentElement.parentElement.classList.remove('two');this.parentElement.parentElement.parentElement.classList.add('out');"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"/></svg></div>
+            <h2>Reijitys</h2>
+            <h6>Tee yli 10000mm2 reijät Framenä. </h6>
+            <table>
+               <tbody class="reikaframe__tbody">						
+               <tr class="headingrow">
+                  <td>Sarakkeet</td>
+                  <td>Dustiksi?</td>
+               </tr>
+
+               </tbody>
+            </table>
+            <h2>Reikä asetukset </h2>
+            <table>
+               <tbody class="lapiviennit__tbody">
+               <tr class="headingrow">
+                  <td>ON/OFF</td>
+                  <td>Reikätyyppi</td>
+                  <td>Nimi</td>
+                  <td>Reikä X</td>
+                  <td>Reikä Y</td>
+                  <td>Ensisijaisesti Dustiksi</td>
+               </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
 </form>
 
 

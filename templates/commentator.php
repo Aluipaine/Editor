@@ -66,7 +66,7 @@
                 <input id="e_radio" name="mitta__huomiot" type="radio" value="Ilmastointi">
                 <label for="e_radio">Ilmastointi</label>
             </fieldset>
-            <h4>Lähetä kommentti</h4>
+            <h4>Lähetä työ</h4>
             <textarea name="kommentti_comment" id="kommentti_comment" cols="30" rows="10" style="resize: none;"></textarea>
             <div class="row">
                 <div class="col-3">  
@@ -141,7 +141,7 @@
             <div class="row center">
                 <div class="col-4"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula">Sulje</div></div>
                 <div class="col-4"><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" onclick="comment__kuittaus(this.getAttribute('name'));addproblemstatus(this);">Kuittaan tehdyksi</div></div>
-                <div class="col-4"><div class="drawarea__controls_btn_ vastaus_nappula m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();">Vastaus kommenttiin</div></div>
+                <div class="col-4"><div class="drawarea__controls_btn_ vastaus_nappula m_btn" onclick="document.querySelector('body').classList.remove('commentmodal_active');document.getElementById('cord_up').value = 5;document.getElementById('cord_left').value = 5;document.querySelector('#dist_origo').click();">Vastaus työhön</div></div>
             </div>
             <div id="commentbox__answers" style="margin-top: 50px;">
              <h6>Vastaukset:</h6>

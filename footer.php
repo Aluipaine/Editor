@@ -1,5 +1,4 @@
-<!-- canvas -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js'></script>
+
 <!-- <script  src="js/script.js"></script>
    <script>
    function updatew() {
@@ -115,5 +114,5 @@
 <script src='js/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js'></script>
 <!-- Marko new row btn function -->
-<script src="js/jstemplates/mrarko.js"></script>
+<!-- <script src="js/jstemplates/mrarko.js"></script> -->
 <script src="js/jstemplates/creation.js"></script>

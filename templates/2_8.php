@@ -25,7 +25,7 @@
 
               <li><div class="greenbtn" onclick="create__excel_fromallwalls();">Lataa Seinän Excel</div></li>
               <li><div class="yellowbtn" onclick="takeshotAllwalls();">Ota PDF-kuvakaappaus</div></li>
-              <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();" class="redbtn">Palaa Ladontaan</div></li>
+              <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();" class="redbtn">Palaa Korjailuun</div></li>
               </ul>
             </nav>
             <nav style="margin: 15px 0 0 0;">
@@ -36,7 +36,7 @@
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Läpiviennit</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Saumat</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Kiinnikkeet</div></li>
-               <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Ladonta</div></li>
+               <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Korjailu</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav_current">Seinät</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu'); refresh__drawcontrols();updatearea(); delcanvases();">Levyt</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_six'); refresh__drawcontrols();updatearea(); delcanvases();">Rangat</div></li>

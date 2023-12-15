@@ -28,7 +28,7 @@
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three'); refresh__drawcontrols();updatearea();" class="nav__comleted">Läpiviennit</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four'); refresh__drawcontrols();updatearea();" class="nav__comleted">Saumat</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot'); refresh__drawcontrols();updatearea();" class="nav__comleted">Kiinnikkeet</div></li>
-          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea();" class="nav__comleted">Ladonta</div></li>
+          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea();" class="nav__comleted">Korjailu</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight'); refresh__drawcontrols();updatearea();osittainen_siirto_muualle();" class="nav__comleted">Seinät</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu'); refresh__drawcontrols();updatearea();" class="nav__comleted">Levyt</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_six'); refresh__drawcontrols();updatearea();" class="nav_current">Rangat</div></li>
@@ -37,27 +37,58 @@
         </ul> 
       </nav>
     </section>
-    <section class="ranka_excel">
+    <section class="ranka_as_excel">
      <!-- Set for input default center coords  -->
-     <h3>Ranka excel:</h3>
+     <h3>Asennusohjeet:</h3>
       <table>
-        <tr>
-          <td class="cool">Tyyppi</td>
-          <td class="cool">Nimi</td>
-          <td class="cool">Pituus (mm)</td>
-          <td class="cool">KPL</td>
-          <td class="cool">Asennus<td>
+        <tr class="headingrow">
+          <td>Tyyppi</td>
+          <td>Nimi</td>
+          <td>Pituus (mm)</td>
+          <td>KPL</td>
+          <td>Asennus<td>
         </tr>
       </table>
 
        <div class="row">
-        <div class="get_ranka_excel get_excel_btn">Lataa ranka excel</div>
+        <div class="get_ranka_as_excel get_excel_btn" onclick="lataa_ranka_as_excel();">Lataa rankojen asennusohjetaulu</div>
         <div class="get_screenshot" onclick="takeshot(1);">Tallenna havainnekuva</div>
       </div>
 
       <div id="rangat__havainnekuva" class="havainnekuva"></div>
-
     </section>
+    <section class="ranka_tuo_excel">
+     <!-- Set for input default center coords  -->
+     <h3>Tuotanto Excel:</h3>
+      <table>
+        <tr class="headingrow">
+          <td>Rivinumero</td>
+          <td>Rangan tyyppi</td>
+          <td>Tilauskoodi</td>
+          <td>Pituus</td>
+          <td>KPL</td>
+          <td>MATERIAALI</td>
+          <td>PAKSUUS</td>
+          <td>LAATU</td>
+          <td>Väri nimi</td>
+          <td>NCS code</td>
+          <td>Tilattu PVM</td>
+          <td>STATUS</td>
+          <td>Asiakas</td>
+          <td>Projekti</td>
+          <td>Osoite</td>
+          <td>Palletgroup</td>
+          <td>Asunto Nimi 1</td>
+          <td>Nimi 2</td>
+          <td>Työstöt </td>
+          <td>Asennus</td> 
+        </tr>
+      </table>
+      <div class="row">
+        <div class="get_ranka_tuo_excel get_excel_btn" onclick="lataa_ranka_tuo_excel();">Lataa rankatuotantoexcel</div>
+      </div>
+    </section>
+
 
   <div class="modal-container">
    <div class="modal-background">

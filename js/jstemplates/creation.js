@@ -1,5 +1,34 @@
 // highlighter for sizer visuals
-z = 0;
+z = 1;
+zb = 1;
+zc = 1;
+zd = 1;
+ze = 1;
+zf = 1;
+zg = 1;
+zh = 1;
+z_alphabet = 1;
+zb_alphabet = 1;
+zc_alphabet = 1;
+zd_alphabet = 1;
+ze_alphabet = 1;
+zf_alphabet = 1;
+zg_alphabet = 1;
+zh_alphabet = 1;
+toAlpha = (num) => {
+    try {
+        if(num < 1 || typeof num !== 'number'){
+            return 'nan';
+        }
+        const leveller = 64;
+        //since actually A is represented by 65 and we want to represent it
+        return String.fromCharCode(num + leveller);
+    } catch (error) {
+        return 'nan';
+    }
+   
+};
+
 $('td').mouseover(function() {
     var $this = $(this);
     var col = $this.index();
@@ -199,21 +228,18 @@ $('td').mouseover(function() {
     $EXPORT.text(JSON.stringify(data));
   });
   
-  $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
+  $("#A_").delegate('td', 'mouseover mouseleave click', function (e) {
     var cellindex = 0;
     let rooms = "";
     e.stopImmediatePropagation();
-  
     if (e.type == 'click') {
         if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
             $(this).removeClass("nowork");
-        } else if ($('input#pohjakierros').is(':checked')) {
+        }
+        else if ($('input#pohjakierros').is(':checked')) {
             console.log("Pohja checkattu");
-  
-  
             var cells = $(this).parent().children("td");
             var tds = $('#A_ .table_size_chooser td').removeClass("SizeChooser-clicked")
-  
             for (var i = 0; i < cells.length; i++) {
                 if ($(this).find('label').text().length > 1) {
                     $(this).removeClass("nowork");
@@ -221,83 +247,180 @@ $('td').mouseover(function() {
                     cellindex = i;
                     console.log("IF EVENT");
                 } else {
-                    $(this).addClass("nowork"); $(this).removeClass("checked");
+                    $(this).addClass("nowork");
+                    $(this).removeClass("checked");
                     $(this).find('label').val("");
                     console.log("ELSE EVENT");
                 }
-  
             }
-  
-  
-        } else if ($(this).hasClass("noindex")) {
+        }
+        else if ($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
             z = 0;
-            $('#a_nextnum').val(z);
-        } else if ($(this).find('input').prop('checked') == false) {
+            z_letter = toAlpha(z_alphabet).toUpperCase();
+            if($('#a_nextnum').val().length >= 1) {
+                $('#a_nextnum').val(z);
+            }
+            if($('#a_nextnum_second_1').val().length >= 1) {
+                $('#a_nextnum_second_1').val(z);
+            }
+            if($('#a_nextnum_third_1').val().length >= 1) {
+                $('#a_nextnum_third_1').val(z);
+            }
+
+            if($('#a_nextnum_2').val().length >= 1) {
+                $('#a_nextnum_2').val(z_letter);
+            }
+            if($('#a_nextnum_second_2').val().length >= 1) {
+                $('#a_nextnum_second_2').val(z_letter);
+            }
+            if($('#a_nextnum_third_2').val().length >= 1) {
+                $('#a_nextnum_third_2').val(z_letter);
+            }
+            console.log($(this));
+        }
+        else if($(this).hasClass("checked") || $(this).hasClass("nowork")) {
+            if($(this).hasClass("nowork")) {
+                $(this).removeClass("nowork");
+                return
+            }
+            if($(this).hasClass("checked")) {
+                $(this).removeClass("checked");
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                z -= 1;
+                z_alphabet -= 1;
+
+                if($('#a_nextnum').val().length >= 1) {
+                    $('#a_nextnum').val(z);
+                }
+                if($('#a_nextnum_second_1').val().length >= 1) {
+                    $('#a_nextnum_second_1').val(z);
+                }
+                if($('#a_nextnum_third_1').val().length >= 1) {
+                    $('#a_nextnum_third_1').val(z);
+                }
+    
+                if($('#a_nextnum_2').val().length >= 1) {
+                    $('#a_nextnum_2').val(z_letter);
+                }
+                if($('#a_nextnum_second_2').val().length >= 1) {
+                    $('#a_nextnum_second_2').val(z_letter);
+                }
+                if($('#a_nextnum_third_2').val().length >= 1) {
+                    $('#a_nextnum_third_2').val(z_letter);
+                }
+
+                return
+            }
+
             z -= 1;
+            z_alphabet -= 1;
+            z_letter = toAlpha(z_alphabet).toUpperCase();
             $(this).find('input').val("");
             $(this).find('label').text("");
-            $('#a_nextnum').val(z);
-        } else {
-            // e.preventDefault();
-            // e.stopPropagation();
-            
+
+            if($('#a_nextnum').val().length >= 1) {
+                $('#a_nextnum').val(z);
+            }
+            if($('#a_nextnum_second_1').val().length >= 1) {
+                $('#a_nextnum_second_1').val(z);
+            }
+            if($('#a_nextnum_third_1').val().length >= 1) {
+                $('#a_nextnum_third_1').val(z);
+            }
+
+            if($('#a_nextnum_2').val().length >= 1) {
+                $('#a_nextnum_2').val(z_letter);
+            }
+            if($('#a_nextnum_second_2').val().length >= 1) {
+                $('#a_nextnum_second_2').val(z_letter);
+            }
+            if($('#a_nextnum_third_2').val().length >= 1) {
+                $('#a_nextnum_third_2').val(z_letter);
+            }
+
+        }
+        else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
             var tds = $('#A_ .table_size_chooser td').removeClass("SizeChooser-clicked");
-            
-            if(Math.floor($('#a_nextnum').val()) == $('#a_nextnum').val() && $.isNumeric($('#a_nextnum').val()))  {
-                z = parseFloat($('#a_nextnum').val().replace(/\D/g,''));
+            if (Math.floor($('#a_nextnum').val()) == $('#a_nextnum').val() && $.isNumeric($('#a_nextnum').val())) {
+                // z = parseFloat($('#a_nextnum').val().replace(/\D/g, ''));
                 console.log("Z::" + z);
                 z += 1;
-            }
-            else {
-                z = parseFloat($('#a_nextnum').val().replace(/\D/g,''));
+                z_alphabet += 1;
+            } else {
+                // z = parseFloat($('#a_nextnum').val().replace(/\D/g, ''));
                 console.log("Z::" + z);
                 z += 1;
+                z_alphabet += 1;
             }
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
                     $(this).removeClass("cell");
                     cellindex = i;
-  
                     break;
-  
-  
                 }
                 var a_val = $('#a_val').val();
-                var a_val_num = $('#a_nextnum').val();
-
-                if($('#a_nextnum_second').val().length >= 1) {
-                    var a_val_2 = "<br/>" + $('#a_nextnum_second').val();
+                if ($('#a_nextnum_2').val().length >= 1 && $('#a_nextnum_2').val().toLowerCase() != "nan") {
+                    var a_val_num = $('#a_nextnum_2').val();
+                }
+                else if($('#a_nextnum_3').val().length >= 1 && $('#a_nextnum_3').val().toLowerCase() != "nan") {
+                    var a_val_num = $('#a_nextnum_3').val();
+                }
+                
+                else if($('#a_nextnum').val().length >= 1 && $('#a_nextnum').val().toLowerCase() != "nan") {
+                    var a_val_num = $('#a_nextnum').val();
                 }
                 else {
+                    var a_val_num = "";
+                }
+
+                if ($('#a_nextnum_second').val().length >= 1) {
+                    var a_val_2 = "<br>" + $('#a_nextnum_second').val();
+                } else {
                     var a_val_2 = "";
                 }
-                if($('#a_nextnum_third').val().length >= 1) {
-                    var a_val_3 = "<br/>" + $('#a_nextnum_third').val();
+
+                if ($('#a_nextnum_second_1').val().length >= 1 && $('#a_nextnum_second_1').val().toLowerCase() != "nan") {
+                    var a_val_num2 = $('#a_nextnum_second_1').val();
+                }
+                else if($('#a_nextnum_second_2').val().length >= 1 && $('#a_nextnum_second_2').val().toLowerCase() != "nan") {
+                    var a_val_num2 = $('#a_nextnum_second_2').val();
+                }
+                else if($('#a_nextnum_second_3').val().length >= 1 && $('#a_nextnum_second_3').val().toLowerCase() != "nan") {
+                    var a_val_num2 = $('#a_nextnum_second_3').val();
                 }
                 else {
+                    var a_val_num2 = "";
+                }
+                if ($('#a_nextnum_third').val().length >= 1) {
+                    var a_val_3 = "<br>" + $('#a_nextnum_third').val();
+                } else {
                     var a_val_3 = "";
                 }
-
-               
-                
-                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                if ($('#a_nextnum_third_1').val().length >= 1 && $('#a_nextnum_third_1').val().toLowerCase() != "nan") {
+                    var a_val_num3 = $('#a_nextnum_third_1').val();
+                }
+                else if($('#a_nextnum_third_2').val().length >= 1 && $('#a_nextnum_third_2').val().toLowerCase() != "nan") {
+                    var a_val_num3 = $('#a_nextnum_third_2').val();
+                }
+                else if($('#a_nextnum_third_3').val().length >= 1 && $('#a_nextnum_third_3').val().toLowerCase() != "nan") {
+                    var a_val_num3 = $('#a_nextnum_third_3').val();
+                }
+                else {
+                    var a_val_num3 = "";
+                }
+                $(this).find('label').html(a_val + a_val_num + a_val_2 + a_val_num2 + a_val_3 + a_val_num3);
                 var a_rooms = $('#a_rooms');
-  
             }
-  
-  
             $(this).parent().addClass("row");
             var rows = $(this).parent().parent().children("tr");
-  
-  
             for (var i = 0; i < rows.length; i++) {
                 var tds = $(rows[i]).children("label");
                 V = "";
                 for (var j = 0; j <= cellindex; j++) {
                     Z = i;
-  
                     var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
                 }
                 if ($(rows[i]).hasClass("row")) {
@@ -305,107 +428,229 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#a_val').val() + parseFloat($('#a_nextnum').val().replace(/\D/g,''));
-  
-  
-            posX = $(this).closest('tr').index();
+            V = $('#a_val').val() + parseFloat($('#a_nextnum').val().replace(/\D/g, ''));
+            posX = $(this).parent().data("no");
             posY = $(this).index();
-  
-            $('#a_nextnum').val(z);
+
+            z_letter = toAlpha(z_alphabet).toUpperCase();
+
+            if($('#a_nextnum').val().length >= 1) {
+                $('#a_nextnum').val(z);
+            }
+            if($('#a_nextnum_second_1').val().length >= 1) {
+                $('#a_nextnum_second_1').val(z);
+            }
+            if($('#a_nextnum_third_1').val().length >= 1) {
+                $('#a_nextnum_third_1').val(z);
+            }
+
+            if($('#a_nextnum_2').val().length >= 1) {
+                $('#a_nextnum_2').val(z_letter);
+            }
+            if($('#a_nextnum_second_2').val().length >= 1) {
+                $('#a_nextnum_second_2').val(z_letter);
+            }
+            if($('#a_nextnum_third_2').val().length >= 1) {
+                $('#a_nextnum_third_2').val(z_letter);
+            }
         }
-  
     }
   });
-  $("#B_").delegate('td', 'mouseover mouseleave click', function(e) {
+
+  $("#B_").delegate('td', 'mouseover mouseleave click', function (e) {
     var cellindex = 0;
     let rooms = "";
-    console.log("reg B");
+    e.stopImmediatePropagation();
     if (e.type == 'click') {
-        console.log("reg B");
         if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
             $(this).removeClass("nowork");
+            console.log("I: " + zb);
         } else if ($('input#pohjakierros').is(':checked')) {
             console.log("Pohja checkattu");
-  
-  
             var cells = $(this).parent().children("td");
-            var tds = $('#B .table_size_chooser td').removeClass("SizeChooser-clicked")
-  
+            var tds = $('#B_ .table_size_chooser td').removeClass("SizeChooser-clicked")
             for (var i = 0; i < cells.length; i++) {
                 if ($(this).find('label').text().length > 1) {
                     $(this).removeClass("nowork");
                     $(this).find('label').text("");
                     cellindex = i;
+                    console.log("IF EVbENT");
                 } else {
-                    $(this).addClass("nowork"); $(this).removeClass("checked");
+                    $(this).addClass("nowork");
+                    $(this).removeClass("checked");
                     $(this).find('label').val("");
+                    console.log("ELSE EVbENT");
                 }
-  
             }
-  
-        } else if ($(this).hasClass("noindex")) {
-            z = 0;
-            $('#b_nextnum').val(z).replace(/\D/g,'');
-        } else if ($(this).find('input').prop('checked') == false) {
-            z -= 1;
+        } else if($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
+            zb = 0;
+            zb_letter = toAlpha(zb_alphabet).toUpperCase();
+            if($('#b_nextnum').val().length >= 1) {
+                $('#b_nextnum').val(zb);
+            }
+            if($('#b_nextnum_second_1').val().length >= 1) {
+                $('#b_nextnum_second_1').val(zb);
+            }
+            if($('#b_nextnum_third_1').val().length >= 1) {
+                $('#b_nextnum_third_1').val(zb);
+            }
+
+            if($('#b_nextnum_2').val().length >= 1) {
+                $('#b_nextnum_2').val(zb_letter);
+            }
+            if($('#b_nextnum_second_2').val().length >= 1) {
+                $('#b_nextnum_second_2').val(zb_letter);
+            }
+            if($('#b_nextnum_third_2').val().length >= 1) {
+                $('#b_nextnum_third_2').val(zb_letter);
+            }
+
+        } else if($(this).hasClass("checked") || $(this).hasClass("nowork")) {
+            if($(this).hasClass("nowork")) {
+                $(this).removeClass("nowork");
+                return
+            }
+            if($(this).hasClass("checked")) {
+                $(this).removeClass("checked");
+                zb -= 1;
+                zb_alphabet -= 1;
+                zb_letter = toAlpha(zb_alphabet).toUpperCase();
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#b_nextnum').val(zb);
+                console.log("IV: " + zb);
+
+                if($('#b_nextnum').val().length >= 1) {
+                    $('#b_nextnum').val(zb);
+                }
+                if($('#b_nextnum_second_1').val().length >= 1) {
+                    $('#b_nextnum_second_1').val(zb);
+                }
+                if($('#b_nextnum_third_1').val().length >= 1) {
+                    $('#b_nextnum_third_1').val(zb);
+                }
+
+                if($('#b_nextnum_2').val().length >= 1) {
+                    $('#b_nextnum_2').val(zb_letter);
+                }
+                if($('#b_nextnum_second_2').val().length >= 1) {
+                    $('#b_nextnum_second_2').val(zb_letter);
+                }
+                if($('#b_nextnum_third_2').val().length >= 1) {
+                    $('#b_nextnum_third_2').val(zb_letter);
+                }
+
+                return
+            }
+
+            zb -= 1;
+            zb_alphabet -= 1;
+            zb_letter = toAlpha(zb_alphabet).toUpperCase();
             $(this).find('input').val("");
             $(this).find('label').text("");
-            $('#b_nextnum').val(z).replace(/\D/g,'');
-        } else {
+            $('#b_nextnum').val(zb);
+            console.log("IV: " + zb);
+
+            if($('#b_nextnum').val().length >= 1) {
+                $('#b_nextnum').val(zb);
+            }
+            if($('#b_nextnum_second_1').val().length >= 1) {
+                $('#b_nextnum_second_1').val(zb);
+            }
+            if($('#b_nextnum_third_1').val().length >= 1) {
+                $('#b_nextnum_third_1').val(zb);
+            }
+
+            if($('#b_nextnum_2').val().length >= 1) {
+                $('#b_nextnum_2').val(zb_letter);
+            }
+            if($('#b_nextnum_second_2').val().length >= 1) {
+                $('#b_nextnum_second_2').val(zb_letter);
+            }
+            if($('#b_nextnum_third_2').val().length >= 1) {
+                $('#b_nextnum_third_2').val(zb_letter);
+            }
+        } 
+        else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
-            var tds = $('#B .table_size_chooser td').removeClass("SizeChooser-clicked")
-            if(Math.floor($('#b_nextnum').val()) == $('#b_nextnum').val() && $.isNumeric($('#b_nextnum').val()))  {
-                z = parseFloat($('#b_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-            else {
-                z = parseFloat($('#b_nextnum').val().replace(/\D/g,''));
-                z += 1;
+            var tds = $('#B_ .table_size_chooser td').removeClass("SizeChooser-clicked");
+            if (Math.floor($('#b_nextnum').val()) == $('#b_nextnum').val() && $.isNumeric($('#b_nextnum').val())) {
+                zb = parseFloat($('#b_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zb);
+                zb += 1;
+                zb_alphabet += 1;
+            } else {
+                zb = parseFloat($('#b_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zb);
+                zb += 1;
+                zb_alphabet += 1;
             }
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
                     $(this).removeClass("cell");
                     cellindex = i;
-  
                     break;
-  
-  
                 }
-                var a_val = $('#b_val').val();
-                var a_val_num = $('#b_nextnum').val();
-                if($('#b_nextnum_second').val().length >= 1) {
-                    var a_val_2 = "<br/>" + $('#b_nextnum_second').val();
+                var b_val = $('#b_val').val();
+                if ($('#b_nextnum_2').val().length >= 1 && $('#b_nextnum_2').val().toLowerCase() != "nan") {
+                    var b_val_num = $('#b_nextnum_2').val();
                 }
-                else {
-                    var a_val_2 = "";
+                else if($('#b_nextnum_3').val().length >= 1 && $('#b_nextnum_3').val().toLowerCase() != "nan") {
+                    var b_val_num = $('#b_nextnum_3').val();
                 }
-                if($('#b_nextnum_third').val().length >= 1) {
-                    var a_val_3 = "<br/>" + $('#b_nextnum_third').val();
-                }
-                else {
-                    var a_val_3 = "";
-                }
-
-               
                 
-                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-
-                var a_rooms = $('#b_rooms');
-  
+                else if($('#b_nextnum').val().length >= 1 && $('#b_nextnum').val().toLowerCase() != "nan") {
+                    var b_val_num = $('#b_nextnum').val();
+                }
+                else {
+                    var b_val_num = "";
+                }
+                
+                if ($('#b_nextnum_second').val().length >= 1) {
+                    var b_val_2 = "<br>" + $('#b_nextnum_second').val();
+                } else {
+                    var b_val_2 = "";
+                }
+                
+                if ($('#b_nextnum_second_1').val().length >= 1 && $('#b_nextnum_second_1').val().toLowerCase() != "nan") {
+                    var b_val_num2 = $('#b_nextnum_second_1').val();
+                }
+                else if($('#b_nextnum_second_2').val().length >= 1 && $('#b_nextnum_second_2').val().toLowerCase() != "nan") {
+                    var b_val_num2 = $('#b_nextnum_second_2').val();
+                }
+                else if($('#b_nextnum_second_3').val().length >= 1 && $('#b_nextnum_second_3').val().toLowerCase() != "nan") {
+                    var b_val_num2 = $('#b_nextnum_second_3').val();
+                }
+                else {
+                    var b_val_num2 = "";
+                }
+                if ($('#b_nextnum_third').val().length >= 1) {
+                    var b_val_3 = "<br>" + $('#b_nextnum_third').val();
+                } else {
+                    var b_val_3 = "";
+                }
+                if ($('#b_nextnum_third_1').val().length >= 1 && $('#b_nextnum_third_1').val().toLowerCase() != "nan") {
+                    var b_val_num3 = $('#b_nextnum_third_1').val();
+                }
+                else if($('#b_nextnum_third_2').val().length >= 1 && $('#b_nextnum_third_2').val().toLowerCase() != "nan") {
+                    var b_val_num3 = $('#b_nextnum_third_2').val();
+                }
+                else if($('#b_nextnum_third_3').val().length >= 1 && $('#b_nextnum_third_3').val().toLowerCase() != "nan") {
+                    var b_val_num3 = $('#b_nextnum_third_3').val();
+                }
+                else {
+                    var b_val_num3 = "";
+                }
+                $(this).find('label').html(b_val + b_val_num + b_val_2 + b_val_num2 + b_val_3 + b_val_num3);
+                var b_rooms = $('#b_rooms');
             }
-  
-  
             $(this).parent().addClass("row");
             var rows = $(this).parent().parent().children("tr");
-  
-  
             for (var i = 0; i < rows.length; i++) {
                 var tds = $(rows[i]).children("label");
-                V = "";
+                Vb = "";
                 for (var j = 0; j <= cellindex; j++) {
-                    Z = i;
-  
                     var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
                 }
                 if ($(rows[i]).hasClass("row")) {
@@ -413,662 +658,202 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#b_val').val() + parseFloat($('#b_nextnum').val().replace(/\D/g,''));
-  
-  
-            posX = $(this).closest('tr').index();
+            Vb = $('#b_val').val() + parseFloat($('#b_nextnum').val().replace(/\D/g, ''));
+            posX = $(this).parent().data("no");
             posY = $(this).index();
-  
-  
-            $('#b_nextnum').val(z).replace(/\D/g,'');
+
+            zb_letter = toAlpha(zb_alphabet).toUpperCase();
+
+            if($('#b_nextnum').val().length >= 1) {
+                $('#b_nextnum').val(zb);
+            }
+            if($('#b_nextnum_second_1').val().length >= 1) {
+                $('#b_nextnum_second_1').val(zb);
+            }
+            if($('#b_nextnum_third_1').val().length >= 1) {
+                $('#b_nextnum_third_1').val(zb);
+            }
+
+            if($('#b_nextnum_2').val().length >= 1) {
+                $('#b_nextnum_2').val(zb_letter);
+            }
+            if($('#b_nextnum_second_2').val().length >= 1) {
+                $('#b_nextnum_second_2').val(zb_letter);
+            }
+            if($('#b_nextnum_third_2').val().length >= 1) {
+                $('#b_nextnum_third_2').val(zb_letter);
+            }
         }
-  
     }
   });
-  $("#C_").delegate('td', 'mouseover mouseleave click', function(e) {
+  
+  $("#C_").delegate('td', 'mouseover mouseleave click', function (e) {
     var cellindex = 0;
     let rooms = "";
-  
+    e.stopImmediatePropagation();
     if (e.type == 'click') {
         if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
             $(this).removeClass("nowork");
+            console.log("I: " + zc);
         } else if ($('input#pohjakierros').is(':checked')) {
             console.log("Pohja checkattu");
-  
-  
             var cells = $(this).parent().children("td");
-            var tds = $('#C .table_size_chooser td').removeClass("SizeChooser-clicked")
-  
+            var tds = $('#C_ .table_size_chooser td').removeClass("SizeChooser-clicked")
             for (var i = 0; i < cells.length; i++) {
                 if ($(this).find('label').text().length > 1) {
                     $(this).removeClass("nowork");
                     $(this).find('label').text("");
                     cellindex = i;
+                    console.log("IF EVcENT");
                 } else {
-                    $(this).addClass("nowork"); $(this).removeClass("checked");
+                    $(this).addClass("nowork");
+                    $(this).removeClass("checked");
                     $(this).find('label').val("");
+                    console.log("ELSE EVcENT");
                 }
-  
             }
-  
-  
-        } else if ($(this).hasClass("noindex")) {
-            z = 0;
-            $('#c_nextnum').val(z).replace(/\D/g,'');
-        } else if ($(this).find('input').prop('checked') == false) {
-            z -= 1;
-            $(this).find('input').val("");
-            $(this).find('label').text("");
-            $('#c_nextnum').val(z).replace(/\D/g,'');
-        } else {
-            $(this).addClass("checked");
-            var cells = $(this).parent().children("td");
-            var tds = $('#C .table_size_chooser td').removeClass("SizeChooser-clicked")
-            // z = parseFloat($('#c_nextnum').val().replace(/\D/g,''));
-            // z += 1;
+        } else if($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
+            zc = 0;
+            zc_letter = toAlpha(zc_alphabet).toUpperCase();
+            if($('#c_nextnum').val().length >= 1) {
+                $('#c_nextnum').val(zc);
+            }
+            if($('#c_nextnum_second_1').val().length >= 1) {
+                $('#c_nextnum_second_1').val(zc);
+            }
+            if($('#c_nextnum_third_1').val().length >= 1) {
+                $('#c_nextnum_third_1').val(zc);
+            }
 
-            if(Math.floor($('#c_nextnum').val()) == $('#c_nextnum').val() && $.isNumeric($('#c_nextnum').val()))  {
-                z = parseFloat($('#c_nextnum').val().replace(/\D/g,''));
-                z += 1;
+            if($('#c_nextnum_2').val().length >= 1) {
+                $('#c_nextnum_2').val(zc_letter);
             }
-            else {
-                z = parseFloat($('#c_nextnum').val().replace(/\D/g,''));
-                z += 1;
+            if($('#c_nextnum_second_2').val().length >= 1) {
+                $('#c_nextnum_second_2').val(zc_letter);
             }
-            for (var i = 0; i < cells.length; i++) {
-                if ($(cells[i]).hasClass("cell")) {
-                    $(this).removeClass("cell");
-                    cellindex = i;
-  
-                    break;
-  
-  
-                }
-                var a_val = $('#c_val').val();
-                var a_val_num = $('#c_nextnum').val();
-                if($('#c_nextnum_second').val().length >= 1) {
-                    var a_val_2 = "<br/>" + $('#c_nextnum_second').val();
-                }
-                else {
-                    var a_val_2 = "";
-                }
-                if($('#c_nextnum_third').val().length >= 1) {
-                    var a_val_3 = "<br/>" + $('#c_nextnum_third').val();
-                }
-                else {
-                    var a_val_3 = "";
-                }
+            if($('#c_nextnum_third_2').val().length >= 1) {
+                $('#c_nextnum_third_2').val(zc_letter);
+            }
 
-               
-                
-                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+        } else if($(this).hasClass("checked") || $(this).hasClass("nowork")) {
+            if($(this).hasClass("nowork")) {
+                $(this).removeClass("nowork");
+                return
+            }
+            if($(this).hasClass("checked")) {
+                $(this).removeClass("checked");
+                zc -= 1;
+                zc_alphabet -= 1;
+                zc_letter = toAlpha(zc_alphabet).toUpperCase();
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#c_nextnum').val(zc);
+                console.log("IV: " + zc);
 
-                var a_rooms = $('#c_rooms');
-  
-            }
-  
-  
-            $(this).parent().addClass("row");
-            var rows = $(this).parent().parent().children("tr");
-  
-  
-            for (var i = 0; i < rows.length; i++) {
-                var tds = $(rows[i]).children("label");
-                V = "";
-                for (var j = 0; j <= cellindex; j++) {
-                    Z = i;
-  
-                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                if($('#c_nextnum').val().length >= 1) {
+                    $('#c_nextnum').val(zc);
                 }
-                if ($(rows[i]).hasClass("row")) {
-                    $(this).parent().removeClass("row");
-                    break;
+                if($('#c_nextnum_second_1').val().length >= 1) {
+                    $('#c_nextnum_second_1').val(zc);
                 }
-            }
-            V = $('#c_val').val() + parseFloat($('#c_nextnum').val().replace(/\D/g,''));
-  
-  
-            posX = $(this).closest('tr').index();
-            posY = $(this).index();
-  
-  
-            $('#c_nextnum').val(z).replace(/\D/g,'');
-        }
-  
-    }
-  });
-  $("#D_").delegate('td', 'mouseover mouseleave click', function(e) {
-    var cellindex = 0;
-    let rooms = "";
-  
-    if (e.type == 'click') {
-        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-            $(this).removeClass("nowork");
-        } else if ($('input#pohjakierros').is(':checked')) {
-            console.log("Pohja checkattu");
-  
-  
-            var cells = $(this).parent().children("td");
-            var tds = $('#D .table_size_chooser td').removeClass("SizeChooser-clicked")
-  
-            for (var i = 0; i < cells.length; i++) {
-                if ($(this).find('label').text().length > 1) {
-                    $(this).removeClass("nowork");
-                    $(this).find('label').text("");
-                    cellindex = i;
-                } else {
-                    $(this).addClass("nowork"); $(this).removeClass("checked");
-                    $(this).find('label').val("");
-                }
-  
-            }
-  
-  
-        } else if ($(this).hasClass("noindex")) {
-            z = 0;
-            $('#d_nextnum').val(z).replace(/\D/g,'');
-        } else if ($(this).find('input').prop('checked') == false) {
-            z -= 1;
-            $(this).find('input').val("");
-            $(this).find('label').text("");
-            $('#d_nextnum').val(z).replace(/\D/g,'');
-        } else {
-            $(this).addClass("checked");
-            var cells = $(this).parent().children("td");
-            var tds = $('#D .table_size_chooser td').removeClass("SizeChooser-clicked")
-            // z = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
-            // z += 1;
-
-            if(Math.floor($('#d_nextnum').val()) == $('#d_nextnum').val() && $.isNumeric($('#d_nextnum').val()))  {
-                z = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-            else {
-                z = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-  
-            for (var i = 0; i < cells.length; i++) {
-                if ($(cells[i]).hasClass("cell")) {
-                    $(this).removeClass("cell");
-                    cellindex = i;
-  
-                    break;
-  
-  
-                }
-                var a_val = $('#d_val').val();
-                var a_val_num = $('#d_nextnum').val();
-                if($('#d_nextnum_second').val().length >= 1) {
-                    var a_val_2 = "<br/>" + $('#d_nextnum_second').val();
-                }
-                else {
-                    var a_val_2 = "";
-                }
-                if($('#d_nextnum_third').val().length >= 1) {
-                    var a_val_3 = "<br/>" + $('#d_nextnum_third').val();
-                }
-                else {
-                    var a_val_3 = "";
+                if($('#c_nextnum_third_1').val().length >= 1) {
+                    $('#c_nextnum_third_1').val(zc);
                 }
 
-               
-                
-                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+                if($('#c_nextnum_2').val().length >= 1) {
+                    $('#c_nextnum_2').val(zc_letter);
+                }
+                if($('#c_nextnum_second_2').val().length >= 1) {
+                    $('#c_nextnum_second_2').val(zc_letter);
+                }
+                if($('#c_nextnum_third_2').val().length >= 1) {
+                    $('#c_nextnum_third_2').val(zc_letter);
+                }  
 
-
-                var a_rooms = $('#d_rooms');
-  
+                return
             }
-  
-  
-            $(this).parent().addClass("row");
-            var rows = $(this).parent().parent().children("tr");
-  
-  
-            for (var i = 0; i < rows.length; i++) {
-                var tds = $(rows[i]).children("label");
-                V = "";
-                for (var j = 0; j <= cellindex; j++) {
-  
-                    Z = i;
-  
-                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                }
-                if ($(rows[i]).hasClass("row")) {
-                    $(this).parent().removeClass("row");
-                    break;
-                }
-            }
-            V = $('#d_val').val() + parseFloat($('#d_nextnum').val().replace(/\D/g,''));
-  
-  
-  
-            posX = $(this).closest('tr').index();
-            posY = $(this).index();
-  
-            $('#d_nextnum').val(z).replace(/\D/g,'');
-        }
-  
-    }
-  });
-  $("#E_").delegate('td', 'mouseover mouseleave click', function(e) {
-    var cellindex = 0;
-    let rooms = "";
-  
-    if (e.type == 'click') {
-        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-            $(this).removeClass("nowork");
-        } else if ($('input#pohjakierros').is(':checked')) {
-            console.log("Pohja checkattu");
-  
-  
-            var cells = $(this).parent().children("td");
-            var tds = $('#E .table_size_chooser td').removeClass("SizeChooser-clicked")
-  
-            for (var i = 0; i < cells.length; i++) {
-                if ($(this).find('label').text().length > 1) {
-                    $(this).removeClass("nowork");
-                    $(this).find('label').text("");
-                    cellindex = i;
-                } else {
-                    $(this).addClass("nowork"); $(this).removeClass("checked");
-                    $(this).find('label').val("");
-                }
-  
-            }
-  
-  
-        } else if ($(this).hasClass("noindex")) {
-            z = 0;
-            $('#e_nextnum').val(z).replace(/\D/g,'');
-        } else if ($(this).find('input').prop('checked') == false) {
-            z -= 1;
-            $(this).find('input').val("");
-            $(this).find('label').text("");
-            $('#e_nextnum').val(z).replace(/\D/g,'');
-        } else {
-            $(this).addClass("checked");
-            var cells = $(this).parent().children("td");
-            var tds = $('#E .table_size_chooser td').removeClass("SizeChooser-clicked")
-
-
-            if(Math.floor($('#e_nextnum').val()) == $('#e_nextnum').val() && $.isNumeric($('#e_nextnum').val()))  {
-                z = parseFloat($('#e_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-            else {
-                z = parseFloat($('#e_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-  
-            for (var i = 0; i < cells.length; i++) {
-                if ($(cells[i]).hasClass("cell")) {
-                    $(this).removeClass("cell");
-                    cellindex = i;
-  
-                    break;
-  
-  
-                }
-                var a_val = $('#e_val').val();
-                var a_val_num = $('#e_nextnum').val();
-
-                if($('#e_nextnum_second').val().length >= 1) {
-                    var a_val_2 = "<br/>" + $('#e_nextnum_second').val();
-                }
-                else {
-                    var a_val_2 = "";
-                }
-                if($('#e_nextnum_third').val().length >= 1) {
-                    var a_val_3 = "<br/>" + $('#e_nextnum_third').val();
-                }
-                else {
-                    var a_val_3 = "";
-                }
-
-               
-                
-                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                var a_rooms = $('#e_rooms');
-  
-            }
-  
-  
-            $(this).parent().addClass("row");
-            var rows = $(this).parent().parent().children("tr");
-  
-  
-            for (var i = 0; i < rows.length; i++) {
-                var tds = $(rows[i]).children("label");
-                V = "";
-                for (var j = 0; j <= cellindex; j++) {
-                    Z = i;
-  
-                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                }
-                if ($(rows[i]).hasClass("row")) {
-                    $(this).parent().removeClass("row");
-                    break;
-                }
-            }
-            V = $('#e_val').val() + parseFloat($('#e_nextnum').val().replace(/\D/g,''));
-  
-  
-            posX = $(this).closest('tr').index();
-            posY = $(this).index();
-  
-            $('#e_nextnum').val(z).replace(/\D/g,'');
-        }
-  
-    }
-  });
-  $("#F_").delegate('td', 'mouseover mouseleave click', function(e) {
-    var cellindex = 0;
-    let rooms = "";
-  
-    if (e.type == 'click') {
-        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-            $(this).removeClass("nowork");
-        } else if ($('input#pohjakierros').is(':checked')) {
-            console.log("Pohja checkattu");
-  
-  
-            var cells = $(this).parent().children("td");
-            var tds = $('#F .table_size_chooser td').removeClass("SizeChooser-clicked")
-  
-            for (var i = 0; i < cells.length; i++) {
-                if ($(this).find('label').text().length > 1) {
-                    $(this).removeClass("nowork");
-                    $(this).find('label').text("");
-                    cellindex = i;
-                } else {
-                    $(this).addClass("nowork"); $(this).removeClass("checked");
-                    $(this).find('label').val("");
-                }
-  
-            }
-  
-        } else if ($(this).hasClass("noindex")) {
-            z = 0;
-            $('#f_nextnum').val(z).replace(/\D/g,'');
-        } else if ($(this).find('input').prop('checked') == false) {
-            z -= 1;
-            $(this).find('input').val("");
-            $(this).find('label').text("");
-            $('#f_nextnum').val(z).replace(/\D/g,'');
-        } else {
-            $(this).addClass("checked");
-            var cells = $(this).parent().children("td");
-            var tds = $('#F .table_size_chooser td').removeClass("SizeChooser-clicked")
-
-            if(Math.floor($('#f_nextnum').val()) == $('#f_nextnum').val() && $.isNumeric($('#f_nextnum').val()))  {
-                z = parseFloat($('#f_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-            else {
-                z = parseFloat($('#f_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-            for (var i = 0; i < cells.length; i++) {
-                if ($(cells[i]).hasClass("cell")) {
-                    $(this).removeClass("cell");
-                    cellindex = i;
-  
-                    break;
-  
-  
-                }
-                var a_val = $('#f_val').val();
-                var a_val_num = $('#f_nextnum').val();
-                if($('#f_nextnum_second').val().length >= 1) {
-                    var a_val_2 = "<br/>" + $('#f_nextnum_second').val();
-                }
-                else {
-                    var a_val_2 = "";
-                }
-                if($('#f_nextnum_third').val().length >= 1) {
-                    var a_val_3 = "<br/>" + $('#f_nextnum_third').val();
-                }
-                else {
-                    var a_val_3 = "";
-                }
-
-               
-                
-                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                var a_rooms = $('#f_rooms');
-  
-            }
-  
-  
-            $(this).parent().addClass("row");
-            var rows = $(this).parent().parent().children("tr");
-  
-  
-            for (var i = 0; i < rows.length; i++) {
-                var tds = $(rows[i]).children("label");
-                V = "";
-                for (var j = 0; j <= cellindex; j++) {
-                    Z = i;
-  
-                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                }
-                if ($(rows[i]).hasClass("row")) {
-                    $(this).parent().removeClass("row");
-                    break;
-                }
-            }
-            V = $('#f_val').val() + parseFloat($('#f_nextnum').val().replace(/\D/g,''));
-  
-  
-            posX = $(this).closest('tr').index();
-            posY = $(this).index();
-  
-            $('#f_nextnum').val(z).replace(/\D/g,'');
-        }
-  
-    }
-  });
-  $("#G_").delegate('td', 'mouseover mouseleave click', function(e) {
-    var cellindex = 0;
-    let rooms = "";
-  
-    if (e.type == 'click') {
-        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-            $(this).removeClass("nowork");
-        } else if ($('input#pohjakierros').is(':checked')) {
-            console.log("Pohja checkattu");
-  
-  
-            var cells = $(this).parent().children("td");
-            var tds = $('#G .table_size_chooser td').removeClass("SizeChooser-clicked")
-            for (var i = 0; i < cells.length; i++) {
-                if ($(this).find('label').text().length > 1) {
-                    $(this).removeClass("nowork");
-                    $(this).find('label').text("");
-                    cellindex = i;
-                } else {
-                    $(this).addClass("nowork"); $(this).removeClass("checked");
-                    $(this).find('label').val("");
-                }
-  
-            }
-  
-        } else if ($(this).hasClass("noindex")) {
-            z = 0;
-            $('#g_nextnum').val(z).replace(/\D/g,'');
-        } else if ($(this).find('input').prop('checked') == false) {
-            z -= 1;
-            $(this).find('input').val("");
-            $(this).find('label').text("");
-            $('#g_nextnum').val(z).replace(/\D/g,'');
-        } else {
-            $(this).addClass("checked");
-            var cells = $(this).parent().children("td");
-            var tds = $('#G .table_size_chooser td').removeClass("SizeChooser-clicked")
-
-            if(Math.floor($('#g_nextnum').val()) == $('#g_nextnum').val() && $.isNumeric($('#g_nextnum').val()))  {
-                z = parseFloat($('#g_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-            else {
-                z = parseFloat($('#g_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-            for (var i = 0; i < cells.length; i++) {
-                if ($(cells[i]).hasClass("cell")) {
-                    $(this).removeClass("cell");
-                    cellindex = i;
-  
-                    break;
-  
-  
-                }
-                var a_val = $('#g_val').val();
-                var a_val_num = $('#g_nextnum').val();
-                
-                if($('#g_nextnum_second').val().length >= 1) {
-                    var a_val_2 = "<br/>" + $('#g_nextnum_second').val();
-                }
-                else {
-                    var a_val_2 = "";
-                }
-                if($('#g_nextnum_third').val().length >= 1) {
-                    var a_val_3 = "<br/>" + $('#g_nextnum_third').val();
-                }
-                else {
-                    var a_val_3 = "";
-                }
-
-               
-                
-                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                var a_rooms = $('#g_rooms');
-  
-            }
-  
-  
-            $(this).parent().addClass("row");
-            var rows = $(this).parent().parent().children("tr");
-  
-  
-            for (var i = 0; i < rows.length; i++) {
-                var tds = $(rows[i]).children("label");
-                V = "";
-                for (var j = 0; j <= cellindex; j++) {
-                    Z = i;
-  
-                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                }
-                if ($(rows[i]).hasClass("row")) {
-                    $(this).parent().removeClass("row");
-                    break;
-                }
-            }
-            V = $('#g_val').val() + parseFloat($('#g_nextnum').val().replace(/\D/g,''));
-  
-  
-            posX = $(this).closest('tr').index();
-            posY = $(this).index();
-  
-            $('#g_nextnum').val(z).replace(/\D/g,'');
-        }
-  
-    }
-  });
-  $("#H_").delegate('td', 'mouseover mouseleave click', function(e) {
-    var cellindex = 0;
-    let rooms = "";
-  
-    if (e.type == 'click') {
-        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-            $(this).removeClass("nowork");
-        } else if ($('input#pohjakierros').is(':checked')) {
-            console.log("Pohja checkattu");
-  
-  
-            var cells = $(this).parent().children("td");
-            var tds = $('#H .table_size_chooser td').removeClass("SizeChooser-clicked")
-  
-            for (var i = 0; i < cells.length; i++) {
-                if ($(this).find('label').text().length > 1) {
-                    $(this).removeClass("nowork");
-                    $(this).find('label').text("");
-                    cellindex = i;
-                } else {
-                    $(this).addClass("nowork"); $(this).removeClass("checked");
-                    $(this).find('label').val("");
-                }
-  
-            }
-  
-        } else if ($(this).hasClass("noindex")) {
-            z = 0;
-            $('#h_nextnum').val(z).replace(/\D/g,'');
-        } else if ($(this).find('input').prop('checked') == false) {
-            z -= 1;
-            $(this).find('input').val("");
-            $(this).find('label').text("");
-            $('#h_nextnum').val(z).replace(/\D/g,'');
-        } else {
-            $(this).addClass("checked");
-            var cells = $(this).parent().children("td");
-            var tds = $('#H .table_size_chooser td').removeClass("SizeChooser-clicked")
-
             
-
-            if(Math.floor($('#h_nextnum').val()) == $('#h_nextnum').val() && $.isNumeric($('#h_nextnum').val()))  {
-                z = parseFloat($('#h_nextnum').val().replace(/\D/g,''));
-                z += 1;
-            }
-            else {
-                z = parseFloat($('#h_nextnum').val().replace(/\D/g,''));
-                z += 1;
+        } 
+        else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#C_ .table_size_chooser td').removeClass("SizeChooser-clicked");
+            if (Math.floor($('#c_nextnum').val()) == $('#c_nextnum').val() && $.isNumeric($('#c_nextnum').val())) {
+                zc = parseFloat($('#c_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zc);
+                zc += 1;
+                zc_alphabet += 1;
+            } else {
+                zc = parseFloat($('#c_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zc);
+                zc += 1;
+                zc_alphabet += 1;
             }
             for (var i = 0; i < cells.length; i++) {
                 if ($(cells[i]).hasClass("cell")) {
                     $(this).removeClass("cell");
                     cellindex = i;
-  
                     break;
-  
-  
                 }
-                var a_val = $('#h_val').val();
-                var a_val_num = $('#h_nextnum').val();
-
-                if($('#h_nextnum_second').val().length >= 1) {
-                    var a_val_2 = "<br/>" + $('#h_nextnum_second').val();
+                var c_val = $('#c_val').val();
+                if ($('#c_nextnum_2').val().length >= 1 && $('#c_nextnum_2').val().toLowerCase() != "nan") {
+                    var c_val_num = $('#c_nextnum_2').val();
                 }
-                else {
-                    var a_val_2 = "";
+                else if($('#c_nextnum_3').val().length >= 1 && $('#c_nextnum_3').val().toLowerCase() != "nan") {
+                    var c_val_num = $('#c_nextnum_3').val();
                 }
-                if($('#h_nextnum_third').val().length >= 1) {
-                    var a_val_3 = "<br/>" + $('#h_nextnum_third').val();
-                }
-                else {
-                    var a_val_3 = "";
-                }
-
-               
                 
-                $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                var a_rooms = $('#h_rooms');
-  
+                else if($('#c_nextnum').val().length >= 1 && $('#c_nextnum').val().toLowerCase() != "nan") {
+                    var c_val_num = $('#c_nextnum').val();
+                }
+                else {
+                    var c_val_num = "";
+                }
+                
+                if ($('#c_nextnum_second').val().length >= 1) {
+                    var c_val_2 = "<br>" + $('#c_nextnum_second').val();
+                } else {
+                    var c_val_2 = "";
+                }
+                
+                if ($('#c_nextnum_second_1').val().length >= 1 && $('#c_nextnum_second_1').val().toLowerCase() != "nan") {
+                    var c_val_num2 = $('#c_nextnum_second_1').val();
+                }
+                else if($('#c_nextnum_second_2').val().length >= 1 && $('#c_nextnum_second_2').val().toLowerCase() != "nan") {
+                    var c_val_num2 = $('#c_nextnum_second_2').val();
+                }
+                else if($('#c_nextnum_second_3').val().length >= 1 && $('#c_nextnum_second_3').val().toLowerCase() != "nan") {
+                    var c_val_num2 = $('#c_nextnum_second_3').val();
+                }
+                else {
+                    var c_val_num2 = "";
+                }
+                if ($('#c_nextnum_third').val().length >= 1) {
+                    var c_val_3 = "<br>" + $('#c_nextnum_third').val();
+                } else {
+                    var c_val_3 = "";
+                }
+                if ($('#c_nextnum_third_1').val().length >= 1 && $('#c_nextnum_third_1').val().toLowerCase() != "nan") {
+                    var c_val_num3 = $('#c_nextnum_third_1').val();
+                }
+                else if($('#c_nextnum_third_2').val().length >= 1 && $('#c_nextnum_third_2').val().toLowerCase() != "nan") {
+                    var c_val_num3 = $('#c_nextnum_third_2').val();
+                }
+                else if($('#c_nextnum_third_3').val().length >= 1 && $('#c_nextnum_third_3').val().toLowerCase() != "nan") {
+                    var c_val_num3 = $('#c_nextnum_third_3').val();
+                }
+                else {
+                    var c_val_num3 = "";
+                }
+                $(this).find('label').html(c_val + c_val_num + c_val_2 + c_val_num2 + c_val_3 + c_val_num3);
+                var c_rooms = $('#c_rooms');
             }
-  
-  
             $(this).parent().addClass("row");
             var rows = $(this).parent().parent().children("tr");
-  
-  
             for (var i = 0; i < rows.length; i++) {
                 var tds = $(rows[i]).children("label");
-                V = "";
+                Vc = "";
                 for (var j = 0; j <= cellindex; j++) {
-                    Z = i;
-  
                     var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
                 }
                 if ($(rows[i]).hasClass("row")) {
@@ -1076,17 +861,1038 @@ $('td').mouseover(function() {
                     break;
                 }
             }
-            V = $('#h_val').val() + parseFloat($('#h_nextnum').val().replace(/\D/g,''));
-  
-  
-            posX = $(this).closest('tr').index();
+            Vc = $('#c_val').val() + parseFloat($('#c_nextnum').val().replace(/\D/g, ''));
+            posX = $(this).parent().data("no");
             posY = $(this).index();
-  
-            $('#h_nextnum').val(z).replace(/\D/g,'');
+
+            zc_letter = toAlpha(zc_alphabet).toUpperCase();
+
+            if($('#c_nextnum').val().length >= 1) {
+                $('#c_nextnum').val(zc);
+            }
+            if($('#c_nextnum_second_1').val().length >= 1) {
+                $('#c_nextnum_second_1').val(zc);
+            }
+            if($('#c_nextnum_third_1').val().length >= 1) {
+                $('#c_nextnum_third_1').val(zc);
+            }
+
+            if($('#c_nextnum_2').val().length >= 1) {
+                $('#c_nextnum_2').val(zc_letter);
+            }
+            if($('#c_nextnum_second_2').val().length >= 1) {
+                $('#c_nextnum_second_2').val(zc_letter);
+            }
+            if($('#c_nextnum_third_2').val().length >= 1) {
+                $('#c_nextnum_third_2').val(zc_letter);
+            }
         }
-  
     }
   });
+
+  $("#D_").delegate('td', 'mouseover mouseleave click', function (e) {
+    var cellindex = 0;
+    let rooms = "";
+    e.stopImmediatePropagation();
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+            console.log("I: " + zd);
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+            var cells = $(this).parent().children("td");
+            var tds = $('#D_ .table_size_chooser td').removeClass("SizeChooser-clicked")
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                    console.log("IF EVdENT");
+                } else {
+                    $(this).addClass("nowork");
+                    $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                    console.log("ELSE EVdENT");
+                }
+            }
+        } else if($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
+            zd = 0;
+            zd_letter = toAlpha(zd_alphabet).toUpperCase();
+            if($('#d_nextnum').val().length >= 1) {
+                $('#d_nextnum').val(zd);
+            }
+            if($('#d_nextnum_second_1').val().length >= 1) {
+                $('#d_nextnum_second_1').val(zd);
+            }
+            if($('#d_nextnum_third_1').val().length >= 1) {
+                $('#d_nextnum_third_1').val(zd);
+            }
+
+            if($('#d_nextnum_2').val().length >= 1) {
+                $('#d_nextnum_2').val(zd_letter);
+            }
+            if($('#d_nextnum_second_2').val().length >= 1) {
+                $('#d_nextnum_second_2').val(zd_letter);
+            }
+            if($('#d_nextnum_third_2').val().length >= 1) {
+                $('#d_nextnum_third_2').val(zd_letter);
+            }
+
+        } else if($(this).hasClass("checked") || $(this).hasClass("nowork"))  {
+            if($(this).hasClass("nowork")) {
+                $(this).removeClass("nowork");
+                return
+            }
+            if($(this).hasClass("checked")) {
+                $(this).removeClass("checked");
+                zd -= 1;
+                zd_alphabet -= 1;
+                zd_letter = toAlpha(zd_alphabet).toUpperCase();
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#d_nextnum').val(zd);
+                console.log("IV: " + zd);
+
+                if($('#d_nextnum').val().length >= 1) {
+                    $('#d_nextnum').val(zd);
+                }
+                if($('#d_nextnum_second_1').val().length >= 1) {
+                    $('#d_nextnum_second_1').val(zd);
+                }
+                if($('#d_nextnum_third_1').val().length >= 1) {
+                    $('#d_nextnum_third_1').val(zd);
+                }
+
+                if($('#d_nextnum_2').val().length >= 1) {
+                    $('#d_nextnum_2').val(zd_letter);
+                }
+                if($('#d_nextnum_second_2').val().length >= 1) {
+                    $('#d_nextnum_second_2').val(zd_letter);
+                }
+                if($('#d_nextnum_third_2').val().length >= 1) {
+                    $('#d_nextnum_third_2').val(zd_letter);
+                }
+                return
+            }
+        } 
+        else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#D_ .table_size_chooser td').removeClass("SizeChooser-clicked");
+            if (Math.floor($('#d_nextnum').val()) == $('#d_nextnum').val() && $.isNumeric($('#d_nextnum').val())) {
+                zd = parseFloat($('#d_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zd);
+                zd += 1;
+                zd_alphabet += 1;
+            } else {
+                zd = parseFloat($('#d_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zd);
+                zd += 1;
+                zd_alphabet += 1;
+            }
+            for (var i = 0; i < cells.length; i++) {
+                if ($(cells[i]).hasClass("cell")) {
+                    $(this).removeClass("cell");
+                    cellindex = i;
+                    break;
+                }
+                var d_val = $('#d_val').val();
+                if ($('#d_nextnum_2').val().length >= 1 && $('#d_nextnum_2').val().toLowerCase() != "nan") {
+                    var d_val_num = $('#d_nextnum_2').val();
+                }
+                else if($('#d_nextnum_3').val().length >= 1 && $('#d_nextnum_3').val().toLowerCase() != "nan") {
+                    var d_val_num = $('#d_nextnum_3').val();
+                }
+                
+                else if($('#d_nextnum').val().length >= 1 && $('#d_nextnum').val().toLowerCase() != "nan") {
+                    var d_val_num = $('#d_nextnum').val();
+                }
+                else {
+                    var d_val_num = "";
+                }
+                
+                if ($('#d_nextnum_second').val().length >= 1) {
+                    var d_val_2 = "<br>" + $('#d_nextnum_second').val();
+                } else {
+                    var d_val_2 = "";
+                }
+                
+                if ($('#d_nextnum_second_1').val().length >= 1 && $('#d_nextnum_second_1').val().toLowerCase() != "nan") {
+                    var d_val_num2 = $('#d_nextnum_second_1').val();
+                }
+                else if($('#d_nextnum_second_2').val().length >= 1 && $('#d_nextnum_second_2').val().toLowerCase() != "nan") {
+                    var d_val_num2 = $('#d_nextnum_second_2').val();
+                }
+                else if($('#d_nextnum_second_3').val().length >= 1 && $('#d_nextnum_second_3').val().toLowerCase() != "nan") {
+                    var d_val_num2 = $('#d_nextnum_second_3').val();
+                }
+                else {
+                    var d_val_num2 = "";
+                }
+                if ($('#d_nextnum_third').val().length >= 1) {
+                    var d_val_3 = "<br>" + $('#d_nextnum_third').val();
+                } else {
+                    var d_val_3 = "";
+                }
+                if ($('#d_nextnum_third_1').val().length >= 1 && $('#d_nextnum_third_1').val().toLowerCase() != "nan") {
+                    var d_val_num3 = $('#d_nextnum_third_1').val();
+                }
+                else if($('#d_nextnum_third_2').val().length >= 1 && $('#d_nextnum_third_2').val().toLowerCase() != "nan") {
+                    var d_val_num3 = $('#d_nextnum_third_2').val();
+                }
+                else if($('#d_nextnum_third_3').val().length >= 1 && $('#d_nextnum_third_3').val().toLowerCase() != "nan") {
+                    var d_val_num3 = $('#d_nextnum_third_3').val();
+                }
+                else {
+                    var d_val_num3 = "";
+                }
+                $(this).find('label').html(d_val + d_val_num + d_val_2 + d_val_num2 + d_val_3 + d_val_num3);
+                var d_rooms = $('#d_rooms');
+            }
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                Vd = "";
+                for (var j = 0; j <= cellindex; j++) {
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            Vd = $('#d_val').val() + parseFloat($('#d_nextnum').val().replace(/\D/g, ''));
+            posX = $(this).parent().data("no");
+            posY = $(this).index();
+
+            zd_letter = toAlpha(zd_alphabet).toUpperCase();
+
+            if($('#d_nextnum').val().length >= 1) {
+                $('#d_nextnum').val(zd);
+            }
+            if($('#d_nextnum_second_1').val().length >= 1) {
+                $('#d_nextnum_second_1').val(zd);
+            }
+            if($('#d_nextnum_third_1').val().length >= 1) {
+                $('#d_nextnum_third_1').val(zd);
+            }
+
+            if($('#d_nextnum_2').val().length >= 1) {
+                $('#d_nextnum_2').val(zd_letter);
+            }
+            if($('#d_nextnum_second_2').val().length >= 1) {
+                $('#d_nextnum_second_2').val(zd_letter);
+            }
+            if($('#d_nextnum_third_2').val().length >= 1) {
+                $('#d_nextnum_third_2').val(zd_letter);
+            }
+        }
+    }
+  });
+
+  $("#E_").delegate('td', 'mouseover mouseleave click', function (e) {
+    var cellindex = 0;
+    let rooms = "";
+    e.stopImmediatePropagation();
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+            console.log("I: " + ze);
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+            var cells = $(this).parent().children("td");
+            var tds = $('#E_ .table_size_chooser td').removeClass("SizeChooser-clicked")
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                    console.log("IF EVeENT");
+                } else {
+                    $(this).addClass("nowork");
+                    $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                    console.log("ELSE EVeENT");
+                }
+            }
+        } else if($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
+            ze = 0;
+            ze_letter = toAlpha(ze_alphabet).toUpperCase();
+            if($('#e_nextnum').val().length >= 1) {
+                $('#e_nextnum').val(ze);
+            }
+            if($('#e_nextnum_second_1').val().length >= 1) {
+                $('#e_nextnum_second_1').val(ze);
+            }
+            if($('#e_nextnum_third_1').val().length >= 1) {
+                $('#e_nextnum_third_1').val(ze);
+            }
+
+            if($('#e_nextnum_2').val().length >= 1) {
+                $('#e_nextnum_2').val(ze_letter);
+            }
+            if($('#e_nextnum_second_2').val().length >= 1) {
+                $('#e_nextnum_second_2').val(ze_letter);
+            }
+            if($('#e_nextnum_third_2').val().length >= 1) {
+                $('#e_nextnum_third_2').val(ze_letter);
+            }
+
+        } else if($(this).hasClass("checked") || $(this).hasClass("nowork")) {
+            if($(this).hasClass("nowork")) {
+                $(this).removeClass("nowork");
+                return
+            }
+            if($(this).hasClass("checked")) {
+                $(this).removeClass("checked");
+                ze -= 1;
+                ze_alphabet -= 1;
+                ze_letter = toAlpha(ze_alphabet).toUpperCase();
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#e_nextnum').val(ze);
+                console.log("IV: " + ze);
+
+                if($('#e_nextnum').val().length >= 1) {
+                    $('#e_nextnum').val(ze);
+                }
+                if($('#e_nextnum_second_1').val().length >= 1) {
+                    $('#e_nextnum_second_1').val(ze);
+                }
+                if($('#e_nextnum_third_1').val().length >= 1) {
+                    $('#e_nextnum_third_1').val(ze);
+                }
+
+                if($('#e_nextnum_2').val().length >= 1) {
+                    $('#e_nextnum_2').val(ze_letter);
+                }
+                if($('#e_nextnum_second_2').val().length >= 1) {
+                    $('#e_nextnum_second_2').val(ze_letter);
+                }
+                if($('#e_nextnum_third_2').val().length >= 1) {
+                    $('#e_nextnum_third_2').val(ze_letter);
+                }
+                return
+            }
+        } 
+        else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#E_ .table_size_chooser td').removeClass("SizeChooser-clicked");
+            if (Math.floor($('#e_nextnum').val()) == $('#e_nextnum').val() && $.isNumeric($('#e_nextnum').val())) {
+                ze = parseFloat($('#e_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + ze);
+                ze += 1;
+                ze_alphabet += 1;
+            } else {
+                ze = parseFloat($('#e_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + ze);
+                ze += 1;
+                ze_alphabet += 1;
+            }
+            for (var i = 0; i < cells.length; i++) {
+                if ($(cells[i]).hasClass("cell")) {
+                    $(this).removeClass("cell");
+                    cellindex = i;
+                    break;
+                }
+                var e_val = $('#e_val').val();
+                if ($('#e_nextnum_2').val().length >= 1 && $('#e_nextnum_2').val().toLowerCase() != "nan") {
+                    var e_val_num = $('#e_nextnum_2').val();
+                }
+                else if($('#e_nextnum_3').val().length >= 1 && $('#e_nextnum_3').val().toLowerCase() != "nan") {
+                    var e_val_num = $('#e_nextnum_3').val();
+                }
+                
+                else if($('#e_nextnum').val().length >= 1 && $('#e_nextnum').val().toLowerCase() != "nan") {
+                    var e_val_num = $('#e_nextnum').val();
+                }
+                else {
+                    var e_val_num = "";
+                }
+                
+                if ($('#e_nextnum_second').val().length >= 1) {
+                    var e_val_2 = "<br>" + $('#e_nextnum_second').val();
+                } else {
+                    var e_val_2 = "";
+                }
+                
+                if ($('#e_nextnum_second_1').val().length >= 1 && $('#e_nextnum_second_1').val().toLowerCase() != "nan") {
+                    var e_val_num2 = $('#e_nextnum_second_1').val();
+                }
+                else if($('#e_nextnum_second_2').val().length >= 1 && $('#e_nextnum_second_2').val().toLowerCase() != "nan") {
+                    var e_val_num2 = $('#e_nextnum_second_2').val();
+                }
+                else if($('#e_nextnum_second_3').val().length >= 1 && $('#e_nextnum_second_3').val().toLowerCase() != "nan") {
+                    var e_val_num2 = $('#e_nextnum_second_3').val();
+                }
+                else {
+                    var e_val_num2 = "";
+                }
+                if ($('#e_nextnum_third').val().length >= 1) {
+                    var e_val_3 = "<br>" + $('#e_nextnum_third').val();
+                } else {
+                    var e_val_3 = "";
+                }
+                if ($('#e_nextnum_third_1').val().length >= 1 && $('#e_nextnum_third_1').val().toLowerCase() != "nan") {
+                    var e_val_num3 = $('#e_nextnum_third_1').val();
+                }
+                else if($('#e_nextnum_third_2').val().length >= 1 && $('#e_nextnum_third_2').val().toLowerCase() != "nan") {
+                    var e_val_num3 = $('#e_nextnum_third_2').val();
+                }
+                else if($('#e_nextnum_third_3').val().length >= 1 && $('#e_nextnum_third_3').val().toLowerCase() != "nan") {
+                    var e_val_num3 = $('#e_nextnum_third_3').val();
+                }
+                else {
+                    var e_val_num3 = "";
+                }
+                $(this).find('label').html(e_val + e_val_num + e_val_2 + e_val_num2 + e_val_3 + e_val_num3);
+                var e_rooms = $('#e_rooms');
+            }
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                Ve = "";
+                for (var j = 0; j <= cellindex; j++) {
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            Ve = $('#e_val').val() + parseFloat($('#e_nextnum').val().replace(/\D/g, ''));
+            posX = $(this).parent().data("no");
+            posY = $(this).index();
+
+            ze_letter = toAlpha(ze_alphabet).toUpperCase();
+
+            if($('#e_nextnum').val().length >= 1) {
+                $('#e_nextnum').val(ze);
+            }
+            if($('#e_nextnum_second_1').val().length >= 1) {
+                $('#e_nextnum_second_1').val(ze);
+            }
+            if($('#e_nextnum_third_1').val().length >= 1) {
+                $('#e_nextnum_third_1').val(ze);
+            }
+
+            if($('#e_nextnum_2').val().length >= 1) {
+                $('#e_nextnum_2').val(ze_letter);
+            }
+            if($('#e_nextnum_second_2').val().length >= 1) {
+                $('#e_nextnum_second_2').val(ze_letter);
+            }
+            if($('#e_nextnum_third_2').val().length >= 1) {
+                $('#e_nextnum_third_2').val(ze_letter);
+            }
+        }
+    }
+  });
+
+  $("#F_").delegate('td', 'mouseover mouseleave click', function (e) {
+    var cellindex = 0;
+    let rooms = "";
+    e.stopImmediatePropagation();
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+            console.log("I: " + zf);
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+            var cells = $(this).parent().children("td");
+            var tds = $('#F_ .table_size_chooser td').removeClass("SizeChooser-clicked")
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                    console.log("IF EVfENT");
+                } else {
+                    $(this).addClass("nowork");
+                    $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                    console.log("ELSE EVfENT");
+                }
+            }
+        } else if($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
+            zf = 0;
+            zf_letter = toAlpha(zf_alphabet).toUpperCase();
+            if($('#f_nextnum').val().length >= 1) {
+                $('#f_nextnum').val(zf);
+            }
+            if($('#f_nextnum_second_1').val().length >= 1) {
+                $('#f_nextnum_second_1').val(zf);
+            }
+            if($('#f_nextnum_third_1').val().length >= 1) {
+                $('#f_nextnum_third_1').val(zf);
+            }
+
+            if($('#f_nextnum_2').val().length >= 1) {
+                $('#f_nextnum_2').val(zf_letter);
+            }
+            if($('#f_nextnum_second_2').val().length >= 1) {
+                $('#f_nextnum_second_2').val(zf_letter);
+            }
+            if($('#f_nextnum_third_2').val().length >= 1) {
+                $('#f_nextnum_third_2').val(zf_letter);
+            }
+
+        } else if($(this).hasClass("checked") || $(this).hasClass("nowork")) {
+            if($(this).hasClass("nowork")) {
+                $(this).removeClass("nowork");
+                return
+            }
+            if($(this).hasClass("checked")) {
+                $(this).removeClass("checked");
+                zf -= 1;
+                zf_alphabet -= 1;
+                zf_letter = toAlpha(zf_alphabet).toUpperCase();
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#f_nextnum').val(zf);
+                console.log("IV: " + zf);
+
+                if($('#f_nextnum').val().length >= 1) {
+                    $('#f_nextnum').val(zf);
+                }
+                if($('#f_nextnum_second_1').val().length >= 1) {
+                    $('#f_nextnum_second_1').val(zf);
+                }
+                if($('#f_nextnum_third_1').val().length >= 1) {
+                    $('#f_nextnum_third_1').val(zf);
+                }
+
+                if($('#f_nextnum_2').val().length >= 1) {
+                    $('#f_nextnum_2').val(zf_letter);
+                }
+                if($('#f_nextnum_second_2').val().length >= 1) {
+                    $('#f_nextnum_second_2').val(zf_letter);
+                }
+                if($('#f_nextnum_third_2').val().length >= 1) {
+                    $('#f_nextnum_third_2').val(zf_letter);
+                }
+            }
+        } 
+        else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#F_ .table_size_chooser td').removeClass("SizeChooser-clicked");
+            if (Math.floor($('#f_nextnum').val()) == $('#f_nextnum').val() && $.isNumeric($('#f_nextnum').val())) {
+                zf = parseFloat($('#f_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zf);
+                zf += 1;
+                zf_alphabet += 1;
+            } else {
+                zf = parseFloat($('#f_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zf);
+                zf += 1;
+                zf_alphabet += 1;
+            }
+            for (var i = 0; i < cells.length; i++) {
+                if ($(cells[i]).hasClass("cell")) {
+                    $(this).removeClass("cell");
+                    cellindex = i;
+                    break;
+                }
+                var f_val = $('#f_val').val();
+                if ($('#f_nextnum_2').val().length >= 1 && $('#f_nextnum_2').val().toLowerCase() != "nan") {
+                    var f_val_num = $('#f_nextnum_2').val();
+                }
+                else if($('#f_nextnum_3').val().length >= 1 && $('#f_nextnum_3').val().toLowerCase() != "nan") {
+                    var f_val_num = $('#f_nextnum_3').val();
+                }
+                
+                else if($('#f_nextnum').val().length >= 1 && $('#f_nextnum').val().toLowerCase() != "nan") {
+                    var f_val_num = $('#f_nextnum').val();
+                }
+                else {
+                    var f_val_num = "";
+                }
+                
+                if ($('#f_nextnum_second').val().length >= 1) {
+                    var f_val_2 = "<br>" + $('#f_nextnum_second').val();
+                } else {
+                    var f_val_2 = "";
+                }
+                
+                if ($('#f_nextnum_second_1').val().length >= 1 && $('#f_nextnum_second_1').val().toLowerCase() != "nan") {
+                    var f_val_num2 = $('#f_nextnum_second_1').val();
+                }
+                else if($('#f_nextnum_second_2').val().length >= 1 && $('#f_nextnum_second_2').val().toLowerCase() != "nan") {
+                    var f_val_num2 = $('#f_nextnum_second_2').val();
+                }
+                else if($('#f_nextnum_second_3').val().length >= 1 && $('#f_nextnum_second_3').val().toLowerCase() != "nan") {
+                    var f_val_num2 = $('#f_nextnum_second_3').val();
+                }
+                else {
+                    var f_val_num2 = "";
+                }
+                if ($('#f_nextnum_third').val().length >= 1) {
+                    var f_val_3 = "<br>" + $('#f_nextnum_third').val();
+                } else {
+                    var f_val_3 = "";
+                }
+                if ($('#f_nextnum_third_1').val().length >= 1 && $('#f_nextnum_third_1').val().toLowerCase() != "nan") {
+                    var f_val_num3 = $('#f_nextnum_third_1').val();
+                }
+                else if($('#f_nextnum_third_2').val().length >= 1 && $('#f_nextnum_third_2').val().toLowerCase() != "nan") {
+                    var f_val_num3 = $('#f_nextnum_third_2').val();
+                }
+                else if($('#f_nextnum_third_3').val().length >= 1 && $('#f_nextnum_third_3').val().toLowerCase() != "nan") {
+                    var f_val_num3 = $('#f_nextnum_third_3').val();
+                }
+                else {
+                    var f_val_num3 = "";
+                }
+                $(this).find('label').html(f_val + f_val_num + f_val_2 + f_val_num2 + f_val_3 + f_val_num3);
+                var f_rooms = $('#f_rooms');
+            }
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                Vf = "";
+                for (var j = 0; j <= cellindex; j++) {
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            Vf = $('#f_val').val() + parseFloat($('#f_nextnum').val().replace(/\D/g, ''));
+            posX = $(this).parent().data("no");
+            posY = $(this).index();
+
+            zf_letter = toAlpha(zf_alphabet).toUpperCase();
+
+            if($('#f_nextnum').val().length >= 1) {
+                $('#f_nextnum').val(zf);
+            }
+            if($('#f_nextnum_second_1').val().length >= 1) {
+                $('#f_nextnum_second_1').val(zf);
+            }
+            if($('#f_nextnum_third_1').val().length >= 1) {
+                $('#f_nextnum_third_1').val(zf);
+            }
+
+            if($('#f_nextnum_2').val().length >= 1) {
+                $('#f_nextnum_2').val(zf_letter);
+            }
+            if($('#f_nextnum_second_2').val().length >= 1) {
+                $('#f_nextnum_second_2').val(zf_letter);
+            }
+            if($('#f_nextnum_third_2').val().length >= 1) {
+                $('#f_nextnum_third_2').val(zf_letter);
+            }
+        }
+    }
+  });
+
+  $("#G_").delegate('td', 'mouseover mouseleave click', function (e) {
+    var cellindex = 0;
+    let rooms = "";
+    e.stopImmediatePropagation();
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+            console.log("I: " + zg);
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+            var cells = $(this).parent().children("td");
+            var tds = $('#G_ .table_size_chooser td').removeClass("SizeChooser-clicked")
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                    console.log("IF EVgENT");
+                } else {
+                    $(this).addClass("nowork");
+                    $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                    console.log("ELSE EVgENT");
+                }
+            }
+        } else if($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
+            zg = 0;
+            zg_letter = toAlpha(zg_alphabet).toUpperCase();
+            if($('#g_nextnum').val().length >= 1) {
+                $('#g_nextnum').val(zg);
+            }
+            if($('#g_nextnum_second_1').val().length >= 1) {
+                $('#g_nextnum_second_1').val(zg);
+            }
+            if($('#g_nextnum_third_1').val().length >= 1) {
+                $('#g_nextnum_third_1').val(zg);
+            }
+
+            if($('#g_nextnum_2').val().length >= 1) {
+                $('#g_nextnum_2').val(zg_letter);
+            }
+            if($('#g_nextnum_second_2').val().length >= 1) {
+                $('#g_nextnum_second_2').val(zg_letter);
+            }
+            if($('#g_nextnum_third_2').val().length >= 1) {
+                $('#g_nextnum_third_2').val(zg_letter);
+            }
+
+        } else if($(this).hasClass("checked") || $(this).hasClass("nowork")) {
+            if($(this).hasClass("nowork")) {
+                $(this).removeClass("nowork");
+                return
+            }
+            if($(this).hasClass("checked")) {
+                $(this).removeClass("checked");
+                zg -= 1;
+                zg_alphabet -= 1;
+                zg_letter = toAlpha(zg_alphabet).toUpperCase();
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#g_nextnum').val(zg);
+                console.log("IV: " + zg);
+
+                if($('#g_nextnum').val().length >= 1) {
+                    $('#g_nextnum').val(zg);
+                }
+                if($('#g_nextnum_second_1').val().length >= 1) {
+                    $('#g_nextnum_second_1').val(zg);
+                }
+                if($('#g_nextnum_third_1').val().length >= 1) {
+                    $('#g_nextnum_third_1').val(zg);
+                }
+
+                if($('#g_nextnum_2').val().length >= 1) {
+                    $('#g_nextnum_2').val(zg_letter);
+                }
+                if($('#g_nextnum_second_2').val().length >= 1) {
+                    $('#g_nextnum_second_2').val(zg_letter);
+                }
+                if($('#g_nextnum_third_2').val().length >= 1) {
+                    $('#g_nextnum_third_2').val(zg_letter);
+                }
+            }
+        } 
+        else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#G_ .table_size_chooser td').removeClass("SizeChooser-clicked");
+            if (Math.floor($('#g_nextnum').val()) == $('#g_nextnum').val() && $.isNumeric($('#g_nextnum').val())) {
+                zg = parseFloat($('#g_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zg);
+                zg += 1;
+                zg_alphabet += 1;
+            } else {
+                zg = parseFloat($('#g_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zg);
+                zg += 1;
+                zg_alphabet += 1;
+            }
+            for (var i = 0; i < cells.length; i++) {
+                if ($(cells[i]).hasClass("cell")) {
+                    $(this).removeClass("cell");
+                    cellindex = i;
+                    break;
+                }
+                var g_val = $('#g_val').val();
+                if ($('#g_nextnum_2').val().length >= 1 && $('#g_nextnum_2').val().toLowerCase() != "nan") {
+                    var g_val_num = $('#g_nextnum_2').val();
+                }
+                else if($('#g_nextnum_3').val().length >= 1 && $('#g_nextnum_3').val().toLowerCase() != "nan") {
+                    var g_val_num = $('#g_nextnum_3').val();
+                }
+                
+                else if($('#g_nextnum').val().length >= 1 && $('#g_nextnum').val().toLowerCase() != "nan") {
+                    var g_val_num = $('#g_nextnum').val();
+                }
+                else {
+                    var g_val_num = "";
+                }
+                
+                if ($('#g_nextnum_second').val().length >= 1) {
+                    var g_val_2 = "<br>" + $('#g_nextnum_second').val();
+                } else {
+                    var g_val_2 = "";
+                }
+                
+                if ($('#g_nextnum_second_1').val().length >= 1 && $('#g_nextnum_second_1').val().toLowerCase() != "nan") {
+                    var g_val_num2 = $('#g_nextnum_second_1').val();
+                }
+                else if($('#g_nextnum_second_2').val().length >= 1 && $('#g_nextnum_second_2').val().toLowerCase() != "nan") {
+                    var g_val_num2 = $('#g_nextnum_second_2').val();
+                }
+                else if($('#g_nextnum_second_3').val().length >= 1 && $('#g_nextnum_second_3').val().toLowerCase() != "nan") {
+                    var g_val_num2 = $('#g_nextnum_second_3').val();
+                }
+                else {
+                    var g_val_num2 = "";
+                }
+                if ($('#g_nextnum_third').val().length >= 1) {
+                    var g_val_3 = "<br>" + $('#g_nextnum_third').val();
+                } else {
+                    var g_val_3 = "";
+                }
+                if ($('#g_nextnum_third_1').val().length >= 1 && $('#g_nextnum_third_1').val().toLowerCase() != "nan") {
+                    var g_val_num3 = $('#g_nextnum_third_1').val();
+                }
+                else if($('#g_nextnum_third_2').val().length >= 1 && $('#g_nextnum_third_2').val().toLowerCase() != "nan") {
+                    var g_val_num3 = $('#g_nextnum_third_2').val();
+                }
+                else if($('#g_nextnum_third_3').val().length >= 1 && $('#g_nextnum_third_3').val().toLowerCase() != "nan") {
+                    var g_val_num3 = $('#g_nextnum_third_3').val();
+                }
+                else {
+                    var g_val_num3 = "";
+                }
+                $(this).find('label').html(g_val + g_val_num + g_val_2 + g_val_num2 + g_val_3 + g_val_num3);
+                var g_rooms = $('#g_rooms');
+            }
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                Vg = "";
+                for (var j = 0; j <= cellindex; j++) {
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            Vg = $('#g_val').val() + parseFloat($('#g_nextnum').val().replace(/\D/g, ''));
+            posX = $(this).parent().data("no");
+            posY = $(this).index();
+
+            zg_letter = toAlpha(zg_alphabet).toUpperCase();
+
+            if($('#g_nextnum').val().length >= 1) {
+                $('#g_nextnum').val(zg);
+            }
+            if($('#g_nextnum_second_1').val().length >= 1) {
+                $('#g_nextnum_second_1').val(zg);
+            }
+            if($('#g_nextnum_third_1').val().length >= 1) {
+                $('#g_nextnum_third_1').val(zg);
+            }
+
+            if($('#g_nextnum_2').val().length >= 1) {
+                $('#g_nextnum_2').val(zg_letter);
+            }
+            if($('#g_nextnum_second_2').val().length >= 1) {
+                $('#g_nextnum_second_2').val(zg_letter);
+            }
+            if($('#g_nextnum_third_2').val().length >= 1) {
+                $('#g_nextnum_third_2').val(zg_letter);
+            }
+        }
+    }
+  });
+
+  $("#H_").delegate('td', 'mouseover mouseleave click', function (e) {
+    var cellindex = 0;
+    let rooms = "";
+    e.stopImmediatePropagation();
+    if (e.type == 'click') {
+        if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+            $(this).removeClass("nowork");
+            console.log("I: " + zh);
+        } else if ($('input#pohjakierros').is(':checked')) {
+            console.log("Pohja checkattu");
+            var cells = $(this).parent().children("td");
+            var tds = $('#H_ .table_size_chooser td').removeClass("SizeChooser-clicked")
+            for (var i = 0; i < cells.length; i++) {
+                if ($(this).find('label').text().length > 1) {
+                    $(this).removeClass("nowork");
+                    $(this).find('label').text("");
+                    cellindex = i;
+                    console.log("IF EVhENT");
+                } else {
+                    $(this).addClass("nowork");
+                    $(this).removeClass("checked");
+                    $(this).find('label').val("");
+                    console.log("ELSE EVhENT");
+                }
+            }
+        } else if($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
+            zh = 0;
+            zh_letter = toAlpha(zh_alphabet).toUpperCase();
+            if($('#h_nextnum').val().length >= 1) {
+                $('#h_nextnum').val(zh);
+            }
+            if($('#h_nextnum_second_1').val().length >= 1) {
+                $('#h_nextnum_second_1').val(zh);
+            }
+            if($('#h_nextnum_third_1').val().length >= 1) {
+                $('#h_nextnum_third_1').val(zh);
+            }
+
+            if($('#h_nextnum_2').val().length >= 1) {
+                $('#h_nextnum_2').val(zh_letter);
+            }
+            if($('#h_nextnum_second_2').val().length >= 1) {
+                $('#h_nextnum_second_2').val(zh_letter);
+            }
+            if($('#h_nextnum_third_2').val().length >= 1) {
+                $('#h_nextnum_third_2').val(zh_letter);
+            }
+
+        } else if($(this).hasClass("checked") || $(this).hasClass("nowork")) {
+            if($(this).hasClass("nowork")) {
+                $(this).removeClass("nowork");
+                return
+            }
+            if($(this).hasClass("checked")) {
+                $(this).removeClass("checked");
+                zh -= 1;
+                zh_alphabet -= 1;
+                zh_letter = toAlpha(zh_alphabet).toUpperCase();
+                $(this).find('input').val("");
+                $(this).find('label').text("");
+                $('#h_nextnum').val(zh);
+                console.log("IV: " + zh);
+
+                if($('#h_nextnum').val().length >= 1) {
+                    $('#h_nextnum').val(zh);
+                }
+                if($('#h_nextnum_second_1').val().length >= 1) {
+                    $('#h_nextnum_second_1').val(zh);
+                }
+                if($('#h_nextnum_third_1').val().length >= 1) {
+                    $('#h_nextnum_third_1').val(zh);
+                }
+
+                if($('#h_nextnum_2').val().length >= 1) {
+                    $('#h_nextnum_2').val(zh_letter);
+                }
+                if($('#h_nextnum_second_2').val().length >= 1) {
+                    $('#h_nextnum_second_2').val(zh_letter);
+                }
+                if($('#h_nextnum_third_2').val().length >= 1) {
+                    $('#h_nextnum_third_2').val(zh_letter);
+                }
+            }
+        } 
+        else {
+            $(this).addClass("checked");
+            var cells = $(this).parent().children("td");
+            var tds = $('#H_ .table_size_chooser td').removeClass("SizeChooser-clicked");
+            if (Math.floor($('#h_nextnum').val()) == $('#h_nextnum').val() && $.isNumeric($('#h_nextnum').val())) {
+                zh = parseFloat($('#h_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zh);
+                zh += 1;
+                zh_alphabet += 1;
+            } else {
+                zh = parseFloat($('#h_nextnum').val().replace(/\D/g, ''));
+                console.log("Z::" + zh);
+                zh += 1;
+                zh_alphabet += 1;
+            }
+            for (var i = 0; i < cells.length; i++) {
+                if ($(cells[i]).hasClass("cell")) {
+                    $(this).removeClass("cell");
+                    cellindex = i;
+                    break;
+                }
+                var h_val = $('#h_val').val();
+                if ($('#h_nextnum_2').val().length >= 1 && $('#h_nextnum_2').val().toLowerCase() != "nan") {
+                    var h_val_num = $('#h_nextnum_2').val();
+                }
+                else if($('#h_nextnum_3').val().length >= 1 && $('#h_nextnum_3').val().toLowerCase() != "nan") {
+                    var h_val_num = $('#h_nextnum_3').val();
+                }
+                
+                else if($('#h_nextnum').val().length >= 1 && $('#h_nextnum').val().toLowerCase() != "nan") {
+                    var h_val_num = $('#h_nextnum').val();
+                }
+                else {
+                    var h_val_num = "";
+                }
+                
+                if ($('#h_nextnum_second').val().length >= 1) {
+                    var h_val_2 = "<br>" + $('#h_nextnum_second').val();
+                } else {
+                    var h_val_2 = "";
+                }
+                
+                if ($('#h_nextnum_second_1').val().length >= 1 && $('#h_nextnum_second_1').val().toLowerCase() != "nan") {
+                    var h_val_num2 = $('#h_nextnum_second_1').val();
+                }
+                else if($('#h_nextnum_second_2').val().length >= 1 && $('#h_nextnum_second_2').val().toLowerCase() != "nan") {
+                    var h_val_num2 = $('#h_nextnum_second_2').val();
+                }
+                else if($('#h_nextnum_second_3').val().length >= 1 && $('#h_nextnum_second_3').val().toLowerCase() != "nan") {
+                    var h_val_num2 = $('#h_nextnum_second_3').val();
+                }
+                else {
+                    var h_val_num2 = "";
+                }
+                if ($('#h_nextnum_third').val().length >= 1) {
+                    var h_val_3 = "<br>" + $('#h_nextnum_third').val();
+                } else {
+                    var h_val_3 = "";
+                }
+                if ($('#h_nextnum_third_1').val().length >= 1 && $('#h_nextnum_third_1').val().toLowerCase() != "nan") {
+                    var h_val_num3 = $('#h_nextnum_third_1').val();
+                }
+                else if($('#h_nextnum_third_2').val().length >= 1 && $('#h_nextnum_third_2').val().toLowerCase() != "nan") {
+                    var h_val_num3 = $('#h_nextnum_third_2').val();
+                }
+                else if($('#h_nextnum_third_3').val().length >= 1 && $('#h_nextnum_third_3').val().toLowerCase() != "nan") {
+                    var h_val_num3 = $('#h_nextnum_third_3').val();
+                }
+                else {
+                    var h_val_num3 = "";
+                }
+                $(this).find('label').html(h_val + h_val_num + h_val_2 + h_val_num2 + h_val_3 + h_val_num3);
+                var h_rooms = $('#h_rooms');
+            }
+            $(this).parent().addClass("row");
+            var rows = $(this).parent().parent().children("tr");
+            for (var i = 0; i < rows.length; i++) {
+                var tds = $(rows[i]).children("label");
+                Vh = "";
+                for (var j = 0; j <= cellindex; j++) {
+                    var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+                }
+                if ($(rows[i]).hasClass("row")) {
+                    $(this).parent().removeClass("row");
+                    break;
+                }
+            }
+            Vh = $('#h_val').val() + parseFloat($('#h_nextnum').val().replace(/\D/g, ''));
+            posX = $(this).parent().data("no");
+            posY = $(this).index();
+
+            zh_letter = toAlpha(zh_alphabet).toUpperCase();
+
+            if($('#h_nextnum').val().length >= 1) {
+                $('#h_nextnum').val(zh);
+            }
+            if($('#h_nextnum_second_1').val().length >= 1) {
+                $('#h_nextnum_second_1').val(zh);
+            }
+            if($('#h_nextnum_third_1').val().length >= 1) {
+                $('#h_nextnum_third_1').val(zh);
+            }
+
+            if($('#h_nextnum_2').val().length >= 1) {
+                $('#h_nextnum_2').val(zh_letter);
+            }
+            if($('#h_nextnum_second_2').val().length >= 1) {
+                $('#h_nextnum_second_2').val(zh_letter);
+            }
+            if($('#h_nextnum_third_2').val().length >= 1) {
+                $('#h_nextnum_third_2').val(zh_letter);
+            }
+        }
+    }
+  });
+
+
   
   $('.rappu_more').click(function() {
     $("#roomconfig_third").slideUp(250).delay(600).fadeIn(100);
@@ -1139,795 +1945,302 @@ $('td').mouseover(function() {
   zh = 1;
 //   const _O_ = [];
   
-  $(".rappu_more").click(function() {
-    setTimeout(console.log("wait"), 1000);
-    $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
-        var cellindex = 0;
-        let rooms = "";
+//   $(".rappu_more").click(function() {
+//     setTimeout(console.log("wait"), 1000);
+//     $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
+//         var cellindex = 0;
+//         let rooms = "";
   
-        if (e.type == 'click') {
-            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-                $(this).removeClass("nowork");
-            } else if ($('input#pohjakierros').is(':checked')) {
-                console.log("Pohja checkattu");
-  
-  
-                var cells = $(this).parent().children("td");
-                var tds = $('#A_ .table_sizae_chooser td').removeClass("SizaeChooser-clicked")
-  
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(this).find('label').text().length > 1) {
-                        $(this).removeClass("nowork");
-                        $(this).find('label').text("");
-                        cellindex = i;
-                    } else {
-                        $(this).addClass("nowork"); $(this).removeClass("checked");
-                        $(this).find('label').val("");
-                    }
-  
-                }
-  
-            } else if ($(this).hasClass("noindex")) {
-                za -= 0;
-                $('#a_nextnum').val(za);
-            } else if ($(this).find('input').prop('checked') == false) {
-                za -= 1;
-                $(this).find('input').val("");
-                $(this).find('label').text("");
-                $('#a_nextnum').val(za);
-            } else {
-                $(this).addClass("checked");
-                var cells = $(this).parent().children("td");
-                var tds = $('#A_ .table_sizae_chooser td').removeClass("SizaeChooser-clicked")
-                za = parseFloat($('#a_nextnum').val().replace(/\D/g,''));
-                za += 1;
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(cells[i]).hasClass("cell")) {
-                        $(this).removeClass("cell");
-                        cellindex = i;
-                        break;
-                    }
-                    var a_val = $('#a_val').val();
-                    var a_val_num = $('#a_nextnum').val();
-                    $(this).find('label').text(a_val + a_val_num);
-                    var a_rooms = $('#a_rooms');
-  
-                }
+//         if (e.type == 'click') {
+//             if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+//                 $(this).removeClass("nowork");
+//             } else if ($('input#pohjakierros').is(':checked')) {
+//                 console.log("Pohja checkattu");
   
   
-                $(this).parent().addClass("row");
-                var rows = $(this).parent().parent().children("tr");
+//                 var cells = $(this).parent().children("td");
+//                 var tds = $('#A_ .table_sizae_chooser td').removeClass("SizaeChooser-clicked")
+  
+//                 for (var i = 0; i < cells.length; i++) {
+//                     if ($(this).find('label').text().length > 1) {
+//                         $(this).removeClass("nowork");
+//                         $(this).find('label').text("");
+//                         cellindex = i;
+//                     } else {
+//                         $(this).addClass("nowork"); $(this).removeClass("checked");
+//                         $(this).find('label').val("");
+//                     }
+  
+//                 }
+  
+//             } else if ($(this).hasClass("noindex")) {
+//                 za -= 0;
+//                 $('#a_nextnum').val(za);
+//             } else if ($(this).find('input').prop('checked') == false) {
+//                 za -= 1;
+//                 $(this).find('input').val("");
+//                 $(this).find('label').text("");
+//                 $('#a_nextnum').val(za);
+//             } else {
+//                 $(this).addClass("checked");
+//                 var cells = $(this).parent().children("td");
+//                 var tds = $('#A_ .table_sizae_chooser td').removeClass("SizaeChooser-clicked")
+//                 za = parseFloat($('#a_nextnum').val().replace(/\D/g,''));
+//                 za += 1;
+//                 for (var i = 0; i < cells.length; i++) {
+//                     if ($(cells[i]).hasClass("cell")) {
+//                         $(this).removeClass("cell");
+//                         cellindex = i;
+//                         break;
+//                     }
+//                     var a_val = $('#a_val').val();
+//                     var a_val_num = $('#a_nextnum').val();
+//                     $(this).find('label').text(a_val + a_val_num);
+//                     var a_rooms = $('#a_rooms');
+  
+//                 }
   
   
-                for (var i = 0; i < rows.length; i++) {
-                    var tds = $(rows[i]).children("label");
-                    V = "";
-                    for (var j = 0; j <= cellindex; j++) {
-                        ZA = i;
-  
-                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                    }
-                    if ($(rows[i]).hasClass("row")) {
-                        $(this).parent().removeClass("row");
-                        break;
-                    }
-                }
-                V = parseFloat($('#a_val').val()) + 1;
+//                 $(this).parent().addClass("row");
+//                 var rows = $(this).parent().parent().children("tr");
   
   
-                posX = $(this).closest('tr').index();
-                posY = $(this).index();
+//                 for (var i = 0; i < rows.length; i++) {
+//                     var tds = $(rows[i]).children("label");
+//                     V = "";
+//                     for (var j = 0; j <= cellindex; j++) {
+//                         ZA = i;
+  
+//                         var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+//                     }
+//                     if ($(rows[i]).hasClass("row")) {
+//                         $(this).parent().removeClass("row");
+//                         break;
+//                     }
+//                 }
+//                 V = parseFloat($('#a_val').val()) + 1;
+  
+  
+//                 posX = $(this).parent().data("no");
+//                 posY = $(this).index();
                 
-                $('#a_nextnum').val(za);
-            }
+//                 $('#a_nextnum').val(za);
+//             }
   
-        }
-    });
-    $("#B_").delegate('td', 'mouseover mouseleave click', function(e) {
-        var cellindex = 0;
-        let rooms = "";
-        if (e.type == 'click') {
-            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-                $(this).removeClass("nowork");
-            } else if ($('input#pohjakierros').is(':checked')) {
-                console.log("Pohja checkattu");
-  
-  
-                var cells = $(this).parent().children("td");
-                var tds = $('#B .table_size_chooser td').removeClass("SizbeChooser-clicked")
-  
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(this).find('label').text().length > 1) {
-                        $(this).removeClass("nowork");
-                        $(this).find('label').text("");
-                        cellindex = i;
-                    } else {
-                        $(this).addClass("nowork"); $(this).removeClass("checked");
-                        $(this).find('label').val("");
-                    }
-  
-                }
-  
-            } else if ($(this).hasClass("noindex")) {
-                zb -= 0;
-                $('#b_nextnum').val(zb);
-            } else if ($(this).find('input').prop('checked') == false) {
-                zb -= 1;
-                $(this).find('input').val("");
-                $(this).find('label').text("");
-                $('#b_nextnum').val(zb);
-            } else {
-                $(this).addClass("checked");
-                var cells = $(this).parent().children("td");
-                var tds = $('#B .table_size_chooser td').removeClass("SizbeChooser-clicked")
-                zb = parseFloat($('#b_nextnum').val().replace(/\D/g,''));
-                zb += 1;
-  
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(cells[i]).hasClass("cell")) {
-                        $(this).removeClass("cell");
-                        cellindex = i;
-  
-                        break;
+//         }
+//     });
+//     $("#B_").delegate('td', 'mouseover mouseleave click', function(e) {
+//         var cellindex = 0;
+//         let rooms = "";
+//         if (e.type == 'click') {
+//             if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+//                 $(this).removeClass("nowork");
+//             } else if ($('input#pohjakierros').is(':checked')) {
+//                 console.log("Pohja checkattu");
   
   
-                    }
+//                 var cells = $(this).parent().children("td");
+//                 var tds = $('#B .table_size_chooser td').removeClass("SizeChooser-clicked")
+  
+//                 for (var i = 0; i < cells.length; i++) {
+//                     if ($(this).find('label').text().length > 1) {
+//                         $(this).removeClass("nowork");
+//                         $(this).find('label').text("");
+//                         cellindex = i;
+//                     } else {
+//                         $(this).addClass("nowork"); $(this).removeClass("checked");
+//                         $(this).find('label').val("");
+//                     }
+  
+//                 }
+  
+//             } else if ($(this).hasClass("noindex")) {
+//                 zb -= 0;
+//                 $('#b_nextnum').val(zb);
+//             } else if ($(this).find('input').prop('checked') == false) {
+//                 zb -= 1;
+//                 $(this).find('input').val("");
+//                 $(this).find('label').text("");
+//                 $('#b_nextnum').val(zb);
+//             } else {
+//                 $(this).addClass("checked");
+//                 var cells = $(this).parent().children("td");
+//                 var tds = $('#B .table_size_chooser td').removeClass("SizeChooser-clicked")
+//                 zb = parseFloat($('#b_nextnum').val().replace(/\D/g,''));
+//                 zb += 1;
+  
+//                 for (var i = 0; i < cells.length; i++) {
+//                     if ($(cells[i]).hasClass("cell")) {
+//                         $(this).removeClass("cell");
+//                         cellindex = i;
+  
+//                         break;
+  
+  
+//                     }
 
-                    var a_val = $('#b_val').val();
-                    var a_val_num = $('#b_nextnum').val();
-                    if($('#b_nextnum_second').val().length >= 1) {
-                        var a_val_2 = "<br/>" + $('#b_nextnum_second').val();
-                    }
-                    else {
-                        var a_val_2 = "";
-                    }
-                    if($('#b_nextnum_third').val().length >= 1) {
-                        var a_val_3 = "<br/>" + $('#b_nextnum_third').val();
-                    }
-                    else {
-                        var a_val_3 = "";
-                    }
+//                     var a_val = $('#b_val').val();
+//                     var a_val_num = $('#b_nextnum').val();
+//                     if($('#b_nextnum_second').val().length >= 1) {
+//                         var a_val_2 = "<br>" + $('#b_nextnum_second').val();
+//                     }
+//                     else {
+//                         var a_val_2 = "";
+//                     }
+//                     if($('#b_nextnum_third').val().length >= 1) {
+//                         var a_val_3 = "<br>" + $('#b_nextnum_third').val();
+//                     }
+//                     else {
+//                         var a_val_3 = "";
+//                     }
     
                    
                     
-                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+//                     $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
 
-                    var a_rooms = $('#b_rooms');
+//                     var a_rooms = $('#b_rooms');
   
-                }
-  
-  
-                $(this).parent().addClass("row");
-                var rows = $(this).parent().parent().children("tr");
+//                 }
   
   
-                for (var i = 0; i < rows.length; i++) {
-                    var tds = $(rows[i]).children("label");
-                    V = "";
-                    for (var j = 0; j <= cellindex; j++) {
-  
-                        ZB = i;
-  
-                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                    }
-                    if ($(rows[i]).hasClass("row")) {
-                        $(this).parent().removeClass("row");
-                        break;
-                    }
-                }
-                V = $('#b_val').val() + parseFloat($('#b_nextnum').val().replace(/\D/g,''));
+//                 $(this).parent().addClass("row");
+//                 var rows = $(this).parent().parent().children("tr");
   
   
-                posX = $(this).closest('tr').index();
-                posY = $(this).index();
+//                 for (var i = 0; i < rows.length; i++) {
+//                     var tds = $(rows[i]).children("label");
+//                     V = "";
+//                     for (var j = 0; j <= cellindex; j++) {
   
-                $('#b_nextnum').val(zb);
-            }
+//                         ZB = i;
   
-        }
-    });
-    $("#C_").delegate('td', 'mouseover mouseleave click', function(e) {
-        var cellindex = 0;
-        let rooms = "";
-  
-        if (e.type == 'click') {
-            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-                $(this).removeClass("nowork");
-            } else if ($('input#pohjakierros').is(':checked')) {
-                console.log("Pohja checkattu");
+//                         var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+//                     }
+//                     if ($(rows[i]).hasClass("row")) {
+//                         $(this).parent().removeClass("row");
+//                         break;
+//                     }
+//                 }
+//                 V = $('#b_val').val() + parseFloat($('#b_nextnum').val().replace(/\D/g,''));
   
   
-                var cells = $(this).parent().children("td");
-                var tds = $('#C .table_sizce_chooser td').removeClass("SizceChooser-clicked")
+//                 posX = $(this).parent().data("no");
+//                 posY = $(this).index();
   
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(this).find('label').text().length > 1) {
-                        $(this).removeClass("nowork");
-                        $(this).find('label').text("");
-                        cellindex = i;
-                    } else {
-                        $(this).addClass("nowork"); $(this).removeClass("checked");
-                        $(this).find('label').val("");
-                    }
+//                 $('#b_nextnum').val(zb);
+//             }
   
-                }
+//         }
+//     });
+//     $("#C_").delegate('td', 'mouseover mouseleave click', function(e) {
+//         var cellindex = 0;
+//         let rooms = "";
   
-            } else if ($(this).hasClass("noindex")) {
-                zc -= 0;
-                $('#c_nextnum').val(zc);
-            } else if ($(this).find('input').prop('checked') == false) {
-                zc -= 1;
-                $(this).find('input').val("");
-                $(this).find('label').text("");
-                $('#c_nextnum').val(zc);
-            } else {
-                $(this).addClass("checked");
-                var cells = $(this).parent().children("td");
-                var tds = $('#C .table_sizce_chooser td').removeClass("SizceChooser-clicked")
-                zc = parseFloat($('#c_nextnum').val().replace(/\D/g,''));
-                zc += 1;
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(cells[i]).hasClass("cell")) {
-                        $(this).removeClass("cell");
-                        cellindex = i;
-  
-                        break;
+//         if (e.type == 'click') {
+//             if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
+//                 $(this).removeClass("nowork");
+//             } else if ($('input#pohjakierros').is(':checked')) {
+//                 console.log("Pohja checkattu");
   
   
-                    }
-                    var a_val = $('#c_val').val();
-                    var a_val_num = $('#c_nextnum').val();
-                    if($('#c_nextnum_second').val().length >= 1) {
-                        var a_val_2 = "<br/>" + $('#c_nextnum_second').val();
-                    }
-                    else {
-                        var a_val_2 = "";
-                    }
-                    if($('#c_nextnum_third').val().length >= 1) {
-                        var a_val_3 = "<br/>" + $('#c_nextnum_third').val();
-                    }
-                    else {
-                        var a_val_3 = "";
-                    }
+//                 var cells = $(this).parent().children("td");
+//                 var tds = $('#C .table_sizce_chooser td').removeClass("SizceChooser-clicked")
+  
+//                 for (var i = 0; i < cells.length; i++) {
+//                     if ($(this).find('label').text().length > 1) {
+//                         $(this).removeClass("nowork");
+//                         $(this).find('label').text("");
+//                         cellindex = i;
+//                     } else {
+//                         $(this).addClass("nowork"); $(this).removeClass("checked");
+//                         $(this).find('label').val("");
+//                     }
+  
+//                 }
+  
+//             } else if ($(this).hasClass("noindex")) {
+//                 zc -= 0;
+//                 $('#c_nextnum').val(zc);
+//             } else if ($(this).find('input').prop('checked') == false) {
+//                 zc -= 1;
+//                 $(this).find('input').val("");
+//                 $(this).find('label').text("");
+//                 $('#c_nextnum').val(zc);
+//             } else {
+//                 $(this).addClass("checked");
+//                 var cells = $(this).parent().children("td");
+//                 var tds = $('#C .table_sizce_chooser td').removeClass("SizceChooser-clicked")
+//                 zc = parseFloat($('#c_nextnum').val().replace(/\D/g,''));
+//                 zc += 1;
+//                 for (var i = 0; i < cells.length; i++) {
+//                     if ($(cells[i]).hasClass("cell")) {
+//                         $(this).removeClass("cell");
+//                         cellindex = i;
+  
+//                         break;
+  
+  
+//                     }
+//                     var a_val = $('#c_val').val();
 
-                
-                    
-                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                    var a_rooms = $('#c_rooms');
-  
-                }
-  
-  
-                $(this).parent().addClass("row");
-                var rows = $(this).parent().parent().children("tr");
-  
-  
-                for (var i = 0; i < rows.length; i++) {
-                    var tds = $(rows[i]).children("label");
-                    V = "";
-                    for (var j = 0; j <= cellindex; j++) {
-  
-                        ZC = i;
-  
-                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                    }
-                    if ($(rows[i]).hasClass("row")) {
-                        $(this).parent().removeClass("row");
-                        break;
-                    }
-                }
-                V = $('#c_val').val() + parseFloat($('#c_nextnum').val().replace(/\D/g,''));
-  
-  
-                posX = $(this).closest('tr').index();
-                posY = $(this).index();
-  
-                $('#c_nextnum').val(zc);
-            }
-  
-        }
-    });
-    $("#D_").delegate('td', 'mouseover mouseleave click', function(e) {
-        var cellindex = 0;
-        let rooms = "";
-  
-        if (e.type == 'click') {
-            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-                $(this).removeClass("nowork");
-            } else if ($('input#pohjakierros').is(':checked')) {
-                console.log("Pohja checkattu");
-  
-  
-                var cells = $(this).parent().children("td");
-                var tds = $('#D .table_sizde_chooser td').removeClass("SizdeChooser-clicked")
-  
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(this).find('label').text().length > 1) {
-                        $(this).removeClass("nowork");
-                        $(this).find('label').text("");
-                        cellindex = i;
-                    } else {
-                        $(this).addClass("nowork"); $(this).removeClass("checked");
-                        $(this).find('label').val("");
-                    }
-  
-                }
-  
-            } else if ($(this).hasClass("noindex")) {
-                zd -= 0;
-                $('#d_nextnum').val(zd);
-            } else if ($(this).find('input').prop('checked') == false) {
-                zd -= 1;
-                $(this).find('input').val("");
-                $(this).find('label').text("");
-                $('#d_nextnum').val(zd);
-            } else {
-                $(this).addClass("checked");
-                var cells = $(this).parent().children("td");
-                var tds = $('#D .table_sizde_chooser td').removeClass("SizdeChooser-clicked")
-                zd = parseFloat($('#d_nextnum').val().replace(/\D/g,''));
-                zd += 1;
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(cells[i]).hasClass("cell")) {
-                        $(this).removeClass("cell");
-                        cellindex = i;
-  
-                        break;
-  
-  
-                    }
-                    var a_val = $('#d_val').val();
-                    var a_val_num = $('#d_nextnum').val();
-                    if($('#d_nextnum_second').val().length >= 1) {
-                        var a_val_2 = "<br/>" + $('#d_nextnum_second').val();
-                    }
-                    else {
-                        var a_val_2 = "";
-                    }
-                    if($('#d_nextnum_third').val().length >= 1) {
-                        var a_val_3 = "<br/>" + $('#d_nextnum_third').val();
-                    }
-                    else {
-                        var a_val_3 = "";
-                    }
-    
-                   
-                    
-                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                    var a_rooms = $('#d_rooms');
-  
-                }
-  
-  
-                $(this).parent().addClass("row");
-                var rows = $(this).parent().parent().children("tr");
-  
-  
-                for (var i = 0; i < rows.length; i++) {
-                    var tds = $(rows[i]).children("label");
-                    V = "";
-                    for (var j = 0; j <= cellindex; j++) {
-                        ZD = i;
-  
-                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                    }
-                    if ($(rows[i]).hasClass("row")) {
-                        $(this).parent().removeClass("row");
-                        break;
-                    }
-                }
-                V = $('#d_val').val() + parseFloat($('#d_nextnum').val().replace(/\D/g,''));
-  
-  
-                posX = $(this).closest('tr').index();
-                posY = $(this).index();
-                $('#d_nextnum').val(zd);
-            }
-  
-        }
-    });
-    $("#E_").delegate('td', 'mouseover mouseleave click', function(e) {
-        var cellindex = 0;
-        let rooms = "";
-  
-        if (e.type == 'click') {
-            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-                $(this).removeClass("nowork");
-            } else if ($('input#pohjakierros').is(':checked')) {
-                console.log("Pohja checkattu");
-  
-  
-                var cells = $(this).parent().children("td");
-                var tds = $('#E .table_sizee_chooser td').removeClass("SizeeChooser-clicked")
-  
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(this).find('label').text().length > 1) {
-                        $(this).removeClass("nowork");
-                        $(this).find('label').text("");
-                        cellindex = i;
-                    } else {
-                        $(this).addClass("nowork"); $(this).removeClass("checked");
-                        $(this).find('label').val("");
-                    }
-  
-                }
-  
-            } else if ($(this).hasClass("noindex")) {
-                ze -= 0;
-                $('#e_nextnum').val(ze);
-            } else if ($(this).find('input').prop('checked') == false) {
-                ze -= 1;
-                $(this).find('input').val("");
-                $(this).find('label').text("");
-                $('#e_nextnum').val(ze);
-            } else {
-                $(this).addClass("checked");
-                var cells = $(this).parent().children("td");
-                var tds = $('#E .table_sizee_chooser td').removeClass("SizeeChooser-clicked")
-                ze = parseFloat($('#e_nextnum').val().replace(/\D/g,''));
-                ze += 1;
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(cells[i]).hasClass("cell")) {
-                        $(this).removeClass("cell");
-                        cellindex = i;
-  
-                        break;
-  
-  
-                    }
-                    var a_val = $('#e_val').val();
-                    var a_val_num = $('#e_nextnum').val();
-    
-                    if($('#e_nextnum_second').val().length >= 1) {
-                        var a_val_2 = "<br/>" + $('#e_nextnum_second').val();
-                    }
-                    else {
-                        var a_val_2 = "";
-                    }
-                    if($('#e_nextnum_third').val().length >= 1) {
-                        var a_val_3 = "<br/>" + $('#e_nextnum_third').val();
-                    }
-                    else {
-                        var a_val_3 = "";
-                    }
-    
-                   
-                    
-                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                    var a_rooms = $('#e_rooms');
-  
-                }
-  
-  
-                $(this).parent().addClass("row");
-                var rows = $(this).parent().parent().children("tr");
-  
-  
-                for (var i = 0; i < rows.length; i++) {
-                    var tds = $(rows[i]).children("label");
-                    V = "";
-                    for (var j = 0; j <= cellindex; j++) {
-                        ZE = i;
-  
-                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                    }
-                    if ($(rows[i]).hasClass("row")) {
-                        $(this).parent().removeClass("row");
-                        break;
-                    }
-                }
-                V = $('#e_val').val() + parseFloat($('#e_nextnum').val().replace(/\D/g,''));
-  
-                posX = $(this).closest('tr').index();
-                posY = $(this).index();
-  
-                $('#e_nextnum').val(ze);
-            }
-  
-        }
-    });
-    $("#F_").delegate('td', 'mouseover mouseleave click', function(e) {
-        var cellindex = 0;
-        let rooms = "";
-  
-        if (e.type == 'click') {
-            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-                $(this).removeClass("nowork");
-            } else if ($('input#pohjakierros').is(':checked')) {
-                console.log("Pohja checkattu");
-  
-  
-                var cells = $(this).parent().children("td");
-                var tds = $('#F .table_sizfe_chooser td').removeClass("SizfeChooser-clicked")
-  
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(this).find('label').text().length > 1) {
-                        $(this).removeClass("nowork");
-                        $(this).find('label').text("");
-                        cellindex = i;
-                    } else {
-                        $(this).addClass("nowork"); $(this).removeClass("checked");
-                        $(this).find('label').val("");
-                    }
-  
-                }
-  
-            } else if ($(this).hasClass("noindex")) {
-                zf -= 0;
-                $('#f_nextnum').val(zf);
-            } else if ($(this).find('input').prop('checked') == false) {
-                zf -= 1;
-                $(this).find('input').val("");
-                $(this).find('label').text("");
-                $('#f_nextnum').val(zf);
-            } else {
-                $(this).addClass("checked");
-                var cells = $(this).parent().children("td");
-                var tds = $('#F .table_sizfe_chooser td').removeClass("SizfeChooser-clicked")
-                zf = parseFloat($('#f_nextnum').val().replace(/\D/g,''));
-                zf += 1;
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(cells[i]).hasClass("cell")) {
-                        $(this).removeClass("cell");
-                        cellindex = i;
-  
-                        break;
-  
-  
-                    }
-                    var a_val = $('#f_val').val();
-                    var a_val_num = $('#f_nextnum').val();
-                    if($('#f_nextnum_second').val().length >= 1) {
-                        var a_val_2 = "<br/>" + $('#f_nextnum_second').val();
-                    }
-                    else {
-                        var a_val_2 = "";
-                    }
-                    if($('#f_nextnum_third').val().length >= 1) {
-                        var a_val_3 = "<br/>" + $('#f_nextnum_third').val();
-                    }
-                    else {
-                        var a_val_3 = "";
-                    }
+//                     if ($('#a_nextnum_2').val().length >= 1) {
+//                         var a_val_num = $('#a_nextnum_2').val();
+//                     }
+//                     else {
+//                         var a_val_num = $('#a_nextnum').val();
+//                     }
+//                     if($('#c_nextnum_second').val().length >= 1) {
+//                         var a_val_2 = "<br>" + $('#c_nextnum_second').val();
+//                     }
+//                     else {
+//                         var a_val_2 = "";
+//                     }
+//                     if($('#c_nextnum_third').val().length >= 1) {
+//                         var a_val_3 = "<br>" + $('#c_nextnum_third').val();
+//                     }
+//                     else {
+//                         var a_val_3 = "";
+//                     }
 
                 
                     
-                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                    var a_rooms = $('#f_rooms');
+//                     $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
+//                     var a_rooms = $('#c_rooms');
   
-                }
-  
-  
-                $(this).parent().addClass("row");
-                var rows = $(this).parent().parent().children("tr");
+//                 }
   
   
-                for (var i = 0; i < rows.length; i++) {
-                    var tds = $(rows[i]).children("label");
-                    V = "";
-                    for (var j = 0; j <= cellindex; j++) {
-                        ZF = i;
-  
-                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                    }
-                    if ($(rows[i]).hasClass("row")) {
-                        $(this).parent().removeClass("row");
-                        break;
-                    }
-                }
-                V = $('#f_val').val() + parseFloat($('#f_nextnum').val().replace(/\D/g,''));
+//                 $(this).parent().addClass("row");
+//                 var rows = $(this).parent().parent().children("tr");
   
   
-                posX = $(this).closest('tr').index();
-                posY = $(this).index();
-                $('#f_nextnum').val(zf);
-            }
+//                 for (var i = 0; i < rows.length; i++) {
+//                     var tds = $(rows[i]).children("label");
+//                     V = "";
+//                     for (var j = 0; j <= cellindex; j++) {
   
-        }
-    });
-    $("#G_").delegate('td', 'mouseover mouseleave click', function(e) {
-        var cellindex = 0;
-        let rooms = "";
+//                         ZC = i;
   
-        if (e.type == 'click') {
-            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-                $(this).removeClass("nowork");
-            } else if ($('input#pohjakierros').is(':checked')) {
-                console.log("Pohja checkattu");
-  
-  
-                var cells = $(this).parent().children("td");
-                var tds = $('#G .table_sizge_chooser td').removeClass("SizgeChooser-clicked")
-  
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(this).find('label').text().length > 1) {
-                        $(this).removeClass("nowork");
-                        $(this).find('label').text("");
-                        cellindex = i;
-                    } else {
-                        $(this).addClass("nowork"); $(this).removeClass("checked");
-                        $(this).find('label').val("");
-                    }
-  
-                }
-  
-            } else if ($(this).hasClass("noindex")) {
-                zg -= 0;
-                $('#g_nextnum').val(zg);
-            } else if ($(this).find('input').prop('checked') == false) {
-                zg -= 1;
-                $(this).find('input').val("");
-                $(this).find('label').text("");
-                $('#g_nextnum').val(zg);
-            } else {
-                $(this).addClass("checked");
-                var cells = $(this).parent().children("td");
-                var tds = $('#G .table_sizge_chooser td').removeClass("SizgeChooser-clicked")
-                zg = parseFloat($('#g_nextnum').val().replace(/\D/g,''));
-                zg += 1;
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(cells[i]).hasClass("cell")) {
-                        $(this).removeClass("cell");
-                        cellindex = i;
-  
-                        break;
+//                         var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+//                     }
+//                     if ($(rows[i]).hasClass("row")) {
+//                         $(this).parent().removeClass("row");
+//                         break;
+//                     }
+//                 }
+//                 V = $('#c_val').val() + parseFloat($('#c_nextnum').val().replace(/\D/g,''));
   
   
-                    }
-                    var a_val = $('#g_val').val();
-                    var a_val_num = $('#g_nextnum').val();
-                    
-                    if($('#g_nextnum_second').val().length >= 1) {
-                        var a_val_2 = "<br/>" + $('#g_nextnum_second').val();
-                    }
-                    else {
-                        var a_val_2 = "";
-                    }
-                    if($('#g_nextnum_third').val().length >= 1) {
-                        var a_val_3 = "<br/>" + $('#g_nextnum_third').val();
-                    }
-                    else {
-                        var a_val_3 = "";
-                    }
-    
-                   
-                    
-                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                    var a_rooms = $('#g_rooms');
+//                 posX = $(this).parent().data("no");
+//                 posY = $(this).index();
   
-                }
+//                 $('#c_nextnum').val(zc);
+//             }
   
-  
-                $(this).parent().addClass("row");
-                var rows = $(this).parent().parent().children("tr");
-  
-  
-                for (var i = 0; i < rows.length; i++) {
-                    var tds = $(rows[i]).children("label");
-                    V = "";
-                    for (var j = 0; j <= cellindex; j++) {
-                        ZG = i;
-  
-                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                    }
-                    if ($(rows[i]).hasClass("row")) {
-                        $(this).parent().removeClass("row");
-                        break;
-                    }
-                }
-                V = $('#g_val').val() + parseFloat($('#g_nextnum').val().replace(/\D/g,''));
-  
-  
-                posX = $(this).closest('tr').index();
-                posY = $(this).index();
-  
-                $('#g_nextnum').val(zg);
-            }
-  
-        }
-    });
-    $("#H_").delegate('td', 'mouseover mouseleave click', function(e) {
-        var cellindex = 0;
-        let rooms = "";
-  
-        if (e.type == 'click') {
-            if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
-                $(this).removeClass("nowork");
-            } else if ($('input#pohjakierros').is(':checked')) {
-                console.log("Pohja checkattu");
-  
-  
-                var cells = $(this).parent().children("td");
-                var tds = $('#H .table_sizhe_chooser td').removeClass("SizheChooser-clicked")
-  
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(this).find('label').text().length > 1) {
-                        $(this).removeClass("nowork");
-                        $(this).find('label').text("");
-                        cellindex = i;
-                    } else {
-                        $(this).addClass("nowork"); $(this).removeClass("checked");
-                        $(this).find('label').val("");
-                    }
-  
-                }
-  
-            } else if ($(this).hasClass("noindex")) {
-                zh -= 0;
-                $('#h_nextnum').val(zh);
-            } else if ($(this).find('input').prop('checked') == false) {
-                zh -= 1;
-                $(this).find('input').val("");
-                $(this).find('label').text("");
-                $('#h_nextnum').val(zh);
-            } else {
-                $(this).addClass("checked");
-                var cells = $(this).parent().children("td");
-                var tds = $('#H .table_sizhe_chooser td').removeClass("SizheChooser-clicked")
-                zh = parseFloat($('#h_nextnum').val().replace(/\D/g,''));
-                zh += 1;
-                for (var i = 0; i < cells.length; i++) {
-                    if ($(cells[i]).hasClass("cell")) {
-                        $(this).removeClass("cell");
-                        cellindex = i;
-  
-                        break;
-  
-  
-                    }
-                    var a_val = $('#h_val').val();
-                    var a_val_num = $('#h_nextnum').val();
-
-                    if($('#h_nextnum_second').val().length >= 1) {
-                        var a_val_2 = "<br/>" + $('#h_nextnum_second').val();
-                    }
-                    else {
-                        var a_val_2 = "";
-                    }
-                    if($('#h_nextnum_third').val().length >= 1) {
-                        var a_val_3 = "<br/>" + $('#h_nextnum_third').val();
-                    }
-                    else {
-                        var a_val_3 = "";
-                    }
-
-                
-                    
-                    $(this).find('label').html(a_val + a_val_num+a_val_2+a_val_3);
-                    var a_rooms = $('#h_rooms');
-  
-                }
-  
-  
-                $(this).parent().addClass("row");
-                var rows = $(this).parent().parent().children("tr");
-  
-  
-                for (var i = 0; i < rows.length; i++) {
-                    var tds = $(rows[i]).children("label");
-                    V = "";
-                    for (var j = 0; j <= cellindex; j++) {
-                        ZH = i;
-  
-                        var rappu = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
-                    }
-                    if ($(rows[i]).hasClass("row")) {
-                        $(this).parent().removeClass("row");
-                        break;
-                    }
-                }
-                V = $('#h_val').val() + parseFloat($('#h_nextnum').val().replace(/\D/g,''));
-  
-  
-                posX = $(this).closest('tr').index();
-                posY = $(this).index();
-  
-                $('#h_nextnum').val(zh);
-            }
-  
-        }
-    });
-  });
+//         }
+//     });
+   
+//   });
   
   
   
@@ -2128,9 +2441,9 @@ $('td').mouseover(function() {
   
   
     $("#A_ .checked").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
-        nam = $(this).find("label").text();
+        nam = $(this).find("label").html();
   
         if (nam.length > 2) {
             a_array.push({
@@ -2150,7 +2463,7 @@ $('td').mouseover(function() {
     });
   
     $("#A_ .nowork").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
         nam = "NOWORK";
         a_.push({
@@ -2162,9 +2475,9 @@ $('td').mouseover(function() {
     });
   
     $("#B_ .checked").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
-        nam = $(this).find("label").text();
+        nam = $(this).find("label").html();
   
   
         if (nam.length > 2) {
@@ -2185,7 +2498,7 @@ $('td').mouseover(function() {
     });
   
     $("#B_ .nowork").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
         nam = "";
         b_.push({
@@ -2197,9 +2510,9 @@ $('td').mouseover(function() {
     });
   
     $("#C_ .checked").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
-        nam = $(this).find("label").text();
+        nam = $(this).find("label").html();
   
   
         if (nam.length > 2) {
@@ -2220,7 +2533,7 @@ $('td').mouseover(function() {
     });
   
     $("#C_ .nowork").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
         nam = "";
         c_.push({
@@ -2232,9 +2545,9 @@ $('td').mouseover(function() {
     });
   
     $("#D_ .checked").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
-        nam = $(this).find("label").text();
+        nam = $(this).find("label").html();
   
   
         if (nam.length > 2) {
@@ -2255,7 +2568,7 @@ $('td').mouseover(function() {
     });
   
     $("#D_ .nowork").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
         nam = "";
         d_.push({
@@ -2267,9 +2580,9 @@ $('td').mouseover(function() {
     });
   
     $("#E_ .checked").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
-        nam = $(this).find("label").text();
+        nam = $(this).find("label").html();
   
         if (nam.length > 2) {
             e_array.push({
@@ -2290,7 +2603,7 @@ $('td').mouseover(function() {
     });
   
     $("#E_ .nowork").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
         nam = "";
         e_.push({
@@ -2302,9 +2615,9 @@ $('td').mouseover(function() {
     });
   
     $("#F_ .checked").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
-        nam = $(this).find("label").text();
+        nam = $(this).find("label").html();
   
         if (nam.length > 2) {
             f_array.push({
@@ -2324,7 +2637,7 @@ $('td').mouseover(function() {
     });
   
     $("#F_ .nowork").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
         nam = "";
         f_.push({
@@ -2336,9 +2649,9 @@ $('td').mouseover(function() {
     });
   
     $("#G_ .checked").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
-        nam = $(this).find("label").text();
+        nam = $(this).find("label").html();
         if (nam.length > 2) {
             g_array.push({
                 name: nam,
@@ -2358,7 +2671,7 @@ $('td').mouseover(function() {
     });
   
     $("#G_ .nowork").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
         nam = "";
         g_.push({
@@ -2370,9 +2683,9 @@ $('td').mouseover(function() {
     });
   
     $("#H_ .checked").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
-        nam = $(this).find("label").text();
+        nam = $(this).find("label").html();
   
         if (nam.length > 2) {
             h_array.push({
@@ -2393,7 +2706,7 @@ $('td').mouseover(function() {
     });
   
     $("#H .nowork").each(function(index) {
-        posX = $(this).closest('tr').index();
+        posX = $(this).parent().data("no");
         posY = $(this).index();
         nam = "";
         h_.push({
@@ -2447,7 +2760,9 @@ $('td').mouseover(function() {
       }
       var group = document.createElement("div");
       group.classList.add("form-group");
-  
+
+      var datalist = document.querySelector("#prc_1_list").cloneNode(true);
+      datalist.setAttribute("id", 'prc_'+prc_count+'_list');
       var subgroup_1 = document.createElement("div");
       var subgroup_2 = document.createElement("div");
       var subgroup_3 = document.createElement("div");
@@ -2462,11 +2777,11 @@ $('td').mouseover(function() {
       subgroup_5.classList.add("form-subgroup");
       
           
-      subgroup_1.innerHTML = '<label>Nimi ja Rooli: </label><input type="text" name="prc_'+prc_count+'" class="form-control" value=" " required></div>';
-      subgroup_2.innerHTML = '<label>Puhelinnumero: </label><input type="text" name="prc_'+prc_count+'_puh" class="form-control" value=" " required></div>';
-      subgroup_3.innerHTML = '<label>Sähköposti: </label><input type="text" name="prc_'+prc_count+'_email" class="form-control" value=" " required></div>';
+      subgroup_1.innerHTML = '<label>Nimi ja Rooli: </label><input type="text" name="prc_'+prc_count+'" class="form-control" value=" " list="prc_'+prc_count+'_list" onchange="give_numbers(this.value,'+prc_count+');" required></div>';
+      subgroup_2.innerHTML = '<label>Puhelinnumero: </label><input type="text" name="prc_'+prc_count+'_puh" class="form-control prc_'+prc_count+'_puh" value=" " required></div>';
+      subgroup_3.innerHTML = '<label>Sähköposti: </label><input type="text" name="prc_'+prc_count+'_email" class="form-control prc_'+prc_count+'_email" value=" " required></div>';
       subgroup_4.innerHTML = '<label for="prc_'+prc_count+'_role">Rooli:</label><select name="role" id="prc_'+prc_count+'_role"><option value="saaja">Viestien saaja</option><option value="katsoja">Katsoja</option><option value="kommentointi">Kommentointi</option><option value="mittaus">Mittamies</option></select>';
-      subgroup_5.innerHTML = '<h5>Saako katsoa kaikki projektin tiedot?</h5><div class="row-reversed"><label for="prc_'+prc_count+'_permission">Kyllä</label><input type="checkbox" id="prc_'+prc_count+'_permission" class="standard_checkbox"></div><h5>Poista näkymässä projektilla</h5><div class="row-reversed"><label for="prc_'+prc_count+'_hiding">Kyllä</label><input type="checkbox" id="prc_'+prc_count+'_hiding" class="standard_checkbox"></div>';
+      subgroup_5.innerHTML = '<h5>Saako katsoa kaikki projektin tiedot?</h5><div class="row-reversed"><label for="prc_'+prc_count+'_permission">Kyllä</label><input type="checkbox" name="prc_'+prc_count+'_permission" id="prc_'+prc_count+'_permission" class="standard_checkbox" value="1"></div><h5>Poista näkymässä projektilla</h5><div class="row-reversed"><label for="prc_'+prc_count+'_hiding">Kyllä</label><input type="checkbox" id="prc_'+prc_count+'_hiding" name="prc_'+prc_count+'_hiding" class="standard_checkbox" value="1"></div>';
   
   
       group.appendChild(subgroup_1);
@@ -2474,6 +2789,7 @@ $('td').mouseover(function() {
       group.appendChild(subgroup_3);
       group.appendChild(subgroup_4);
       group.appendChild(subgroup_5);
+      group.appendChild(datalist);
   
       document.querySelector("#new_project > fieldset").append(group);
   }
@@ -2508,26 +2824,39 @@ function change__byhands(elem) {
     }
 }
 
-function open_ak() {
-    let _AK_shits_ = document.querySelectorAll(".AK > td");
+function change__toggling(elem,lvl) {
+    f = elem.dataset.alt.split("|")[0];
+    s = elem.dataset.alt.split("|")[1];
+    console.log(elem.value);
+    if(elem.value.length >= 1) {
+        document.querySelector("#" + f).classList.add("closed");
+        document.querySelector("#" + s).classList.add("closed");
+    }   
+    else {
+        document.querySelector("#" + f).classList.remove("closed");
+        document.querySelector("#" + s).classList.remove("closed");
+    }
+}
+
+
+function open_ak(elem) {
+    let _AK_shits_ = elem.parentElement.querySelectorAll(".AK > td");
     _AK_shits_.forEach(myFunction);
-
-    function myFunction(item) {
-        item.classList.remove("hidden");
-        item.classList.add("nowork");
-    }
-
 }
-function open_k() {
-    let _K_shits_ = document.querySelectorAll(".K > td");
+function open_k(elem) {
+    let _K_shits_ = elem.parentElement.querySelectorAll(".K > td");
     _K_shits_.forEach(myFunction);
-
-    function myFunction(item) {
-        item.classList.remove("hidden");
-        item.classList.add("nowork");
-    }
 }
-
+function myFunction(item) {
+    if(item.classList.contains("noindex")) {}
+    else {
+        item.classList.remove("hidden");
+        item.classList.remove("checked");
+        item.querySelector("label").innerHTML = "";
+        item.querySelector("input").checked = false;
+        item.classList.add("nowork");
+    }   
+}
 function pohjakierros_function() {
       
 }
@@ -2538,12 +2867,13 @@ function add_new_lvl(elem) {
     table = gp.querySelector(".table > tbody");
     len = gp.querySelectorAll("tr").length;
     var tr = document.createElement('tr');
-    
-    if(len > 10) {
+    tr.dataset.no = parseFloat(gp.querySelectorAll("tr")[0].dataset.no) +1;
+
+    if(len > 50) {
         alert("Kerrosten maksimimäärä saavutettu");
         return
     }
-    for (let i = 1; i < 31; i++) {
+    for (let i = 1; i < 22; i++) {
         if(i == 1) {
             num = len-1;
             var td = document.createElement('td');
@@ -2579,3 +2909,34 @@ function add_new_lvl(elem) {
     table.prepend(tr);
 
 }
+
+String.prototype.slugify = function (separator = "-") {
+    return this
+        .toString()
+        .normalize('NFD')                   // split an accented letter in the base letter and the acent
+        .replace(/[\u0300-\u036f]/g, '')   // remove all previously split accents
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9 ]/g, '')   // remove all chars not letters, numbers and spaces (to be replaced)
+        .replace(/\s+/g, separator);
+};
+
+function slugify__prname() {
+    document.querySelector(".project_name_slugto").value = document.querySelector(".project_name_slugfrom").value.slugify("-");
+}
+
+jQuery(document).ready(function($) {
+    if (window.history && window.history.pushState) {
+      $(window).on('popstate', function() {
+        $('#roomconfig_first').hide();
+        $('#roomconfig_first').slideUp(200);
+        $('#roomconfig_second').hide();
+        $('#roomconfig_second').slideUp(200);
+        $('#roomconfig_third').hide();
+        $('#roomconfig_third').slideUp(200);
+
+        $('#new_project').slideDown(200);
+        $('#new_project').show();
+      });
+    }
+  });

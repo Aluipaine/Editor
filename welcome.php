@@ -20,11 +20,19 @@ if(htmlspecialchars($_SESSION["username"]) === "marko" || htmlspecialchars($_SES
 $posts = mysqli_query($db, "SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `addedusers` WHERE `username`=\"" . $_SESSION["username"] . "\");");
 $posts = mysqli_fetch_all($posts);
 
-$username = $_SESSION["username"];
-$username_role_ = mysqli_query($db, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
-$username_role = mysqli_fetch_assoc($username_role_);
 
-$_SESSION["role"] = $username_role['role'];
+$usr = $_SESSION["username"];
+
+$usr_role = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr'; ");
+$usr_role = mysqli_fetch_all($usr_role);
+
+$usr_role = $usr_role[3];
+
+// $username = $_SESSION["username"];
+// $username_role_ = mysqli_query($db, "SELECT * FROM `users` WHERE `username` LIKE '$username'");
+// $username_role = mysqli_fetch_assoc($username_role_);
+
+$_SESSION["role"] = $usr_role;
 
 
 
@@ -97,7 +105,7 @@ $_SESSION["role"] = $username_role['role'];
                
                  ?>
                  </td>
-                <td><a href="post.php?id=<?= $post[0] . '&user=' . htmlspecialchars($_SESSION["username"]) . '&role=' . htmlspecialchars($_SESSION["role"]) ?>">Jatka projektiin</a></td>
+                <td><a href="post.php?id=<?= $post[0] . '&user=' . htmlspecialchars($_SESSION["username"]) ?>">Jatka projektiin</a></td>
               </tr>
             <?php
         }

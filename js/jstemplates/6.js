@@ -1,46 +1,21 @@
 let ltcontainer = document.querySelector("#levytyosto_container");
 let levy = document.querySelectorAll(".levy");
 
+// Function to start the work on green lines based on the provided specification
 function aloita_tyosto_kiinnikkeet(specification_launch) {
+   // Select all elements with class "levy"
   let levyt = document.querySelectorAll(".levy");
-  console.log("aloita_tyosto_kiinnikkeet() fired");
+
+  // Initialize event variable
   evt = 0;
-  // k_main_levy = canvas.querySelectorAll(".levy")[0].title;
-  // k_min_h = parseFloat(document.querySelector("#p_two").value);
-  // k_min_w = parseFloat(document.querySelector("#v_two").value);
-  // k_main_levy_ = k_main_levy.split(",");
 
-  // if(specification_launch) {
-  //    if (document.querySelector("#lt-kiinniketys__pkiinnike_one").checked === true) {
-  //     evt = 1;
-  //   }
-  //   if (document.querySelector("#lt-kiinniketys__pkiinnike_two").checked === true) {
-  //     evt = 2;
-  //   }
-  //   if (document.querySelector("#lt-kiinniketys__pkiinnike_three").checked === true) {
-  //     evt = 3;
-  //   }
-  //   if (document.querySelector("#lt-kiinniketys__pkiinnike_four").checked === true) {
-  //     evt = 4;
-  //   }
-  //   if (document.querySelector("#lt-kiinniketys__vkiinnike_one").checked === true) {
-  //     evt = 5;
-  //   }
-  //   if (document.querySelector("#lt-kiinniketys__vkiinnike_two").checked === true) {
-  //     evt = 6;
-  //   }
-  //   if (document.querySelector("#lt-kiinniketys__vkiinnike_three").checked === true) {
-  //     evt = 7;
-  //   }
-  //   if (document.querySelector("#lt-kiinniketys__vkiinnike_four").checked === true) {
-  //     evt = 8;
-  //   }
-  //   spessu_levy = document.querySelector(".lt_levy_vis");
-  //   tyosta(spessu_levy, evt);
+  s_ar = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);
+  s_yr = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);
+  s_vr = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
+  s_or = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
+  // Code commented out for clarity (possible part of future development)
 
-  // }
-  // else {
-
+  // Checkboxes for green lines
   if (document.querySelector("#kiinniketys__pkiinnike_one").checked === true) {
     evt = 1;
     levyt.forEach(element => tyosta(element, evt));
@@ -74,19 +49,37 @@ function aloita_tyosto_kiinnikkeet(specification_launch) {
     evt = 8;
     levyt.forEach(element => tyosta(element, evt));
   }
-
   vaaka_event = evt;
 
-  // } 
+  if(document.querySelector(".db_saumatable")) {
+    document.querySelector(".db_saumatable").remove();
+  }
+  else {
+      
+  }
+  db_saumatable = document.createElement("div");
+  db_saumatable.classList = "db_saumatable";
+  s_pset = "S=<b class='saumaset_vm'>" +document.querySelector(".saumapysty__tbody td:nth-child(2) > input").value + "</b>";
+  s_vset = "S=<b class='saumaset_hm'>" +document.querySelector(".saumavaaka__tbody td:nth-child(2) > input").value + "</b>";
+  db_saumatable.innerHTML = `
+      <div class="vertical_module">${s_pset}</div>
+      <div class="horizontal_module">${s_vset}</div>
+      <div class="valiranka_module">V=<b class="valirankaset">Väliranka</b></div>
+      <div class="reika_module">R=<b class="reikaset">Reikä</b></div>  
+  `;
+  document.querySelector(".drawarea__bottom").appendChild(db_saumatable);
 
 }
 
+// Function to perform work on a given "levy" element based on the specified event "evt"
 function tyosta(levy, evt) {
+  // Initialize variables
   levy_c_x = 0;
   levy_c_y = 0;
   console.log("tyosta(levy, evt) ");
   var left_cord = 0,
     bottom_cord = 0;
+    // Create or select elements for vertical and horizontal work on the "levy"
   if (levy.querySelector(".levy_tyostot_y")) {
     var levy_tyostot_y = levy.querySelector(".levy_tyostot_y");
   }
@@ -103,6 +96,8 @@ function tyosta(levy, evt) {
     levy_tyostot_x.classList.add("levy_tyostot_x");
     levy.append(levy_tyostot_x);
   }
+
+  // Select various elements and values needed for calculations
   k_one = document.querySelector("#kiinniketys__kiinnike_one");
   k_two = document.querySelector("#kiinniketys__kiinnike_two");
   k_three = document.querySelector("#kiinniketys__kiinnike_three");
@@ -115,18 +110,24 @@ function tyosta(levy, evt) {
   k_min_h = parseFloat(document.querySelector("#p_two").value);
   k_min_w = parseFloat(document.querySelector("#v_two").value);
   k_main_levy_ = k_main_levy.split(",");
+
   //PYSTYKIINNIKKEET
   if (evt === 1 || evt === 2 || evt === 3 || evt === 4) {
+    // Remove existing vertical work elements
     let tyosto_levy = levy.querySelectorAll(".tyostot__tyosto_pysty");
     for (var i = tyosto_levy.length - 1; i >= 0; i--) {
       tyosto_levy[i].remove()
     }
+
+    // Get height of the "levy" and relevant values
     height_levy = parseFloat(levy.title.split(",")[0]);
     l_i = document.querySelector("#p_target").value;
     p_left = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
     p_right = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
     p_h_ = (height_levy - (p_left + p_right));
     p_kaava1 = p_h_ / l_i;
+
+    // Handle cases where the height is less than the minimum required
     if (p_h_ < k_min_h) {
       p_h = -1;
       p_kaava1 = 0;
@@ -138,6 +139,8 @@ function tyosta(levy, evt) {
       p_c_kaava1 = Math.ceil(p_kaava1);
       p_t_kaava1 = 1 + Math.trunc(p_kaava1);
     }
+
+    // Create vertical green lines based on the event and minimum height conditions
     if (evt === 1 && k_min_h < parseFloat(k_main_levy_[0]) || evt === 2 && k_min_h < parseFloat(k_main_levy_[0])) {
       for (var j = 1; j < p_c_kaava1; j++) {
         if (evt === 1) {
@@ -148,13 +151,19 @@ function tyosta(levy, evt) {
           x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
           x.classList.add("tyostot__tyosto");
           x.classList.add("tyostot__tyosto_pysty");
+
+          // Position the green lines based on the event    
           left_cord = ((parseFloat(l_i) * j) / 5) + "px";
           x.style.right = left_cord;
           x.style.height = "100%";
           x.style.width = parseFloat(8 / 5) + "px";
           x.style.position = "absolute";
+          
+          // Append elements to the DOM
           levy_tyostot_x.prepend(x);
           levy.append(levy_tyostot_x);
+
+          // Create input element for the fastener coordinates
           x_cord.type = "text";
           x_cord.classList.add("x_cord");
           x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
@@ -164,7 +173,11 @@ function tyosta(levy, evt) {
           x_cord.style.right = cord / 10;
           x_cord.style.float = "right";
           x_cord.classList.add("standard_kcord");
+
+          // Append input element to the fastener
           x.prepend(x_cord);
+
+          // Create delete button for the fastener
           var x_del = document.createElement("div");
           x_del.classList.add("x_del");
           x_del.setAttribute("onclick", "tyosto__del(this);");
@@ -173,17 +186,28 @@ function tyosta(levy, evt) {
 
         }
         else if (evt === 2) {
+          // Create a new div element for the vertical fastener
           var x = document.createElement("div");
-          right_cord = ((parseFloat(l_i) * j) / 5) + 6.5 + "px";
+          // Calculate the left position based on the iteration (j)
+          right_cord = ((parseFloat(l_i) * j) / 5) - 1 + "px";
+          // Set the left position style
           x.style.left = right_cord;
+          // Add classes to the div for styling
           x.classList.add("tyostot__tyosto");
           x.classList.add("tyostot__tyosto_pysty");
           x.style.height = "100%";
           x.style.width = parseFloat(8 / 5) + "px";
           x.style.position = "absolute";
+
+          // Prepend the vertical fastener element to the container (levy_tyostot_x)
           levy_tyostot_x.prepend(x);
+          // Append the container to the main element (levy)
           levy.append(levy_tyostot_x);
+
+          // Calculate the cord (coordinate) value
           cord = parseFloat((parseFloat(l_i) * (j))) - parseFloat((parseFloat(l_i) * (j - 1)));
+
+          // Create a new input element for the coordinate
           var x_cord = document.createElement("input");
           x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
           x_cord.classList.add("x_cord_mki");
@@ -195,33 +219,41 @@ function tyosta(levy, evt) {
           x_cord.dataset.from = x_cord.value;
           x_cord.style.float = "right";
           // x_cord.style.left = cord/10;
+
+          // Prepend the input element to the vertical fastener
           x.prepend(x_cord);
+
+          // Create a delete button element for the vertical fastener
           var x_del = document.createElement("div");
           x_del.classList.add("x_del");
           x_del.setAttribute("onclick", "tyosto__del(this);");
           x.prepend(x_del);
         }
-        // if(evt === 1) {
-        //   x_cord.style.float = "left";
-        // }
-        // else if(evt === 2) {
-        //   x_cord.style.float = "right";
-        // }
       }
     }
     if (evt === 3 && k_min_h < parseFloat(k_main_levy_[0]) || evt === 4 && k_min_h < parseFloat(k_main_levy_[0])) {
-      lahinmodmitta = (p_h / 25);
+      // Calculate the approximate distance between vertical green lines
+      lahinmodmitta = p_h / 25;
+
+      // Determine the number of areas (segments) for vertical green lines
       areas = Math.ceil(p_c_kaava1);
-      modcount = Math.floor((lahinmodmitta) / areas);
+
+      // Calculate the number of green lines in each area
+      modcount = Math.floor(lahinmodmitta / areas);
+
+      // Calculate the optimal distance between green lines
       l_i = parseFloat(modcount * 25);
+
+      // Calculate the total number of green lines needed
       p_t_kaava1 = Math.floor(p_h / l_i);
+
+      // Adjust calculations if the event is 4 and the total number of green lines is not even
       if (evt === 4) {
-        if (isEven(p_t_kaava1)) { }
-        else {
-          // p_t_kaava1 += 1;
+        if (!isEven(p_t_kaava1)) {
+          // Increase the total number of green lines and recalculate
           p_c_kaava1 += 1;
           areas = Math.ceil(p_c_kaava1);
-          modcount = Math.floor((lahinmodmitta) / areas);
+          modcount = Math.floor(lahinmodmitta / areas);
           l_i = parseFloat(modcount * 25);
           p_t_kaava1 = Math.floor(p_h / l_i);
         }
@@ -229,27 +261,38 @@ function tyosta(levy, evt) {
       for (var j = 0; j < p_t_kaava1; j++) {
         if (j !== 0) {
           var x = document.createElement("div");
-          tas_vord = (j * l_i) / 5 + 6.5 + "px";
+          // Calculate the left position of the vertical work element
+          tas_vord = (j * l_i) / 5 - 1 + "px";
           x.style.left = tas_vord;
+
+          // Set the styles and classes for the new element
           x.classList.add("tyostot__tyosto");
           x.classList.add("tyostot__tyosto_pysty");
           x.style.height = "100%";
           x.style.width = parseFloat(8 / 5) + "px";
           x.style.position = "absolute";
+
+          // Append the new element to the container (levy_tyostot_x)
           levy_tyostot_x.prepend(x);
+
+          // Create an input element for the coordinate value
           var x_cord = document.createElement("input");
           x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
           x_cord.classList.add("x_cord_mki");
           x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
           x_cord.type = "text";
-          x_cord.classList.add("x_cord");
-          cord = (j * (l_i) - (j - 1) * (parseFloat(l_i)));
+
+          // Calculate and set the coordinate value for the input
+          cord = (j * l_i) - (j - 1) * (parseFloat(l_i));
           x_cord.value = cord.toFixed(0);
           x_cord.dataset.from = x_cord.value;
           x_cord.style.float = "right";
           x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
-          // x_cord.style.left = cord/10 + "px";
+
+          // Append the coordinate input to the new element
           x.prepend(x_cord);
+
+          // Create a delete button element and append it to the new element
           var x_del = document.createElement("div");
           x_del.classList.add("x_del");
           x_del.setAttribute("onclick", "tyosto__del(this);");
@@ -257,38 +300,46 @@ function tyosta(levy, evt) {
         }
       }
     }
+    // Adjust the right side
     t_last_right(levy, levy_tyostot_x, evt);
+    // Adjust the left side
     t_last_left(levy, levy_tyostot_x, evt);
   }
   //VAAKAKIINNIKKEET
   if (evt === 5 || evt === 6 || evt === 7 || evt === 8) {
+    // Select all existing horizontal work elements within the 'levy' element and remove them
     let tyosto_levy = levy.querySelectorAll(".tyostot__tyosto_vaaka");
     for (var i = tyosto_levy.length - 1; i >= 0; i--) {
-      tyosto_levy[i].remove()
+      tyosto_levy[i].remove();
     }
-    l_i = document.querySelector("#v_target").value;
-    v_u = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);
-    v_b = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);
-    width_levy = parseFloat(document.querySelector("#k_settings__levy_levysizeh").value);
-    v_w_ = (width_levy - (v_u + v_b));
-    v_kaava1 = v_w_ / l_i;
+
+    // Get input values and calculate parameters for creating new horizontal work elements
+    // based on the specified target, upper and lower bounds, and width of the 'levy'.
+    l_i = document.querySelector("#v_target").value;  // Target value for the horizontal work elements
+    v_u = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);  // Upper bound value
+    v_b = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);  // Lower bound value
+    width_levy = parseFloat(document.querySelector("#k_settings__levy_levysizeh").value);  // Width of the 'levy'
+    v_w_ = (width_levy - (v_u + v_b));  // Calculating available width for horizontal work elements
+    v_kaava1 = v_w_ / l_i;  // Calculating the formula for positioning horizontal work elements
+
+    // Check if the available width is less than the minimum required width (k_min_w)
     if (v_w_ < k_min_w) {
-      v_w = -1;
-      p_kaava1 = 0;
-      v_c_kaava1 = 0;
-      v_t_kaava1 = 0;
-    }
-    else {
+      v_w = -1;  // Set a flag indicating insufficient width
+      p_kaava1 = 0;  // Reset parameter
+      v_c_kaava1 = 0;  // Reset parameter
+      v_t_kaava1 = 0;  // Reset parameter
+    } else {
+      // Set parameters for creating horizontal work elements when there is sufficient width
       v_w = v_w_;
-      v_c_kaava1 = parseFloat(1 + Math.ceil(v_kaava1));
-      v_t_kaava1 = parseFloat(1 + Math.trunc(v_kaava1));
+      v_c_kaava1 = parseFloat(1 + Math.ceil(v_kaava1));  // Calculate the ceiling value for count
+      v_t_kaava1 = parseFloat(1 + Math.trunc(v_kaava1));  // Calculate the truncated value for count
     }
     // l_i = 
     if (evt === 5 && k_min_w < parseFloat(k_main_levy_[1]) || evt === 6 && k_min_w < parseFloat(k_main_levy_[1])) {
       for (var g = 1; g < v_t_kaava1; g++) {
         if (evt === 5) {
           var x = document.createElement("div");
-          bottom_cord = (parseFloat(l_i) * g) / 5 + 6.5 + "px";
+          bottom_cord = (parseFloat(l_i) * g) / 5 - 1 + "px";
           x.style.bottom = bottom_cord;
           x.classList.add("tyostot__tyosto");
           x.classList.add("tyostot__tyosto_vaaka");
@@ -315,7 +366,7 @@ function tyosta(levy, evt) {
         }
         else if (evt === 6) {
           var x = document.createElement("div");
-          top_cord = (parseFloat(l_i) * g) / 5 + 6.5 + "px";
+          top_cord = (parseFloat(l_i) * g) / 5 - 1 + "px";
           x.style.top = top_cord;
           x.classList.add("tyostot__tyosto");
           x.classList.add("tyostot__tyosto_vaaka");
@@ -374,7 +425,7 @@ function tyosta(levy, evt) {
       for (var g = 1; g < v_t_kaava1; g++) {
         if (g !== 0) {
           var x = document.createElement("div");
-          tas_vord = (g * l_i) / 5 + 6.5 + "px";
+          tas_vord = (g * l_i) / 5 - 1 + "px";
           x.style.bottom = tas_vord;
           x.classList.add("tyostot__tyosto");
           x.classList.add("tyostot__tyosto_vaaka");
@@ -407,17 +458,13 @@ function tyosta(levy, evt) {
   // levy.setAttribute("data-levy_y",(parseFloat(levy_c_y)));
   l_meta = {};
 
-  fixkiinnikkeet(levy);
+  give__tyosto_cord(levy);
 
 
-  // countdown__kiinnikkeet(levy);
+  removeduplicatecords__adjustcords();
 
 
-  // if(evt == 1) {
-  //   for (var i = pysty_cords.length - 1; i >= 0; i--) {
-  //     pysty_cords[i]
-  //   }
-  // }
+  
 }
 
 function t_last_top(levy, tyosto, evt) {
@@ -437,6 +484,7 @@ function t_last_top(levy, tyosto, evt) {
     var x_cord = document.createElement("input");
     x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
     x_cord.classList.add("x_cord_mki");
+    x_cord.classList.add("temp_input_last");
     x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
     x_cord.type = "text";
     x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
@@ -455,6 +503,7 @@ function t_last_top(levy, tyosto, evt) {
     var x_last_cord = document.createElement("input");
     x_last_cord.type = "text";
     x_last_cord.classList.add("x_cord");
+
     x_last_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
     x_last_cord.classList.add("y_cord_border");
     x_last_cord_cord = parseFloat(levy_meta[1]) - parseFloat(x.style.bottom) * 5;
@@ -466,6 +515,7 @@ function t_last_top(levy, tyosto, evt) {
     x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
     // x_cord.setAttribute("onchange", "alert('Häntä- ja äärikiinnikekoordinaatit ovat kovakoodattuja . Kokeile muokata toista levyn koordinaattia')");
     x_cord.classList.add("x_cord_mki");
+    //x_cord.classList.add("temp_input_last");
     x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
     x_cord.type = "text";
     x_cord.classList.add("x_cord");
@@ -497,6 +547,7 @@ function t_last_right(levy, tyosto, evt) {
   if (evt === 2 || evt === 1 || evt === 3 || evt === 4) {
     var x_cord = document.createElement("input");
     x_cord.setAttribute("onchange", "alert('Häntä- ja äärikiinnikekoordinaatit ovat kovakoodattuja . Kokeile muokata toista levyn koordinaattia')");
+    x_cord.classList.add("temp_input_last");
     x_cord.classList.add("x_cord_mki");
     x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
     x_cord.type = "text";
@@ -530,6 +581,7 @@ function t_last_right(levy, tyosto, evt) {
   else {
     var x_cord = document.createElement("input");
     x_cord.setAttribute("onchange", "alert('Häntä- ja äärikiinnikekoordinaatit ovat kovakoodattuja . Kokeile muokata toista levyn koordinaattia')");
+    //x_cord.classList.add("temp_input_last");
     x_cord.classList.add("x_cord_mki");
     x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
     x_cord.type = "text";
@@ -560,6 +612,7 @@ function t_last_left(levy, tyosto, evt) {
     var x_cord = document.createElement("input");
     x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
     x_cord.classList.add("x_cord_mki");
+    x_cord.classList.add("temp_input_last");
     x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
     x_cord.type = "text";
     var i_ = 0;
@@ -589,6 +642,7 @@ function t_last_left(levy, tyosto, evt) {
     var x_cord = document.createElement("input");
     x_cord.setAttribute("onchange", "alert('Häntä- ja äärikiinnikekoordinaatit ovat kovakoodattuja . Kokeile muokata toista levyn koordinaattia')");
     x_cord.classList.add("x_cord_mki");
+    //x_cord.classList.add("temp_input_last");
     x_cord.type = "text";
     x_cord.classList.add("x_cord");
     x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
@@ -618,6 +672,7 @@ function t_last_bottom(levy, tyosto, evt) {
     var x_cord = document.createElement("input");
     x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
     x_cord.classList.add("x_cord_mki");
+    //x_cord.classList.add("temp_input_last");
     x_cord.type = "text";
     x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
     var i_ = 0;
@@ -646,6 +701,7 @@ function t_last_bottom(levy, tyosto, evt) {
   else {
     var x_cord = document.createElement("input");
     x_cord.setAttribute("onchange", "alert('Häntä- ja äärikiinnikekoordinaatit ovat kovakoodattuja . Kokeile muokata toista levyn koordinaattia')");
+    //x_cord.classList.add("temp_input_last");
     x_cord.classList.add("x_cord_mki");
     x_cord.type = "text";
     x_cord.classList.add("x_cord");
@@ -763,14 +819,22 @@ function change__klevy(info) {
     horizontalinputs_up.style.float = "right";
     horizontalinputs_up.style.top = "top:-30px;";
     horizontalinputs_down.style.marginLeft = "30px";
+    
+
+
+    s_ar = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);
+    s_yr = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);
+    s_vr = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
+    s_or = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
+
     horizontalinputs_left.innerHTML =
-      '<div style="margin-top: 50px;" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_vrlevy" onchange="change__levykiinnike();"><label for="">VR LEVY</label></div>';
+      `<div style="margin-top: 50px;" class="tyosto_measure"><input type="text" name="_levymod" value="${s_vr}" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_vrlevy" onchange="change__levykiinnike();"><label for="">VR LEVY</label></div>`;
     horizontalinputs_right.innerHTML =
-      '<div style="margin-top: 50px;" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_orlevy" onchange="change__levykiinnike();"><label for="">OR LEVY</label></div>';
+      `<div style="margin-top: 50px;" class="tyosto_measure"><input type="text" name="_levymod" value="${s_or}" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_orlevy" onchange="change__levykiinnike();"><label for="">OR LEVY</label></div>`;
     horizontalinputs_up.innerHTML =
-      ' <div style="" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_yrlevy" onchange="change__levykiinnike();"><label for="">YR LEVY</label></div>';
+      `<div style="" class="tyosto_measure"><input type="text" name="_levymod" value="${s_yr}" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_yrlevy" onchange="change__levykiinnike();"><label for="">YR LEVY</label></div>`;
     horizontalinputs_down.innerHTML =
-      ' <div style="" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_arlevy" onchange="change__levykiinnike();"><label for="">AR LEVY</label></div>';
+      `<div style="" class="tyosto_measure"><input type="text" name="_levymod" value="${s_ar}" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_arlevy" onchange="change__levykiinnike();"><label for="">AR LEVY</label></div>`;
     levy.append(horizontalinputs_left);
     levy.append(horizontalinputs_right);
     levy.append(horizontalinputs_up);
@@ -798,8 +862,8 @@ function change__klevy(info) {
 function change__tyostocord(input, secondsetting, evt) {
   console.log("change__tyostocord(input, secondsetting) fired");
   oldvalue = input.dataset.from;
-  let c_kiinnikkeet = undefined;
-  try { c_kiinnikkeet = canvas.querySelectorAll(".tyostot__tyosto"); } catch { console.log("canvas not set"); }
+  
+  try { c_kiinnikkeet = canvas.querySelectorAll(".tyostot__tyosto"); } catch { let c_kiinnikkeet = undefined;console.log("canvas not set"); }
   k_x = [];
   k_y = [];
 
@@ -814,6 +878,8 @@ function change__tyostocord(input, secondsetting, evt) {
       k_y.push(c_kiinnikkeet[i].getBoundingClientRect().bottom);
     }
   }
+
+  // Identify elems
   if ((input.parentElement.parentElement).classList.contains("levy")) {
     thislevy = input.parentElement;
   }
@@ -826,10 +892,15 @@ function change__tyostocord(input, secondsetting, evt) {
   else if ((input.parentElement.parentElement).classList.contains("tyostot__tyosto")) {
     thistyosto = input.parentElement.parentElement;
   }
+
+
   k_x_array = removeDuplicates(k_x);
   k_y_array = removeDuplicates(k_y);
   thisinput_l = input.parentElement.getBoundingClientRect().left;
   thisinput_b = input.parentElement.getBoundingClientRect().bottom;
+  // End identify elems
+
+
   tochange_array_x.push(thisinput_l);
   tochange_array_y.push(thisinput_b);
   for (var i = k_x_array.length - 1; i >= 0; i--) {
@@ -854,25 +925,34 @@ function change__tyostocord(input, secondsetting, evt) {
   grandbarent = barent.parentElement;
   elements = grandbarent.querySelectorAll(".tyostot__tyosto");
   currentIndex = Array.from(elements).indexOf(barent);
-  newvalue = parseFloat(input.value);
+  newvalue = parseFloat(input.value.replaceAll(",","."));
   erotus = oldvalue - newvalue;
+
   if (secondsetting === 1) {
     new_cord = (parseFloat(old_cord) - (parseFloat(erotus) / 5)) + "px";
     if (thistyosto.classList.contains("tyostot__tyosto_pysty")) {
       thistyosto.style.left = new_cord;
-      input.dataset.from = parseFloat(input.value);
+      input.dataset.from = parseFloat(input.value.replaceAll(",","."));
       if (thistyosto.parentElement.parentElement.classList.contains("visible") != true) {
         thistyosto.querySelector(".secondcord").value = parseFloat(thistyosto.parentElement.parentElement.style.left) * 5 + parseFloat(thistyosto.style.left) * 5;
+      }
+
+      if (thistyosto.querySelector(".thirdcord")) {
+        thistyosto.querySelector(".thirdcord").innerHTML = "<b>V</b><br>" + parseFloat(thistyosto.style.left) * 5;
       }
 
       for (var i = c_kiinnikkeet.length - 1; i >= 0; i--) {
         if (thisinput_l === c_kiinnikkeet[i].getBoundingClientRect().left) {
           c_kiinnikkeet[i].style.left = new_cord;
+          console.log(c_kiinnikkeet[i]);
           if (c_kiinnikkeet[i].querySelector("input")) {
             c_kiinnikkeet[i].querySelector("input").value = newvalue;
           }
-          if (c_kiinnikkeet[i].parentElement.querySelector("input.secondcord")) {
-            c_kiinnikkeet[i].parentElement.querySelector("input.secondcord").value = parseFloat(c_kiinnikkeet[i].parentElement.parentElement.style.left) * 5 + parseFloat(c_kiinnikkeet[i].style.left) * 5;
+          if (c_kiinnikkeet[i].querySelector("input.secondcord")) {
+            c_kiinnikkeet[i].querySelector("input.secondcord").value = parseFloat(c_kiinnikkeet[i].parentElement.parentElement.style.left) * 5 + parseFloat(c_kiinnikkeet[i].style.left) * 5;
+          }
+          if (c_kiinnikkeet[i].querySelector(".thirdcord")) {
+            c_kiinnikkeet[i].querySelector(".thirdcord").innerHTML = "<b>V</b><br>" + parseFloat(c_kiinnikkeet[i].style.left) * 5;
           }
         }
       }
@@ -882,9 +962,13 @@ function change__tyostocord(input, secondsetting, evt) {
     }
     else if (thistyosto.classList.contains("tyostot__tyosto_vaaka")) {
       thistyosto.style.bottom = new_cord;
-      input.dataset.from = parseFloat(input.value);
+      input.dataset.from = parseFloat(input.value.replaceAll(",","."));
       if (thistyosto.querySelector(".secondcord")) {
         thistyosto.querySelector(".secondcord").value = parseFloat(thistyosto.style.bottom) * 5;
+      }
+
+      if (thistyosto.querySelector(".thirdcord")) {
+        thistyosto.querySelector(".thirdcord").innerHTML = "<b>V</b><br>" + parseFloat(thistyosto.style.bottom) * 5;
       }
 
       for (var i = c_kiinnikkeet.length - 1; i >= 0; i--) {
@@ -893,8 +977,15 @@ function change__tyostocord(input, secondsetting, evt) {
           if (c_kiinnikkeet[i].querySelector("input")) {
             c_kiinnikkeet[i].querySelector("input").value = newvalue;
           }
-          if (c_kiinnikkeet[i].parentElement.querySelector("input.secondcord")) {
-            c_kiinnikkeet[i].parentElement.querySelector("input.secondcord").value = parseFloat(c_kiinnikkeet[i].parentElement.parentElement.style.bottom) * 5 + parseFloat(c_kiinnikkeet[i].style.bottom) * 5;
+
+          if (c_kiinnikkeet[i].querySelector("input.secondcord")) {
+            console.log(parseFloat(c_kiinnikkeet[i].parentElement.parentElement.style.bottom) * 5);
+            console.log(parseFloat(c_kiinnikkeet[i].style.bottom) * 5);
+            c_kiinnikkeet[i].querySelector("input.secondcord").value = parseFloat(c_kiinnikkeet[i].parentElement.parentElement.style.bottom) * 5 + parseFloat(c_kiinnikkeet[i].style.bottom) * 5;
+          }
+
+          if (c_kiinnikkeet[i].querySelector(".thirdcord")) {
+            c_kiinnikkeet[i].querySelector(".thirdcord").innerHTML = "<b>V</b><br>" + parseFloat(c_kiinnikkeet[i].style.bottom) * 5;
           }
         }
       }
@@ -940,14 +1031,14 @@ function change__tyostocord(input, secondsetting, evt) {
     new_cord = (parseFloat(old_cord) - (parseFloat(erotus))) + "px";
     mki_input_val = parseFloat(thistyosto.querySelector(".x_cord_mki").value);
     if (thistyosto.classList.contains("tyostot__tyosto_pysty")) {
-      thistyosto.style.left = parseFloat(input.value) / 5 + "px";
-      input.dataset.from = parseFloat(input.value);
+      thistyosto.style.left = parseFloat(input.value.replaceAll(",",".")) / 5 + "px";
+      input.dataset.from = parseFloat(input.value.replaceAll(",","."));
       mki_input_val = parseFloat(thistyosto.querySelector(".x_cord_mki").value);
       thistyosto.querySelector(".x_cord_mki").dataset.from = mki_input_val - erotus;
       thistyosto.querySelector(".x_cord_mki").value = mki_input_val - erotus;
       for (var i = c_kiinnikkeet.length - 1; i >= 0; i--) {
         if (thisinput_l === c_kiinnikkeet[i].getBoundingClientRect().left) {
-          c_kiinnikkeet[i].style.left = parseFloat(input.value) / 5 + "px";;
+          c_kiinnikkeet[i].style.left = parseFloat(input.value.replaceAll(",",".")) / 5 + "px";
           if (c_kiinnikkeet[i].querySelector("input")) {
             c_kiinnikkeet[i].querySelector("input").value = newvalue;
           }
@@ -958,8 +1049,8 @@ function change__tyostocord(input, secondsetting, evt) {
       }
     }
     else if (thistyosto.classList.contains("tyostot__tyosto_vaaka")) {
-      thistyosto.style.bottom = parseFloat(input.value) / 5 + "px";
-      input.dataset.from = parseFloat(input.value);
+      thistyosto.style.bottom = parseFloat(input.value.replaceAll(",",".")) / 5 + "px";
+      input.dataset.from = parseFloat(input.value.replaceAll(",","."));
       realval = mki_input_val - erotus;
       console.log("realval " + realval);
       console.log("mki_input_val " + mki_input_val);
@@ -968,7 +1059,7 @@ function change__tyostocord(input, secondsetting, evt) {
       thistyosto.querySelector(".x_cord_mki").value = parseFloat(realval);
       for (var i = c_kiinnikkeet.length - 1; i >= 0; i--) {
         if (thisinput_b === c_kiinnikkeet[i].getBoundingClientRect().bottom) {
-          c_kiinnikkeet[i].style.bottom = parseFloat(input.value) / 5 + "px";
+          c_kiinnikkeet[i].style.bottom = parseFloat(input.value.replaceAll(",",".")) / 5 + "px";
           if (c_kiinnikkeet[i].querySelector("input")) {
             c_kiinnikkeet[i].querySelector("input").value = newvalue;
           }
@@ -1143,9 +1234,8 @@ function tallenna_kiinnikepaikat(levy) {
   console.log("l_meta_y: " + l_meta_y);
 }
 
-function fixkiinnikkeet(levy) {
-
-  console.log("fixkiinnikkeet(levy) fired");
+function give__tyosto_cord(levy) {
+  console.log("give__tyosto_cord(levy) fired");
   levy_tyostot_x = levy.querySelectorAll(".levy_tyostot_x");
   levy_tyostot_y = levy.querySelectorAll(".levy_tyostot_y");
   for (var i = levy_tyostot_x.length - 1; i >= 0; i--) {
@@ -1168,14 +1258,17 @@ function fixkiinnikkeet(levy) {
         console.log("left detected");
       }
       else if (tyosto_array[j].classList.contains("viim__tyosto_pysty")) {
-        tyosto_array[j].style.left = l_w - 6.5 + "px";
+        right_limit = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
+        tyosto_array[j].style.left = l_w - ((right_limit/5)-1) + "px";
+        
         console.log("tyosto_array[j].style.left" + tyosto_array[j].style.left);
-        tyosto_array[j].value = 32.5;
+        tyosto_array[j].value = right_limit;
       }
       else if (tyosto_array[j].classList.contains("alku__tyosto_pysty")) {
-        tyosto_array[j].style.left = 6.5 + "px";
+        left_limit = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
+        tyosto_array[j].style.left = ((left_limit/5)-1) + "px";
         console.log("tyosto_array[j].style.left" + tyosto_array[j].style.left);
-        tyosto_array[j].value = 32.5;
+        tyosto_array[j].value = left_limit;
       }
       else if (parseFloat(tyosto_array[j].style.right) > 1) {
         if (tyosto_array[j].classList.contains("alku__tyosto_pysty") || tyosto_array[j].classList.contains("viim__tyosto_pysty")) {
@@ -1184,7 +1277,7 @@ function fixkiinnikkeet(levy) {
         else {
           l_w_operating = l_w - 13;
           rcord = parseFloat(tyosto_array[j].style.right);
-          realshicord_l = ((-1) * (rcord - l_w_operating)) + 6.5;
+          realshicord_l = ((-1) * (rcord - l_w_operating)) - 1;
           console.log("l_w: " + l_w);
           console.log("rcord: " + rcord);
           console.log("realshicord_l: " + realshicord_l);
@@ -1202,7 +1295,7 @@ function fixkiinnikkeet(levy) {
         else {
           l_h_operating = l_h - 13;
           tcord = parseFloat(tyosto_array[j].style.top);
-          realshicord_h = ((-1) * (tcord - l_h_operating)) + 6.5;
+          realshicord_h = ((-1) * (tcord - l_h_operating)) - 1;
           console.log("l_h: " + l_h);
           console.log("tcord: " + tcord);
           console.log("realshicord_h: " + realshicord_h);
@@ -1349,18 +1442,15 @@ function fixkiinnikkeet(levy) {
     if (parseFloat(kiinnikkeet[i].style.bottom) > levy_height) {
       kiinnikkeet[i].parentElement.remove();
     }
-    // let inbuts = levy.querySelectorAll("input");
-    // for (var z = 0; z < inbuts.length; z++) {
-    //    if (parseFloat(inbuts[z].value) < 0) {
-    //       inbuts[z].parentElement.remove();
-    //    }
-    //     console.log("parseFloat(inbuts[i].value " + parseFloat(inbuts[z].value));
-    // }
+
+    
+
+    
     boxHeight = parseFloat(document.querySelector('#box-wrapper > main').offsetHeight);
     boxWidth = parseFloat(document.querySelector('#box-wrapper > main').offsetWidth);
-    leftend = parseFloat(document.querySelector(".drawarea__right").getBoundingClientRect().left) - 10;
-    bottomend = 80; // old
-    p_bottomend = 80;
+    leftend = parseFloat(document.querySelector(".drawarea__right").getBoundingClientRect().left) - 55;
+    bottomend = 999; // old
+    p_bottomend = 999;
     t_input = canvas.querySelectorAll(".tyostot__tyosto");
     for (var i = t_input.length - 1; i >= 0; i--) {
       if (t_input[i].querySelector("input")) {
@@ -1368,8 +1458,6 @@ function fixkiinnikkeet(levy) {
 
         input__left = parseFloat(input.getBoundingClientRect().left);
         input__bottom = parseFloat(input.getBoundingClientRect().top);
-
-
         p_input__left = parseFloat(input.parentElement.getBoundingClientRect().left);
         p_input__bottom = parseFloat(input.parentElement.getBoundingClientRect().top);
 
@@ -1388,11 +1476,13 @@ function fixkiinnikkeet(levy) {
       console.log(i_s);
       for (var j = i_s.length - 1; j >= 0; j--) {
         if (parseFloat(i_s[j].value) < 0) {
-          i_s[j].value = parseFloat(levy_tyostot_y.parentElement.title.split(",")[1]) - 32.5 * 2;
+          i_s[j].value = parseFloat(levy_tyostot_y.parentElement.title.split(",")[1]) - (s_ar + s_yr);
         }
       }
     }
   }
+
+  
   tyostot__tyosto_vaaka = canvas.querySelectorAll(".tyostot__tyosto_vaaka");
   for (var i = tyostot__tyosto_vaaka.length - 1; i >= 0; i--) {
     if (tyostot__tyosto_vaaka[i].querySelector(".secondcord")) { }
@@ -1435,15 +1525,15 @@ function fixkiinnikkeet(levy) {
         tyostot__tyosto_pysty[i].append(secondcord);
       }
     }
-    if (tyostot__tyosto_pysty[i].querySelector("input")) {
-      if (tyostot__tyosto_pysty[i].classList.contains("viim__tyosto_pysty") || tyostot__tyosto_pysty[i].classList.contains("alku__tyosto_pysty")) {
+    // if (tyostot__tyosto_pysty[i].querySelector("input")) {
+    //   if (tyostot__tyosto_pysty[i].classList.contains("viim__tyosto_pysty") || tyostot__tyosto_pysty[i].classList.contains("alku__tyosto_pysty")) {
 
-      }
-      else if (parseFloat(tyostot__tyosto_pysty[i].querySelector("input").value) < 100) {
-        tyostot__tyosto_pysty[i].remove();
-        alert("Alle 100mm Työstö poistettu piirtoalueelta");
-      }
-    }
+    //   }
+    //   else if (parseFloat(tyostot__tyosto_pysty[i].querySelector("input").value) < 100) {
+    //     tyostot__tyosto_pysty[i].remove();
+    //     alert("Alle 100mm Työstö poistettu piirtoalueelta");
+    //   }
+    // }
 
 
   }
@@ -1464,16 +1554,26 @@ function fixkiinnikkeet(levy) {
   }
 }
 
+function getElementIndex(element) {
+  return Array.from(element.parentNode.children).indexOf(element);
+}
+
 function tyosto__del(item) {
-  //if (document.querySelector("#drawscreen_section_five #levytyosto_container.two")) {
-    item.parentElement.remove();
-    return;
-  //}
+
+  if(item.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.classList.contains("modal")) {
+    thistyosto = item.parentElement;
+    thistyosto.remove();
+  }
+
   console.log(" tyosto__del(item) fired");
   try {
     c_kiinnikkeet = canvas.querySelectorAll(".tyostot__tyosto");
     thistyosto = item.parentElement;
-    console.log("thistyosto: " + thistyosto);
+
+    current_delete_tyosto = getElementIndex(thistyosto);
+    deleted_tyosto_value = parseFloat(item.parentElement.querySelector("input:not(.secondcord):not(temp_input_last)").value);
+
+    console.log("current_delete_tyosto: "+current_delete_tyosto);
     if (thistyosto.classList.contains("tyostot__tyosto_pysty")) {
       thisinput_l = parseFloat(thistyosto.getBoundingClientRect().left);
       console.log("thisinput_l: " + thisinput_l);
@@ -1483,6 +1583,9 @@ function tyosto__del(item) {
           c_kiinnikkeet[i].remove();
         }
       }
+
+      tomodify_cord = document.querySelectorAll(".tyostot__tyosto_pysty")[current_delete_tyosto-1];
+      get__that_cordinput = identify__sameline(tomodify_cord,"x");
     }
     else if (thistyosto.classList.contains("tyostot__tyosto_vaaka")) {
       thisinput_b = parseFloat(thistyosto.getBoundingClientRect().bottom);
@@ -1493,7 +1596,17 @@ function tyosto__del(item) {
           c_kiinnikkeet[i].remove();
         }
       }
+      tomodify_cord = document.querySelectorAll(".tyostot__tyosto_vaaka")[current_delete_tyosto-1];
+      get__that_cordinput = identify__sameline(tomodify_cord,"y");
     }
+    get__that_cordinput.forEach(g => {
+      if(g.querySelector("input:not(.secondcord)")) {
+        tomod_input = g.querySelector("input:not(.secondcord)");
+        tomod_inputcur_value = parseFloat(tomod_input.value);
+        tomod_input.value = deleted_tyosto_value + tomod_inputcur_value;
+        tomod_input.dataset.from = deleted_tyosto_value + tomod_inputcur_value;
+      }
+    });
   } catch {
     console.log("canvas is not set");
   }
@@ -1539,9 +1652,9 @@ function reorganise__newtyosto() {
   // }
 
   t3 = canvas.querySelectorAll(".secondcord");
-  for (var i = t3.length - 1; i >= 0; i--) {
-    t3[i].remove();
-  }
+  // for (var i = t3.length - 1; i >= 0; i--) {
+  //   t3[i].style.opacity = 0;
+  // }
 
   t4 = canvas.querySelectorAll(".x_del");
   // for (var i = t4.length - 1; i >= 0; i--) {
@@ -1552,7 +1665,7 @@ function reorganise__newtyosto() {
     console.log("Delayed for 1 second.");
     // k_levys = canvas.querySelectorAll(".levy");
     for (var i = k_levys.length - 1; i >= 0; i--) {
-      fixkiinnikkeet(k_levys[i]);
+      give__tyosto_cord(k_levys[i]);
       countdown__kiinnikkeet(k_levys[i]);
     }
   }, 100);
@@ -1599,8 +1712,6 @@ function reorganise__newtyosto() {
     }
     // levy_array_pysty.push(parseFloat(c_levy[i].querySelector(".levy_tyostot_y .tyostot__tyosto").getBoundingClientRect().bottom));
     // levy_array_vaaka.push(parseFloat(c_levy[i].querySelector(".levy_tyostot_x .tyostot__tyosto").getBoundingClientRect().left));
-    console.log("c_lev_x.length " + c_lev_x.length);
-    console.log("c_lev_y.length " + c_lev_y.length);
 
     lenx += c_lev_x.length;
     leny += c_lev_y.length;
@@ -1703,18 +1814,9 @@ function reorganise__newtyosto() {
     sauma__controls[i].style.display = "none";
   }
 
-  t3 = canvas.querySelectorAll(".secondcord");
-  for (var s = t3.length - 1; s >= 0; s--) {
-    if (t3[s].parentElement.classList.contains("tyostot__tyosto_pysty")) {
-      t3[s].style.top = 30 + ((parseFloat(drawarea.style.height))) + "px";
-      t3[s].style.position = "absolute";
-    }
-    if (t3[s].parentElement.classList.contains("tyostot__tyosto_vaaka")) {
-      // t3[s].style.left = 10 + (-0.9) * ((parseFloat(drawarea.style.width))) + "px";
-      t3[s].style.right = 30 + ((parseFloat(drawarea.style.width))) + "px";
-      t3[s].style.position = "absolute";
-    }
-  }
+
+
+  
 
   //20/04 secondcord fix
 
@@ -1798,7 +1900,7 @@ function reorganise__newtyosto() {
 
       pressed__levy = item;
       open_ltladonta_settings(true, pressed__levy);
-      // alert("TYÖSTÖNÄYTTÖ TÄHÄN")
+
       realinputs = pressed__levy.parentElement.querySelectorAll("input");
       for (var c = realinputs.length - 1; c >= 0; c--) {
         if (realinputs[c].classList.contains('temp_input') === true) {
@@ -1808,130 +1910,140 @@ function reorganise__newtyosto() {
           realinputs[c].style.display = "none";
         }
       }
+
       document.querySelector(".levymodal__levyname").innerHTML = pressed__levy.innerText;
-      setTimeout(() => {
-        vis_levy = document.querySelector("#drawscreen_section_five > div#levytyosto_container.two div.visible.levy_vis.lt_levy_vis");
-        realinputs = vis_levy.querySelectorAll("input");
-        tyostot_oikeat = [];
-        for (var c = realinputs.length - 1; c >= 0; c--) {
-          // if(realinputs[c].classList.contains('temp_input') === true) {
-          //   realinputs[c].remove();
-          // }
-          // else {
-          //   if(realinputs[c].parentElement.classList.contains("tyostot__tyosto_pysty")) {
-          //     type = "tyostot__tyosto_pysty";
-          //   }
-          //   else if(realinputs[c].parentElement.classList.contains("tyostot__tyosto_vaaka")) {
-          //     type = "tyostot__tyosto_vaaka";
-          //   }
+      reset__ltlevy_cords(pressed__levy.parentElement);
 
-          //   tyostot_oikeat.push([realinputs[c],type])
-          //   realinputs[c].style.display = "none";
-          // }
-
-          realinputs[c].remove();
-        }
-        pystyt = vis_levy.querySelector(".levy_tyostot_x");
-        vaat = vis_levy.querySelector(".levy_tyostot_y");
-        pystyt_tyostot = pystyt.querySelectorAll(".tyostot__tyosto");
-        vaat_tyostot = vaat.querySelectorAll(".tyostot__tyosto");
-        pysty_tsumm = 0;
-        vaaka_tsumm = 0;
-        for (var i = pystyt_tyostot.length - 1; i >= 0; i--) {
-          temp_input = document.createElement("input");
-          temp_input.classList.add("temp_input");
-          temp_input.setAttribute("onchange", "change__tyostocord(this,1," + pysty_event + ");");
-          temp_input.setAttribute("onclick", "clearcord(this,'tyo');");
-          pystyt_tyostot[i].appendChild(temp_input);
-
-          real_cord = parseFloat(pystyt_tyostot[i].style.left) * 5 - pysty_tsumm;
-          //console.log("real_cord " + real_cord);
-          if (pystyt_tyostot[i].classList.contains("alku__tyosto_pysty")) {
-            pystyt_tyostot[i].querySelector("input").value = parseFloat(pystyt_tyostot[i].style.left) * 5;
-            pystyt_tyostot[i].querySelector("input").dataset.from = parseFloat(pystyt_tyostot[i].style.left) * 5;
-          }
-          else if (pystyt_tyostot[i].classList.contains("viim__tyosto_pysty") !== true) {
-            real_cord = parseFloat(pystyt_tyostot[i].style.left) * 5 - pysty_tsumm;
-            pystyt_tyostot[i].querySelectorAll("input")[0].value = real_cord;
-            pystyt_tyostot[i].querySelectorAll("input")[0].dataset.from = real_cord;
-          }
-          else {
-            real_cord = parseFloat(levy.title.split(",")[0]) - 32.5;
-            last_cord = real_cord - pysty_tsumm;
-            pystyt_tyostot[i].querySelectorAll("input")[0].value = 32.5;
-            pystyt_tyostot[i].querySelectorAll("input")[0].dataset.from = 32.5;
-
-
-
-            pystyt_tyostot[i].querySelectorAll("input")[0].value = 32.5;
-            pystyt_tyostot[i].querySelectorAll("input")[0].dataset.from = 32.5;
-
-            temp_input_last = document.createElement("input");
-            temp_input_last.classList.add("temp_input");
-            temp_input_last.classList.add("temp_input_last");
-            temp_input_last.setAttribute("onchange", "alert('Häntä- ja äärikiinnikekoordinaatit ovat kovakoodattuja . Kokeile muokata toista levyn koordinaattia')");
-            temp_input_last.setAttribute("onclick", "clearcord(this,'tyo');");
-            pystyt_tyostot[i].appendChild(temp_input_last);
-
-
-            temp_input_last.value = last_cord;
-            temp_input_last.dataset.from = last_cord;
-          }
-          if (pystyt_tyostot[i].querySelector("input.secondcord")) {
-            pystyt_tyostot[i].querySelector("input.secondcord").value = parseFloat(pystyt_tyostot[i].style.left) * 5 + parseFloat(pystyt_tyostot[i].parentElement.parentElement.style.left) * 5;
-            pystyt_tyostot[i].querySelector("input.secondcord").dataset.from = parseFloat(pystyt_tyostot[i].style.left) * 5 + parseFloat(pystyt_tyostot[i].parentElement.parentElement.style.left) * 5;
-
-          }
-          pysty_tsumm += real_cord;
-
-        }
-        for (var i = vaat_tyostot.length - 1; i >= 0; i--) {
-          temp_input = document.createElement("input");
-          temp_input.classList.add("temp_input");
-          temp_input.setAttribute("onchange", "change__tyostocord(this,1," + vaaka_event + ");");
-          temp_input.setAttribute("onclick", "clearcord(this,'tyo');");
-          vaat_tyostot[i].appendChild(temp_input);
-          real_cord_vaaka = parseFloat(vaat_tyostot[i].style.bottom) * 5 - vaaka_tsumm;
-          //console.log("real_cord " + real_cord);
-          if (vaat_tyostot[i].classList.contains("alku__tyosto_vaaka")) {
-            vaat_tyostot[i].querySelector("input").value = parseFloat(vaat_tyostot[i].style.bottom) * 5;
-            vaat_tyostot[i].querySelector("input").dataset.from = parseFloat(vaat_tyostot[i].style.bottom) * 5;
-          }
-          else if (vaat_tyostot[i].classList.contains("viim__tyosto_vaaka") !== true) {
-            real_cord_vaaka = parseFloat(vaat_tyostot[i].style.bottom) * 5 - vaaka_tsumm;
-            vaat_tyostot[i].querySelectorAll("input")[0].value = real_cord_vaaka;
-            vaat_tyostot[i].querySelectorAll("input")[0].dataset.from = real_cord_vaaka;
-          }
-          else {
-            real_cord_vaaka = parseFloat(levy.title.split(",")[1]) - 32.5;
-            last_cord_vaaka = real_cord_vaaka - vaaka_tsumm;
-            vaat_tyostot[i].querySelectorAll("input")[0].value = 32.5;
-            vaat_tyostot[i].querySelectorAll("input")[0].dataset.from = 32.5;
-
-            temp_input_last = document.createElement("input");
-            temp_input_last.classList.add("temp_input");
-            temp_input_last.classList.add("temp_input_last");
-            temp_input_last.setAttribute("onchange", "alert('Häntä- ja äärikiinnikekoordinaatit ovat kovakoodattuja . Kokeile muokata toista levyn koordinaattia')");
-            temp_input_last.setAttribute("onclick", "clearcord(this,'tyo');");
-            vaat_tyostot[i].appendChild(temp_input_last);
-
-
-            temp_input_last.value = last_cord_vaaka;
-            temp_input_last.dataset.from = last_cord_vaaka;
-          }
-          if (vaat_tyostot[i].querySelector("input.secondcord")) {
-            vaat_tyostot[i].querySelector("input.secondcord").value = parseFloat(vaat_tyostot[i].style.bottom) * 5 + parseFloat(vaat_tyostot[i].parentElement.parentElement.style.bottom) * 5;
-            vaat_tyostot[i].querySelector("input.secondcord").dataset.from = parseFloat(vaat_tyostot[i].style.bottom) * 5 + parseFloat(vaat_tyostot[i].parentElement.parentElement.style.bottom) * 5;
-          }
-
-          vaaka_tsumm += real_cord_vaaka;
-        }
-
-        realinputs = item.querySelectorAll("input");
-      }, 600);
     }
 
   }
+
+  removeduplicatecords__adjustcords();
+}
+
+function reset__ltlevy_cords(levy) {
+    vis_levy = document.querySelector("#drawscreen_section_five > div#levytyosto_container.two div.visible.levy_vis.lt_levy_vis");
+    realinputs = vis_levy.querySelectorAll("input");
+    tyostot_oikeat = [];
+    for (var c = realinputs.length - 1; c >= 0; c--) {
+      realinputs[c].remove();
+    }
+    pystyt = vis_levy.querySelector(".levy_tyostot_x");
+    vaat = vis_levy.querySelector(".levy_tyostot_y");
+    pystyt_tyostot = pystyt.querySelectorAll(".tyostot__tyosto");
+    vaat_tyostot = vaat.querySelectorAll(".tyostot__tyosto");
+    pysty_tsumm = 0;
+    vaaka_tsumm = 0;
+    for (var i = pystyt_tyostot.length - 1; i >= 0; i--) {
+      temp_input = document.createElement("input");
+      temp_input.classList.add("temp_input");
+      temp_input.setAttribute("onchange", "change__tyostocord(this,1," + pysty_event + ");");
+      temp_input.setAttribute("onclick", "clearcord(this,'tyo');");
+      pystyt_tyostot[i].appendChild(temp_input);
+
+      real_cord = parseFloat(pystyt_tyostot[i].style.left) * 5 - pysty_tsumm;
+      //console.log("real_cord " + real_cord);
+      if (pystyt_tyostot[i].classList.contains("alku__tyosto_pysty")) {
+        pystyt_tyostot[i].querySelector("input").value = parseFloat(pystyt_tyostot[i].style.left) * 5;
+        pystyt_tyostot[i].querySelector("input").dataset.from = parseFloat(pystyt_tyostot[i].style.left) * 5;
+      }
+      else if (pystyt_tyostot[i].classList.contains("viim__tyosto_pysty") !== true) {
+        real_cord = parseFloat(pystyt_tyostot[i].style.left) * 5 - pysty_tsumm;
+        pystyt_tyostot[i].querySelectorAll("input")[0].value = real_cord;
+        pystyt_tyostot[i].querySelectorAll("input")[0].dataset.from = real_cord;
+      }
+      else {
+        real_cord = parseFloat(levy.title.split(",")[0]) - s_vr;
+        last_cord = real_cord - pysty_tsumm;
+        pystyt_tyostot[i].querySelectorAll("input")[0].value = s_vr;
+        pystyt_tyostot[i].querySelectorAll("input")[0].dataset.from = s_vr;
+        pystyt_tyostot[i].querySelectorAll("input")[0].value = s_vr;
+        pystyt_tyostot[i].querySelectorAll("input")[0].dataset.from = s_vr;
+
+        temp_input_last = document.createElement("input");
+        temp_input_last.classList.add("temp_input");
+        temp_input_last.classList.add("temp_input_last");
+        temp_input_last.setAttribute("onchange", "alert('Häntä- ja äärikiinnikekoordinaatit ovat kovakoodattuja . Kokeile muokata toista levyn koordinaattia')");
+        temp_input_last.setAttribute("onclick", "clearcord(this,'tyo');");
+        pystyt_tyostot[i].appendChild(temp_input_last);
+
+
+        temp_input_last.value = last_cord;
+        temp_input_last.dataset.from = last_cord;
+      }
+      if (pystyt_tyostot[i].querySelector(".thirdcord")) {
+        pystyt_tyostot[i].querySelector(".thirdcord").innerHTML = parseFloat(pystyt_tyostot[i].style.left) * 5;
+        pystyt_tyostot[i].querySelector(".thirdcord").dataset.from = parseFloat(pystyt_tyostot[i].style.left) * 5;
+        pystyt_tyostot[i].querySelector(".thirdcord").style.display = "block";
+      }
+      else {
+        thirdcord = document.createElement("div");
+        thirdcord.style.display = "block";
+        thirdcord.classList.add("thirdcord");
+        thirdcord.setAttribute("onclick", "clearcord(this,'tyo');");
+        thirdcord.innerHTML = parseFloat(pystyt_tyostot[i].style.left) * 5;
+        thirdcord.dataset.from = parseFloat(pystyt_tyostot[i].style.left) * 5;
+        pystyt_tyostot[i].append(thirdcord);
+        
+      }
+      pysty_tsumm += real_cord;
+
+    }
+    for (var i = vaat_tyostot.length - 1; i >= 0; i--) {
+      temp_input = document.createElement("input");
+      temp_input.classList.add("temp_input");
+      temp_input.setAttribute("onchange", "change__tyostocord(this,1," + vaaka_event + ");");
+      temp_input.setAttribute("onclick", "clearcord(this,'tyo');");
+      vaat_tyostot[i].appendChild(temp_input);
+      real_cord_vaaka = parseFloat(vaat_tyostot[i].style.bottom) * 5 - vaaka_tsumm;
+      //console.log("real_cord " + real_cord);
+      if (vaat_tyostot[i].classList.contains("alku__tyosto_vaaka")) {
+        vaat_tyostot[i].querySelector("input").value = parseFloat(vaat_tyostot[i].style.bottom) * 5;
+        vaat_tyostot[i].querySelector("input").dataset.from = parseFloat(vaat_tyostot[i].style.bottom) * 5;
+      }
+      else if (vaat_tyostot[i].classList.contains("viim__tyosto_vaaka") !== true) {
+        real_cord_vaaka = parseFloat(vaat_tyostot[i].style.bottom) * 5 - vaaka_tsumm;
+        vaat_tyostot[i].querySelectorAll("input")[0].value = real_cord_vaaka;
+        vaat_tyostot[i].querySelectorAll("input")[0].dataset.from = real_cord_vaaka;
+      }
+      else {
+        real_cord_vaaka = parseFloat(levy.title.split(",")[1]) - s_ar;
+        last_cord_vaaka = real_cord_vaaka - vaaka_tsumm;
+        vaat_tyostot[i].querySelectorAll("input")[0].value = s_ar;
+        vaat_tyostot[i].querySelectorAll("input")[0].dataset.from = s_ar;
+
+        temp_input_last = document.createElement("input");
+        temp_input_last.classList.add("temp_input");
+        temp_input_last.classList.add("temp_input_last");
+        temp_input_last.setAttribute("onchange", "alert('Häntä- ja äärikiinnikekoordinaatit ovat kovakoodattuja . Kokeile muokata toista levyn koordinaattia')");
+        temp_input_last.setAttribute("onclick", "clearcord(this,'tyo');");
+        vaat_tyostot[i].appendChild(temp_input_last);
+
+
+        temp_input_last.value = last_cord_vaaka;
+        temp_input_last.dataset.from = last_cord_vaaka;
+      }
+      if (vaat_tyostot[i].querySelector(".thirdcord")) {
+        vaat_tyostot[i].querySelector(".thirdcord").innerHTML = parseFloat(vaat_tyostot[i].style.bottom) * 5;
+        vaat_tyostot[i].querySelector(".thirdcord").dataset.from = parseFloat(vaat_tyostot[i].style.bottom) * 5;
+        vaat_tyostot[i].querySelector(".thirdcord").style.display = "block";
+      }
+      else {
+        thirdcord = document.createElement("div");
+        thirdcord.classList.add("thirdcord");
+        thirdcord.style.display = "block";
+        thirdcord.setAttribute("onclick", "clearcord(this,'tyo');");
+        // secondcord.setAttribute("onchange", "change__tyostocord(this,2)");
+        thirdcord.innerHTML = parseFloat(vaat_tyostot[i].style.bottom) * 5;
+        thirdcord.dataset.from = parseFloat(vaat_tyostot[i].style.bottom) * 5;
+        vaat_tyostot[i].append(thirdcord);
+      }
+
+     
+      vaaka_tsumm += real_cord_vaaka;
+    }
+
+    realinputs = levy.querySelectorAll("input");
 }
 
 function open_ltladonta_settings(e, levy) {
@@ -1950,15 +2062,15 @@ function open_ltladonta_settings(e, levy) {
     levy_ = document.querySelector("div.levytyosto_container.two div.visible.levy_vis.lt_levy_vis");
 
     levy_.innerHTML = levy.parentElement.innerHTML;
+    ltcontainer.querySelector(".lt_levy_vis").style.height = parseFloat(levy.parentElement.style.height) + "px";
+    ltcontainer.querySelector(".lt_levy_vis").style.width = parseFloat(levy.parentElement.style.width) + "px";
 
-    ltcontainer.querySelector(".lt_levy_vis").style.height = parseFloat(l_title[1]) / 5 + "px";
-    ltcontainer.querySelector(".lt_levy_vis").style.width = parseFloat(l_title[0]) / 5 + "px";
+
+    ltcontainer.querySelector(".levytyosto__maincol_y").style.height = parseFloat(levy.parentElement.style.height) + "px";
+    ltcontainer.querySelector(".levytyosto__maincol_x").style.width = parseFloat(levy.parentElement.style.width) + "px";
+    ltcontainer.querySelector(".levytyosto__maincol_x").style.marginTop = parseFloat(levy.parentElement.style.height) + 40 + "px";
 
     ltcontainer.querySelector(".lt_levy_vis").title = levy.parentElement.title;
-
-    // kiinniketys = document.querySelector(".kiinniketys");
-    // kiinniketys.querySelector(".trow:nth-child(1) label").click();
-    // kiinniketys.querySelector(".trow:nth-child(2) label").click();
 
     if (document.querySelector(".dir_y")) {
       levy_.classList.remove("dir_x");
@@ -1983,6 +2095,12 @@ function open_ltladonta_settings(e, levy) {
         else {
           realinputs[c].style.display = "none";
         }
+
+        thirdcord = ltcontainer.parentElement.querySelectorAll(".thirdcord");
+        
+        for (var c = thirdcord.length - 1; c >= 0; c--) {
+          thirdcord[c].style.display = "none";
+        }
       }
       document.querySelectorAll(".levy__label")[0].click();
 
@@ -2002,30 +2120,14 @@ function open_ltladonta_settings(e, levy) {
     number = levy_.dataset.levy;
 
 
+    
+
+
 
     reorganise__newtyosto_levy(pressed__levy);
 
-    fixkiinnikkeet(pressed__levy.parentElement);
+    give__tyosto_cord(pressed__levy.parentElement);
     countdown__kiinnikkeet(pressed__levy.parentElement);
-
-
-    // setTimeout(() => {
-    //   fixkiinnikkeet(pressed__levy.parentElement);
-    //   countdown__kiinnikkeet(pressed__levy.parentElement);
-    // }, 1000);
-
-    console.log(pressed__levy);
-
-    // levyt=canvas.querySelectorAll(".levy");
-    // for (var i = levyt.length - 1; i >= 0; i--) {
-    //   // fixkiinnikkeet(levyt[i]);
-    //   countdown__kiinnikkeet(levyt[i]);
-    // }
-
-    // aloita_tyosto_kiinnikkeet();
-    // reorganise__newtyosto();
-
-
 
     pressed__levy = null;
     document.querySelector("#levyn_mitat_1").checked = false;
@@ -2042,6 +2144,11 @@ function open_ltladonta_settings(e, levy) {
       temp_inputs[i].style.display = 'none';
     }
 
+    thirdcords = canvas.querySelectorAll(".thirdcord");
+    for (let i = 0; i < thirdcords.length; i++) {
+      thirdcords[i].style.display = 'none';
+    }
+
     x_cord_mkis = canvas.querySelectorAll(".x_cord_mki");
     for (let i = 0; i < x_cord_mkis.length; i++) {
       x_cord_mkis[i].style.display = 'none';
@@ -2052,82 +2159,69 @@ function open_ltladonta_settings(e, levy) {
       x_dels[i].style.display = 'none';
     }
 
-    t3 = canvas.querySelectorAll(".secondcord");
-    for (var s = t3.length - 1; s >= 0; s--) {
-      if (t3[s].parentElement.classList.contains("tyostot__tyosto_pysty")) {
-        t3[s].style.top = 30 + ((parseFloat(drawarea.style.height))) + "px";
-        t3[s].style.position = "absolute";
-      }
-      if (t3[s].parentElement.classList.contains("tyostot__tyosto_vaaka")) {
-        // t3[s].style.left = 10 + (-0.9) * ((parseFloat(drawarea.style.width))) + "px";
-        t3[s].style.right = 30 + ((parseFloat(drawarea.style.width))) + "px";
-        t3[s].style.position = "absolute";
-      }
-    }
+    
 
     if (document.querySelector("#levy__adding_3")) {
       for (let d = 0; d < 3; d++) {
         addingval = document.querySelector("#levy__adding_") + d;
         addingval.value = 0;
-
         document.querySelector("#levy_vari_" + d).checked = false;
-
-
-
-        document.querySelector("#levyn_mitat_1").checked = false;
+        document.querySelector("#c").checked = false;
         document.querySelector("#levy_ruuvit_1").checked = false;
         document.querySelector("#levy_ruuvit_2").checked = false;
 
         levy__interaction(3, document.querySelector("#levyn_mitat_1 + label"));
         levy__interaction(2, document.querySelector("#levy_ruuvit_1 + label"));
         levy__interaction(2, document.querySelector("#levy_ruuvit_2 + label"));
-
-
         levy_example.style.border = "unset";
+        
+
       }
+
     }
     levys = canvas.querySelectorAll(".levy");
     for (var i = 0; i < levys.length; i++) {
       if (levys[i].dataset.levy == number) {
-        levys[i].style.background = levy_.style.background;
-        levys[i].style.backgroundColor = levy_.style.backgroundColor;
-        // levys[i].classList = levy_.classList;
-        // levys[i].innerHTML = levy_.innerHTML;
-        // console.log(levys[i]);
-        // console.log(levy_);
+        levys[i].style.backgroundImage = levy_.style.backgroundImage;
+         levys[i].dataset.sku = levy_.dataset.sku; 
+         levys[i].dataset.thickness = levy_.dataset.thickness; 
+         levys[i].dataset.structure = levy_.dataset.structure; 
       }
     }
-
-    // SAVE HERE
   }
-
 
   function reorganise__newtyosto_levy(levy__to_reorgaise) {
     levy__to_reorgaise.parentElement.querySelector(".levy_tyostot_y").innerHTML = ltcontainer.querySelector(".levy_tyostot_y").innerHTML;
     levy__to_reorgaise.parentElement.querySelector(".levy_tyostot_x").innerHTML = ltcontainer.querySelector(".levy_tyostot_x").innerHTML;
-
-    // realinputs = levy__to_reorgaise.parentElement.querySelectorAll("input");
-
-
-
-    // for (var c = realinputs.length - 1; c >= 0; c--) {
-    //   if(realinputs[c].classList.contains('temp_input')) {
-    //     realinputs[c].remove();
-    //   }
-    //   else {
-    //     realinputs[c].style.display = "block";
-    //   }
-    // }
-
-    // fixkiinnikkeet(levy__to_reorgaise);
-    // countdown__kiinnikkeet(levy__to_reorgaise);
+  }
+}
+function reset_bordercords() {
+  pysty_alkutyostot = ltcontainer.querySelectorAll(".alku__tyosto_pysty");
+  pysty_viimtyostot = ltcontainer.querySelectorAll(".viim__tyosto_pysty");
+  vaaka_alkutyostot = ltcontainer.querySelectorAll(".alku__tyosto_vaaka");
+  vaaka_viimtyostot = ltcontainer.querySelectorAll(".viim__tyosto_vaaka");
+  for (let a = 0; a < pysty_alkutyostot.length; a++) {
+    pysty_alkutyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(e => {
+      e.classList.add("hidden");
+    });
+  }
+  for (let a = 0; a < pysty_viimtyostot.length; a++) {
+    pysty_viimtyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(e => {
+      e.classList.add("hidden");
+    });
   }
 
-
-
-
+  for (let a = 0; a < vaaka_alkutyostot.length; a++) {
+    vaaka_alkutyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(e => {
+      e.classList.add("hidden");
+    });
+  }
+  for (let a = 0; a < vaaka_viimtyostot.length; a++) {
+    vaaka_viimtyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(e => {
+      e.classList.add("hidden");
+    });
+  }
 }
-
 function countdown__kiinnikkeet(levy) {
   console.log("15-07 LEVY:::" + levy);
   if (levy) {
@@ -2153,12 +2247,14 @@ function countdown__kiinnikkeet(levy) {
             pystyt_tyostot[i].querySelectorAll("input")[0].dataset.from = real_cord;
           }
           else {
-            real_cord = parseFloat(levy.title.split(",")[0]) - 32.5;
+            real_cord = parseFloat(levy.title.split(",")[0]) - parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
             last_cord = real_cord - pysty_tsumm;
-            pystyt_tyostot[i].querySelectorAll("input")[0].value = 32.5;
-            pystyt_tyostot[i].querySelectorAll("input")[0].dataset.from = 32.5;
-            pystyt_tyostot[i].querySelectorAll("input")[1].value = last_cord;
-            pystyt_tyostot[i].querySelectorAll("input")[1].dataset.from = last_cord;
+            pystyt_tyostot[i].querySelectorAll("input")[0].value = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
+            pystyt_tyostot[i].querySelectorAll("input")[0].dataset.from = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
+            if(pystyt_tyostot[i].querySelectorAll("input")[1]) {
+              pystyt_tyostot[i].querySelectorAll("input")[1].value = last_cord;
+              pystyt_tyostot[i].querySelectorAll("input")[1].dataset.from = last_cord;
+            }
           }
           if (pystyt_tyostot[i].querySelector("input.secondcord")) {
             pystyt_tyostot[i].querySelector("input.secondcord").value = parseFloat(pystyt_tyostot[i].style.left) * 5 + parseFloat(pystyt_tyostot[i].parentElement.parentElement.style.left) * 5;
@@ -2181,10 +2277,10 @@ function countdown__kiinnikkeet(levy) {
             vaat_tyostot[i].querySelectorAll("input")[0].dataset.from = real_cord_vaaka;
           }
           else {
-            real_cord_vaaka = parseFloat(levy.title.split(",")[1]) - 32.5;
+            real_cord_vaaka = parseFloat(levy.title.split(",")[1]) - parseFloat(document.querySelector("#settings__levy_ar_arvo").value);
             last_cord_vaaka = real_cord_vaaka - vaaka_tsumm;
-            vaat_tyostot[i].querySelectorAll("input")[0].value = 32.5;
-            vaat_tyostot[i].querySelectorAll("input")[0].dataset.from = 32.5;
+            vaat_tyostot[i].querySelectorAll("input")[0].value = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);
+            vaat_tyostot[i].querySelectorAll("input")[0].dataset.from = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);
             if (vaat_tyostot[i].querySelectorAll("input")[1]) {
               vaat_tyostot[i].querySelectorAll("input")[1].value = last_cord_vaaka;
               vaat_tyostot[i].querySelectorAll("input")[1].dataset.from = last_cord_vaaka;
@@ -2200,26 +2296,33 @@ function countdown__kiinnikkeet(levy) {
         }
       }
     }
+    reset_bordercords();
   }
-
 }
 
 
 function levy__interaction(stage, attr) {
   tyosto__container = document.querySelector("div#levytyosto_container");
   levy_example = tyosto__container.querySelector(".levy_vis");
-
   current__attribute = attr.getAttribute("for");
 
+  document.querySelector("#levy_vaaka").checked = false;
+  document.querySelector("#levy_pysty").checked = false;
+
+  reset_bordercords();
   if (current__attribute === "levyn_mitat_1") {
     document.querySelector("#levy_ruuvit_1").checked = false;
     document.querySelector("#levy_ruuvit_2").checked = false;
 
     realinputs = ltcontainer.parentElement.querySelectorAll("input.temp_input");
+    thirdcord = ltcontainer.parentElement.querySelectorAll(".thirdcord");
     del_divs = tyosto__container.querySelectorAll(".x_del");
 
     for (var c = realinputs.length - 1; c >= 0; c--) {
       realinputs[c].style.display = "none";
+    }
+    for (var c = thirdcord.length - 1; c >= 0; c--) {
+      thirdcord[c].style.display = "none";
     }
     for (let d = 0; d < del_divs.length; d++) {
       del_divs[d].style.display = "none";
@@ -2231,9 +2334,13 @@ function levy__interaction(stage, attr) {
 
     realinputs = ltcontainer.parentElement.querySelectorAll("input.temp_input");
     del_divs = tyosto__container.querySelectorAll(".x_del");
+    thirdcord = ltcontainer.parentElement.querySelectorAll(".thirdcord");
 
     for (var c = realinputs.length - 1; c >= 0; c--) {
       realinputs[c].style.display = "none";
+    }
+    for (var c = thirdcord.length - 1; c >= 0; c--) {
+      thirdcord[c].style.display = "none";
     }
 
     levyja = document.querySelectorAll(".levy__adding_arrow");
@@ -2250,6 +2357,7 @@ function levy__interaction(stage, attr) {
 
 
     realinputs = ltcontainer.parentElement.querySelectorAll("input.temp_input");
+    thirdcord = ltcontainer.parentElement.querySelectorAll(".thirdcord");
     del_divs = tyosto__container.querySelectorAll(".x_del");
 
     // for (var c = realinputs.length - 1; c >= 0; c--) {
@@ -2259,14 +2367,23 @@ function levy__interaction(stage, attr) {
       del_divs[d].style.display = "none";
     }
 
+
+    for (let d = 0; d < thirdcord.length; d++) {
+      thirdcord[d].style.display = "block";
+    }
+    
+
     levyja = document.querySelectorAll(".levy__adding_arrow");
     for (let d = 0; d < levyja.length; d++) {
       levyja[d].remove();
     }
   }
-
   if (stage == 1) {
-    levy_example.style.backgroundColor = attr.style.background;
+    levy_example.style.backgroundImage = attr.style.backgroundImage;
+    levy_example.dataset.sku = document.querySelector("#"+attr.getAttribute('for')).dataset.sku; 
+    levy_example.dataset.thickness = document.querySelector("#"+attr.getAttribute('for')).dataset.thickness; 
+    levy_example.dataset.structure = document.querySelector("#"+attr.getAttribute('for')).dataset.structure; 
+
   }
   if (stage == 2) {
     realinputs = ltcontainer.parentElement.querySelectorAll("input");
@@ -2274,13 +2391,7 @@ function levy__interaction(stage, attr) {
     setTimeout(() => {
       if (document.querySelector("#levy_ruuvit_2").checked) {
         for (var c = realinputs.length - 1; c >= 0; c--) {
-          if (realinputs[c].classList.contains('levy__adding_input') === true) { }
-          else if (realinputs[c].classList.contains('temp_input') !== true) {
-            realinputs[c].style.display = "none";
-          }
-          else {
-            realinputs[c].style.display = "block";
-          }
+          realinputs[c].style.display = "block";
         }
       }
       else {
@@ -2338,8 +2449,6 @@ function levy__interaction(stage, attr) {
           levy__addedarea.classList.add("levy__addedarea");
           levy__addedarea.classList.add("levy__addedarea_" + d);
 
-
-
           levy__adding_arrow.appendChild(levy__adding_input);
           levy__adding_arrow.appendChild(levy__adding_label);
           levy_example.appendChild(levy__addedarea);
@@ -2354,15 +2463,15 @@ function levy__interaction(stage, attr) {
     }, 100);
 
   }
+
+  give__tyosto_cord(vis_levy);
+  countdown__kiinnikkeet(vis_levy);
 }
 
 function addtolevy(elem, identificator) {
   input_destination = parseFloat(document.querySelector("#" + elem.getAttribute("for")).value);
-  console.log(input_destination);
-
-  console.log("levy_example" + levy_example);
-
-
+  // console.log(input_destination);
+  // console.log("levy_example" + levy_example);
   adding_w = (input_destination / 5);
   new_w = (old_w + adding_w) + "px";
 
@@ -2373,37 +2482,737 @@ function addtolevy(elem, identificator) {
   if (identificator == 0) {
     levy_example.style.width = parseFloat(new_w) + reverse_w + "px";
     addedside_w = parseFloat(adding_w);
-
     levy_example.querySelector(".levy__addedarea_" + identificator).style.width = adding_w + "px";
   }
   if (identificator == 1) {
     levy_example.style.height = parseFloat(new_h) + reverse_h + "px";
     addedside_h = parseFloat(adding_h);
-
     levy_example.querySelector(".levy__addedarea_" + identificator).style.height = adding_h + "px";
-
   }
   if (identificator == 2) {
     levy_example.style.borderLeft = adding_w + "px solid ";
     levy_example.style.width = parseFloat(new_w) + addedside_w + "px";
     reverse_w = parseFloat(adding_w);
     // levy_example.style.paddingLeft = adding_w/2 + "px";
-
     levy_example.querySelector(".levy__addedarea_" + identificator).style.width = adding_w + "px";
     levy_example.querySelector(".levy__addedarea_" + identificator).style.marginLeft = ((-1) * adding_w) + "px";
-
-
   }
   if (identificator == 3) {
     levy_example.style.borderBottom = adding_h + "px solid ";
     levy_example.style.height = parseFloat(new_h) + addedside_h + "px";
     reverse_h = parseFloat(adding_h);
     // levy_example.style.paddingBottom = adding_h/2 + "px";
-
     levy_example.querySelector(".levy__addedarea_" + identificator).style.height = adding_h + "px";
     levy_example.querySelector(".levy__addedarea_" + identificator).style.marginBottom = ((-1) * adding_h) + "px";
+  }
+}
+
+function removeduplicatecords__adjustcords() {
+  setTimeout(() => {
+    t3 = canvas.querySelectorAll(".secondcord");
+    for (var s = t3.length - 1; s >= 0; s--) {
+      levy = t3[s].parentElement.parentElement.parentElement;
+      if (t3[s].parentElement.classList.contains("tyostot__tyosto_pysty")) {
+        t3[s].style.top = 30 + ((parseFloat(drawarea.style.height) - levy.offsetTop)) + "px";
+        t3[s].style.position = "absolute";
+      }
+      
+      if (t3[s].parentElement.classList.contains("tyostot__tyosto_vaaka")) {
+       
+        t3[s].parentElement.querySelectorAll("input.secondcord").forEach(element => {
+          element.style.left = -30 - parseFloat(levy.offsetLeft) + "px";
+          element.style.position =  "absolute";
+          console.log(t3[s]);
+        }); 
+      }
+
+      if (t3[s].parentElement.classList.contains("tyostot__tyosto_pysty") && t3[s].parentElement.querySelector("input.x_cord_mki")) {
+        t3[s].parentElement.querySelectorAll("input:not(.secondcord)").forEach(element => {
+          element.style.top = ((parseFloat(levy.style.bottom)+parseFloat(levy.style.height))-parseFloat(drawarea.style.height)) + "px";
+          element.style.position =  "absolute";
+        }); 
+      }
+
+      if (t3[s].parentElement.classList.contains("tyostot__tyosto_vaaka") && t3[s].parentElement.querySelector("input.x_cord_mki")) {
+        t3[s].parentElement.querySelectorAll("input:not(.secondcord)").forEach(element => {
+          element.style.right = ((parseFloat(levy.offsetLeft)+parseFloat(levy.style.width))-parseFloat(drawarea.style.width)) + "px";
+          element.style.position =  "absolute";
+        });
+      }
+
+      
+      
+    }
+
+    x_dels = canvas.querySelectorAll(".x_del");
+    for (let i = 0; i < x_dels.length; i++) {
+      x_dels[i].classList.add("hidden");
+    }
+
+    tyostot__tyosto_pysty_s = canvas.querySelectorAll(".tyostot__tyosto_pysty .secondcord");
+    unique_array = [];
+    for (let a = 0; a < tyostot__tyosto_pysty_s.length; a++) {
+      if(unique_array.includes(tyostot__tyosto_pysty_s[a].value)) {
+        tyostot__tyosto_pysty_s[a].remove();
+      }
+      else {
+        unique_array.push(tyostot__tyosto_pysty_s[a].value);
+      }
+    }
+
+    tyostot__tyosto_vaaka_s = canvas.querySelectorAll(".tyostot__tyosto_vaaka .secondcord");
+    unique_array_ = [];
+    for (let a = 0; a < tyostot__tyosto_vaaka_s.length; a++) {
+      if(unique_array_.includes(tyostot__tyosto_vaaka_s[a].value)) {
+        tyostot__tyosto_vaaka_s[a].remove();
+      }
+      else {
+        unique_array_.push(tyostot__tyosto_vaaka_s[a].value);
+      }
+    }
+
+    levyt = canvas.querySelectorAll(".levy");
+
+    left_array = [];
+    top_array = [];
+    levyt.forEach(levy => {
+      levy_leftset = levy.offsetLeft;
+      levy_topset = levy.offsetTop;
+      if(left_array.includes(levy_leftset)) {}
+      else {
+        left_array.push(levy_leftset)
+      }
+      if(top_array.includes(levy_topset)) {}
+      else {
+        top_array.push(levy_topset)
+      }
+    });
+
+    left_array.forEach(left => {
+      my_array = [];
+      my_inputs = [];
+      my_dels = [];
+      for (let a = 0; a < levyt.length; a++) {
+        levy2_leftset = levyt[a].offsetLeft;
+        if(left === levy2_leftset) {
+          my_array.push(levyt[a]);
+        }
+      }
+
+      my_array.forEach(item => {
+        inputs_in_levy = item.querySelectorAll(".tyostot__tyosto_pysty input:not(.secondcord)");
+        dels_in_levy = item.querySelectorAll(".tyostot__tyosto_pysty .x_del");
+        for (let a = 0; a < inputs_in_levy.length; a++) {
+           if(my_inputs.includes(inputs_in_levy[a].getBoundingClientRect().left)) {
+            inputs_in_levy[a].remove();
+           }
+           else {
+            my_inputs.push(inputs_in_levy[a].getBoundingClientRect().left);
+           }
+        }
+        for (let a = 0; a < dels_in_levy.length; a++) {
+          if(my_dels.includes(dels_in_levy[a].getBoundingClientRect().left)) {
+          //  dels_in_levy[a].remove();
+            console.log(dels_in_levy[a].getBoundingClientRect().left);
+          }
+          else {
+           my_dels.push(dels_in_levy[a].getBoundingClientRect().left);
+          }
+       }
+      });
+
+      
+    });
+
+    top_array.forEach(top => {
+      my_array = [];
+      my_inputs = [];
+      my_dels = [];
+      for (let a = 0; a < levyt.length; a++) {
+        levy2_topset = levyt[a].offsetTop;
+        if(top === levy2_topset) {
+          my_array.push(levyt[a]);
+        }
+      }
+    
+      my_array.forEach(item => {
+        inputs_in_levy = item.querySelectorAll(".tyostot__tyosto_vaaka input.x_cord_mki");
+        dels_in_levy = item.querySelectorAll(".tyostot__tyosto_vaaka .x_del");
+        for (let a = 0; a < inputs_in_levy.length; a++) {
+          if(my_inputs.includes(inputs_in_levy[a].getBoundingClientRect().top)) {
+            // inputs_in_levy[a].remove();
+
+            console.log(inputs_in_levy[a].getBoundingClientRect().top);
+          }
+          else {
+            my_inputs.push(inputs_in_levy[a].getBoundingClientRect().top);
+          }
+        }
+        for (let a = 0; a < dels_in_levy.length; a++) {
+          if(my_dels.includes(dels_in_levy[a].getBoundingClientRect().top)) {
+          //  dels_in_levy[a].remove();
+          }
+          else {
+           my_dels.push(dels_in_levy[a].getBoundingClientRect().top);
+          }
+        }
+      });
+    });
+
+    x_cords = document.querySelectorAll(".tyostot__tyosto_pysty .x_cord_mki");
+    y_cords = document.querySelectorAll(".tyostot__tyosto_vaaka .x_cord_mki");
+
+    x_cords.forEach(x => {
+      x.style.left = (-1) * parseFloat(x.value)/10 + "px";
+      x.style.marginLeft = "unset";
+    });
+
+    y_cords.forEach(y => {
+      y.style.bottom = (-1) * parseFloat(y.value)/10 + "px";
+      y.style.top = "unset";
+      y.style.marginBottom = "unset";
+    });
+
+    levyt.forEach(lev => {
+      tyostox_for_add = lev.querySelectorAll(".tyostot__tyosto_pysty:not(.viim__tyosto_pysty):not(.alku__tyosto_pysty)");
+      for (let a = 0; a < tyostox_for_add.length; a++) {
+        if(tyostox_for_add[a].querySelector(".secondcord")) {
+          scord = tyostox_for_add[a].querySelector(".secondcord");
+          if(tyostox_for_add[a].querySelector(".thirdcord")) {
+            tyostox_for_add[a].querySelector(".thirdcord").innerHTML = "<b>V</b><br>" + parseFloat(scord.parentElement.style.left)*5;
+          }
+          else {
+            scord = tyostox_for_add[a].querySelector(".secondcord");
+            x = document.createElement("div");
+            x.classList = ["thirdcord"];
+            x.style.top = parseFloat(scord.style.top) - 30 + "px";
+            x.innerHTML = "<b>V</b><br>" +parseFloat(scord.parentElement.style.left)*5;
+            tyostox_for_add[a].appendChild(x); 
+          }
+        }
+        
+      }
 
 
+
+      tyostoy_for_add = lev.querySelectorAll(".tyostot__tyosto_vaaka:not(.viim__tyosto_vaaka):not(.alku__tyosto_vaaka)");
+      for (let a = 0; a < tyostoy_for_add.length; a++) {
+        if(tyostoy_for_add[a].querySelector(".secondcord")) {
+          scord = tyostoy_for_add[a].querySelector(".secondcord");
+          if(tyostoy_for_add[a].querySelector(".thirdcord")) {
+            tyostoy_for_add[a].querySelector(".thirdcord").innerHTML = parseFloat(scord.parentElement.style.bottom)*5 + "<br><b>V</b>";
+          }
+          else {
+            x = document.createElement("div");
+            x.classList = ["thirdcord"];
+            x.style.right = parseFloat(scord.style.right) - 20 + "px";
+            x.style.left = parseFloat(scord.style.left) + 10 + "px";
+            x.innerHTML =  parseFloat(scord.parentElement.style.bottom)*5 +"<br><b>V</b>";
+            tyostoy_for_add[a].appendChild(x); 
+          }
+        }
+      }
+
+      alku_tyostot = lev.querySelectorAll(".alku__tyosto_pysty");
+      for (let a = 0; a < alku_tyostot.length; a++) {
+        if(alku_tyostot[a].querySelector(".secondcord")) {
+          scord = alku_tyostot[a].querySelector(".secondcord");
+          if(alku_tyostot[a].querySelector(".thirdcord")) {
+            alku_tyostot[a].querySelector(".thirdcord").innerHTML = "<b>R</b>";
+          }
+          else {
+            scord = alku_tyostot[a].querySelector(".secondcord");
+            x = document.createElement("div");
+            x.classList = ["thirdcord"];
+            x.style.top = parseFloat(scord.style.top) - 30 + "px";
+            x.innerHTML = "<b>R</b>";
+            alku_tyostot[a].appendChild(x);
+            console.log(alku_tyostot[a]); 
+          }
+        }
+          
+      }
+
+      alku_tyosto = lev.querySelectorAll(".alku__tyosto_vaaka");
+      for (let a = 0; a < alku_tyosto.length; a++) {
+        if(alku_tyosto[a].querySelector(".secondcord")) {
+          scord = alku_tyosto[a].querySelector(".secondcord");
+          if(alku_tyosto[a].querySelector(".thirdcord")) {
+            alku_tyosto[a].querySelector(".thirdcord").innerHTML = "<b>R</b>";
+          }
+          else {
+            x = document.createElement("div");
+            x.classList = ["thirdcord"];
+            x.style.right = parseFloat(scord.style.right) - 20 + "px";
+            x.style.left = parseFloat(scord.style.left) + 10 + "px";
+            x.innerHTML = "<b>R</b>";
+            alku_tyosto[a].appendChild(x); 
+            console.log(alku_tyosto[a]);
+          }
+        }
+      }
+
+      viim_tyostot = lev.querySelectorAll(".viim__tyosto_pysty");
+      viim_rc = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
+      viim_r = parseFloat(lev.querySelector(".levy b i").innerText.split("x")[0]) - viim_rc;
+      
+      for (let a = 0; a < viim_tyostot.length; a++) {
+        if(viim_tyostot[a].querySelector(".secondcord")) {
+          scord = viim_tyostot[a].querySelector(".secondcord");
+          if(viim_tyostot[a].querySelector(".thirdcord")) {
+            viim_tyostot[a].querySelector(".thirdcord").innerHTML = "<b>R</b><br><i>"+viim_r+"</i>";
+          }
+          else {
+            scord = viim_tyostot[a].querySelector(".secondcord");
+            x = document.createElement("div");
+            x.classList = ["thirdcord"];
+            x.style.top = parseFloat(scord.style.top) - 30 + "px";
+            viim_tyostot[a].appendChild(x); 
+          }
+          console.log(viim_tyostot[a]);
+        }
+      }
+
+      viim_tyosto = lev.querySelectorAll(".viim__tyosto_vaaka");
+      viim_ac = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);
+      viim_a = parseFloat(lev.querySelector(".levy b i").innerText.split("x")[1]) - viim_ac;
+      for (let a = 0; a < viim_tyosto.length; a++) {
+        if(viim_tyosto[a].querySelector(".secondcord")) {
+          scord = viim_tyosto[a].querySelector(".secondcord");
+          if(viim_tyosto[a].querySelector(".thirdcord")) {
+            viim_tyosto[a].querySelector(".thirdcord").innerHTML = "<i>"+viim_a+"</i><br><b>R</b>";
+          }
+          else {
+            x = document.createElement("div");
+            x.classList = ["thirdcord"];
+            x.style.right = parseFloat(scord.style.right) - 20 + "px";
+            x.style.left = parseFloat(scord.style.left) - 10 + "px";
+            viim_tyosto[a].appendChild(x); 
+            console.log(viim_tyosto[a]);
+          }
+        }
+      }
+    });
+  }, 1500);
+}
+
+function identify__sameline(object,mode) {
+  levyt = canvas.querySelectorAll(".levy");
+
+  left_array = [];
+  top_array = [];
+  levyt.forEach(levy => {
+    levy_leftset = levy.offsetLeft;
+    levy_topset = levy.offsetTop;
+    if(left_array.includes(levy_leftset)) {}
+    else {
+      left_array.push(levy_leftset)
+    }
+    if(top_array.includes(levy_topset)) {}
+    else {
+      top_array.push(levy_topset)
+    }
+  });
+
+
+  
+
+
+
+  levyt.forEach(lev => {
+    tyostox_for_add = lev.querySelectorAll(".tyostot__tyosto_pysty:not(.viim__tyosto_pysty):not(.alku__tyosto_pysty)");
+    for (let a = 0; a < tyostox_for_add.length; a++) {
+      if(tyostox_for_add[a].querySelector(".secondcord")) {
+        scord = tyostox_for_add[a].querySelector(".secondcord");
+        if(tyostox_for_add[a].querySelector(".thirdcord")) {
+          tyostox_for_add[a].querySelector(".thirdcord").innerHTML = "<b>V</b><br>" + parseFloat(scord.parentElement.style.left)*5;
+        }
+        else {
+          scord = tyostox_for_add[a].querySelector(".secondcord");
+          x = document.createElement("div");
+          x.classList = ["thirdcord"];
+          x.style.top = parseFloat(scord.style.top) - 30 + "px";
+          x.innerHTML = "<b>V</b><br>" +parseFloat(scord.parentElement.style.left)*5;
+          tyostox_for_add[a].appendChild(x); 
+        }
+      }
+      
+    }
+
+
+
+    tyostoy_for_add = lev.querySelectorAll(".tyostot__tyosto_vaaka:not(.viim__tyosto_vaaka):not(.alku__tyosto_vaaka)");
+    for (let a = 0; a < tyostoy_for_add.length; a++) {
+      if(tyostoy_for_add[a].querySelector(".secondcord")) {
+        scord = tyostoy_for_add[a].querySelector(".secondcord");
+        if(tyostoy_for_add[a].querySelector(".thirdcord")) {
+          tyostoy_for_add[a].querySelector(".thirdcord").innerHTML = parseFloat(scord.parentElement.style.bottom)*5 + "<br><b>V</b>";
+        }
+        else {
+          x = document.createElement("div");
+          x.classList = ["thirdcord"];
+          x.style.right = parseFloat(scord.style.right) - 20 + "px";
+          x.style.left = parseFloat(scord.style.left) + 10 + "px";
+          x.innerHTML =  parseFloat(scord.parentElement.style.bottom)*5 +"<br><b>V</b>";
+          tyostoy_for_add[a].appendChild(x); 
+        }
+      }
+    }
+
+    alku_tyostot = lev.querySelectorAll(".alku__tyosto_pysty");
+    for (let a = 0; a < alku_tyostot.length; a++) {
+      if(alku_tyostot[a].querySelector(".secondcord")) {
+        scord = alku_tyostot[a].querySelector(".secondcord");
+        if(alku_tyostot[a].querySelector(".thirdcord")) {
+          alku_tyostot[a].querySelector(".thirdcord").innerHTML = "<b>R</b>";
+        }
+        else {
+          scord = alku_tyostot[a].querySelector(".secondcord");
+          x = document.createElement("div");
+          x.classList = ["thirdcord"];
+          x.style.top = parseFloat(scord.style.top) - 30 + "px";
+          x.innerHTML = "<b>R</b>";
+          alku_tyostot[a].appendChild(x);
+          console.log(alku_tyostot[a]); 
+        }
+      }
+        
+    }
+
+    alku_tyosto = lev.querySelectorAll(".alku__tyosto_vaaka");
+    for (let a = 0; a < alku_tyosto.length; a++) {
+      if(alku_tyosto[a].querySelector(".secondcord")) {
+        scord = alku_tyosto[a].querySelector(".secondcord");
+        if(alku_tyosto[a].querySelector(".thirdcord")) {
+          alku_tyosto[a].querySelector(".thirdcord").innerHTML = "<b>R</b>";
+        }
+        else {
+          x = document.createElement("div");
+          x.classList = ["thirdcord"];
+          x.style.right = parseFloat(scord.style.right) - 20 + "px";
+          x.style.left = parseFloat(scord.style.left) + 10 + "px";
+          x.innerHTML = "<b>R</b>";
+          alku_tyosto[a].appendChild(x); 
+          console.log(alku_tyosto[a]);
+        }
+      }
+    }
+
+    viim_tyostot = lev.querySelectorAll(".viim__tyosto_pysty");
+    viim_rc = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
+    viim_r = parseFloat(lev.querySelector(".levy b i").innerText.split("x")[0]) - viim_rc;
+    
+    for (let a = 0; a < viim_tyostot.length; a++) {
+      if(viim_tyostot[a].querySelector(".secondcord")) {
+        scord = viim_tyostot[a].querySelector(".secondcord");
+        if(viim_tyostot[a].querySelector(".thirdcord")) {
+          viim_tyostot[a].querySelector(".thirdcord").innerHTML = "<b>R</b><br><i>"+viim_r+"</i>";
+        }
+        else {
+          scord = viim_tyostot[a].querySelector(".secondcord");
+          x = document.createElement("div");
+          x.classList = ["thirdcord"];
+          x.style.top = parseFloat(scord.style.top) - 30 + "px";
+          viim_tyostot[a].appendChild(x); 
+        }
+        console.log(viim_tyostot[a]);
+      }
+    }
+
+    viim_tyosto = lev.querySelectorAll(".viim__tyosto_vaaka");
+    viim_ac = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);
+    viim_a = parseFloat(lev.querySelector(".levy b i").innerText.split("x")[1]) - viim_ac;
+    for (let a = 0; a < viim_tyosto.length; a++) {
+      if(viim_tyosto[a].querySelector(".secondcord")) {
+        scord = viim_tyosto[a].querySelector(".secondcord");
+        if(viim_tyosto[a].querySelector(".thirdcord")) {
+          viim_tyosto[a].querySelector(".thirdcord").innerHTML = "<i>"+viim_a+"</i><br><b>R</b>";
+        }
+        else {
+          x = document.createElement("div");
+          x.classList = ["thirdcord"];
+          x.style.right = parseFloat(scord.style.right) - 20 + "px";
+          x.style.left = parseFloat(scord.style.left) - 10 + "px";
+          viim_tyosto[a].appendChild(x); 
+          console.log(viim_tyosto[a]);
+        }
+      }
+    }
+  });
+  
+  if(mode === 'x') {
+    left_array.forEach(left => {
+      my_array = [];
+      all_lines = [];
+      my_dels = [];
+      for (let a = 0; a < levyt.length; a++) {
+        levy2_leftset = levyt[a].offsetLeft;
+        if(left === levy2_leftset) {
+          my_array.push(levyt[a]);
+        }
+      }
+      
+      my_array.forEach(item => {
+        tyostos_in_levy = item.querySelectorAll(".tyostot__tyosto_pysty");
+        for (let a = 0; a < tyostos_in_levy.length; a++) {
+          if(tyostos_in_levy[a].getBoundingClientRect().left === object.getBoundingClientRect().left) {
+            all_lines.push(tyostos_in_levy[a]);
+          }
+          
+        }
+        
+      });
+    });
+  }
+  else if(mode === 'y') {
+    top_array.forEach(top => {
+      my_array = [];
+      all_lines = [];
+      my_dels = [];
+      for (let a = 0; a < levyt.length; a++) {
+        levy2_topset = levyt[a].offsetTop;
+        if(top === levy2_topset) {
+          my_array.push(levyt[a]);
+        }
+      }
+      my_array.forEach(item => {
+        tyostos_in_levy = item.querySelectorAll(".tyostot__tyosto_vaaka");
+        for (let a = 0; a < tyostos_in_levy.length; a++) {
+          if(tyostos_in_levy[a].getBoundingClientRect().bottom === object.getBoundingClientRect().bottom) {
+            all_lines.push(tyostos_in_levy[a]);
+          }
+        }
+      });
+    });
   }
 
+  return all_lines;
+}
+
+
+
+function toggle__kinnikkeet_specs(arg) {
+  x_cords = canvas.querySelectorAll("input:not(.secondcord):not(.y_cord_border):not(.x_cord_border)");
+  x_dels = canvas.querySelectorAll(".x_del");
+  if(arg == 1) {
+    
+    for (let i = 0; i < x_cords.length; i++) {
+      x_cords[i].style.display = 'block';
+    }
+    
+    for (let i = 0; i < x_dels.length; i++) {
+      x_dels[i].style.display = 'none';
+    }
+  }
+  else if(arg == 2) {
+    for (let i = 0; i < x_cords.length; i++) {
+      x_cords[i].style.display = 'none';
+    }
+    x_dels = canvas.querySelectorAll(".x_del");
+    for (let i = 0; i < x_dels.length; i++) {
+      x_dels[i].style.display = 'block';
+    }
+  }
+}
+
+
+function lt_addmitta(mode) {
+  p_levy = pressed__levy.parentElement;
+  p_levytitle = p_levy.title.split(",");
+  p_levytitle_h = p_levytitle[1];
+  p_levytitle_w = p_levytitle[0];
+  if(mode == 'vaaka') {
+    ltnew_mitta_ = prompt('Anna mitta millimetreinä levyn alareunasta');
+  }
+  if(mode === 'pysty') {
+    ltnew_mitta_ = prompt('Anna mitta millimetreinä levyn vasemmasta reunasta');
+  }
+  ltnew_mitta = parseFloat(ltnew_mitta_.replaceAll(/\D/g, ''));
+  ltnew_mitta_px = ltnew_mitta / 5;
+  if(mode == 'vaaka') {
+    if(ltnew_mitta > parseFloat(p_levytitle_h)) {
+      alert("Mitta ylittää levyn korkeuden. Yritä uudelleen.");
+      return
+    }
+    
+    a = document.createElement("div");
+    a.style.bottom = ltnew_mitta_px + "px";
+    a.classList = ["tyostot__tyosto tyostot__tyosto_vaaka levy_blessedcord"];
+    
+    a.innerHTML = `
+      <div class="x_del hidden" onclick="tyosto__del(this);"></div>
+      <input class="temp_input" onchange="change__tyostocord(this,1,${pysty_event});" onclick="clearcord(this,'tyo');" data-from="">
+      <div class="thirdcord" onclick="clearcord(this,'tyo');" data-from="${ltnew_mitta}" style="display: none; display: block;">${ltnew_mitta}</div>
+    `;
+    
+    tyostot = vis_levy.querySelectorAll(".levy_tyostot_y .tyostot__tyosto");
+    tyostot_ = tyostot;
+    for (let c = 0; c < tyostot_.length; c++) {
+      tyostot_[c].remove();
+    }
+
+    oke = null;
+    for (let b = 0; b < tyostot.length; b++) {
+      if(parseFloat(tyostot[b].style.bottom) >= ltnew_mitta_px && oke == null) {
+        vis_levy.querySelector(".levy_tyostot_y").appendChild(a);
+        console.log(a);
+        vis_levy.querySelector(".levy_tyostot_y").appendChild(tyostot[b]);
+        oke = 1;
+      } 
+      else {
+        vis_levy.querySelector(".levy_tyostot_y").appendChild(tyostot[b]);
+      }
+    }
+    oke = null;
+  }
+  if(mode === 'pysty') {
+    if(ltnew_mitta > parseFloat(p_levytitle_w)) {
+      alert("Mitta ylittää levyn leveyden. Yritä uudelleen.");
+      return
+    }
+    a = document.createElement("div");
+    a.style.left = ltnew_mitta_px + "px";
+    a.classList = ["tyostot__tyosto tyostot__tyosto_pysty levy_blessedcord"];
+    thirdcord_kinet = parseFloat(p_levy.style.height) + "px";
+    a.innerHTML = `
+      <div class="x_del hidden" onclick="tyosto__del(this);"></div>
+      <input class="temp_input" onchange="change__tyostocord(this,1,${vaaka_event});" onclick="clearcord(this,'tyo');" data-from="">
+      <div class="thirdcord" onclick="clearcord(this,'tyo');" data-from="${ltnew_mitta}" style="top:${thirdcord_kinet};">${ltnew_mitta}</div>
+    `;
+
+    tyostot = vis_levy.querySelectorAll(".levy_tyostot_x .tyostot__tyosto");
+    tyostot_ = tyostot;
+    for (let c = 0; c < tyostot_.length; c++) {
+      tyostot_[c].remove();
+    }
+    oke = null;
+    for (let b = 0; b < tyostot.length; b++) {
+      if(parseFloat(tyostot[b].style.left) >= ltnew_mitta_px && oke == null) {
+        vis_levy.querySelector(".levy_tyostot_x").appendChild(a);
+        vis_levy.querySelector(".levy_tyostot_x").appendChild(tyostot[b]);
+        oke = 1;
+      }       
+      else {
+        vis_levy.querySelector(".levy_tyostot_x").appendChild(tyostot[b]);
+      }
+    }
+    oke = null;
+  }
+
+  give__tyosto_cord(vis_levy);
+  countdown__kiinnikkeet(vis_levy);
+  
+}
+
+
+
+function c_open_ltladonta_settings(e, levy) {
+  console.log("c_open_ltladonta_settings(e,levy) ");
+  ltcontainer = document.querySelector(".all_container");
+  if (e === true) {
+    ltcontainer.classList.add("two");
+    l_title = levy.parentElement.getAttribute("title").split(",");
+    // ltcontainer.querySelector("#lt-k_settings__levy_levysizeh").value = parseFloat(l_title[1]);
+    // ltcontainer.querySelector("#lt-k_settings__levy_levysizew").value = parseFloat(l_title[0]);
+    ltcontainer.querySelector(".lt_levy_vis").style.height = parseFloat(l_title[1]) / 5 + "px";
+    ltcontainer.querySelector(".lt_levy_vis").style.width = parseFloat(l_title[0]) / 5 + "px";
+    ltcontainer.querySelector(".lt_levy_vis").title = levy.parentElement.getAttribute("title");
+    cloning_levy = levy.parentElement.cloneNode(true);
+    ltcontainer.querySelector(".lt_levy_vis").innerHTML = cloning_levy.innerHTML;
+    // kiinniketys = document.querySelector(".kiinniketys");
+    // kiinniketys.querySelector(".trow:nth-child(1) label").click()
+    // kiinniketys.querySelector(".trow:nth-child(2) label").click();
+    ltcontainer.querySelector("b").remove();
+    allvals = ltcontainer.querySelectorAll("input");
+    for (var a = allvals.length - 1; a >= 0; a--) {
+      if (allvals[a].dataset.from) {
+        allvals[a].value = parseFloat(allvals[a].dataset.from);
+      }
+    }
+  }
+  else if (e === false) {
+    ltcontainer = document.querySelector(".all_container");
+    ltcontainer.classList.remove("two");
+    c_reorganise__newtyosto_levy(pressed__levy);
+    pressed__levy = null;
+  }
+  // aloita_tyosto_kiinnikkeet();
+  // reorganise__newtyosto();
+}
+
+function c_reorganise__newtyosto_levy(levy__to_reorgaise) {
+  // ltcontainer = document.querySelector(".levytyosto_container");
+  // console.log(ltcontainer);
+  // console.log(levy__to_reorgaise.parentElement);
+  // console.log(levy__to_reorgaise.parentElement.querySelector(".levy_tyostot_y").innerHTML);
+  // console.log(ltcontainer.parentElement.querySelector(".levy_tyostot_x").innerHTML);
+  levy__to_reorgaise.parentElement.querySelector(".levy_tyostot_y").innerHTML = ltcontainer.querySelector(".levy_tyostot_x").innerHTML;
+  levy__to_reorgaise.parentElement.querySelector(".levy_tyostot_x").innerHTML = ltcontainer.querySelector(".levy_tyostot_y").innerHTML;
+  // levyt=copiedcanvases.querySelectorAll(".levy");
+  // for (var i = levyt.length - 1; i >= 0; i--) {
+  //   fixkiinnikkeet(levyt[i]);
+  // }
+  // aloita_tyosto_kiinnikkeet();
+  // reorganise__newtyosto();
+}
+
+function show__borders(e) {
+  mode = e.getAttribute("id");
+  pysty_alkutyostot = ltcontainer.querySelectorAll(".alku__tyosto_pysty");
+  pysty_viimtyostot = ltcontainer.querySelectorAll(".viim__tyosto_pysty");
+  vaaka_alkutyostot = ltcontainer.querySelectorAll(".alku__tyosto_vaaka");
+  vaaka_viimtyostot = ltcontainer.querySelectorAll(".viim__tyosto_vaaka");
+  
+  if(e.checked !== true) {
+    if(mode === "levy_pysty") {
+      for (let a = 0; a < pysty_alkutyostot.length; a++) {
+        pysty_alkutyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(b => {
+          b.classList.remove("hidden");
+        });
+      }
+      for (let a = 0; a < pysty_viimtyostot.length; a++) {
+        pysty_viimtyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(b => {
+          b.classList.remove("hidden");
+        });
+      }  
+    }
+    else if(mode === "levy_vaaka") {
+      for (let a = 0; a < vaaka_alkutyostot.length; a++) {
+        vaaka_alkutyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(b => {
+          b.classList.remove("hidden");
+        });
+      }
+      for (let a = 0; a < vaaka_viimtyostot.length; a++) {
+        vaaka_viimtyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(b => {
+          b.classList.remove("hidden");
+        });
+      }
+    }
+  }
+  else if(e.checked === true) { 
+    if(mode === "levy_pysty") {
+      for (let a = 0; a < pysty_alkutyostot.length; a++) {
+        pysty_alkutyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(b => {
+          b.classList.add("hidden");
+        });
+      }
+      for (let a = 0; a < pysty_viimtyostot.length; a++) {
+        pysty_viimtyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(b => {
+          b.classList.add("hidden");
+        });
+      }  
+    }
+    else if(mode === "levy_vaaka") {
+      for (let a = 0; a < vaaka_alkutyostot.length; a++) {
+        vaaka_alkutyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(b => {
+          b.classList.add("hidden");
+        });
+      }
+      for (let a = 0; a < vaaka_viimtyostot.length; a++) {
+        vaaka_viimtyostot[a].querySelectorAll(".temp_input:not(.temp_input_last)").forEach(b => {
+          b.classList.add("hidden");
+        });
+      }
+    }
+  }
 }

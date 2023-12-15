@@ -1,137 +1,176 @@
-const todoInput = document.querySelector('.todo-input');         
-// const addTodoBtn = document.querySelector('.add-todo');           
-const todoContainer = document.querySelector('.todo-box .box-body');    
-const allTodoBox = document.querySelectorAll(".box-body"); 
+// НАЧАЛО DROP
+
+const todoInput = document.querySelector(".todo-input"); // Поле ввода задачи
+const todoContainer = document.querySelector(".todo-box .box-body"); // Контейнер для задач
+const allTodoBox = document.querySelectorAll(".box-body"); // Все контейнеры для задач
+
+allTodoBox.forEach((box) => {
+  new Sortable(box, {
+    handle: ".comment_name",
+    group: "shared",
+    sort: false, // запрещает чортиовку внутри списка
+    animation: 150,
+    // Element is chosen
+    onStart: function (evt) {
+      evt.item.classList.add("dragging");
+    },
+    // Окончание перетаскивания элемента
+    onEnd: function (evt) {
+      var itemEl = evt.item; // перемещаемый HTMLElement
+      itemEl.classList.remove("dragging");
+
+      var data = itemEl.id;
+      var dataWeek = itemEl.closest(".box-body").dataset.week;
+
+      countdown_hours();
+
+      if (dataWeek) {
+        document.getElementById(data).querySelector(".commentbox__vko").value = dataWeek;
+        change_task_vko(
+          document.getElementById(data).querySelector(".commentbox__vko"),
+          document.getElementById(data).querySelector(".commentbox__vko").getAttribute("name")
+        );
+      }
+    },
+  });
+});
+
+// КОНЕW DROP
+
+// const todoInput = document.querySelector('.todo-input');         
+// // const addTodoBtn = document.querySelector('.add-todo');           
+// const todoContainer = document.querySelector('.todo-box .box-body');    
+// const allTodoBox = document.querySelectorAll(".box-body"); 
    
 
 
-let todocartNumber = 1;          
+// let todocartNumber = 1;          
                                 
-todocards = document.querySelectorAll(".todo-card");    
-for (let i = 0; i < todocards.length; i++) {
-    const todoCard = todocards[i];
-    todoCard.addEventListener("dragstart", (e) => dragStart(e));    
-    todoCard.addEventListener("dragend", (e) => dragEnd(e));   
+// todocards = document.querySelectorAll(".todo-card");    
+// for (let i = 0; i < todocards.length; i++) {
+//     const todoCard = todocards[i];
+//     todoCard.addEventListener("dragstart", (e) => dragStart(e));    
+//     todoCard.addEventListener("dragend", (e) => dragEnd(e));   
 
-    const delBtn = todoCard.querySelectorAll(".delete");       
-        delBtn.forEach((item)=>{                                    
-        item.addEventListener('click', (e) => e.target.parentElement.remove()); 
-    });
-}       
-
-
-allTodoBox.forEach(box => {                                      
-    box.addEventListener("dragover", (e) => allowDrop(e));         
-    box.addEventListener("drop", (e) => drop(e));                  
-});
+//     const delBtn = todoCard.querySelectorAll(".delete");       
+//         delBtn.forEach((item)=>{                                    
+//         item.addEventListener('click', (e) => e.target.parentElement.remove()); 
+//     });
+// }       
 
 
-
-// addTodoBtn.addEventListener("click", (e) => { 
-//     e.preventDefault();                                          
-//     addTodoFunction();                                           
+// allTodoBox.forEach(box => {                                      
+//     box.addEventListener("dragover", (e) => allowDrop(e));         
+//     box.addEventListener("drop", (e) => drop(e));                  
 // });
 
-function addTodoFunction() {                                     
-    let id = todocartNumber++;                                  
-    const todoCard = document.createElement("article");          
-    todoCard.classList.add("todo-card");                         
 
-    todoCard.innerHTML = `  
-    <h5 class="task-name">${todoInput.value}</h5>
-    <button class="fas fa-trash delete"></button>
-    `;                                                         
 
-    todoCard.draggable = true;                                  
-    todoCard.id = `todo${id}`;                                  
-    todoCard.addEventListener("dragstart", (e) => dragStart(e));    
-    todoCard.addEventListener("dragend", (e) => dragEnd(e));  
+// // addTodoBtn.addEventListener("click", (e) => { 
+// //     e.preventDefault();                                          
+// //     addTodoFunction();                                           
+// // });
+
+// function addTodoFunction() {                                     
+//     let id = todocartNumber++;                                  
+//     const todoCard = document.createElement("article");          
+//     todoCard.classList.add("todo-card");                         
+
+//     todoCard.innerHTML = `  
+//     <h5 class="task-name">${todoInput.value}</h5>
+//     <button class="fas fa-trash delete"></button>
+//     `;                                                         
+
+//     todoCard.draggable = true;                                  
+//     todoCard.id = `todo${id}`;                                  
+//     todoCard.addEventListener("dragstart", (e) => dragStart(e));    
+//     todoCard.addEventListener("dragend", (e) => dragEnd(e));  
     
    
 
-    todoCard.addEventListener("touchstart", dragStart(e), true);
-    todoCard.addEventListener("touchend", dragEnd(e), true);
-    todoCard.addEventListener("touchcancel", dragEnd(e), true);
-    todoCard.addEventListener("touchleave", dragEnd(e), true);
+//     todoCard.addEventListener("touchstart", dragStart(e), true);
+//     todoCard.addEventListener("touchend", dragEnd(e), true);
+//     todoCard.addEventListener("touchcancel", dragEnd(e), true);
+//     todoCard.addEventListener("touchleave", dragEnd(e), true);
 
 
-  // ^ Do the same for the rest of the events
+//   // ^ Do the same for the rest of the events
 
-    if (todoInput.value !== "") {
-        todoContainer.appendChild(todoCard);
-    } else {
-        alert("Set Title !");                                   
-    }                                                           
+//     if (todoInput.value !== "") {
+//         todoContainer.appendChild(todoCard);
+//     } else {
+//         alert("Set Title !");                                   
+//     }                                                           
 
-    todoInput.value = "";                                       
+//     todoInput.value = "";                                       
 
-    const delBtn = document.querySelectorAll(".delete");       
-        delBtn.forEach((item)=>{                                    
-        item.addEventListener('click', (e) => e.target.parentElement.remove()); 
-    });
+//     const delBtn = document.querySelectorAll(".delete");       
+//         delBtn.forEach((item)=>{                                    
+//         item.addEventListener('click', (e) => e.target.parentElement.remove()); 
+//     });
 
-    console.log("ITEM ADDED")
-}
+//     console.log("ITEM ADDED")
+// }
 
 
-function dragStart(event) {
-    event.target.classList.add("dragging");                     
-    event.dataTransfer.setData("Text/html", event.target.id);   
-    console.log(event.target);
-    console.log(event);
-}
+// function dragStart(event) {
+//     event.target.classList.add("dragging");                     
+//     event.dataTransfer.setData("Text/html", event.target.id);   
+//     console.log(event.target);
+//     console.log(event);
+// }
 
-function allowDrop(event) {
-    event.preventDefault();
-    console.log(event.target);
-    console.log(event);
-}
+// function allowDrop(event) {
+//     event.preventDefault();
+//     console.log(event.target);
+//     console.log(event);
+// }
 
-function drop(event) {
-    event.preventDefault();
-    console.log(event.target);
-    console.log(event);
+// function drop(event) {
+//     event.preventDefault();
+//     console.log(event.target);
+//     console.log(event);
 
-    const data = event.dataTransfer.getData("Text/html");       
-    // if(event.target.classList.contains("box")) {
-    event.target.appendChild(document.getElementById(data));  
-    // }
+//     const data = event.dataTransfer.getData("Text/html");       
+//     // if(event.target.classList.contains("box")) {
+//     event.target.appendChild(document.getElementById(data));  
+//     // }
 
     
      
-}
+// }
 
-function dragEnd(event) {
-    event.target.classList.remove("dragging");                  
-}
+// function dragEnd(event) {
+//     event.target.classList.remove("dragging");                  
+// }
 
-function dragStart(event) {
-    event.target.classList.add("dragging");                     
-    event.dataTransfer.setData("Text/html", event.target.id);   
-}
+// function dragStart(event) {
+//     event.target.classList.add("dragging");                     
+//     event.dataTransfer.setData("Text/html", event.target.id);   
+// }
 
-function allowDrop(event) {
-    event.preventDefault();
-}
+// function allowDrop(event) {
+//     event.preventDefault();
+// }
 
-function drop(event) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("Text/html");       
-     if(event.target.classList.contains("box-body")) {
-        event.target.appendChild(document.getElementById(data)); 
-        countdown_hours(); 
-        if(event.target.dataset.week) {
-            document.getElementById(data).querySelector(".commentbox__vko").value = event.target.dataset.week;
-            change_task_vko(document.getElementById(data).querySelector(".commentbox__vko"),document.getElementById(data).querySelector(".commentbox__vko").getAttribute("name"));
-        }
-        console.log(event.target);
-        event.target.scrollTop = event.target.scrollHeight;
-    }
-}
+// function drop(event) {
+//     event.preventDefault();
+//     const data = event.dataTransfer.getData("Text/html");       
+//      if(event.target.classList.contains("box-body")) {
+//         event.target.appendChild(document.getElementById(data)); 
+//         countdown_hours(); 
+//         if(event.target.dataset.week) {
+//             document.getElementById(data).querySelector(".commentbox__vko").value = event.target.dataset.week;
+//             change_task_vko(document.getElementById(data).querySelector(".commentbox__vko"),document.getElementById(data).querySelector(".commentbox__vko").getAttribute("name"));
+//         }
+//         console.log(event.target);
+//         event.target.scrollTop = event.target.scrollHeight;
+//     }
+// }
 
-function dragEnd(event) {
-    event.target.classList.remove("dragging");                  
-}  
+// function dragEnd(event) {
+//     event.target.classList.remove("dragging");                  
+// }  
 
 function toggle__tprojects(elem,prid) {
     allprojects=document.querySelectorAll(".t_projects ul.t_projectslist > li");

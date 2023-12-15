@@ -1,15 +1,20 @@
 <div class="drawarea__controls drawarea__controls_one">
-   <h1>Levytettävä alue</h1>
+   <h1>MOD alue</h1>
    <div class="row" style="justify-content: center;">
-      <input type="number" value="<?= $post["room_one_a-h"]; ?>" class="drawarea_h" id="drawarea_h" onchange="changesize(this.value+'|y');" max="3650"><span> x </span>
-      <input type="number" value="<?= $post["room_one_a-w"]; ?>" class="drawarea_w" id="drawarea_w" onchange="changesize(this.value+'|x');" max="9975"><span> mm</span>
+      <input type="number" value="<?= $post["room_one_a-h"]; ?>" class="drawarea_h" id="drawarea_h" oninput="changesize(this.value+'|y');" max="3650" step="25"><span> x </span>
+      <input type="number" value="<?= $post["room_one_a-w"]; ?>" class="drawarea_w" id="drawarea_w" oninput="changesize(this.value+'|x');" max="9975" step="25"><span> mm</span>
+      <label for="drawarea_h" class="drawarea_hlabel"> (Korkeus)</label>
+      <label for="drawarea_w" class="drawarea_wlabel"> (Leveys)</label>
    </div>
    <h2>Mittapisteet</h2>
    <div class="drawarea__controls_elementsone drawarea__things">
       
    </div>
    <div class="drawarea__controls_btns">
-      <div class="drawarea__controls_btn m_btn" onclick="settings__mitta();change__newdiv_cord();document.querySelector('#dist_origo').click();">
+      <div class="drawarea__controls_btn drawarea__controls_settingsbtn" onclick="settings__modal_open(this);" data-asmodal_mode="origoas">
+         Levytyksen reunat as
+      </div>
+      <div class="drawarea__controls_btn" onclick="settings__mitta();change__newdiv_cord();document.querySelector('#dist_origo').click();settings__modal_open(this);" data-asmodal_mode="uusiorigo">
        Lisää uusi mittapiste
       </div>
    </div>

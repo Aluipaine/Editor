@@ -1,24 +1,26 @@
 if(document.querySelector('#drawscreen_section_two')) {
-  user = document.querySelector("#mittapiste_comment_from").value;
+  user = document.querySelector("#current_user").value;
   document.querySelector("#aukko_comment_from").value = user;
 }
 
-function open_aukko_settings(e) {
-  if (e === true) {
-    document.querySelector(".aukko_container").classList.add("two");
-  }
-  else if (e === false) {
-    document.querySelector(".aukko_container").classList.remove("two");
-  }
+// DEPRECATED 04.12.23
+// function open_aukko_settings(e) {
+//   if (e === true) {
+//     document.querySelector(".aukko_container").classList.add("two");
+//   }
+//   else if (e === false) {
+//     document.querySelector(".aukko_container").classList.remove("two");
+//   }
 
-  tds = document.querySelectorAll(".aukko_container .group-0 td");
+//   tds = document.querySelectorAll(".aukko_container .group-0 td");
 
-  for (var i = 0; i < tds.length; i++) {
-    if(tds[i].innerHTML.replaceAll(" ","").length <= 3) {
-       tds[i].remove();
-    }
-  }
-}
+//   for (var i = 0; i < tds.length; i++) {
+//     if(tds[i].innerHTML.replaceAll(" ","").length <= 3) {
+//        tds[i].remove();
+//     }
+//   }
+// }
+
 var a = 0;
 var b = 0;
 var c = 0;
@@ -32,27 +34,51 @@ function change__aukko_sizecord() {
     // document.getElementById("hole__height").value = 2000;
     // document.getElementById("hole__width").value = 1000;
     document.querySelector("#aukko__name").value = "Ovi ";
+
+
   }
+  cur_aukko_type = "";
+  if (document.querySelector("#type__door").checked) {
+    cur_aukko_type = "ovi";
+    document.querySelector("#aukko__name").value = "Ovi ";
+  }
+
   if (document.querySelector("#type__window").checked) {
-    // document.getElementById("hole__height").value = 1000;
-    // document.getElementById("hole__width").value = 2000;
+    cur_aukko_type = "ikkuna";
     document.querySelector("#aukko__name").value = "Ikkuna ";
   }
+  
   if (document.querySelector("#type__palkki").checked) {
-    // document.getElementById("hole__height").value = 100;
-    // document.getElementById("hole__width").value = 1000;
     document.querySelector("#aukko__name").value = "Palkki ";
+    cur_aukko_type = "palkki";
   }
   if (document.querySelector("#type__collar").checked) {
-    // document.getElementById("hole__height").value = 1000;
-    // document.getElementById("hole__width").value = 100;
     document.querySelector("#aukko__name").value = "Pilari ";
+    cur_aukko_type = "pilari";
   }
   if (document.querySelector("#type__ventilation").checked) {
-    // document.getElementById("hole__height").value = 200;
-    // document.getElementById("hole__width").value = 200;
+    cur_aukko_type = "ilmastointi";
     document.querySelector("#aukko__name").value = "Ilmastointi ";
   }
+
+  ylitys_selector = document.querySelector("#aukko__name").value.toLowerCase().replaceAll(" ","");
+  all_types = document.querySelectorAll("."+ylitys_selector+"__asetusheading");
+
+  aukko_ylitys = document.querySelector(".aukko_ylitys");
+  aukko_ylitys.innerHTML ="";
+
+  for (let a = 0; a < all_types.length; a++) {
+    aukko_ylitys.innerHTML += `
+      <input type="radio" name="aukko_ylitysas" value="${all_types[a].querySelector("b").innerText}" id="aukkotype_array_`+a+`">
+      <label for="aukkotype_array_`+a+`">${all_types[a].querySelector("b").innerText}</label>
+    `;
+  }
+
+
+  
+  document.querySelectorAll(".aukko_ylitys input")[0].checked = true;
+
+
   // document.getElementById("settings__aukko").style.height = (document.getElementById("hole__height").value / height * 100) + '%';
   // document.getElementById("settings__aukko").style.width = (document.getElementById("hole__width").value / width * 100) + '%';
   // change__aukko_size();
@@ -284,78 +310,76 @@ function changedimensions_aukko(input) {
 }
 var erikois_array_array = [];
 function ylitys__array() {
-  ikkuna_a = document.querySelectorAll(".ikkuna_info input");
-  ovi_a = document.querySelectorAll(".ovi_info input");
-  ilmastointi_a = document.querySelectorAll(".ilmastointi_info input");
-  pilari_a = document.querySelectorAll(".pilari_info input");
-  erikois_a = document.querySelectorAll(".alue_erikoisranka_info input");
 
-  ikkuna_array = [];
-  ovi_array = [];
-  ilmastointi_array = [];
-  pilari_array = [];
-  erikois_array = [];
-  all_array = [];
-
-  for (var i = 0; i < ikkuna_a.length; i++) {
-    if(typeof ikkuna_a[i].value == 'number') {
-      all_array.push(ikkuna_a[i].value);
-    }
-
-    ikkuna_array.push(ikkuna_a[i].value);
-  }
-
-  for (var i = 0; i < ovi_a.length; i++) {
-    if(typeof ikkuna_a[i].value == 'number') {
-      all_array.push(ovi_a[i].value);
-    }
-
-    ovi_array.push(ovi_a[i].value);
-  }
-
-  for (var i = 0; i < ilmastointi_a.length; i++) {
-    if(typeof ikkuna_a[i].value == 'number') {
-      all_array.push(ilmastointi_a[i].value);
-    }
-
-    ilmastointi_array.push(ilmastointi_a[i].value);
-  }
-
-  for (var i = 0; i < pilari_a.length; i++) {
-    if(typeof ikkuna_a[i].value == 'number') {
-      all_array.push(pilari_a[i].value);
-    }
-
-    pilari_array.push(pilari_a[i].value);
-  }
-
-  for (var i = 0; i < erikois_a.length; i++) {
-    if(typeof ikkuna_a[i].value == 'number') {
-      all_array.push(erikois_a[i].value);
-    }
-
-    erikois_array.push(erikois_a[i].value);
-  }
+  ylitysas = document.querySelector(".aukko_ylitys input:checked").value;
+  headings = document.querySelectorAll("#hole_set h4."+cur_aukko_type+"__asetusheading");
   
+  all_tr_array = [];
+  // SEARCH FOR CORRECT TYPE
+  for (let a = 0; a < headings.length; a++) {
+    h4 = headings[a];
+    if(h4.querySelector("b").innerText == ylitysas) {
+      table_trs = h4.parentElement.querySelectorAll("table")[a].querySelectorAll("tr:not(.headingrow)");
+      for (let b = 0; b < table_trs.length; b++) {
+        tr_array = [];
+        input_array = table_trs[b].querySelectorAll("input");
+        
+        for (let c = 0; c < input_array.length; c++) {
+          tr_array.push(input_array[c].value);
+          
+        }
+        all_tr_array.push(tr_array);
+      }
+    }
+  }
+  vasen_array = [];
+  oikea_array = [];
+  yla_array = [];
+  ala_array = [];
+
+  for (let a = 0; a < all_tr_array.length; a++) {
+    aukko_input = all_tr_array[a];
+    aukko_array = [];
+    for (let b = 0; b < aukko_input.length; b++) {
+      aukko_array.push(aukko_input[b])
+      if(aukko_input[0].toLowerCase().includes("vasen")) {
+        vasen_array = aukko_array;
+      }
+      if(aukko_input[0].toLowerCase().includes("oikea")) {
+        oikea_array = aukko_array;
+      }
+      if(aukko_input[0].toLowerCase().includes("ylä")) {
+        yla_array = aukko_array;
+      }
+      if(aukko_input[0].toLowerCase().includes("ala")) {
+        ala_array = aukko_array;
+      }
+    }
+  }
+
+  if(vasen_array.length < 2 || ala_array.length < 2 || yla_array.length < 2 || oikea_array.length < 2) {
+    alert("VIRHE ASETUSTEN LUVUSSA");
+    return;
+  }
 
   aukko = canvas.querySelectorAll(".aukko");
   for (var i = 0; i < aukko.length; i++) {
     
     if (aukko[i].classList.contains("ovi"))  {
       left_side = parseFloat(aukko[i].querySelector(".aukko_lcord").dataset.from)-10;
-      left_plus = parseFloat(ovi_array[1]);
+      left_plus = parseFloat(vasen_array[1]);
       real_left_side = roundToNearest25(left_side+left_plus);
 
       right_side = parseFloat(aukko[i].querySelector(".aukko_rcord").dataset.from)-10;
-      right_plus = parseFloat(ovi_array[3]);
+      right_plus = parseFloat(oikea_array[1]);
       real_right_side = roundToNearest25(right_side+right_plus);
 
       bottom_side = parseFloat(aukko[i].querySelector(".aukko_bcord").dataset.from)-10;
-      bottom_plus = parseFloat(ovi_array[7]);
+      bottom_plus = parseFloat(ala_array[1]);
       real_bottom_side = roundToNearest25(bottom_side+bottom_plus);
 
       top_side = parseFloat(aukko[i].querySelector(".aukko_tcord").dataset.from)-10;
-      top_plus = parseFloat(ovi_array[6]);
+      top_plus = parseFloat(yla_array[1]);
       real_top_side = roundToNearest25(top_side+top_plus);
 
 
@@ -367,19 +391,19 @@ function ylitys__array() {
     }
     else if (aukko[i].classList.contains("ikkuna")) {
       left_side = parseFloat(aukko[i].querySelector(".aukko_lcord").dataset.from)-10;
-      left_plus = parseFloat(ikkuna_array[1]);
+      left_plus = parseFloat(vasen_array[1]);
       real_left_side = roundToNearest25(left_side+left_plus);
 
       right_side = parseFloat(aukko[i].querySelector(".aukko_rcord").dataset.from)-10;
-      right_plus = parseFloat(ikkuna_array[3]);
+      right_plus = parseFloat(oikea_array[1]);
       real_right_side = roundToNearest25(right_side+right_plus);
 
       bottom_side = parseFloat(aukko[i].querySelector(".aukko_bcord").dataset.from)-10;
-      bottom_plus = parseFloat(ikkuna_array[7]);
+      bottom_plus = parseFloat(ala_array[1]);
       real_bottom_side = roundToNearest25(bottom_side+bottom_plus);
 
       top_side = parseFloat(aukko[i].querySelector(".aukko_tcord").dataset.from)-10;
-      top_plus = parseFloat(ikkuna_array[6]);
+      top_plus = parseFloat(yla_array[1]);
       real_top_side = roundToNearest25(top_side+top_plus);
 
 
@@ -390,19 +414,19 @@ function ylitys__array() {
     }
     else if (aukko[i].classList.contains("palkki")) {
       left_side = parseFloat(aukko[i].querySelector(".aukko_lcord").dataset.from)-10;
-      left_plus = parseFloat(erikois_array[1]);
+      left_plus = parseFloat(vasen_array[1]);
       real_left_side = roundToNearest25(left_side+left_plus);
 
       right_side = parseFloat(aukko[i].querySelector(".aukko_rcord").dataset.from)-10;
-      right_plus = parseFloat(erikois_array[3]);
+      right_plus = parseFloat(oikea_array[1]);
       real_right_side = roundToNearest25(right_side+right_plus);
 
       bottom_side = parseFloat(aukko[i].querySelector(".aukko_bcord").dataset.from)-10;
-      bottom_plus = parseFloat(erikois_array[7]);
+      bottom_plus = parseFloat(ala_array[1]);
       real_bottom_side = roundToNearest25(bottom_side+bottom_plus);
 
       top_side = parseFloat(aukko[i].querySelector(".aukko_tcord").dataset.from)-10;
-      top_plus = parseFloat(erikois_array[6]);
+      top_plus = parseFloat(yla_array[1]);
       real_top_side = roundToNearest25(top_side+top_plus);
 
 
@@ -413,19 +437,19 @@ function ylitys__array() {
     }
     else if (aukko[i].classList.contains("pilari"))  {
        left_side = parseFloat(aukko[i].querySelector(".aukko_lcord").dataset.from)-10;
-      left_plus = parseFloat(pilari_array[1]);
+      left_plus = parseFloat(vasen_array[1]);
       real_left_side = roundToNearest25(left_side+left_plus);
 
       right_side = parseFloat(aukko[i].querySelector(".aukko_rcord").dataset.from)-10;
-      right_plus = parseFloat(pilari_array[3]);
+      right_plus = parseFloat(oikea_array[1]);
       real_right_side = roundToNearest25(right_side+right_plus);
 
       bottom_side = parseFloat(aukko[i].querySelector(".aukko_bcord").dataset.from)-10;
-      bottom_plus = parseFloat(pilari_array[7]);
+      bottom_plus = parseFloat(ala_array[1]);
       real_bottom_side = roundToNearest25(bottom_side+bottom_plus);
 
       top_side = parseFloat(aukko[i].querySelector(".aukko_tcord").dataset.from)-10;
-      top_plus = parseFloat(pilari_array[6]);
+      top_plus = parseFloat(yla_array[1]);
       real_top_side = roundToNearest25(top_side+top_plus);
 
 
@@ -436,19 +460,19 @@ function ylitys__array() {
     }
     else if (aukko[i].classList.contains("tuuletus")) {
       left_side = parseFloat(aukko[i].querySelector(".aukko_lcord").dataset.from)-10;
-      left_plus = parseFloat(ilmastointi_array[1]);
+      left_plus = parseFloat(vasen_array[1]);
       real_left_side = roundToNearest25(left_side+left_plus);
 
       right_side = parseFloat(aukko[i].querySelector(".aukko_rcord").dataset.from)-10;
-      right_plus = parseFloat(ilmastointi_array[3]);
+      right_plus = parseFloat(oikea_array[1]);
       real_right_side = roundToNearest25(right_side+right_plus);
 
       bottom_side = parseFloat(aukko[i].querySelector(".aukko_bcord").dataset.from)-10;
-      bottom_plus = parseFloat(ilmastointi_array[7]);
+      bottom_plus = parseFloat(ala_array[1]);
       real_bottom_side = roundToNearest25(bottom_side+bottom_plus);
 
       top_side = parseFloat(aukko[i].querySelector(".aukko_tcord").dataset.from)-10;
-      top_plus = parseFloat(ilmastointi_array[6]);
+      top_plus = parseFloat(yla_array[1]);
       real_top_side = roundToNearest25(top_side+top_plus);
 
 
@@ -458,10 +482,5 @@ function ylitys__array() {
       aukko[i].querySelector(".aukko_tcord").innerHTML = parseFloat(real_top_side);
     }
   }
-
-
- 
-  document.querySelector(".a_asetukset").value = all_array;
-  
-
+  // document.querySelector(".a_asetukset").value = all_array;
 }

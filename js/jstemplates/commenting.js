@@ -258,8 +258,8 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
 
         let answer_child_id = grand_array[0];
         console.log("answer_parent "+answer_child_id);
-        // Sorry for that, I don't know how to use DOM and I have a burning deadline.
-        // P.S. Your code is good and understandable, respect for this.
+    
+        
         answersDiv.innerHTML += `
         <hr style="margin-top: 50px;">
         <section class="commentbox comment_answer">
@@ -653,34 +653,7 @@ function initializebuilding_comments(mode) {
     for (let s = 0; s < statuses.length; s++) {
       statuses[s].classList.remove("prob");
     }
-    
-
-    tables = document.querySelectorAll(".tablepreview");
-
-    for (let t = 0; t < tables.length; t++) {
-      pbr = tables[t].querySelectorAll(".project__building_room");
-      pbr_array = [];
-      pbr_array_x = [];
-      for (let r = 0; r < pbr.length; r++) {
-        if(isNaN(parseFloat(pbr[r].dataset.y)) == false) {
-          pbr_array.push(parseFloat(pbr[r].dataset.y));
-        }
-      }
-
-      for (let r = 0; r < pbr.length; r++) {
-        if(isNaN(parseFloat(pbr[r].dataset.x)) == false) {
-          pbr_array_x.push(parseFloat(pbr[r].dataset.x));
-        }
-      }
-      max_pbrarray = Math.min(...pbr_array);
-      max_pbrarray_x = Math.max(...pbr_array_x);
-      rowcount = 10 - max_pbrarray;
-      rowcount_x = max_pbrarray_x+1;
-      tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
-      tables[t].style.maxWidth = "calc("+rowcount_x+"*80px + 3px)";
-      tables[t].style.overflowX = "clip";
-      
-    }
+  
 
     console.log("initializebuilding_comments()");
   }
@@ -711,21 +684,21 @@ function initializebuilding_comments(mode) {
     }
     
 
-    tables = document.querySelectorAll(".tablepreview");
+    // tables = document.querySelectorAll(".tablepreview");
 
-    for (let t = 0; t < tables.length; t++) {
-      pbr = tables[t].querySelectorAll(".project__building_room");
-      pbr_array = [];
-      for (let r = 0; r < pbr.length; r++) {
-        if(isNaN(parseFloat(pbr[r].dataset.y)) == false) {
-          pbr_array.push(parseFloat(pbr[r].dataset.y));
-        }
-      }
-      max_pbrarray = Math.min(...pbr_array);
-      rowcount = 10 - max_pbrarray;
-      tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
+    // for (let t = 0; t < tables.length; t++) {
+    //   pbr = tables[t].querySelectorAll(".project__building_room");
+    //   pbr_array = [];
+    //   for (let r = 0; r < pbr.length; r++) {
+    //     if(isNaN(parseFloat(pbr[r].dataset.y)) == false) {
+    //       pbr_array.push(parseFloat(pbr[r].dataset.y));
+    //     }
+    //   }
+    //   max_pbrarray = Math.min(...pbr_array);
+    //   rowcount = 10 - max_pbrarray;
+    //   tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
       
-    }
+    // }
   }
   else {
     for (let q = 0; q < ir_coms.length; q++) {
@@ -754,21 +727,21 @@ function initializebuilding_comments(mode) {
     }
     
 
-    tables = document.querySelectorAll(".tablepreview");
+    // tables = document.querySelectorAll(".tablepreview");
 
-    for (let t = 0; t < tables.length; t++) {
-      pbr = tables[t].querySelectorAll(".project__building_room");
-      pbr_array = [];
-      for (let r = 0; r < pbr.length; r++) {
-        if(isNaN(parseFloat(pbr[r].dataset.y)) == false) {
-          pbr_array.push(parseFloat(pbr[r].dataset.y));
-        }
-      }
-      max_pbrarray = Math.min(...pbr_array);
-      rowcount = 10 - max_pbrarray;
-      tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
+    // for (let t = 0; t < tables.length; t++) {
+    //   pbr = tables[t].querySelectorAll(".project__building_room");
+    //   pbr_array = [];
+    //   for (let r = 0; r < pbr.length; r++) {
+    //     if(isNaN(parseFloat(pbr[r].dataset.y)) == false) {
+    //       pbr_array.push(parseFloat(pbr[r].dataset.y));
+    //     }
+    //   }
+    //   max_pbrarray = Math.min(...pbr_array);
+    //   rowcount = 10 - max_pbrarray;
+    //   tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
       
-    }
+    // }
   }
 
 }
@@ -1038,48 +1011,101 @@ function comment__create_simpler(parent_id, this_element) {
   }
 }
 
-function comment__create_new() {
-  document.querySelector("body").classList.toggle("bg");
-  select = document.querySelector(".kommentti_comment_newto");
+function comment__create_new(doc,arg) {
+  document.querySelector("body").classList.add("bg");
+  select = doc.querySelector(".kommentti_comment_newto");
   var result = [];
   var options = select && select.options;
   var opt;
   selected = 0;
   for (var i=0, iLen=options.length; i<iLen; i++) {
     opt = options[i];
-    
     if (opt.selected) {
-     
       if(selected>0) {
         result +="|";
       }
-       selected +=1;
+      selected +=1;
       result += opt.value || opt.text;
-      
     }
   }
 
-  // alert(result);
+  console.log(doc);
+  new_com_id = "com" + Math.random().toString(16).slice(2).toLowerCase().toLowerCase();
+  new_com_id_ = new_com_id;
 
-    new_com_id = "com" + Math.random().toString(16).slice(2).toLowerCase().toLowerCase();
-    new_com_id_ = new_com_id;
+  newcom = doc;
 
-    newcom = document.querySelector(".commentbox__new");
-    newcom.querySelector(".comment__preview_files").classList.add(new_com_id + '_previewfiles');
-    newcom.querySelector(".comment__preview_files").classList.add(new_com_id);
+  doc.querySelector(".comment__preview_files").classList.add(new_com_id + '_previewfiles');
+  doc.querySelector(".comment__preview_files").classList.add(new_com_id);
+
+  if(arg) { 
+    project_id = parseFloat(document.querySelector("#current_project_id").value);
+    room_id = arg.innerHTML;
+    _attachments = doc.querySelector(".comment__preview_files").innerText;
+    _ending_time = '';
+    _deadline = doc.querySelector(".comment__deadline").value;
+    _x_y = doc.querySelector(".vko_estimate").value;
+    _content = doc.querySelector(".kommentti_comment").value.replaceAll(","," - ");
+    _name = doc.querySelector(".kommentti__name").value;
+    _comment_from = doc.querySelector(".kommentti_comment_from").value.replaceAll(","," - ");
+    
+    _comment_to = result.replaceAll(","," - ");
+    if(doc.querySelector(".is_thecomment_critical").checked) {
+      _urgency = "critical";
+    }
+    else {
+      _urgency = "no_critical";
+    }
+    _aihe = _comment_from + " kommentit";
+    _answer_to = '';
+    _time_estimate = doc.querySelector(".time_estimate").value;
+
+    formData = {
+      comment_id: new_com_id_,
+      project_id: project_id,
+      room: room_id + ">a",
+      name: _name,
+      x_y: _x_y,
+      content: _content,
+      attachments: _attachments,
+      comment_from: _comment_from,
+      comment_to: _comment_to,
+      urgency: _urgency,
+      ending_time: _ending_time,
+      deadline: _deadline,
+      aihe: _aihe,
+      answer_to: _answer_to,
+      time_estimate: _time_estimate
+    };
+    console.log(formData);
+    $.ajax({
+      type: "POST",
+      url: "/vendor/addcomment.php",
+      data: formData,
+      error: function (jqxhr, status, exception) {
+        alert('Tietokantavirhe, soita numeroon +358449782028');
+        console.log(formData);
+      }
+    }).done(function (data) {
+      alert('Kommentti lisätty');
+      document.querySelector("body").classList.remove("bg");
+      console.log(formData);
+    });
+  }
+  else {
     setTimeout(function () {
       project_id = parseFloat(document.querySelector("#current_project_id").value);
       room_id = document.querySelector("#roomname").value.replaceAll(" ","");
-      _attachments = newcom.querySelector(".comment__preview_files").innerText;
+      _attachments = doc.querySelector(".comment__preview_files").innerText;
       _ending_time = '';
-      _deadline = newcom.querySelector(".comment__deadline").value;
-      _x_y = newcom.querySelector(".vko_estimate").value;
-      _content = newcom.querySelector(".kommentti_comment").value.replaceAll(","," - ");
-      _name = newcom.querySelector(".kommentti__name").value;
-      _comment_from = newcom.querySelector(".kommentti_comment_from").value.replaceAll(","," - ");
+      _deadline = doc.querySelector(".comment__deadline").value;
+      _x_y = doc.querySelector(".vko_estimate").value;
+      _content = doc.querySelector(".kommentti_comment").value.replaceAll(","," - ");
+      _name = doc.querySelector(".kommentti__name").value;
+      _comment_from = doc.querySelector(".kommentti_comment_from").value.replaceAll(","," - ");
       
       _comment_to = result.replaceAll(","," - ");
-      if(document.querySelector("#is_thecomment_critical").checked) {
+      if(doc.querySelector(".is_thecomment_critical").checked) {
         _urgency = "critical";
       }
       else {
@@ -1087,7 +1113,7 @@ function comment__create_new() {
       }
       _aihe = _comment_from + " kommentit";
       _answer_to = '';
-      _time_estimate = newcom.querySelector(".time_estimate").value;
+      _time_estimate = doc.querySelector(".time_estimate").value;
 
       formData = {
         comment_id: new_com_id_,
@@ -1123,13 +1149,13 @@ function comment__create_new() {
         console.log(formData);
       });
     }, 2500);
-  
-    
+  }
+    // }
 }
 
 function copy_comment(element) {
   comment_thing = element.parentElement.parentElement.parentElement;
-  newcomment = document.querySelector('.commentbox__new');
+  newcomment = document.querySelector('.commentbox__new.commentbox__newsecond');
   newcomment.querySelector('.kommentti__name').value = comment_thing.querySelector('.commentbox__name').value;
   newcomment.querySelector('.comment__deadline').value = comment_thing.querySelector('.comment_deadline').innerText;
   newcomment.querySelector('.kommentti_comment').value = comment_thing.querySelector('.commentbox__content').value;

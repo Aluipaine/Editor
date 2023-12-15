@@ -137,12 +137,12 @@ function changeHeights(num) {
   allHeights.forEach(function(item) {
     item.value = num;
   });
-  document.querySelector("#house > div:nth-child(1) > div").style.height = num / 10 + "px";
-  document.querySelector("#house > div:nth-child(3) > div").style.height = num / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.height = num / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.height = num / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.height = num / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.height = num / 10 + "px";
+  document.querySelector("#house .house__wall_roof").style.height = num / 20 + "px";
+  document.querySelector("#house .house__wall_floor").style.height = num / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.height = num / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.height = num / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.height = num / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.height = num / 20 + "px";
 }
 
 function changeWidths(num) {
@@ -150,12 +150,18 @@ function changeWidths(num) {
   allWidths.forEach(function(item) {
     item.value = num;
   });
-  document.querySelector("#house > div:nth-child(1) > div").style.width = num / 10 + "px";
-  document.querySelector("#house > div:nth-child(3) > div").style.width = num / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.width = num / 10 + "px";
+  document.querySelector("#house .house__wall_roof").style.width = num / 20 + "px";
+  document.querySelector("#house .house__wall_floor").style.width = num / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.width = num / 20 + "px";
   // document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = num/10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.width = num / 10 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.width = num / 20 + "px";
   // document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = num/10 + "px";
+
+
+  f_ap = document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one"); 
+  s_ap = document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two");
+  document.querySelector("#house .house__wall_roof").style.left = (-35) + document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three.house__wall_c").offsetLeft + "px";
+  document.querySelector("#house .house__wall_floor").style.left = (-35) + document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three.house__wall_c").offsetLeft + "px";
 }
 
 function changeWidths_2(num) {
@@ -163,8 +169,8 @@ function changeWidths_2(num) {
   allWidths.forEach(function(item) {
     item.value = num;
   });
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = num / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = num / 10 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = num / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = num / 20 + "px";
 }
 
 function change_roof() {
@@ -176,8 +182,8 @@ function change_roof() {
     changeHeights(roof_height);
     changeWidths(roof_width);
   });
-  document.querySelector("#house > div:nth-child(1) > div").style.width = roof_width / 10 + "px";
-  document.querySelector("#house > div:nth-child(1) > div").style.height = roof_height / 10 + "px";
+  document.querySelector("#house > div:nth-child(1) > div").style.width = roof_width / 20 + "px";
+  document.querySelector("#house > div:nth-child(1) > div").style.height = roof_height / 20 + "px";
 }
 
 function change_floor() {
@@ -189,8 +195,8 @@ function change_floor() {
     changeHeights(floor_height);
     changeWidths(floor_width);
   });
-  document.querySelector("#house > div:nth-child(3) > div").style.width = floor_width / 10 + "px";
-  document.querySelector("#house > div:nth-child(3) > div").style.height = floor_height / 10 + "px";
+  document.querySelector("#house > div:nth-child(3) > div").style.width = floor_width / 20 + "px";
+  document.querySelector("#house > div:nth-child(3) > div").style.height = floor_height / 20 + "px";
 }
 
 function change_a() {
@@ -202,8 +208,8 @@ function change_a() {
     changeHeights(a_height);
     changeWidths(a_width);
   });
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.width = a_width / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.height = a_height / 10 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.width = a_width / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.height = a_height / 20 + "px";
 }
 
 function change_b() {
@@ -215,8 +221,8 @@ function change_b() {
     changeHeights(b_height);
     changeWidths_2(b_width);
   });
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = b_width / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.height = b_height / 10 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = b_width / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.height = b_height / 20 + "px";
 }
 
 function change_c() {
@@ -228,8 +234,8 @@ function change_c() {
     changeHeights(c_height);
     changeWidths(c_width);
   });
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.width = c_width / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.height = c_height / 10 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.width = c_width / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.height = c_height / 20 + "px";
 }
 
 function change_d() {
@@ -241,8 +247,8 @@ function change_d() {
     changeHeights(d_height);
     changeWidths_2(d_width);
   });
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = d_width / 10 + "px";
-  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.height = d_height / 10 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = d_width / 20 + "px";
+  document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.height = d_height / 20 + "px";
 }
 
 
@@ -397,59 +403,6 @@ $('.project__building div.project__building_room').click(function() {
 
 });
 
-let timer = 0
-
-$('.project__building_room').click((e) => {
-  e.preventDefault()
-  e.stopPropagation()
-  $('.project__building_room-overlay').remove()
-  $(e.target).find('.active').removeClass('active')
-})
-
-$(".project__building_room")
-  .on("mousedown touchstart", (e) => {
-    $(e.target).focus();
-    let $element = $(e.target)
-    timer = window.setTimeout(() => longClick($element), 1000);
-  })
-  .on("mouseup mouseleave touchend touchmove", (e) =>
-    clearTimeout(timer)
-  )
-  .click((e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    $('.popup__statuses').removeClass('active')
-    console.log("click")
-  });
-
-const longClick = (element) => {
-  $('.project__building').removeClass('active')
-  $('.project__building_room-overlay').remove()
-  $('.project__building_room').removeClass('active')
-  element.addClass('active')
-  $('.popup__statuses').addClass('active')
-  window.addEventListener("click", defaultClick, true)
-  $('.project__building').addClass('active')
-  element.append(`<div class='project__building_room-overlay'></div>`)
-  // $('.project__building_room').append(`<div class='project__building_room-disable'></div>`)
-  
-  $('.project__building_room-overlay').click((e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    $('.project__building').removeClass('active')
-    $('.popup__statuses').removeClass('active')
-    $('.project__building_room').removeClass('active')
-    $('.project__building_room-overlay').remove()
-  })
-
-  console.log("longpress")
-};
-
-const defaultClick = (e) => {
-  e.stopPropagation()
-  $(e.target).addClass('active')
-  window.removeEventListener("click", defaultClick, true)
-};
 
 $('#rooms div.house__wall_status').click(function() {
   $("#rooms").slideUp(200);
@@ -460,8 +413,8 @@ $('#rooms div.house__wall_status').click(function() {
   $("#zero_tila").text(tilaname);
   var text = $(this).text();
   $("#zero_huone").text(text);
-  $(this).removeClass("undone");
-  $(this).addClass("tomeasure");
+  // $(this).removeClass("undone");
+  // $(this).addClass("tomeasure");
   $(this).parent().find('.wall_height').val();
   $(this).parent().find('.wall_width').val();
   $('#reclamation__popup .modal_close_btn').attr('id', '--' + tilaname);
@@ -539,19 +492,19 @@ function create_rooms() {
 
 function initalize_cross(arg) {
 
-  a_saved = apartment.dataset.aroom;
-  b_saved = apartment.dataset.broom;
-  c_saved = apartment.dataset.croom;
-  d_saved = apartment.dataset.droom;
-  k_saved = apartment.dataset.kroom;
-  l_saved = apartment.dataset.lroom;
+  a_saved = apartment.dataset.aroom.replaceAll(",","~");
+  b_saved = apartment.dataset.broom.replaceAll(",","~");
+  c_saved = apartment.dataset.croom.replaceAll(",","~");
+  d_saved = apartment.dataset.droom.replaceAll(",","~");
+  k_saved = apartment.dataset.kroom.replaceAll(",","~");
+  l_saved = apartment.dataset.lroom.replaceAll(",","~");
 
-  console.log(a_saved);
-  console.log(b_saved);
-  console.log(c_saved);
-  console.log(d_saved);
-  console.log(k_saved);
-  console.log(l_saved);
+  // console.log(a_saved);
+  // console.log(b_saved);
+  // console.log(c_saved);
+  // console.log(d_saved);
+  // console.log(k_saved);
+  // console.log(l_saved);
 
   console.log('initalize_cross fired');
   //document.querySelector('#step_drawscreen').value='rooms';
@@ -637,213 +590,221 @@ function initalize_cross(arg) {
     // d_saved = document.querySelector("#rooms > input.d_saved").value;
     // k_saved = document.querySelector("#rooms > input.k_saved").value;
     // l_saved = document.querySelector("#rooms > input.l_saved").value;
-    if(document.querySelector("#house div.house__wall.house__wall_one")) {
-      a_wall = document.querySelector("#house div.house__wall.house__wall_one");
-      b_wall = document.querySelector("#house div.house__wall.house__wall_two");
-      c_wall = document.querySelector("#house div.house__wall.house__wall_three");
-      d_wall = document.querySelector("#house div.house__wall.house__wall_four");
-      k_wall = document.querySelector("#house div.house__wall.house__wall_roof");
-      l_wall = document.querySelector("#house div.house__wall.house__wall_floor");
+  if(document.querySelector("#house div.house__wall.house__wall_one")) {
+    a_wall = document.querySelector("#house div.house__wall.house__wall_one");
+    b_wall = document.querySelector("#house div.house__wall.house__wall_two");
+    c_wall = document.querySelector("#house div.house__wall.house__wall_three");
+    d_wall = document.querySelector("#house div.house__wall.house__wall_four");
+    k_wall = document.querySelector("#house div.house__wall.house__wall_roof");
+    l_wall = document.querySelector("#house div.house__wall.house__wall_floor");
 
-      if(a_saved.length>10) {
-        a_wall.querySelector(".wall_height").value = parseFloat(a_saved.split(",")[3].split("|")[0]);
-        a_wall.querySelector(".wall_width").value = parseFloat(a_saved.split(",")[3].split("|")[1]);
+    if(a_saved.length>10) {
+      a_wall.querySelector(".wall_height").value = parseFloat(a_saved.split("~")[3].split("|")[0]);
+      a_wall.querySelector(".wall_width").value = parseFloat(a_saved.split("~")[3].split("|")[1]);
 
-        a_wall.querySelector(".house__wall_status").classList.remove('undone');
-        a_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
-        a_wall.querySelector(".house__wall_status").classList.remove('rangatok');
-        a_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+      a_wall.querySelector(".house__wall_status").classList.remove('undone');
+      a_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      a_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      a_wall.querySelector(".house__wall_status").classList.remove('saumatok');
 
-        a_wall.querySelector(".house__wall_status").classList.remove('measured');
-        a_wall.querySelector(".house__wall_status").classList.remove('done');
-        // a_wall.querySelector(".house__wall_status").classList.remove('prob');
-        // a_wall.querySelector(".house__wall_status").classList.remove('problem');
+      a_wall.querySelector(".house__wall_status").classList.remove('measured');
+      a_wall.querySelector(".house__wall_status").classList.remove('done');
+      // a_wall.querySelector(".house__wall_status").classList.remove('prob');
+      // a_wall.querySelector(".house__wall_status").classList.remove('problem');
 
-        a_wall.querySelector(".house__wall_status").classList.add(a_saved.split(",")[1]);
+      a_wall.querySelector(".house__wall_status").classList.add(a_saved.split("~")[1]);
 
-        a_wall.style.height = parseFloat(a_wall.querySelector(".wall_height").value) / 10 + "px";
-        a_wall.style.width = parseFloat(a_wall.querySelector(".wall_width").value) / 10 + "px";
-      }
-      else {
-        a_wall.querySelector(".wall_height").value = 3200;
-        a_wall.querySelector(".wall_width").value = 6000;
-
-        a_wall.style.height = parseFloat(a_wall.querySelector(".wall_height").value) / 10 + "px";
-        a_wall.style.width = parseFloat(a_wall.querySelector(".wall_width").value) / 10 + "px";
-      }
-
-      if(b_saved.length>10) {
-        b_wall.querySelector(".wall_height").value = parseFloat(b_saved.split(",")[3].split("|")[0]);
-        b_wall.querySelector(".wall_width_2").value = parseFloat(b_saved.split(",")[3].split("|")[1]);
-
-        b_wall.querySelector(".house__wall_status").classList.remove('undone');
-        b_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
-        b_wall.querySelector(".house__wall_status").classList.remove('rangatok');
-        b_wall.querySelector(".house__wall_status").classList.remove('saumatok');
-
-        b_wall.querySelector(".house__wall_status").classList.remove('measured');
-        b_wall.querySelector(".house__wall_status").classList.remove('done');
-        // b_wall.querySelector(".house__wall_status").classList.remove('prob');
-        // b_wall.querySelector(".house__wall_status").classList.remove('problem');
-
-        b_wall.querySelector(".house__wall_status").classList.add(b_saved.split(",")[1]);
-
-        b_wall.style.height = parseFloat(b_wall.querySelector(".wall_height").value) / 10 + "px";
-        b_wall.style.width = parseFloat(b_wall.querySelector(".wall_width_2").value) / 10 + "px";
-      }
-      else {
-        b_wall.querySelector(".wall_height").value = 3200;
-        b_wall.querySelector(".wall_width_2").value = 6000;
-
-        b_wall.style.height = parseFloat(b_wall.querySelector(".wall_height").value) / 10 + "px";
-        b_wall.style.width = parseFloat(b_wall.querySelector(".wall_width_2").value) / 10 + "px";
-      }
-
-      if(c_saved.length>10) {
-        c_wall.querySelector(".wall_height").value = parseFloat(c_saved.split(",")[3].split("|")[0]);
-        c_wall.querySelector(".wall_width").value = parseFloat(c_saved.split(",")[3].split("|")[1]);
-
-        c_wall.querySelector(".house__wall_status").classList.remove('undone');
-        c_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
-        c_wall.querySelector(".house__wall_status").classList.remove('rangatok');
-        c_wall.querySelector(".house__wall_status").classList.remove('saumatok');
-
-        c_wall.querySelector(".house__wall_status").classList.remove('measured');
-        c_wall.querySelector(".house__wall_status").classList.remove('done');
-        // c_wall.querySelector(".house__wall_status").classList.remove('prob');
-        // c_wall.querySelector(".house__wall_status").classList.remove('problem');
-
-        c_wall.querySelector(".house__wall_status").classList.add(c_saved.split(",")[1]);
-
-        c_wall.style.height = parseFloat(c_wall.querySelector(".wall_height").value) / 10 + "px";
-        c_wall.style.width = parseFloat(c_wall.querySelector(".wall_width").value) / 10 + "px";
-      }
-      else {
-        c_wall.querySelector(".wall_height").value = 3200;
-        c_wall.querySelector(".wall_width").value = 6000;
-
-        c_wall.style.height = parseFloat(c_wall.querySelector(".wall_height").value) / 10 + "px";
-        c_wall.style.width = parseFloat(c_wall.querySelector(".wall_width").value) / 10 + "px";
-      }
-      if(d_saved.length>10) {
-        d_wall.querySelector(".wall_height").value = parseFloat(d_saved.split(",")[3].split("|")[0]);
-        d_wall.querySelector(".wall_width_2").value = parseFloat(d_saved.split(",")[3].split("|")[1]);
-
-        d_wall.querySelector(".house__wall_status").classList.remove('undone');
-        d_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
-        d_wall.querySelector(".house__wall_status").classList.remove('rangatok');
-        d_wall.querySelector(".house__wall_status").classList.remove('saumatok');
-
-        d_wall.querySelector(".house__wall_status").classList.remove('measured');
-        d_wall.querySelector(".house__wall_status").classList.remove('done');
-        // d_wall.querySelector(".house__wall_status").classList.remove('prob');
-        // d_wall.querySelector(".house__wall_status").classList.remove('problem');
-
-        d_wall.querySelector(".house__wall_status").classList.add(d_saved.split(",")[1]);
-
-        d_wall.style.height = parseFloat(d_wall.querySelector(".wall_height").value) / 10 + "px";
-        d_wall.style.width = parseFloat(d_wall.querySelector(".wall_width_2").value) / 10 + "px";
-
-        k_wall.style.right = parseFloat(d_wall.querySelector(".wall_width_2").value) / 10 + "px";
-        l_wall.style.right = parseFloat(d_wall.querySelector(".wall_width_2").value) / 10 + "px";
-      }
-      else {
-        d_wall.querySelector(".wall_height").value = 3200;
-        d_wall.querySelector(".wall_width_2").value = 6000;
-        d_wall.style.height = parseFloat(d_wall.querySelector(".wall_height").value) / 10 + "px";
-        d_wall.style.width = parseFloat(d_wall.querySelector(".wall_width_2").value) / 10 + "px";
-      }
-      if(k_saved.length>10) {
-        k_wall.querySelector(".wall_height").value = parseFloat(k_saved.split(",")[3].split("|")[0]);
-        k_wall.querySelector(".wall_width").value = parseFloat(k_saved.split(",")[3].split("|")[1]);
-
-        k_wall.querySelector(".house__wall_status").classList.remove('undone');
-        k_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
-        k_wall.querySelector(".house__wall_status").classList.remove('rangatok');
-        k_wall.querySelector(".house__wall_status").classList.remove('saumatok');
-
-        k_wall.querySelector(".house__wall_status").classList.remove('measured');
-        k_wall.querySelector(".house__wall_status").classList.remove('done');
-        // k_wall.querySelector(".house__wall_status").classList.remove('prob');
-        // k_wall.querySelector(".house__wall_status").classList.remove('problem');
-
-        k_wall.querySelector(".house__wall_status").classList.add(k_saved.split(",")[1]);
-
-        k_wall.style.height = parseFloat(k_wall.querySelector(".wall_height").value) / 10 + "px";
-        k_wall.style.width = parseFloat(k_wall.querySelector(".wall_width").value) / 10 + "px";
-      }
-      else {
-        k_wall.querySelector(".wall_height").value = 3200;
-        k_wall.querySelector(".wall_width").value = 6000;
-
-        k_wall.style.height = parseFloat(k_wall.querySelector(".wall_height").value) / 10 + "px";
-        k_wall.style.width = parseFloat(k_wall.querySelector(".wall_width").value) / 10 + "px";
-      }
-      if(l_saved.length>10) {
-        l_wall.querySelector(".wall_height").value = parseFloat(l_saved.split(",")[3].split("|")[0]);
-        l_wall.querySelector(".wall_width").value = parseFloat(l_saved.split(",")[3].split("|")[1]);
-
-
-        l_wall.querySelector(".house__wall_status").classList.remove('undone');
-        l_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
-        l_wall.querySelector(".house__wall_status").classList.remove('rangatok');
-        l_wall.querySelector(".house__wall_status").classList.remove('saumatok');
-
-        l_wall.querySelector(".house__wall_status").classList.remove('measured');
-        l_wall.querySelector(".house__wall_status").classList.remove('done');
-        // l_wall.querySelector(".house__wall_status").classList.remove('prob');
-        // l_wall.querySelector(".house__wall_status").classList.remove('problem');
-
-        l_wall.querySelector(".house__wall_status").classList.add(l_saved.split(",")[1]);
-
-        l_wall.style.height = parseFloat(l_wall.querySelector(".wall_height").value) / 10 + "px";
-        l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 10 + "px";
-      }
-      else {
-        l_wall.querySelector(".wall_height").value = 3200;
-        l_wall.querySelector(".wall_width").value = 6000;
-
-        l_wall.style.height = parseFloat(l_wall.querySelector(".wall_height").value) / 10 + "px";
-        l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 10 + "px";
-      }
+      a_wall.style.height = parseFloat(a_wall.querySelector(".wall_height").value) / 20 + "px";
+      a_wall.style.width = parseFloat(a_wall.querySelector(".wall_width").value) / 20 + "px";
     }
-    console.log("currect_arak:", currect_arak);
+    else {
+      a_wall.querySelector(".wall_height").value = 3200;
+      a_wall.querySelector(".wall_width").value = 6000;
 
-    $.ajax({
-      url: "/get-walls.php",
-      type: "post",
-      data: {
-        project_id: document.querySelector("#current_project_id").value,
-        arak: currect_arak
-      },
-      success: (answer) => {
-        let walls = JSON.parse(answer);
-        console.log("walls:", walls);
+      a_wall.style.height = parseFloat(a_wall.querySelector(".wall_height").value) / 20 + "px";
+      a_wall.style.width = parseFloat(a_wall.querySelector(".wall_width").value) / 20 + "px";
+    }
 
-        walls.forEach((wall) => {
-          //  	id 	project_id 	arak 	wall 	asjarj 	name 	description 	hidden 	
+    if(b_saved.length>10) {
+      b_wall.querySelector(".wall_height").value = parseFloat(b_saved.split("~")[3].split("|")[0]);
+      b_wall.querySelector(".wall_width_2").value = parseFloat(b_saved.split("~")[3].split("|")[1]);
 
-          let i = wall[3].toLowerCase();
-          j = i == 'k' ? 'roof' : i == 'l' ? 'floor' : i;
+      b_wall.querySelector(".house__wall_status").classList.remove('undone');
+      b_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      b_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      b_wall.querySelector(".house__wall_status").classList.remove('saumatok');
 
-          document.querySelector(`#wall_order_${j}`).value = wall[4] && wall[4] > 0 ? parseInt(wall[4]) : wallAToNum(i);
-          document.querySelector(`#wall_one_${j}`).value = wall[5] ? wall[5] : "SEINÄ " + i.toUpperCase(); console.log(document.querySelector(`#wall_one_${j}`).value);
-          document.querySelector(`#wall_desc_${j}`).value = wall[6] ? wall[6] : "" ;
+      b_wall.querySelector(".house__wall_status").classList.remove('measured');
+      b_wall.querySelector(".house__wall_status").classList.remove('done');
+      // b_wall.querySelector(".house__wall_status").classList.remove('prob');
+      // b_wall.querySelector(".house__wall_status").classList.remove('problem');
 
-          wall[7] == "1" ? document.querySelector(`.house__wall_${j}`).classList.add("hidden")
-          : document.querySelector(`.house__wall_${j}`).classList.remove("hidden");
-        }); 
-      }
-    });
-  }, 500);
+      b_wall.querySelector(".house__wall_status").classList.add(b_saved.split("~")[1]);
+
+      b_wall.style.height = parseFloat(b_wall.querySelector(".wall_height").value) / 20 + "px";
+      b_wall.style.width = parseFloat(b_wall.querySelector(".wall_width_2").value) / 20 + "px";
+    }
+    else {
+      b_wall.querySelector(".wall_height").value = 3200;
+      b_wall.querySelector(".wall_width_2").value = 6000;
+
+      b_wall.style.height = parseFloat(b_wall.querySelector(".wall_height").value) / 20 + "px";
+      b_wall.style.width = parseFloat(b_wall.querySelector(".wall_width_2").value) / 20 + "px";
+    }
+
+    if(c_saved.length>10) {
+      c_wall.querySelector(".wall_height").value = parseFloat(c_saved.split("~")[3].split("|")[0]);
+      c_wall.querySelector(".wall_width").value = parseFloat(c_saved.split("~")[3].split("|")[1]);
+
+      c_wall.querySelector(".house__wall_status").classList.remove('undone');
+      c_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      c_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      c_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      c_wall.querySelector(".house__wall_status").classList.remove('measured');
+      c_wall.querySelector(".house__wall_status").classList.remove('done');
+      // c_wall.querySelector(".house__wall_status").classList.remove('prob');
+      // c_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      c_wall.querySelector(".house__wall_status").classList.add(c_saved.split("~")[1]);
+
+      c_wall.style.height = parseFloat(c_wall.querySelector(".wall_height").value) / 20 + "px";
+      c_wall.style.width = parseFloat(c_wall.querySelector(".wall_width").value) / 20 + "px";
+    }
+    else {
+      c_wall.querySelector(".wall_height").value = 3200;
+      c_wall.querySelector(".wall_width").value = 6000;
+
+      c_wall.style.height = parseFloat(c_wall.querySelector(".wall_height").value) / 20 + "px";
+      c_wall.style.width = parseFloat(c_wall.querySelector(".wall_width").value) / 20 + "px";
+    }
+    if(d_saved.length>10) {
+      d_wall.querySelector(".wall_height").value = parseFloat(d_saved.split("~")[3].split("|")[0]);
+      d_wall.querySelector(".wall_width_2").value = parseFloat(d_saved.split("~")[3].split("|")[1]);
+
+      d_wall.querySelector(".house__wall_status").classList.remove('undone');
+      d_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      d_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      d_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      d_wall.querySelector(".house__wall_status").classList.remove('measured');
+      d_wall.querySelector(".house__wall_status").classList.remove('done');
+      // d_wall.querySelector(".house__wall_status").classList.remove('prob');
+      // d_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      d_wall.querySelector(".house__wall_status").classList.add(d_saved.split("~")[1]);
+
+      d_wall.style.height = parseFloat(d_wall.querySelector(".wall_height").value) / 20 + "px";
+      d_wall.style.width = parseFloat(d_wall.querySelector(".wall_width_2").value) / 20 + "px";
+
+      k_wall.style.right = parseFloat(d_wall.querySelector(".wall_width_2").value) / 20 + "px";
+      l_wall.style.right = parseFloat(d_wall.querySelector(".wall_width_2").value) / 20 + "px";
+    }
+    else {
+      d_wall.querySelector(".wall_height").value = 3200;
+      d_wall.querySelector(".wall_width_2").value = 6000;
+      d_wall.style.height = parseFloat(d_wall.querySelector(".wall_height").value) / 20 + "px";
+      d_wall.style.width = parseFloat(d_wall.querySelector(".wall_width_2").value) / 20 + "px";
+    }
+    if(k_saved.length>10) {
+      k_wall.querySelector(".wall_height").value = parseFloat(k_saved.split("~")[3].split("|")[0]);
+      k_wall.querySelector(".wall_width").value = parseFloat(k_saved.split("~")[3].split("|")[1]);
+
+      k_wall.querySelector(".house__wall_status").classList.remove('undone');
+      k_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      k_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      k_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      k_wall.querySelector(".house__wall_status").classList.remove('measured');
+      k_wall.querySelector(".house__wall_status").classList.remove('done');
+      // k_wall.querySelector(".house__wall_status").classList.remove('prob');
+      // k_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      k_wall.querySelector(".house__wall_status").classList.add(k_saved.split("~")[1]);
+
+      k_wall.style.height = parseFloat(k_wall.querySelector(".wall_height").value) / 20 + "px";
+      k_wall.style.width = parseFloat(k_wall.querySelector(".wall_width").value) / 20 + "px";
+    }
+    else {
+      k_wall.querySelector(".wall_height").value = 3200;
+      k_wall.querySelector(".wall_width").value = 6000;
+
+      k_wall.style.height = parseFloat(k_wall.querySelector(".wall_height").value) / 20 + "px";
+      k_wall.style.width = parseFloat(k_wall.querySelector(".wall_width").value) / 20 + "px";
+    }
+    if(l_saved.length>10) {
+      l_wall.querySelector(".wall_height").value = parseFloat(l_saved.split("~")[3].split("|")[0]);
+      l_wall.querySelector(".wall_width").value = parseFloat(l_saved.split("~")[3].split("|")[1]);
+
+
+      l_wall.querySelector(".house__wall_status").classList.remove('undone');
+      l_wall.querySelector(".house__wall_status").classList.remove('tomeasure');
+      l_wall.querySelector(".house__wall_status").classList.remove('rangatok');
+      l_wall.querySelector(".house__wall_status").classList.remove('saumatok');
+
+      l_wall.querySelector(".house__wall_status").classList.remove('measured');
+      l_wall.querySelector(".house__wall_status").classList.remove('done');
+      // l_wall.querySelector(".house__wall_status").classList.remove('prob');
+      // l_wall.querySelector(".house__wall_status").classList.remove('problem');
+
+      l_wall.querySelector(".house__wall_status").classList.add(l_saved.split("~")[1]);
+
+      l_wall.style.height = parseFloat(l_wall.querySelector(".wall_height").value) / 20 + "px";
+      l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 20 + "px";
+    }
+    else {
+      l_wall.querySelector(".wall_height").value = 3200;
+      l_wall.querySelector(".wall_width").value = 6000;
+
+      l_wall.style.height = parseFloat(l_wall.querySelector(".wall_height").value) / 20 + "px";
+      l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 20 + "px";
+    }
+
+    if(parseFloat(document.querySelector("#house div.house__wall.house__wall_three.house__wall_c").offsetLeft) > 0) {
+      document.querySelector("#house .house__wall_roof").style.left = (-35) + document.querySelector("#house div.house__wall.house__wall_three.house__wall_c").offsetLeft + "px";
+      document.querySelector("#house .house__wall_floor").style.left = (-35) + document.querySelector("#house div.house__wall.house__wall_three.house__wall_c").offsetLeft + "px";
+    }
+  }
+  console.log("currect_arak:", currect_arak);
+
+  $.ajax({
+    url: "/get-walls.php",
+    type: "post",
+    data: {
+      project_id: document.querySelector("#current_project_id").value,
+      arak: currect_arak
+    },
+    success: (answer) => {
+      let walls = JSON.parse(answer);
+      console.log("walls:", walls);
+
+      // walls.forEach((wall) => {
+      //   //  	id 	project_id 	arak 	wall 	asjarj 	name 	description 	hidden 	
+
+      //   let i = wall[3].toLowerCase();
+      //   j = i == 'k' ? 'roof' : i == 'l' ? 'floor' : i;
+
+      //   document.querySelector(`#wall_order_${j}`).value = wall[4] && wall[4] > 0 ? parseInt(wall[4]) : wallAToNum(i);
+      //   document.querySelector(`#wall_one_${j}`).value = wall[5] ? wall[5] : "SEINÄ " + i.toUpperCase(); console.log(document.querySelector(`#wall_one_${j}`).value);
+      //   document.querySelector(`#wall_desc_${j}`).value = wall[6] ? wall[6] : "" ;
+
+      //   wall[7] == "1" ? document.querySelector(`.house__wall_${j}`).classList.add("hidden")
+      //   : document.querySelector(`.house__wall_${j}`).classList.remove("hidden");
+      // }); 
+    }
+  });
+  }, 400);
+
+  
   statuses = document.querySelectorAll(".house__wall_status");
   for (let s = 0; s < statuses.length; s++) {
     statuses[s].classList.remove("prob");
     statuses[s].classList.remove("problem");
   }
   refresh__drawcontrols();
-  
-  
+
+
+
 }
 
 function wallAToNum(a) {
@@ -873,27 +834,29 @@ function adjust_roomsizes() {
     k_wall = document.querySelector("#house div.house__wall.house__wall_roof");
     l_wall = document.querySelector("#house div.house__wall.house__wall_floor");
 
-    a_wall.style.height = parseFloat(a_wall.querySelector(".wall_height").value) / 10 + "px";
-    a_wall.style.width = parseFloat(a_wall.querySelector(".wall_width").value) / 10 + "px";
+    a_wall.style.height = parseFloat(a_wall.querySelector(".wall_height").value) / 20 + "px";
+    a_wall.style.width = parseFloat(a_wall.querySelector(".wall_width").value) / 20 + "px";
 
-    b_wall.style.height = parseFloat(b_wall.querySelector(".wall_height").value) / 10 + "px";
-    b_wall.style.width = parseFloat(b_wall.querySelector(".wall_width_2").value) / 10 + "px";
+    b_wall.style.height = parseFloat(b_wall.querySelector(".wall_height").value) / 20 + "px";
+    b_wall.style.width = parseFloat(b_wall.querySelector(".wall_width_2").value) / 20 + "px";
 
-    c_wall.style.height = parseFloat(c_wall.querySelector(".wall_height").value) / 10 + "px";
-    c_wall.style.width = parseFloat(c_wall.querySelector(".wall_width").value) / 10 + "px";
+    c_wall.style.height = parseFloat(c_wall.querySelector(".wall_height").value) / 20 + "px";
+    c_wall.style.width = parseFloat(c_wall.querySelector(".wall_width").value) / 20 + "px";
 
-    d_wall.style.height = parseFloat(d_wall.querySelector(".wall_height").value) / 10 + "px";
-    d_wall.style.width = parseFloat(d_wall.querySelector(".wall_width_2").value) / 10 + "px";
+    d_wall.style.height = parseFloat(d_wall.querySelector(".wall_height").value) / 20 + "px";
+    d_wall.style.width = parseFloat(d_wall.querySelector(".wall_width_2").value) / 20 + "px";
 
-    k_wall.style.right = parseFloat(d_wall.querySelector(".wall_width_2").value) / 10 + "px";
-    l_wall.style.right = parseFloat(d_wall.querySelector(".wall_width_2").value) / 10 + "px";
+    k_wall.style.right = parseFloat(d_wall.querySelector(".wall_width_2").value) / 20 + "px";
+    l_wall.style.right = parseFloat(d_wall.querySelector(".wall_width_2").value) / 20 + "px";
 
-    k_wall.style.width = parseFloat(k_wall.querySelector(".wall_width").value) / 10 + "px";
-    k_wall.style.height = parseFloat(k_wall.querySelector(".wall_height").value) / 10 + "px";
+    k_wall.style.width = parseFloat(k_wall.querySelector(".wall_width").value) / 20 + "px";
+    k_wall.style.height = parseFloat(k_wall.querySelector(".wall_height").value) / 20 + "px";
 
-    l_wall.style.height = parseFloat(l_wall.querySelector(".wall_height").value) / 10 + "px";
-    l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 10 + "px";
+    l_wall.style.height = parseFloat(l_wall.querySelector(".wall_height").value) / 20 + "px";
+    l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 20 + "px";
   }
+
+  
 }
 
 
@@ -947,7 +910,6 @@ function initializebuilding() {
   current_role = document.querySelector("#current_role").value;
   if(current_user.toLowerCase() == 'tyonjohto' || current_role.toLowerCase() == 'mittaus') {
     for (let i = 0; i < raput.length; i++) {
-      if(raput[i].querySelector(".project__building_grid").offsetHeight > 25) {
         addmore = document.createElement("div");
         addmore.classList.add("projectbtn");
         addmore.classList.add("projectbtn__addmore");
@@ -961,9 +923,15 @@ function initializebuilding() {
 
         raput[i].querySelector("h2").appendChild(addmore);
         raput[i].querySelector("h2").appendChild(settings);
-      }
       
     }
+  }
+  project_type = document.querySelector("#current_project_measurement").value;
+  if(project_type === 'after_measure_comment') {
+      document.querySelector("#house").style.display = "block";
+  }
+  else {
+    document.querySelector("#house").style.display = "none";    
   }
   
 }
@@ -979,49 +947,62 @@ function projectfunction__addmore(elem) {
   console.log(table_from);
 
   table_from_cells = table_from.querySelectorAll(".project__building_room");
-
-  for (let i = 0; i < table_from_cells.length; i++) {
-    console.log(table_from_cells[i]);
-    console.log(table_from_cells[i].dataset.x);
-    console.log(table_from_cells[i].dataset.y);
-    right_y = table_to.querySelectorAll("tr")[parseFloat(table_from_cells[i].dataset.y)].querySelectorAll("td")[parseFloat(table_from_cells[i].dataset.x)];
+  try {
+    for (let i = 0; i < table_from_cells.length; i++) {
     
-
-    right_y.dataset.y = table_from_cells[i].dataset.y;
-    right_y.dataset.x = table_from_cells[i].dataset.x;
-    right_y.dataset.aroom = table_from_cells[i].dataset.aroom;
-    right_y.dataset.broom = table_from_cells[i].dataset.broom;
-    right_y.dataset.croom = table_from_cells[i].dataset.croom;
-    right_y.dataset.droom = table_from_cells[i].dataset.droom;
-    right_y.dataset.kroom = table_from_cells[i].dataset.kroom;
-    right_y.dataset.lroom = table_from_cells[i].dataset.lroom;
-
-
-    right_y.click();
-    right_y.classList.add("checked");
-    right_y.querySelector("input").checked = true;
-
-    if(document.querySelector("#a_nextnum_second").value.length > 1) {
-      secondelem = "<br/>" + document.querySelector("#a_nextnum_second").value;
-    }
-    else {
-      secondelem = "";
-    }
-
-    if(document.querySelector("#a_nextnum_third").value.length > 1) {
-      thirdelem = "<br/>" + document.querySelector("#a_nextnum_third").value;
-    }
-    else {
-      thirdelem = "";
-    }
-
-    right_y.querySelector("label").innerHTML = table_from_cells[i].innerHTML;
+      table_to.querySelectorAll("tr")[table_to.querySelectorAll("tr").length - parseFloat(table_from_cells[i].dataset.y)].style.display = "flex";  
     
-    console.log("CLICK TD");
+      right_y = table_to.querySelectorAll("tr")[table_to.querySelectorAll("tr").length - parseFloat(table_from_cells[i].dataset.y)].querySelectorAll("td")[parseFloat(table_from_cells[i].dataset.x)];
+      
 
-    document.querySelector("#a_nextnum").value = i+2;
-    console.log(i);
+      right_y.dataset.y = table_from_cells[i].dataset.y;
+      right_y.dataset.x = table_from_cells[i].dataset.x;
+      right_y.dataset.aroom = table_from_cells[i].dataset.aroom;
+      right_y.dataset.broom = table_from_cells[i].dataset.broom;
+      right_y.dataset.croom = table_from_cells[i].dataset.croom;
+      right_y.dataset.droom = table_from_cells[i].dataset.droom;
+      right_y.dataset.kroom = table_from_cells[i].dataset.kroom;
+      right_y.dataset.lroom = table_from_cells[i].dataset.lroom;
+
+
+      right_y.click();
+      right_y.classList.add("checked");
+      right_y.querySelector("input").checked = true;
+
+      if(document.querySelector("#a_nextnum_second").value.length > 1) {
+        secondelem = "<br/>" + document.querySelector("#a_nextnum_second").value;
+      }
+      else {
+        secondelem = "";
+      }
+
+      if(document.querySelector("#a_nextnum_third").value.length > 1) {
+        thirdelem = "<br/>" + document.querySelector("#a_nextnum_third").value;
+      }
+      else {
+        thirdelem = "";
+      }
+
+      right_y.querySelector("label").innerHTML = table_from_cells[i].innerHTML;
+      
+      console.log("CLICK TD");
+
+      document.querySelector("#a_nextnum").value = i+2;
+      z = parseFloat(document.querySelector("#a_nextnum").value);
+      console.log(i);
+      
+    }
+  } catch (error) {
     
+  }
+  table_from_trs = table_to.querySelectorAll("tr");
+  table_from_trs[49].style.display = "block";
+  table_from_trs = table_to.querySelectorAll("tr");
+
+  for (let o = 0; o < table_from_trs.length; o++) {
+    if(table_from_trs[o].style.display === "none") {
+      table_from_trs[o].remove();
+    }
   }
   
 }
@@ -1035,7 +1016,7 @@ function send_new_aparts() {
   const upd__a_array = [];
   const upd__a_ = [];
   $("#A_ .checked").each(function(index) {
-      posX = $(this).closest('tr').index();
+      posX = $(this).parent().data("no");
       posY = $(this).index();
       nam = $(this).find("label").html();
 
@@ -1072,7 +1053,7 @@ function send_new_aparts() {
   });
 
   $("#A_ .nowork").each(function(index) {
-      posX = $(this).closest('tr').index();
+      posX = $(this).parent().data("no");
       posY = $(this).index();
       nam = "NOWORK";
       upd__a_.push({
@@ -1364,3 +1345,675 @@ setTimeout(() => {
 
   }
 }, 1000);
+
+
+
+let timer = 0
+
+$('.project__building_room').click((e) => {
+  e.preventDefault()
+  e.stopPropagation()
+  
+  $('.project__building_room-overlay').remove()
+  $(e.target).find('.active').removeClass('active')
+})
+
+$(".p_meaning")
+  .on("mousedown touchstart", (e) => {
+    $(e.target).focus();
+    let $element = $(e.target)
+
+    $( ".p_meaning.active").each(function( index ) {
+      $('.p_meaning').removeClass('active')
+    });
+
+    timer = window.setTimeout(() => longClick($element), 1000);
+
+    action = $(e.target).data("action");
+    action_meaning = $(e.target).text();
+
+  })
+  // .on("mouseup mouseleave touchend touchmove", (e) =>
+  //   clearTimeout(timer)
+  // )
+  // .click((e) => {
+  //   e.preventDefault()
+  //   e.stopPropagation()
+  //   $('.popup__statuses').removeClass('active')
+  //   console.log("click")
+  // });
+
+$(".p_meaning_end")
+  .on("mousedown touchstart", (e) => {
+    save__newstatuses();
+   
+    setTimeout(function() { 
+      clearTimeout(timer);
+      e.preventDefault()
+      e.stopPropagation()
+      $('.project__building').removeClass('active')
+      $('.popup__statuses').removeClass('active')
+      $('.project__building_room').removeClass('active')
+      $('.project__building_room-overlay').remove()
+      window.removeEventListener("click", defaultClick, true)
+
+      $( ".p_meaning.active").each(function( index ) {
+        $('.p_meaning').removeClass('active')
+      });
+
+      open__workelab();
+    }, 500);
+    
+
+});
+const longClick = (element) => {
+
+  $('.project__building').removeClass('active')
+  $('.project__building_room-overlay').remove()
+  $('.project__building_room').removeClass('active')
+  element.addClass('active')
+  element.addClass(action)
+  $('.popup__statuses').addClass('active')
+  window.addEventListener("click", defaultClick, true)
+  element.append(`<div class='project__building_room-overlay'></div>`)
+  console.log("longpress")
+
+  if($(element).hasClass('problemo')) elab__comment_enable(true,'basic');
+  else if($(element).hasClass('grande_problemo')) elab__comment_enable(true,'critical');
+  else {
+    elab__comment_enable(false);
+  }
+};
+
+function elab__comment_enable(stage,criticality) {
+  if(stage === false) {
+    document.querySelector(`.status__elab_problem`).classList.add(`elab__status_hidden`);
+  }
+  else {
+    console.log('problemo or gorande broblemo');
+    console.log(criticality);
+    document.querySelector(`.status__elab_problem`).classList.remove(`elab__status_hidden`);
+    if(criticality == 'critical') {
+      document.querySelector("#is_thecomment_critical2").checked = true;
+    }
+    else {
+      document.querySelector("#is_thecomment_critical2").checked = false;
+    }
+ 
+
+      // p_meaning_end = document.querySelector(".p_meaning_end");
+      // document.querySelector(".status__elab_problem commentbox_btn").remove();
+      // p_meaning_end.classList.add("commentbox_btn");
+      // p_meaning_end.classList.add("drawarea__controls_btn");
+      // p_meaning_end.classList.add("btn");
+      // p_meaning_end.classList.add("commentreadyready_btn");
+      // p_meaning_end.classList.add("sendcommentfiles");
+      // p_meaning_end.classList.setAttribute("onclick","comment__create_new(1);");
+
+     
+
+  }
+}
+
+const defaultClick = (e) => {
+  e.stopPropagation()
+  _changed_tilas = "";
+  if($(e.target).hasClass('project__building_room')) $(e.target).toggleClass('active');
+  if($(e.target).hasClass('project__building_room')) building__action(action);
+  
+};
+
+function save__newstatuses() {
+  a_rooms = '';b_rooms = '';c_rooms = '';d_rooms = '';e_rooms = '';f_rooms = '';g_rooms = '';h_rooms = '';
+  if (document.querySelectorAll("#A")) {
+    if(document.querySelector("#A").offsetHeight === 0) {
+    }
+    else {
+      a_rooms_ = document.querySelectorAll("#A .project__building_room");
+
+      a_rooms = '';
+
+      for (let i = 0; i < a_rooms_.length; i++) {
+        _name = a_rooms_[i].innerHTML.replaceAll(",", "~").replaceAll("   ", " ").replaceAll("<divclass=project__building_room-overlay></div>","");
+        positionX = a_rooms_[i].dataset.x.replaceAll(",", "~").replaceAll("   ", " ");
+        positionY = a_rooms_[i].dataset.y.replaceAll(",", "~").replaceAll("   ", " ");;
+        a_room = a_rooms_[i].dataset.aroom.replaceAll(",", "~").replaceAll("   ", " ");;
+        b_room = a_rooms_[i].dataset.broom.replaceAll(",", "~").replaceAll("   ", " ");;
+        c_room = a_rooms_[i].dataset.croom.replaceAll(",", "~").replaceAll("   ", " ");;
+        d_room = a_rooms_[i].dataset.droom.replaceAll(",", "~").replaceAll("   ", " ");;
+        k_room = a_rooms_[i].dataset.kroom.replaceAll(",", "~").replaceAll("   ", " ");;
+        l_room = a_rooms_[i].dataset.lroom.replaceAll(",", "~").replaceAll("   ", " ");;
+
+        element = '{"name": "' + _name + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+        a_rooms += element;
+      }
+    }
+  }
+  else {
+    
+  }
+  
+  if(document.querySelectorAll("#B")) {
+    if(document.querySelector("#B").offsetHeight === 0) {
+    }
+    else {
+      b_rooms_ = document.querySelectorAll("#B .project__building_room");
+      b_rooms = '';
+
+      for (let i = 0; i < b_rooms_.length; i++) {     
+        _name = b_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
+        positionX = b_rooms_[i].dataset.x.replace('"','').replace("'","");
+        positionY = b_rooms_[i].dataset.y.replace('"','').replace("'","");
+        a_room = b_rooms_[i].dataset.aroom.replace('"','').replace("'","");
+        b_room = b_rooms_[i].dataset.broom.replace('"','').replace("'","");
+        c_room = b_rooms_[i].dataset.croom.replace('"','').replace("'","");
+        d_room = b_rooms_[i].dataset.droom.replace('"','').replace("'","");
+        k_room = b_rooms_[i].dataset.kroom.replace('"','').replace("'","");
+        l_room = b_rooms_[i].dataset.lroom.replace('"','').replace("'","");
+
+        element = '{"name": "' + _name + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+        b_rooms+=element;
+      }
+    }
+  } 
+  else {
+    b_rooms = '';
+  }
+  if(document.querySelectorAll("#C")) {
+    if(document.querySelector("#C").offsetHeight === 0) {}
+    else {
+      c_rooms_ = document.querySelectorAll("#C .project__building_room");
+      c_rooms = '';
+
+      for (let i = 0; i < c_rooms_.length; i++) {     
+        _name = c_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
+        positionX = c_rooms_[i].dataset.x.replace('"','').replace("'","");
+        positionY = c_rooms_[i].dataset.y.replace('"','').replace("'","");
+        a_room = c_rooms_[i].dataset.aroom.replace('"','').replace("'","");
+        b_room = c_rooms_[i].dataset.broom.replace('"','').replace("'","");
+        c_room = c_rooms_[i].dataset.croom.replace('"','').replace("'","");
+        d_room = c_rooms_[i].dataset.droom.replace('"','').replace("'","");
+        k_room = c_rooms_[i].dataset.kroom.replace('"','').replace("'","");
+        l_room = c_rooms_[i].dataset.lroom.replace('"','').replace("'","");
+
+        element = '{"name": "' + _name + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+        c_rooms+=element;
+      }
+    }
+  
+  }
+  else {
+    
+  }
+
+  
+  if(document.querySelectorAll("#C")) {
+    if(document.querySelector("#C").offsetHeight === 0) {}
+    else {
+      c_rooms_ = document.querySelectorAll("#C .project__building_room");
+      c_rooms = '';
+
+      for (let i = 0; i < c_rooms_.length; i++) {     
+        _name = c_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
+        positionX = c_rooms_[i].dataset.x.replace('"','').replace("'","");
+        positionY = c_rooms_[i].dataset.y.replace('"','').replace("'","");
+        a_room = c_rooms_[i].dataset.aroom.replace('"','').replace("'","");
+        b_room = c_rooms_[i].dataset.broom.replace('"','').replace("'","");
+        c_room = c_rooms_[i].dataset.croom.replace('"','').replace("'","");
+        d_room = c_rooms_[i].dataset.droom.replace('"','').replace("'","");
+        k_room = c_rooms_[i].dataset.kroom.replace('"','').replace("'","");
+        l_room = c_rooms_[i].dataset.lroom.replace('"','').replace("'","");
+
+        element = '{"name": "' + _name + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+        c_rooms+=element;
+      }
+    }
+  
+  }
+  else {
+    c_rooms = '';
+  }
+
+  
+  if(document.querySelectorAll("#D")) {
+    if(document.querySelector("#D").offsetHeight === 0) {}
+    else {
+      d_rooms_ = document.querySelectorAll("#D .project__building_room");
+      d_rooms = '';
+
+      for (let i = 0; i < d_rooms_.length; i++) {     
+        _name = d_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
+        positionX = d_rooms_[i].dataset.x.replace('"','').replace("'","");
+        positionY = d_rooms_[i].dataset.y.replace('"','').replace("'","");
+        a_room = d_rooms_[i].dataset.aroom.replace('"','').replace("'","");
+        b_room = d_rooms_[i].dataset.broom.replace('"','').replace("'","");
+        c_room = d_rooms_[i].dataset.croom.replace('"','').replace("'","");
+        d_room = d_rooms_[i].dataset.droom.replace('"','').replace("'","");
+        k_room = d_rooms_[i].dataset.kroom.replace('"','').replace("'","");
+        l_room = d_rooms_[i].dataset.lroom.replace('"','').replace("'","");
+
+        element = '{"name": "' + _name + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+        d_rooms+=element;
+      }
+    }
+  
+  }
+  else {
+    d_rooms = '';
+  }
+
+  
+  if(document.querySelectorAll("#E")) {
+    if(document.querySelector("#E").offsetHeight === 0) {}
+    else {
+      e_rooms_ = document.querySelectorAll("#E .project__building_room");
+      e_rooms = '';
+
+      for (let i = 0; i < e_rooms_.length; i++) {     
+        _name = e_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
+        positionX = e_rooms_[i].dataset.x.replace('"','').replace("'","");
+        positionY = e_rooms_[i].dataset.y.replace('"','').replace("'","");
+        a_room = e_rooms_[i].dataset.aroom.replace('"','').replace("'","");
+        b_room = e_rooms_[i].dataset.broom.replace('"','').replace("'","");
+        c_room = e_rooms_[i].dataset.croom.replace('"','').replace("'","");
+        d_room = e_rooms_[i].dataset.droom.replace('"','').replace("'","");
+        k_room = e_rooms_[i].dataset.kroom.replace('"','').replace("'","");
+        l_room = e_rooms_[i].dataset.lroom.replace('"','').replace("'","");
+
+        element = '{"name": "' + _name + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+        e_rooms+=element;
+      }
+    }
+  
+  }
+  else {
+    e_rooms = '';
+  }
+
+  
+  if(document.querySelectorAll("#F")) {
+    if(document.querySelector("#F").offsetHeight === 0) {}
+    else {
+      f_rooms_ = document.querySelectorAll("#F .project__building_room");
+      f_rooms = '';
+
+      for (let i = 0; i < f_rooms_.length; i++) {     
+        _name = f_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
+        positionX = f_rooms_[i].dataset.x.replace('"','').replace("'","");
+        positionY = f_rooms_[i].dataset.y.replace('"','').replace("'","");
+        a_room = f_rooms_[i].dataset.aroom.replace('"','').replace("'","");
+        b_room = f_rooms_[i].dataset.broom.replace('"','').replace("'","");
+        c_room = f_rooms_[i].dataset.croom.replace('"','').replace("'","");
+        d_room = f_rooms_[i].dataset.droom.replace('"','').replace("'","");
+        k_room = f_rooms_[i].dataset.kroom.replace('"','').replace("'","");
+        l_room = f_rooms_[i].dataset.lroom.replace('"','').replace("'","");
+
+        element = '{"name": "' + _name + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+        f_rooms+=element;
+      }
+    }
+  
+  }
+  else {
+    f_rooms = '';
+  }
+
+  
+  if(document.querySelectorAll("#G")) {
+    if(document.querySelector("#G").offsetHeight === 0) {}
+    else {
+      g_rooms_ = document.querySelectorAll("#G .project__building_room");
+      g_rooms = '';
+
+      for (let i = 0; i < g_rooms_.length; i++) {     
+        _name = g_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
+        positionX = g_rooms_[i].dataset.x.replace('"','').replace("'","");
+        positionY = g_rooms_[i].dataset.y.replace('"','').replace("'","");
+        a_room = g_rooms_[i].dataset.aroom.replace('"','').replace("'","");
+        b_room = g_rooms_[i].dataset.broom.replace('"','').replace("'","");
+        c_room = g_rooms_[i].dataset.croom.replace('"','').replace("'","");
+        d_room = g_rooms_[i].dataset.droom.replace('"','').replace("'","");
+        k_room = g_rooms_[i].dataset.kroom.replace('"','').replace("'","");
+        l_room = g_rooms_[i].dataset.lroom.replace('"','').replace("'","");
+
+        element = '{"name": "' + _name + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+        g_rooms+=element;
+      }
+    }
+  
+  }
+  else {
+    g_rooms = '';
+  }
+
+  
+  if(document.querySelectorAll("#H")) {
+    if(document.querySelector("#H").offsetHeight === 0) {}
+    else {
+      h_rooms_ = document.querySelectorAll("#H .project__building_room");
+      h_rooms = '';
+
+      for (let i = 0; i < h_rooms_.length; i++) {     
+        _name = h_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
+        positionX = h_rooms_[i].dataset.x.replace('"','').replace("'","");
+        positionY = h_rooms_[i].dataset.y.replace('"','').replace("'","");
+        a_room = h_rooms_[i].dataset.aroom.replace('"','').replace("'","");
+        b_room = h_rooms_[i].dataset.broom.replace('"','').replace("'","");
+        c_room = h_rooms_[i].dataset.croom.replace('"','').replace("'","");
+        d_room = h_rooms_[i].dataset.droom.replace('"','').replace("'","");
+        k_room = h_rooms_[i].dataset.kroom.replace('"','').replace("'","");
+        l_room = h_rooms_[i].dataset.lroom.replace('"','').replace("'","");
+
+        element = '{"name": "' + _name + '","positionY": ' + positionY + ',"positionX": ' + positionX + ',"a_room": "' + a_room + '","b_room": "' + b_room + '","c_room": "' + c_room + '","d_room": "' + d_room + '","k_room": "' + k_room + '","l_room": "' + l_room + '"},';
+        h_rooms+=element;
+      }
+    }
+  
+  }
+  else {
+    h_rooms = '';
+  }
+  _id = parseFloat(document.querySelector("#current_project_id").value);
+  _who = document.querySelector(".t_users .active_user").innerText;
+  _what = action_meaning;
+
+  activerooms = document.querySelectorAll(".project__building_room.active");
+  _rooms_array = "";
+  for (let a = 0; a < activerooms.length; a++) {
+    _rooms_array += activerooms[a].parentElement.parentElement.parentElement.querySelector("h2 input").value + " - " + activerooms[a].innerText + " <br>";
+  }
+  formData = {
+    pr_id: _id,
+    who: _who,
+    what: _what,
+    where: _rooms_array
+  };
+
+  console.log(formData);
+
+  $.ajax({
+    type: "POST",
+    url: "/vendor/send_workdiary.php",
+    data: formData,
+    error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+    }
+  }).done(function (data) {
+    // alert('Seinä ' + current_room + ' tallennettu');
+    console.log("saved rooms: " + data);
+  });
+
+  _saving_a_rooms = "[" + a_rooms.replace("'", "").replaceAll('<div class="project__building_room-overlay"></div>','') + "]";
+  _saving_b_rooms = "[" + b_rooms.replace("'", "").replaceAll('<div class="project__building_room-overlay"></div>','') + "]";
+  _saving_c_rooms = "[" + c_rooms.replace("'", "").replaceAll('<div class="project__building_room-overlay"></div>','') + "]";
+  _saving_d_rooms = "[" + d_rooms.replace("'", "").replaceAll('<div class="project__building_room-overlay"></div>','') + "]";
+  _saving_e_rooms = "[" + e_rooms.replace("'", "").replaceAll('<div class="project__building_room-overlay"></div>','') + "]";
+  _saving_f_rooms = "[" + f_rooms.replace("'", "").replaceAll('<div class="project__building_room-overlay"></div>','') + "]";
+  _saving_g_rooms = "[" + g_rooms.replace("'", "").replaceAll('<div class="project__building_room-overlay"></div>','') + "]";
+  _saving_h_rooms = "[" + h_rooms.replace("'", "").replaceAll('<div class="project__building_room-overlay"></div>','') + "]";
+
+  formData = {
+    id: _id,
+    saving_a_rooms: _saving_a_rooms.replaceAll(",]","]").replaceAll("   ",""),
+    saving_b_rooms: _saving_b_rooms.replaceAll(",]","]").replaceAll("   ",""),
+    saving_c_rooms: _saving_c_rooms.replaceAll(",]","]").replaceAll("   ",""),
+    saving_d_rooms: _saving_d_rooms.replaceAll(",]","]").replaceAll("   ",""),
+    saving_e_rooms: _saving_e_rooms.replaceAll(",]","]").replaceAll("   ",""), 
+    saving_f_rooms: _saving_f_rooms.replaceAll(",]","]").replaceAll("   ",""), 
+    saving_g_rooms: _saving_g_rooms.replaceAll(",]","]").replaceAll("   ",""), 
+    saving_h_rooms: _saving_h_rooms.replaceAll(",]","]").replaceAll("   ",""),
+    // settings: document.querySelector("#aukko_settings").value,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: "/updateproject.php",
+    data: formData,
+    error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+    }
+  }).done(function (data) {
+    // alert('Seinä ' + current_room + ' tallennettu');
+    console.log("saved Data: " + data);
+  });
+
+
+  p_room = document.querySelectorAll(".project__building_room.active.problemo");
+  gp_room = document.querySelectorAll(".project__building_room.active.grande_problemo");
+
+  for (let a = 0; a < p_room.length; a++) {
+    comment__create_new(document.querySelector('.commentbox__newfirst'),p_room[a]);
+  }
+  for (let a = 0; a < gp_room.length; a++) {
+    comment__create_new(document.querySelector('.commentbox__newfirst'),gp_room[a]);
+  }
+}
+
+function building__action(evt) {
+  console.log(evt);
+
+  
+  console.log(evt);
+  console.log("building__action");
+  $( ".project__building_room.active").each(function( index ) {
+    $( this ).attr("data-aroom", $( this ).attr("data-aroom").replaceAll($( this ).attr("data-aroom").split("~")[1],evt))
+    $( this ).attr("data-broom", $( this ).attr("data-broom").replaceAll($( this ).attr("data-broom").split("~")[1],evt))
+    $( this ).attr("data-croom", $( this ).attr("data-croom").replaceAll($( this ).attr("data-croom").split("~")[1],evt))
+    $( this ).attr("data-droom", $( this ).attr("data-droom").replaceAll($( this ).attr("data-droom").split("~")[1],evt))
+    $( this ).attr("data-kroom", $( this ).attr("data-kroom").replaceAll($( this ).attr("data-kroom").split("~")[1],evt))
+    $( this ).attr("data-lroom", $( this ).attr("data-lroom").replaceAll($( this ).attr("data-lroom").split("~")[1],evt))
+  });
+  $('.project__building_room.active').removeClass('<divclass=project__building_room-overlay></div>')
+  $('.project__building_room.active').removeClass('prob')
+  $('.project__building_room.active').removeClass('problem')
+  $('.project__building_room.active').removeClass('problemo')
+  $('.project__building_room.active').removeClass('grande_problemo')
+  $('.project__building_room.active').removeClass('no_progress')
+  $('.project__building_room.active').removeClass('undone')
+  
+  $('.project__building_room.active').removeClass('l5_a')
+  $('.project__building_room.active').removeClass('l5_b')
+  $('.project__building_room.active').removeClass('l5_c')
+  $('.project__building_room.active').removeClass('l5_d')
+  
+  $('.project__building_room.active').removeClass('l4_a')
+  $('.project__building_room.active').removeClass('l4_b')
+  $('.project__building_room.active').removeClass('l4_c')
+  $('.project__building_room.active').removeClass('l4_d')
+
+  $('.project__building_room.active').removeClass('l3_a')
+  $('.project__building_room.active').removeClass('l3_b')
+  $('.project__building_room.active').removeClass('l3_c')
+  $('.project__building_room.active').removeClass('l3_d')
+
+  $('.project__building_room.active').removeClass('l2_a')
+  $('.project__building_room.active').removeClass('l2_b')
+  $('.project__building_room.active').removeClass('l2_c')
+  $('.project__building_room.active').removeClass('l2_d')
+
+  $('.project__building_room.active').removeClass('l1_a')
+  $('.project__building_room.active').removeClass('l1_b')
+  $('.project__building_room.active').removeClass('l1_c')
+  $('.project__building_room.active').removeClass('l1_d')
+  
+  $('.project__building_room.active').addClass(evt)
+
+  // $('.project__building').removeClass('active')
+  // $('.popup__statuses').removeClass('active')
+  // $('.project__building_room').removeClass('active')
+  
+  // $('.project__building_room-overlay').remove()
+  // window.removeEventListener("click", defaultClick, true)
+}
+
+
+function open__workelab() {
+  document.querySelector(".elab__statuses").classList.toggle("active");
+}
+
+function toggle__pusers(elem) {
+  p_li = document.querySelectorAll(".p_li");
+
+  for (let o = 0; o < p_li.length; o++) {
+    p_li[o].classList.remove("active_user");
+  }
+
+  elem.classList.add("active_user");
+  active__user = elem.innerText;
+
+  
+
+  s_options = document.querySelectorAll(".status__report_from > option");
+  for (let i = 0; i < s_options.length; i++) {
+    if(s_options[i].value.toLowerCase() === active__user.toLowerCase()) {
+      s_options[i].selected = true;
+    }    
+  }
+  s_options = document.querySelectorAll(".kommentti_comment_from");
+  for (let i = 0; i < s_options.length; i++) {
+    s_options[i].value = active__user;
+  }
+}
+
+function enable__elabelems() {
+  document.querySelector(`.t_elabstatus`).classList.remove(`elab__status_hidden`);
+  document.querySelector(`.t_elabday`).classList.remove(`elab__status_hidden`);
+  document.querySelector(`.status__elab_noproblem`).classList.remove(`elab__status_hidden`);
+}
+
+function zero_controls(e) {
+  if(e.value.length > 1) {
+   zerocontrols = document.querySelectorAll(".zero_popup .hidden");
+    for (let i = 0; i < zerocontrols.length; i++) {
+      zerocontrols[i].classList.remove("hidden"); 
+    } 
+  }
+  else {
+    zerocontrols = document.querySelectorAll(".zero_popup .modal_close_btn");
+    for (let i = 0; i < zerocontrols.length; i++) {
+      zerocontrols[i].classList.add("hidden"); 
+    } 
+  }
+}
+
+function zero_controls_close() {
+  document.querySelector('.zero_popup').classList.add('out');
+  document.querySelector('.zero_popup').classList.remove('two');
+
+  mainsite = window.location.host;
+  prid = document.querySelector("#current_project_id").value;
+
+  if(document.querySelector("#usr__selection").value.charAt(0) == " ") {
+    selected_user = document.querySelector("#usr__selection").value.replace(" ","");
+  }
+  else {
+    selected_user = document.querySelector("#usr__selection").value;
+  }
+  window.location.replace("http://"+mainsite+"/post.php?id="+prid+"&user="+selected_user);
+}
+
+
+function add_new_lvlproject(elem) {
+  gp = elem.parentElement.parentElement.parentElement;
+
+  table = gp.querySelector(".tablepreviewz tbody");
+  len = gp.querySelectorAll("tr").length;
+  var tr = document.createElement('tr');
+  tr.dataset.no = parseFloat(gp.querySelectorAll("tr")[0].dataset.no) +1;
+
+  if(len > 50) {
+      alert("Kerrosten maksimimäärä saavutettu");
+      return
+  }
+  for (let i = 1; i < 31; i++) {
+      if(i == 1) {
+          num = tr.dataset.no;
+          var td = document.createElement('td');
+          var td_input = document.createElement('input');
+          td_input.setAttribute("name","room_name");
+          td_input.setAttribute("type","checkbox");
+
+          var td_label = document.createElement('label');
+          td_label.innerHTML=num;
+          // td.append(td_input);
+          td.append(td_label);
+          
+
+          td.classList.add("noindex");
+          tr.append(td);
+      }
+      else {
+          var td = document.createElement('td');
+          var td_input = document.createElement('input');
+          td_input.setAttribute("name","room_name");
+          td_input.setAttribute("type","checkbox");
+
+          var td_label = document.createElement('label');
+          td.append(td_input);
+          td.append(td_label);
+          
+
+          tr.append(td);
+      }
+      
+      
+  }
+  table.prepend(tr);
+
+}
+
+
+
+function change__stsplit(e) {
+  allimps = document.querySelectorAll(".colormeaningsimps input");
+  c_meanings = document.querySelectorAll(".c_meaning");
+  _value = "";
+  for (let a = 0; a < allimps.length; a++) {
+    _value += allimps[a].value + "~~";
+  }
+
+  for (let b = 0; b < c_meanings.length; b++) {
+    if(e.dataset.action == c_meanings[b].dataset.action) {
+      if(c_meanings[b].querySelector("i")) {
+        c_meanings[b].querySelector("i").innerHTML = e.value;
+      }
+    }
+  }
+
+  _id = parseFloat(document.querySelector("#current_project_id").value);
+  _meta = 'statuses__text';
+
+  formData = {
+    pr_id: _id,
+    meta: _meta,
+    value: _value
+  };
+  
+
+
+  $.ajax({
+    type: "POST",
+    url: "/vendor/updatemeta.php",
+    data: formData,
+    error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+    }
+  }).done(function (data) {
+    console.log("saved Data: " + data);
+  });
+}
+
+
+
+function next_rabbu() {
+  if(current_user.toLowerCase() == 'tyonjohto' || current_role.toLowerCase() == 'mittaus') {
+    allrappus = document.querySelectorAll(".coderdy");
+
+    for (let a = 0; a < allrappus.length; a++) {
+      if(allrappus[a].offsetHeight < 2) {
+        allrappus[a].style.display = 'block';
+        break
+      }
+    }
+  }
+}

@@ -38,9 +38,8 @@ $(document).ready(function() {
     $('.sendcommentfiles').click(function() {
 
         previewelement_class = 'newcomment__previewfiles';
-        
-        totalfiles = $('#newcomment__files')[0].files.length;
-        cur_comment_files = $('#newcomment__files')[0].files;
+        totalfiles =  $(this).parent().closest(".newcomment__files")[0].files.length;
+        cur_comment_files =  $(this).parent().closest(".newcomment__files")[0].files;
 
         console.log(totalfiles);
         for (var index = 0; index < totalfiles; index++) {

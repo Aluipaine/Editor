@@ -18,20 +18,15 @@ include('tyonjohto-header.php');
   <section class="t_projects">
     <h2>Projektilista</h2>
     <div class="row">
-    <ul class="t_projectslist">
-      <li class="active" onclick="toggle__tprojects(this);">Kaikki</li>
-      <?php
-        
+      <ul class="t_projectslist">
+        <li class="active" onclick="toggle__tprojects(this);">Kaikki</li>
+        <?php
           $projects = mysqli_query($db, "SELECT * FROM `projects`");
           $projects = mysqli_fetch_all($projects);
           $prjct_array = array();
           foreach ($projects as $p) { 
-
-            
-
             $hours = mysqli_query($db, "SELECT `h_remaining` FROM `comments` WHERE `projectid`='$p[0]'");
             $hours = mysqli_fetch_all($hours);
-            
             $prjct_summarum = 0;
             foreach ($hours as $h) { 
               $prjct_summarum+=$h[0];
@@ -39,19 +34,13 @@ include('tyonjohto-header.php');
             $prjct_array+= array($p[0] => $pprjct_summarum);
           }
           arsort($prjct_array);
-
           foreach($prjct_array as $x => $x_value) {
-            
             $pr_name_ = mysqli_query($db, "SELECT * FROM `projects` WHERE `id`='$x' ");
             $_pr_name = mysqli_fetch_all($pr_name_);
             $pr_name = $_pr_name[0][1];
-
             echo '<li onclick="toggle__tprojects(this,`'.$x.'`);">'.$pr_name.'</li>';
-          }
-              
+          }    
         ?>
-      
-        
       </ul>
       <a href="/new-project.php" class="start_btn">Aloita uusi projekti</a>
     </div>

@@ -67,41 +67,7 @@ body {
 .container .box .box-header h3 {
     width: 15rem;
 }
-.t_users h2,
-.t_projects h2 {
-    font-size: 1.5rem;
-}
 
-.t_users ul,
-.t_projects ul {
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-around; */
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    padding-left: 5px;
-}
-.t_users li,
-.t_projects li {
-    flex: 0 0 19%;
-    margin-top: 6px;
-    margin-bottom: 3px;
-    background-color: rgba(255,255,255,.5);
-    border-radius: 30px;
-    padding: 15px 15px 10px 15px;
-    text-align: center;
-    cursor: pointer;
-    transition: all .5s ease-in-out;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.t_users li.active,
-.t_projects li.active {
-    background: #fff;
-}
 .container {
     /* height: calc(100vh - 10rem); */
     display: flex;

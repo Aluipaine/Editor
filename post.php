@@ -5,14 +5,23 @@ require "vendor/config.php";
 
 $id = $_GET["id"];
 $post = mysqli_query($db, "SELECT * FROM `projects` WHERE `id` = '$id'");
+$post_tradarray = mysqli_fetch_all($post)[0];
+$post = mysqli_query($db, "SELECT * FROM `projects` WHERE `id` = '$id'");
 $post = mysqli_fetch_assoc($post);
+
 
 
 include('./header.php');
 // echo "<form action='' method='post' onsubmit='return false' class='post__form'>";
 
+$usr = $_GET["user"];
 
-if(isset($_GET["role"]) && $_GET["role"] == 'mittaus'){
+$usr_role = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr'; ");
+$usr_role = mysqli_fetch_all($usr_role)[0];
+
+$usr_role = $usr_role[3];
+
+if(isset($usr_role) && $usr_role == 'mittaus'){
     include('./templates/2_0.php');
     include('./templates/drawarea.php');
     include('./templates/2_1.php');
@@ -77,11 +86,15 @@ else {
 
 // print_r($usrpermissions[0][1]);
 // print_r($usrpermissions[0][4]);
-echo '<input type="hidden" value="' . $usrpermissions[0][1] . '" id="current_user" name="current_user">';
+echo '<input type="hidden" value="' . strtolower($_GET["user"]) . '" id="current_user" name="current_user">';
 echo '<input type="hidden" value="' . strtolower($_GET["role"]) . '" id="current_role" name="current_role">';
 echo '<input type="hidden" value="' . $usrpermissions[0][4] . '" id="current_user_permissions" name="current_user_permissions">';
 echo '<input type="hidden" value="' . $id . '" id="current_project_id" name="current_project_id">';
+echo '<input type="hidden" value="' . $post_tradarray[4] . '" id="current_project_measurement" name="current_project_measurement">';
 
+$usrs_asiakas = mysqli_query($db, "SELECT * FROM `users`");
+$usrs_asiakas = mysqli_fetch_all($usrs_asiakas)[1][1];
+echo '<input type="hidden" value="' . $usrs_asiakas . '" id="current_asiakas" name="current_asiakas">';
 
 include('./footer-post.php');
 

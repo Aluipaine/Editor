@@ -26,7 +26,7 @@
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();" class="nav__comleted">Läpiviennit</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();" class="nav__comleted">Saumat</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();" class="nav__comleted">Kiinnikkeet</div></li>
-               <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();" class="nav__comleted">Ladonta</div></li>
+               <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();" class="nav__comleted">Korjailu</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();updatearea();osittainen_siirto_muualle();" class="nav__comleted">Seinät</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();" class="nav_current">Levyt</div></li>
                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_six');refresh__drawcontrols();updatearea();">Rangat</div></li>
@@ -38,10 +38,10 @@
     <section class="excel">
       <h3>Levyexcel</h3>
       
-      <div class="greenbtn" onclick="create__levy_excel(false);">Generoi Levyexcel</div>
+      <div class="greenbtn levyexcel__btn" onclick="create__levy_excel(false);">Generoi Levyexcel</div>
      <!-- Set for input default center coords  -->
       <table class="levy_excel">
-        <tr>
+        <tr class="headingrow">
           <td>Type (drawing)</td>
           <td>Materialcode</td>
           <td>Pituus (X)</td>
@@ -83,7 +83,7 @@
           <td>Y1</td>
           <td>Y2</td>
           <td>Y3</td>
-          <td>Y4</td>
+          <td>Y5</td>
           <td>Y4</td>
           <td>Y6</td>
           <td>Y7</td>
@@ -154,8 +154,8 @@
 
       </table>
       <div class="row">
-         <div class="get_excel get_excel_btn get_levy_btn">Lataa Excel</div>
-                  <div class="get_screenshot" onclick="takeshot(0);">Tallenna havainnekuva</div>
+          <div class="get_excel get_excel_btn get_levy_btn" onclick="generating_excel();">Lataa Excel</div>
+          <div class="get_screenshot" onclick="takeshot(0);">Tallenna havainnekuva</div>
 
       </div>
       <div id="levyt__havainnekuva" class="havainnekuva"></div>
