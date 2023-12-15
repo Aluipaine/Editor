@@ -1,0 +1,305 @@
+html.modal-active, body.modal-active {
+  overflow: hidden;
+}
+.modal section {
+  position: static;
+}
+
+.modal section .col-6:first-child {
+  padding-right: 5px;
+}
+
+.modal section .col-6:last-child {
+  padding-left: 5px;
+}
+.modal_close_btn {
+  background: unset;
+  border: unset;
+  float: right;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+}
+.modal-container, .aukko_container,
+.recl-container, .cus-container, .ladonta_container, .levytyosto_container,
+.all_container,.as-container {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  z-index: 9;
+}
+.recl-container .modal-background,
+.cus-container .modal-background,
+.modal-container .modal-background,
+.as-container .modal-background,
+.aukko_container .modal-background,
+.ladonta_container .modal-background,
+.all_container .modal-background,
+.levytyosto_container .modal-background {
+  display: table-cell;
+  background: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  vertical-align: middle;
+}
+.recl-container .modal-background .modal,
+.cus-container .modal-background .modal,
+.modal-container .modal-background .modal,
+.as-container .modal-background .modal,
+.aukko_container .modal-background .modal,
+.ladonta_container .modal-background .modal,
+.all_container .modal-background .modal,
+.levytyosto_container .modal-background .modal {
+  background: white;
+  padding: 50px;
+  display: inline-block;
+  border-radius: 3px;
+  font-weight: 300;
+  position: relative;
+  width: 90vw;
+}
+.recl-container .modal-background .modal h2,
+.cus-container .modal-background .modal h2,
+.modal-container .modal-background .modal h2,
+.as-container .modal-background .modal h2,
+.aukko_container .modal-background .modal h2,
+.ladonta_container .modal-background .modal h2, 
+.all_container .modal-background .modal h2, 
+.levytyosto_container .modal-background .modal h2 
+{
+  font-size: 25px;
+  line-height: 25px;
+  margin-bottom: 15px;
+}
+.recl-container .modal-background .modal p,
+.cus-container .modal-background .modal p,
+.modal-container .modal-background .modal p,
+.as-container .modal-background .modal p,
+.aukko_container .modal-background .modal p,
+.ladonta_container .modal-background .modal p,
+.all_container .modal-background .modal p,
+.levytyosto_container .modal-background .modal p {
+  font-size: 18px;
+  line-height: 22px;
+}
+.recl-container .modal-background .modal .modal-svg,
+.cus-container .modal-background .modal .modal-svg,
+.modal-container .modal-background .modal .modal-svg,
+.as-container .modal-background .modal .modal-svg,
+.aukko_container .modal-background .modal .modal-svg,
+.ladonta_container .modal-background .modal .modal-svg,
+.all_container .modal-background .modal .modal-svg,
+.levytyosto_container .modal-background .modal .modal-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 3px;
+}
+.recl-container .modal-background .modal .modal-svg rect,
+.cus-container .modal-background .modal .modal-svg rect,
+.modal-container .modal-background .modal .modal-svg rect,
+.as-container .modal-background .modal .modal-svg rect,
+.aukko_container .modal-background .modal .modal-svg rect,
+.ladonta_container .modal-background .modal .modal-svg rect,
+.all_container .modal-background .modal .modal-svg rect,
+.levytyosto_container .modal-background .modal .modal-svg rect 
+{
+  stroke: #fff;
+  stroke-width: 2px;
+  stroke-dasharray: 778;
+  stroke-dashoffset: 778;
+}
+
+
+.recl-container.two,
+.cus-container.two,
+.modal-container.two,
+.as-container.two,
+.aukko_container.two,
+.ladonta_container.two,
+.all_container.two,
+.levytyosto_container.two
+ {
+  transform: scale(1);
+}
+.recl-container.two .modal-background,
+.cus-container.two .modal-background,
+.modal-container.two .modal-background,
+.as-container.two .modal-background,
+.aukko_container.two .modal-background,
+.ladonta_container.two .modal-background,
+.all_container.two .modal-background,
+.levytyosto_container.two .modal-background 
+{
+  background: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.recl-container.two .modal-background .modal,
+.cus-container.two .modal-background .modal,
+.modal-container.two .modal-background .modal,
+.as-container.two .modal-background .modal,
+.aukko_container.two .modal-background .modal,
+.all_container.two .modal-background .modal,
+.ladonta_container.two .modal-background .modal, 
+.levytyosto_container.two .modal-background .modal 
+{
+  opacity: 0;
+  animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.modal-container.two .modal-background .modal,
+.as-container.two .modal-background .modal,
+.aukko_container.two .modal-background .modal,
+.ladonta_container.two .modal-background .modal,
+.all_container.two .modal-background .modal,
+.levytyosto_container.two .modal-background .modal
+ {
+  overflow-x:scroll;
+}
+.recl-container.two + .content,
+.cus-container.two + .content,
+.modal-container.two + .content,
+.as-container.two + .content,
+.aukko_container.two + .content,
+.ladonta_container.two + .content, 
+.all_container.two + .content, 
+.levytyosto_container.two + .content 
+{
+  animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.recl-container.two.out,
+.cus-container.two.out,
+.modal-container.two.out,
+.as-container.two.out,
+.aukko_container.two.out,
+.all_container.two.out,
+.ladonta_container.two.out,
+.levytyosto_container.two.out
+ {
+  animation: quickScaleDown 0s 0.5s linear forwards;
+}
+.recl-container.two.out .modal-background,
+.cus-container.two.out .modal-background,
+.modal-container.two.out .modal-background,
+.as-container.two.out .modal-background,
+.aukko_container.two.out .modal-background,
+.ladonta_container.two.out .modal-background,
+.all_container.two.out .modal-background,
+.levytyosto_container.two.out .modal-background
+ {
+  animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.recl-container.two.out .modal-background .modal,
+.cus-container.two.out .modal-background .modal,
+.modal-container.two.out .modal-background .modal,
+.as-container.two.out .modal-background .modal,
+.aukko_container.two.out .modal-background .modal,
+.all_container.two.out .modal-background .modal,
+.ladonta_container.two.out .modal-background .modal, 
+.levytyosto_container.two.out .modal-background .modal 
+{
+  animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.recl-container.two.out + .content,
+.cus-container.two.out + .content,
+.modal-container.two.out + .content,
+.as-container.two.out + .content,
+.aukko_container.two.out + .content,
+.ladonta_container.two.out + .content, 
+.all_container.two.out + .content, 
+.levytyosto_container.two.out + .content 
+{
+  animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.recl-container .form-group label {
+  padding: 4px;
+}
+.table_overflow {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.modal .canvas span.settings__mittapiste {
+  opacity: 1;
+}
+
+.modal .canvas span {
+  opacity: 0.5;
+}
+@keyframes fadeIn {
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+@keyframes fadeOut {
+  0% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.8) translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleDown {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) translateY(1000px);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleBack {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.85);
+  }
+}
+
+@keyframes quickScaleDown {
+  0% {
+    transform: scale(1);
+  }
+  99.9% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes scaleForward {
+  0% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.all_container.two {
+  z-index: 99;
+}

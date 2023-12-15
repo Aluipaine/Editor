@@ -242,7 +242,7 @@ function transfer__height_cords(elem) {
   wallw_cord = elem.parentElement.querySelector(".wall_width").value;
 
   drawarea_h.value = wallh_cord;
-  drawarea_.value = wallw_cord;
+  drawarea_w.value = wallw_cord;
 
   document.querySelector(".tohide__room_"+current_room.toLowerCase() + " .wall_height").value = wallh_cord;
   document.querySelector(".tohide__room_"+current_room.toLowerCase() + " .wall_width").value = wallw_cord;
