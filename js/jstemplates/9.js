@@ -1,17 +1,12 @@
 listoitettu = false;
-if(document.querySelector(".lista_excel")) {
-  old_listat_excel = document.querySelector(".lista_excel").innerHTML;
-}
 
-if(document.querySelector(".ikkunalista_excel")) {
-  old_ikkunalista_excel = document.querySelector(".ikkunalista_excel").innerHTML;
-}
 function listoitus() {
-  lista_excel = document.querySelector(".lista_excel");
-  lista_excel.innerHTML = old_listat_excel;
-  ikkunalista_excel = document.querySelector(".ikkunalista_excel");
-  ikkunalista_excel.innerHTML = old_ikkunalista_excel;
-  tyostot_grandrow.style.opacity = 0;
+  document.querySelector(".rangat__grandrow").style.opacity = 0;
+  ikkunaListaExcel = document.querySelector(".ikkunalista_excel");
+  ListaExcel = document.querySelector(".lista_as_excel tbody");
+  first_excel = document.querySelector(" table.ikkunalista_excel > tbody > tr");
+  second_excel = document.querySelector(" table.lista_excel > tbody > tr");
+
   listat__grandrow = document.querySelector(".listat__grandrow");
 
   
@@ -22,13 +17,8 @@ function listoitus() {
     listat[i].classList.add("lista");
     listat[i].innerHTML = "";
   }
-  ikkunaListaExcel = document.querySelector(".ikkunalista_excel");
-  ListaExcel = document.querySelector(".lista_excel");
-  first_excel = document.querySelector(" table.ikkunalista_excel > tbody > tr");
-  second_excel = document.querySelector(" table.lista_excel > tbody > tr");
-
   if (listoitettu === false) {
-    make_aslista_excel();
+    create__lista__asexcel();
   }
   else {
     console.log("Jo listoitettu");
@@ -45,6 +35,8 @@ function listoitus() {
 
 
 // function make_aslista_excel() {
+//   ListaExcel = document.querySelector(".lista_as_excel tbody");
+
 //   summ_epdm = 0;
 //   listat_data = [];
 //   ikkuna_array = [];
@@ -63,12 +55,12 @@ function listoitus() {
 //     if (listat[i].classList.contains("ranka_pysty")) {
 //       h3.innerHTML = h;
 //       etaisyys = parseFloat(listat[i].style.left) * 5;
-//       h5.innerHTML = etaisyys + " mm vasemmalle Seinässä " + wallname;
+//       h5.innerHTML = etaisyys + " mm vasemmalle Seinässä " + current_room.toLowerCase();
 //     }
 //     else if (listat[i].classList.contains("ranka_vaaka")) {
 //       h3.innerHTML = w;
 //       etaisyys = parseFloat(listat[i].style.bottom) * 5;
-//       h5.innerHTML = etaisyys + " mm ylös Seinässä " + wallname;
+//       h5.innerHTML = etaisyys + " mm ylös Seinässä " + current_room.toLowerCase();
 //     }
 //     summ_epdm += parseFloat(h3.innerHTML);
 //     h4.innerHTML = "1";
@@ -171,8 +163,8 @@ function create__lista__asexcel() {
     var h4 = document.createElement('td');
     var h5 = document.createElement('td');
        
-    h1.innerHTML = listat[i].dataset.listan_koodin_alku;
-    h2.innerHTML = listat[i].dataset.name + " " + listat[i].dataset.listan_koodin_alku;
+    h1.innerHTML = "Määrittelemätön"; //listat[i].dataset.listan_koodin_alku;
+    h2.innerHTML = "Määrittelemätön"; //listat[i].dataset.name + " " + listat[i].dataset.listan_koodin_alku;
 
     if (listat[i].classList.contains("lista_pysty")) {
       pituus = parseFloat(listat[i].style.height)*5 -10;

@@ -6590,6 +6590,17 @@ div.x_del.hidden {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.get_excel_btn:after {
+  content: 'Jos lataat saman Excelin, uusi tallentuu uutena tiedostona';
+  position: absolute;
+  font-size: 11px;
+  top: 50px;
+  color: rgba(0,0,0,.8);
+  font-weight: 400;
 }
 
 .get_screenshot {
