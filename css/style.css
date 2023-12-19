@@ -7058,8 +7058,13 @@ input[type="radio"] + label.levy__label:focus, input[type="radio"] + label.levy_
   letter-spacing: 0;
 }
 
-.three_sheet_item.hidden {
+.three_sheet_item.hidden,
+.prthree_sheet_item.hidden {
   display: none;
+}
+
+.get_project_modal {
+  width: 100%;
 }
 
 .commentbox {

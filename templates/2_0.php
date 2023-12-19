@@ -33,7 +33,8 @@
           </tr>
         </table>
         <div class="project__start_elaborate" onclick="open__workelab();">Kuittaa työt</div>
-        
+        <div class="open_modal yellowbtn get_project_modal col-6" onclick="settings__modal_open(this);toggle__projectexcel(1,document.querySelector(`.projektilista_btn:nth-child(1)`));" data-asmodal_mode="projektiexcel">Avaa projektin Excel</div>
+
       </div>  
     </div>
   </div>
@@ -1707,7 +1708,6 @@
               </table>
               <div class="row">
                 <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(1,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon Excel</div>
-                <div class="get_excel_btn get_apartment_excel col-6" onclick="lataa_seinaexcel();">Lataa asunnon Excel</div>
               </div>
             </div> ';
 
@@ -2744,7 +2744,192 @@
           </tbody>
         </table>
 
-        
+        <div class="get_excel_btn get_apartment_excel col-6" onclick="lataa_seinaexcel();">Lataa asunnon Excel</div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-container projektiexcel out">
+  <div class="modal-background">
+    <div class="modal" style="height: 90vh;">
+        <div class="modal_close_btn" onclick="this.parentElement.parentElement.parentElement.classList.remove('two');this.parentElement.parentElement.parentElement.classList.add('out');"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
+        <h2>Projektin Excel</h2>
+        <div class="tilalista__btns">
+          <div onclick="toggle__projectexcel(1,this);" class="projektilista_btn active">Levyt</div>
+          <div onclick="toggle__projectexcel(2,this);" class="projektilista_btn">Rangat</div>
+          <div onclick="toggle__projectexcel(3,this);" class="projektilista_btn">Listat</div>
+        </div>
+        <table class="projectlevyt prthree_sheet_item">
+          <tbody class="projectlevyt__tbody">						
+            <tr class="headingrow">
+              <td>Type (drawing)</td>
+              <td>Materialcode</td>
+              <td>Pituus (X)</td>
+              <td>Leveys (Y)</td>
+              <td>Thickness</td>
+              <td>Structure</td>
+              <td>Quantity</td>
+              <td>Plus</td>
+              <td>Part number</td>
+              <td>Nimi 1</td>
+              <td>Nimi 2</td>
+              <td>MPR</td>
+              <td>Palletgroup</td>
+              <td>Prioriteetti</td>
+              <td>Asiakas</td>
+              <td>Asennus</td>
+              <td>Työstöt</td>
+              <td></td>
+              <td>X KPL</td>
+              <td>Y KPL</td>
+              <td>Yhteensä</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Tarra</td>
+              <td>Diameter</td>
+              <td>X1</td>
+              <td>X2</td>
+              <td>X3</td>
+              <td>X4</td>
+              <td>X5</td>
+              <td>X6</td>
+              <td>X7</td>
+              <td>X8</td>
+              <td>X9</td>
+              <td>X10</td>
+              <td>Y1</td>
+              <td>Y2</td>
+              <td>Y3</td>
+              <td>Y5</td>
+              <td>Y4</td>
+              <td>Y6</td>
+              <td>Y7</td>
+              <td>Y8</td>
+              <td>Y9</td>
+              <td>Y10</td>
+              <td>X</td>
+              <td>Y</td>
+              <td>X</td>
+              <td>Y</td>
+              <td>PR1_X</td>
+              <td>PR1_Y</td>
+              <td>PR1_DX</td>
+              <td>PR1_DY</td>
+              <td>PR2_X</td>
+              <td>PR2_Y</td>
+              <td>PR1_DX</td>
+              <td>PR2_DY</td>
+              <td>PR3_X</td>
+              <td>PR3_Y</td>
+              <td>PR3_DX</td>
+              <td>PR3_DY</td>
+              <td>PR4_X</td>
+              <td>PR4_Y</td>
+              <td>PR4_DX</td>
+              <td>PR4_DY</td>
+              <td>PF1_X</td>
+              <td>PF1_Y</td>
+              <td>PF1_DX</td>
+              <td>PF1_DY</td>
+              <td>PF2_X</td>
+              <td>PF2_Y</td>
+              <td>PF2_DX</td>
+              <td>PF2_DY</td>
+              <td>CH 0=OFF 1= ON</td>
+              <td>Y Vasen</td>
+              <td>Y oikea</td>
+              <td>X ala</td>
+              <td>x ylä</td>
+              <td>X ala</td>
+              <td>X ylä</td>
+              <td>VH1_X</td>
+              <td>VH1_Y</td>
+              <td>VH1_L</td>
+              <td>VH1_KPL</td>
+              <td>VH1_K</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>AR Edge 1</td>
+              <td>YR Edge 1</td>
+              <td>VR Edge 1</td>
+              <td>OR Edge 1</td>
+              <td>AR Edge 2</td>
+              <td>YR Edge 2</td>
+              <td>VR Edge 2</td>
+              <td>OR Edge 2</td>
+              <td>AR Trim</td>
+              <td>YR Trim</td>
+              <td>VR Trim</td>
+              <td>OR Trim</td>
+              <td>Yhdistä Xx-XX</td>
+              <td>Yhdistä Yx-YX</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="projectrangat prthree_sheet_item hidden">
+          <tbody class="projectrangat__tbody">						
+            <tr class="headingrow">
+              <td>Rivinumero</td>
+              <td>Rangan tyyppi</td>
+              <td>Tilauskoodi</td>
+              <td>Pituus</td>
+              <td>KPL</td>
+              <td>MATERIAALI</td>
+              <td>PAKSUUS</td>
+              <td>LAATU</td>
+              <td>Väri nimi</td>
+              <td>NCS code</td>
+              <td>Tilattu PVM</td>
+              <td>STATUS</td>
+              <td>Asiakas</td>
+              <td>Projekti</td>
+              <td>Osoite</td>
+              <td>Palletgroup</td>
+              <td>Asunto Nimi 1</td>
+              <td>Nimi 2</td>
+              <td>Työstöt </td>
+              <td>Asennus</td> 
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="projectlistat prthree_sheet_item hidden">
+          <tbody class="projectlistat__tbody">						
+            <tr class="headingrow">
+              <td>Rivinumero</td>
+              <td>Rangan tyyppi</td>
+              <td>Tilauskoodi</td>
+              <td>Pituus</td>
+              <td>KPL</td>
+              <td>MATERIAALI</td>
+              <td>PAKSUUS</td>
+              <td>LAATU</td>
+              <td>Väri nimi</td>
+              <td>NCS code</td>
+              <td>Tilattu PVM</td>
+              <td>STATUS</td>
+              <td>Asiakas</td>
+              <td>Projekti</td>
+              <td>Osoite</td>
+              <td>Palletgroup</td>
+              <td>Asunto Nimi 1</td>
+              <td>Nimi 2</td>
+              <td>Työstöt </td>
+              <td>Asennus</td> 
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="get_excel_btn get_projekti_excel col-6" onclick="lataa_projektiexcel();">Lataa projektin Excel</div>
+
     </div>
   </div>
 </div>
