@@ -5966,8 +5966,6 @@ function toggle__projectexcel(mode, b) {
             }
           });
         }
-        
-        
       });
       successful.forEach(timestamp => {
         raw_data = timestamp.replaceAll('&&','').split("----");
@@ -6038,9 +6036,9 @@ function lataa_projektiexcel() {
       });
       // END ROOM>WALLARRAY
 
-
       toiterate = removeDuplicates(u_rooms);
       toiterate.forEach(iteration => {
+        toiterate__apart = iteration.split(">")[0];
         wall = iteration.split(">")[1];
         successful.forEach(timestamp => {
           if(timestamp.length < 5) {
@@ -6048,45 +6046,59 @@ function lataa_projektiexcel() {
           }
           raw_data = timestamp.replaceAll('&&','').split("----");
           apart = raw_data[3];
-          if(apart === iteration.split(">")[0]) {
-            timing = toTimestamp(raw_data[2]);
+          timing = toTimestamp(raw_data[2]);
+          raw_wall = raw_data[1];
+          if(apart === toiterate__apart && raw_wall === wall) {
             used_rooms.forEach(u1 => {
-              for (let u2 = 0; u2 < used_rooms.length; u2++) {
-                console.log(u1.split("|")[0].split(">")[1]);
-                console.log(used_rooms[u2].split("|")[0].split(">")[1]);
-
-                if(u1.split("|")[0].split(">")[1] === wall && used_rooms[u2].split("|")[0].split(">")[1] === wall) {
-                  console.log(wall);
-                  if(u1.split("|")[1] > used_rooms[u2].split("|")[1]) {
+              if(u1.split("|")[0].split(">")[1] === wall && u1.split("|")[0] === iteration) {
+                if(timest !== null) {
+                  if(u1.split("|")[1] > timest) {
                     timest = u1.split("|")[1];
+                    timest_item = u1;
+                  }
+                  else if(timest < timing) {
+                    timest = timing;
+                    timest_item = apart+">"+raw_wall+"|"+timing;
+                  }
+                }
+                else {
+                  if(u1.split("|")[1] > timing) {
+                    timest = u1.split("|")[1];
+                    timest_item = u1;
                   }
                   else {
-                    timest = used_rooms[u2].split("|")[1];
+                    timest = timing;
+                    timest_item = apart+">"+raw_wall+"|"+timing;
+                    
                   }
                 }
               }
             });
-      
-            if(parseFloat(timest) !== parseFloat(timing)) {
-              return
-            }
-            else {
-              content = JSON.parse(raw_data[0]);
-              content.forEach(row => {
-                if(_type === "levyt") {
-                  prlevytarray.push(row);
-                }
-                if(_type === "rangat") {
-                  prrangat_array.push(row);
-                }
-                if(_type === "listat") {
-                  prlistat_array.push(row);
-                }
-              });  
-            }
+          }
+        });
+        successful.forEach(timestamp => {
+          raw_data = timestamp.replaceAll('&&','').split("----");
+          apart = raw_data[3];
+          timing = toTimestamp(raw_data[2]);
+          raw_wall = raw_data[1];
+          if(timest_item === apart+">"+raw_wall+"|"+timing) {
+            content = JSON.parse(raw_data[0]);
+            content.forEach(row => {
+              if(_type === "levyt") {
+                prlevytarray.push(row);
+              }
+              if(_type === "rangat") {
+                prrangat_array.push(row);
+              }
+              if(_type === "listat") {
+                prlistat_array.push(row);
+              }
+            });   
+            timest = null;
           }
         });
       });
+
     });
   });
 
