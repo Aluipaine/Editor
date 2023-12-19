@@ -3819,6 +3819,16 @@ function saumoitus__additionalcord() {
         vm.innerHTML = saumaset_vm/2;
     });
 
-    document.querySelector(".sauma__vertical_last .vertical_module").innerHTML = saumaset_vm/2;
-    document.querySelector(".sauma__horizontal_last .horizontal_module").innerHTML = saumaset_hm/2;
+    if(document.querySelector(".sauma__vertical_last")) {
+        document.querySelector(".sauma__vertical_last .vertical_module").innerHTML = saumaset_vm/2;
+    }
+    else {
+        document.querySelector(".sauma__vertical .vertical_module").innerHTML = saumaset_vm/2;
+    }
+    if(document.querySelector(".sauma__horizontal_last")) {
+        document.querySelector(".sauma__horizontal_last .horizontal_module").innerHTML = saumaset_hm/2;
+    }
+    else {
+        document.querySelector(".sauma__horizontal .horizontal_module").innerHTML = saumaset_hm/2;
+    }
 }

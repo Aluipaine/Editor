@@ -53,209 +53,210 @@ if (isset($usr_role) && $usr_role == 'mittaus') {
 ?>
 
 <div class="out rankalista_as asetustaulu as-container">
-    <div class="modal-background">
-      <div class="modal">
-         <div class="modal_close_btn" onclick="this.parentElement.parentElement.parentElement.classList.remove('two');this.parentElement.parentElement.parentElement.classList.add('out');"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"/></svg></div>
-            <table class="s_rangat">
-              <tbody class="ranka__tbody_one l2a_table_pysty ">			
-                <tr class="headingrow">
-                  <td>L2A Rangoitus pystyyn</td>
-                  <td>Tyyppi</td>
-                  <td>Rangan koodin alku</td>
-                  <td>Tilauskoodi </td>
-                  <td>Materiaali</td>
-                  <td>Paksuus</td>
-                  <td>Laatu</td>
-                  <td>Väri nimi </td>
-                  <td>NCS code</td>
-                  <td>Suunta </td>
-                  <td>Lisää / -poista mitasta</td>
-                  <td style="width: 150px;">Vähennä mistä</td>
-                </tr>
-              </tbody>
-            </table>
+  <div class="modal-background">
+    <div class="modal">
+        <div class="modal_close_btn" onclick="this.parentElement.parentElement.parentElement.classList.remove('two');this.parentElement.parentElement.parentElement.classList.add('out');"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"/></svg></div>
+          <table class="s_rangat">
+            <tbody class="ranka__tbody_one l2a_table_pysty ">			
+              <tr class="headingrow">
+                <td>L2A Rangoitus pystyyn</td>
+                <td>Tyyppi</td>
+                <td>Rangan koodin alku</td>
+                <td>Tilauskoodi </td>
+                <td>Materiaali</td>
+                <td>Paksuus</td>
+                <td>Laatu</td>
+                <td>Väri nimi </td>
+                <td>NCS code</td>
+                <td>Suunta </td>
+                <td>Lisää / -poista mitasta</td>
+                <td style="width: 150px;">Vähennä mistä</td>
+              </tr>
+            </tbody>
+          </table>
 
-            <table class="s_rangat">
-              <tbody class="ranka__tbody_six l2a_table_pysty">			
-                <tr class="headingrow">
-                  <td>L2A Rangoitus pystyyn</td>
-                  <td>Tyyppi</td>
-                  <td>Rangan koodin alku</td>
-                  <td>Tilauskoodi </td>
-                  <td>Materiaali</td>
-                  <td>Paksuus</td>
-                  <td>Laatu</td>
-                  <td>Väri nimi </td>
-                  <td>NCS code</td>
-                  <td>Suunta </td>
-                  <td>Lisää / -poista mitasta</td>
-                  <td style="width: 150px;">Vähennä mistä</td>
-                </tr>
-               
-               
-              </tbody>
-            </table>
+          <table class="s_rangat">
+            <tbody class="ranka__tbody_six l2a_table_pysty">			
+              <tr class="headingrow">
+                <td>L2A Rangoitus pystyyn</td>
+                <td>Tyyppi</td>
+                <td>Rangan koodin alku</td>
+                <td>Tilauskoodi </td>
+                <td>Materiaali</td>
+                <td>Paksuus</td>
+                <td>Laatu</td>
+                <td>Väri nimi </td>
+                <td>NCS code</td>
+                <td>Suunta </td>
+                <td>Lisää / -poista mitasta</td>
+                <td style="width: 150px;">Vähennä mistä</td>
+              </tr>
+              
+              
+            </tbody>
+          </table>
 
-            <table class="s_rangat">
-              <tbody class="ranka__tbody_four l2a_table_vaaka">			
-                <tr class="headingrow">
-                  <td>L2A Rangoitus vaakaan </td>
-                  <td>Tyyppi</td>
-                  <td>Rangan koodin alku</td>
-                  <td>Tilauskoodi </td>
-                  <td>Materiaali</td>
-                  <td>Paksuus</td>
-                  <td>Laatu</td>
-                  <td>Väri nimi </td>
-                  <td>NCS code</td>
-                  <td>Suunta </td>
-                  <td>Lisää / -poista mitasta</td>
-                  <td style="width: 150px;">Vähennä mistä</td>
-                </tr>
+          <table class="s_rangat">
+            <tbody class="ranka__tbody_four l2a_table_vaaka">			
+              <tr class="headingrow">
+                <td>L2A Rangoitus vaakaan </td>
+                <td>Tyyppi</td>
+                <td>Rangan koodin alku</td>
+                <td>Tilauskoodi </td>
+                <td>Materiaali</td>
+                <td>Paksuus</td>
+                <td>Laatu</td>
+                <td>Väri nimi </td>
+                <td>NCS code</td>
+                <td>Suunta </td>
+                <td>Lisää / -poista mitasta</td>
+                <td style="width: 150px;">Vähennä mistä</td>
+              </tr>
+              
+              
+            </tbody>
+          </table>
+
+          <table class="s_rangat">
+            <tbody class="ranka__tbody_eight l2a_table_vaaka">			
+              <tr class="headingrow">
+                <td>L2A Rangoitus vaakaan</td>
+                <td>Tyyppi</td>
+                <td>Rangan koodin alku</td>
+                <td>Tilauskoodi </td>
+                <td>Materiaali</td>
+                <td>Paksuus</td>
+                <td>Laatu</td>
+                <td>Väri nimi </td>
+                <td>NCS code</td>
+                <td>Suunta </td>
+                <td>Lisää / -poista mitasta</td>
+                <td style="width: 150px;">Vähennä mistä</td>
+              </tr>
+              
+              
+            </tbody>
+          </table>
+
+          <table class="s_rangat">
+            <tbody class="ranka__tbody_two l2b_table_pysty">			
+              <tr class="headingrow">
+                <td>L2B Rangoitus pystyyn</td>
+                <td>Tyyppi</td>
+                <td>Rangan koodin alku</td>
+                <td>Tilauskoodi </td>
+                <td>Materiaali</td>
+                <td>Paksuus</td>
+                <td>Laatu</td>
+                <td>Väri nimi </td>
+                <td>NCS code</td>
+                <td>Suunta </td>
+                <td>Lisää / -poista mitasta</td>
+                <td style="width: 150px;">Vähennä mistä</td>
+              </tr>
+              
+              
+            </tbody>
+          </table>
+
+          <table class="s_rangat">
+            <tbody class="ranka__tbody_three l2b_table_pysty">			
+              <tr class="headingrow">
+                <td>L2B Rangoitus pystyyn</td>
+                <td>Tyyppi</td>
+                <td>Rangan koodin alku</td>
+                <td>Tilauskoodi </td>
+                <td>Materiaali</td>
+                <td>Paksuus</td>
+                <td>Laatu</td>
+                <td>Väri nimi </td>
+                <td>NCS code</td>
+                <td>Suunta </td>
+                <td>Lisää / -poista mitasta</td>
+                <td style="width: 150px;">Vähennä mistä</td>
+              </tr>
+              
+              
+            </tbody>
+          </table>
+
+          <table class="s_rangat">
+            <tbody class="ranka__tbody_five l2b_table_vaaka">			
+              <tr class="headingrow">
+                <td>L2B Rangoitus vaakaan </td>
+                <td>Tyyppi</td>
+                <td>Rangan koodin alku</td>
+                <td>Tilauskoodi </td>
+                <td>Materiaali</td>
+                <td>Paksuus</td>
+                <td>Laatu</td>
+                <td>Väri nimi </td>
+                <td>NCS code</td>
+                <td>Suunta </td>
+                <td>Lisää / -poista mitasta</td>
+                <td style="width: 150px;">Vähennä mistä</td>
+              </tr>
+              
+              
+            </tbody>
+          </table>
+
+          <table class="s_rangat">
+            <tbody class="ranka__tbody_seven l2b_table_vaaka">			
+              <tr class="headingrow">
+                <td>L2B Rangoitus vaakaan</td>
+                <td>Tyyppi</td>
+                <td>Rangan koodin alku</td>
+                <td>Tilauskoodi </td>
+                <td>Materiaali</td>
+                <td>Paksuus</td>
+                <td>Laatu</td>
+                <td>Väri nimi </td>
+                <td>NCS code</td>
+                <td>Suunta </td>
+                <td>Lisää / -poista mitasta</td>
+                <td style="width: 150px;">Vähennä mistä</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>
+            Pystylistojen asetukset
+          </h4>
+          <table>
+            <tbody class="listapysty__tbody tabs__target_table">			
+              <tr class="headingrow">
+                <td>ON/OFF</td>
+                <td>Nimi</td>
+                <td>Paksuus</td>
+                <td>Lista</td>
+                <td>Laatu</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>
+            Vaakalistojen asetukset
+          </h4>
+          <table>
+            <tbody class="listavaaka__tbody tabs__target_table">			
+              <tr class="headingrow">
+                <td>ON/OFF</td>
+                <td>Nimi</td>
+                <td>Paksuus</td>
+                <td>Materiaali</td>
+                <td>Laatu</td>
                 
-                
-              </tbody>
-            </table>
-
-            <table class="s_rangat">
-              <tbody class="ranka__tbody_eight l2a_table_vaaka">			
-                <tr class="headingrow">
-                  <td>L2A Rangoitus vaakaan</td>
-                  <td>Tyyppi</td>
-                  <td>Rangan koodin alku</td>
-                  <td>Tilauskoodi </td>
-                  <td>Materiaali</td>
-                  <td>Paksuus</td>
-                  <td>Laatu</td>
-                  <td>Väri nimi </td>
-                  <td>NCS code</td>
-                  <td>Suunta </td>
-                  <td>Lisää / -poista mitasta</td>
-                  <td style="width: 150px;">Vähennä mistä</td>
-                </tr>
-                
-                
-              </tbody>
-            </table>
-
-            <table class="s_rangat">
-              <tbody class="ranka__tbody_two l2b_table_pysty">			
-                <tr class="headingrow">
-                  <td>L2B Rangoitus pystyyn</td>
-                  <td>Tyyppi</td>
-                  <td>Rangan koodin alku</td>
-                  <td>Tilauskoodi </td>
-                  <td>Materiaali</td>
-                  <td>Paksuus</td>
-                  <td>Laatu</td>
-                  <td>Väri nimi </td>
-                  <td>NCS code</td>
-                  <td>Suunta </td>
-                  <td>Lisää / -poista mitasta</td>
-                  <td style="width: 150px;">Vähennä mistä</td>
-                </tr>
-                
-                
-              </tbody>
-            </table>
-
-            <table class="s_rangat">
-              <tbody class="ranka__tbody_three l2b_table_pysty">			
-                <tr class="headingrow">
-                  <td>L2B Rangoitus pystyyn</td>
-                  <td>Tyyppi</td>
-                  <td>Rangan koodin alku</td>
-                  <td>Tilauskoodi </td>
-                  <td>Materiaali</td>
-                  <td>Paksuus</td>
-                  <td>Laatu</td>
-                  <td>Väri nimi </td>
-                  <td>NCS code</td>
-                  <td>Suunta </td>
-                  <td>Lisää / -poista mitasta</td>
-                  <td style="width: 150px;">Vähennä mistä</td>
-                </tr>
-               
-               
-              </tbody>
-            </table>
-
-            <table class="s_rangat">
-              <tbody class="ranka__tbody_five l2b_table_vaaka">			
-                <tr class="headingrow">
-                  <td>L2B Rangoitus vaakaan </td>
-                  <td>Tyyppi</td>
-                  <td>Rangan koodin alku</td>
-                  <td>Tilauskoodi </td>
-                  <td>Materiaali</td>
-                  <td>Paksuus</td>
-                  <td>Laatu</td>
-                  <td>Väri nimi </td>
-                  <td>NCS code</td>
-                  <td>Suunta </td>
-                  <td>Lisää / -poista mitasta</td>
-                  <td style="width: 150px;">Vähennä mistä</td>
-                </tr>
-                
-                
-              </tbody>
-            </table>
-
-            <table class="s_rangat">
-              <tbody class="ranka__tbody_seven l2b_table_vaaka">			
-                <tr class="headingrow">
-                  <td>L2B Rangoitus vaakaan</td>
-                  <td>Tyyppi</td>
-                  <td>Rangan koodin alku</td>
-                  <td>Tilauskoodi </td>
-                  <td>Materiaali</td>
-                  <td>Paksuus</td>
-                  <td>Laatu</td>
-                  <td>Väri nimi </td>
-                  <td>NCS code</td>
-                  <td>Suunta </td>
-                  <td>Lisää / -poista mitasta</td>
-                  <td style="width: 150px;">Vähennä mistä</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <h4>
-              Pystylistojen asetukset
-            </h4>
-            <table>
-              <tbody class="listapysty__tbody tabs__target_table">			
-                <tr class="headingrow">
-                  <td>ON/OFF</td>
-                  <td>Nimi</td>
-                  <td>Paksuus</td>
-                  <td>Lista</td>
-                  <td>Laatu</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <h4>
-              Vaakalistojen asetukset
-            </h4>
-            <table>
-              <tbody class="listavaaka__tbody tabs__target_table">			
-                <tr class="headingrow">
-                  <td>ON/OFF</td>
-                  <td>Nimi</td>
-                  <td>Paksuus</td>
-                  <td>Materiaali</td>
-                  <td>Laatu</td>
-                  
-                </tr>
-              </tbody>
-            </table>
-      </div>
+              </tr>
+            </tbody>
+          </table>
     </div>
   </div>
+</div>
 
 
-<!-- canvas -->
+
+  <!-- canvas -->
 <script defer src='/js/p5.min.js'></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script>
 

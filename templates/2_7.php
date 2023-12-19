@@ -102,7 +102,7 @@
         </tr>
       </table>
       <div class="row">
-        <div class="get_lista_tuo_excel get_excel_btn" onclick="lataa_lista_tuo_excel();">Lataa listatuotantoexcel</div>
+        <div class="get_lista_tuo_excel get_excel_btn" onclick="lataa_lista_tuo_excel();create__excelgenerationtimestamp(this);" data-generatingtype="listat">Lataa listatuotantoexcel</div>
       </div>
     </section>
 </form>

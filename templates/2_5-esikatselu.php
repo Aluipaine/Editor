@@ -121,8 +121,6 @@
           <td>CH 0=OFF 1= ON</td>
           <td>Y Vasen</td>
           <td>Y oikea</td>
-          <td>Y Vasen</td>
-          <td>Y oikea</td>
           <td>X ala</td>
           <td>x ylä</td>
           <td>X ala</td>
@@ -154,7 +152,7 @@
 
       </table>
       <div class="row">
-          <div class="get_excel get_excel_btn get_levy_btn" onclick="generating_excel();">Lataa Excel</div>
+          <div class="get_excel get_excel_btn get_levy_btn" onclick="generating_excel();create__excelgenerationtimestamp(this);" data-generatingtype="levyt">Lataa Excel</div>
           <div class="get_screenshot" onclick="takeshot(0);">Tallenna havainnekuva</div>
 
       </div>

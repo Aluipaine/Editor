@@ -8,138 +8,31 @@ function listoitus() {
   second_excel = document.querySelector(" table.lista_excel > tbody > tr");
 
   listat__grandrow = document.querySelector(".listat__grandrow");
-
-  
-  listat = listat__grandrow.querySelectorAll("div");
+  listat = document.querySelector(".listat__grandrow > div");
   for (var i = 0; i < listat.length; i++) {
     listat[i].style.boxShadow = "unset";
     listat[i].style.background = "dimgray";
     listat[i].classList.add("lista");
-    listat[i].innerHTML = "";
+    if(listat[i].querySelector('.ranka_type')) {
+      listat[i].querySelector('.ranka_type').classList = ["lista_type"];
+    }
+    
+    if(listat[i].querySelector('.ranka_cord:not(.ranka_type)')) {
+      listat[i].querySelector('.ranka_cord:not(.ranka_type)').classList = ["lista_cord"];
+    }
+    
+    if(listat[i].querySelector('.ranka_secondcord')) {
+      listat[i].querySelector('.ranka_secondcord').classList = ["lista_secondcord"];
+    }
   }
   if (listoitettu === false) {
     create__lista__asexcel();
+    create__lista__tuoexcel();
   }
   else {
     console.log("Jo listoitettu");
   }
 }
-
-
-
-
-
-
-
-
-
-
-// function make_aslista_excel() {
-//   ListaExcel = document.querySelector(".lista_as_excel tbody");
-
-//   summ_epdm = 0;
-//   listat_data = [];
-//   ikkuna_array = [];
-//   ikkunalistat_data = [];
-//   listat = listat__grandrow.querySelectorAll("div");
-//   for (var i = 0; i < listat.length; i++) {
-//     const row = document.createElement('tr');
-//     var h1 = document.createElement('td');
-//     var h2 = document.createElement('td');
-//     var h3 = document.createElement('td');
-//     var h4 = document.createElement('td');
-//     var h5 = document.createElement('td');
-//     h1.innerHTML = "EP20";
-//     h2.innerHTML = "EPDM-Lista";
-//     listat[i].style.opacity = 1;
-//     if (listat[i].classList.contains("ranka_pysty")) {
-//       h3.innerHTML = h;
-//       etaisyys = parseFloat(listat[i].style.left) * 5;
-//       h5.innerHTML = etaisyys + " mm vasemmalle Seinässä " + current_room.toLowerCase();
-//     }
-//     else if (listat[i].classList.contains("ranka_vaaka")) {
-//       h3.innerHTML = w;
-//       etaisyys = parseFloat(listat[i].style.bottom) * 5;
-//       h5.innerHTML = etaisyys + " mm ylös Seinässä " + current_room.toLowerCase();
-//     }
-//     summ_epdm += parseFloat(h3.innerHTML);
-//     h4.innerHTML = "1";
-//     listat_data.push({
-//       "Tyyppi": h1.textContent,
-//       "Nimi": h2.textContent,
-//       "Pituus (mm)": h3.textContent,
-//       "KPL": h4.textContent,
-//       "Asennus": h5.textContent
-//     }, );
-//     row.append(h1);
-//     row.append(h2);
-//     row.append(h3);
-//     row.append(h4);
-//     row.append(h5);
-//     ListaExcel.append(row);
-//   }
-//   document.querySelector('.get_lista_excel').addEventListener('click', () => {
-//     filename = 'Tila ESIMERKKI - Listat.xlsx';
-//     var ws = XLSX.utils.json_to_sheet(listat_data);
-//     var wb = XLSX.utils.book_new();
-//     XLSX.utils.book_append_sheet(wb, ws, "Listat");
-//     XLSX.writeFile(wb, filename);
-//   });
-//   ikkunat = document.querySelectorAll(".ikkuna");
-//   aukot = document.querySelectorAll(".aukko");
-//   levyt = document.querySelectorAll(".levyt");
-//   if (ikkunat.length > 0) {
-//     for (var i = ikkunat.length - 1; i >= 0; i--) {
-//       //TYPE,NAME,PITUUS,ASENNUS
-//       i_vas = parseFloat(ikkunat[i].style.height) + "," + i + "," + "" + "," + "" + "," + "VASEN ";
-//       i_oik = parseFloat(ikkunat[i].style.height) + "," + i + "," + "" + "," + "" + "," + "OIKEA ";
-//       i_btm = parseFloat(ikkunat[i].style.width) + 1 + "," + i + "," + "" + "," + "" + "," + "ALA";
-//       i_top = parseFloat(ikkunat[i].style.width) + 1 + "," + i + "," + "" + "," + "" + "," + "YLÄ";
-//       ikkuna_array.push(i_vas);
-//       ikkuna_array.push(i_oik);
-//       ikkuna_array.push(i_btm);
-//       ikkuna_array.push(i_top);
-//     }
-//     for (var i = ikkuna_array.length - 1; i >= 0; i--) {
-//       const row = document.createElement('tr');
-//       var h1 = document.createElement('td');
-//       var h2 = document.createElement('td');
-//       var h3 = document.createElement('td');
-//       var h4 = document.createElement('td');
-//       var h5 = document.createElement('td');
-//       i_ar = ikkuna_array[i].split(",");
-//       h1.innerHTML = "SL251";
-//       h2.innerHTML = "Lista";
-//       h3.innerHTML = i_ar[0] * 5;
-//       summ_epdm += i_ar[0] * 5;
-//       h4.innerHTML = "1";
-//       h5.innerHTML = "Ikkunan #" + i_ar[1] + ", " + i_ar[4] + "REUNA";
-//       row.append(h1);
-//       row.append(h2);
-//       row.append(h3);
-//       row.append(h4);
-//       row.append(h5);
-//       ikkunaListaExcel.append(row);
-//       ikkunalistat_data.push({
-//         "Tyyppi": h1.textContent,
-//         "Nimi": h2.textContent,
-//         "Pituus (mm)": h3.textContent,
-//         "KPL": h4.textContent,
-//         "Asennus": h5.textContent
-//       }, );
-//     }
-//   }
-//   listoitettu = true;
-//   document.querySelector('.get_ikkunalista_excel').addEventListener('click', () => {
-//     filename = 'Tila ESIMERKKI - Ikkunalistat.xlsx';
-//     var ws = XLSX.utils.json_to_sheet(ikkunalistat_data);
-//     var wb = XLSX.utils.book_new();
-//     XLSX.utils.book_append_sheet(wb, ws, "ikkunalistat");
-//     XLSX.writeFile(wb, filename);
-//   });
-//   document.querySelector(".listat_excel").prepend("Tähän seinään menee noin " + summ_epdm + "mm EPDM-kumia");
-// }
-
 
 function create__lista__asexcel() {
   listat = canvas.querySelectorAll(".listat__grandrow > div");
@@ -239,7 +132,14 @@ function create__lista__tuoexcel() {
     h1.innerHTML = i+1;
     h2.innerHTML = listat[i].dataset.listan_koodin_alku;
     h3.innerHTML = listat[i].dataset.tilauskoodi;
-    h4.innerHTML = parseFloat(listat[i].querySelector(".lista_cord:not(.lista_type)").innerText);
+    
+    if(listat[i].querySelector(".lista_cord:not(.lista_type)")) {
+      h4.innerHTML = parseFloat(listat[i].querySelector(".lista_cord:not(.lista_type)").innerText);
+    }
+    else {
+      h4.innerHTML = "-";
+    }
+
     h5.innerHTML = "1";
     h6.innerHTML = listat[i].dataset.materiaali;
 
@@ -313,7 +213,7 @@ function lataa_lista_as_excel() {
 }
 
 function lataa_lista_tuo_excel() {
-  filename = current_tila +" seinä "+ current_room+' [Listat Asennusohje].xlsx';
+  filename = current_tila +" seinä "+ current_room+' [Listat Tuotanto].xlsx';
   var ws = XLSX.utils.json_to_sheet(listat_tuotanto_data);
   var wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Listat");

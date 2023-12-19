@@ -6594,6 +6594,11 @@ div.x_del.hidden {
   margin-bottom: 50px;
 }
 
+.get_apartment_modal {
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
 .get_excel_btn:after {
   content: 'Jos lataat saman Excelin, uusi tallentuu uutena tiedostona';
   position: absolute;
@@ -6601,6 +6606,11 @@ div.x_del.hidden {
   top: 50px;
   color: rgba(0,0,0,.8);
   font-weight: 400;
+}
+
+.get_apartment_excel {
+  margin: 0;
+  margin-top: 20px;
 }
 
 .get_screenshot {
@@ -6941,9 +6951,7 @@ div.x_del.hidden {
 
 .rangatnav input[type="radio"] + label, .rangatnav input[type="checkbox"] + label {
   margin: 0;
-
 }
-
 
 .myinfo td {
   width: 39px;
@@ -7016,12 +7024,43 @@ input[type="radio"] + label.levy__label:focus, input[type="radio"] + label.levy_
   border: 6px solid #18ab00;
 }
 
-/* TEMPORARY */
+.tilalista__btns div.active {
+  color: #188038;
+  cursor: default;
+  background-color: rgba(24,128,56,.3);
+  border-color: #aaa;
+  border-top-color: #fff;
+  border-width: 0 1px 1px 1px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.15);
+  font-weight: 500;
+  margin: 0 0 2px 0;
+  outline: 3px solid transparent;
+}
 
-/* 
-.levyt {
-  display: none !important;
-} */
+.tilalista__btns div:not(.active) {
+  color: #222;
+  cursor: default;
+  background-color: #fff;
+  border-color: #aaa;
+  border-top-color: #fff;
+  border-width: 0 1px 1px 1px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.15);
+  font-weight: 500;
+  margin: 0 0 2px 0;
+  outline: 3px solid transparent;
+}
+
+.tilalista__btns div {
+  display: inline-block;
+  float: left;
+  padding: 9px 14px;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.three_sheet_item.hidden {
+  display: none;
+}
 
 .commentbox {
   display: none;

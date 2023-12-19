@@ -85,7 +85,7 @@
         </tr>
       </table>
       <div class="row">
-        <div class="get_ranka_tuo_excel get_excel_btn" onclick="lataa_ranka_tuo_excel();">Lataa rankatuotantoexcel</div>
+        <div class="get_ranka_tuo_excel get_excel_btn" onclick="lataa_ranka_tuo_excel();create__excelgenerationtimestamp(this);" data-generatingtype="rangat">Lataa rankatuotantoexcel</div>
       </div>
     </section>
 

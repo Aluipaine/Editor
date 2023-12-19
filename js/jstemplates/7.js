@@ -66,7 +66,7 @@ function create__levy_excel(now) {
   if(levy_excel != null)
     levy_excel.innerHTML = old_levy_excel;
 
-  let  items = canvas.querySelectorAll(".levy");
+  let items = canvas.querySelectorAll(".levy");
   const tableExcel = document.querySelector('.excel table tbody');
 
   tableExcel_trs = document.querySelectorAll('.levy_excel tr:not(.headingrow)');
@@ -536,8 +536,8 @@ function create__levy_excel(now) {
         'CH 0=OFF 1= ON': h77.textContent,
         'Y Vasen': h78.textContent,
         'Y oikea': h79.textContent,
-        'Y Vasen': h80.textContent,
-        'Y oikea': h81.textContent,
+        // 'Y Vasen ': h80.textContent,
+        // 'Y oikea ': h81.textContent,
         'X ala': h82.textContent,
         'x ylä': h83.textContent,
         'X ala': h84.textContent,
@@ -696,4 +696,9 @@ function generating_excel() {
   var wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Levyt");
   XLSX.writeFile(wb, filename);
+
+
+  
 }
+
+

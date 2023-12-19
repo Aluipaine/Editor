@@ -2036,7 +2036,7 @@ function refresh__drawcontrols() {
             sauma__controls_dels[i].style.display = "none";
           }
         }
-        tyostot_grandrow = canvas.querySelector(".rangat__grandrow");
+        rangat_grandrow = canvas.querySelector(".rangat__grandrow");
         if (document.querySelector(".listat__grandrow")) {
           document.querySelector(".listat__grandrow").remove();
         }
@@ -2050,7 +2050,7 @@ function refresh__drawcontrols() {
         listat__grandrow = document.createElement("div");
         listat__grandrow.classList.add("listat__grandrow");
         canvas.prepend(listat__grandrow);
-        listat__grandrow.innerHTML = tyostot_grandrow.innerHTML;
+        listat__grandrow.innerHTML = rangat_grandrow.innerHTML;
         listoitettu = false;
         listoitus();
         rangat__navigation(false);
@@ -2201,6 +2201,13 @@ function refresh__drawcontrols() {
       for (var a = 0; a < lineinbuts.length; a++) {
         lineinbuts[a].style.display = "block";
       }
+
+      if(document.querySelector(".listat__grandrow")) {
+        listat__grandrow = document.querySelector(".listat__grandrow");
+        listat__grandrow.remove();
+        listoitettu = false;
+      }
+      
 
 
     }
@@ -3575,7 +3582,7 @@ function initialize__housetempla(arguemento,stage) {
     };
     $.ajax({
       type: "POST",
-      url: "/db/updatepohjat.php",
+      url: "/vendor/updatepohjat.php",
       data: formData,
       error: function (jqxhr, status, exception) {
         alert('Tietokantavirhe, soita numeroon +358449782028');
@@ -5577,3 +5584,119 @@ setTimeout(() => {
   change__sauma_koko(document.querySelector("#sauma_material1"));
   document.querySelector("#sauma_material1").checked = true;
 }, 3350);
+
+
+function create__excelgenerationtimestamp(e) {
+
+  _who = current_user;
+  _type = e.dataset.generatingtype;
+  _timedate = "";
+  _room = current_tila;
+  _wall = current_room.toLowerCase();
+  _generated_array = "";
+
+  if(_type === 'levyt') {  
+    __generated_array = JSON.stringify(levyexcel_array);
+  }
+  if(_type === 'rangat') {
+    __generated_array = JSON.stringify(rangat_tuotanto_data);
+  }
+  if(_type === 'listat') {
+    __generated_array = JSON.stringify(listat_tuotanto_data);
+  }
+  _generated_array = __generated_array.replaceAll(",","~~~~");
+  formData = {
+    project_id: document.querySelector("#current_project_id").value,
+    generated_array: _generated_array,
+    room: _room,
+    wall: _wall,
+    who: _who,
+    type: _type,
+    timedate: _timedate
+  },
+  $.ajax({
+    type: "POST",
+    url: "../vendor/excel_orderlog.php",
+    data: formData,
+    error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+    }
+  }).done(function (data) {
+    console.log("excel generation timestamp initiated on type "+_type);
+    console.log(data);
+  });
+}
+
+
+function toggle__asexcel(mode, b) {
+  current_tila = document.querySelector("#roomname_1").value + "_" + document.querySelector("#roomname_2").value + "_" + document.querySelector("#roomname_3").value;
+  current_tila = current_tila.replaceAll(" ","");
+
+  sheets = document.querySelectorAll(".three_sheet_item");
+  btns = document.querySelectorAll(".tilalista_btn");
+
+  sheets.forEach(sheet => {
+    sheet.classList.add("hidden");
+  });
+
+  btns.forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  b.classList.add("active");
+  sheets[mode-1].classList.remove("hidden");
+
+  
+  current_id = parseFloat(document.querySelector("#current_project_id").value);
+  if(mode === 1) {
+    _type = "levyt";
+    cols = ['Type (drawing)','Materialcode','Pituus (X)','Leveys (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
+  }
+  if(mode === 2) {
+    _type = "rangat";
+    cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
+  }
+  if(mode === 3) {
+    _type = "listat";
+    cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
+  }
+
+  formData = {
+    pr_id: document.querySelector("#current_project_id").value,
+    room: current_tila,
+    type: _type,
+  },
+  $.ajax({
+    type: "POST",
+    url: "../vendor/get-ordersinroom.php",
+    data: formData,
+    error: function (jqxhr, status, exception) {
+      alert('Tietokantavirhe, soita numeroon +358449782028');
+    }
+  }).done(function (success) {
+    trs = document.querySelectorAll(".tila"+_type+"__tbody tr:not(.headingrow)");
+
+    trs.forEach(tr => {
+      tr.remove();
+    });
+
+    successful = success.replaceAll("~~~~",",").split("&&&&");
+    
+    used_rooms = [];
+
+    successful.forEach(timestamp => {
+      raw_data = timestamp.replaceAll("&&","").split("----");
+      console.log(raw_data);
+      wall = raw_data[1];
+      content = JSON.parse(raw_data[0].replaceAll('&&',''));
+
+      content.forEach(row => {
+        tr = document.createElement("tr");
+        for(var i=0;i<cols.length;i++) {
+          tr.innerHTML += "<td>" + row[cols[i]] + "</td>";
+        }
+      });
+      document.querySelector(".tila"+_type+"__tbody").appendChild(tr);
+    });
+  });
+}

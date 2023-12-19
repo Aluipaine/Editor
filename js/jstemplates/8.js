@@ -910,7 +910,7 @@ function lataa_ranka_as_excel() {
 }
 
 function lataa_ranka_tuo_excel() {
-  filename = current_tila +" seinä "+ current_room+' [Rangat Asennusohje].xlsx';
+  filename = current_tila +" seinä "+ current_room+' [Rangat Tuotanto].xlsx';
   var ws = XLSX.utils.json_to_sheet(rangat_tuotanto_data);
   var wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Rangat");

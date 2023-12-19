@@ -1610,6 +1610,12 @@ function tyosto__del(item) {
   } catch {
     console.log("canvas is not set");
   }
+
+  t_levys = canvas.querySelectorAll(".levy");
+
+  for (var i = t_levys.length - 1; i >= 0; i--) {
+    countdown__kiinnikkeet(t_levys[i]);
+  }
 }
 if (document.querySelector("#drawscreen_section_five .levy")) {
   // document.querySelector("#drawscreen_section_five .visible").classList.remove("levy");
@@ -2814,168 +2820,44 @@ function identify__sameline(object,mode) {
     }
   });
 
-
-  
-
-
-
   levyt.forEach(lev => {
-    tyostox_for_add = lev.querySelectorAll(".tyostot__tyosto_pysty:not(.viim__tyosto_pysty):not(.alku__tyosto_pysty)");
-    for (let a = 0; a < tyostox_for_add.length; a++) {
-      if(tyostox_for_add[a].querySelector(".secondcord")) {
-        scord = tyostox_for_add[a].querySelector(".secondcord");
-        if(tyostox_for_add[a].querySelector(".thirdcord")) {
-          tyostox_for_add[a].querySelector(".thirdcord").innerHTML = "<b>V</b><br>" + parseFloat(scord.parentElement.style.left)*5;
-        }
-        else {
-          scord = tyostox_for_add[a].querySelector(".secondcord");
-          x = document.createElement("div");
-          x.classList = ["thirdcord"];
-          x.style.top = parseFloat(scord.style.top) - 30 + "px";
-          x.innerHTML = "<b>V</b><br>" +parseFloat(scord.parentElement.style.left)*5;
-          tyostox_for_add[a].appendChild(x); 
-        }
-      }
-      
-    }
 
-
-
-    tyostoy_for_add = lev.querySelectorAll(".tyostot__tyosto_vaaka:not(.viim__tyosto_vaaka):not(.alku__tyosto_vaaka)");
-    for (let a = 0; a < tyostoy_for_add.length; a++) {
-      if(tyostoy_for_add[a].querySelector(".secondcord")) {
-        scord = tyostoy_for_add[a].querySelector(".secondcord");
-        if(tyostoy_for_add[a].querySelector(".thirdcord")) {
-          tyostoy_for_add[a].querySelector(".thirdcord").innerHTML = parseFloat(scord.parentElement.style.bottom)*5 + "<br><b>V</b>";
-        }
-        else {
-          x = document.createElement("div");
-          x.classList = ["thirdcord"];
-          x.style.right = parseFloat(scord.style.right) - 20 + "px";
-          x.style.left = parseFloat(scord.style.left) + 10 + "px";
-          x.innerHTML =  parseFloat(scord.parentElement.style.bottom)*5 +"<br><b>V</b>";
-          tyostoy_for_add[a].appendChild(x); 
-        }
-      }
-    }
-
-    alku_tyostot = lev.querySelectorAll(".alku__tyosto_pysty");
-    for (let a = 0; a < alku_tyostot.length; a++) {
-      if(alku_tyostot[a].querySelector(".secondcord")) {
-        scord = alku_tyostot[a].querySelector(".secondcord");
-        if(alku_tyostot[a].querySelector(".thirdcord")) {
-          alku_tyostot[a].querySelector(".thirdcord").innerHTML = "<b>R</b>";
-        }
-        else {
-          scord = alku_tyostot[a].querySelector(".secondcord");
-          x = document.createElement("div");
-          x.classList = ["thirdcord"];
-          x.style.top = parseFloat(scord.style.top) - 30 + "px";
-          x.innerHTML = "<b>R</b>";
-          alku_tyostot[a].appendChild(x);
-          console.log(alku_tyostot[a]); 
-        }
-      }
-        
-    }
-
-    alku_tyosto = lev.querySelectorAll(".alku__tyosto_vaaka");
-    for (let a = 0; a < alku_tyosto.length; a++) {
-      if(alku_tyosto[a].querySelector(".secondcord")) {
-        scord = alku_tyosto[a].querySelector(".secondcord");
-        if(alku_tyosto[a].querySelector(".thirdcord")) {
-          alku_tyosto[a].querySelector(".thirdcord").innerHTML = "<b>R</b>";
-        }
-        else {
-          x = document.createElement("div");
-          x.classList = ["thirdcord"];
-          x.style.right = parseFloat(scord.style.right) - 20 + "px";
-          x.style.left = parseFloat(scord.style.left) + 10 + "px";
-          x.innerHTML = "<b>R</b>";
-          alku_tyosto[a].appendChild(x); 
-          console.log(alku_tyosto[a]);
-        }
-      }
-    }
-
-    viim_tyostot = lev.querySelectorAll(".viim__tyosto_pysty");
-    viim_rc = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
-    viim_r = parseFloat(lev.querySelector(".levy b i").innerText.split("x")[0]) - viim_rc;
-    
-    for (let a = 0; a < viim_tyostot.length; a++) {
-      if(viim_tyostot[a].querySelector(".secondcord")) {
-        scord = viim_tyostot[a].querySelector(".secondcord");
-        if(viim_tyostot[a].querySelector(".thirdcord")) {
-          viim_tyostot[a].querySelector(".thirdcord").innerHTML = "<b>R</b><br><i>"+viim_r+"</i>";
-        }
-        else {
-          scord = viim_tyostot[a].querySelector(".secondcord");
-          x = document.createElement("div");
-          x.classList = ["thirdcord"];
-          x.style.top = parseFloat(scord.style.top) - 30 + "px";
-          viim_tyostot[a].appendChild(x); 
-        }
-        console.log(viim_tyostot[a]);
-      }
-    }
-
-    viim_tyosto = lev.querySelectorAll(".viim__tyosto_vaaka");
-    viim_ac = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);
-    viim_a = parseFloat(lev.querySelector(".levy b i").innerText.split("x")[1]) - viim_ac;
-    for (let a = 0; a < viim_tyosto.length; a++) {
-      if(viim_tyosto[a].querySelector(".secondcord")) {
-        scord = viim_tyosto[a].querySelector(".secondcord");
-        if(viim_tyosto[a].querySelector(".thirdcord")) {
-          viim_tyosto[a].querySelector(".thirdcord").innerHTML = "<i>"+viim_a+"</i><br><b>R</b>";
-        }
-        else {
-          x = document.createElement("div");
-          x.classList = ["thirdcord"];
-          x.style.right = parseFloat(scord.style.right) - 20 + "px";
-          x.style.left = parseFloat(scord.style.left) - 10 + "px";
-          viim_tyosto[a].appendChild(x); 
-          console.log(viim_tyosto[a]);
-        }
-      }
-    }
   });
   
   if(mode === 'x') {
+    my_array_x = [];
+    all_lines = [];
+     my_dels = [];
     left_array.forEach(left => {
-      my_array = [];
-      all_lines = [];
-      my_dels = [];
       for (let a = 0; a < levyt.length; a++) {
-        levy2_leftset = levyt[a].offsetLeft;
+        levy2_leftset = object.parentElement.parentElement.offsetLeft;
         if(left === levy2_leftset) {
-          my_array.push(levyt[a]);
+          my_array_x.push(levyt[a]);
         }
       }
       
-      my_array.forEach(item => {
+      my_array_x.forEach(item => {
         tyostos_in_levy = item.querySelectorAll(".tyostot__tyosto_pysty");
         for (let a = 0; a < tyostos_in_levy.length; a++) {
           if(tyostos_in_levy[a].getBoundingClientRect().left === object.getBoundingClientRect().left) {
             all_lines.push(tyostos_in_levy[a]);
           }
-          
         }
-        
       });
     });
   }
   else if(mode === 'y') {
+    my_array_y = [];
+    all_lines = [];
+    my_dels = [];
     top_array.forEach(top => {
-      my_array = [];
-      all_lines = [];
-      my_dels = [];
       for (let a = 0; a < levyt.length; a++) {
-        levy2_topset = levyt[a].offsetTop;
+        levy2_topset = object.parentElement.parentElement.offsetTop;
         if(top === levy2_topset) {
-          my_array.push(levyt[a]);
+          my_array_y.push(levyt[a]);
         }
       }
-      my_array.forEach(item => {
+      my_array_y.forEach(item => {
         tyostos_in_levy = item.querySelectorAll(".tyostot__tyosto_vaaka");
         for (let a = 0; a < tyostos_in_levy.length; a++) {
           if(tyostos_in_levy[a].getBoundingClientRect().bottom === object.getBoundingClientRect().bottom) {
