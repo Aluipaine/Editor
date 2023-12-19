@@ -196,18 +196,8 @@ function create__levy_excel(now) {
       else {
         h2.innerHTML = '';
       }
-      try {
-      if (document.querySelector("#settings__sauma_pysty").checked) {
-        h3.innerHTML = item.querySelector(".levy_h").innerText;
-        h4.innerHTML = item.querySelector(".levy_w").innerText;
-      }
-      else if (document.querySelector("#settings__sauma_vaaka").checked) {
-        h3.innerHTML = item.querySelector(".levy_w").innerText;
-        h4.innerHTML = item.querySelector(".levy_h").innerText;
-      }
-    } catch(e) {
-      console.log("TRY-CATCH ERROR:", e);
-    }
+
+     
       h5.innerHTML = item.dataset.thickness;
       h6.innerHTML = item.dataset.structure;
 
@@ -219,22 +209,54 @@ function create__levy_excel(now) {
       y_kiinnikkeet = item.querySelectorAll(".tyostot__tyosto_vaaka");
       x_kiinnikkeet = item.querySelectorAll(".tyostot__tyosto_pysty");
 
+      lw = parseFloat(item.querySelector(".levy_w").innerText);
+      lh = parseFloat(item.querySelector(".levy_h").innerText);
+      if (lw > lh) {
+        h3.innerHTML = lh;
+        h4.innerHTML = lw;
+      }
+      else if (lw <= lh) {
+        h3.innerHTML = lw;
+        h4.innerHTML = lh;
+      }
+
       for (var i = x_kiinnikkeet.length - 1; i >= 0; i--) {
-        if(i == 0) {
+        if (lw > lh) {
+          if(i == 0) {
+            l_t_y.push(((parseFloat(item.style.width)-1)*5-parseFloat(document.querySelector("#settings__levy_or_arvo").value)).toString().replaceAll(".",","));
+          }
+          else {
+            l_t_y.push((parseFloat(x_kiinnikkeet[i].style.left) * 5).toString().replaceAll(".",","));
+          }
+        }
+        else if(lw <= lh) {
+          if(i == 0) {
             l_t_x.push(((parseFloat(item.style.width)-1)*5-parseFloat(document.querySelector("#settings__levy_or_arvo").value)).toString().replaceAll(".",","));
-        }
-        else {
+          }
+          else {
             l_t_x.push((parseFloat(x_kiinnikkeet[i].style.left) * 5).toString().replaceAll(".",","));
+          }
         }
+       
       }
 
       for (var i = y_kiinnikkeet.length - 1; i >= 0; i--) {
-        if(i == 0) {
+        if (lw > lh) {
+          if(i == 0) {
+            l_t_x.push(((parseFloat(item.style.height)-1)*5-parseFloat(document.querySelector("#settings__levy_yr_arvo").value)).toString().replaceAll(".",","));
+          }
+          else {
+            l_t_x.push((parseFloat(y_kiinnikkeet[i].style.bottom) * 5).toString().replaceAll(".",","));
+          }
+        }
+        else if(lw <= lh) {
+          if(i == 0) {
             l_t_y.push(((parseFloat(item.style.height)-1)*5-parseFloat(document.querySelector("#settings__levy_yr_arvo").value)).toString().replaceAll(".",","));
-        }
-        else {
-          l_t_y.push((parseFloat(y_kiinnikkeet[i].style.bottom) * 5).toString().replaceAll(".",","));
-        }
+          }
+          else {
+            l_t_y.push((parseFloat(y_kiinnikkeet[i].style.bottom) * 5).toString().replaceAll(".",","));
+          }
+        }   
       }
     
       

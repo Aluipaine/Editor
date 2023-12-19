@@ -33,7 +33,7 @@
           </tr>
         </table>
         <div class="project__start_elaborate" onclick="open__workelab();">Kuittaa työt</div>
-        <div class="open_modal yellowbtn get_project_modal col-6" onclick="settings__modal_open(this);toggle__projectexcel(1,document.querySelector(`.projektilista_btn:nth-child(1)`));" data-asmodal_mode="projektiexcel">Avaa projektin Excel</div>
+        <div class="open_modal yellowbtn get_project_modal col-6" onclick="settings__modal_open(this);toggle__projectexcel(0,document.querySelector(`.projektilista_btn:nth-child(1)`));" data-asmodal_mode="projektiexcel">Avaa tilaustaulu</div>
 
       </div>  
     </div>
@@ -1707,7 +1707,7 @@
                 </tr>
               </table>
               <div class="row">
-                <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(1,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon Excel</div>
+                <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(1,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon tilaustaulu</div>
               </div>
             </div> ';
 
@@ -2571,7 +2571,7 @@
   <div class="modal-background">
     <div class="modal" style="height: 90vh;">
         <div class="modal_close_btn" onclick="this.parentElement.parentElement.parentElement.classList.remove('two');this.parentElement.parentElement.parentElement.classList.add('out');"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
-        <h2>Asuntoexcel</h2>
+        <h2>Asunnon tilaustaulu</h2>
         <div class="tilalista__btns">
           <div onclick="toggle__asexcel(1,this);" class="tilalista_btn active">Levyt</div>
           <div onclick="toggle__asexcel(2,this);" class="tilalista_btn">Rangat</div>
@@ -2755,12 +2755,28 @@
   <div class="modal-background">
     <div class="modal" style="height: 90vh;">
         <div class="modal_close_btn" onclick="this.parentElement.parentElement.parentElement.classList.remove('two');this.parentElement.parentElement.parentElement.classList.add('out');"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
-        <h2>Projektin Excel</h2>
+        <h2>Projektin Tilaustaulu</h2>
         <div class="tilalista__btns">
-          <div onclick="toggle__projectexcel(1,this);" class="projektilista_btn active">Levyt</div>
+          <div onclick="toggle__projectexcel(0,this);" class="projektilista_btn active">Levytilaukset</div>
+          <div onclick="toggle__projectexcel(1,this);" class="projektilista_btn">Levyt</div>
           <div onclick="toggle__projectexcel(2,this);" class="projektilista_btn">Rangat</div>
           <div onclick="toggle__projectexcel(3,this);" class="projektilista_btn">Listat</div>
         </div>
+
+        <table class="projecttilaus prthree_sheet_item">
+          <tbody class="projecttilaus__tbody">						
+            <tr class="headingrow">
+              <td>Huone</td>
+              <td>Seinä A</td>
+              <td>Seinä B</td>
+              <td>Seinä C</td>
+              <td>Seinä D</td>
+              <td>Katto</td>
+              <td>Lattia</td>
+            </tr>
+          </tbody>
+        </table>
+        
         <table class="projectlevyt prthree_sheet_item">
           <tbody class="projectlevyt__tbody">						
             <tr class="headingrow">
@@ -2928,7 +2944,7 @@
           </tbody>
         </table>
 
-        <div class="get_excel_btn get_projekti_excel col-6" onclick="lataa_projektiexcel();">Lataa projektin Excel</div>
+        <div class="get_excel_btn get_projekti_excel col-6" onclick="lataa_projektiexcel();">Hyväksy rivit ja lataa Excel</div>
 
     </div>
   </div>
