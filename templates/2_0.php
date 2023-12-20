@@ -2596,8 +2596,8 @@
             <tr class="headingrow">
               <td>Type (drawing)</td>
               <td>Materialcode</td>
-              <td>Pituus (X)</td>
-              <td>Leveys (Y)</td>
+              <td>Leveys (X)</td>
+              <td>Pituus (Y)</td>
               <td>Thickness</td>
               <td>Structure</td>
               <td>Quantity</td>
@@ -2799,8 +2799,8 @@
             <tr class="headingrow">
               <td>Type (drawing)</td>
               <td>Materialcode</td>
-              <td>Pituus (X)</td>
-              <td>Leveys (Y)</td>
+              <td>Leveys (X)</td>
+              <td>Pituus (Y)</td>
               <td>Thickness</td>
               <td>Structure</td>
               <td>Quantity</td>

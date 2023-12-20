@@ -1172,7 +1172,7 @@ function change__roomname() {
     console.log(project_roomname_);
     console.log(project_oldroomname_);
     console.log(data);
-    location.reload();
+    // location.reload();
   });
 }
 

@@ -481,8 +481,8 @@ function create__levy_excel(now) {
       levyexcel_array.push({
         'Type (drawing)': h1.textContent,
         'Materialcode': h2.textContent,
-        'Pituus (X)': h3.textContent,
-        'Leveys (Y)': h4.textContent,
+        'Leveys (X)': h3.textContent,
+        'Pituus (Y)': h4.textContent,
         'Thickness': h5.textContent,
         'Structure': h6.textContent,
         'Quantity': h7.textContent,
@@ -668,8 +668,8 @@ function create__levy_excel(now) {
       row.append(h77)
       row.append(h78)
       row.append(h79)
-      row.append(h80)
-      row.append(h81)
+      // row.append(h80)
+      // row.append(h81)
       row.append(h82)
       row.append(h83)
       row.append(h84)

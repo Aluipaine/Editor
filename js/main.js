@@ -5650,7 +5650,7 @@ function toggle__asexcel(mode, b) {
 
   b.classList.add("active");
   sheets[mode].classList.remove("hidden");
-  levyt_cols = ['Type (drawing)','Materialcode','Pituus (X)','Leveys (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
+  levyt_cols = ['Type (drawing)','Materialcode','Leveys (X)','Pituus (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
   rangat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
   listat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
 
@@ -5698,6 +5698,7 @@ function toggle__asexcel(mode, b) {
         }
       }).done(function (success) {
         u_rooms = [];
+        used_rooms = [];
         successful = success.replaceAll("~~~~",",").split("&&");    
         successful.forEach(timestamp => {
           if(timestamp.length < 5) {
@@ -5756,7 +5757,7 @@ function toggle__asexcel(mode, b) {
   }
   if(mode === 1) {
     _type = "levyt";
-    cols = ['Type (drawing)','Materialcode','Pituus (X)','Leveys (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
+    cols = ['Type (drawing)','Materialcode','Leveys (X)','Pituus (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
   }
   if(mode === 2) {
     _type = "rangat";
@@ -5862,10 +5863,142 @@ function lataa_seinaexcel(arg) {
   _types = ["levyt","rangat","listat"];
     
   if(arg) {
-    
+    _types.forEach(_type => {
+      formData = {
+        pr_id: document.querySelector("#current_project_id").value,
+        room: current_tila,
+        type: _type,
+      },
+      $.ajax({
+        type: "POST",
+        url: "../vendor/get-ordersinroom.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+      }).done(function (success) {
+        timest = 0;
+        successful = success.replaceAll("~~~~",",").split("&&");    
+        used_rooms = [];
+        u_rooms = [];
+        successful.forEach(timestamp => {
+          if(timestamp.length < 5) {
+            return
+          }
+          raw_data = timestamp.replaceAll('&&','').split("----");
+          console.log(raw_data);
+          wall = raw_data[1];
+          timing = toTimestamp(raw_data[2]);
+          statusroom = raw_data[3];
+          if(statusroom === "hyväksyttävä") {
+            if(used_rooms.includes(wall+"|"+timing)) {
+              used_rooms.push(wall+"|"+timing);
+              u_rooms.push(wall);
+            }
+            else {
+              used_rooms.push(wall+"|"+timing);
+              u_rooms.push(wall);
+            } 
+          }
+          
+        });
+
+        successful.forEach(timestamp => {
+          statusroom = raw_data[3];
+          timest = 0;
+          if(timestamp.length < 5 && statusroom !== "hyväksyttävä") {
+            return
+          }
+          raw_data = timestamp.replaceAll('&&','').split("----");
+          wall = raw_data[1];
+          timing = toTimestamp(raw_data[2]);
+          used_rooms.forEach(u1 => {
+            for (let u2 = 0; u2 < used_rooms.length; u2++) {
+              if(u1.split("|")[0] === wall && used_rooms[u2].split("|")[0] === wall) {
+                console.log(wall);
+                if(u1.split("|")[1] > used_rooms[u2].split("|")[1]) {
+                  timest = u1.split("|")[1];
+                }
+                else {
+                  timest = used_rooms[u2].split("|")[1];
+                }
+              }
+            }
+          });
+
+          if(parseFloat(timest) !== parseFloat(timing)) {
+            return
+          }
+          else {
+            content = JSON.parse(raw_data[0]);
+            content.forEach(row => {
+              if(_type === "levyt") {
+                aslevytarray.push(row);
+              }
+              if(_type === "rangat") {
+                asrangat_array.push(row);
+              }
+              if(_type === "listat") {
+                aslistat_array.push(row);
+              }
+            });  
+
+
+            timestamby = parseFloat(timest) * 1000;
+            formatted_db_date = new Date(timestamby);
+
+            formattedDate = GetDatabaseDate(formatted_db_date);
+            formData = {
+              status: 'tilattu',
+              timedate: formattedDate,
+            }
+            
+            $.ajax({
+              type: "POST",
+              url: "../vendor/excel_changestatus.php",
+              data: formData,
+              error: function (jqxhr, status, exception) {
+                alert('Tietokantavirhe, soita numeroon +358449782028');
+              }
+            }).done(function (success) {
+              console.log(success);
+            });
+          }
+        });
+      });
+    });
+    setTimeout(() => {
+      rows = document.querySelectorAll(".tilatilaus__tbody tr:not(.headingrow)");
+      astilausarray = [];
+      rows.forEach(row => {
+        tds = row.querySelectorAll("td");
+        astilausarray.push({
+          'HUONE': tds[0].innerText,
+          'SEINÄ A': tds[1].innerText,
+          'SEINÄ B': tds[2].innerText,
+          'SEINÄ C': tds[3].innerText,
+          'SEINÄ D': tds[4].innerText,
+          'KATTO': tds[5].innerText,
+          'LATTIA': tds[6].innerText,
+        });
+      });
+
+      filename = current_tila+' [Tilausexcel].xlsx';
+      var ws0 = XLSX.utils.json_to_sheet(astilausarray);
+      var ws1 = XLSX.utils.json_to_sheet(aslevytarray);
+      var ws2 = XLSX.utils.json_to_sheet(asrangat_array);
+      var ws3 = XLSX.utils.json_to_sheet(aslistat_array);
+      var wb = XLSX.utils.book_new();
+      
+      XLSX.utils.book_append_sheet(wb, ws0, "Tilaukset");
+      XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
+      XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
+      XLSX.utils.book_append_sheet(wb, ws3, "Listat");
+      XLSX.writeFile(wb, filename);
+    }, 250);
   }
   else {
-    alert("Olet lataamassa kaikki tuotteet, myös tilatut");
+    alert("Olet tilaamassa myös tilatut tuotteet.");
     _types.forEach(_type => {
       formData = {
         pr_id: document.querySelector("#current_project_id").value,
@@ -5965,12 +6098,29 @@ function lataa_seinaexcel(arg) {
       });
     });
     setTimeout(() => {
+      rows = document.querySelectorAll(".tilatilaus__tbody tr:not(.headingrow)");
+      astilausarray = [];
+      rows.forEach(row => {
+        tds = row.querySelectorAll("td");
+        astilausarray.push({
+          'HUONE': tds[0].innerText,
+          'SEINÄ A': tds[1].innerText,
+          'SEINÄ B': tds[2].innerText,
+          'SEINÄ C': tds[3].innerText,
+          'SEINÄ D': tds[4].innerText,
+          'KATTO': tds[5].innerText,
+          'LATTIA': tds[6].innerText,
+        });
+      });
+
       filename = current_tila+' [Tilausexcel].xlsx';
+      var ws0 = XLSX.utils.json_to_sheet(astilausarray);
       var ws1 = XLSX.utils.json_to_sheet(aslevytarray);
       var ws2 = XLSX.utils.json_to_sheet(asrangat_array);
       var ws3 = XLSX.utils.json_to_sheet(aslistat_array);
       var wb = XLSX.utils.book_new();
       
+      XLSX.utils.book_append_sheet(wb, ws0, "Tilaukset");
       XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
       XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
       XLSX.utils.book_append_sheet(wb, ws3, "Listat");
@@ -5999,7 +6149,7 @@ function toggle__projectexcel(mode, b) {
 
   b.classList.add("active");
   sheets[mode].classList.remove("hidden");
-  levyt_cols = ['Type (drawing)','Materialcode','Pituus (X)','Leveys (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
+  levyt_cols = ['Type (drawing)','Materialcode','Leveys (X)','Pituus (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
   rangat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
   listat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
 
@@ -6186,7 +6336,7 @@ function toggle__projectexcel(mode, b) {
   
   if(mode === 1) {
     _type = "levyt";
-    cols = ['Type (drawing)','Materialcode','Pituus (X)','Leveys (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
+    cols = ['Type (drawing)','Materialcode','Leveys (X)','Pituus (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
   }
   if(mode === 2) {
     _type = "rangat";
@@ -6306,17 +6456,178 @@ function toggle__projectexcel(mode, b) {
 
 function lataa_projektiexcel(arg) {
   current_project = document.querySelector(".project_start_heading").innerText;
+  prtilausarray = [];
   prlevytarray = [];
   prrangat_array = [];
-  prlistat_array = [];
+  prlistat_array = []; 
 
   _types = ["levyt","rangat","listat"];
 
   if(arg) {
+    _types.forEach(_type => {
+      formData = {
+        pr_id: document.querySelector("#current_project_id").value,
+        type: _type,
+      },
+      $.ajax({
+        type: "POST",
+        url: "../vendor/get-ordersinproject.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+      }).done(function (success) {
+        // ITERATE ROOM>WALLARRAY
+        successful = success.replaceAll("~~~~",",").split("&&");    
+        used_rooms = [];
+        u_rooms = [];
+        successful.forEach(timestamp => {
+          if(timestamp.length < 5) {
+            return
+          }
+          raw_data = timestamp.replaceAll('&&','').split("----");
+          wall = raw_data[1];
+          apart = raw_data[3];
+          roomstatus = raw_data[4];
+          timing = toTimestamp(raw_data[2]);
+          console.log(raw_data);
+          if(roomstatus == "hyväksyttävä") {
+            if(used_rooms.includes(apart+">"+wall+"|"+timing)) {
+              used_rooms.push(apart+">"+wall+"|"+timing);
+              u_rooms.push(apart+">"+wall);
+            }
+            else {
+              used_rooms.push(apart+">"+wall+"|"+timing);
+              u_rooms.push(apart+">"+wall);
+            } 
+          }
+          
+        });
+        // END ROOM>WALLARRAY
 
+        toiterate = removeDuplicates(u_rooms);
+        toiterate.forEach(iteration => {
+          toiterate__apart = iteration.split(">")[0];
+          wall = iteration.split(">")[1];
+          successful.forEach(timestamp => {
+            if(timestamp.length < 5) {
+              return
+            }
+            raw_data = timestamp.replaceAll('&&','').split("----");
+            apart = raw_data[3];
+            roomstatus = raw_data[4];
+            timing = toTimestamp(raw_data[2]);
+            raw_wall = raw_data[1];
+            if(apart === toiterate__apart && raw_wall === wall) {
+              used_rooms.forEach(u1 => {
+                if(u1.split("|")[0].split(">")[1] === wall && u1.split("|")[0] === iteration) {
+                  if(timest !== null) {
+                    if(u1.split("|")[1] > timest) {
+                      timest = u1.split("|")[1];
+                      timest_item = u1;
+                    }
+                    else if(timest < timing) {
+                      timest = timing;
+                      timest_item = apart+">"+raw_wall+"|"+timing;
+                    }
+                  }
+                  else {
+                    if(u1.split("|")[1] > timing) {
+                      timest = u1.split("|")[1];
+                      timest_item = u1;
+                    }
+                    else {
+                      timest = timing;
+                      timest_item = apart+">"+raw_wall+"|"+timing;
+                      
+                    }
+                  }
+                }
+              });
+            }
+          });
+          successful.forEach(timestamp => {
+            raw_data = timestamp.replaceAll('&&','').split("----");
+            apart = raw_data[3];
+            timing = toTimestamp(raw_data[2]);
+            raw_wall = raw_data[1];
+            if(timest_item === apart+">"+raw_wall+"|"+timing) {
+              content = JSON.parse(raw_data[0]);
+              content.forEach(row => {
+                if(_type === "levyt") {
+                  prlevytarray.push(row);
+                }
+                if(_type === "rangat") {
+                  prrangat_array.push(row);
+                }
+                if(_type === "listat") {
+                  prlistat_array.push(row);
+                }
+              });  
+              
+              timestamby = parseFloat(timing) * 1000;
+              formatted_db_date = new Date(timestamby);
+
+              formattedDate = GetDatabaseDate(formatted_db_date);
+              formData = {
+                status: 'tilattu',
+                timedate: formattedDate,
+              }
+              
+              $.ajax({
+                type: "POST",
+                url: "../vendor/excel_changestatus.php",
+                data: formData,
+                error: function (jqxhr, status, exception) {
+                  alert('Tietokantavirhe, soita numeroon +358449782028');
+                }
+              }).done(function (success) {
+                console.log(success);
+              });
+              timest = null;
+            }
+          });
+        });
+
+      });
+    });
+
+
+    setTimeout(() => {
+      rows = document.querySelectorAll(".projecttilaus__tbody tr:not(.headingrow)");
+
+      rows.forEach(row => {
+        tds = row.querySelectorAll("td");
+        prtilausarray.push({
+          'HUONE': tds[0].innerText,
+          'SEINÄ A': tds[1].innerText,
+          'SEINÄ B': tds[2].innerText,
+          'SEINÄ C': tds[3].innerText,
+          'SEINÄ D': tds[4].innerText,
+          'KATTO': tds[5].innerText,
+          'LATTIA': tds[6].innerText,
+        });
+      });
+      
+      filename = current_project+' [Tilausexcel hyväksytyt].xlsx';
+      var ws0 = XLSX.utils.json_to_sheet(prtilausarray);
+      var ws1 = XLSX.utils.json_to_sheet(prlevytarray);
+      var ws2 = XLSX.utils.json_to_sheet(prrangat_array);
+      var ws3 = XLSX.utils.json_to_sheet(prlistat_array);
+      var wb = XLSX.utils.book_new();
+      
+      XLSX.utils.book_append_sheet(wb, ws0, "Tilaukset");
+      XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
+      XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
+      XLSX.utils.book_append_sheet(wb, ws3, "Listat");
+      XLSX.writeFile(wb, filename);
+
+
+      
+    }, 250);
   }
   else {
-    alert("Olet lataamassa kaikki tuotteet, myös tilatut");
+    alert("Olet tilaamassa myös tilatut tuotteet.");
     _types.forEach(_type => {
       formData = {
         pr_id: document.querySelector("#current_project_id").value,
@@ -6410,7 +6721,27 @@ function lataa_projektiexcel(arg) {
                 if(_type === "listat") {
                   prlistat_array.push(row);
                 }
-              });   
+              });  
+              
+              timestamby = parseFloat(timing) * 1000;
+              formatted_db_date = new Date(timestamby);
+
+              formattedDate = GetDatabaseDate(formatted_db_date);
+              formData = {
+                status: 'tilattu',
+                timedate: formattedDate,
+              }
+              
+              $.ajax({
+                type: "POST",
+                url: "../vendor/excel_changestatus.php",
+                data: formData,
+                error: function (jqxhr, status, exception) {
+                  alert('Tietokantavirhe, soita numeroon +358449782028');
+                }
+              }).done(function (success) {
+                console.log(success);
+              });
               timest = null;
             }
           });
@@ -6421,16 +6752,36 @@ function lataa_projektiexcel(arg) {
 
 
     setTimeout(() => {
-      filename = current_project+' [Tilausexcel].xlsx';
+      rows = document.querySelectorAll(".projecttilaus__tbody tr:not(.headingrow)");
+
+      rows.forEach(row => {
+        tds = row.querySelectorAll("td");
+        prtilausarray.push({
+          'HUONE': tds[0].innerText,
+          'SEINÄ A': tds[1].innerText,
+          'SEINÄ B': tds[2].innerText,
+          'SEINÄ C': tds[3].innerText,
+          'SEINÄ D': tds[4].innerText,
+          'KATTO': tds[5].innerText,
+          'LATTIA': tds[6].innerText,
+        });
+      });
+      
+      filename = current_project+' [Tilausexcel kaikki].xlsx';
+      var ws0 = XLSX.utils.json_to_sheet(prtilausarray);
       var ws1 = XLSX.utils.json_to_sheet(prlevytarray);
       var ws2 = XLSX.utils.json_to_sheet(prrangat_array);
       var ws3 = XLSX.utils.json_to_sheet(prlistat_array);
       var wb = XLSX.utils.book_new();
       
+      XLSX.utils.book_append_sheet(wb, ws0, "Tilaukset");
       XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
       XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
       XLSX.utils.book_append_sheet(wb, ws3, "Listat");
       XLSX.writeFile(wb, filename);
+
+
+      
     }, 250);
   }
   
