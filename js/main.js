@@ -5649,13 +5649,111 @@ function toggle__asexcel(mode, b) {
   });
 
   b.classList.add("active");
-  sheets[mode-1].classList.remove("hidden");
+  sheets[mode].classList.remove("hidden");
   levyt_cols = ['Type (drawing)','Materialcode','Pituus (X)','Leveys (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
   rangat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
   listat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
 
   
   current_id = parseFloat(document.querySelector("#current_project_id").value);
+
+  if(mode === 0) {
+    _type = "tilaus";
+    _types = ["levyt","rangat","listat"];
+    used_rooms = [];
+    u_rooms = [];
+    trs = document.querySelectorAll(".tilatilaus__tbody tr:not(.headingrow)");
+    trs.forEach(tr => {
+      tr.remove();
+    });
+    _types.forEach(_type => {
+      
+
+      _tr = document.createElement("tr");
+      rinnerText = current_tila+" "+_type.toUpperCase();
+      rinnerText_selector = rinnerText.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
+      _tr.classList.add(rinnerText_selector);
+      _tr.innerHTML = `
+        <td>${rinnerText}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      `;
+      document.querySelector(".tilatilaus__tbody").appendChild(_tr);
+
+      formData = {
+        pr_id: document.querySelector("#current_project_id").value,
+        room: current_tila,
+        type: _type,
+      },
+      $.ajax({
+        type: "POST",
+        url: "../vendor/get-ordersinroom.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+      }).done(function (success) {
+        u_rooms = [];
+        successful = success.replaceAll("~~~~",",").split("&&");    
+        successful.forEach(timestamp => {
+          if(timestamp.length < 5) {
+            return
+          }
+          raw_data = timestamp.replaceAll('&&','').split("----");
+          console.log(raw_data);
+          wall = raw_data[1];
+          roomstatus = raw_data[3];
+          timing = toTimestamp(raw_data[2]);
+          if(used_rooms.includes(wall+"|"+roomstatus)) {
+            used_rooms.push(wall+"|"+roomstatus);
+            u_rooms.push(wall);
+          }
+          else {
+            used_rooms.push(wall+"|"+roomstatus);
+            u_rooms.push(wall);
+          } 
+        });
+        rinnerText = current_tila+" "+_type.toUpperCase();
+        rinnerText_selector = rinnerText.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
+  
+        console.log("rinnerText_selector: " + rinnerText_selector);
+
+        used_rooms.forEach(r => {
+          r_wall = r.split("|")[0].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();        
+          r_row = document.querySelector(".tilatilaus__tbody tr."+rinnerText_selector);
+          wall_status = r.split("|")[1].toUpperCase();
+          if(r_wall === "a") {
+            r_row.querySelectorAll("td")[1].innerHTML = wall_status;
+          }
+          else if(r_wall === "b") {
+            r_row.querySelectorAll("td")[2].innerHTML = wall_status;
+          }
+          else if(r_wall === "c") {
+            r_row.querySelectorAll("td")[3].innerHTML = wall_status;
+          }
+          else if(r_wall === "d") {
+            r_row.querySelectorAll("td")[4].innerHTML = wall_status;
+          }
+          else if(r_wall === "k") {
+            r_row.querySelectorAll("td")[5].innerHTML = wall_status;
+          }
+          else if(r_wall === "l") {
+            r_row.querySelectorAll("td")[6].innerHTML = wall_status;
+          }
+        });
+      });
+    });
+
+      
+
+    
+
+    return
+  }
   if(mode === 1) {
     _type = "levyt";
     cols = ['Type (drawing)','Materialcode','Pituus (X)','Leveys (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
@@ -5747,126 +5845,138 @@ function toggle__asexcel(mode, b) {
   });
 }
 
-function lataa_seinaexcel() {
+function GetDatabaseDate(date) {
+  var month = ("0" + (date.getMonth() + 1)).slice(-2);
+  var day  = ("0" + (date.getDate())).slice(-2);
+  var year = date.getFullYear();
+  var hour =  ("0" + (date.getHours())).slice(-2);
+  var min =  ("0" + (date.getMinutes())).slice(-2);
+  var seg = ("0" + (date.getSeconds())).slice(-2);
+  return year + "-" + month + "-" + day + " " + hour + ":" +  min + ":" + seg;
+}
+
+function lataa_seinaexcel(arg) {
   aslevytarray = [];
   asrangat_array = [];
   aslistat_array = [];
-
   _types = ["levyt","rangat","listat"];
-
-  _types.forEach(_type => {
-    formData = {
-      pr_id: document.querySelector("#current_project_id").value,
-      room: current_tila,
-      type: _type,
-    },
-    $.ajax({
-      type: "POST",
-      url: "../vendor/get-ordersinroom.php",
-      data: formData,
-      error: function (jqxhr, status, exception) {
-        alert('Tietokantavirhe, soita numeroon +358449782028');
-      }
-    }).done(function (success) {
-
-      successful = success.replaceAll("~~~~",",").split("&&");    
-      used_rooms = [];
-      u_rooms = [];
-      successful.forEach(timestamp => {
-        if(timestamp.length < 5) {
-          return
+    
+  if(arg) {
+    
+  }
+  else {
+    alert("Olet lataamassa kaikki tuotteet, myös tilatut");
+    _types.forEach(_type => {
+      formData = {
+        pr_id: document.querySelector("#current_project_id").value,
+        room: current_tila,
+        type: _type,
+      },
+      $.ajax({
+        type: "POST",
+        url: "../vendor/get-ordersinroom.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
         }
-        raw_data = timestamp.replaceAll('&&','').split("----");
-        console.log(raw_data);
-        wall = raw_data[1];
-        timing = toTimestamp(raw_data[2]);
-        if(used_rooms.includes(wall+"|"+timing)) {
-          used_rooms.push(wall+"|"+timing);
-          u_rooms.push(wall);
-        }
-        else {
-          used_rooms.push(wall+"|"+timing);
-          u_rooms.push(wall);
-        } 
-      });
+      }).done(function (success) {
 
-      successful.forEach(timestamp => {
-        if(timestamp.length < 5) {
-          return
-        }
-        raw_data = timestamp.replaceAll('&&','').split("----");
-        wall = raw_data[1];
-        timing = toTimestamp(raw_data[2]);
-        used_rooms.forEach(u1 => {
-          for (let u2 = 0; u2 < used_rooms.length; u2++) {
-            if(u1.split("|")[0] === wall && used_rooms[u2].split("|")[0] === wall) {
-              console.log(wall);
-              if(u1.split("|")[1] > used_rooms[u2].split("|")[1]) {
-                timest = u1.split("|")[1];
-              }
-              else {
-                timest = used_rooms[u2].split("|")[1];
-              }
-            }
+        successful = success.replaceAll("~~~~",",").split("&&");    
+        used_rooms = [];
+        u_rooms = [];
+        successful.forEach(timestamp => {
+          if(timestamp.length < 5) {
+            return
           }
+          raw_data = timestamp.replaceAll('&&','').split("----");
+          console.log(raw_data);
+          wall = raw_data[1];
+          timing = toTimestamp(raw_data[2]);
+          if(used_rooms.includes(wall+"|"+timing)) {
+            used_rooms.push(wall+"|"+timing);
+            u_rooms.push(wall);
+          }
+          else {
+            used_rooms.push(wall+"|"+timing);
+            u_rooms.push(wall);
+          } 
         });
 
-        if(parseFloat(timest) !== parseFloat(timing)) {
-          return
-        }
-        else {
-          content = JSON.parse(raw_data[0]);
-          content.forEach(row => {
-            if(_type === "levyt") {
-              aslevytarray.push(row);
-            }
-            if(_type === "rangat") {
-              asrangat_array.push(row);
-            }
-            if(_type === "listat") {
-              aslistat_array.push(row);
-            }
-          });  
-
-
-          timestamby = parseFloat(timest) * 1000;
-          formatted_db_date = new Date(timestamby);
-
-          formattedDate = formatted_db_date.toLocaleString("ru-RU").replaceAll(",","").replaceAll(".","-");
-          formData = {
-            status: 'Tilattu',
-            timedate: formattedDate,
+        successful.forEach(timestamp => {
+          if(timestamp.length < 5) {
+            return
           }
-          
-          $.ajax({
-            type: "POST",
-            url: "../vendor/excel_changestatus.php",
-            data: formData,
-            error: function (jqxhr, status, exception) {
-              alert('Tietokantavirhe, soita numeroon +358449782028');
+          raw_data = timestamp.replaceAll('&&','').split("----");
+          wall = raw_data[1];
+          timing = toTimestamp(raw_data[2]);
+          used_rooms.forEach(u1 => {
+            for (let u2 = 0; u2 < used_rooms.length; u2++) {
+              if(u1.split("|")[0] === wall && used_rooms[u2].split("|")[0] === wall) {
+                console.log(wall);
+                if(u1.split("|")[1] > used_rooms[u2].split("|")[1]) {
+                  timest = u1.split("|")[1];
+                }
+                else {
+                  timest = used_rooms[u2].split("|")[1];
+                }
+              }
             }
-          }).done(function (success) {
-            console.log(success);
           });
-        }
+
+          if(parseFloat(timest) !== parseFloat(timing)) {
+            return
+          }
+          else {
+            content = JSON.parse(raw_data[0]);
+            content.forEach(row => {
+              if(_type === "levyt") {
+                aslevytarray.push(row);
+              }
+              if(_type === "rangat") {
+                asrangat_array.push(row);
+              }
+              if(_type === "listat") {
+                aslistat_array.push(row);
+              }
+            });  
+
+
+            timestamby = parseFloat(timest) * 1000;
+            formatted_db_date = new Date(timestamby);
+
+            formattedDate = GetDatabaseDate(formatted_db_date);
+            formData = {
+              status: 'tilattu',
+              timedate: formattedDate,
+            }
+            
+            $.ajax({
+              type: "POST",
+              url: "../vendor/excel_changestatus.php",
+              data: formData,
+              error: function (jqxhr, status, exception) {
+                alert('Tietokantavirhe, soita numeroon +358449782028');
+              }
+            }).done(function (success) {
+              console.log(success);
+            });
+          }
+        });
       });
     });
-  });
-
-
-  setTimeout(() => {
-    filename = current_tila+' [Tilausexcel].xlsx';
-    var ws1 = XLSX.utils.json_to_sheet(aslevytarray);
-    var ws2 = XLSX.utils.json_to_sheet(asrangat_array);
-    var ws3 = XLSX.utils.json_to_sheet(aslistat_array);
-    var wb = XLSX.utils.book_new();
-    
-    XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
-    XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
-    XLSX.utils.book_append_sheet(wb, ws3, "Listat");
-    XLSX.writeFile(wb, filename);
-  }, 250);
-
+    setTimeout(() => {
+      filename = current_tila+' [Tilausexcel].xlsx';
+      var ws1 = XLSX.utils.json_to_sheet(aslevytarray);
+      var ws2 = XLSX.utils.json_to_sheet(asrangat_array);
+      var ws3 = XLSX.utils.json_to_sheet(aslistat_array);
+      var wb = XLSX.utils.book_new();
+      
+      XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
+      XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
+      XLSX.utils.book_append_sheet(wb, ws3, "Listat");
+      XLSX.writeFile(wb, filename);
+    }, 250);
+  }
   
 
 }
@@ -5903,9 +6013,12 @@ function toggle__projectexcel(mode, b) {
     });
 
     _types = ["levyt","rangat","listat"];
-    t_used_rooms = [];
-    t_u_rooms_ = [];
+    _t_u_rooms=[];
     _types.forEach(_type => {
+      t_used_rooms = [];
+      t_u_rooms_ = [];
+      apart_statuses=[];
+
       formData = {
         pr_id: document.querySelector("#current_project_id").value,
         type: _type,
@@ -5920,7 +6033,6 @@ function toggle__projectexcel(mode, b) {
       }).done(function (success) {
         // ITERATE ROOM>WALLARRAY
         successful = success.replaceAll("~~~~",",").split("&&");    
-        
         successful.forEach(timestamp => {
           if(timestamp.length < 5) {
             return
@@ -5929,24 +6041,96 @@ function toggle__projectexcel(mode, b) {
           wall = raw_data[1];
           apart = raw_data[3];
           timing = toTimestamp(raw_data[2]);
+          roomstatus = raw_data[4];
           if(t_used_rooms.includes(apart+">"+wall+"|"+timing)) {
             t_used_rooms.push(apart+">"+wall+"|"+timing);
+            apart_statuses.push(timing+"|"+roomstatus);
             t_u_rooms_.push(apart+">"+wall);
           }
           else {
-            t_used_rooms.push(apart+">"+wall+"|"+timing);
+            t_used_rooms.push(apart+">"+wall+"|"+timing+"|"+roomstatus);
+            apart_statuses.push(timing+"|"+roomstatus);
             t_u_rooms_.push(apart+">"+wall);
           } 
-        });
+          });
+
+
+          toiterate = removeDuplicates(t_u_rooms_);
+          toiterate.forEach(iteration => {
+            toiterate__apart = iteration.split(">")[0];
+            wall = iteration.split(">")[1];
+            successful.forEach(timestamp => {
+              if(timestamp.length < 5) {
+                
+              }
+              else {
+                raw_data = timestamp.replaceAll('&&','').split("----");
+                apart = raw_data[3];
+                timing = toTimestamp(raw_data[2]);
+                raw_wall = raw_data[1];
+                if(apart === toiterate__apart && raw_wall === wall) {
+                
+                  t_used_rooms.forEach(u1 => {
+                    if(u1.split("|")[0].split(">")[1] === wall && u1.split("|")[0] === iteration) {
+                      if(timest !== null) {
+                        if(u1.split("|")[1] > timest) {
+                          timest = u1.split("|")[1];
+                          timest_item = u1.split("|")[0] +"|"+ u1.split("|")[1];
+                        }
+                        else if(timest < timing) {
+                          timest = timing;
+                          timest_item = apart+">"+raw_wall+"|"+timing;
+                        }
+                      }
+                      else {
+                        if(u1.split("|")[1] > timing) {
+                          timest = u1.split("|")[1];
+                          timest_item = u1.split("|")[0] +"|"+ u1.split("|")[1];
+                        }
+                        else {
+                          timest = timing;
+                          timest_item = apart+">"+raw_wall+"|"+timing;
+                          
+                        }
+                      }
+                    }
+                  });
+                }
+              }
+              
+            });
+
+            console.log("timest_item -> " + timest_item);
+
+            successful.forEach(timestamp => {
+              raw_data = timestamp.replaceAll('&&','').split("----");
+              apart = raw_data[3];
+              timing = toTimestamp(raw_data[2]);
+              raw_wall = raw_data[1];
+              
+              if(timest_item === apart+">"+raw_wall+"|"+timing) {
+                console.log("MATCH apart raw_wall timing " + apart+">"+raw_wall+"|"+timing);
+                apart_statuses.forEach(as => {
+                  if(parseFloat(as.split("|")[0]) === parseFloat(timing)) {
+                    mystatus = as.split("|")[1];
+                    _t_u_rooms.push(apart+">"+raw_wall+"|"+mystatus);
+                  }
+                });           
+                
+              }
+            });
+            
+          });
       });
+
+      
     });
 
 
     
 
 
-    setTimeout(() => {
-      
+    setTimeout(() => {      
       rooms_data = document.querySelectorAll(".project__building_room");
       rooms_data.forEach(r => {
         _tr = document.createElement("tr");
@@ -5969,13 +6153,12 @@ function toggle__projectexcel(mode, b) {
     }, 550);
 
     setTimeout(() => {
-      t_u_rooms = removeDuplicates(t_u_rooms_);
-      t_u_rooms.forEach(r => {
-        r_name = r.split(">")[0].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
-        r_wall = r.split(">")[1].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
+      _t_u_rooms.forEach(r => {
+        r_name = r.split("|")[0].split(">")[0].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
+        r_wall = r.split("|")[0].split(">")[1].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
         
         r_row = document.querySelector(".projecttilaus__tbody ."+r_name.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase());
-        wall_status = "Tilattu";
+        wall_status = r.split("|")[1].toUpperCase();
         if(r_wall === "a") {
           r_row.querySelectorAll("td")[1].innerHTML = wall_status;
         }
@@ -5998,7 +6181,7 @@ function toggle__projectexcel(mode, b) {
     }, 650);
 
    
-    
+    return
   }
   
   if(mode === 1) {
@@ -6121,7 +6304,7 @@ function toggle__projectexcel(mode, b) {
 }
 
 
-function lataa_projektiexcel() {
+function lataa_projektiexcel(arg) {
   current_project = document.querySelector(".project_start_heading").innerText;
   prlevytarray = [];
   prrangat_array = [];
@@ -6129,122 +6312,127 @@ function lataa_projektiexcel() {
 
   _types = ["levyt","rangat","listat"];
 
-  _types.forEach(_type => {
-    formData = {
-      pr_id: document.querySelector("#current_project_id").value,
-      type: _type,
-    },
-    $.ajax({
-      type: "POST",
-      url: "../vendor/get-ordersinproject.php",
-      data: formData,
-      error: function (jqxhr, status, exception) {
-        alert('Tietokantavirhe, soita numeroon +358449782028');
-      }
-    }).done(function (success) {
-      // ITERATE ROOM>WALLARRAY
-      successful = success.replaceAll("~~~~",",").split("&&");    
-      used_rooms = [];
-      u_rooms = [];
-      successful.forEach(timestamp => {
-        if(timestamp.length < 5) {
-          return
-        }
-        raw_data = timestamp.replaceAll('&&','').split("----");
-        wall = raw_data[1];
-        apart = raw_data[3];
-        timing = toTimestamp(raw_data[2]);
-        if(used_rooms.includes(apart+">"+wall+"|"+timing)) {
-          used_rooms.push(apart+">"+wall+"|"+timing);
-          u_rooms.push(apart+">"+wall);
-        }
-        else {
-          used_rooms.push(apart+">"+wall+"|"+timing);
-          u_rooms.push(apart+">"+wall);
-        } 
-      });
-      // END ROOM>WALLARRAY
+  if(arg) {
 
-      toiterate = removeDuplicates(u_rooms);
-      toiterate.forEach(iteration => {
-        toiterate__apart = iteration.split(">")[0];
-        wall = iteration.split(">")[1];
+  }
+  else {
+    alert("Olet lataamassa kaikki tuotteet, myös tilatut");
+    _types.forEach(_type => {
+      formData = {
+        pr_id: document.querySelector("#current_project_id").value,
+        type: _type,
+      },
+      $.ajax({
+        type: "POST",
+        url: "../vendor/get-ordersinproject.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+      }).done(function (success) {
+        // ITERATE ROOM>WALLARRAY
+        successful = success.replaceAll("~~~~",",").split("&&");    
+        used_rooms = [];
+        u_rooms = [];
         successful.forEach(timestamp => {
           if(timestamp.length < 5) {
             return
           }
           raw_data = timestamp.replaceAll('&&','').split("----");
+          wall = raw_data[1];
           apart = raw_data[3];
           timing = toTimestamp(raw_data[2]);
-          raw_wall = raw_data[1];
-          if(apart === toiterate__apart && raw_wall === wall) {
-            used_rooms.forEach(u1 => {
-              if(u1.split("|")[0].split(">")[1] === wall && u1.split("|")[0] === iteration) {
-                if(timest !== null) {
-                  if(u1.split("|")[1] > timest) {
-                    timest = u1.split("|")[1];
-                    timest_item = u1;
-                  }
-                  else if(timest < timing) {
-                    timest = timing;
-                    timest_item = apart+">"+raw_wall+"|"+timing;
-                  }
-                }
-                else {
-                  if(u1.split("|")[1] > timing) {
-                    timest = u1.split("|")[1];
-                    timest_item = u1;
+          if(used_rooms.includes(apart+">"+wall+"|"+timing)) {
+            used_rooms.push(apart+">"+wall+"|"+timing);
+            u_rooms.push(apart+">"+wall);
+          }
+          else {
+            used_rooms.push(apart+">"+wall+"|"+timing);
+            u_rooms.push(apart+">"+wall);
+          } 
+        });
+        // END ROOM>WALLARRAY
+
+        toiterate = removeDuplicates(u_rooms);
+        toiterate.forEach(iteration => {
+          toiterate__apart = iteration.split(">")[0];
+          wall = iteration.split(">")[1];
+          successful.forEach(timestamp => {
+            if(timestamp.length < 5) {
+              return
+            }
+            raw_data = timestamp.replaceAll('&&','').split("----");
+            apart = raw_data[3];
+            timing = toTimestamp(raw_data[2]);
+            raw_wall = raw_data[1];
+            if(apart === toiterate__apart && raw_wall === wall) {
+              used_rooms.forEach(u1 => {
+                if(u1.split("|")[0].split(">")[1] === wall && u1.split("|")[0] === iteration) {
+                  if(timest !== null) {
+                    if(u1.split("|")[1] > timest) {
+                      timest = u1.split("|")[1];
+                      timest_item = u1;
+                    }
+                    else if(timest < timing) {
+                      timest = timing;
+                      timest_item = apart+">"+raw_wall+"|"+timing;
+                    }
                   }
                   else {
-                    timest = timing;
-                    timest_item = apart+">"+raw_wall+"|"+timing;
-                    
+                    if(u1.split("|")[1] > timing) {
+                      timest = u1.split("|")[1];
+                      timest_item = u1;
+                    }
+                    else {
+                      timest = timing;
+                      timest_item = apart+">"+raw_wall+"|"+timing;
+                      
+                    }
                   }
                 }
-              }
-            });
-          }
+              });
+            }
+          });
+          successful.forEach(timestamp => {
+            raw_data = timestamp.replaceAll('&&','').split("----");
+            apart = raw_data[3];
+            timing = toTimestamp(raw_data[2]);
+            raw_wall = raw_data[1];
+            if(timest_item === apart+">"+raw_wall+"|"+timing) {
+              content = JSON.parse(raw_data[0]);
+              content.forEach(row => {
+                if(_type === "levyt") {
+                  prlevytarray.push(row);
+                }
+                if(_type === "rangat") {
+                  prrangat_array.push(row);
+                }
+                if(_type === "listat") {
+                  prlistat_array.push(row);
+                }
+              });   
+              timest = null;
+            }
+          });
         });
-        successful.forEach(timestamp => {
-          raw_data = timestamp.replaceAll('&&','').split("----");
-          apart = raw_data[3];
-          timing = toTimestamp(raw_data[2]);
-          raw_wall = raw_data[1];
-          if(timest_item === apart+">"+raw_wall+"|"+timing) {
-            content = JSON.parse(raw_data[0]);
-            content.forEach(row => {
-              if(_type === "levyt") {
-                prlevytarray.push(row);
-              }
-              if(_type === "rangat") {
-                prrangat_array.push(row);
-              }
-              if(_type === "listat") {
-                prlistat_array.push(row);
-              }
-            });   
-            timest = null;
-          }
-        });
+
       });
-
     });
-  });
 
 
-  setTimeout(() => {
-    filename = current_project+' [Tilausexcel].xlsx';
-    var ws1 = XLSX.utils.json_to_sheet(prlevytarray);
-    var ws2 = XLSX.utils.json_to_sheet(prrangat_array);
-    var ws3 = XLSX.utils.json_to_sheet(prlistat_array);
-    var wb = XLSX.utils.book_new();
-    
-    XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
-    XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
-    XLSX.utils.book_append_sheet(wb, ws3, "Listat");
-    XLSX.writeFile(wb, filename);
-  }, 250);
-  
+    setTimeout(() => {
+      filename = current_project+' [Tilausexcel].xlsx';
+      var ws1 = XLSX.utils.json_to_sheet(prlevytarray);
+      var ws2 = XLSX.utils.json_to_sheet(prrangat_array);
+      var ws3 = XLSX.utils.json_to_sheet(prlistat_array);
+      var wb = XLSX.utils.book_new();
+      
+      XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
+      XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
+      XLSX.utils.book_append_sheet(wb, ws3, "Listat");
+      XLSX.writeFile(wb, filename);
+    }, 250);
+  }
   
 
 }

@@ -1707,7 +1707,7 @@
                 </tr>
               </table>
               <div class="row">
-                <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(1,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon tilaustaulu</div>
+                <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(0,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon tilaustaulu</div>
               </div>
             </div> ';
 
@@ -2573,11 +2573,25 @@
         <div class="modal_close_btn" onclick="this.parentElement.parentElement.parentElement.classList.remove('two');this.parentElement.parentElement.parentElement.classList.add('out');"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
         <h2>Asunnon tilaustaulu</h2>
         <div class="tilalista__btns">
-          <div onclick="toggle__asexcel(1,this);" class="tilalista_btn active">Levyt</div>
+          <div onclick="toggle__asexcel(0,this);" class="tilalista_btn active">Tilaukset</div>
+          <div onclick="toggle__asexcel(1,this);" class="tilalista_btn">Levyt</div>
           <div onclick="toggle__asexcel(2,this);" class="tilalista_btn">Rangat</div>
           <div onclick="toggle__asexcel(3,this);" class="tilalista_btn">Listat</div>
         </div>
-        <table class="tilalevyt three_sheet_item">
+        <table class="tilatilaus three_sheet_item">
+          <tbody class="tilatilaus__tbody">						
+            <tr class="headingrow">
+              <td>Huone</td>
+              <td>Seinä A</td>
+              <td>Seinä B</td>
+              <td>Seinä C</td>
+              <td>Seinä D</td>
+              <td>Katto</td>
+              <td>Lattia</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="tilalevyt three_sheet_item hidden">
           <tbody class="tilalevyt__tbody">						
             <tr class="headingrow">
               <td>Type (drawing)</td>
@@ -2743,8 +2757,11 @@
             </tr>
           </tbody>
         </table>
-
-        <div class="get_excel_btn get_apartment_excel col-6" onclick="lataa_seinaexcel();">Lataa asunnon Excel</div>
+        
+        <div class="row excel_tilauksetrow">
+          <div class="get_excel_btn get_apartment_excel col-6" onclick="lataa_seinaexcel();">Hyväksy rivit ja lataa asunnon Excel</div>
+          <div class="get_excel_btn get_apartment_excel col-6 yellowbtn" onclick="lataa_seinaexcel('osittainen');">Hyväksy rivit ja lataa tilaamatta olevat tuotteet</div>
+        </div>
 
     </div>
   </div>
@@ -2757,7 +2774,7 @@
         <div class="modal_close_btn" onclick="this.parentElement.parentElement.parentElement.classList.remove('two');this.parentElement.parentElement.parentElement.classList.add('out');"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
         <h2>Projektin Tilaustaulu</h2>
         <div class="tilalista__btns">
-          <div onclick="toggle__projectexcel(0,this);" class="projektilista_btn active">Levytilaukset</div>
+          <div onclick="toggle__projectexcel(0,this);" class="projektilista_btn active">Tilaukset</div>
           <div onclick="toggle__projectexcel(1,this);" class="projektilista_btn">Levyt</div>
           <div onclick="toggle__projectexcel(2,this);" class="projektilista_btn">Rangat</div>
           <div onclick="toggle__projectexcel(3,this);" class="projektilista_btn">Listat</div>
@@ -2943,8 +2960,12 @@
             </tr>
           </tbody>
         </table>
+        
 
-        <div class="get_excel_btn get_projekti_excel col-6" onclick="lataa_projektiexcel();">Hyväksy rivit ja lataa Excel</div>
+        <div class="row excel_tilauksetrow">
+          <div class="get_excel_btn get_projekti_excel col-6" onclick="lataa_projektiexcel();">Hyväksy rivit ja lataa Excel</div>
+          <div class="get_excel_btn get_projekti_excel col-6 yellowbtn" onclick="lataa_projektiexcel('osittainen');">Hyväksy rivit ja lataa tilaamatta olevat</div>
+        </div>
 
     </div>
   </div>

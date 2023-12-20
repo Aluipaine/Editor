@@ -292,11 +292,33 @@ form input[type="submit"]:focus {
   padding: 9px 0;
   border: unset;
 }
+
+.get_excel_btn {
+  display: block;
+  text-align: center;
+  width: 333px;
+  height: 50px;
+  margin: 0 5px;
+  background: #18ab00;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  vertical-align: middle;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 50px;
+}
 .yellowbtn {
   font-size: 14px;
   width: 210px;
   background: #ffc80a;
-  border-radius: 1px;
+  /* border-radius: 1px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6572,27 +6594,7 @@ div.x_del.hidden {
   font-weight: bold;
 }
 
-.get_excel_btn {
-  display: block;
-  text-align: center;
-  width: 333px;
-  height: 50px;
-  margin: 0 5px;
-  background: #18ab00;
-  border-radius: 5px;
-  margin-top: 20px;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 18px;
-  text-align: center;
-  vertical-align: middle;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-bottom: 50px;
-}
+
 
 .get_apartment_modal {
   border-radius: 5px;
@@ -7065,6 +7067,21 @@ input[type="radio"] + label.levy__label:focus, input[type="radio"] + label.levy_
 
 .get_project_modal {
   width: 100%;
+}
+
+.projecttilaus__tbody tr td:not(.projecttilaus__tbody tr td:nth-child(1)) {
+  font-weight: bold;
+  font-size: 12px;
+  width: 10%;
+}
+
+.excel_tilauksetrow {
+  justify-content: space-between;
+}
+
+.excel_tilauksetrow div {
+  margin: 6px 0;
+  flex: 0 0 48%;
 }
 
 .commentbox {
