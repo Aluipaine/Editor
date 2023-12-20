@@ -5827,6 +5827,27 @@ function lataa_seinaexcel() {
               aslistat_array.push(row);
             }
           });  
+
+
+          timestamby = parseFloat(timest) * 1000;
+          formatted_db_date = new Date(timestamby);
+
+          formattedDate = formatted_db_date.toLocaleString("ru-RU").replaceAll(",","").replaceAll(".","-");
+          formData = {
+            status: 'Tilattu',
+            timedate: formattedDate,
+          }
+          
+          $.ajax({
+            type: "POST",
+            url: "../vendor/excel_changestatus.php",
+            data: formData,
+            error: function (jqxhr, status, exception) {
+              alert('Tietokantavirhe, soita numeroon +358449782028');
+            }
+          }).done(function (success) {
+            console.log(success);
+          });
         }
       });
     });
@@ -5845,7 +5866,7 @@ function lataa_seinaexcel() {
     XLSX.utils.book_append_sheet(wb, ws3, "Listat");
     XLSX.writeFile(wb, filename);
   }, 250);
-  
+
   
 
 }
@@ -5930,7 +5951,7 @@ function toggle__projectexcel(mode, b) {
       rooms_data.forEach(r => {
         _tr = document.createElement("tr");
         rinnerText = r.innerText;
-        rinnerText_selector = rinnerText.replaceAll("_","").replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","").replaceAll('\n','').toLowerCase();
+        rinnerText_selector = rinnerText.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
         _tr.classList.add(rinnerText_selector);
         _tr.innerHTML = `
           <td>${rinnerText}</td>
@@ -5950,10 +5971,10 @@ function toggle__projectexcel(mode, b) {
     setTimeout(() => {
       t_u_rooms = removeDuplicates(t_u_rooms_);
       t_u_rooms.forEach(r => {
-        r_name = r.split(">")[0].replaceAll("_","").replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","").toLowerCase();
-        r_wall = r.split(">")[1].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","").toLowerCase();
+        r_name = r.split(">")[0].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
+        r_wall = r.split(">")[1].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
         
-        r_row = document.querySelector(".projecttilaus__tbody ."+r_name.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","").toLowerCase());
+        r_row = document.querySelector(".projecttilaus__tbody ."+r_name.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase());
         wall_status = "Tilattu";
         if(r_wall === "a") {
           r_row.querySelectorAll("td")[1].innerHTML = wall_status;

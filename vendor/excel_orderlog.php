@@ -11,6 +11,6 @@ $type = $_POST['type'];
 $timedate = date('Y-m-d H:i:s');
 
 
-$meta = mysqli_query($db, "INSERT INTO `orderlog` (`project_id`, `generated_array`,`room`,`wall`,`who`,`type`,`timedate`,`status`) VALUES ('$project_id', '$generated_array', '$room', '$wall', '$who', '$type', '$timedate',''); ");
+$meta = mysqli_query($db, "INSERT INTO `orderlog` (`project_id`, `generated_array`,`room`,`wall`,`who`,`type`,`timedate`,`status`) VALUES ('$project_id', '$generated_array', '$room', '$wall', '$who', '$type', '$timedate','hyväksyttävä'); ");
 
-echo "INSERT INTO `orderlog` (`project_id`, `generated_array`,`room`,`wall`,`who`,`type`,`timedate`,`status`) VALUES ('$project_id', '$generated_array', '$room', '$wall', '$who', '$type', '$timedate',''); ";
+echo "INSERT INTO `orderlog` (`project_id`, `generated_array`,`room`,`wall`,`who`,`type`,`timedate`,`status`) VALUES ('$project_id', '$generated_array', '$room', '$wall', '$who', '$type', '$timedate','hyväksyttävä'); ";
