@@ -1,6 +1,17 @@
 listoitettu = false;
 
 function listoitus() {
+  rangat_grandrow = canvas.querySelector(".rangat__grandrow");
+  if (document.querySelector(".listat__grandrow")) {
+    document.querySelector(".listat__grandrow").remove();
+  }
+  
+  listat__grandrow = document.createElement("div");
+  listat__grandrow.classList.add("listat__grandrow");
+  canvas.prepend(listat__grandrow);
+  listat__grandrow.innerHTML = rangat_grandrow.innerHTML;
+  listoitettu = false;
+
   document.querySelector(".rangat__grandrow").style.opacity = 0;
   ikkunaListaExcel = document.querySelector(".ikkunalista_excel");
   ListaExcel = document.querySelector(".lista_as_excel tbody");

@@ -1853,6 +1853,49 @@ function refresh__drawcontrols() {
           sauma__controls_dels[i].style.display = "none";
         }
       }
+
+      rangat__navigation(false);
+
+      formData = {
+        pr_id: document.querySelector("#current_project_id").value,
+        room: current_tila,
+        wall: current_room.toLowerCase(),
+        type: 'levyt',
+      },
+      $.ajax({
+        type: "POST",
+        url: "../vendor/get-ordersinwall.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+      }).done(function (success) {
+        u_rooms = [];
+        used_rooms = [];
+            
+        try {
+          successful = success.replaceAll("~~~~",",").split("&&");
+          trs = document.querySelectorAll(".levy_excel tr:not(.headingrow)");
+          trs.forEach(tr => {
+            tr.remove();
+          });
+
+          cols = ['Type (drawing)','Materialcode','Leveys (X)','Pituus (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
+          raw_data = successful[0].replaceAll('&&','').split("----");
+          console.log(raw_data);
+          levy_array = JSON.parse(raw_data[0]);
+          levy_array.forEach(row => {
+            tr = document.createElement("tr");
+            for(var i=0;i<cols.length;i++) {
+              index = cols[i];
+              tr.innerHTML += "<td>" + row[index] + "</td>";
+            }
+            document.querySelector(".levy_excel tbody").appendChild(tr);
+          });  
+        } catch (error) {
+          console.log("no previous save detected");
+        }
+      });
     }
     else {
 
@@ -1939,9 +1982,51 @@ function refresh__drawcontrols() {
         listat__grandrow.classList.add("six_hidden");
       }
 
-      rangoita();
-      room_status = 'rangatok';
-      document.querySelector("input.room_status").value = room_status;
+
+
+      formData = {
+        pr_id: document.querySelector("#current_project_id").value,
+        room: current_tila,
+        wall: current_room.toLowerCase(),
+        type: 'rangat',
+      },
+      $.ajax({
+        type: "POST",
+        url: "../vendor/get-ordersinwall.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+      }).done(function (success) {
+        u_rooms = [];
+        used_rooms = [];
+            
+        try {
+          successful = success.replaceAll("~~~~",",").split("&&");
+          trs = document.querySelectorAll(".ranka_tuo_excel tr:not(.headingrow)");
+          trs.forEach(tr => {
+            tr.remove();
+          });
+
+          cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
+          raw_data = successful[0].replaceAll('&&','').split("----");
+          console.log(raw_data);
+          ranka_array = JSON.parse(raw_data[0]);
+          ranka_array.forEach(row => {
+            tr = document.createElement("tr");
+            for(var i=0;i<cols.length;i++) {
+              index = cols[i];
+              tr.innerHTML += "<td>" + row[index] + "</td>";
+            }
+            document.querySelector(".ranka_tuo_excel tbody").appendChild(tr);
+          });  
+        } catch (error) {
+          console.log("no previous save detected");
+          rangoita();
+          room_status = 'rangatok';
+          document.querySelector("input.room_status").value = room_status;
+        }
+      });
       // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     else {
@@ -2036,10 +2121,6 @@ function refresh__drawcontrols() {
             sauma__controls_dels[i].style.display = "none";
           }
         }
-        rangat_grandrow = canvas.querySelector(".rangat__grandrow");
-        if (document.querySelector(".listat__grandrow")) {
-          document.querySelector(".listat__grandrow").remove();
-        }
         if (canvas.querySelector(".closer")) {
           closers = canvas.querySelectorAll(".closer");
           for (var i = closers.length - 1; i >= 0; i--) {
@@ -2047,13 +2128,50 @@ function refresh__drawcontrols() {
             closers[i].style.zIndex = -1;
           }
         }
-        listat__grandrow = document.createElement("div");
-        listat__grandrow.classList.add("listat__grandrow");
-        canvas.prepend(listat__grandrow);
-        listat__grandrow.innerHTML = rangat_grandrow.innerHTML;
-        listoitettu = false;
+        
+        
         listoitus();
-        rangat__navigation(false);
+        formData = {
+          pr_id: document.querySelector("#current_project_id").value,
+          room: current_tila,
+          wall: current_room.toLowerCase(),
+          type: 'listat',
+        },
+        $.ajax({
+          type: "POST",
+          url: "../vendor/get-ordersinwall.php",
+          data: formData,
+          error: function (jqxhr, status, exception) {
+            alert('Tietokantavirhe, soita numeroon +358449782028');
+          }
+        }).done(function (success) {
+          u_rooms = [];
+          used_rooms = [];
+              
+          try {
+            successful = success.replaceAll("~~~~",",").split("&&");
+            trs = document.querySelectorAll(".lista_tuo_excel tr:not(.headingrow)");
+            trs.forEach(tr => {
+              tr.remove();
+            });
+  
+            cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
+            raw_data = successful[0].replaceAll('&&','').split("----");
+            console.log(raw_data);
+            lista_array = JSON.parse(raw_data[0]);
+            lista_array.forEach(row => {
+              tr = document.createElement("tr");
+              for(var i=0;i<cols.length;i++) {
+                index = cols[i];
+                tr.innerHTML += "<td>" + row[index] + "</td>";
+              }
+              document.querySelector(".lista_tuo_excel tbody").appendChild(tr);
+            });  
+          } catch (error) {
+            console.log("no previous save detected");
+            listoitus();
+          }
+        });
 
       }
       else {
