@@ -27,7 +27,7 @@
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();" class="nav__comleted">Läpiviennit</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();" class="nav_current">Saumat</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();">Kiinnikkeet</div></li>
-          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();submitprogress('', 'adding', '', 'sau');">Korjailu</div></li>
+          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();submitprogress('', 'adding', '', 'sau');">Kuosit</div></li>
           
           <li><div onclick="alert('Onnistuu kiinnikkeet-kohdasta');">Seinät</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();">Levyt</div></li>
@@ -52,9 +52,9 @@
           ?>
           <h4>Levytyksen suunta</h4>
           <fieldset>
-            <input type="radio" id="settings__sauma_pysty" name="sauma__suunta" onclick="saumoitus__examplephoto()" <?php echo $sy[24] == "0" ? "checked" : "" ?>>
+            <input type="radio" id="settings__sauma_pysty" name="sauma__suunta" value="levytyspystyyn" onclick="saumoitus__examplephoto()" <?php echo $sy[24] == "0" ? "checked" : "" ?>>
             <label for="settings__sauma_pysty">Levytys pystyyn</label>
-            <input type="radio" id="settings__sauma_vaaka" name="sauma__suunta" onclick="saumoitus__examplephoto()" <?php echo $sy[24] == "1" ? "checked" : "" ?>>
+            <input type="radio" id="settings__sauma_vaaka" name="sauma__suunta" value="levytysvaakaan" onclick="saumoitus__examplephoto()" <?php echo $sy[24] == "1" ? "checked" : "" ?>>
             <label for="settings__sauma_vaaka">Levytys vaakaan</label>
           </fieldset>
         </section>
@@ -112,7 +112,8 @@
 
             </fieldset>
             <fieldset class="row sauma__setting_row">
-            <div class="col-6" style="flex-direction: column;">
+            <div class="col-4" style="flex-direction: column;">
+              <h6>Tavoitelu levyn koko (modulissa, mm)</h6>
               <label for="settings__sauma_intervalx">Leveys</label>
               <input type="number" id="settings__sauma_intervalx" min="0" placeholder="numero tähän.." onchange="document.querySelector('#settings__sauma_interval_x').value = this.value" value="1250">
               
@@ -122,7 +123,15 @@
               <input type="hidden" id="settings__sauma_interval_x" value="1260">
               <input type="hidden" id="settings__sauma_interval_y" value="3010">
             </div>
-            <div class="col-6" style="flex-direction: column;">
+            <div class="col-4" style="flex-direction: column;">
+              <h6>Trimmin määrä aihiolevystä</h6>
+              <label for="settings__sauma_aihiotrimx">Trimmaus leveysmitasta</label>
+              <input type="number" id="settings__sauma_aihiotrimx" min="0" oninput="document.querySelector('#settings__sauma_intervalx').value = parseFloat(document.querySelector('#settings__sauma_aihiopituus').value) - parseFloat(this.value)">
+              <label for="settings__sauma_aihiotrimy">Trimmaus pystymitasta</label>
+              <input type="number" id="settings__sauma_aihiotrimy" min="0" oninput="document.querySelector('#settings__sauma_intervaly').value = parseFloat(document.querySelector('#settings__sauma_aihioleveys').value) - parseFloat(this.value)">
+            </div>
+            <div class="col-4" style="flex-direction: column;">
+              <h6>Tavoitelu levyn koko (modulissa, mm)</h6>
               <label for="settings__sauma_aihiopituus">Aihioleveys</label>
               <input type="number" id="settings__sauma_aihiopituus" min="0">
               <label for="settings__sauma_aihioleveys">Aihiopituus</label>

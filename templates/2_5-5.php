@@ -10,8 +10,7 @@
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();" class="nav__comleted">Läpiviennit</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();" class="nav__comleted">Saumat</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();" class="nav_current">Kiinnikkeet</div></li>
-          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();" class="">Korjailu</div></li>
-          
+          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();" class="">Kuosit</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();updatearea(); osittainen_siirto_muualle();">Seinät</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();">Levyt</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_six');refresh__drawcontrols();updatearea();">Rangat</div></li>
@@ -141,35 +140,36 @@
                           <fieldset>
                             <div class="trow">
                              <div class="modal__row_kvali">
-                               <label for="p_target">K-väli, Tavoite </label>
-                               <input type="number" id="p_target" placeholder="Tavoiteltu levyn pituus" min="570" value="600">
+                               <label for="v_target">K-väli, Tavoite </label>
+                               <input type="number" id="v_target" placeholder="Tavoiteltu levyn pituus" min="450" value="600">
                              </div>
                              <div class="modal__row_kvali">
-                               <label for="p_two">2 reikää max väl</label>
-                               <input type="number" id="p_two" placeholder="Tavoiteltu levyn leveys" min="570" value="570" placeholder="0-570">
+                               <label for="v_two">2 reikää max väl</label>
+                               <input type="number" id="v_two" onchange="aloita_tyosto_kiinnikkeet();" placeholder="Tavoiteltu levyn leveys" value="450">
                              </div>
                              <div class="modal__row_kvali">
-                               <label for="p_three">3 reikää max väl</label>
-                               <input type="number" id="p_three" placeholder="Tavoiteltu levyn leveys" min="580" value="580" placeholder="580-3050">
+                               <label for="v_three">3 reikää max väl</label>
+                               <input type="number" id="v_three" onchange="aloita_tyosto_kiinnikkeet();" placeholder="Tavoiteltu levyn leveys" value="550">
                              </div>
                            </div>
                           </fieldset>
+                          
                         </div>
                         <div class="col-6">
                           <h4>Leveyssuunnan Läpiviennit </h4>
                           <fieldset>
                             <div class="trow">
                              <div class="modal__row_kvali">
-                               <label for="v_target">K-väli, Tavoite </label>
-                               <input type="number" id="v_target" placeholder="Tavoiteltu levyn pituus" min="450" value="600">
+                               <label for="p_target">K-väli, Tavoite </label>
+                               <input type="number" id="p_target" placeholder="Tavoiteltu levyn pituus" min="570" value="600">
                              </div>
                              <div class="modal__row_kvali">
-                               <label for="v_two">2 reikää max väl</label>
-                               <input type="number" id="v_two" placeholder="Tavoiteltu levyn leveys" min="450" value="450">
+                               <label for="p_two">2 reikää max väl</label>
+                               <input type="number" id="p_two" onchange="aloita_tyosto_kiinnikkeet();" placeholder="Tavoiteltu levyn leveys" min="570" value="570" placeholder="0-570">
                              </div>
                              <div class="modal__row_kvali">
-                               <label for="v_three">3 reikää max väl</label>
-                               <input type="number" id="v_three" placeholder="Tavoiteltu levyn leveys" min="450" value="550">
+                               <label for="p_three">3 reikää max väl</label>
+                               <input type="number" id="p_three" onchange="aloita_tyosto_kiinnikkeet();" placeholder="Tavoiteltu levyn leveys" min="580" value="580" placeholder="580-3050">
                              </div>
                            </div>
                           </fieldset>
@@ -567,6 +567,39 @@
 </div>
 
 
-
+<div class="tyostot_keskitys">
+  <div class="row">
+    <div class="col-6"><h4>Haluatko keskittää työstöt?</h4></div>
+    <div class="col-6">
+      <div class="modal_close_btn" onclick="this.parentElement.parentElement.parentElement.classList.remove('two');this.parentElement.parentElement.parentElement.classList.add('out');"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
+    </div>
+    
+  </div>
+  <fieldset class="spontanous__kiinniketys">
+    <input type="radio" id="kiinniketys__pkiinnike_three__" name="levy_porautus_vertical" value="Tasamalli">
+    <label for="kiinniketys__pkiinnike_three__">Tasamalli pysty</label>
+    <input type="radio" id="kiinniketys__pkiinnike_four__" name="levy_porautus_vertical" value="Pariton tasa">
+    <label for="kiinniketys__pkiinnike_four__">Pariton tasa pysty</label>
+    <input type="radio" id="kiinniketys__vkiinnike_three__" name="levy_porautus_horizontal" value="Tasamalli">
+    <label for="kiinniketys__vkiinnike_three__">Tasamalli vaaka</label>
+    <input type="radio" id="kiinniketys__vkiinnike_four__" name="levy_porautus_horizontal" value="Pariton tasa">
+    <label for="kiinniketys__vkiinnike_four__">Pariton tasa vaaka</label>
+  </fieldset>
+  
+</div>
 
 </form>
+
+
+
+<!-- OLD -->
+<!-- <fieldset class="spontanous__kiinniketys">
+    <input type="radio" id="kiinniketys__pkiinnike_three" name="levy_porautus_vertical" value="Tasamalli">
+    <label for="kiinniketys__pkiinnike_three">Tasamalli pysty</label>
+    <input type="radio" id="kiinniketys__pkiinnike_four" name="levy_porautus_vertical" value="Pariton tasa">
+    <label for="kiinniketys__pkiinnike_four">Pariton tasa pysty</label>
+    <input type="radio" id="kiinniketys__vkiinnike_three" name="levy_porautus_horizontal" value="Tasamalli">
+    <label for="kiinniketys__vkiinnike_three">Tasamalli vaaka</label>
+    <input type="radio" id="kiinniketys__vkiinnike_four" name="levy_porautus_horizontal" value="Pariton tasa">
+    <label for="kiinniketys__vkiinnike_four">Pariton tasa vaaka</label>
+  </fieldset> -->

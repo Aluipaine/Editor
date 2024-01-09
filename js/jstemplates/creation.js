@@ -2459,7 +2459,6 @@ $('td').mouseover(function() {
             });
             $("#a_rooms").val(JSON.stringify(a_array));
         }
-  
     });
   
     $("#A_ .nowork").each(function(index) {
@@ -2716,8 +2715,36 @@ $('td').mouseover(function() {
         });
         $("#h_rooms_nowork").val(JSON.stringify(h_));
     });
-  
-  
+
+
+    giga_array=[a_array,b_array,c_array,d_array,e_array,f_array,g_array,h_array];
+    giga_array.forEach(g => {
+        if(g.length < 1) {
+            return
+        }
+        g.forEach(b => {
+            console.log(b["name"]); 
+            roomsnames = ["A","B","C","D","K","L"];
+            roomsnames.forEach(wall => {
+                formData = {
+                    apartment: b["name"].replaceAll(" ","").replaceAll("ä","a").replaceAll("ö","o").toLowerCase(),
+                    wall: wall,
+                    function: "2200~~4000",
+                    timestamp: Math.floor(Date.now() / 1000),
+                },
+                $.ajax({
+                    type: "POST",
+                    url: "../vendor/save-sizesinroom.php",
+                    data: formData,
+                    error: function (jqxhr, status, exception) {
+                    alert('Tietokantavirhe, soita numeroon +358449782028');
+                    }
+                }).done(function (success) {
+                    
+                });
+            });
+        });
+    }); 
   
     $('#new_project__form').submit();
   });

@@ -364,7 +364,33 @@ function ylitys__array() {
 
   aukko = canvas.querySelectorAll(".aukko");
   for (var i = 0; i < aukko.length; i++) {
-    
+    aukko[i].dataset.l2a_or_lista = oikea_array[9];
+    aukko[i].dataset.l2a_or_listapituus = oikea_array[10];
+    aukko[i].dataset.l2a_or_listalaatu = oikea_array[11];
+    aukko[i].dataset.l2a_vr_lista = vasen_array[9];
+    aukko[i].dataset.l2a_vr_listapituus = vasen_array[10];
+    aukko[i].dataset.l2a_vr_listalaatu = vasen_array[11];
+    aukko[i].dataset.l2a_yr_lista = yla_array[9];
+    aukko[i].dataset.l2a_yr_listapituus = yla_array[10];
+    aukko[i].dataset.l2a_yr_listalaatu = yla_array[11];
+    aukko[i].dataset.l2a_ar_lista = ala_array[9];
+    aukko[i].dataset.l2a_ar_listapituus = ala_array[10];
+    aukko[i].dataset.l2a_ar_listalaatu = ala_array[11];
+
+
+    aukko[i].dataset.l2b_or_lista = oikea_array[12];
+    aukko[i].dataset.l2b_or_listapituus = oikea_array[13];
+    aukko[i].dataset.l2b_or_listalaatu = oikea_array[14];
+    aukko[i].dataset.l2b_vr_lista = vasen_array[12];
+    aukko[i].dataset.l2b_vr_listapituus = vasen_array[13];
+    aukko[i].dataset.l2b_vr_listalaatu = vasen_array[14];
+    aukko[i].dataset.l2b_yr_lista = yla_array[12];
+    aukko[i].dataset.l2b_yr_listapituus = yla_array[13];
+    aukko[i].dataset.l2b_yr_listalaatu = yla_array[14];
+    aukko[i].dataset.l2b_ar_lista = ala_array[12];
+    aukko[i].dataset.l2b_ar_listapituus = ala_array[13];
+    aukko[i].dataset.l2b_ar_listalaatu = ala_array[14];
+
     if (aukko[i].classList.contains("ovi"))  {
       left_side = parseFloat(aukko[i].querySelector(".aukko_lcord").dataset.from)-10;
       left_plus = parseFloat(vasen_array[1]);

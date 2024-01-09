@@ -5,6 +5,10 @@ apartment = null;
 current_asiakas = document.querySelector("#current_asiakas").value;
 all_apartments = document.querySelectorAll('.project__building_room');
 
+saumaset_hm = 10;
+saumaset_vm = 10;
+
+
 const convertLetter = (str) => {
   const map = {
      a:'α',b:'β',d:'δ',e:'ε',
@@ -55,7 +59,7 @@ function givenewtype() {
       etypes[i].innerHTML = convertLetter(String.fromCharCode(65 + i).toLowerCase());
     }
 
-  }, 100);
+  }, 1000);
 }
 if(document.querySelector("#open_comments")) {
   // for (let i = 0; i < all_apartments.length; i++) {
@@ -133,44 +137,11 @@ function changeWalls_all() {
     saving_array = [];
     saving_id = $('.id').val();
 
-    aroom_data = apartment.dataset.aroom;
-    broom_data = apartment.dataset.broom;
-    croom_data = apartment.dataset.croom;
-    droom_data = apartment.dataset.droom;
-    kroom_data = apartment.dataset.kroom;
-    lroom_data = apartment.dataset.lroom;
-
-    aroom_data_ = aroom_data.split("~");
-    broom_data_ = broom_data.split("~");
-    croom_data_ = croom_data.split("~");
-    droom_data_ = droom_data.split("~");
-    kroom_data_ = kroom_data.split("~");
-    lroom_data_ = lroom_data.split("~");
-
-    arsz = parseFloat(document.querySelector(".house__wall_a .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_a .wall_width").value);
-    brsz = parseFloat(document.querySelector(".house__wall_b .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_b .wall_width_2").value);
-    crsz = parseFloat(document.querySelector(".house__wall_c .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_c .wall_width").value);
-    drsz = parseFloat(document.querySelector(".house__wall_d .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_d .wall_width_2").value);
-    krsz = parseFloat(document.querySelector(".house__wall_k .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_k .wall_width").value);
-    lrsz = parseFloat(document.querySelector(".house__wall_l .wall_height").value) + "|" + parseFloat(document.querySelector(".house__wall_l .wall_width").value);
-
-
-    ad = aroom_data_[0] + "~" + aroom_data_[1] + "~" + arsz + "~" + aroom_data_[3] + "~" + aroom_data_[4] + "~" + aroom_data_[5] + "~" + aroom_data_[6] + "~" + aroom_data_[7];
-    bd = broom_data_[0] + "~" + broom_data_[1] + "~" + brsz + "~" + broom_data_[3] + "~" + broom_data_[4] + "~" + broom_data_[5] + "~" + broom_data_[6] + "~" + broom_data_[7];
-    cd = croom_data_[0] + "~" + croom_data_[1] + "~" + crsz + "~" + croom_data_[3] + "~" + croom_data_[4] + "~" + croom_data_[5] + "~" + croom_data_[6] + "~" + croom_data_[7];
-    dd = droom_data_[0] + "~" + droom_data_[1] + "~" + drsz + "~" + droom_data_[3] + "~" + droom_data_[4] + "~" + droom_data_[5] + "~" + droom_data_[6] + "~" + droom_data_[7];
-    kd = kroom_data_[0] + "~" + kroom_data_[1] + "~" + krsz + "~" + kroom_data_[3] + "~" + kroom_data_[4] + "~" + kroom_data_[5] + "~" + kroom_data_[6] + "~" + kroom_data_[7];
-    ld = lroom_data_[0] + "~" + lroom_data_[1] + "~" + lrsz + "~" + lroom_data_[3] + "~" + lroom_data_[4] + "~" + lroom_data_[5] + "~" + lroom_data_[6] + "~" + lroom_data_[7];
-
-    apartment.dataset.aroom = ad;
-    apartment.dataset.broom = bd;
-    apartment.dataset.croom = cd;
-    apartment.dataset.droom = dd;
-    apartment.dataset.kroom = kd;
-    apartment.dataset.lroom = ld;
+    save_rooms();
   }, 500);
   if (current_room !== null) {
-    submitprogress('', 'save');
+    // submitprogress('', 'save');
+    save_rooms();
   }
   // submitprogress('', 'save');
 }
@@ -214,12 +185,12 @@ function refresh__drawcontrols() {
   input_step = document.querySelector('#step_drawscreen').value;
 
   if (apartment != null) {
-    k_saved_input = apartment.dataset.kroom;
-    a_saved_input = apartment.dataset.aroom;
-    b_saved_input = apartment.dataset.broom;
-    c_saved_input = apartment.dataset.croom;
-    d_saved_input = apartment.dataset.droom;
-    l_saved_input = apartment.dataset.lroom;
+    // k_saved_input = apartment.dataset.kroom;
+    // a_saved_input = apartment.dataset.aroom;
+    // b_saved_input = apartment.dataset.broom;
+    // c_saved_input = apartment.dataset.croom;
+    // d_saved_input = apartment.dataset.droom;
+    // l_saved_input = apartment.dataset.lroom;
 
     // if (k_saved_input.length > 5) {
     //   k_wall = document.querySelectorAll(".house__wall_status_k");
@@ -378,63 +349,6 @@ function refresh__drawcontrols() {
     }
     if (input_step == 'drawscreen_section_zero') {
       input_step = 'drawscreen_section_one';
-      // var drawarea__left = document.querySelector(".drawarea__left");
-      // drawarea__left.onclick = function() {};
-      // var drawarea__bottom = document.querySelector(".drawarea__bottom");
-      // drawarea__bottom.onclick = function() { };
-      // for (var i = 0; i < da__controls.length; i++) {
-      //     da__controls[i].style.display = "none";
-      // }
-      // // Enable/disable levytysalue controls
-      // for (var i = 0; i < boxes.length; i++) {
-      //     boxes[i].style.display = "none";
-      // }
-      // // document.querySelector(".drawarea__controls_zero").style.display = 'block';
-      // document.querySelector("#box_upper__bottom-mid").style.display = 'none';
-      // document.querySelector("#box_lower__top-mid").style.display = 'none';
-      // document.querySelector("#box_right__left-mid").style.display = 'none';
-      // document.querySelector("#box_left__right-mid").style.display = 'none';
-      // // Aukot for s 2.2
-      // for (var i = 0; i < da__topitems.length; i++) {
-      //     da__topitems[i].style.display = "none";
-      // }
-      // // Enable popup for Aukot and Reijät 2.2-2.3
-      // document.querySelector(".drawarea__top").classList.remove("m_btn");
-      // //Enable reclamation for 2.1-2.3
-      // document.querySelector(".drawarea__right").classList.remove("recl_btn");
-      // // Enable controls
-      // document.querySelector(".drawarea__bottom_container").style.display = 'none';
-      // document.querySelector(".box__upper_upperdecor").style.display = 'none';
-      // document.querySelector(".box__lower_lowerdecor").style.display = 'none';
-      // // Disable drawarea controls for 2.4-2.7
-      // document.querySelector(".drawarea__right").classList.remove("disabled");
-      // document.querySelector(".drawarea__top").classList.remove("disabled");
-      // document.querySelector(".sauma__downctrl_container").classList.remove("disabled");
-      // document.querySelector(".sauma__rightctrl_container").classList.remove("disabled");
-      // // Edit Sauma's for 2.6-2.7
-      // var saumas = document.querySelectorAll(".sauma");
-      // var sauma__vertical_ctrl = document.querySelectorAll(".sauma__vertical_ctrl");
-      // if (document.querySelector(".newrow_vertical")) {document.querySelector(".newrow_vertical").remove();}
-      // if (document.querySelector(".newrow_horizontal")) {document.querySelector(".newrow_horizontal").remove();}
-      // if (saumas) {
-      //   for (var i=0;i<saumas.length;i+=1){
-      //     saumas[i].remove();
-      //   }
-      // }
-      // if (sauma__vertical_ctrl) {
-      //   for (var i=0;i<sauma__vertical_ctrl.length;i+=1){
-      //     sauma__vertical_ctrl[i].remove();
-      //   }
-      // }
-      // // Reklamation things for 2.8
-      // document.querySelector("#box-wrapper").classList.remove("drawarea__eight");
-      // document.querySelector(".drawarea__right > span").innerHTML = 'Reklamaatiot ja huomiot';
-      // for (var i = 0; i < da__topitems_eight.length; i++) {
-      //     da__topitems_eight[i].style.display = "none";
-      // }
-      //  if(document.querySelector(".saumat__grandrow")) {
-      //    document.querySelector(".saumat__grandrow").style.opacity = 0;
-      //   }
     }
     if (input_step == 'drawscreen_section_one') {
       $('.drawarea__section').show();
@@ -531,11 +445,6 @@ function refresh__drawcontrols() {
         // degradate_url(3);
       }
       rangat__navigation(false);
-
-
-
-      
-      
     }
     else {
       let array__ofinputsy = [];
@@ -818,8 +727,6 @@ function refresh__drawcontrols() {
       for (var i = 0; i < da__topitems.length; i++) {
         da__topitems[i].style.display = "none";
       }
-      // Enable popup for Aukot and Reijät 2.2-2.3
-      document.querySelector(".drawarea__top").classList.remove("m_btn");
       //Enable reclamation for 2.1-2.3
       document.querySelector(".drawarea__right").classList.remove("recl_btn");
       // Enable controls
@@ -856,7 +763,9 @@ function refresh__drawcontrols() {
       }
       document.querySelector(".drawarea__bottom").style.marginBottom = "-70px";
       document.querySelector(".drawarea__left").style.marginLeft = "-70px";
-      document.querySelector(".drawarea__left .end_measure").style.left = "30px";
+      if(document.querySelector(".drawarea__left .end_measure")) {
+        document.querySelector(".drawarea__left .end_measure").style.left = "30px";
+      }
 
       document.querySelector(".drawarea__bottom").style.zIndex = "0";
       // document.querySelector(".drawarea__left").style.opacity = "0.2";
@@ -1079,18 +988,27 @@ function refresh__drawcontrols() {
     }
     
     if (input_step == 'drawscreen_section_tyostot') {
+
+      if (canvas.querySelector("div.saumat__grandrow")) {
+
+      }
+      else {
+        alert("Sinun tulee asettaa saumat ennen tätä vaihetta.");
+        $('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();
+        return
+      }
       $('.drawarea__section').show();
-      // $('.box-wrapper').css('display', 'none');
-      // $('.levy__section').css('display', 'flex');
       $('.drawarea__section').css('display', 'flex');
       $('#drawscreen_section_tyostot').show();
       $('.drawarea__controls_tyostot').show();
 
-
-      kiinnikkeet__siirto();
       document.querySelector(".drawarea__left").style.marginLeft = "-40px";
-
-
+      // Disable drawarea controls for 2.4-2.7
+      document.querySelector(".drawarea__right").classList.add("disabled");
+      document.querySelector(".drawarea__top").classList.add("disabled");
+      document.querySelector(".drawarea__right").classList.remove("m_btn");
+      document.querySelector(".drawarea__top").classList.remove("m_btn");
+      
       let tyostot = document.querySelectorAll(".levy_input");
       for (var i = 0; i < tyostot.length; i++) {
         var tyosto_id = tyostot[i].getAttribute("id");
@@ -1117,321 +1035,6 @@ function refresh__drawcontrols() {
       for (var i = 0; i < levy.length; i += 1) {
         levy[i].classList.remove("levy_transparent");
       }
-      kp_one = document.querySelector("#kiinniketys__pkiinnike_one");
-      kp_two = document.querySelector("#kiinniketys__pkiinnike_two");
-      kp_three = document.querySelector("#kiinniketys__pkiinnike_three");
-      kp_four = document.querySelector("#kiinniketys__pkiinnike_four");
-      kv_one = document.querySelector("#kiinniketys__vkiinnike_one");
-      kv_two = document.querySelector("#kiinniketys__vkiinnike_two");
-      kv_three = document.querySelector("#kiinniketys__vkiinnike_three");
-      kv_four = document.querySelector("#kiinniketys__vkiinnike_four");
-
-      lt_kp_one = document.querySelector("#lt-kiinniketys__pkiinnike_one");
-      lt_kp_two = document.querySelector("#lt-kiinniketys__pkiinnike_two");
-      lt_kp_three = document.querySelector("#lt-kiinniketys__pkiinnike_three");
-      lt_kp_four = document.querySelector("#lt-kiinniketys__pkiinnike_four");
-      lt_kv_one = document.querySelector("#lt-kiinniketys__vkiinnike_one");
-      lt_kv_two = document.querySelector("#lt-kiinniketys__vkiinnike_two");
-      lt_kv_three = document.querySelector("#lt-kiinniketys__vkiinnike_three");
-      lt_kv_four = document.querySelector("#lt-kiinniketys__vkiinnike_four");
-
-      function tyostanaytto(evt) {
-        d_levyt = document.querySelectorAll(".levyt > .levy");
-        for (var i = d_levyt.length - 1; i >= 0; i--) {
-          tyosta(d_levyt[i], evt);
-        }
-        tyostot__tyosto_input = document.querySelectorAll(".tyostot__tyosto > input");
-        for (var i = tyostot__tyosto_input.length - 1; i >= 0; i--) {
-          // tyostot__tyosto_input[i].remove();
-          // tyostot__tyosto_input[i].setAttribute("onchange", "change__tyostocord(this,1);");
-          tyostot__tyosto_input[i].classList.add("x_cord_mki");
-          tyostot__tyosto_input[i].setAttribute("onclick", "clearcord(this,'tyo');");
-        }
-        elements = document.querySelectorAll('.tyostot__tyosto');
-        // Create a new array to hold the elements sorted by their offset left position
-        const sortedElements = [];
-        // Loop through the array of HTML elements and add them to the sortedElements array
-        for (let i = 0; i < elements.length; i++) {
-          const element = elements[i];
-          sortedElements.push(element);
-        }
-        // Sort the array of HTML elements by their offset left position
-        sortedElements.sort((a, b) => a.offsetLeft - b.offsetLeft);
-      }
-      kp_one.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        kp_two.checked = false;
-        kp_three.checked = false;
-        kp_four.checked = false;
-        evt = 1;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      kp_two.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        kp_one.checked = false;
-        kp_three.checked = false;
-        kp_four.checked = false;
-        evt = 2;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        tyostanaytto(evt);
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      kp_three.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        kp_one.checked = false;
-        kp_two.checked = false;
-        kp_four.checked = false;
-        evt = 3;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      kp_four.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        kp_one.checked = false;
-        kp_two.checked = false;
-        kp_three.checked = false;
-        evt = 4;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      kv_one.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        kv_two.checked = false;
-        kv_three.checked = false;
-        kv_four.checked = false;
-        evt = 5;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      kv_two.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        kv_one.checked = false;
-        kv_three.checked = false;
-        kv_four.checked = false;
-        evt = 6;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      kv_three.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        kv_one.checked = false;
-        kv_two.checked = false;
-        kv_four.checked = false;
-        evt = 7;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      kv_four.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        kv_one.checked = false;
-        kv_two.checked = false;
-        kv_three.checked = false;
-        evt = 8;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-
-
-
-      lt_kp_one.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        lt_kp_two.checked = false;
-        lt_kp_three.checked = false;
-        lt_kp_four.checked = false;
-        evt = 1;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        // tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      lt_kp_two.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        lt_kp_one.checked = false;
-        lt_kp_three.checked = false;
-        lt_kp_four.checked = false;
-        evt = 2;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        // tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      lt_kp_three.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        lt_kp_one.checked = false;
-        lt_kp_two.checked = false;
-        lt_kp_four.checked = false;
-        evt = 3;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        // tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      lt_kp_four.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        lt_kp_one.checked = false;
-        lt_kp_two.checked = false;
-        lt_kp_three.checked = false;
-        evt = 4;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        // tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      lt_kv_one.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        lt_kv_two.checked = false;
-        lt_kv_three.checked = false;
-        lt_kv_four.checked = false;
-        evt = 5;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        // tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      lt_kv_two.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        lt_kv_one.checked = false;
-        lt_kv_three.checked = false;
-        lt_kv_four.checked = false;
-        evt = 6;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        // tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      lt_kv_three.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        lt_kv_one.checked = false;
-        lt_kv_two.checked = false;
-        lt_kv_four.checked = false;
-        evt = 7;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        // tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
-      lt_kv_four.addEventListener("click", function () {
-        let levyt = document.querySelectorAll("#drawscreen_section_tyostot .visible");
-        lt_kv_one.checked = false;
-        lt_kv_two.checked = false;
-        lt_kv_three.checked = false;
-        evt = 8;
-        for (var i = levyt.length - 1; i >= 0; i--) {
-          if (levyt[i].classList.contains("visible") || evt != null) {
-            tyosta(levyt[i], evt);
-          }
-        }
-        // tyostanaytto(evt);
-
-        l_container = document.querySelector(".ladonta_container");
-        levy_visualisation = l_container.querySelector(".levy");
-        countdown__kiinnikkeet(levy_visualisation);
-      });
 
       if (canvas.querySelector(".sauma__controls_del")) {
         let sauma__controls_dels = canvas.querySelectorAll(".sauma__controls_del");
@@ -1447,21 +1050,6 @@ function refresh__drawcontrols() {
         }
       }
 
-      let five_levy_closers = canvas.querySelectorAll(".closer");
-      for (var i = five_levy_closers.length - 1; i >= 0; i--) {
-        five_levy_closers[i].remove();
-      }
-      let k_levys = canvas.querySelectorAll(".levy");
-
-      tyostot__tyosto_pysty = canvas.querySelectorAll(".levy_tyostot_x > div");
-      tyostot__tyosto_vaaka = canvas.querySelectorAll(".levy_tyostot_y > div");
-      for (var i = tyostot__tyosto_pysty.length - 1; i >= 0; i--) {
-        tyostot__tyosto_pysty[i].style.opacity = 1;
-      }
-      for (var i = tyostot__tyosto_vaaka.length - 1; i >= 0; i--) {
-        tyostot__tyosto_vaaka[i].style.opacity = 1;
-      }
-
       sauma__controls = canvas.querySelectorAll(".sauma__controls");
 
       for (var i = 0; i < sauma__controls.length; i++) {
@@ -1469,53 +1057,46 @@ function refresh__drawcontrols() {
         sauma__controls[i].style.zIndex = "-1";
         sauma__controls[i].style.display = "none";
       }
-
-      // if(document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled")) {
-      //   document.querySelector("#box-wrapper > div.drawarea__control.drawarea__top.disabled").style.border = "unset";
-      //   document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled").style.border = "unset";
-      // }
-
-
-      for (var i = k_levys.length - 1; i >= 0; i--) {
-        give__tyosto_cord(k_levys[i]);
-      }
-
-      room_status = 'saumatok';
-      document.querySelector("input.room_status").value = room_status;
-      // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
-
-
-      t3 = canvas.querySelectorAll(".secondcord");
-      for (var s = t3.length - 1; s >= 0; s--) {
-        if(t3[s].parentElement.classList.contains("tyostot__tyosto_pysty")) {
-          t3[s].style.top = 30+((parseFloat(drawarea.style.height))) + "px";
-          t3[s].style.position = "absolute";
-        }
-        if(t3[s].parentElement.classList.contains("tyostot__tyosto_vaaka")) {
-          // t3[s].style.left = 10 + (-0.9) * ((parseFloat(drawarea.style.width))) + "px";
-          t3[s].style.right = 30+((parseFloat(drawarea.style.width))) + "px";
-          t3[s].style.position = "absolute";
+    
+      var drawarea__top_item = document.querySelectorAll(".drawarea__top_item");
+      if (drawarea__top_item) {
+        for (var i = 0; i < drawarea__top_item.length; i += 1) {
+          drawarea__top_item[i].style.display = 'none';
         }
       }
 
-      document.querySelector("#kin_toggle_1").checked = true;
+      
+
+      if(tyostot_ok !== 0) {
+        only_levy_transfer();
+        restore__kiinnikkeet(tyostocontent);
+      }
+      else {
+        kiinnikkeet__siirto();
+        kiinnike_default_initialization();
+      }
+      
+      if(tyostot_ok !== 0 && canvas.querySelector(".tyostot__tyosto") == null) {
+        kiinnikkeet__siirto();
+        kiinnike_default_initialization();
+      }
+
       rangat__navigation(false);
-
     }
     else {
       sauma__controls = canvas.querySelectorAll(".sauma__controls");
-
+    
       for (var i = 0; i < sauma__controls.length; i++) {
         sauma__controls[i].style.opacity = 1;
         sauma__controls[i].style.zIndex = 1;
         sauma__controls[i].style.display = "block";
       }
-
+    
       if (document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled")) {
         document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled").style.borderLeft = "1px solid black";
         document.querySelector("#box-wrapper > div.drawarea__control.drawarea__top.disabled").style.borderBottom = "1px solid black";
       }
-
+    
       if(canvas.querySelector(".tyostot__tyosto input:not(.secondcord)")) {
         input = canvas.querySelectorAll(".tyostot__tyosto input:not(.secondcord)");
         for (var i = input.length - 1; i >= 0; i--) {
@@ -1529,8 +1110,16 @@ function refresh__drawcontrols() {
         }
       }
     }
-    
     if (input_step == 'drawscreen_section_five') {
+      if (canvas.querySelector("div.saumat__grandrow")) {
+
+      }
+      else {
+        alert("Sinun tulee asettaa saumat ennen tätä vaihetta.");
+        $('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();
+        return
+      }
+      
       $('.drawarea__section').show();
       for (var i = 0; i < da__controls.length; i++) {
         da__controls[i].style.display = "none";
@@ -1685,7 +1274,6 @@ function refresh__drawcontrols() {
       create__ladontaoptions();
 
       rangat__navigation(false);
-
     }
     else {
       // if(canvas.querySelector(".closer")) {
@@ -1697,6 +1285,22 @@ function refresh__drawcontrols() {
       // }
     }
     if (input_step == 'drawscreen_section_esikatselu') {
+      if (canvas.querySelector("div.saumat__grandrow")) {
+
+      }
+      else {
+        alert("Sinun tulee asettaa saumat ennen tätä vaihetta.");
+        $('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();
+        return
+      }
+      if (canvas.querySelector(".tyostot__tyosto")) {
+
+      }
+      else {
+        alert("Sinun tulee asettaa kiinnikkeet ennen tätä vaihetta.");
+        $('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();
+        return
+      }
       $('.drawarea__section').show();
       for (var i = 0; i < da__controls.length; i++) {
         da__controls[i].style.display = "none";
@@ -1747,6 +1351,7 @@ function refresh__drawcontrols() {
       document.querySelector("#box_lower__top-mid").style.display = 'none';
       document.querySelector("#box_right__left-mid").style.display = 'none';
       document.querySelector("#box_left__right-mid").style.display = 'none';
+
       // Aukot for s 2.2
       for (var i = 0; i < da__topitems.length; i++) {
         da__topitems[i].style.display = "none";
@@ -1901,6 +1506,24 @@ function refresh__drawcontrols() {
 
     }
     if (input_step == 'drawscreen_section_six') {
+      if (canvas.querySelector("div.saumat__grandrow")) {
+
+      }
+      else {
+        alert("Sinun tulee asettaa saumat ennen tätä vaihetta.");
+        $('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();
+        return
+      }
+
+      if (canvas.querySelector(".tyostot__tyosto")) {
+
+      }
+      else {
+        alert("Sinun tulee asettaa kiinnikkeet ennen tätä vaihetta.");
+        $('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();
+        return
+      }
+
       $('.drawarea__section').show();
       $("#drawscreen_section_six").show();
       $('.drawarea__controls_six').show();
@@ -2036,6 +1659,22 @@ function refresh__drawcontrols() {
     }
     if (input_step == 'drawscreen_section_seven') {
       document.querySelector(".drawarea__left").style.marginLeft = "-40px";
+      if (canvas.querySelector("div.saumat__grandrow")) {
+
+      }
+      else {
+        alert("Sinun pitää asettaa saumat ennen rankoja.");
+        $('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();
+        return
+      }
+      if (canvas.querySelector(".tyostot__tyosto")) {
+
+      }
+      else {
+        alert("Sinun tulee asettaa kiinnikkeet ennen tätä vaihetta.");
+        $('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();
+        return
+      }
       if (canvas.querySelector("div.rangat__grandrow")) {
         $('.drawarea__section').show();
         $("#drawscreen_section_seven").show();
@@ -2102,13 +1741,7 @@ function refresh__drawcontrols() {
             saumas[i].classList.add('deformed');
           }
         }
-        // Edit aukkos for 2.7 
-        var aukkos = document.querySelectorAll(".aukko");
-        if (aukkos) {
-          for (var i = 0; i < aukkos.length; i += 1) {
-            aukkos[i].classList.add('deformed');
-          }
-        }
+
         // Reklamation things for 2.8
         document.querySelector("#box-wrapper").classList.remove("drawarea__eight");
         document.querySelector(".drawarea__right > span").innerHTML = 'Reklamaatiot ja huomiot';
@@ -2173,6 +1806,29 @@ function refresh__drawcontrols() {
           }
         });
 
+        levyarray = "";
+        levyt = canvas.querySelectorAll(".levy");
+        for (let a = 0; a < levyt.length; a++) {
+          console.log(a);
+          if(a > 0) {
+            levyarray += "&";
+            levyarray += levyt[a].querySelector(".levy_h").innerText + "|";
+            levyarray += levyt[a].querySelector(".levy_w").innerText + "|";
+            levyarray += levyt[a].querySelector(".levy_name").innerText + "|";
+            levyarray += levyt[a].querySelector(".levy b i").innerText + "|";
+            kiinnikkeet_x = levyt[a].querySelectorAll(".tyostot__tyosto_pysty");
+            kiinnikkeet_y = levyt[a].querySelectorAll(".tyostot__tyosto_vaaka");
+            kiinnikkeet_x.forEach(k => {
+              levyarray += parseFloat(k.style.left)*5 + "---";
+            });
+            levyarray += "|";
+            kiinnikkeet_y.forEach(k => {
+              levyarray += parseFloat(k.style.bottom)*5 + "---";
+            });
+          }
+        }
+        save("seven~~"+levyarray);
+
       }
       else {
         $('#step_drawscreen').val('drawscreen_section_six');
@@ -2197,13 +1853,7 @@ function refresh__drawcontrols() {
       }
     }
     if (input_step == 'drawscreen_section_eight') {
-      if (document.querySelector(".levy_tyostot_x") && document.querySelector(".levy_tyostot_y")) { }
-      else {
-        $('#step_drawscreen').val('drawscreen_section_five');
-        refresh__drawcontrols();
-        updatearea();
-        return;
-      }
+      
       $('.drawarea__section').show();
       $("#drawscreen_section_eight").show();
       $('.drawarea__controls_eight').show();
@@ -2443,18 +2093,19 @@ addFunctionOnWindowLoad(refresh__drawcontrols);
 
 function nav_betweenwalls(elem) {
   setTimeout(function () {
-   
     rooms_array = [];
     $('#house .house__wall').each(function (i, obj) {
-      wall_name = $(this).find(".house__wall_status").data("room");
+     wall_name = $(this).find(".house__wall_status").data("room");
       wall_h = $(this).find('input.house__wall_param:nth-child(2)').val();
       wall_w = $(this).find('input.house__wall_param:nth-child(3)').val();
       wall_class = $(this).find('.house__wall_status').attr("class");
       rooms_array.push(wall_name + "|" + wall_h + "|" + wall_w + "|" + wall_class);
     });
     totransfer_elem=elem;
-    wallh_cord = elem.parentElement.querySelector(".wall_height").value;
-    wallw_cord = elem.parentElement.querySelector(".wall_width").value;
+    current_room = elem.innerText.toLowerCase();
+    restoreprogress();
+    // wallh_cord = elem.parentElement.querySelector(".wall_height").value;
+    // wallw_cord = elem.parentElement.querySelector(".wall_width").value;
     changesize();
 
     // da_houses = document.querySelectorAll(".drawarea__house");
@@ -2486,13 +2137,11 @@ function nav_betweenwalls(elem) {
     
 
     
-  }, 2000);
+  }, 1000);
 }
 
 function initializeroom(room, menu) {
   ir_no = room.dataset.room;
-
-
   
   if(window.location.href.indexOf('&room=' + current_room.toLowerCase()) === -1) {
     degradate_url(2);
@@ -3263,6 +2912,9 @@ function initializeroom(room, menu) {
     }
     calculateamounts();
   }
+
+
+  restoreprogress();
 }
 // Function for changing element coords
 // Parametrs:
@@ -3875,57 +3527,80 @@ function initializesettings__mittaus() {
               }
               sauma__presets.innerHTML += `
               <td>
-              <input type="radio" data-levysku="${v[1]}" data-levystructure="${v[7]}" data-levythickness="${v[6]}" data-levyimg="${v[8]}" data-h="${v[2]}" data-w="${v[3]}" data-aihioh="${v[4]}" data-aihiow="${v[5]}" name="sauma_material" onclick="change__sauma_koko(this);" id="sauma_material`+count+`">
+              <input type="radio" data-orlista="${v[10]}" data-yrlista="${v[9]}" data-levysku="${v[1]}" data-levystructure="${v[7]}" data-levythickness="${v[6]}" data-levyimg="${v[8]}" data-h="${v[2]}" data-w="${v[3]}" data-aihioh="${v[4]}" data-aihiow="${v[5]}" name="sauma_material" onclick="change__sauma_koko(this);" id="sauma_material`+count+`">
                 <label for="sauma_material`+count+`" ${img}>${v[1]}</label>
               </td>`;
               sauma__presets_2.innerHTML += `
               <td>
-                <input type="radio" data-sku="${v[1]}" data-structure="${v[7]}" data-thickness="${v[6]}" data-img="${v[8]}" data-h="${v[2]}" data-w="${v[3]}" data-aihioh="${v[4]}" data-aihiow="${v[5]}" name="levyn_vari" id="levy_vari_`+count+`">
+                <input type="radio" data-orlista="${v[10]}" data-yrlista="${v[9]}" data-sku="${v[1]}" data-structure="${v[7]}" data-thickness="${v[6]}" data-img="${v[8]}" data-h="${v[2]}" data-w="${v[3]}" data-aihioh="${v[4]}" data-aihiow="${v[5]}" name="levyn_vari" id="levy_vari_`+count+`">
                 <label onclick="levy__interaction(1,this);" class="levy__label" for="levy_vari_`+count+`" ${img}>${v[1]}</label>
               </td>`;
-            }
-            row.innerHTML += `
-              <td>
-                <input type="checkbox" name="admin_material" value="" onclick="this.checked ? this.value = 'on' : this.value = '';" id="material_`+count+`" ${checked}>
-                <label for="material_`+count+`"></label>
-              </td>`;
-            row.innerHTML += `
+            
+              row.innerHTML += `
                 <td>
-                    <input type="text" value="${v[1]}" class="lineinput" oninput="">
-                </td>
-                <td>
-                    <input type="text" value="${v[2]}" class="lineinput" oninput="">
-                </td>
-                <td>
-                    <input type="text" value="${v[3]}" class="lineinput" oninput="">
-                </td>
-                <td>
-                    <input type="text" value="${v[4]}" class="lineinput" oninput="">
-                </td>
-                <td>
-                    <input type="text" value="${v[5]}" class="lineinput" oninput="">
-                </td>
-                <td>
-                    <input type="text" value="${v[6]}" class="lineinput" oninput="">
-                </td>
-                <td>
-                    <input type="text" value="${v[7]}" class="lineinput" oninput="">
-                </td>
-                `;
-  
-              if(v.length > 5 && v[8].length > 5) {
-                row.innerHTML += '<td><img src="/uploads/'+v[8]+'" style="max-width: 100px"><input type="hidden" class="fileinput_value" value="'+v[8]+'"></td>';
-              }
-              else {
-                row.innerHTML += `
+                  <input type="checkbox" name="admin_material" value="" onclick="this.checked ? this.value = 'on' : this.value = '';" id="material_`+count+`" ${checked}>
+                  <label for="material_`+count+`"></label>
+                </td>`;
+              row.innerHTML += `
                   <td>
-                      <input type="file" class="fileinput">
-                      <input type="hidden" class="fileinput_value" value="">
-                      <div class="send_material_btn">Ammu kuva sisään</div>
-                  </td>`;
-              }
-            t.appendChild(row);
+                      <input type="text" disabled value="${v[1]}" class="lineinput" oninput="">
+                  </td>
+                  <td>
+                      <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
+                  </td>
+                  <td>
+                      <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
+                  </td>
+                  <td>
+                      <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
+                  </td>
+                  <td>
+                      <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
+                  </td>
+                  <td>
+                      <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
+                  </td>
+                  <td>
+                      <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
+                  </td>
+                  `;
+    
+                if(v.length > 5 && v[8].length > 5) {
+                  row.innerHTML += '<td><img src="/uploads/'+v[8]+'" style="max-width: 100px"><input type="hidden" class="fileinput_value" value="'+v[8]+'"></td>';
+                }
+                else {
+                  row.innerHTML += `
+                    <td>
+                        <input type="file" class="fileinput">
+                        <input type="hidden" class="fileinput_value" value="">
+                        <div class="send_material_btn">Ammu kuva sisään</div>
+                    </td>`;
+                }
+
+              row.innerHTML += `
+                <td>
+                    <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
+                </td>
+              `;
+
+              t.appendChild(row);
+            
+              setTimeout(() => {
+                change__sauma_koko(document.querySelector("#sauma_material1"));
+                document.querySelector("#sauma_material1").checked = true;
+              }, 3350);
+            }
           });
+
+          if(t.querySelector("tr:not(.headingrow)")) {
+
+          }
+          else {
+            t.style.opacity = 0;
+          }
         }
         
         if(key == 's_levytysreunat') {
@@ -3938,55 +3613,63 @@ function initializesettings__mittaus() {
             checked = '';
             if(v[0] == 'on') {
               checked = 'checked';
+            
+              row.innerHTML += `
+                <td>
+                  <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="lvreunat_`+count+`" ${checked}>
+                  <label for="lvreunat_`+count+`"></label>
+                </td>`;
+              row.innerHTML += `
+                <td>
+                    <input type="text" disabled value="${v[1]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[2]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[3]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[4]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[5]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[6]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[7]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[8]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[9]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[10]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[11]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[12]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[13]}" class="lineinput">
+                </td>
+                `;
+              t.appendChild(row);
             }
-            row.innerHTML += `
-              <td>
-                <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="lvreunat_`+count+`" ${checked}>
-                <label for="lvreunat_`+count+`"></label>
-              </td>`;
-            row.innerHTML += `
-              <td>
-                  <input type="text" value="${v[1]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[2]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[3]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[4]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[5]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[6]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[7]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[8]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[9]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[10]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[11]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[12]}" class="lineinput">
-              </td>
-              <td>
-                  <input type="text" value="${v[13]}" class="lineinput">
-              </td>
-              `;
-            t.appendChild(row);
           });
+
+          if(t.querySelector("tr:not(.headingrow)")) {
+
+          }
+          else {
+            t.style.opacity = 0;
+          }
         }
 
         for (let i = 1; i < 6; i++) {
@@ -4031,16 +3714,22 @@ function initializesettings__mittaus() {
             newtr = document.createElement("tr");
             newtr.classList = "headingrow";
             newtr.innerHTML = `
-                  <td>Aukkojen tyypit</td>
-                  <td>Max</td>
-                  <td>Min</td>
-                  <td>Ranka</td>
-                  <td>Rangan pituus</td>
-                  <td>+	Rangan laatu</td>
-                  <td>Lisäranka</td>
-                  <td>Listat</td>
-                  <td>Listan pituus +</td>
-                  <td>Listan laatu</td>`;
+              <td>Aukkojen tyypit</td>
+              <td>Max</td>
+              <td>Min</td>
+              <td>L2A Ranka</td>
+              <td>L2A Rangan pituus</td>
+              <td>L2A +	Rangan laatu</td>
+              <td>L2B Ranka</td>
+              <td>L2B Rangan pituus</td>
+              <td>L2B +	Rangan laatu</td>
+              <td>L2A Listat</td>
+              <td>L2A Listan pituus +</td>
+              <td>L2A Listan laatu</td>
+              <td>L2B Listat</td>
+              <td>L2B Listan pituus +</td>
+              <td>L2B Listan laatu</td>
+            `;
   
             count_rows = 0;
   
@@ -4061,16 +3750,21 @@ function initializesettings__mittaus() {
                 newtr = document.createElement("tr");
                 newtr.classList = "headingrow";
                 newtr.innerHTML = `
-                      <td>Aukkojen tyypit</td>
-                      <td>Max</td>
-                      <td>Min</td>
-                      <td>Ranka</td>
-                      <td>Rangan pituus</td>
-                      <td>+	Rangan laatu</td>
-                      <td>Lisäranka</td>
-                      <td>Listat</td>
-                      <td>Listan pituus +</td>
-                      <td>Listan laatu</td>`;
+                  <td>Aukkojen tyypit</td>
+                  <td>Max</td>
+                  <td>Min</td>
+                  <td>L2A Ranka</td>
+                  <td>L2A Rangan pituus</td>
+                  <td>L2A +	Rangan laatu</td>
+                  <td>L2B Ranka</td>
+                  <td>L2B Rangan pituus</td>
+                  <td>L2B +	Rangan laatu</td>
+                  <td>L2A Listat</td>
+                  <td>L2A Listan pituus +</td>
+                  <td>L2A Listan laatu</td>
+                  <td>L2B Listat</td>
+                  <td>L2B Listan pituus +</td>
+                  <td>L2B Listan laatu</td>`;
                   newsection_table.appendChild(newtr);
                     
   
@@ -4127,7 +3821,7 @@ function initializesettings__mittaus() {
              
               
               <td>
-                  <input type="text" value="${v[0]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[0]}" class="lineinput" oninput="">
               </td>
               
               <td>
@@ -4181,20 +3875,38 @@ function initializesettings__mittaus() {
                 <label for="lapivienti_`+count+`"></label>
               </td>
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
               </td>
               <td>
                 <input type="checkbox" value="${v[5]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="lapivienti_dust_`+count+`" ${checked2}>
                 <label for="lapivienti_dust_`+count+`"></label>
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
               `;
             t.appendChild(row);
@@ -4284,16 +3996,16 @@ function initializesettings__mittaus() {
            
             row.innerHTML += `
                 <td>
-                    <input type="text" value="${v[1]}" class="lineinput">
+                    <input type="text" disabled value="${v[1]}" class="lineinput">
                 </td>
                 <td>
-                    <input type="text" value="${v[2]}" class="lineinput">
+                    <input type="text" disabled value="${v[2]}" class="lineinput">
                 </td>
                 <td>
-                    <input type="text" value="${v[3]}" class="lineinput">
+                    <input type="text" disabled value="${v[3]}" class="lineinput">
                 </td>
                 <td>
-                    <input type="text" value="${v[4]}" class="lineinput">
+                    <input type="text" disabled value="${v[4]}" class="lineinput">
                 </td>
                 `;
             t.appendChild(row);
@@ -4318,16 +4030,16 @@ function initializesettings__mittaus() {
            
             row.innerHTML += `
                 <td>
-                    <input type="text" value="${v[1]}" class="lineinput">
+                    <input type="text" disabled value="${v[1]}" class="lineinput">
                 </td>
                 <td>
-                    <input type="text" value="${v[2]}" class="lineinput">
+                    <input type="text" disabled value="${v[2]}" class="lineinput">
                 </td>
                 <td>
-                    <input type="text" value="${v[3]}" class="lineinput">
+                    <input type="text" disabled value="${v[3]}" class="lineinput">
                 </td>
                 <td>
-                    <input type="text" value="${v[4]}" class="lineinput">
+                    <input type="text" disabled value="${v[4]}" class="lineinput">
                 </td>
                 `;
             t.appendChild(row);
@@ -4370,37 +4082,37 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
               
               `;
@@ -4442,37 +4154,37 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="" list="ranka_list">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
               
               
@@ -4516,37 +4228,37 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
               
               `;
@@ -4589,37 +4301,37 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
               
               `;
@@ -4662,37 +4374,37 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
               
               `;
@@ -4735,37 +4447,37 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
               
               `;
@@ -4809,37 +4521,37 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
               
               `;
@@ -4882,37 +4594,37 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="" list="ranka_list"  onchange="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[5]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[6]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[7]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[8]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[9]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[10]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[11]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
               
               `;
@@ -4943,16 +4655,40 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[12]}" class="lineinput" oninput="">
               </td>
               `;
             t.appendChild(row);
@@ -4980,19 +4716,53 @@ function initializesettings__mittaus() {
               </td>`;
             row.innerHTML += `
               <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[1]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[2]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[3]}" class="lineinput" oninput="">
               </td>
               <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="">
+                  <input type="text" disabled value="${v[4]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[5]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[6]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[8]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[9]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[10]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
+              </td>
+              <td>
+                  <input type="text" disabled value="${v[12]}" class="lineinput" oninput="">
               </td>
               `;
             t.appendChild(row);
+          });
+        }
+        
+        if(key == 's_listat') {
+          t = document.querySelector(".listat__tbody");
+          v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+            if(v.length > 0) {
+              document.querySelector("#listat_list").value += v[1] + "~~" +v[2] + "~~" +v[3] + "~~" +v[4] + "~~" +v[5] + "~~" +v[6] + "~~" +v[7] + "~~" +v[8] + "~~" +v[9] + "~~" +v[10] + "~~" +v[11] + "~~" +v[12] + "~~" +v[13] + "~~" +v[14] + "~~" +v[15] + v[16] + "~~" + v[17] + "||";
+            }
           });
         }
 
@@ -5457,7 +5227,14 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
       }
       else {
         room_status = 'measured';
+
         if(current_room) {
+          current_room = current_room.replaceAll("seinä ","");
+          if(current_room === "lattia") {
+            current_room = "l";
+          } else if(current_room === "katto") {
+            current_room = "k";
+          }
           if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("problem")) {
             room_status = 'problem';
           }
@@ -5697,11 +5474,6 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
   }
 }
 
-
-setTimeout(() => {
-  change__sauma_koko(document.querySelector("#sauma_material1"));
-  document.querySelector("#sauma_material1").checked = true;
-}, 3350);
 
 
 function create__excelgenerationtimestamp(e) {

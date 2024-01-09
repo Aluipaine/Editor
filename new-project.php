@@ -207,108 +207,24 @@ include('header.php');
    </section>
 
    <section id="roomconfig_second" class="container">  
-      <h2>Alkuasetukset (jo valittu, ei tarvitse valita mtn)</h2>
+      <h2>Valitse Presetti projektille:</h2>
+
       <div class="row start_set">
-         <div class="col-6 row">
-            <h3 style="width: 100%;">Valitut järjestelmät:</h3>
 
-            <?php 
-
-                  $s_data = mysqli_query($db, "SELECT * FROM `settingsmeta` WHERE `id` = '100' AND `meta_key` = 's_settings'");
-                  $s_da = mysqli_fetch_all($s_data);
-                  $s_data = $s_da[0][3];
-
-                  $s_da_ = explode("},{", $s_data);
-                  $_s = explode("],[", $s_da_[0]);
-
-
-                  $s_ = str_replace("]" , "",$_s);
-                  $s = str_replace("[" , "",$s_);
-                  
-                  // echo($s[0]);
-
-             ?>
-             <div class="form-group">
-               <?php 
-
-                  $sys = explode(",",$s[0]);
-
-                  $unique_id = 0;
-                  foreach ($sys as $sy) {
-                     if(strlen($sy)>=3) {
-                        echo '<div class="material__customcol_item"><input id="selected-systems-' . $unique_id . '" type="checkbox" name="system_type" class="valitut_järjestelmät" value="' . str_replace('"','', $sy) . '" checked><label for="selected-systems-' . $unique_id . '" style="background: #E2E2E2;">' . str_replace('"','', $sy) . '</label></div>';
-                     }
-                     $unique_id++;
-                  }
-
-                ?>
-
-               <script>
-                  let valitut_järjestelmät = document.querySelectorAll('.valitut_järjestelmät');
-
-                  valitut_järjestelmät.forEach(radio => {
-                  radio.addEventListener('click', function() {
-                     valitut_järjestelmät.forEach(marko => {
-                        if (radio != marko) {
-                           marko.checked = false;
-                        }
-                     });
-                  });
-                  });
-               </script>
-               <div class="material__customcol_item">
-
-                  
-               <!--  <input type="checkbox" id="system_one" name="system_type" value="Classic" checked>
-                <label for="system_one" style="background: #E2E2E2;">Classic</label> -->
-              </div>
-            </div>
-         </div>
-         <div class="col-6 row">
-            <h3 style="width: 100%;">Materiaalit:</h3>
-            <?php 
-          $s_data = mysqli_query($db, "SELECT * FROM `settingsmeta` WHERE `id` = '100' AND `meta_key` = 's_materials'");
-          $s_da = mysqli_fetch_all($s_data);
-          $s_data = $s_da[0][3];
-
-          $s_da_ = explode("],[", $s_data);
-          $_s = explode('}","{', $s_da_[0]);
-
-
-          // $s_ = str_replace("]" , "",$_s);
-          // $s = str_replace("[" , "",$s_);
-
-          // print_r($s);
-
-          // print_r($_s);
-          $unique_id = 0;
-          foreach ($_s as $sy) {
-
-            // echo $sy;
-            $sy_1 = str_replace("{" , "", str_replace("}" , "",$sy));
-            $sy_2 =str_replace("[" , "", str_replace("]" , "",$sy_1));
-            $sy_3 = str_replace('"','', $sy_2);
-            $sys = explode(",", $sy_3);
-
-            // print_r($sys);
-           echo '<div class="material__customcol_item"><input id="custom-color-' . $unique_id . '" type="checkbox" name="material_type" value="'.$sys[0].'"><label for="custom-color-' . $unique_id . '" style="color: white; background: '.$sys[7].';">'.$sys[0].'</label><input type="hidden" name="material_bg" value="'.$sys[7].'"><input type="hidden" name="material_colour" value="'.$sys[7].'"><input type="hidden" name="material_array" value="'.$sys[0].','.$sys[1].','.$sys[2].','.$sys[3].','.$sys[4].','.$sys[5].','.$sys[6].','.$sys[7].'"></div>';
-            // print_r($s);
-
-            // $sys = explode(",",$s[0]);
-            //    if(strlen($sy)>=3) {
-            //       // echo '<div class="material__customcol_item"><input type="checkbox" name="system_type" value="Classic" checked><label style="background: #E2E2E2;">' . str_replace('"','', $sy) . '</label></div>';
-
-            //       echo '<div class="material__customcol_item"><input type="checkbox" name="material_type" value="Exterior Green" id="exterior green"><label for="exterior green" style="color: rgb(255, 255, 255); background: rgb(110, 135, 85);">FO Malibu E. Green</label><input type="hidden" name="material_bg" value="rgb(255, 255, 255)"><input type="hidden" name="material_colour" value="rgb(110, 135, 85)"><input type="hidden" name="material_array" value="Exterior Green,Exterior Green,FO/B_s2_d0,1250,600,8,Standard,#6E8755"></div>';
-            //    }
-
-            $unique_id++;
-          }
-          
-          
-
-       ?>
-          
-         </div>
+         <input type="hidden" id="adminpreset__current_type" name="adminpreset__current_type">
+         <fieldset class="adminpreset_settings">
+            <?php
+            $s_data = mysqli_query($db, "SELECT * FROM `settings__templates`");
+            $s_da = mysqli_fetch_all($s_data);
+            $s_data = $s_da;        
+            
+            foreach ($s_data as $key => $s) {
+               echo '
+                  <input name="admin__presets" type="radio" class="tmpbtn" value="'.$s[1].'" id="template-button-'.$s[1].'" data-letterid="'. $s[0] .'">
+                  <label onclick="preset_id=' . $s[0] .';document.querySelector(`#adminpreset__current_type`).value = (`'.$s[1].'`);" for="template-button-'.$s[1].'" data-letterid="'. $s[0] .'">'.$s[1].'</label>';
+            }
+            ?>
+         </fieldset>
       </div>
       <div class="row">
           <div class="col-6"><div class="prev_btn" onclick="$('#roomconfig_second').hide();$('#roomconfig_second').slideUp(200);$('#roomconfig_first').slideDown(200);$('#roomconfig_first').show();">Edellinen</div></div>

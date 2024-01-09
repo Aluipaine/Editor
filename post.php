@@ -95,6 +95,7 @@ echo '<input type="hidden" value="' . $post_tradarray[4] . '" id="current_projec
 $usrs_asiakas = mysqli_query($db, "SELECT * FROM `users`");
 $usrs_asiakas = mysqli_fetch_all($usrs_asiakas)[1][1];
 echo '<input type="hidden" value="' . $usrs_asiakas . '" id="current_asiakas" name="current_asiakas">';
+echo '<input type="hidden" value="" id="listat_list">';
 
 include('./footer-post.php');
 

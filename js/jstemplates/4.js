@@ -9,7 +9,7 @@ add_skipped_penalty_vertical = 0;
 add_skipped_penalty_horizontal = 0;
 
 // 0 SAUMOITUS PÄÄTOIMINTO, V/H
-function saumoita() {
+function saumoita(mode) {
     document.querySelector("#settings__sauma_interval_x").value = document.querySelector("#settings__sauma_intervalx").value;
     document.querySelector("#settings__sauma_interval_y").value = document.querySelector("#settings__sauma_intervaly").value;
     
@@ -143,6 +143,25 @@ function saumoita() {
 
     calculateamounts();
     saumoitus__additionalcord();
+
+    saumoitus__direction = document.querySelector("*[name='sauma__suunta']:checked").value.toLowerCase().replaceAll(" ","");
+    saumoitus__type_1 = document.querySelector("*[name='sauma__saumoitus_x']:checked").value.toLowerCase().replaceAll(" ","");
+    saumoitus__type_2 = document.querySelector("*[name='sauma__saumoitus_y']:checked").value.toLowerCase().replaceAll(" ","");
+    saumoitus__acol_1 = document.querySelector("#settings__sauma_intervalx").value;
+    saumoitus__acol_2 = document.querySelector("#settings__sauma_intervaly").value;
+    saumoitus__bcol_2 = document.querySelector("#settings__sauma_aihiotrimx").value;
+    saumoitus__bcol_2 = document.querySelector("#settings__sauma_aihiotrimy").value;
+    saumoitus__ccol_2 = document.querySelector("#settings__sauma_aihiopituus").value;
+    saumoitus__ccol_2 = document.querySelector("#settings__sauma_aihioleveys").value;
+
+    if(mode) {
+
+    }
+    else {
+        active_material = document.querySelector("#sauma__presets input:checked").dataset.levysku;
+        save("sau~~"+saumoitus__direction+"~~"+saumoitus__type_1+"~~"+saumoitus__type_2+"~~"+saumoitus__acol_1+"~~"+saumoitus__acol_2+"~~"+saumoitus__bcol_2+"~~"+saumoitus__bcol_2+"~~"+saumoitus__ccol_2+"~~"+saumoitus__ccol_2+"~~"+active_material);
+    }
+
 }
 // 1 SAUMAKUVAT, V/H
 function saumoitus__examplephoto() {
@@ -3740,6 +3759,8 @@ levy_bg = null;
 levy_sku = null;
 levy_thickness = null;
 levy_structure = null;
+orlista = null;
+yrlista = null;
 function change__sauma_koko(e) {
     sauma_wcord = e.dataset.w;
     sauma_hcord = e.dataset.h;
@@ -3754,12 +3775,17 @@ function change__sauma_koko(e) {
        levy_sku = e.dataset.levysku; 
        levy_thickness = e.dataset.levythickness; 
        levy_structure = e.dataset.levystructure; 
+
+       orlista = e.dataset.orlista; 
+       yrlista = e.dataset.yrlista; 
     }
     else {
         levy_bg = null;
         levy_sku = null;
         levy_thickness = null;
+        orlista = null;
         levy_structure = null;
+        yrlista = null;
     }
     
 

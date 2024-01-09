@@ -28,7 +28,7 @@
          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();" class="nav_current">Läpiviennit</div></li>
          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();">Saumat</div></li>
          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();">Kiinnikkeet</div></li>
-         <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();">Korjailu</div></li>
+         <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();">Kuosit</div></li>
          
          <li><div onclick="alert('Onnistuu kiinnikkeet-kohdasta');">Seinät</div></li>
          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();">Levyt</div></li>
@@ -152,6 +152,12 @@
                   <td>Reikä X</td>
                   <td>Reikä Y</td>
                   <td>Ensisijaisesti Dustiksi</td>
+                  <td>L2A Lista</td>
+                  <td>L2A LISTAN PITUUS +	</td>
+                  <td>L2A LISTAN LAATU</td>
+                  <td>L2B Lista</td>
+                  <td>L2B LISTAN PITUUS +	</td>
+                  <td>L2B LISTAN LAATU</td>
                </tr>
                </tbody>
             </table>

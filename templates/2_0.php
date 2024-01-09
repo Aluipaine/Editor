@@ -2074,7 +2074,7 @@
             <div class="row">
               <div class="house__wall house__wall_roof house__wall_k" style="width: 170px; height: 120px;">
                 <div class="house__wall_status house__wall_status_k" data-room="K" onclick="input_step = `drawscreen_section_one`;submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);refresh__drawcontrols();">KATTO</div>
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
                 <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof();">
               
                 <div class="house__wallspecial">
@@ -2126,7 +2126,7 @@
             <div class="row">
               <div class="house__wall house__wall_floor house__wall_l" style="width: 170px; height: 120px;">
                 <div class="house__wall_status house__wall_status_l" data-room="L" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">LATTIA</div>
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_floor_h" id="wall_one_floor_h" onchange="change_floor();">
+                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_floor_h" id="wall_one_floor_h" onchange="change_floor();">
                 <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_floor_w" id="wall_one_floor_w" onchange="change_floor();">
                 <div class="house__wallspecial">
                   <div class="house__wall_asjarj asjarjl">6</div>

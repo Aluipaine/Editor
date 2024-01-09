@@ -116,3 +116,13 @@
 <!-- Marko new row btn function -->
 <!-- <script src="js/jstemplates/mrarko.js"></script> -->
 <script src="js/jstemplates/creation.js"></script>
+
+<script>
+
+  $(document).ready(function(){
+    setTimeout(() => {
+      $(".preloader").removeClass( "active" );
+    }, 2000);
+  });
+
+</script>

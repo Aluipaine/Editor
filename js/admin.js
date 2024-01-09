@@ -961,7 +961,14 @@ function appendnewmaterial() {
             <input type="file" class="fileinput">
             <input type="hidden" class="fileinput_value">
             <div class="send_material_btn">Ammu kuva sisään</div>
-        </td>`;
+        </td>
+        <td>
+            <input type="text" value="" class="lineinput" oninput="admin__savematerials();">
+        </td>
+        <td>
+            <input type="text" value="" class="lineinput" oninput="admin__savematerials();">
+        </td>
+        `;
 
     t.appendChild(row);
 }
@@ -1122,6 +1129,24 @@ function appendnewlvitem() {
       <td>
           <input type="checkbox"  onclick="this.checked ? this.value = 'on' : this.value = '';admin__savelapiviennit();" id="lapivienti_dust_`+count+`">
           <label for="lapivienti_dust_`+count+`"></label>
+      </td>
+      <td>
+          <input type="text" value="" class="lineinput" oninput="admin__savelapiviennit();change_aukkolista(this,7);" list="listat_list">
+      </td>
+      <td>
+          <input type="text" value="" class="lineinput" oninput="admin__savelapiviennit();">
+      </td>
+      <td>
+          <input type="text" value="" class="lineinput" oninput="admin__savelapiviennit();">
+      </td>
+      <td>
+          <input type="text" value="" class="lineinput" oninput="admin__savelapiviennit();change_aukkolista(this,10);" list="listat_list">
+      </td>
+      <td>
+          <input type="text" value="" class="lineinput" oninput="admin__savelapiviennit();">
+      </td>
+      <td>
+          <input type="text" value="" class="lineinput" oninput="admin__savelapiviennit();">
       </td>
     `;
     
@@ -1406,6 +1431,14 @@ function s_change_malli(letter, l_id) {
                     <div class="send_material_btn">Ammu kuva sisään</div>
                 </td>`;
             }
+            row.innerHTML += `
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="admin__savematerials();" list="listat_list">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="admin__savematerials();" list="listat_list">
+              </td>
+              `;
           t.appendChild(row);
         });
       }
@@ -1623,7 +1656,7 @@ function s_change_malli(letter, l_id) {
             `;
           t.appendChild(row);
           if(v.length > 0) {
-            document.querySelector("#ranka_list").innerHTML += "<option class='"+v[2].toLowerCase()+"_userselection' data-optiondata='"+v[1] + "~~" +v[2] + "~~" +v[3] + "~~" +v[4] + "~~" +v[5] + "~~" +v[6] + "~~" +v[7] + "~~" +v[8] + "~~" +v[9] + "~~" +v[10] + "~~" +v[11] + "~~" +v[12] + "~~" +v[13] + "~~" +v[14] + "~~" +v[15] +"'>"+v[2]+"</option>";
+            document.querySelector("#ranka_list").innerHTML += "<option class='"+v[2].toLowerCase()+"_userselection' data-optiondata='"+v[1] + "~~" +v[2] + "~~" +v[3] + "~~" +v[4] + "~~" +v[5] + "~~" +v[6] + "~~" +v[7] + "~~" +v[8] + "~~" +v[9] + "~~" +v[10] + "~~" +v[11] + "~~" +v[12] + "~~" +v[13] + "~~" +v[14] + "~~" +v[15] + "~~" +v[16] + "~~" +v[17] +"'>"+v[2]+"</option>";
           }
         });
       }
@@ -2198,7 +2231,7 @@ function s_change_malli(letter, l_id) {
                 <input type="text" value="${v[4]}" class="lineinput" oninput="admin__savelistatpysty();">
             </td>
             <td>
-                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__savelistatpysty();">
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__savelistatpysty();give__listaspecs(this);" list="listat_list">
             </td>
             <td>
                 <input type="text" value="${v[6]}" class="lineinput" oninput="admin__savelistatpysty();">
@@ -2223,6 +2256,7 @@ function s_change_malli(letter, l_id) {
             </td>
             `;
           t.appendChild(row);
+          
         });
       }
 
@@ -2244,7 +2278,7 @@ function s_change_malli(letter, l_id) {
             </td>`;
           row.innerHTML += `
             <td>
-                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__savelistatvaaka();">
+              <input type="text" value="${v[1]}" class="lineinput" oninput="admin__savelistatvaaka();">
             </td>
             <td>
                 <input type="text" value="${v[2]}" class="lineinput" oninput="admin__savelistatvaaka();">
@@ -2254,6 +2288,30 @@ function s_change_malli(letter, l_id) {
             </td>
             <td>
                 <input type="text" value="${v[4]}" class="lineinput" oninput="admin__savelistatvaaka();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__savelistatvaaka(); give__listaspecs(this);" list="listat_list">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__savelistatvaaka();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__savelistatvaaka();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__savelistatvaaka();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__savelistatvaaka();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__savelistatvaaka();">
+            </td>
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__savelistatvaaka();">
+            </td>
+            <td>
+                <input type="text" value="${v[12]}" class="lineinput" oninput="admin__savelistatvaaka();">
             </td>
             `;
           t.appendChild(row);
@@ -2328,6 +2386,9 @@ function s_change_malli(letter, l_id) {
             </td>
             `;
           t.appendChild(row);
+          if(v.length > 0) {
+            document.querySelector("#listat_list").innerHTML += "<option class='"+v[1].replaceAll("/","_").replaceAll(" ","_").replaceAll("ä","a").replaceAll("ö","o").toLowerCase()+"_userselection' data-optiondata='"+v[1] + "~~" +v[2] + "~~" +v[3] + "~~" +v[4] + "~~" +v[5] + "~~" +v[6] + "~~" +v[7] + "~~" +v[8] + "~~" +v[9] + "~~" +v[10] + "~~" +v[11] + "~~" +v[12] + "~~" +v[13] + "~~" +v[14] + "~~" +v[15] + v[16] + "~~" + v[17] +"'>"+v[1]+"</option>";
+          }
         });
       }
 
@@ -2437,13 +2498,19 @@ function s_change_malli(letter, l_id) {
                 <td>Aukkojen tyypit</td>
                 <td>Max</td>
                 <td>Min</td>
-                <td>Ranka</td>
-                <td>Rangan pituus</td>
-                <td>+	Rangan laatu</td>
-                <td>Lisäranka</td>
-                <td>Listat</td>
-                <td>Listan pituus +</td>
-                <td>Listan laatu</td>`;
+                <td>L2A Ranka</td>
+                <td>L2A Rangan pituus</td>
+                <td>L2A +	Rangan laatu</td>
+                <td>L2B Ranka</td>
+                <td>L2B Rangan pituus</td>
+                <td>L2B +	Rangan laatu</td>
+                <td>L2A Listat</td>
+                <td>L2A Listan pituus +</td>
+                <td>L2A Listan laatu</td>
+                <td>L2B Listat</td>
+                <td>L2B Listan pituus +</td>
+                <td>L2B Listan laatu</td>
+                `;
 
           count_rows = 0;
 
@@ -2464,19 +2531,22 @@ function s_change_malli(letter, l_id) {
               newtr = document.createElement("tr");
               newtr.classList = "headingrow";
               newtr.innerHTML = `
-                    <td>Aukkojen tyypit</td>
-                    <td>Max</td>
-                    <td>Min</td>
-                    <td>Ranka</td>
-                    <td>Rangan pituus</td>
-                    <td>+	Rangan laatu</td>
-                    <td>Lisäranka</td>
-                    <td>Listat</td>
-                    <td>Listan pituus +</td>
-                    <td>Listan laatu</td>`;
+                <td>Aukkojen tyypit</td>
+                <td>Max</td>
+                <td>Min</td>
+                <td>L2A Ranka</td>
+                <td>L2A Rangan pituus</td>
+                <td>L2A +	Rangan laatu</td>
+                <td>L2B Ranka</td>
+                <td>L2B Rangan pituus</td>
+                <td>L2B +	Rangan laatu</td>
+                <td>L2A Listat</td>
+                <td>L2A Listan pituus +</td>
+                <td>L2A Listan laatu</td>
+                <td>L2B Listat</td>
+                <td>L2B Listan pituus +</td>
+                <td>L2B Listan laatu</td>`;
                 newsection_table.appendChild(newtr);
-                  
-
               count_rows = 0;
               newsection.appendChild(newsection_h4);
               newsection.appendChild(newsection_table);
@@ -2493,6 +2563,32 @@ function s_change_malli(letter, l_id) {
                   <td>
                     <input type="number" data-key="s_aukot_${i}" value="${vchild}" class='lineinput' oninput='save_aukko(this);'>
                   </td>`;
+                }
+
+                else if(counting_item == 4) {
+                  newtr.innerHTML += `
+                    <td>
+                      <input type='text' list="ranka_list" data-key="s_aukot_${i}" value="${vchild}" class='lineinput' oninput='change_aukkoranka(this,${counting_item});save_aukko(this);'>
+                    </td>`;
+                }
+                else if(counting_item == 7) {
+                  newtr.innerHTML += `
+                    <td>
+                      <input type='text' list="ranka_list" data-key="s_aukot_${i}" value="${vchild}" class='lineinput' oninput='change_aukkoranka(this,${counting_item});save_aukko(this);'>
+                    </td>`;
+                }
+
+                else if(counting_item == 10) {
+                  newtr.innerHTML += `
+                    <td>
+                      <input type='text' list="listat_list" data-key="s_aukot_${i}" value="${vchild}" class='lineinput' oninput='change_aukkolista(this,${counting_item});save_aukko(this);'>
+                    </td>`;
+                }
+                else if(counting_item == 13) {
+                  newtr.innerHTML += `
+                    <td>
+                      <input type='text' list="listat_list" data-key="s_aukot_${i}" value="${vchild}" class='lineinput' oninput='change_aukkolista(this,${counting_item});save_aukko(this);'>
+                    </td>`;
                 }
                 else {
                   newtr.innerHTML += `
@@ -2586,6 +2682,24 @@ function s_change_malli(letter, l_id) {
               <input type="checkbox" value="${v[5]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__savelapiviennit();" id="lapivienti_dust_`+count+`" ${checked2}>
               <label for="lapivienti_dust_`+count+`"></label>
             </td>
+            <td>
+                  <input type="text" value="${v[6]}" class="lineinput" oninput="admin__savelapiviennit();change_aukkolista(this,7);" list="listat_list">
+              </td>
+              <td>
+                  <input type="text" value="${v[7]}" class="lineinput" oninput="admin__savelapiviennit();">
+              </td>
+              <td>
+                  <input type="text" value="${v[8]}" class="lineinput" oninput="admin__savelapiviennit();">
+              </td>
+              <td>
+                  <input type="text" value="${v[9]}" class="lineinput" oninput="admin__savelapiviennit();change_aukkolista(this,10);" list="listat_list">
+              </td>
+              <td>
+                  <input type="text" value="${v[10]}" class="lineinput" oninput="admin__savelapiviennit();">
+              </td>
+              <td>
+                  <input type="text" value="${v[11]}" class="lineinput" oninput="admin__savelapiviennit();">
+              </td>
             `;
           t.appendChild(row);
         });
@@ -2865,6 +2979,20 @@ function give__rankaspecs(e) {
 
     console.log(e.parentElement.parentElement.querySelectorAll("input"));
 }
+function give__listaspecs(e) {
+    elements_array = document.querySelector("."+e.value.replaceAll("/","_").replaceAll(" ","_").replaceAll("ä","a").replaceAll("ö","o").toLowerCase()+"_userselection").dataset.optiondata.split("~~");
+    console.log(elements_array);
+    e.parentElement.parentElement.querySelectorAll("input")[4].value = elements_array[15]; //Vähennä mistä ehdotus
+    e.parentElement.parentElement.querySelectorAll("input")[5].value = elements_array[0]; //name
+    // e.parentElement.parentElement.querySelectorAll("input")[6].value = elements_array[1]; //tilauscode
+    e.parentElement.parentElement.querySelectorAll("input")[7].value = elements_array[2]; //material
+    // e.parentElement.parentElement.querySelectorAll("input")[5].value = elements_array[4]; // paksuus
+    e.parentElement.parentElement.querySelectorAll("input")[9].value = elements_array[3]; //laatu
+    e.parentElement.parentElement.querySelectorAll("input")[10].value = elements_array[4]; //värinimi
+    e.parentElement.parentElement.querySelectorAll("input")[11].value = elements_array[6]; //ncs
+
+    console.log(e.parentElement.parentElement.querySelectorAll("input"));
+}
 
 function appendnewaukkoitem(e) {
   tables = e.parentElement.querySelectorAll("table");
@@ -2874,6 +3002,11 @@ function appendnewaukkoitem(e) {
   newtr = document.createElement("tr");
   newtr.innerHTML = `
   <tr>
+    <td><input type="text" value="" data-key='s_aukot_`+i+`' class="lineinput" oninput="save_aukko(this);"></td>
+    <td><input type="text" value="" data-key='s_aukot_`+i+`' class="lineinput" oninput="save_aukko(this);"></td>
+    <td><input type="text" value="" data-key='s_aukot_`+i+`' class="lineinput" oninput="save_aukko(this);"></td>
+    <td><input type="text" value="" data-key='s_aukot_`+i+`' class="lineinput" oninput="save_aukko(this);"></td>
+    <td><input type="text" value="" data-key='s_aukot_`+i+`' class="lineinput" oninput="save_aukko(this);"></td>
     <td><input type="text" value="" data-key='s_aukot_`+i+`' class="lineinput" oninput="save_aukko(this);"></td>
     <td><input type="text" value="" data-key='s_aukot_`+i+`' class="lineinput" oninput="save_aukko(this);"></td>
     <td><input type="text" value="" data-key='s_aukot_`+i+`' class="lineinput" oninput="save_aukko(this);"></td>
@@ -2900,13 +3033,18 @@ function appendnewaukkoitem(e) {
             <td>Aukkojen tyypit</td>
             <td>Max</td>
             <td>Min</td>
-            <td>Ranka</td>
-            <td>Rangan pituus</td>
-            <td>+	Rangan laatu</td>
-            <td>Lisäranka</td>
-            <td>Listat</td>
-            <td>Listan pituus +</td>
-            <td>Listan laatu</td>
+            <td>L2A Ranka</td>
+            <td>L2A Rangan pituus</td>
+            <td>L2A +	Rangan laatu</td>
+            <td>L2B Ranka</td>
+            <td>L2B Rangan pituus</td>
+            <td>L2B +	Rangan laatu</td>
+            <td>L2A Listat</td>
+            <td>L2A Listan pituus +</td>
+            <td>L2A Listan laatu</td>
+            <td>L2B Listat</td>
+            <td>L2B Listan pituus +</td>
+            <td>L2B Listan laatu</td>
           </tr>
         </tbody>
       </table>
@@ -2979,3 +3117,23 @@ function s_change_preset(id,mod) {
 }
 givenewtype();
 document.querySelector("#template-button-DEFAULT").checked = true;
+
+
+function change_aukkolista(e,inputpos) {
+  if(document.querySelector("."+e.value.replaceAll("/","_").replaceAll(" ","_").replaceAll("ä","a").replaceAll("ö","o").toLowerCase()+"_userselection")) {
+    elements_array = document.querySelector("."+e.value.replaceAll("/","_").replaceAll(" ","_").replaceAll("ä","a").replaceAll("ö","o").toLowerCase()+"_userselection").dataset.optiondata.split("~~");
+    console.log(elements_array);
+    e.parentElement.parentElement.querySelectorAll("input")[parseFloat(inputpos)].value = elements_array[15]; //Vähennä mistä ehdotus
+    e.parentElement.parentElement.querySelectorAll("input")[parseFloat(inputpos)+1].value = elements_array[3]; //Laatu
+  }
+}
+
+
+function change_aukkoranka(e,inputpos) {
+  if(document.querySelector("."+e.value.replaceAll("/","_").replaceAll(" ","_").replaceAll("ä","a").replaceAll("ö","o").toLowerCase()+"_userselection").dataset.optiondata.split("~~")) {
+    elements_array = document.querySelector("."+e.value.toLowerCase()+"_userselection").dataset.optiondata.split("~~");
+    console.log(elements_array);
+    e.parentElement.parentElement.querySelectorAll("input")[parseFloat(inputpos)].value = elements_array[16]; //Vähennä mistä ehdotus
+    e.parentElement.parentElement.querySelectorAll("input")[parseFloat(inputpos)+1].value = elements_array[4]; //Laatu
+  }
+}

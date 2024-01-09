@@ -705,6 +705,32 @@ function create__levy_excel(now) {
       indexes++;
     });
   }, 500);
+
+
+
+  
+  if(levyt_ok === 0) {
+    levyarray = "";
+    levyt = canvas.querySelectorAll(".levy");
+    for (let a = 0; a < levyt.length; a++) {
+      levyarray += "&";
+      levyarray += levyt[a].querySelector(".levy_h").innerText + "|";
+      levyarray += levyt[a].querySelector(".levy_w").innerText + "|";
+      levyarray += levyt[a].querySelector(".levy_name").innerText + "|";
+      levyarray += levyt[a].querySelector(".levy b i").innerText + "|";
+      kiinnikkeet_x = levyt[a].querySelectorAll(".tyostot__tyosto_pysty");
+      kiinnikkeet_y = levyt[a].querySelectorAll(".tyostot__tyosto_vaaka");
+      kiinnikkeet_x.forEach(k => {
+        levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+pysty_event+"---";
+      });
+      levyarray += "|";
+      kiinnikkeet_y.forEach(k => {
+        levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+vaaka_event+"---";
+      });
+    }
+    save("levyt~~"+levyarray);
+  }
+  
   
 }
 

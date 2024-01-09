@@ -57,6 +57,13 @@ function rangat__navigation(arg) {
       rangat_blayer[i].classList.remove("six_hidden");
     }
   }
+  tds = document.querySelectorAll('.ranka_tuo_excel .headingrow td');
+  tds.forEach(td => {
+    if(td.innerText.replaceAll(" ","").length < 2) {
+      td.remove();
+    }
+  });
+
 }
 
 
@@ -292,14 +299,15 @@ function rangoita() {
 
   viimranka_vaaka.style.bottom = roundToNearest25(h - 2.5) / 5 + "px";
   tyostot.append(viimranka_vaaka);
-  document.querySelector(".saumat__grandrow").style.opacity = 0;
+  if(document.querySelector(".saumat__grandrow")) {
+    document.querySelector(".saumat__grandrow").style.opacity = 0;
+  }
+  
   trow = tyostot;
   fixrangat();
   rangat__initializesettings();
-
   rangat__setcord();
-  
-  create__ranka__asexcel();
+  // create__ranka__asexcel();
   create__ranka__tuoexcel();
 }
 
@@ -381,11 +389,11 @@ function rangat__initializesettings() {
 
         setval = settingvalue.value.toLowerCase().replaceAll(" ","");
         if(setval == "saumaranka") {
-          tomod = canvas.querySelectorAll(".ranka_pysty.saumaranka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.saumaranka");
           
         }
         if(setval == "väliranka") {
-          tomod = canvas.querySelectorAll(".ranka_pysty.valiranka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.valiranka");
         }
         if(setval == "alueenalareuna") {
           tomod = [];
@@ -394,10 +402,10 @@ function rangat__initializesettings() {
           tomod = [];
         }
         if(setval == "alueenvasenreuna") {
-          tomod = canvas.querySelectorAll(".ranka_pysty.alkuranka_pysty");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.alkuranka_pysty");
         }
         if(setval == "alueenoikeareuna") {
-          tomod = canvas.querySelectorAll(".ranka_pysty.viimranka_pysty");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.viimranka_pysty");
         }
 
         for (let b = 0; b < tomod.length; b++) {
@@ -425,16 +433,16 @@ function rangat__initializesettings() {
 
         setval = settingvalue.value.toLowerCase().replaceAll(" ","");
         if(setval == "saumaranka") {
-          tomod = canvas.querySelectorAll(".ranka_vaaka.saumaranka");     
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.saumaranka");     
         }
         if(setval == "väliranka") {
-          tomod = canvas.querySelectorAll(".ranka_vaaka.valiranka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.valiranka");
         }
         if(setval == "alueenalareuna") {
-          tomod = canvas.querySelectorAll(".ranka_vaaka.alkuranka_vaaka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.alkuranka_vaaka");
         }
         if(setval == "alueenyläreuna") {
-          tomod = canvas.querySelectorAll(".ranka_vaaka.viimranka_vaaka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.viimranka_vaaka");
         }
         
         for (let b = 0; b < tomod.length; b++) {
@@ -462,11 +470,11 @@ function rangat__initializesettings() {
 
         setval = settingvalue.value.toLowerCase().replaceAll(" ","");
         if(setval == "saumaranka") {
-          tomod = canvas.querySelectorAll(".ranka_pysty.saumaranka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.saumaranka");
           
         }
         if(setval == "väliranka") {
-          tomod = canvas.querySelectorAll(".ranka_pysty.valiranka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.valiranka");
         }
         if(setval == "alueenalareuna") {
           tomod = [];
@@ -475,10 +483,10 @@ function rangat__initializesettings() {
           tomod = [];
         }
         if(setval == "alueenvasenreuna") {
-          tomod = canvas.querySelectorAll(".ranka_pysty.alkuranka_pysty");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.alkuranka_pysty");
         }
         if(setval == "alueenoikeareuna") {
-          tomod = canvas.querySelectorAll(".ranka_pysty.viimranka_pysty");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.viimranka_pysty");
         }
 
         for (let b = 0; b < tomod.length; b++) {
@@ -506,16 +514,16 @@ function rangat__initializesettings() {
 
         setval = settingvalue.value.toLowerCase().replaceAll(" ","");
         if(setval == "saumaranka") {
-          tomod = canvas.querySelectorAll(".ranka_vaaka.saumaranka");     
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.saumaranka");     
         }
         if(setval == "väliranka") {
-          tomod = canvas.querySelectorAll(".ranka_vaaka.valiranka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.valiranka");
         }
         if(setval == "alueenalareuna") {
-          tomod = canvas.querySelectorAll(".ranka_vaaka.alkuranka_vaaka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.alkuranka_vaaka");
         }
         if(setval == "alueenyläreuna") {
-          tomod = canvas.querySelectorAll(".ranka_vaaka.viimranka_vaaka");
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.viimranka_vaaka");
         }
         
         for (let b = 0; b < tomod.length; b++) {
@@ -738,61 +746,6 @@ valiranka_no = 0;
 saumaranka_no = 0;
 
 
-function create__ranka__asexcel() {
-  rangat = canvas.querySelectorAll(".rangat__grandrow > div");
-  h = parseFloat(document.querySelector("#box_h").value);
-  w = parseFloat(document.querySelector("#box_w").value);
-  rangat_asennus_data = [];
-
-  ranka_as_excel = document.querySelector(".ranka_as_excel");
-  tableExcel = document.querySelector(".ranka_as_excel tbody");
-  tableExcel_trs = tableExcel.querySelectorAll("tr:not(.headingrow)");
-
-  tableExcel_trs.forEach(tr => {
-    tr.remove();
-  });
-  
-  for (var i = 0; i < rangat.length; i++) {
-    const row = document.createElement('tr');
-    var h1 = document.createElement('td');
-    var h2 = document.createElement('td');
-    var h3 = document.createElement('td');
-    var h4 = document.createElement('td');
-    var h5 = document.createElement('td');
-       
-    h1.innerHTML = rangat[i].dataset.rangan_koodin_alku;
-    h2.innerHTML = rangat[i].dataset.name + " " + rangat[i].dataset.rangan_koodin_alku;
-
-    if (rangat[i].classList.contains("ranka_pysty")) {
-      pituus = parseFloat(rangat[i].querySelector(".ranka_cord:not(.ranka_type)").innerText);
-      etaisyys = parseFloat(rangat[i].querySelector(".ranka_secondcord").innerText);
-      h3.innerHTML = pituus;
-      h5.innerHTML = etaisyys + " mm vasemmalle tilan " + current_tila + " seinässä " + current_room;
-    }
-    else if (rangat[i].classList.contains("ranka_vaaka")) {
-      pituus = parseFloat(rangat[i].querySelector(".ranka_cord:not(.ranka_type)").innerText);
-      etaisyys = parseFloat(rangat[i].querySelector(".ranka_secondcord").innerText);
-      h3.innerHTML = pituus;
-      h5.innerHTML = etaisyys + " mm ylös tilan " + current_tila + " seinässä " + current_room;
-    }
-    h4.innerHTML = "1";
-    rangat_asennus_data.push({
-      "Tyyppi": h1.textContent,
-      "Nimi": h2.textContent,
-      "Pituus (mm)": h3.textContent,
-      "KPL": h4.textContent,
-      "Asennus": h5.textContent
-    }, );
-    row.append(h1);
-    row.append(h2);
-    row.append(h3);
-    row.append(h4);
-    row.append(h5);
-    tableExcel.append(row);
-  }
-  
-}
-
 function create__ranka__tuoexcel() {
   rangat = canvas.querySelectorAll(".rangat__grandrow > div");
   h = parseFloat(document.querySelector("#box_h").value);
@@ -808,6 +761,118 @@ function create__ranka__tuoexcel() {
   });
   
   for (var i = 0; i < rangat.length; i++) {
+    const row = document.createElement('tr');
+    var h2 = document.createElement('td');
+    var h3 = document.createElement('td');
+    var h4 = document.createElement('td');
+    var h5 = document.createElement('td');
+    var h6 = document.createElement('td');
+    var h7 = document.createElement('td');
+    var h8 = document.createElement('td');
+    var h9 = document.createElement('td');
+    var h10 = document.createElement('td');
+    var h11 = document.createElement('td');
+    var h12 = document.createElement('td');
+    var h13 = document.createElement('td');
+    var h14 = document.createElement('td');
+    var h15 = document.createElement('td');
+    var h16 = document.createElement('td');
+    var h17 = document.createElement('td');
+    var h18  = document.createElement('td');
+    var h19  = document.createElement('td');
+    var h01 = document.createElement('td');
+    var h02 = document.createElement('td');
+    var h05 = document.createElement('td');
+       
+    h01.innerHTML = rangat[i].dataset.rangan_koodin_alku;
+    h02.innerHTML = rangat[i].dataset.name + " " + rangat[i].dataset.rangan_koodin_alku;
+
+    if (rangat[i].classList.contains("ranka_pysty")) {
+      etaisyys = parseFloat(rangat[i].querySelector(".ranka_secondcord").innerText);
+      h05.innerHTML = etaisyys + " mm vasemmalle tilan " + current_tila + " seinässä " + current_room;
+    }
+    else if (rangat[i].classList.contains("ranka_vaaka")) {
+      etaisyys = parseFloat(rangat[i].querySelector(".ranka_secondcord").innerText);
+      h05.innerHTML = etaisyys + " mm ylös tilan " + current_tila + " seinässä " + current_room;
+    }
+
+    current_date = new Date();
+
+       
+    h2.innerHTML = rangat[i].dataset.rangan_koodin_alku;
+    h3.innerHTML = rangat[i].dataset.tilauskoodi;
+    h4.innerHTML = parseFloat(rangat[i].querySelector(".ranka_cord:not(.ranka_type)").innerText);
+    h5.innerHTML = "1";
+    h6.innerHTML = rangat[i].dataset.materiaali;
+
+    h7.innerHTML = rangat[i].dataset.paksuus;
+    h8.innerHTML = rangat[i].dataset.laatu;
+    h9.innerHTML = rangat[i].dataset.vari_nimi;
+    h10.innerHTML = rangat[i].dataset.ncs_code;
+    h11.innerHTML = current_date.toLocaleDateString('fi-FI');
+    h12.innerHTML = "Tilattu";
+    h13.innerHTML = current_asiakas;
+    h14.innerHTML = document.querySelector("h1").innerText;
+    h15.innerHTML = "-";
+    h16.innerHTML = "-";
+    h17.innerHTML = current_tila;
+    h18.innerHTML = current_room;
+    h19.innerHTML = "";
+
+    rangat_tuotanto_data.push({
+      "Rivinro": i+1,
+      "Nimi": h02.textContent,
+      "Asennus": h05.textContent,
+      "Rangan tyyppi": h2.textContent,
+      "Tilauskoodi": h3.textContent,
+      "Pituus": h4.textContent,
+      "KPL": h5.textContent,
+      "MATERIAALI": h6.textContent,
+      "PAKSUUS": h7.textContent,
+      "LAATU": h8.textContent,
+      "Väri nimi": h9.textContent,
+      "NCS code": h10.textContent,
+      "Tilattu PVM": h11.textContent,
+      "STATUS": h12.textContent,
+      "Asiakas": h13.textContent,
+      "Projekti": h14.textContent,
+      "Osoite": h15.textContent,
+      "Palletgroup": h16.textContent,
+      "Asunto Nimi 1": h17.textContent,
+      "Nimi 2": h18.textContent,
+      "Työstöt": h19.textContent,
+    }, );
+  }
+  rangat_real_data = [];
+  rangat_real_data_names = [];
+  for (let a = 0; a < rangat_tuotanto_data.length; a++) {
+    kpl=1;
+    asennus = "";
+    rangat_tuotanto_data.forEach(e => {
+      if(e["Nimi"] === rangat_tuotanto_data[a]["Nimi"] && rangat_tuotanto_data[a]["Asennus"] !== e["Asennus"] && e["Tilauskoodi"] === rangat_tuotanto_data[a]["Tilauskoodi"] && parseFloat(e["Pituus"]) === parseFloat(rangat_tuotanto_data[a]["Pituus"]) && e["Rivinro"] !== rangat_tuotanto_data[a]["Rivinro"]) {
+        kpl += 1; 
+        console.log(e["Asennus"]);
+        rangat_tuotanto_data[a]["Asennus"] += e["Asennus"] + ", "; 
+      }
+    });
+    if(rangat_real_data_names.includes(rangat_tuotanto_data[a]["Nimi"])) {
+
+    }
+    else {
+      rangat_tuotanto_data[a]["KPL"] = kpl;
+      rangat_real_data.push(rangat_tuotanto_data[a]);
+      rangat_real_data_names.push(rangat_tuotanto_data[a]["Nimi"]);
+    }
+    
+  }
+  tableExcel = document.querySelector(".ranka_tuo_excel tbody");
+  tableExcel_trs = tableExcel.querySelectorAll("tr:not(.headingrow)");
+
+  tableExcel_trs.forEach(tr => {
+    tr.remove();
+  });
+
+  rangat_real_data.forEach(e => {
     const row = document.createElement('tr');
     var h1 = document.createElement('td');
     var h2 = document.createElement('td');
@@ -829,55 +894,57 @@ function create__ranka__tuoexcel() {
     var h18  = document.createElement('td');
     var h19  = document.createElement('td');
     var h20  = document.createElement('td');
-
-    current_date = new Date();
-
-       
-    h1.innerHTML = i+1;
-    h2.innerHTML = rangat[i].dataset.rangan_koodin_alku;
-    h3.innerHTML = rangat[i].dataset.tilauskoodi;
-    h4.innerHTML = parseFloat(rangat[i].querySelector(".ranka_cord:not(.ranka_type)").innerText);
-    h5.innerHTML = "1";
-    h6.innerHTML = rangat[i].dataset.materiaali;
-
-    h7.innerHTML = rangat[i].dataset.paksuus;
-    h8.innerHTML = rangat[i].dataset.laatu;
-    h9.innerHTML = rangat[i].dataset.vari_nimi;
-    h10.innerHTML = rangat[i].dataset.ncs_code;
-    h11.innerHTML = current_date.toLocaleDateString('fi-FI');
-    h12.innerHTML = "Tilattu";
-    h13.innerHTML = current_asiakas;
-    h14.innerHTML = document.querySelector("h1").innerText;
-    h15.innerHTML = "-";
-    h16.innerHTML = "-";
-    h17.innerHTML = current_tila;
-    h18.innerHTML = current_room;
-    h19.innerHTML = "";
-    h20.innerHTML = "";
-
-    rangat_tuotanto_data.push({
-      "Rivinumero": h1.textContent,
-      "Rangan tyyppi": h2.textContent,
-      "Tilauskoodi": h3.textContent,
-      "Pituus": h4.textContent,
-      "KPL": h5.textContent,
-      "MATERIAALI": h6.textContent,
-      "PAKSUUS": h7.textContent,
-      "LAATU": h8.textContent,
-      "Väri nimi": h9.textContent,
-      "NCS code": h10.textContent,
-      "Tilattu PVM": h11.textContent,
-      "STATUS": h12.textContent,
-      "Asiakas": h13.textContent,
-      "Projekti": h14.textContent,
-      "Osoite": h15.textContent,
-      "Palletgroup": h16.textContent,
-      "Asunto Nimi 1": h17.textContent,
-      "Nimi 2": h18.textContent,
-      "Työstöt": h19.textContent,
-      "Asennus": h20.textContent
+    var h21  = document.createElement('td');
+    var h22  = document.createElement('td');
+  
+    // h1.innerHTML = e["Rivinro"];
+    h2.innerHTML = e["Nimi"];
+    h3.innerHTML = e["Asennus"];
+    h5.innerHTML = e["Rangan tyyppi"];
+    h6.innerHTML = e["Tilauskoodi"];
+    h7.innerHTML = e["Pituus"];
+    h8.innerHTML = e["KPL"];
+    h9.innerHTML = e["MATERIAALI"];
+    h10.innerHTML = e["PAKSUUS"];
+    h11.innerHTML = e["LAATU"];
+    h12.innerHTML = e["Väri nimi"];
+    h13.innerHTML = e["NCS code"];
+    h14.innerHTML = e["Tilattu PVM"];
+    h15.innerHTML = e["STATUS"];
+    h16.innerHTML = e["Asiakas"];
+    h17.innerHTML = e["Projekti"];
+    h18.innerHTML = e["Osoite"];
+    h19.innerHTML = e["Palletgroup"];
+    h20.innerHTML = e["Asunto Nimi 1"];
+    h21.innerHTML = e["Nimi 2"];
+    h22.innerHTML = e["Työstöt"];
+  
+    
+    rangat_real_data.push({
+      // "Rivinro": h1.textContent,
+      "Nimi": h2.textContent,
+      "Asennus": h3.textContent,
+      "Rangan tyyppi": h5.textContent,
+      "Tilauskoodi": h6.textContent,
+      "Pituus": h7.textContent,
+      "KPL": h8.textContent,
+      "MATERIAALI": h9.textContent,
+      "PAKSUUS": h10.textContent,
+      "LAATU": h11.textContent,
+      "Väri nimi": h12.textContent,
+      "NCS code": h13.textContent,
+      "Tilattu PVM": h14.textContent,
+      "STATUS": h15.textContent,
+      "Asiakas": h16.textContent,
+      "Projekti": h17.textContent,
+      "Osoite": h18.textContent,
+      "Palletgroup": h19.textContent,
+      "Asunto Nimi 1": h20.textContent,
+      "Nimi 2": h21.textContent,
+      "Työstöt": h22.textContent,
     }, );
-    row.append(h1);
+  
+    // row.append(h1);
     row.append(h2);
     row.append(h3);
     row.append(h4);
@@ -897,17 +964,19 @@ function create__ranka__tuoexcel() {
     row.append(h18);
     row.append(h19);
     row.append(h20);
+    row.append(h21);
+    row.append(h22);
     tableExcel.append(row);
-  }
+  });
 }
 
-function lataa_ranka_as_excel() {
-  filename = current_tila +" seinä "+ current_room+' [Rangat Asennusohje].xlsx';
-  var ws = XLSX.utils.json_to_sheet(rangat_asennus_data);
-  var wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Rangat");
-  XLSX.writeFile(wb, filename);
-}
+// function lataa_ranka_as_excel() {
+//   filename = current_tila +" seinä "+ current_room+' [Rangat Asennusohje].xlsx';
+//   var ws = XLSX.utils.json_to_sheet(rangat_asennus_data);
+//   var wb = XLSX.utils.book_new();
+//   XLSX.utils.book_append_sheet(wb, ws, "Rangat");
+//   XLSX.writeFile(wb, filename);
+// }
 
 function lataa_ranka_tuo_excel() {
   filename = current_tila +" seinä "+ current_room+' [Rangat Tuotanto].xlsx';

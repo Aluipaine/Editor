@@ -335,6 +335,12 @@ function siirto_muualle() {
 
 
 function osittainen_siirto_muualle() {
+
+  if(document.querySelector("#copiedcanvases .canvas:nth-child(4)")) {
+    document.querySelector("#copiedcanvases").style.display = "flex";
+    document.querySelector("#box-wrapper > main").style.display = "none";
+    return
+  }
   horizontals_original = canvas.querySelectorAll(".horizontalrow_saumat > div");
 
   rooms_vaaka = [];
@@ -349,12 +355,10 @@ function osittainen_siirto_muualle() {
   tworoom_h = parseFloat(tworoom.querySelector(".wall_height").value);
   threeroom_h = parseFloat(threeroom.querySelector(".wall_height").value);
   fourroom_h = parseFloat(fourroom.querySelector(".wall_height").value);
-
   oneroom_w = parseFloat(oneroom.querySelector(".wall_width").value);
   tworoom_w = parseFloat(tworoom.querySelector(".wall_width_2").value);
   threeroom_w = parseFloat(threeroom.querySelector(".wall_width").value);
   fourroom_w = parseFloat(fourroom.querySelector(".wall_width_2").value);
-
   oneroom_name = parseFloat(oneroom.querySelector(".house__wall_status").innerText);
   tworoom_name = parseFloat(tworoom.querySelector(".house__wall_status").innerText);
   threeroom_name = parseFloat(threeroom.querySelector(".house__wall_status").innerText);
@@ -408,14 +412,7 @@ function osittainen_siirto_muualle() {
       body.classList.add("bg");
       realcount = Math.floor(parseFloat(z) + 1);
       console.log("z+1: " + realcount);
-      if(rooms_vaaka[z] == 'skip') {
-        if(realcount == rooms_vaaka.length) {
-          $('#step_drawscreen').val('drawscreen_section_eight');
-          refresh__drawcontrols();
-          break;
-        }
-        continue;
-      }
+      
       room_h = parseFloat(rooms_vaaka[z].split("|")[0]);
       room_w = parseFloat(rooms_vaaka[z].split("|")[1]);
       document.querySelector(".wall").value = rooms_vaaka[z].split("|")[2];
@@ -537,11 +534,7 @@ function osittainen_siirto_muualle() {
     }
     await sleep(3000);
     
-    $('#step_drawscreen').val('drawscreen_section_eight');
-    refresh__drawcontrols();
-    await sleep(3000);
-    // takeshotAllwalls();
-
+    
 
     copiedcanvases = document.querySelector("#copiedcanvases");
     ck_levys = copiedcanvases.querySelectorAll(".levy");
@@ -618,24 +611,12 @@ function osittainen_siirto_muualle() {
         }      
       }
 
-    
+    await sleep(1000);
+    document.querySelector("#copiedcanvases").style.display = "flex";
+    document.querySelector("#box-wrapper > main").style.display = "none";    
   })();
 
-    $('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();
-
-  // refresh__drawcontrols();$('#step_drawscreen').val('drawscreen_section_five');levyta();
-  // console.log("Levytetty");
-  // refresh__drawcontrols();$('#step_drawscreen').val('drawscreen_section_tyostot');
-  // document.querySelector("#kiinniketys__pkiinnike_three").click();
-  // document.querySelector("#kiinniketys__vkiinnike_three").click();
-  // console.log("Kiinnikelinja valinta I&II");
-  // console.log("Työstetty");
-  // refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_esikatselu');
-  // refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_six'); 
-  // console.log("Menee rankoihin");
-  // refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_seven'); listoita();
-  // console.log("Menee listoihin
-  // $('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();
+    
 }
 
 

@@ -9,12 +9,12 @@
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three');refresh__drawcontrols();updatearea();" class="nav__comleted">Läpiviennit</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();" class="nav__comleted">Saumat</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();" class="nav__comleted">Kiinnikkeet</div></li>
-          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();" class="nav__comleted">Korjailu</div></li>
+          <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();" class="nav__comleted">Kuosit</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();updatearea();siirto_muualle();" class="nav__comleted">Seinät</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu');refresh__drawcontrols();updatearea();" class="nav__comleted">Levyt</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_six');refresh__drawcontrols();updatearea();" class="nav__comleted">Rangat</div></li>
           <li><div onclick="$('#step_drawscreen').val('drawscreen_section_seven');refresh__drawcontrols();updatearea();" class="nav_current">Listat</div></li>
-          <li><div onclick="$('#step_drawscreen').val('project_start');">Päävalikkoon</div></li>
+          <li><div onclick="$('#step_drawscreen').val('project_start');refresh__drawcontrols();">Päävalikkoon</div></li>
         </ul>
       </nav>
     </section>
@@ -55,8 +55,7 @@
       
     </section> -->
 
-    <section class="lista_as_excel">
-     <!-- Set for input default center coords  -->
+    <!-- <section class="lista_as_excel">
      <h3>Asennusohjeet:</h3>
       <table>
         <tr class="headingrow">
@@ -70,17 +69,15 @@
 
        <div class="row">
         <div class="get_lista_as_excel get_excel_btn" onclick="lataa_lista_as_excel();">Lataa rankojen asennusohjetaulu</div>
-        <div class="get_screenshot" onclick="takeshot(2);">Tallenna havainnekuva</div>
       </div>
 
-      <div id="listat__havainnekuva" class="havainnekuva"></div>
-    </section>
+    </section> -->
     <section class="lista_tuo_excel">
       <h3>Tuotanto Excel:</h3>
       <table>
         <tr class="headingrow">
           <td>Rivinumero</td>
-          <td>Rangan tyyppi</td>
+          <td>Listan tyyppi</td>
           <td>Tilauskoodi</td>
           <td>Pituus</td>
           <td>KPL</td>
@@ -103,7 +100,10 @@
       </table>
       <div class="row">
         <div class="get_lista_tuo_excel get_excel_btn" onclick="lataa_lista_tuo_excel();create__excelgenerationtimestamp(this);" data-generatingtype="listat">Lataa listatuotantoexcel</div>
+        <div class="get_screenshot" onclick="takeshot(2);">Tallenna havainnekuva</div>
       </div>
+      <div id="listat__havainnekuva" class="havainnekuva"></div>
+
     </section>
 </form>
 

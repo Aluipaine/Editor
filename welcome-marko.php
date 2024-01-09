@@ -116,6 +116,9 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                 <td>Paksuus</td>
                 <td>Kuvio</td>
                 <td>Kuva</td>
+                <td>LISTA YR</td>
+                <td>LISTA OR</td>
+                
               </tr>
               <?php
               ?>
@@ -427,12 +430,13 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             Lisää uusi rivi
           </div>
           <datalist id="ranka_list"></datalist>
+          <datalist id="listat_list"></datalist>
         </div>
         
         <div class="tabs__target_indent" data-id="1_5">
           <section>
             <h4>
-              L2A Rankalistat
+              L2A Listat
             </h4>
             <table>
               <tbody class="listat2a__tbody tabs__target_table">			
@@ -442,7 +446,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                   <td>Suunta</td>
                   <td>Lisää / -poista mitasta</td>
                   <td>Vähennä mistä</td>
-                  <td>Listan tyyppi</td>
+                  <td>Listan nimi</td>
                   <td>Tilauskoodi</td>
                   <td>Materiaali</td>
                   <td>Paksuus</td>
@@ -459,16 +463,24 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
           </section>
           <section>
             <h4>
-              L2B Rankalistat
+              L2B Listat
             </h4>
             <table>
               <tbody class="listat2b__tbody tabs__target_table">			
                 <tr class="headingrow">
                   <td>ON/OFF</td>
-                  <td>Nimi</td>
-                  <td>VALINTA</td>
-                  <td>Valintaväli</td>
+                  <td>Tyyppi</td>
                   <td>Suunta</td>
+                  <td>Lisää / -poista mitasta</td>
+                  <td>Vähennä mistä</td>
+                  <td>Listan nimi</td>
+                  <td>Tilauskoodi</td>
+                  <td>Materiaali</td>
+                  <td>Paksuus</td>
+                  <td>Laatu</td>
+                  <td>Väri nimi</td>
+                  <td>NCS code</td>
+                  <td>Valinta</td>
                 </tr>
               </tbody>
             </table>
@@ -566,6 +578,12 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                 <td>Reikä X</td>
                 <td>Reikä Y</td>
                 <td>Ensisijaisesti Dustiksi</td>
+                <td>L2A Lista</td>
+                <td>L2A LISTAN PITUUS +	</td>
+                <td>L2A LISTAN LAATU</td>
+                <td>L2B Lista</td>
+                <td>L2B LISTAN PITUUS +	</td>
+                <td>L2B LISTAN LAATU</td>
               </tr>
             </tbody>
           </table>

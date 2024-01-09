@@ -221,32 +221,47 @@ if (isset($usr_role) && $usr_role == 'mittaus') {
           </table>
 
           <h4>
-            Pystylistojen asetukset
+            L2A Listojen asetukset
           </h4>
-          <table>
-            <tbody class="listapysty__tbody tabs__target_table">			
+          <table class="s_listat">
+            <tbody class="l2a_table listapysty__tbody tabs__target_table">			
               <tr class="headingrow">
                 <td>ON/OFF</td>
-                <td>Nimi</td>
+                <td>Tyyppi</td>
+                <td>Suunta</td>
+                <td>Lisää / -poista mitasta</td>
+                <td>Vähennä mistä</td>
+                <td>Listan nimi</td>
+                <td>Tilauskoodi</td>
+                <td>Materiaali</td>
                 <td>Paksuus</td>
-                <td>Lista</td>
                 <td>Laatu</td>
+                <td>Väri nimi</td>
+                <td>NCS code</td>
+                <td>Valinta</td>
               </tr>
             </tbody>
           </table>
 
           <h4>
-            Vaakalistojen asetukset
+            L2B Listojen asetukset
           </h4>
-          <table>
-            <tbody class="listavaaka__tbody tabs__target_table">			
+          <table class="s_listat">
+            <tbody class="l2b_table listavaaka__tbody tabs__target_table">			
               <tr class="headingrow">
                 <td>ON/OFF</td>
-                <td>Nimi</td>
-                <td>Paksuus</td>
+                <td>Tyyppi</td>
+                <td>Suunta</td>
+                <td>Lisää / -poista mitasta</td>
+                <td>Vähennä mistä</td>
+                <td>Listan nimi</td>
+                <td>Tilauskoodi</td>
                 <td>Materiaali</td>
+                <td>Paksuus</td>
                 <td>Laatu</td>
-                
+                <td>Väri nimi</td>
+                <td>NCS code</td>
+                <td>Valinta</td>
               </tr>
             </tbody>
           </table>
@@ -264,7 +279,7 @@ if (isset($usr_role) && $usr_role == 'mittaus') {
 
 
 
-<script defer src='/js/jquery.min.js'></script>
+<script src='/js/jquery.min.js'></script>
 <script defer src='/js/clipboard.min.js'></script>
 <!-- Marko new row btn function -->
 
@@ -285,7 +300,7 @@ if (isset($usr_role) && $usr_role == 'mittaus') {
 
 
 <!-- MAIN JS FUNCTIONS -->
-<script defer src="/js/main.js"> </script>
+<script async src="/js/main.js"> </script>
 
 <!-- JS FUNCTIONS FOR PROJECT AND ROOMS -->
 <script defer src="/js/jstemplates/creation.js"></script>
@@ -323,6 +338,8 @@ if (isset($usr_role) && $usr_role == 'mittaus') {
 
 <!-- JS FUNCTIONS Walls.  -->
 <script defer src="/js/jstemplates/walls.js"></script>
+
+<script defer src="/js/jstemplates/saving.js"></script>
 
 <?php
 
@@ -383,4 +400,33 @@ if (isset($usr_role) && $usr_role == 'mittaus') {
 
 
    // document.querySelector("#copiedcanvases")
+</script>
+
+  
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" defer>
+  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+  m[i].l=1*new Date();
+  for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+  (window, document, "script", "https://mc.yandex.com/metrika/tag.js", "ym");
+
+  ym(95954985, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+  });
+</script>
+<noscript><div><img src="https://mc.yandex.com/watch/95954985" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<script>
+  $(document).ready(function(){
+    setTimeout(() => {
+      $(".preloader").removeClass( "active" );
+    }, 2000);
+  });
+
 </script>

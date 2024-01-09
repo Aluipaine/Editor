@@ -63,6 +63,8 @@ function luo__levy(h, w, dex, col, b, l) {
     levy.dataset.sku = levy_sku;
     levy.dataset.thickness = levy_thickness;
     levy.dataset.structure = levy_structure;
+    levy.dataset.orlista = orlista;
+    levy.dataset.yrlista = yrlista;
   }
   // levy.appendChild(levy_name);
   var l_meta = document.createElement("input");
