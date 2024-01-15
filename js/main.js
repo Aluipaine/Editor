@@ -3448,6 +3448,7 @@ function initializecropping() {
 function settings__modal_open(e) {
   asmodal_mode = e.dataset.asmodal_mode;
 
+  console.log("." + asmodal_mode);
   document.querySelector("."+asmodal_mode).classList.add("two");
   document.querySelector("."+asmodal_mode).classList.remove("out");
 }
@@ -4766,8 +4767,73 @@ function initializesettings__mittaus() {
           });
         }
 
+        if (key == 's_kiinnikkeetpysty') {
+          t = document.querySelector(".kiinnikkeetpysty__tbody");
+          v_.split("~~").forEach((v) => {
+            v = v.replaceAll('"', '').split(",");
 
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if (v[0] == 'on') {
+              checked = 'checked';
+            }
+            else {
+              return
+            }
 
+            row.innerHTML += `
+                <td>
+                    <input type="text" disabled value="${v[1]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[2]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[3]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[4]}" class="lineinput">
+                </td>
+                `;
+            t.appendChild(row);
+          });
+          saumaset_vm = parseFloat(document.querySelector(".kiinnikkeetpysty__tbody td:nth-child(2) > input").value);
+        }
+
+        if (key == 's_kiinnikkeetvaaka') {
+          t = document.querySelector(".kiinnikkeetvaaka__tbody");
+          v_.split("~~").forEach((v) => {
+            v = decode_utf8(encode_utf8(v.replaceAll('"', ''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if (v[0] == 'on') {
+
+            }
+            else {
+              return
+            }
+
+            row.innerHTML += `
+                <td>
+                    <input type="text" disabled value="${v[1]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[2]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[3]}" class="lineinput">
+                </td>
+                <td>
+                    <input type="text" disabled value="${v[4]}" class="lineinput">
+                </td>
+                `;
+            t.appendChild(row);
+          });
+          saumaset_hm = parseFloat(document.querySelector(".kiinnikkeetvaaka__tbody td:nth-child(2) > input").value);
+        }
       });
 
     });

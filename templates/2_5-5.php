@@ -289,7 +289,38 @@
                        </fieldset>
                    </section>
                   
-                   
+                   <section>
+                    <h4>
+                      Pystykiinnikkeet asetukset
+                    </h4>
+                    <table>
+                      <tbody class="kiinnikkeetpysty__tbody tabs__target_table">			
+                        <tr class="headingrow">
+                          <td>Nimi</td>
+                          <td>Paksuus</td>
+                          <td>Lista</td>
+                          <td>Laatu</td>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </section>
+                  <section>
+                    <h4>
+                      Vaakakiinnikkeet asetukset
+                    </h4>
+                    <table>
+                      <tbody class="kiinnikkeetvaaka__tbody tabs__target_table">			
+                        <tr class="headingrow">
+                          <td>Nimi</td>
+                          <td>Paksuus</td>
+                          <td>Materiaali</td>
+                          <td>Laatu</td>                  
+                        </tr>
+                      </tbody>
+                    </table>
+                  </section>
 
                    <section>
 

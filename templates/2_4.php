@@ -41,6 +41,8 @@
 
     </section>
 
+
+  <!-- This modal window we will copy -->
   <div class="modal-container sauma_as">
    <div class="modal-background">
      <div class="modal">
