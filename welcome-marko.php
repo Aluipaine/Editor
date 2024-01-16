@@ -96,6 +96,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
           <li class="tabs__btn_indent" data-toid="1_6">Origo</li>
           <li class="tabs__btn_indent" data-toid="1_7">Aukot</li>
           <li class="tabs__btn_indent" data-toid="1_8">Läpiviennit</li>
+          <li class="tabs__btn_indent" data-toid="1_9">Kiinnikkeet</li>
 
           <!-- <li class="col-6 tabs__btn_indent active" data-toid="1_1">Origo</li>
           <li class="col-6 tabs__btn_indent" data-toid="1_2">Aukot</li>
@@ -592,6 +593,47 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
           </div>
         </div>
         
+        <div class="tabs__target_indent" data-id="1_9">
+          <section>
+            <h4>
+              Pystysaumojen asetukset
+            </h4>
+            <table>
+              <tbody class="kiinnikkeetpysty__tbody tabs__target_table">			
+                <tr class="headingrow">
+                  <td>ON/OFF</td>
+                  <td>Nimi</td>
+                  <td>Paksuus</td>
+                  <td>Lista</td>
+                  <td>Laatu</td>
+                  
+                </tr>
+              </tbody>
+            </table>
+            <div class="start_btn" onclick="appendnewpystykiinnikkeetsetting();">
+              Lisää uusi rivi
+            </div>
+          </section>
+          <section>
+            <h4>
+              Vaakasaumojen asetukset
+            </h4>
+            <table>
+              <tbody class="kiinnikkeetvaaka__tbody tabs__target_table">			
+                <tr class="headingrow">
+                  <td>ON/OFF</td>
+                  <td>Nimi</td>
+                  <td>Paksuus</td>
+                  <td>Materiaali</td>
+                  <td>Laatu</td>                  
+                </tr>
+              </tbody>
+            </table>
+            <div class="start_btn" onclick="appendnewvaakakiinnikkeetsetting();">
+              Lisää uusi rivi
+            </div>
+          </section>
+        </div>
       </div>
     </section>
     <section class="tabs__target" data-id="2">        
