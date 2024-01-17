@@ -4767,72 +4767,31 @@ function initializesettings__mittaus() {
           });
         }
 
-        if (key == 's_kiinnikkeetpysty') {
-          t = document.querySelector(".kiinnikkeetpysty__tbody");
-          v_.split("~~").forEach((v) => {
-            v = v.replaceAll('"', '').split(",");
+        if (key == 's_pituussuunnan'){
+          const inputs = document.querySelectorAll(".pituussuunnan input")
+          const data = v_.slice(0, -1).split(",");
 
-            count = t.querySelectorAll("tr").length;
-            row = document.createElement("tr");
-            checked = '';
-            if (v[0] == 'on') {
-              checked = 'checked';
-            }
-            else {
-              return
-            }
-
-            row.innerHTML += `
-                <td>
-                    <input type="text" disabled value="${v[1]}" class="lineinput">
-                </td>
-                <td>
-                    <input type="text" disabled value="${v[2]}" class="lineinput">
-                </td>
-                <td>
-                    <input type="text" disabled value="${v[3]}" class="lineinput">
-                </td>
-                <td>
-                    <input type="text" disabled value="${v[4]}" class="lineinput">
-                </td>
-                `;
-            t.appendChild(row);
-          });
-          saumaset_vm = parseFloat(document.querySelector(".kiinnikkeetpysty__tbody td:nth-child(2) > input").value);
+          for (let i = 0; i < inputs.length; i++){
+            inputs[i].value = data[i]
+          }
         }
 
-        if (key == 's_kiinnikkeetvaaka') {
-          t = document.querySelector(".kiinnikkeetvaaka__tbody");
-          v_.split("~~").forEach((v) => {
-            v = decode_utf8(encode_utf8(v.replaceAll('"', ''))).split(",");
+        if (key == 's_leveyssuunnan') {
+          const inputs = document.querySelectorAll(".leveyssuunnan input")
+          const data = v_.slice(0, -1).split(",");
 
-            count = t.querySelectorAll("tr").length;
-            row = document.createElement("tr");
-            checked = '';
-            if (v[0] == 'on') {
+          for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = data[i]
+          }
+        } 
 
-            }
-            else {
-              return
-            }
+        if (key == 's_reunaasetukset') {
+          const inputs = document.querySelectorAll(".poraukset input")
+          const data = v_.slice(0, -1).split(",");
 
-            row.innerHTML += `
-                <td>
-                    <input type="text" disabled value="${v[1]}" class="lineinput">
-                </td>
-                <td>
-                    <input type="text" disabled value="${v[2]}" class="lineinput">
-                </td>
-                <td>
-                    <input type="text" disabled value="${v[3]}" class="lineinput">
-                </td>
-                <td>
-                    <input type="text" disabled value="${v[4]}" class="lineinput">
-                </td>
-                `;
-            t.appendChild(row);
-          });
-          saumaset_hm = parseFloat(document.querySelector(".kiinnikkeetvaaka__tbody td:nth-child(2) > input").value);
+          for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = data[i]
+          }
         }
       });
 

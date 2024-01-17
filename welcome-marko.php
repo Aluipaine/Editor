@@ -594,46 +594,112 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
         </div>
         
         <div class="tabs__target_indent" data-id="1_9">
-          <section>
-            <h4>
-              Pystysaumojen asetukset
-            </h4>
-            <table>
-              <tbody class="kiinnikkeetpysty__tbody tabs__target_table">			
-                <tr class="headingrow">
-                  <td>ON/OFF</td>
-                  <td>Nimi</td>
-                  <td>Paksuus</td>
-                  <td>Lista</td>
-                  <td>Laatu</td>
+            <section class="trow">
+              <div class="row">
+                <div class="col-6">
+                  <h4>Pituussuunnan Läpiviennit</h4>
+                  <fieldset>
+                    <div class="trow pituussuunnan">
+                     <div class="modal__row_kvali">
+                       <label for="v_target">K-väli, Tavoite </label>
+                       <input type="number" id="v_target" oninput="admin__savepituussuunnan();" placeholder="Tavoiteltu levyn pituus" min="450" value="600">
+                     </div>
+                     <div class="modal__row_kvali">
+                       <label for="v_two">2 reikää max väl</label>
+                       <input type="number" id="v_two" oninput="admin__savepituussuunnan();" placeholder="Tavoiteltu levyn leveys" value="450">
+                     </div>
+                     <div class="modal__row_kvali">
+                       <label for="v_three">3 reikää max väl</label>
+                       <input type="number" id="v_three" oninput="admin__savepituussuunnan();" placeholder="Tavoiteltu levyn leveys" value="550">
+                     </div>
+                   </div>
+                  </fieldset>
                   
-                </tr>
-              </tbody>
-            </table>
-            <div class="start_btn" onclick="appendnewpystykiinnikkeetsetting();">
-              Lisää uusi rivi
-            </div>
-          </section>
-          <section>
-            <h4>
-              Vaakasaumojen asetukset
-            </h4>
-            <table>
-              <tbody class="kiinnikkeetvaaka__tbody tabs__target_table">			
-                <tr class="headingrow">
-                  <td>ON/OFF</td>
-                  <td>Nimi</td>
-                  <td>Paksuus</td>
-                  <td>Materiaali</td>
-                  <td>Laatu</td>                  
-                </tr>
-              </tbody>
-            </table>
-            <div class="start_btn" onclick="appendnewvaakakiinnikkeetsetting();">
-              Lisää uusi rivi
-            </div>
-          </section>
+                </div>
+                <div class="col-6">
+                  <h4>Leveyssuunnan Läpiviennit </h4>
+                  <fieldset>
+                    <div class="trow leveyssuunnan">
+                     <div class="modal__row_kvali">
+                       <label for="p_target">K-väli, Tavoite </label>
+                       <input type="number" id="p_target" oninput="admin__saveleveyssuunnan()" placeholder="Tavoiteltu levyn pituus" min="570" value="600">
+                     </div>
+                     <div class="modal__row_kvali">
+                       <label for="p_two">2 reikää max väl</label>
+                       <input type="number" id="p_two" oninput="admin__saveleveyssuunnan()" placeholder="Tavoiteltu levyn leveys" min="570" value="570" placeholder="0-570">
+                     </div>
+                     <div class="modal__row_kvali">
+                       <label for="p_three">3 reikää max väl</label>
+                       <input type="number" id="p_three" oninput="admin__saveleveyssuunnan()" placeholder="Tavoiteltu levyn leveys" min="580" value="580" placeholder="580-3050">
+                     </div>
+                   </div>
+                  </fieldset>
+                </div>
+              </div>         
+            </section>
+
+            <section>
+               <h3>Reuna asetukset:</h3>
+               <div class="row poraukset" style="height: 200px">
+                 <div class="col-2 trow">
+                   <h4>arvo</h4>
+                   <h4>min</h4>
+                   <h4>max</h4>
+                 </div>
+                 <div class="col-8 row poraukset"  style="height: 200px">
+                   <div class="col-6 trow ">
+                     <div class="row">
+                       <div class="col-6"><h4>Yläreunasta</h4></div>
+                       <div class="col-6"><h4>Alareunasta:</h4></div>
+                     </div>
+                     <div class="row"> 
+                       <div class="col-6">
+                         <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_yr_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80">
+                       </div>
+                       <div class="col-6">
+                         <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_ar_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80">
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-6">
+                         <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_yr_min" placeholder="Poraus etäisyys min" min="25" value="25">
+                       </div> 
+                       <div class="col-6">
+                         <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_ar_min" placeholder="Poraus etäisyys min" min="25" value="25">
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-6">
+                         <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_yr_max" placeholder="Poraus etäisyys max" min="25" value="80">
+                       </div> 
+                       <div class="col-6">
+                         <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_ar_max" placeholder="Poraus etäisyys max" min="25" value="80">
+                       </div>
+                     </div>
+                   </div>
+                   <div class="col-6 trow">
+                     <div class="row">
+                       <div class="col-6"><h4>Sivusta vas:</h4></div>
+                       <div class="col-6"><h4>Sivusta oik:</h4></div>
+                     </div>
+                     <div class="row">
+                       <div class="col-6"><input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_vr_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80"></div>
+                       <div class="col-6"><input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_or_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80"></div>
+                     </div>
+                     <div class="row">
+                       <div class="col-6"><input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_vr_min" placeholder="Poraus etäisyys min" min="25" value="25"> </div>
+                       <div class="col-6"><input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_or_min" placeholder="Poraus etäisyys min" min="25" value="25"> </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-6"><input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_vr_max" placeholder="Poraus etäisyys max" min="25" value="80"> </div>
+                       <div class="col-6"><input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_or_max" placeholder="Poraus etäisyys max" min="25" value="80"></div>
+                     </div>
+                   </div>
+                 </div>
+               </div>    
+            </section>
         </div>
+
       </div>
     </section>
     <section class="tabs__target" data-id="2">        

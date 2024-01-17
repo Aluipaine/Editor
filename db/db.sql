@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 15 2024 г., 20:20
+-- Время создания: Янв 17 2024 г., 10:27
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -1559,8 +1559,9 @@ INSERT INTO `settingsmeta` (`meta_id`, `id`, `meta_key`, `meta_value`) VALUES
 (20859, 100, 's_listat', '[1,Päätelista 20,SPL20_,TEST,Teräs,Hiarc,,,L-profiili,KAIKKI,10,20,,0_5_10,2400,3000,3600,mod-10,]~~[2,Päätelista 30,SPL30_,TEST,Teräs,Hiarc,,,L-profiili,KAIKKI,10,30,,0_5_10,2400,3000,3600,mod-10,]~~[3,Päätelista 40,SPL40_,TEST,Teräs,Hiarc,,,L-profiili,KAIKKI,10,40,,0_5_10,2400,3000,3600,mod-10,]~~[4,Päätelista 50,SPL50_,TEST,Teräs,Hiarc,,,L-profiili,KAIKKI,10,50,,0_5_10,2400,3000,3600,mod-10,]~~[5,Päätelista 60,SPL60_,TEST,Teräs,Hiarc,,,L-profiili,KAIKKI,10,60,,0_5_10,2400,3000,3600,mod-10,]~~[6,Päätelista 70,SPL70_,TEST,Teräs,Hiarc,,,L-profiili,KAIKKI,10,70,,0_5_10,2400,3000,3600,mod-10,]~~[7,Ulkokulmalista 20/30,SUKL20/30,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,20,30,,0_30,2400,3000,3600,mod-10,]~~[8,Ulkokulmalista 20/40,SUKL20/40,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,20,40,,0_40,2400,3000,3600,mod-10,]~~[9,Ulkokulmalista 20/50,SUKL20/50,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,20,50,,0_50,2400,3000,3600,mod-10,]~~[10,Ulkokulmalista 20/60,SUKL20/60,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,20,60,,0_60,2400,3000,3600,mod-10,]~~[11,Ulkokulmalista 20/70,SUKL20/70,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,20,70,,0_70,2400,3000,3600,mod-10,]~~[12,Sisäkulmalista 30/30,SSKL30/30,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,30,30,,,2400,3000,3600,mod-10,]~~[13,Sisäkulmalista 40/40,SSKL40/40,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,40,40,,,2400,3000,3600,mod-10,]~~[14,Sisäkulmalista 50/50,SSKL50/50,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,50,50,,,2400,3000,3600,mod-10,]~~[15,Vastalista ,SVL10/10/10,TEST,Teräs,Hiarc,,,Vastalista,KAIKKI,50,50,,,2400,3000,3600,mod-10,]~~[16,EPDM,EPDM10,TEST,Kumi,,,,,,,,,,,,,mod-10,]~~[17,,,,,,,,,,,,,,,,,,]~~[18,,,,,,,,,,,,,,,,,,]~~[19,,,,,,,,,,,,,,,,,,]~~[20,,,,,,,,,,,,,,,,,,]~~[21,,,,,,,,,,,,,,,,,,]~~[22,,,,,,,,,,,,,,,,,,]~~[23,,,,,,,,,,,,,,,,,,]~~[24,Ikkunalauta 50,SIL20/50/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,50,,0_20_10_20,2400,3000,,mod+25,]~~[25,Ikkunalauta 60,SIL20/60/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,50,,0_20_10_20,2400,3000,,mod+25,]~~[26,Ikkunalauta 70,SIL20/70/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,60,,0_20_20_20,2400,3000,,mod+25,]~~[27,Ikkunalauta 80,SIL20/80/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,60,,0_20_20_20,2400,3000,,mod+25,]~~[28,Ikkunalauta 90,SIL20/90/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,60,,0_20_20_20,2400,3000,,mod+25,]~~[29,Ikkunalauta 100,SIL20/100/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,70,,0_20_30_20,2400,3000,,mod+25,]~~[30,Ikkunalauta 110,SIL20/110/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,70,,0_20_30_20,2400,3000,,mod+25,]~~[31,Ikkunalauta 120,SIL20/120/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,70,,0_20_30_20,2400,3000,,mod+25,]~~[32,Ikkunalauta 130,SIL20/130/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,80,,0_20_40_20,2400,3000,,mod+25,]~~[33,Ikkunalauta 140,SIL20/140/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,80,,0_20_40_20,2400,3000,,mod+25,]~~[34,Ikkunalauta 150,SIL20/150/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,80,,0_20_40_20,2400,3000,,mod+25,]~~[35,Ikkunalauta 160,SIL20/160/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,90,,0_20_50_20,2400,3000,,mod+25,]~~[36,Ikkunalauta 170,SIL20/170/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,90,,0_20_50_20,2400,3000,,mod+25,]~~[37,Ikkunalauta 180,SIL20/180/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,90,,0_20_50_20,2400,3000,,mod+25,]~~[38,Ikkunalauta 190,SIL20/190/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,100,,0_20_60_20,2400,3000,,mod+25,]~~[39,Ikkunalauta 200,SIL20/200/20,TEST,Teräs,Hiarc,,,Kulmalista,KAIKKI,,100,,0_20_60_20,2400,3000,,mod+25,]~~[40,,,,,,,,,,,,,,,,,,]~~[41,,,,,,,,,,,,,,,,,,]~~[42,,,,,,,,,,,,,,,,,,]'),
 (20860, 123, 's_listat', '[,,,,,,,,,,,,,,,,]~~[,,,,,,,,,,,,,,,,]~~[,,,,,,,,,,,,,,,,]'),
 (20861, 124, 's_listat', '[,,,,,,,,,,,,,,,,]~~[,,,,,,,,,,,,,,,,]~~[,,,,,,,,,,,,,,,,]'),
-(20862, 100, 's_kiinnikkeetpysty', '[,Testi,10,,,]~~[,Testi,10,,,]~~[,Testi,10,,,]~~[,Testi,10,,,]~~[on,Testi,10,,,]~~[,Testi,10,,,]~~[,TestiNew,12,,,]'),
-(20863, 100, 's_kiinnikkeetvaaka', '[on,Testi,10,Teräs,-,]~~[,Testi,8,Teräs,-,]~~[,Testi,10,Teräs,-,]~~[,Testi,10,Teräs,-,]~~[,Testi,10,Teräs,-,]~~[,testi 123,11,Testi 123,1,]~~[,testi 123,12,Testi 123 ,2,]~~[,Testi 321,13,Testi 321,,]');
+(20864, 100, 's_pituussuunnan', '70,80,90'),
+(20865, 100, 's_leveyssuunnan', '630,480,590'),
+(20866, 100, 's_reunaasetukset', '3.5,32.5,25,25,80,80,32.5,32.5,25,25,80,80');
 
 -- --------------------------------------------------------
 
@@ -1898,7 +1899,7 @@ ALTER TABLE `savingtable`
 -- AUTO_INCREMENT для таблицы `settingsmeta`
 --
 ALTER TABLE `settingsmeta`
-  MODIFY `meta_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20864;
+  MODIFY `meta_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20867;
 
 --
 -- AUTO_INCREMENT для таблицы `settings__templates`

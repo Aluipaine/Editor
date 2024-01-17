@@ -919,31 +919,19 @@ function admin__savelistat(key) {
   });
 }
 
-function admin__savekiinnikkeetpysty(key) {
+function admin__savepituussuunnan(key) {
   material_array = "";
-  materialtabletr = document.querySelectorAll(".kiinnikkeetpysty__tbody tr:not(.headingrow)");
-  inputs = document.querySelectorAll(".kiinnikkeetpysty__tbody input[name='kiinnikkeetpysty']:not(:checked)");
-  inputs.forEach(input => {
-    input.value = "";
-  })
+  
+  inputs = document.querySelectorAll(".pituussuunnan input")
 
-  for (let a = 0; a < materialtabletr.length; a++) {
-    materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
-    material_array += "[";
-    for (let b = 0; b < materialtabletd.length; b++) {
-      material_array += materialtabletd[b].value + ",";
-    }
-    if (a == (materialtabletr.length - 1)) {
-      material_array += "]";
-    }
-    else {
-      material_array += "]~~";
-    }
+  for(let i = 0; i < inputs.length; i++){
+    material_array += (i == 0 ? "" : ",") + inputs[i].value
   }
+
   id_ = preset_id;
   formData = {
     prid: id_,
-    mkey: 's_kiinnikkeetpysty',
+    mkey: 's_pituussuunnan',
     material_array: material_array,
   };
   console.log(formData);
@@ -960,31 +948,48 @@ function admin__savekiinnikkeetpysty(key) {
   });
 }
 
-function admin__savekiinnikkeetvaaka(key) {
+function admin__saveleveyssuunnan(key) {
   material_array = "";
 
-  materialtabletr = document.querySelectorAll(".kiinnikkeetvaaka__tbody tr:not(.headingrow)");
-  inputs = document.querySelectorAll(".kiinnikkeetvaaka__tbody input[name='kiinnikkeetvaaka']:not(:checked)");
-  inputs.forEach(input => {
-    input.value = "";
-  });
-  for (let a = 0; a < materialtabletr.length; a++) {
-    materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
-    material_array += "[";
-    for (let b = 0; b < materialtabletd.length; b++) {
-      material_array += materialtabletd[b].value + ",";
-    }
-    if (a == (materialtabletr.length - 1)) {
-      material_array += "]";
-    }
-    else {
-      material_array += "]~~";
-    }
+  inputs = document.querySelectorAll(".leveyssuunnan input")
+
+  for (let i = 0; i < inputs.length; i++) {
+    material_array += (i == 0 ? "" : ",") + inputs[i].value
   }
+
   id_ = preset_id;
   formData = {
     prid: id_,
-    mkey: 's_kiinnikkeetvaaka',
+    mkey: 's_leveyssuunnan',
+    material_array: material_array,
+  };
+  console.log(formData);
+  $.ajax({
+    type: "POST",
+    url: "vendor/admin__settingsedit.php",
+    data: formData,
+    error: function (jqxhr, status, exception) {
+      //alert('Tietokantavirhe, soita numeroon +358449782028');
+    }
+  }).done(function (data) {
+    console.log("Piu piu pau pau");
+    console.log(data);
+  });
+}
+
+function admin__savereunaasetukset(key) {
+  material_array = "";
+
+  inputs = document.querySelectorAll(".poraukset input")
+
+  for (let i = 0; i < inputs.length; i++) {
+    material_array += (i == 0 ? "" : ",") + inputs[i].value
+  }
+
+  id_ = preset_id;
+  formData = {
+    prid: id_,
+    mkey: 's_reunaasetukset',
     material_array: material_array,
   };
   console.log(formData);
@@ -1371,60 +1376,6 @@ function appendnewlistasetting() {
     </td>
   `;
   
-  t.appendChild(row);
-}
-
-function appendnewpystykiinnikkeetsetting() {
-  t = document.querySelector(".kiinnikkeetpysty__tbody");
-
-  count = t.querySelectorAll("tr").length;
-
-  row = document.createElement("tr");
-  row.innerHTML = `
-    <td>
-        <input name="kiinnikkeetpysty" type="radio" value="" onclick="this.checked ? this.value = 'on' : this.value = '';admin__savekiinnikkeetpysty();" id="kiinnikkeetpysty_`+ count + `">
-        <label for="kiinnikkeetpysty_`+ count + `"></label>
-    </td>
-    <td>
-        <input type="text" value="" class="lineinput" oninput="admin__savekiinnikkeetpysty();">
-    </td>
-    <td>
-        <input type="text" value="" class="lineinput" oninput="admin__savekiinnikkeetpysty();">
-    </td>
-    <td>
-        <input type="text" value="" class="lineinput" oninput="admin__savekiinnikkeetpysty();">
-    </td>
-    <td>
-        <input type="text" value="" class="lineinput" oninput="admin__savekiinnikkeetpysty();">
-    </td>`;
-
-  t.appendChild(row);
-}
-
-function appendnewvaakakiinnikkeetsetting() {
-  t = document.querySelector(".kiinnikkeetvaaka__tbody");
-
-  count = t.querySelectorAll("tr").length;
-
-  row = document.createElement("tr");
-  row.innerHTML = `
-    <td>
-        <input name="kiinnikkeetvaaka" type="radio" value="" onclick="this.checked ? this.value = 'on' : this.value = '';admin__savekiinnikkeetvaaka();" id="kiinnikkeetvaaka_`+ count + `">
-        <label for="kiinnikkeetvaaka_`+ count + `"></label>
-    </td>
-    <td>
-        <input type="text" value="" class="lineinput" oninput="admin__savekiinnikkeetvaaka();">
-    </td>
-    <td>
-        <input type="text" value="" class="lineinput" oninput="admin__savekiinnikkeetvaaka();">
-    </td>
-    <td>
-        <input type="text" value="" class="lineinput" oninput="admin__savekiinnikkeetvaaka();">
-    </td>
-    <td>
-        <input type="text" value="" class="lineinput" oninput="admin__savekiinnikkeetvaaka();">
-    </td>`;
-
   t.appendChild(row);
 }
 
@@ -2868,72 +2819,31 @@ function s_change_malli(letter, l_id) {
         });
       }
 
-      if (key == 's_kiinnikkeetpysty') {
-        t = document.querySelector(".kiinnikkeetpysty__tbody");
-        v_.split("~~").forEach((v) => {
-          v = v.replaceAll('"', '').split(",");
+      if (key == 's_pituussuunnan') {
+        const inputs = document.querySelectorAll(".pituussuunnan input")
+        const data = v_.slice(0, -1).split(",");
 
-          count = t.querySelectorAll("tr").length;
-          row = document.createElement("tr");
-          checked = '';
-          if (v[0] == 'on') {
-            checked = 'checked';
-          }
-          row.innerHTML += `
-            <td>
-              <input name="kiinnikkeetpysty" type="radio" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__savekiinnikkeetpysty();" id="kiinnikkeetpysty_` + count + `" ${checked}>
-              <label for="kiinnikkeetpysty_`+ count + `"></label>
-            </td>`;
-          row.innerHTML += `
-              <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="admin__savekiinnikkeetpysty();">
-              </td>
-              <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="admin__savekiinnikkeetpysty();">
-              </td>
-              <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="admin__savekiinnikkeetpysty();">
-              </td>
-              <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="admin__savekiinnikkeetpysty();">
-              </td>
-              `;
-          t.appendChild(row);
-        });
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].value = data[i]
+        }
       }
 
-      if (key == 's_kiinnikkeetvaaka') {
-        t = document.querySelector(".kiinnikkeetvaaka__tbody");
-        v_.split("~~").forEach((v) => {
-          v = decode_utf8(encode_utf8(v.replaceAll('"', ''))).split(",");
+      if (key == 's_leveyssuunnan') {
+        const inputs = document.querySelectorAll(".leveyssuunnan input")
+        const data = v_.slice(0, -1).split(",");
 
-          count = t.querySelectorAll("tr").length;
-          row = document.createElement("tr");
-          checked = '';
-          if (v[0] == 'on') {
-            checked = 'checked';
-          }
-          row.innerHTML += `
-            <td>
-              <input name="kiinnikkeetvaaka" type="radio" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__savekiinnikkeetvaaka();" id="kiinnikkeetvaaka_` + count + `" ${checked}>
-              <label for="kiinnikkeetvaaka_`+ count + `"></label>
-            </td>`;
-          row.innerHTML += `
-              <td>
-                  <input type="text" value="${v[1]}" class="lineinput" oninput="admin__savekiinnikkeetvaaka();">
-              </td>
-              <td>
-                  <input type="text" value="${v[2]}" class="lineinput" oninput="admin__savekiinnikkeetvaaka();">
-              </td>
-              <td>
-                  <input type="text" value="${v[3]}" class="lineinput" oninput="admin__savekiinnikkeetvaaka();">
-              </td>
-              <td>
-                  <input type="text" value="${v[4]}" class="lineinput" oninput="admin__savekiinnikkeetvaaka();">
-              </td>
-              `;
-          t.appendChild(row);
-        });
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].value = data[i]
+        }
+      }
+
+      if (key == 's_reunaasetukset') {
+        const inputs = document.querySelectorAll(".poraukset input")
+        const data = v_.slice(0, -1).split(",");
+
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].value = data[i]
+        }
       }
     });
     

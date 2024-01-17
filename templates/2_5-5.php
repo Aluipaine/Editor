@@ -138,7 +138,7 @@
                         <div class="col-6">
                           <h4>Pituussuunnan Läpiviennit</h4>
                           <fieldset>
-                            <div class="trow">
+                            <div class="trow pituussuunnan">
                              <div class="modal__row_kvali">
                                <label for="v_target">K-väli, Tavoite </label>
                                <input type="number" id="v_target" placeholder="Tavoiteltu levyn pituus" min="450" value="600">
@@ -158,7 +158,7 @@
                         <div class="col-6">
                           <h4>Leveyssuunnan Läpiviennit </h4>
                           <fieldset>
-                            <div class="trow">
+                            <div class="trow leveyssuunnan">
                              <div class="modal__row_kvali">
                                <label for="p_target">K-väli, Tavoite </label>
                                <input type="number" id="p_target" placeholder="Tavoiteltu levyn pituus" min="570" value="600">
@@ -289,38 +289,7 @@
                        </fieldset>
                    </section>
                   
-                   <section>
-                    <h4>
-                      Pystykiinnikkeet asetukset
-                    </h4>
-                    <table>
-                      <tbody class="kiinnikkeetpysty__tbody tabs__target_table">			
-                        <tr class="headingrow">
-                          <td>Nimi</td>
-                          <td>Paksuus</td>
-                          <td>Lista</td>
-                          <td>Laatu</td>
-                          
-                        </tr>
-                      </tbody>
-                    </table>
-
-                  </section>
-                  <section>
-                    <h4>
-                      Vaakakiinnikkeet asetukset
-                    </h4>
-                    <table>
-                      <tbody class="kiinnikkeetvaaka__tbody tabs__target_table">			
-                        <tr class="headingrow">
-                          <td>Nimi</td>
-                          <td>Paksuus</td>
-                          <td>Materiaali</td>
-                          <td>Laatu</td>                  
-                        </tr>
-                      </tbody>
-                    </table>
-                  </section>
+                   
 
                    <section>
 
@@ -464,7 +433,7 @@
                   <div class="col-6">
                     <h4>Leveyssuunnan Läpiviennit </h4>
                     <fieldset>
-                      <div class="trow">
+                      <div class="trow leveyssuunnan">
                         <div class="modal__row_kvali">
                           <label for="v_target">K-väli, Tavoite </label>
                           <input type="number" id="lt-v_target" placeholder="Tavoiteltu levyn pituus" min="450" value="600">
