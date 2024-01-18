@@ -597,7 +597,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <section class="trow">
               <div class="row">
                 <div class="col-6">
-                  <h4>Pituussuunnan Läpiviennit</h4>
+                  <h4 class="tabs_kiinniket_header">Pituussuunnan Läpiviennit</h4>
                   <fieldset>
                     <div class="trow pituussuunnan">
                      <div class="modal__row_kvali">
@@ -617,7 +617,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                   
                 </div>
                 <div class="col-6">
-                  <h4>Leveyssuunnan Läpiviennit </h4>
+                  <h4 class="tabs_kiinniket_header">Leveyssuunnan Läpiviennit </h4>
                   <fieldset>
                     <div class="trow leveyssuunnan">
                      <div class="modal__row_kvali">

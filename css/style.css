@@ -7544,6 +7544,53 @@ input[type="radio"].mass__selection_btn {
   width: 90%;
 }
 
+.tabs_kiinniket_header{
+  margin:0px 10px 10px 0px;
+  text-align: center;
+}
+
+.tabs__target_indent .leveyssuunnan label, .tabs__target_indent .pituussuunnan label{
+  min-width:250px;
+  margin:5px;
+}
+
+.tabs__target_indent .leveyssuunnan input,
+.tabs__target_indent .pituussuunnan input {
+  text-align: center;
+}
+
+.tabs__target_indent section h3{
+  text-align: center;
+  margin:0 10px 10px 0;
+}
+
+.levy_settings section h3 {
+  text-align: left;
+  margin: 0 10px 10px 0;
+}
+
+.tabs__target_indent .poraukset .col-2{
+  margin-top:49px;
+}
+
+.levy_settings .poraukset .col-2 {
+  margin-top: 25px;
+}
+
+.tabs__target_indent .poraukset .col-2 {
+  margin-top: 49px;
+}
+
+.tabs__target_indent .poraukset input {
+  text-align: center;
+}
+
+.tabs__target_indent .leveyssuunnan,
+.tabs__target_indent .pituussuunnan {
+  text-align: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 1326px) {
   #drawscreen_section_zero div.settings_btn.m_btn {
     display: none;
