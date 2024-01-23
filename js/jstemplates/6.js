@@ -1009,6 +1009,250 @@ function tyosta(levy, evt) {
   apply__deletion_rules();
 }
 
+function tyosto_func(evt){
+  const levy_list = document.querySelectorAll(".dir_y");
+  let levy;
+  var levy_tyostot_y;
+  var levy_tyostot_x;
+
+  for (let levy_init = 0; levy_init < levy_list.length; levy_init++){
+    levy = levy_list[levy_init];
+
+    // Select various elements and values needed for calculations
+    k_one = document.querySelector("#kiinniketys__kiinnike_one");
+    k_two = document.querySelector("#kiinniketys__kiinnike_two");
+    k_three = document.querySelector("#kiinniketys__kiinnike_three");
+    k_four = document.querySelector("#kiinniketys__kiinnike_four");
+    k_five = document.querySelector("#kiinniketys__kiinnike_five");
+    k_six = document.querySelector("#kiinniketys__kiinnike_six");
+    levy_meta = (levy.title).split(",");
+    l_d = 8;
+    k_main_levy = levy.title;
+    k_min_h = parseFloat(document.querySelector("#p_two").value);
+    k_min_w = parseFloat(document.querySelector("#v_two").value);
+    k_main_levy_ = k_main_levy.split(",");
+
+    levy_tyostot_y = levy.querySelector(".levy_tyostot_y");
+    levy_tyostot_x = levy.querySelector(".levy_tyostot_x");
+    //PYSTYKIINNIKKEET
+    if (evt === 3 || evt === 4) {
+      // Remove existing vertical work elements
+      let tyosto_levy = levy.querySelectorAll(".tyostot__tyosto_pysty");
+      let levy_lines_count = levy.querySelectorAll(".tyostot__tyosto_pysty:not(.viim__tyosto_pysty)");
+      // let lines_count = remove_elems.length;
+
+      let lines_count = levy_lines_count.length;
+      
+      for (var i = tyosto_levy.length - 1; i >= 0; i--) {
+        tyosto_levy[i].remove()
+      }
+
+      // Get height of the "levy" and relevant values
+      height_levy = parseFloat(levy.title.split(",")[0]);
+      l_i = document.querySelector("#p_target").value;
+      p_left = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
+      p_right = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
+      p_h_ = (height_levy - (p_left + p_right));
+      p_kaava1 = p_h_ / l_i;
+
+      // Handle cases where the height is less than the minimum required
+      if (p_h_ < k_min_h) {
+        p_h = -1;
+        p_kaava1 = 0;
+        p_c_kaava1 = Math.ceil(p_kaava1);
+        p_t_kaava1 = 1 + Math.trunc(p_kaava1);
+      }
+      else {
+        p_h = p_h_;
+        p_c_kaava1 = Math.ceil(p_kaava1);
+        p_t_kaava1 = 1 + Math.trunc(p_kaava1);
+      }
+
+      if (evt === 3 && k_min_h < parseFloat(k_main_levy_[0]) || evt === 4 && k_min_h < parseFloat(k_main_levy_[0])) {
+        // Calculate the approximate distance between vertical green lines
+        lahinmodmitta = p_h / 25;
+
+        // Determine the number of areas (segments) for vertical green lines
+        areas = Math.ceil(p_c_kaava1);
+
+        // Calculate the number of green lines in each area
+        modcount = Math.floor(lahinmodmitta / areas);
+
+        // Calculate the optimal distance between green lines
+        l_i = parseFloat(modcount * 25);
+
+        // Calculate the total number of green lines needed
+        p_t_kaava1 = Math.floor(p_h / l_i);
+
+        // Adjust calculations if the event is 4 and the total number of green lines is not even
+        if (evt === 4) {
+          if (!isEven(p_t_kaava1)) {
+            // Increase the total number of green lines and recalculate
+            p_c_kaava1 += 1;
+            areas = Math.ceil(p_c_kaava1);
+            modcount = Math.floor(lahinmodmitta / areas);
+            l_i = parseFloat(modcount * 25);
+            p_t_kaava1 = Math.floor(p_h / l_i);
+          }
+        }
+
+        // let remove_elems = document.querySelectorAll(".tyostot__tyosto_pysty:not(.viim__tyosto_pysty)");
+        // let lines_count = remove_elems.length;
+
+        // // remove old lines
+        // for (let init = 0; init < remove_elems.length; init++){
+        //   remove_elems[init].remove();
+        // }
+
+        //console.log(lines_count);
+        for (var j = 0; j < lines_count; j++) {
+          if (j !== 0) {
+            var x = document.createElement("div");
+            // Calculate the left position of the vertical work element
+            tas_vord = (j * l_i) / 5 - 1 + "px";
+            x.style.left = tas_vord;
+
+            // Set the styles and classes for the new element
+            x.classList.add("tyostot__tyosto");
+            x.classList.add("tyostot__tyosto_pysty");
+            x.style.height = "100%";
+            x.style.width = parseFloat(8 / 5) + "px";
+            x.style.position = "absolute";
+
+            // Append the new element to the container (levy_tyostot_x)
+            levy_tyostot_x.prepend(x);
+
+            // Create an input element for the coordinate value
+            var x_cord = document.createElement("input");
+            x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
+            x_cord.classList.add("x_cord_mki");
+            x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
+            x_cord.type = "text";
+
+            // Calculate and set the coordinate value for the input
+            cord = (j * l_i) - (j - 1) * (parseFloat(l_i));
+            x_cord.value = cord.toFixed(0);
+            x_cord.dataset.from = x_cord.value;
+            x_cord.style.float = "right";
+            x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
+
+            // Append the coordinate input to the new element
+            x.prepend(x_cord);
+
+            // Create a delete button element and append it to the new element
+            var x_del = document.createElement("div");
+            x_del.classList.add("x_del");
+            x_del.setAttribute("onclick", "tyosto__del(this);");
+            x.prepend(x_del);
+          }
+        }
+      }
+      // Adjust the right side
+      t_last_right(levy, levy_tyostot_x, evt);
+      // Adjust the left side
+      t_last_left(levy, levy_tyostot_x, evt);
+    }
+
+    //VAAKAKIINNIKKEET
+    if (evt === 7 || evt === 8) {
+      // Select all existing horizontal work elements within the 'levy' element and remove them
+      let tyosto_levy = levy.querySelectorAll(".tyostot__tyosto_vaaka");
+      let levy_lines_count = levy.querySelectorAll(".tyostot__tyosto_vaaka:not(.viim__tyosto_vaaka)");
+
+      let lines_count = levy_lines_count.length;
+      
+      for (var i = tyosto_levy.length - 1; i >= 0; i--) {
+        tyosto_levy[i].remove();
+      }
+
+      // Get input values and calculate parameters for creating new horizontal work elements
+      // based on the specified target, upper and lower bounds, and width of the 'levy'.
+      l_i = document.querySelector("#v_target").value;  // Target value for the horizontal work elements
+      v_u = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);  // Upper bound value
+      v_b = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);  // Lower bound value
+      width_levy = parseFloat(document.querySelector("#k_settings__levy_levysizeh").value);  // Width of the 'levy'
+      v_w_ = (width_levy - (v_u + v_b));  // Calculating available width for horizontal work elements
+      v_kaava1 = v_w_ / l_i;  // Calculating the formula for positioning horizontal work elements
+
+      // Check if the available width is less than the minimum required width (k_min_w)
+      if (v_w_ < k_min_w) {
+        v_w = -1;  // Set a flag indicating insufficient width
+        p_kaava1 = 0;  // Reset parameter
+        v_c_kaava1 = 0;  // Reset parameter
+        v_t_kaava1 = 0;  // Reset parameter
+      } else {
+        // Set parameters for creating horizontal work elements when there is sufficient width
+        v_w = v_w_;
+        v_c_kaava1 = parseFloat(1 + Math.ceil(v_kaava1));  // Calculate the ceiling value for count
+        v_t_kaava1 = parseFloat(1 + Math.trunc(v_kaava1));  // Calculate the truncated value for count
+      }
+      // l_i = 
+      // if (evt === 8) {
+      //   if (isEven(v_t_kaava1)) {}
+      //   else {
+      //     v_t_kaava1 += 1;
+
+      //   }
+      // }
+      if (evt === 7 && k_min_w < parseFloat(k_main_levy_[1]) || evt === 8 && k_min_w < parseFloat(k_main_levy_[1])) {
+
+
+        if (evt === 8) {
+          if (isEven(v_t_kaava1)) {
+            lahinmodmitta = (v_w / 25);
+            areas = Math.ceil(v_c_kaava1);
+
+            modcount = Math.floor((lahinmodmitta) / areas);
+            l_i = parseFloat(modcount * 25);
+            v_t_kaava1 = Math.floor(v_w / l_i);
+          }
+          else {
+            v_c_kaava1 += 1;
+
+            areas = Math.ceil(v_c_kaava1);
+            lahinmodmitta = (v_w / 25);
+            modcount = Math.floor((lahinmodmitta) / areas);
+            l_i = parseFloat(modcount * 25);
+            v_t_kaava1 = Math.floor(v_w / l_i);
+          }
+        }
+        for (var g = 1; g < lines_count; g++) {
+          if (g !== 0) {
+            var x = document.createElement("div");
+            tas_vord = (g * l_i) / 5 - 1 + "px";
+            x.style.bottom = tas_vord;
+            x.classList.add("tyostot__tyosto");
+            x.classList.add("tyostot__tyosto_vaaka");
+            x.style.width = "100%";
+            x.style.height = parseFloat(8 / 5) + "px";
+            x.style.position = "absolute";
+            levy_tyostot_y.appendChild(x);
+            var x_cord = document.createElement("input");
+            x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
+            x_cord.classList.add("x_cord_mki");
+            x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
+            x_cord.type = "text";
+            x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
+            cord = (g * l_i) - ((g - 1) * l_i);
+            x_cord.value = cord.toFixed(0);
+            x_cord.dataset.from = x_cord.value;
+            // x_cord.style.bottom = "19px";
+            x.prepend(x_cord);
+            var x_del = document.createElement("div");
+            x_del.classList.add("x_del");
+            x_del.setAttribute("onclick", "tyosto__del(this);");
+            x.prepend(x_del);
+          }
+        }
+      }
+      t_last_top(levy, levy_tyostot_y, evt);
+      t_last_bottom(levy, levy_tyostot_y, evt);
+    }
+
+    give__tyosto_cord(levy);
+  }
+}
+
 function tasoita__tyostot(levy,evt) {
   if (evt === 1 || evt === 2 || evt === 3 || evt === 4) {
     // Remove existing vertical work elements

@@ -577,13 +577,13 @@
   </div>
   <fieldset class="spontanous__kiinniketys">
     <input type="radio" id="kiinniketys__pkiinnike_three__" name="levy_porautus_vertical" value="Tasamalli">
-    <label for="kiinniketys__pkiinnike_three__">Tasamalli pysty</label>
+    <label for="kiinniketys__pkiinnike_three__" onclick="tyosto_func(3)">Tasamalli pysty</label>
     <input type="radio" id="kiinniketys__pkiinnike_four__" name="levy_porautus_vertical" value="Pariton tasa">
-    <label for="kiinniketys__pkiinnike_four__">Pariton tasa pysty</label>
+    <label for="kiinniketys__pkiinnike_four__" onclick="tyosto_func(4)">Pariton tasa pysty</label>
     <input type="radio" id="kiinniketys__vkiinnike_three__" name="levy_porautus_horizontal" value="Tasamalli">
-    <label for="kiinniketys__vkiinnike_three__">Tasamalli vaaka</label>
+    <label for="kiinniketys__vkiinnike_three__" onclick="tyosto_func(7)">Tasamalli vaaka</label>
     <input type="radio" id="kiinniketys__vkiinnike_four__" name="levy_porautus_horizontal" value="Pariton tasa">
-    <label for="kiinniketys__vkiinnike_four__">Pariton tasa vaaka</label>
+    <label for="kiinniketys__vkiinnike_four__" onclick="tyosto_func(8)">Pariton tasa vaaka</label>
   </fieldset>
   
 </div>
