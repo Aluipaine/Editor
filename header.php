@@ -47,7 +47,8 @@
   <script src='/js/html2canvas.min.js'></script>
 </head>
 <body>
-<section class="preloader active">
+<section class="preloader">
+ <!--Add class active to activate -->
   <div class="preloader_bg"></div>
   <div class="preloader__img">
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">

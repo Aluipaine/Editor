@@ -357,29 +357,38 @@ function changeheights() {
   
 }
 function changesize(maxval) {
+  try {
+    changeheights();
+    if (maxval) {
+      reserve_maxval = maxval;
+      mval_cord = maxval.split("|")[0];
+      mval_dir = maxval.split("|")[1];
+      if (mval_dir === "y" && mval_cord > 3650 || mval_dir === "x" && mval_cord > 9999) {
+        return;
+      }
+      
+      if(mval_dir == "y") {
+        document.querySelector(".drawarea__left b.end_measure").innerHTML = parseFloat(mval_cord) - saumaset_hm;
+      }
+      else if(mval_dir == "x") {
+        document.querySelector(".drawarea__bottom b.end_measure").innerHTML = parseFloat(mval_cord) - saumaset_vm;
+      }
+    }
+    height = document.querySelector('.drawarea_h').value;
+    width = document.querySelector('.drawarea_w').value;
 
-  changeheights();
-  if (maxval) {
-    mval_cord = maxval.split("|")[0];
-    mval_dir = maxval.split("|")[1];
-    if (mval_dir === "y" && mval_cord > 3650 || mval_dir === "x" && mval_cord > 9999) {
-      return;
-    }
-    
-    if(mval_dir == "y") {
-      document.querySelector(".drawarea__left b.end_measure").innerHTML = parseFloat(mval_cord) - saumaset_hm;
-    }
-    else if(mval_dir == "x") {
-      document.querySelector(".drawarea__bottom b.end_measure").innerHTML = parseFloat(mval_cord) - saumaset_vm;
-    }
+    thisroom = document.querySelector(".house__wall_" + current_room.toLowerCase());
+
+  
+    thisroom.querySelectorAll("input")[0].value = parseFloat(height);
+    thisroom.querySelectorAll("input")[1].value = parseFloat(width);
+  } catch (error) {
+    setTimeout(() => {
+      changesize(reserve_maxval);
+    }, 500);
   }
-  height = document.querySelector('.drawarea_h').value;
-  width = document.querySelector('.drawarea_w').value;
-
-  thisroom = document.querySelector(".house__wall_" + current_room.toLowerCase());
-
-  thisroom.querySelectorAll("input")[0].value = parseFloat(height);
-  thisroom.querySelectorAll("input")[1].value = parseFloat(width);
+ 
+ 
 
   wall_oncross = document.querySelector(".current__housewall");
 
@@ -456,7 +465,6 @@ function changesize(maxval) {
  changeheights();
  adjust_roomsizes();
 }
-
 function changesize__bottom(maxval) {
   
 
