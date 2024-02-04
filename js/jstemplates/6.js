@@ -454,7 +454,7 @@ function kiinnike_default_initialization() {
   for (var i = five_levy_closers.length - 1; i >= 0; i--) {
     five_levy_closers[i].remove();
   }
-  let k_levys = canvas.querySelectorAll(".levy");
+  k_levys = canvas.querySelectorAll(".levy");
 
   tyostot__tyosto_pysty = canvas.querySelectorAll(".levy_tyostot_x > div");
   tyostot__tyosto_vaaka = canvas.querySelectorAll(".levy_tyostot_y > div");
@@ -1250,6 +1250,9 @@ function tyosto_func(evt){
     }
 
     give__tyosto_cord(levy);
+    k_levys.forEach(kl => {
+      countdown__kiinnikkeet(kl);
+    });
   }
 }
 
