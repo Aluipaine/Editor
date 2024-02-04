@@ -536,14 +536,7 @@ function aloita_tyosto_kiinnikkeet(specification_launch) {
     levyt.forEach(element => tyosta(element, evt));
   }
 
-  if (document.querySelector("#kiinniketys__pkiinnike_three__").checked === true) {
-    evt = 3;
-    levyt.forEach(element => tasoita__tyostot(element, evt));
-  }
-  if (document.querySelector("#kiinniketys__pkiinnike_four__").checked === true) {
-    evt = 4;
-    levyt.forEach(element => tasoita__tyostot(element, evt));
-  }
+
 
   pysty_event = evt;
   if (document.querySelector("#kiinniketys__vkiinnike_one").checked === true) {
@@ -563,14 +556,7 @@ function aloita_tyosto_kiinnikkeet(specification_launch) {
     levyt.forEach(element => tyosta(element, evt));
   }
 
-  if (document.querySelector("#kiinniketys__vkiinnike_three__").checked === true) {
-    evt = 7;
-    levyt.forEach(element => tasoita__tyostot(element, evt));
-  }
-  if (document.querySelector("#kiinniketys__vkiinnike_four__").checked === true) {
-    evt = 8;
-    levyt.forEach(element => tasoita__tyostot(element, evt));
-  }
+
   vaaka_event = evt;
 
   if(document.querySelector(".db_saumatable")) {
@@ -1004,7 +990,7 @@ function tyosta(levy, evt) {
 
   give__tyosto_cord(levy);
 
-
+  
   removeduplicatecords__adjustcords();
   apply__deletion_rules();
 }
@@ -1156,21 +1142,17 @@ function tyosto_func(evt){
     //VAAKAKIINNIKKEET
     if (evt === 7 || evt === 8) {
       // Select all existing horizontal work elements within the 'levy' element and remove them
-      let tyosto_levy = levy.querySelectorAll(".tyostot__tyosto_vaaka");
-      let levy_lines_count = levy.querySelectorAll(".tyostot__tyosto_vaaka:not(.viim__tyosto_vaaka)");
-
-      let lines_count = levy_lines_count.length;
+      let levy_lines_count = levy.querySelectorAll(".tyostot__tyosto_vaaka:not(.alku__tyosto_vaaka):not(.viim__tyosto_vaaka)");
+      lines_count = levy_lines_count.length;
+      l_i = roundToNearest25(parseFloat(levy.querySelector(".levy_h").innerText) / (lines_count+1));  // Target value for the horizontal work elements
       
-      for (var i = tyosto_levy.length - 1; i >= 0; i--) {
-        tyosto_levy[i].remove();
-      }
+   
 
       // Get input values and calculate parameters for creating new horizontal work elements
       // based on the specified target, upper and lower bounds, and width of the 'levy'.
-      l_i = document.querySelector("#v_target").value;  // Target value for the horizontal work elements
       v_u = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);  // Upper bound value
       v_b = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);  // Lower bound value
-      width_levy = parseFloat(document.querySelector("#k_settings__levy_levysizeh").value);  // Width of the 'levy'
+      width_levy = parseFloat(levy.querySelector(".levy_h").innerText);  // Width of the 'levy'
       v_w_ = (width_levy - (v_u + v_b));  // Calculating available width for horizontal work elements
       v_kaava1 = v_w_ / l_i;  // Calculating the formula for positioning horizontal work elements
 
@@ -1195,64 +1177,25 @@ function tyosto_func(evt){
       //   }
       // }
       if (evt === 7 && k_min_w < parseFloat(k_main_levy_[1]) || evt === 8 && k_min_w < parseFloat(k_main_levy_[1])) {
-
-
-        if (evt === 8) {
-          if (isEven(v_t_kaava1)) {
-            lahinmodmitta = (v_w / 25);
-            areas = Math.ceil(v_c_kaava1);
-
-            modcount = Math.floor((lahinmodmitta) / areas);
-            l_i = parseFloat(modcount * 25);
-            v_t_kaava1 = Math.floor(v_w / l_i);
-          }
-          else {
-            v_c_kaava1 += 1;
-
-            areas = Math.ceil(v_c_kaava1);
-            lahinmodmitta = (v_w / 25);
-            modcount = Math.floor((lahinmodmitta) / areas);
-            l_i = parseFloat(modcount * 25);
-            v_t_kaava1 = Math.floor(v_w / l_i);
-          }
-        }
-        for (var g = 1; g < lines_count; g++) {
+        for(var g = lines_count; g>=0; g--) {
           if (g !== 0) {
-            var x = document.createElement("div");
-            tas_vord = (g * l_i) / 5 - 1 + "px";
+            x = levy.querySelectorAll(".tyostot__tyosto_vaaka:not(.alku__tyosto_vaaka):not(.viim__tyosto_vaaka)")[g-1];
+            tas_vord = (((g) * l_i) / 5) - 1 + "px";
+            console.log(tas_vord);
             x.style.bottom = tas_vord;
-            x.classList.add("tyostot__tyosto");
-            x.classList.add("tyostot__tyosto_vaaka");
-            x.style.width = "100%";
-            x.style.height = parseFloat(8 / 5) + "px";
-            x.style.position = "absolute";
-            levy_tyostot_y.appendChild(x);
-            var x_cord = document.createElement("input");
-            x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
-            x_cord.classList.add("x_cord_mki");
-            x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
-            x_cord.type = "text";
-            x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
-            cord = (g * l_i) - ((g - 1) * l_i);
-            x_cord.value = cord.toFixed(0);
-            x_cord.dataset.from = x_cord.value;
-            // x_cord.style.bottom = "19px";
-            x.prepend(x_cord);
-            var x_del = document.createElement("div");
-            x_del.classList.add("x_del");
-            x_del.setAttribute("onclick", "tyosto__del(this);");
-            x.prepend(x_del);
           }
         }
       }
-      t_last_top(levy, levy_tyostot_y, evt);
-      t_last_bottom(levy, levy_tyostot_y, evt);
+      
     }
 
-    give__tyosto_cord(levy);
-    k_levys.forEach(kl => {
-      countdown__kiinnikkeet(kl);
-    });
+    
+  }
+  removeduplicatecords__adjustcords();
+  apply__deletion_rules();
+  for (var i = k_levys.length - 1; i >= 0; i--) {
+    give__tyosto_cord(k_levys[i]);
+    countdown__kiinnikkeet(k_levys[i]);
   }
 }
 
