@@ -1022,20 +1022,12 @@ function tyosto_func(evt){
     levy_tyostot_x = levy.querySelector(".levy_tyostot_x");
     //PYSTYKIINNIKKEET
     if (evt === 3 || evt === 4) {
-      // Remove existing vertical work elements
-      let tyosto_levy = levy.querySelectorAll(".tyostot__tyosto_pysty");
-      let levy_lines_count = levy.querySelectorAll(".tyostot__tyosto_pysty:not(.viim__tyosto_pysty)");
-      // let lines_count = remove_elems.length;
-
+      let levy_lines_count = levy.querySelectorAll(".tyostot__tyosto_pysty:not(.alku__tyosto_pysty):not(.viim__tyosto_pysty)");
       let lines_count = levy_lines_count.length;
-      
-      for (var i = tyosto_levy.length - 1; i >= 0; i--) {
-        tyosto_levy[i].remove()
-      }
 
       // Get height of the "levy" and relevant values
       height_levy = parseFloat(levy.title.split(",")[0]);
-      l_i = document.querySelector("#p_target").value;
+      l_i = roundToNearest25(parseFloat(levy.querySelector(".levy_w").innerText) / (lines_count+1));  // Target value for the vertical work elements
       p_left = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
       p_right = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
       p_h_ = (height_levy - (p_left + p_right));
@@ -1055,88 +1047,19 @@ function tyosto_func(evt){
       }
 
       if (evt === 3 && k_min_h < parseFloat(k_main_levy_[0]) || evt === 4 && k_min_h < parseFloat(k_main_levy_[0])) {
-        // Calculate the approximate distance between vertical green lines
-        lahinmodmitta = p_h / 25;
-
-        // Determine the number of areas (segments) for vertical green lines
-        areas = Math.ceil(p_c_kaava1);
-
-        // Calculate the number of green lines in each area
-        modcount = Math.floor(lahinmodmitta / areas);
-
-        // Calculate the optimal distance between green lines
-        l_i = parseFloat(modcount * 25);
-
-        // Calculate the total number of green lines needed
-        p_t_kaava1 = Math.floor(p_h / l_i);
-
-        // Adjust calculations if the event is 4 and the total number of green lines is not even
-        if (evt === 4) {
-          if (!isEven(p_t_kaava1)) {
-            // Increase the total number of green lines and recalculate
-            p_c_kaava1 += 1;
-            areas = Math.ceil(p_c_kaava1);
-            modcount = Math.floor(lahinmodmitta / areas);
-            l_i = parseFloat(modcount * 25);
-            p_t_kaava1 = Math.floor(p_h / l_i);
-          }
-        }
-
-        // let remove_elems = document.querySelectorAll(".tyostot__tyosto_pysty:not(.viim__tyosto_pysty)");
-        // let lines_count = remove_elems.length;
-
-        // // remove old lines
-        // for (let init = 0; init < remove_elems.length; init++){
-        //   remove_elems[init].remove();
-        // }
 
         //console.log(lines_count);
-        for (var j = 0; j < lines_count; j++) {
+        for(var j = lines_count; j>=0; j--) {
           if (j !== 0) {
-            var x = document.createElement("div");
+            x = levy.querySelectorAll(".tyostot__tyosto_pysty:not(.alku__tyosto_pysty):not(.viim__tyosto_pysty)")[j-1];
             // Calculate the left position of the vertical work element
-            tas_vord = (j * l_i) / 5 - 1 + "px";
+            tas_vord = (((j) * l_i) / 5) - 1 + "px";
             x.style.left = tas_vord;
 
-            // Set the styles and classes for the new element
-            x.classList.add("tyostot__tyosto");
-            x.classList.add("tyostot__tyosto_pysty");
-            x.style.height = "100%";
-            x.style.width = parseFloat(8 / 5) + "px";
-            x.style.position = "absolute";
-
-            // Append the new element to the container (levy_tyostot_x)
-            levy_tyostot_x.prepend(x);
-
-            // Create an input element for the coordinate value
-            var x_cord = document.createElement("input");
-            x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
-            x_cord.classList.add("x_cord_mki");
-            x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
-            x_cord.type = "text";
-
-            // Calculate and set the coordinate value for the input
-            cord = (j * l_i) - (j - 1) * (parseFloat(l_i));
-            x_cord.value = cord.toFixed(0);
-            x_cord.dataset.from = x_cord.value;
-            x_cord.style.float = "right";
-            x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
-
-            // Append the coordinate input to the new element
-            x.prepend(x_cord);
-
-            // Create a delete button element and append it to the new element
-            var x_del = document.createElement("div");
-            x_del.classList.add("x_del");
-            x_del.setAttribute("onclick", "tyosto__del(this);");
-            x.prepend(x_del);
           }
         }
       }
-      // Adjust the right side
-      t_last_right(levy, levy_tyostot_x, evt);
-      // Adjust the left side
-      t_last_left(levy, levy_tyostot_x, evt);
+   
     }
 
     //VAAKAKIINNIKKEET
