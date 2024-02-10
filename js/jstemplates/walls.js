@@ -335,7 +335,6 @@ function siirto_muualle() {
 
 
 function osittainen_siirto_muualle() {
-
   if(document.querySelector("#copiedcanvases .canvas:nth-child(4)")) {
     document.querySelector("#copiedcanvases").style.display = "flex";
     document.querySelector("#box-wrapper > main").style.display = "none";
@@ -406,8 +405,16 @@ function osittainen_siirto_muualle() {
   // secondcanvas.style.display ="block";
   // copiedcanvases.push(secondcanvas);
 
+  skipping__room_ = current_room.replaceAll("a","0").replaceAll("b","1").replaceAll("c","2").replaceAll("d","3");
+  skipping__room = parseFloat(skipping__room_);
+
+
   (async () => {
     for (var z = 0; z < rooms_vaaka.length; z++) {
+
+      if(z == skipping__room) {
+        return
+      }
       body = document.body;
       body.classList.add("bg");
       realcount = Math.floor(parseFloat(z) + 1);
@@ -472,7 +479,6 @@ function osittainen_siirto_muualle() {
         h_parent.appendChild(horizontals_original[i]);
       }
       levyta();
-      submitprogress('', 'adding', '', 'sau');
       await sleep(3000);
       $('#step_drawscreen').val('drawscreen_section_five');
       refresh__drawcontrols();
