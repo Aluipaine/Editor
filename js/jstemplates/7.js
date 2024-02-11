@@ -211,14 +211,13 @@ function create__levy_excel(now) {
 
       lw = parseFloat(item.querySelector(".levy_w").innerText);
       lh = parseFloat(item.querySelector(".levy_h").innerText);
-      if (lw > lh) {
-        h3.innerHTML = lh;
-        h4.innerHTML = lw;
+
+      if (editor_orientation == "vertical"){
+        lw = [lh, lh = lw][0];
       }
-      else if (lw <= lh) {
-        h3.innerHTML = lw;
-        h4.innerHTML = lh;
-      }
+
+      h3.innerHTML = lw;
+      h4.innerHTML = lh;
 
       for (var i = x_kiinnikkeet.length - 1; i >= 0; i--) {
         if (lw > lh) {

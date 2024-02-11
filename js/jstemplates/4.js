@@ -5,6 +5,9 @@ s_h = 0;
 s_v = 0;
 lvalarm = false;
 
+editor_orientation = "horizontal";
+// can be horizontal(default) and vertical
+
 add_skipped_penalty_vertical = 0;
 add_skipped_penalty_horizontal = 0;
 
@@ -167,11 +170,21 @@ function saumoita(mode) {
 function saumoitus__examplephoto() {
     var examplephoto = document.getElementById("sauma__saumoitus_photo");
     if (document.getElementById("settings__sauma_pysty").checked) {
+        // horizontal
         examplephoto.src = "/img/saumoitus/s1.jpg";
+        editor_orientation = "horizontal";
     }
     if (document.getElementById("settings__sauma_vaaka").checked) {
+        // vertical
         examplephoto.src = "/img/saumoitus/s1.jpg";
+        editor_orientation = "vertical";
     }
+
+    var leveys__input_container = document.getElementById('settings__sauma_intervalx');
+    // width
+    var pituus__input_container = document.getElementById('settings__sauma_intervaly');
+    // height
+
     // other variables
     if (document.getElementById("settings__sauma_pysty").checked) {
         if (document.getElementById('settings__saumahanta-oik').checked) {
