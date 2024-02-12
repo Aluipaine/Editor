@@ -216,6 +216,10 @@ h1 {
   flex: 0 0 30%;
 }
 
+.col-3 {
+  flex: 0 0 24%;
+}
+
 .col-2 {
   flex: 0 0 16%;
 }
@@ -1339,8 +1343,15 @@ body.step_screen .drawarea__control.disabled {
   padding: 0 10px;
 } 
 
-.house__wall_asjarj {
+.house__inputrow input {
+  margin-right: 4px;
+  padding: 13px 6px 10px 6px;
+  width: unset;
+  max-width: unset;
+}
 
+.house__parentrow {
+  align-items: center;
 }
 
 .house__types {
@@ -1349,10 +1360,13 @@ body.step_screen .drawarea__control.disabled {
   flex-wrap: wrap;
 
   max-width: 300px;
+
+  justify-content: center;
 }
 
 .house__types h2 {
   width: 100%;
+  text-align: center;
 }
 
 .house__types_type {
@@ -2105,8 +2119,9 @@ input.wall_tochange_2 {
 }
 #rooms .prev_btn {
   margin: 0;
-  margin-left: auto;
-  width: 300px;
+  width: auto;
+  min-width: unset;
+  max-width: unset;
 }
 
 .commentbox__name {

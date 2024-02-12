@@ -245,10 +245,6 @@ function siirto_muualle() {
         h_parent.appendChild(horizontals_original[i]);
       }
       await sleep(3000);
-      // levyta();
-      submitprogress('', 'adding', '', 'sau');
-      submitprogress('', 'save');
-      await sleep(3000);
       $('#step_drawscreen').val('drawscreen_section_five');
       refresh__drawcontrols();
       updatearea();
@@ -329,6 +325,8 @@ function siirto_muualle() {
       refresh__drawcontrols();
       body.classList.remove("bg");
       await sleep(3000);
+      $('#step_drawscreen').val('drawscreen_section_eight');
+      refresh__drawcontrols();
     })();
   }
 }
