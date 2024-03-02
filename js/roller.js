@@ -1,3 +1,9 @@
+/**
+ * Repositions the boxWrapper element to the specified x and y coordinates.
+ * @param {number} x - The new x-coordinate for the boxWrapper element.
+ * @param {number} y - The new y-coordinate for the boxWrapper element.
+ * @returns None
+ */
 var box_upper = document.getElementById("box_upper");
 var boxWrapper = document.getElementById("box-wrapper");
 var upper_mm = document.querySelector('.box__upper_mm');
@@ -17,6 +23,12 @@ function repositionElement(x, y) {
     boxWrapper.style.top = y;
 }
 
+/**
+ * Resize the box elements based on the provided width and height values.
+ * @param {number} w - The new width value for the box elements.
+ * @param {number} h - The new height value for the box elements.
+ * @returns None
+ */
 function resize(w, h) {
     if(h < bw_h) {
         box_upper.style.maxHeight = (boxWrapper.offsetHeight) + 'px';
@@ -33,6 +45,11 @@ function resize(w, h) {
     
 }
 
+/**
+ * Get the current rotation angle of an element in degrees.
+ * @param {HTMLElement} el - The element to get the rotation angle from.
+ * @returns {number} The current rotation angle of the element in degrees.
+ */
 function getCurrentRotation(el) {
     var st = window.getComputedStyle(el, null);
     var tm = st.getPropertyValue("-webkit-transform") ||
@@ -49,12 +66,30 @@ function getCurrentRotation(el) {
     return 0;
 }
 
+/**
+ * Function to handle resizing of a box element based on mouse or touch events.
+ * @param {Event} event - The event object triggering the resize.
+ * @param {boolean} [left=false] - Indicates if resizing is happening towards the left.
+ * @param {boolean} [top=false] - Indicates if resizing is happening towards the top.
+ * @param {boolean} [xResize=false] - Indicates if resizing is happening along the x-axis.
+ * @param {boolean} [yResize=false] - Indicates if resizing is happening along the y-axis.
+ * @returns None
+ */
 function rotateBox(deg) {
     boxWrapper.style.transform = `rotate(${deg}deg)`;
 }
 // handle resize
 var bottomMid = document.getElementById("box_upper__bottom-mid");
 
+/**
+ * Handles resizing of an element based on mouse or touch events.
+ * @param {Event} event - The event object triggering the resize.
+ * @param {boolean} [left=false] - Indicates if resizing is happening towards the left.
+ * @param {boolean} [top=false] - Indicates if resizing is happening towards the top.
+ * @param {boolean} [xResize=false] - Indicates if resizing is happening along the x-axis.
+ * @param {boolean} [yResize=false] - Indicates if resizing is happening along the y-axis.
+ * @returns None
+ */
 function resizeHandler(event, left = false, top = false, xResize = false, yResize = false) {
 
     touches = event.touches;

@@ -1,3 +1,8 @@
+/**
+ * Saves the given array data to the server using an AJAX POST request.
+ * @param {string} array - The array data to be saved
+ * @returns None
+ */
 function save(array) {
     type = array.split("~~")[0];
     current_project_id = parseFloat(document.querySelector("#current_project_id").value);
@@ -23,6 +28,12 @@ function save(array) {
 }
 
 
+/**
+ * Function to restore progress in the application based on saved data.
+ * This function performs multiple asynchronous AJAX calls to retrieve and restore
+ * various settings and user inputs for a specific project.
+ * @returns None
+ */
 function restoreprogress() {
     lvalarm = true;
     sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -254,6 +265,11 @@ function restoreprogress() {
 }
 
 
+/**
+ * Deletes data from the database based on the input step and array provided.
+ * @param {string} t_array - The array containing data to be deleted.
+ * @returns None
+ */
 function delete_from_db(t_array) {
     console.log(t_array);
     array = "";

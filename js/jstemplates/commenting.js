@@ -1,4 +1,16 @@
 kommentti_count = 0;
+/**
+ * Creates a new comment element based on the provided parameters and appends it to the DOM.
+ * @param {string} mode - The mode of the comment.
+ * @param {string} type - The type of the comment.
+ * @param {string} mode_name - The name of the mode.
+ * @param {number} mode_ycord - The y-coordinate of the mode.
+ * @param {number} mode_xcord - The x-coordinate of the mode.
+ * @param {number} mode_hcord - The height coordinate of the mode.
+ * @param {number} mode_wcord - The width coordinate of the mode.
+ * @param {number} mode_count - The count of the mode.
+ * @param
+ */
 // Создание комментария
 function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hcord, mode_wcord, mode_count, mode_id, mode_specifications, ir_mitta_comment, ir_mitta_cfrom, ir_mitta_cto) {
   new_com_id = 0;
@@ -143,6 +155,12 @@ function comment__create(mode, type, mode_name, mode_ycord, mode_xcord, mode_hco
     });
   }, 500);
 }
+/**
+ * Changes the coordinates of new div elements and retrieves the value of an input element.
+ * This function selects specific elements from the DOM using querySelector and updates their positions.
+ * It also retrieves the value of an input element with the id 'step_drawscreen'.
+ * @returns None
+ */
 function change__newdiv_cord_comment() {
   const drawscreen_section_one = document.querySelector('#drawscreen_section_one');
   const drawscreen_section_two = document.querySelector('#drawscreen_section_two');
@@ -152,6 +170,12 @@ function change__newdiv_cord_comment() {
 }
 
 
+/**
+ * This function handles null comment cord.
+ * It selects elements from the DOM based on their IDs and sets values accordingly.
+ * If the input step is "drawscreen_section_one", it sets the values of cord_up and cord_left to "0".
+ * @returns None
+ */
 function null__comment_cord() {
   const drawscreen_section_one = document.querySelector('#drawscreen_section_one');
   const drawscreen_section_two = document.querySelector('#drawscreen_section_two');
@@ -165,6 +189,10 @@ function null__comment_cord() {
 
 }
 
+/**
+ * Retrieves the coordinates of specific elements based on the input step provided.
+ * @returns None
+ */
 function give__comment_cord() {
   const drawscreen_section_one = document.querySelector('#drawscreen_section_one');
   const drawscreen_section_two = document.querySelector('#drawscreen_section_two');
@@ -181,6 +209,11 @@ function give__comment_cord() {
   }
 }
 
+/**
+ * Checks the input value against the maximum value allowed and updates the styling accordingly.
+ * @param {HTMLElement} inp - The input element to check.
+ * @returns None
+ */
 function commentcord__check(inp) {
   console.log("Cord check inp " + parseFloat(inp.value) + " --- " + parseFloat(inp.getAttribute("max")));
 
@@ -196,6 +229,11 @@ function commentcord__check(inp) {
   }
 }
 
+/**
+ * Checks if an element with the id 'kommentti_comment_from' exists in the document.
+ * If it does, it retrieves the value of the element and sets it as the value of the element.
+ * @returns None
+ */
 if (document.querySelector('#kommentti_comment_from')) {
   user = document.querySelector("#kommentti_comment_from").value;
   document.querySelector("#kommentti_comment_from").value = user;
@@ -212,6 +250,19 @@ function delete_comment(id) {
 
 
 
+/**
+ * Opens a comment modal with the specified details and loads answers related to the comment.
+ * @param {string} id - The ID of the comment.
+ * @param {string} name - The name of the commenter.
+ * @param {string} tiedostot - The files attached to the comment.
+ * @param {string} from - The sender of the comment.
+ * @param {string} to - The recipient of the comment.
+ * @param {string} priority - The priority of the comment.
+ * @param {string} deadline - The deadline of the comment.
+ * @param {string} aihe - The subject of the comment.
+ * @param {string} content - The content of the comment.
+ * @
+ */
 function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, content, comment_id) {
   document.querySelector("#comment__answer_to").value = id;
   document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');
@@ -300,6 +351,11 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
   });
 }
 
+/**
+ * Function to mark a comment as acknowledged by sending a POST request to the server.
+ * @param {HTMLElement} comment_id - The HTML element representing the comment to be acknowledged.
+ * @returns None
+ */
 function comment__kuittaus(comment_id) {
   date = new Date();
 
@@ -378,6 +434,12 @@ function comment__kuittaus(comment_id) {
 // }
 
 
+/**
+ * Initializes room comments based on the room and menu provided.
+ * @param {HTMLElement} room - The room element to initialize comments for.
+ * @param {HTMLElement} menu - The menu element associated with the room.
+ * @returns None
+ */
 function initializeroom_comments(room, menu) {
   ir_no = room.dataset.room;
 
@@ -478,6 +540,11 @@ function initializeroom_comments(room, menu) {
   refresh__drawcontrols();
 }
 
+/**
+ * Restores a comment based on the provided data in the grand_array.
+ * @param {string} ga - The string containing the data for the comment.
+ * @returns None
+ */
 function comment__restore(ga) {
   grand_array = ga.split(",");
 
@@ -604,6 +671,12 @@ function comment__restore(ga) {
 // }
 
 
+/**
+ * Initializes building comments based on the specified mode.
+ * @param {string} mode - The mode to determine how to initialize the building comments.
+ * Modes can be 'all', 'all_raktyo', or any other specific mode.
+ * @returns None
+ */
 function initializebuilding_comments(mode) {
   ir_coms = document.querySelector("#open_comments").value.split("~");
   rooms_probs = document.querySelectorAll(".project__building_room");
@@ -748,6 +821,12 @@ function initializebuilding_comments(mode) {
 initializebuilding_comments('all');
 
 
+/**
+ * Function to toggle visibility of a comment box and set its content based on the mode.
+ * @param {HTMLElement} id - The HTML element representing the comment box.
+ * @param {string} mode - The mode of the comment box ('mode1' or 'mode2').
+ * @returns None
+ */
 function comment__help(id,mode) {
   name = id.getAttribute(`name`);
   gp = id.parentElement.parentElement.parentElement;
@@ -865,6 +944,12 @@ function comment__help(id,mode) {
 //   }
 // });
 
+/**
+ * Creates a simpler comment based on the parent ID and the current element.
+ * @param {string} parent_id - The ID of the parent element.
+ * @param {HTMLElement} this_element - The current element.
+ * @returns None
+ */
 function comment__create_simpler(parent_id, this_element) {
 
   document.querySelector("body").classList.toggle("bg");
@@ -1011,6 +1096,12 @@ function comment__create_simpler(parent_id, this_element) {
   }
 }
 
+/**
+ * Creates a new comment with the provided document and argument.
+ * @param {Document} doc - The document object to work with.
+ * @param {Element} arg - The argument element to use for creating the comment.
+ * @returns None
+ */
 function comment__create_new(doc,arg) {
   document.querySelector("body").classList.add("bg");
   select = doc.querySelector(".kommentti_comment_newto");
@@ -1153,6 +1244,11 @@ function comment__create_new(doc,arg) {
     // }
 }
 
+/**
+ * Copies the content of a comment element to a new comment element.
+ * @param {Element} element - The comment element to copy from.
+ * @returns None
+ */
 function copy_comment(element) {
   comment_thing = element.parentElement.parentElement.parentElement;
   newcomment = document.querySelector('.commentbox__new.commentbox__newsecond');
@@ -1166,6 +1262,11 @@ function copy_comment(element) {
 }
 
 
+/**
+ * Toggles the 'active' class of the '.laskuta__ostot' element and updates the text and background color of the '#or_main_label' element accordingly.
+ * If the '.laskuta__ostot' element has the 'active' class after toggling, the text is set to "Sulje" and the background color is set to red.
+ * If the '.laskuta__ostot' element does not have the 'active' class after toggling, the text is set to "Laskuta kaikki ostot" and the background color is set to green.
+ */
 function laskuta_ostot_open() {
   document.querySelector('.laskuta__ostot').classList.toggle('active');
   elem  = document.querySelector("#or_main_label");
@@ -1181,6 +1282,11 @@ function laskuta_ostot_open() {
 
 
 
+/**
+ * Function to handle the logic for displaying and updating invoice rows based on user interaction.
+ * @param {Element} elem - The element that triggered the function.
+ * @returns None
+ */
 function send_laskutus(elem) {
   elem.classList.toggle("active");
   laskutusrivit  = document.querySelector('.laskutusrivit');
@@ -1229,6 +1335,11 @@ function send_laskutus(elem) {
 
 }
 
+/**
+ * Sends invoice data to the server by making AJAX POST requests for each invoice row.
+ * Also sends the shopping list data to the server after a delay.
+ * @returns None
+ */
 function send_laskutus_data() {
   laskutusrivit = document.querySelectorAll(".laskutusrivi");
 
@@ -1283,6 +1394,12 @@ function send_laskutus_data() {
 }
 
 
+/**
+ * Changes the status of a ticket based on the item clicked.
+ * @param {Element} item - The item that was clicked to change the status.
+ * @param {string} name - The name of the ticket.
+ * @returns None
+ */
 function changestatus(item,name) {
   ticket = item.parentElement.parentElement.parentElement.parentElement;
  
@@ -1336,6 +1453,12 @@ function changestatus(item,name) {
 }
 
 
+/**
+ * Changes the hours of a task in the database.
+ * @param {HTMLElement} item - The HTML element containing the new hours value.
+ * @param {string} name - The name of the task to update.
+ * @returns None
+ */
 function change_task_hours(item,name) {
   formData = {
       comment_id: name,
@@ -1355,6 +1478,11 @@ function change_task_hours(item,name) {
 }
 
 
+/**
+ * Updates the text content of a task item on the webpage and sends the updated data to the server.
+ * @param {string} item - The identifier of the task item to be updated.
+ * @returns None
+ */
 function change_task_texts(item) {
   _comment_heading = document.querySelector(".commentbox."+item+" .commentbox__name").value;
   _comment_content = document.querySelector(".commentbox."+item+" .commentbox__content").value;
@@ -1378,6 +1506,11 @@ function change_task_texts(item) {
 }
 
 
+/**
+ * Changes the assignation of a task based on the selected options in a dropdown menu.
+ * @param {string} item - The identifier of the task to be assigned.
+ * @returns None
+ */
 function change_task_assignation(item) {
 
 
@@ -1419,6 +1552,12 @@ function change_task_assignation(item) {
   });
 }
 
+/**
+ * Changes the criticality of a task based on the item's checked status.
+ * @param {number} com_id - The comment ID of the task.
+ * @param {object} item - The item whose criticality is being changed.
+ * @returns None
+ */
 function change_task_criticality(com_id, item) { 
   _urgency = '';
   if(item.checked === false) {
@@ -1446,6 +1585,11 @@ function change_task_criticality(com_id, item) {
   });
 }
 
+/**
+ * Deletes a comment without marking it as acknowledged.
+ * @param {HTMLElement} item - The HTML element representing the comment to be deleted.
+ * @returns None
+ */
 function comment__deletekuittaamatta(item) { 
   com_id_ = item.getAttribute("name");
   statuschange_ = 'poistettu_kuittaamatta';
@@ -1471,6 +1615,12 @@ function comment__deletekuittaamatta(item) {
 }
 
 
+/**
+ * Changes the task vko value for a given item and comment ID using an AJAX POST request.
+ * @param {any} item - The item to update the vko value for.
+ * @param {string} com_id_ - The comment ID associated with the item.
+ * @returns None
+ */
 function change_task_vko(item,com_id_) { 
   vko_ = item.value;
   
@@ -1493,6 +1643,12 @@ function change_task_vko(item,com_id_) {
   });
 }
 
+/**
+ * Changes the task tta value for a given item and comment ID using an AJAX POST request.
+ * @param {any} item - The item to change the tta value for.
+ * @param {string} com_id_ - The comment ID to associate with the tta value.
+ * @returns None
+ */
 function change_task_tta(item,com_id_) { 
   tta_ = item.value;
 
@@ -1516,6 +1672,11 @@ function change_task_tta(item,com_id_) {
 }
 
 
+/**
+ * Function to change the specifications of a task by sending an AJAX request to update the task details.
+ * Retrieves the task details from the DOM elements and sends them to the server for modification.
+ * @returns None
+ */
 function change_task_specs() {
   com_id_ = document.querySelector(".commentasking__section").dataset.currentcomment;
   h_remaining_ = document.querySelector("#commentasking__lefthours").value;

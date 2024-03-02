@@ -1,3 +1,8 @@
+/**
+ * Converts each letter in a given string to a corresponding Greek letter.
+ * @param {string} str - The input string to convert.
+ * @returns The converted string with Greek letters.
+ */
 const convertLetter = (str) => {
   const map = {
      a:'α',b:'β',d:'δ',e:'ε',
@@ -22,6 +27,11 @@ function decode_utf8(s) {
   return decodeURIComponent(escape(s));
 }
 
+/**
+ * Saves materials data to the server using an AJAX POST request.
+ * @param {string} key - The key used to identify the materials data.
+ * @returns None
+ */
 function admin__savematerials(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".materials__tbody tr:not(.headingrow)");
@@ -59,6 +69,11 @@ function admin__savematerials(key) {
     });
 }
 
+/**
+ * Saves user data by sending a POST request to the server with the updated user information.
+ * @param {string} key - The key used for authentication or identification.
+ * @returns None
+ */
 function admin__saveusers(key) {   
   material_array="";
   materialtabletr = document.querySelectorAll(".a_userlist tr:not(.headingrow)");
@@ -93,6 +108,11 @@ function admin__saveusers(key) {
   });
 }
 
+/**
+ * Saves the systems data to the server using an AJAX POST request.
+ * @param {string} key - The key used to identify the system data.
+ * @returns None
+ */
 function admin__savesystems(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".systems__tbody tr:not(.headingrow)");
@@ -133,6 +153,11 @@ function admin__savesystems(key) {
     });
 }
 
+/**
+ * Saves the range of materials in the admin panel.
+ * @param {string} key - The key for the materials being saved.
+ * @returns None
+ */
 function admin__saverangat(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody tr:not(.headingrow)");
@@ -169,6 +194,11 @@ function admin__saverangat(key) {
     });
 }
 
+/**
+ * Saves the range data for a specific key in the admin settings.
+ * @param {string} key - The key for which the range data is being saved.
+ * @returns None
+ */
 function admin__saverangat_one(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_one tr:not(.headingrow)");
@@ -205,6 +235,11 @@ function admin__saverangat_one(key) {
     });
 }
 
+/**
+ * Saves the range of materials in a table to the database using an AJAX POST request.
+ * @param {string} key - The key used to identify the materials being saved.
+ * @returns None
+ */
 function admin__saverangat_two(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_two tr:not(.headingrow)");
@@ -241,6 +276,11 @@ function admin__saverangat_two(key) {
     });
 }
 
+/**
+ * Saves the range of materials in the admin panel by sending a POST request to the server.
+ * @param {string} key - The key used to identify the materials being saved.
+ * @returns None
+ */
 function admin__saverangat_three(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_three tr:not(.headingrow)");
@@ -277,6 +317,11 @@ function admin__saverangat_three(key) {
     });
 }
 
+/**
+ * Saves the material data for a specific key in the admin settings.
+ * @param {string} key - The key for which the material data is being saved.
+ * @returns None
+ */
 function admin__saverangat_four(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_four tr:not(.headingrow)");
@@ -313,6 +358,11 @@ function admin__saverangat_four(key) {
     });
 }
 
+/**
+ * Saves the data for the given key by sending an AJAX POST request to the server.
+ * @param {string} key - The key to save the data under.
+ * @returns None
+ */
 function admin__saverangat_five(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_five tr:not(.headingrow)");
@@ -349,6 +399,11 @@ function admin__saverangat_five(key) {
     });
 }
 
+/**
+ * Saves the material data for a specific key in the admin settings.
+ * @param {string} key - The key for which the material data is being saved.
+ * @returns None
+ */
 function admin__saverangat_six(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_six tr:not(.headingrow)");
@@ -385,6 +440,11 @@ function admin__saverangat_six(key) {
     });
 }
 
+/**
+ * Saves the material data for a specific key in the admin settings.
+ * @param {string} key - The key for which the material data is being saved.
+ * @returns None
+ */
 function admin__saverangat_seven(key) {   
   material_array="";
   materialtabletr = document.querySelectorAll(".ranka__tbody_seven tr:not(.headingrow)");
@@ -421,6 +481,11 @@ function admin__saverangat_seven(key) {
   });
 }
 
+/**
+ * Saves the material data for a specific key in the admin settings.
+ * @param {string} key - The key for which the material data is being saved.
+ * @returns None
+ */
 function admin__saverangat_eight(key) {   
   material_array="";
   materialtabletr = document.querySelectorAll(".ranka__tbody_eight tr:not(.headingrow)");
@@ -457,6 +522,11 @@ function admin__saverangat_eight(key) {
   });
 }
 
+/**
+ * Saves the Reika frame data to the server by sending an AJAX POST request.
+ * @param {string} key - The key used to identify the Reika frame data.
+ * @returns None
+ */
 function admin__savereikaframet(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".reikaframe__tbody tr:not(.headingrow)");
@@ -498,6 +568,11 @@ function admin__savereikaframet(key) {
     });
 }
 
+/**
+ * Saves the lapiviennit data to the server using an AJAX POST request.
+ * @param {string} key - The key used to identify the data being saved.
+ * @returns None
+ */
 function admin__savelapiviennit(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".lapiviennit__tbody tr:not(.headingrow)");
@@ -539,6 +614,11 @@ function admin__savelapiviennit(key) {
     });
 }
 
+/**
+ * Saves the material data for levytysreunat in the admin panel.
+ * @param {string} key - The key for the material data.
+ * @returns None
+ */
 function admin__savelevytysreunat(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".levytysreunat__tbody tr:not(.headingrow)");
@@ -575,6 +655,11 @@ function admin__savelevytysreunat(key) {
     });
 }
 
+/**
+ * Saves the saumatpysty settings in the admin panel by sending a POST request with the updated data.
+ * @param {string} key - The key used to identify the settings being saved.
+ * @returns None
+ */
 function admin__savesaumatpysty(key) {   
     material_array="";
     materialtabletr = document.querySelectorAll(".saumapysty__tbody tr:not(.headingrow)");
@@ -616,6 +701,11 @@ function admin__savesaumatpysty(key) {
     });
 }
 
+/**
+ * Admin function to save material data for a specific key.
+ * @param {string} key - The key associated with the material data.
+ * @returns None
+ */
 function admin__savesaumatvaaka(key) {   
     material_array="";
 
@@ -657,6 +747,11 @@ function admin__savesaumatvaaka(key) {
     });
 }
 
+/**
+ * Saves the seam direction setting based on the user's selection.
+ * @param {string} key - The key used for saving the setting.
+ * @returns None
+ */
 function save_saumasuunta(key) {   
     material_array="";
     
@@ -686,6 +781,11 @@ function save_saumasuunta(key) {
     });
 }
 
+/**
+ * Saves the selected material type based on the checkboxes in the settings form.
+ * @param {string} key - The key to save the material type under.
+ * @returns None
+ */
 function save_saumatyyppi(key) {   
     material_array="";
     
@@ -729,6 +829,11 @@ function save_saumatyyppi(key) {
     });
 }
 
+/**
+ * Saves the selected material options for saumakulku based on user input.
+ * @param {string} key - The key used for saving the data.
+ * @returns None
+ */
 function save_saumakulku(key) {   
     material_array="";
     
@@ -766,6 +871,12 @@ function save_saumakulku(key) {
     });
 }
 
+/**
+ * Saves the data related to materials in a table by sending an AJAX POST request.
+ * @param {Event} e - The event object that triggered the function.
+ * @param {string} key - The key associated with the data being saved.
+ * @returns None
+ */
 function save_aukko(e,key) {   
     material_array="";
 
@@ -811,6 +922,11 @@ function save_aukko(e,key) {
     });
 }
 
+/**
+ * Saves a list of materials to the database using an AJAX POST request.
+ * @param {string} key - The key used to identify the list of materials.
+ * @returns None
+ */
 function admin__savelistatpysty(key) {   
   material_array="";
   materialtabletr = document.querySelectorAll(".listat2a__tbody tr:not(.headingrow)");
@@ -847,6 +963,11 @@ function admin__savelistatpysty(key) {
   });
 }
 
+/**
+ * Saves the list of materials in a specific format to the database using an AJAX POST request.
+ * @param {string} key - The key used to identify the list of materials.
+ * @returns None
+ */
 function admin__savelistatvaaka(key) {   
   material_array="";
   materialtabletr = document.querySelectorAll(".listat2b__tbody tr:not(.headingrow)");
@@ -883,6 +1004,11 @@ function admin__savelistatvaaka(key) {
   });
 }
 
+/**
+ * Saves a list of materials to the database using an AJAX POST request.
+ * @param {string} key - The key used to identify the list of materials.
+ * @returns None
+ */
 function admin__savelistat(key) {   
   material_array="";
   materialtabletr = document.querySelectorAll(".listat__tbody tr:not(.headingrow)");
@@ -919,6 +1045,11 @@ function admin__savelistat(key) {
   });
 }
 
+/**
+ * Saves the length direction settings in the admin panel.
+ * @param {string} key - The key for the settings to be saved.
+ * @returns None
+ */
 function admin__savepituussuunnan(key) {
   material_array = "";
   
@@ -948,6 +1079,11 @@ function admin__savepituussuunnan(key) {
   });
 }
 
+/**
+ * Saves the direction of the width in the admin settings.
+ * @param {string} key - the key to save the direction of the width
+ * @returns None
+ */
 function admin__saveleveyssuunnan(key) {
   material_array = "";
 
@@ -977,6 +1113,11 @@ function admin__saveleveyssuunnan(key) {
   });
 }
 
+/**
+ * Saves the settings for the admin by sending a POST request with the provided key and material array.
+ * @param {string} key - The key for the settings.
+ * @returns None
+ */
 function admin__savereunaasetukset(key) {
   material_array = "";
 
@@ -1006,6 +1147,11 @@ function admin__savereunaasetukset(key) {
   });
 }
 
+/**
+ * Append a new material row to the materials table.
+ * This function creates a new row with input fields for a material entry and appends it to the materials table.
+ * @returns None
+ */
 function appendnewmaterial() {
     t = document.querySelector(".materials__tbody");
 
@@ -1054,6 +1200,13 @@ function appendnewmaterial() {
     t.appendChild(row);
 }
 
+/**
+ * Appends a new row of input fields to the aukkotable element.
+ * The new row contains input fields for various data types with an oninput event
+ * that triggers the save_aukko function.
+ * If a row with display "table" is found in the aukkotable, a new row is appended to it.
+ * @returns None
+ */
 function appendnewaukkosetting() {
     aukkotable = document.querySelectorAll('.aukko-table');
 
@@ -1079,6 +1232,12 @@ function appendnewaukkosetting() {
     au.appendChild(row);
 }
 
+/**
+ * Appends a new row to the saumapysty__tbody element in the document.
+ * The new row contains radio buttons, labels, and input fields for user input.
+ * Each input field has an associated event listener to save the input value.
+ * @returns None
+ */
 function appendnewpystysaumasetting() {
     t = document.querySelector(".saumapysty__tbody");
 
@@ -1106,6 +1265,11 @@ function appendnewpystysaumasetting() {
     t.appendChild(row);
 }
 
+/**
+ * Append a new setting row to the saumavaaka table.
+ * This function creates a new row with input fields and appends it to the saumavaaka table.
+ * @returns None
+ */
 function appendnewvaakasaumasetting() {
     t = document.querySelector(".saumavaaka__tbody");
 
@@ -1133,6 +1297,12 @@ function appendnewvaakasaumasetting() {
     t.appendChild(row);
 }
 
+/**
+ * Append a new ranka setting row to the table.
+ * This function creates a new row with multiple input fields for a ranka setting and appends it to the table.
+ * Each input field has an associated event listener that triggers the admin__saverangat function on input.
+ * @returns None
+ */
 function appendnewrankasetting() {
     t = document.querySelector(".ranka__tbody");
     count = t.querySelectorAll("tr").length;
@@ -1186,6 +1356,12 @@ function appendnewrankasetting() {
     t.appendChild(row);
 }
 
+/**
+ * Append a new list item to the lapiviennit__tbody element in the document.
+ * This function creates a new row with various input elements and checkboxes.
+ * Each input element has event listeners attached to trigger the admin__savelapiviennit function on input.
+ * @returns None
+ */
 function appendnewlvitem() {
     t = document.querySelector(".lapiviennit__tbody");
     count = t.querySelectorAll("tr").length;
@@ -1236,6 +1412,11 @@ function appendnewlvitem() {
 }
 
 
+/**
+ * Append a new row to the table with input fields for a new setting in the pystyla list.
+ * This function creates a new row with multiple input fields and checkboxes for the user to interact with.
+ * @returns None
+ */
 function appendnewpystylistasetting() {
   t = document.querySelector(".listat2a__tbody");
 
@@ -1285,6 +1466,10 @@ function appendnewpystylistasetting() {
   t.appendChild(row);
 }
 
+/**
+ * Append a new row to the vaakalistasetting table with input fields and checkboxes.
+ * @returns None
+ */
 function appendnewvaakalistasetting() {
   t = document.querySelector(".listat2b__tbody");
 
@@ -1313,6 +1498,12 @@ function appendnewvaakalistasetting() {
   t.appendChild(row);
 }
 
+/**
+ * Appends a new list item setting to the table.
+ * This function creates a new row with multiple input fields for each setting.
+ * Each input field has a class "lineinput" and triggers the admin__savelistat function on input.
+ * @returns None
+ */
 function appendnewlistasetting() {
   t = document.querySelector(".listat__tbody");
 
@@ -1383,6 +1574,11 @@ function delete__addeduser(e) {
 
 }
 
+/**
+ * Deletes an added user from the admin panel.
+ * @param {Event} e - The event object that triggered the function.
+ * @returns None
+ */
 function admin__delete_addeduser(e) {   
   _prid = e.parentElement.parentElement.parentElement.parentElement.dataset.prid;
   _user = e.parentElement.innerText.replace("x","");
@@ -1405,6 +1601,11 @@ function admin__delete_addeduser(e) {
     console.log(data);
   });
 }
+/**
+ * Function to handle changing a user associated with a specific PR ID in the admin panel.
+ * @param {Event} e - The event object triggering the function.
+ * @returns None
+ */
 function admin__changeprusr(e) {   
   _prid = e.dataset.prid;
   _user = e.value;
@@ -1427,6 +1628,13 @@ function admin__changeprusr(e) {
   });
 }
 
+/**
+ * This function is used to change the settings based on the given letter and ID.
+ * It updates various settings related to different types of elements like doors, windows, pillars, beams, etc.
+ * @param {string} letter - The letter representing the type of setting to be changed.
+ * @param {string} l_id - The ID of the setting to be changed.
+ * @returns None
+ */
 function s_change_malli(letter, l_id) {
   preset_id = parseFloat(l_id);
   rankatype_array = ["","Saumaranka","Väliranka","Päättöranka","Kulmaranka","ikkunaranka"];
@@ -2884,6 +3092,12 @@ function s_change_malli(letter, l_id) {
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
+/**
+ * Function to handle the creation of a new malli.
+ * This function performs a series of actions including creating a new input element, making an AJAX POST request,
+ * and calling multiple admin functions to save data.
+ * @returns None
+ */
 function s_newmalli() {
   console.log('data');
   i = document.querySelectorAll(".tmpbtn").length;

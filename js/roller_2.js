@@ -1,3 +1,10 @@
+/**
+ * Repositions the boxWrapper element to the specified coordinates (x, y).
+ * Also sets the opacity of a specific element to 0.
+ * @param {number} x - The new horizontal position for the boxWrapper element.
+ * @param {number} y - The new vertical position for the boxWrapper element.
+ * @returns None
+ */
 var box_right = document.getElementById("box_right");
 var boxWrapper = document.getElementById("box-wrapper");
 var right_mm = document.querySelector('.box__right_mm');
@@ -10,6 +17,12 @@ function r_repositionElement(x, y) {
     boxWrapper.style.top = y;
 }
 
+/**
+ * Resize the box elements based on the provided width and height values.
+ * @param {number} w - The width value for resizing the elements.
+ * @param {number} h - The height value for resizing the elements.
+ * @returns None
+ */
 function r_resize(w, h) {
     // box_right.style.width = (w * (parseFloat(document.querySelector("#box_h").value)/parseFloat(document.querySelector("#box_w").value))) + 'px';
     // box_right.style.height = h + 'px';
@@ -29,6 +42,15 @@ function r_resize(w, h) {
     drawarea__update_cord();
 }
 // handle r_resize
+/**
+ * Handles the resizing of an element based on mouse or touch events.
+ * @param {Event} event - The event object triggering the resize.
+ * @param {boolean} [left=false] - Indicates if resizing is happening towards the left.
+ * @param {boolean} [top=false] - Indicates if resizing is happening towards the top.
+ * @param {boolean} [xr_resize=false] - Indicates if resizing is happening on the x-axis.
+ * @param {boolean} [yr_resize=false] - Indicates if resizing is happening on the y-axis.
+ * @returns None
+ */
 var bottomMid = document.getElementById("box_right__left-mid");
 
 function r_resizeHandler(event, left = false, top = false, xr_resize = false, yr_resize = false) {

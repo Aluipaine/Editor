@@ -3,6 +3,11 @@
  * Each input field has the same name and class ('marko__holeparameter' and 'lineinput' respectively)
  */
 
+/**
+ * Synchronizes data from various form elements on the page and stores it in hidden input fields.
+ * This function populates arrays and variables with data from form elements and then stores
+ * this data in hidden input fields for later use.
+ */
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 function s_synchronize() {
@@ -148,6 +153,10 @@ function s_synchronize() {
   document.querySelector("#aukko_template").value = aukko_template;
 
 }
+/**
+ * Creates a new row in a table with input fields for hole parameters.
+ * @returns None
+ */
 function s__createnewrow_holes() {
   var newrow = document.createElement("tr");
                   
@@ -156,6 +165,11 @@ function s__createnewrow_holes() {
   document.querySelector("#hole_set > table").append(newrow);
 }
 
+/**
+ * Changes the display style of tables based on the given letter.
+ * @param {string} letter - The letter used to identify the table to display.
+ * @returns None
+ */
 function s_change_malli(letter) {
   document.querySelectorAll(".aukko-table").forEach((table) =>{
     if(table.id == "aukko-table-" + letter) {
@@ -166,6 +180,11 @@ function s_change_malli(letter) {
   });
 }
 
+/**
+ * Creates a new template button based on the number of existing buttons.
+ * If the number of buttons exceeds 26, an alert is shown.
+ * @returns None
+ */
 function s_newmalli() {
   let buttons = document.getElementsByName("template-button").length;
   let letter = letters[buttons];
@@ -181,6 +200,11 @@ function s_newmalli() {
   }
 }
 
+/**
+ * Creates a new row in a table with specific input fields and checkboxes.
+ * The new row is appended to the table with the id "morehole_set".
+ * @returns None
+ */
 function s__createnewrow_morehole() {
   var newrow = document.createElement("tr");
                   
@@ -254,6 +278,12 @@ function s__newmaterial() {
     document.querySelector("#materials > fieldset").append(material);
   }
 } 
+
+/**
+ * Creates a new row in a table with input fields for "marko__holeparameter".
+ * The row is appended to the table with id "hole_set".
+ * @returns None
+ */
 function marko__createnewrow_holes() {
   const newrow = document.createElement("tr");
   newrow.innerHTML = `
@@ -270,9 +300,11 @@ function marko__createnewrow_holes() {
   `;
   document.querySelector("#hole_set > table").append(newrow);
 }
+
 /**
- * Creates a new row for the 'morehole_set' table with 5 columns of input fields and checkboxes.
- * Each input field and checkbox has the same name and class ('marko__moreholeparameter' and 'lineinput' respectively)
+ * Creates a new row in a table with input fields and checkboxes.
+ * Inserts the new row into the table with id "morehole_set".
+ * @returns None
  */
 function marko__createnewrow_morehole() {
   const newrow = document.createElement("tr");
@@ -286,6 +318,12 @@ function marko__createnewrow_morehole() {
   document.querySelector("#morehole_set > table").append(newrow);
 }
 
+/**
+ * Adds a click event listener to each tab button to handle tab navigation.
+ * @param {NodeList} tabs_btns - The NodeList of tab buttons.
+ * @param {NodeList} tabs_targets - The NodeList of tab targets.
+ * @returns None
+ */
 tabs_btns = document.querySelectorAll(".tabs__btn");
 tabs_targets = document.querySelectorAll(".tabs__target");
 
@@ -294,6 +332,11 @@ for (let i = 0; i < tabs_btns.length; i++) {
     navigation__btns(tabs_btns[i]);
   });
 }
+/**
+ * Function to handle navigation button clicks and update the active state of tabs.
+ * @param {Element} elem - The element that was clicked (navigation button).
+ * @returns None
+ */
 function navigation__btns(elem) {
   elemcount = 0;
   for (let i = tabs_btns.length-1; i > -1; i--) {
@@ -316,6 +359,12 @@ function navigation__btns(elem) {
 
 navigation__btns(tabs_btns[0]);
 
+/**
+ * Saves the message settings based on the values provided in the tabs_targets array.
+ * Iterates through each tab target, constructs the message data based on the tab's dataset id,
+ * and sends an AJAX POST request to save the message settings.
+ * @returns None
+ */
 function save__messagesettings() {
 
   for (let i = 0; i < tabs_targets.length; i++) {
@@ -427,6 +476,11 @@ function save__messagesettings() {
   alert("Tallennettu");
 }
 
+/**
+ * Updates the content of all textarea elements on the page to match their "value" attribute.
+ * @param None
+ * @returns None
+ */
 txt = document.querySelectorAll("textarea");
 for (let i = 0; i < txt.length; i++) {
   txt[i].innerHTML = txt[i].getAttribute("value");

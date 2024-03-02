@@ -1,3 +1,9 @@
+/**
+ * Repositions the box element to the specified coordinates.
+ * @param {number} x - The new horizontal position of the box element.
+ * @param {number} y - The new vertical position of the box element.
+ * @returns None
+ */
 var box_lower = document.getElementById("box_lower");
 var boxWrapper = document.getElementById("box-wrapper");
 var lower_mm = document.querySelector('.box__lower_mm');
@@ -10,6 +16,12 @@ function l_repositionElement(x, y) {
     boxWrapper.style.top = y;
 }
 
+/**
+ * Resize the box and its components based on the provided width and height values.
+ * @param {number} w - The new width of the box.
+ * @param {number} h - The new height of the box.
+ * @returns None
+ */
 function l_resize(w, h) {
     box_lower.style.maxHeight = (boxWrapper.offsetHeight) + 'px';
     box_lower.style.width = w + 'px';
@@ -23,6 +35,15 @@ function l_resize(w, h) {
     drawarea__update_cord();
 }
 // handle l_resize
+/**
+ * Handles the resizing of an element based on mouse or touch events.
+ * @param {Event} event - The event object triggering the resize.
+ * @param {boolean} [left=false] - Indicates if resizing is happening towards the left.
+ * @param {boolean} [top=false] - Indicates if resizing is happening towards the top.
+ * @param {boolean} [xl_resize=false] - Indicates if resizing is happening in the x-axis.
+ * @param {boolean} [yl_resize=false] - Indicates if resizing is happening in the y-axis.
+ * @returns None
+ */
 var bottomMid = document.getElementById("box_lower__top-mid");
 
 function l_resizeHandler(event, left = false, top = false, xl_resize = false, yl_resize = false) {

@@ -1,3 +1,8 @@
+/**
+ * Restores the elements with the specified content.
+ * @param {string} content_ - The content to be processed.
+ * @returns None
+ */
 let ltcontainer = document.querySelector("#levytyosto_container");
 let levy = document.querySelectorAll(".levy");
 
@@ -28,6 +33,12 @@ function restore__kiinnikkeet(content_) {
   });
 }
 
+/**
+ * Restores the tyosto elements on a given levy based on the content provided.
+ * @param {Element} levy - The element on which the tyosto elements will be restored.
+ * @param {string[]} content - An array containing the content to be used for restoring tyosto elements.
+ * @returns None
+ */
 function restore_tyosto(levy,content) {
   x_tyostot = content[4].split("---");
   y_tyostot = content[5].split("---");
@@ -131,6 +142,14 @@ function restore_tyosto(levy,content) {
   
   countdown__kiinnikkeet(levy);
 }
+
+
+/**
+ * Initializes the default settings for the kiinnike elements on the page.
+ * This function sets event listeners for various kiinnike elements and handles their click events.
+ * It also performs various operations related to tyostanaytto, tyosta, countdown__kiinnikkeet, and other functions.
+ * @returns None
+ */
 function kiinnike_default_initialization() {
   kp_one = document.querySelector("#kiinniketys__pkiinnike_one");
   kp_two = document.querySelector("#kiinniketys__pkiinnike_two");
@@ -504,6 +523,11 @@ function kiinnike_default_initialization() {
 
 
 
+/**
+ * Initializes the work with fasteners based on the provided specification launch.
+ * @param {specification_launch} - The specification launch object.
+ * @returns None
+ */
 // Function to start the work on green lines based on the provided specification
 function aloita_tyosto_kiinnikkeet(specification_launch) {
    // Select all elements with class "levy"
@@ -599,6 +623,14 @@ function aloita_tyosto_kiinnikkeet(specification_launch) {
   
   save("tyostot~~"+levyarray);
 }
+/**
+ * Removes the CSS class "two" from the element with the class "tyostot_keskitys".
+ * 
+ * @returns None
+ * 
+ * @param {string} levy - The levy parameter.
+ * @param {number} evt - The event parameter.
+ */
 tyostot_keskitys = document.querySelector(".tyostot_keskitys");
 tyostot_keskitys.classList.remove("two");
 // Function to perform work on a given "levy" element based on the specified event "evt"
@@ -995,6 +1027,13 @@ function tyosta(levy, evt) {
   apply__deletion_rules();
 }
 
+/**
+ * This function is responsible for handling various calculations and adjustments related to a specific event.
+ * It iterates over a list of elements with the class "dir_y" and performs calculations based on the event type (evt).
+ * Depending on the event type, different calculations are performed to adjust the positioning of elements.
+ * @param {number} evt - The event type that triggers specific calculations.
+ * @returns None
+ */
 function tyosto_func(evt){
   const levy_list = document.querySelectorAll(".dir_y");
   let levy;
@@ -1122,6 +1161,12 @@ function tyosto_func(evt){
   }
 }
 
+/**
+ * Function to evenly distribute work items vertically or horizontally on a given surface.
+ * @param {HTMLElement} levy - The surface element on which work items are to be distributed.
+ * @param {number} evt - The event type indicating the direction of distribution (1-8).
+ * @returns None
+ */
 function tasoita__tyostot(levy,evt) {
   if (evt === 1 || evt === 2 || evt === 3 || evt === 4) {
     // Remove existing vertical work elements
@@ -1302,6 +1347,13 @@ function tasoita__tyostot(levy,evt) {
     }
   }
 }
+/**
+ * Function to calculate and position elements based on input parameters.
+ * @param {number} levy - The levy value.
+ * @param {HTMLElement} tyosto - The element to which new elements will be added.
+ * @param {number} evt - The event value.
+ * @returns None
+ */
 function t_last_top(levy, tyosto, evt) {
   var interval = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);
   //console.log("t_last_top(levy, tyosto, evt) fired");
@@ -1363,6 +1415,13 @@ function t_last_top(levy, tyosto, evt) {
   }
 }
 
+/**
+ * Calculates and sets the position of a div element based on the input parameters.
+ * @param {number} levy - The levy value.
+ * @param {number} tyosto - The tyosto value.
+ * @param {number} evt - The evt value.
+ * @returns None
+ */
 function t_last_right(levy, tyosto, evt) {
   //console.log("t_last_right(levy, tyosto, evt) fired");
   var interval = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
@@ -1430,6 +1489,13 @@ function t_last_right(levy, tyosto, evt) {
   }
 }
 
+/**
+ * Function to handle the positioning and creation of elements based on input parameters.
+ * @param {number} levy - The levy parameter.
+ * @param {number} tyosto - The tyosto parameter.
+ * @param {number} evt - The evt parameter.
+ * @returns None
+ */
 function t_last_left(levy, tyosto, evt) {
   //console.log(" t_last_left(levy, tyosto, evt) fired");
   var interval = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
@@ -1490,6 +1556,13 @@ function t_last_left(levy, tyosto, evt) {
   }
 }
 
+/**
+ * Function to add elements to the DOM based on the provided parameters.
+ * @param {any} levy - The levy parameter.
+ * @param {any} tyosto - The tyosto parameter.
+ * @param {number} evt - The evt parameter.
+ * @returns None
+ */
 function t_last_bottom(levy, tyosto, evt) {
   //console.log("t_last_bottom(levy, tyosto, evt) ");
   var interval = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);
@@ -1554,6 +1627,12 @@ function t_last_bottom(levy, tyosto, evt) {
   // x.prepend(x_cord);
 }
 
+/**
+ * Function to handle the movement of elements on the page.
+ * It calculates new positions for elements based on their current styles,
+ * creates new elements with updated positions, and handles click events.
+ * @returns None
+ */
 function kiinnikkeet__siirto() {
   //console.log("kiinnikkeet__siirto() fired");
   let levytys = document.querySelectorAll('.levyt .levy');
@@ -1613,6 +1692,11 @@ function kiinnikkeet__siirto() {
   }, 100);
 }
 
+/**
+ * Filters and processes elements with class 'levy' to create a new array of unique titles.
+ * The unique titles are then sorted and displayed in the DOM as clickable elements.
+ * @returns None
+ */
 function only_levy_transfer() {
   //console.log("only_levy_transfer() fired");
   let levytys = document.querySelectorAll('.levyt .levy');
@@ -1663,6 +1747,11 @@ function only_levy_transfer() {
 
 }
 
+/**
+ * Function to change the layout of a specific element based on the provided information.
+ * @param {any} info - Information used to change the layout of the element.
+ * @returns None
+ */
 function change__klevy(info) {
   //console.log("change__klevy(info) fired");
   info_cord = String(info).replace("'", "").split("x");
@@ -1741,6 +1830,13 @@ function change__klevy(info) {
   levy_visualisation = l_container.querySelector(".levy");
   countdown__kiinnikkeet(levy_visualisation);
 }
+/**
+ * Function to change the coordinates of elements based on input values and settings.
+ * @param {HTMLElement} input - The input element triggering the change.
+ * @param {number} secondsetting - The setting for the type of change to be made.
+ * @param {Event} evt - The event that triggered the function.
+ * @returns None
+ */
 //////////////////////////////////// Esikatselusta
 function change__tyostocord(input, secondsetting, evt) {
   oldvalue = input.dataset.from;
@@ -2072,6 +2168,11 @@ function change__tyostocord(input, secondsetting, evt) {
   // }
 }
 
+/**
+ * Saves the attachment points for the given disk.
+ * @param {Element} levy - The disk element containing attachment points.
+ * @returns None
+ */
 function tallenna_kiinnikepaikat(levy) {
   //console.log("tallenna_kiinnikepaikat(levy) fired");
   kiinnikkeet = levy.querySelectorAll(".tyostot__tyosto");
@@ -2108,6 +2209,11 @@ function tallenna_kiinnikepaikat(levy) {
   //console.log("l_meta_y: " + l_meta_y);
 }
 
+/**
+ * Function to adjust the positioning of elements within a given container based on certain conditions.
+ * @param {Element} levy - The container element to adjust the elements within.
+ * @returns None
+ */
 function give__tyosto_cord(levy) {
   //console.log("give__tyosto_cord(levy) fired");
   levy_tyostot_x = levy.querySelectorAll(".levy_tyostot_x");
@@ -2428,10 +2534,20 @@ function give__tyosto_cord(levy) {
   }
 }
 
+/**
+ * Get the index of a given element among its siblings.
+ * @param {Element} element - The element whose index is to be found.
+ * @returns {number} The index of the element among its siblings.
+ */
 function getElementIndex(element) {
   return Array.from(element.parentNode.children).indexOf(element);
 }
 
+/**
+ * Deletes a specific item from the DOM based on certain conditions and updates related values.
+ * @param {Element} item - The item to be deleted from the DOM.
+ * @returns None
+ */
 function tyosto__del(item) {
 
   if(item.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.classList.contains("modal")) {
@@ -2500,6 +2616,11 @@ if (document.querySelector("#drawscreen_section_five .levy")) {
 }
 
 
+/**
+ * Changes the position of elements based on the values of input fields.
+ * @param {string} argument - The argument passed to the function (not used in the function).
+ * @returns None
+ */
 function change__levykiinnike(argument) {
   //console.log("change__levykiinnike(argument) fired");
   let tyostot = document.querySelectorAll(".levy_input");
@@ -2524,6 +2645,12 @@ function change__levykiinnike(argument) {
   }
 }
 
+/**
+ * Reorganizes and manipulates elements on the canvas based on specific criteria.
+ * This function performs various operations such as querying elements, iterating over elements,
+ * sorting arrays, creating new elements, setting styles, and handling events.
+ * @returns None
+ */
 function reorganise__newtyosto() {
   //console.log("reorganise__newtyosto() fired");
   t1 = canvas.querySelectorAll(".x_cord");
@@ -2805,6 +2932,11 @@ function reorganise__newtyosto() {
   removeduplicatecords__adjustcords();
 }
 
+/**
+ * Reset the coordinates for a given levy element by removing existing inputs and creating new ones with updated values.
+ * @param {Element} levy - The levy element to reset coordinates for.
+ * @returns None
+ */
 function reset__ltlevy_cords(levy) {
     vis_levy = document.querySelector("#drawscreen_section_five > div#levytyosto_container.two div.visible.levy_vis.lt_levy_vis");
     realinputs = vis_levy.querySelectorAll("input");
@@ -2932,6 +3064,12 @@ function reset__ltlevy_cords(levy) {
     realinputs = levy.querySelectorAll("input");
 }
 
+/**
+ * Opens the settings for a specific levy element.
+ * @param {Event} e - The event that triggered the function.
+ * @param {HTMLElement} levy - The levy element to open settings for.
+ * @returns None
+ */
 function open_ltladonta_settings(e, levy) {
 
   //console.log("open_ltladonta_settings(" + e + "," + levy + ") ");
@@ -3105,6 +3243,13 @@ function open_ltladonta_settings(e, levy) {
   }
   removeduplicatecords__adjustcords();
 }
+
+
+/**
+ * Resets the border coordinates by hiding certain elements based on their classes.
+ * This function targets specific elements within the ltcontainer and adds the "hidden" class to them.
+ * @returns None
+ */
 function reset_bordercords() {
   pysty_alkutyostot = ltcontainer.querySelectorAll(".alku__tyosto_pysty");
   pysty_viimtyostot = ltcontainer.querySelectorAll(".viim__tyosto_pysty");
@@ -3132,6 +3277,13 @@ function reset_bordercords() {
     });
   }
 }
+
+
+/**
+ * Updates the input values based on the position of elements within the given container.
+ * @param {Element} levy - The container element to search for elements within.
+ * @returns None
+ */
 function countdown__kiinnikkeet(levy) {
   //console.log("15-07 LEVY:::" + levy);
   if (levy) {
@@ -3211,6 +3363,12 @@ function countdown__kiinnikkeet(levy) {
 }
 
 
+/**
+ * Function that handles interactions for the levy on a stage.
+ * @param {number} stage - The stage of the interaction.
+ * @param {HTMLElement} attr - The attribute element associated with the interaction.
+ * @returns None
+ */
 function levy__interaction(stage, attr) {
   tyosto__container = document.querySelector("div#levytyosto_container");
   levy_example = tyosto__container.querySelector(".levy_vis");
@@ -3378,6 +3536,12 @@ function levy__interaction(stage, attr) {
   countdown__kiinnikkeet(vis_levy);
 }
 
+/**
+ * Function to modify the dimensions and styles of an element based on the input values and identifier.
+ * @param {Element} elem - The element to be modified.
+ * @param {number} identificator - The identifier to determine the type of modification to be made.
+ * @returns None
+ */
 function addtolevy(elem, identificator) {
   input_destination = parseFloat(document.querySelector("#" + elem.getAttribute("for")).value);
   adding_w = (input_destination / 5);
@@ -3415,6 +3579,11 @@ function addtolevy(elem, identificator) {
   }
 }
 
+/**
+ * This function adjusts the coordinates of elements on the canvas based on certain conditions.
+ * It removes duplicate coordinates, sets positions, and adds additional elements to the canvas.
+ * @returns None
+ */
 function removeduplicatecords__adjustcords() {
   setTimeout(() => {
     t3 = canvas.querySelectorAll(".secondcord");
@@ -3724,6 +3893,12 @@ function removeduplicatecords__adjustcords() {
   }, 1500);
 }
 
+/**
+ * Identifies elements that are on the same line either horizontally or vertically based on the mode specified.
+ * @param {object} object - The target element to identify same line elements for.
+ * @param {string} mode - The mode to determine if elements are on the same line ('x' for horizontal, 'y' for vertical).
+ * @returns {Array} An array of elements that are on the same line as the target element.
+ */
 function identify__sameline(object,mode) {
   levyt = canvas.querySelectorAll(".levy");
 
@@ -3795,6 +3970,13 @@ function identify__sameline(object,mode) {
 
 
 
+/**
+ * Toggles the visibility of elements based on the argument provided.
+ * @param {number} arg - The argument to determine which elements to show/hide.
+ *                      - 1: Show x_cords and hide x_dels
+ *                      - 2: Hide x_cords and show x_dels
+ * @returns None
+ */
 function toggle__kinnikkeet_specs(arg) {
   x_cords = canvas.querySelectorAll("input:not(.secondcord):not(.y_cord_border):not(.x_cord_border)");
   x_dels = canvas.querySelectorAll(".x_del");
@@ -3820,6 +4002,11 @@ function toggle__kinnikkeet_specs(arg) {
 }
 
 
+/**
+ * Function to add a new measurement element based on the mode (vaaka or pysty).
+ * @param {string} mode - The mode of the measurement ('vaaka' for horizontal, 'pysty' for vertical).
+ * @returns None
+ */
 function lt_addmitta(mode) {
   p_levy = pressed__levy.parentElement;
   p_levytitle = p_levy.title.split(",");
@@ -3910,6 +4097,12 @@ function lt_addmitta(mode) {
 
 
 
+/**
+ * Opens the settings for a specific levy element based on the event and levy provided.
+ * @param {boolean} e - Indicates whether to open (true) or close (false) the settings.
+ * @param {Element} levy - The levy element for which the settings are being opened.
+ * @returns None
+ */
 function c_open_ltladonta_settings(e, levy) {
   //console.log("c_open_ltladonta_settings(e,levy) ");
   ltcontainer = document.querySelector(".all_container");
@@ -3944,6 +4137,12 @@ function c_open_ltladonta_settings(e, levy) {
   // reorganise__newtyosto();
 }
 
+/**
+ * Reorganizes the content of the given levy element by swapping the innerHTML of
+ * elements with classes "levy_tyostot_y" and "levy_tyostot_x".
+ * @param {HTMLElement} levy__to_reorgaise - The levy element to reorganize
+ * @returns None
+ */
 function c_reorganise__newtyosto_levy(levy__to_reorgaise) {
   // ltcontainer = document.querySelector(".levytyosto_container");
   // //console.log(ltcontainer);
@@ -3960,6 +4159,11 @@ function c_reorganise__newtyosto_levy(levy__to_reorgaise) {
   // reorganise__newtyosto();
 }
 
+/**
+ * Show or hide borders based on the checkbox state and mode.
+ * @param {Element} e - The checkbox element that triggered the function.
+ * @returns None
+ */
 function show__borders(e) {
   mode = e.getAttribute("id");
   pysty_alkutyostot = ltcontainer.querySelectorAll(".alku__tyosto_pysty");
@@ -4021,6 +4225,12 @@ function show__borders(e) {
   }
 }
 
+/**
+ * Applies deletion rules to certain elements on the page after a delay of 2500 milliseconds.
+ * The function retrieves values from specific input fields, performs comparisons, and triggers
+ * deletion actions based on the conditions met.
+ * @returns None
+ */
 function apply__deletion_rules() {
   setTimeout(() => {
     s_two_pituus = parseFloat(document.querySelector("#v_two").value);

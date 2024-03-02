@@ -1,3 +1,8 @@
+/**
+ * Function to handle navigation based on the checked status of different checkboxes.
+ * @param {boolean} arg - Flag to determine if all elements should be shown regardless of checkbox status.
+ * @returns None
+ */
 function rangat__navigation(arg) {
   levyt = canvas.querySelectorAll(".levy");
   rangat_alayer = canvas.querySelectorAll(".l2a");
@@ -67,6 +72,12 @@ function rangat__navigation(arg) {
 }
 
 
+/**
+ * This function performs a series of operations to create a visual representation of a design layout based on the provided input values.
+ * It extracts data from the HTML elements on the page, processes and organizes the data, and then generates a visual layout using div elements.
+ * The function handles the creation of various types of elements such as ranks, saumas, aukkos, and initializes settings for the design layout.
+ * @returns None
+ */
 function rangoita() {
   po_c = "#fedb00";
   pv_c = "#fedb00";
@@ -311,6 +322,10 @@ function rangoita() {
   create__ranka__tuoexcel();
 }
 
+/**
+ * Rearranges elements on the canvas by removing duplicates based on their position and sorting them.
+ * @returns None
+ */
 function fixrangat() {
   rangat = canvas.querySelectorAll(".rangat__grandrow > .ranka");
   // Delete double ranka X, Y after
@@ -367,6 +382,10 @@ function fixrangat() {
   }
 }
 
+/**
+ * Initializes settings for the rangat elements based on the provided configuration.
+ * @returns None
+ */
 function rangat__initializesettings() {
   rangat = canvas.querySelectorAll(".rangat__grandrow > div");
   s_rankaonsettings = document.querySelectorAll(".rankalista_as .s_rangat input:checked");
@@ -555,6 +574,10 @@ function rangat__initializesettings() {
   rangat = canvas.querySelectorAll(".rangat__grandrow > .ranka");
 }
 
+/**
+ * Sets the coordinates and additional information for different types of ranks on the page.
+ * @returns None
+ */
 function rangat__setcord() {
   r_bottomsumm = 0;
   r_leftsumm = 0;
@@ -665,6 +688,11 @@ function rangat__setcord() {
   }
 }
 
+/**
+ * Changes the rank of an element based on the input value.
+ * @param {HTMLElement} input - The input element triggering the rank change.
+ * @returns None
+ */
 function change__rankacord(input) {
   const oldvalue = input.dataset.from;
   let c_kiinnikkeet = canvas.querySelectorAll(".tyostot__tyosto");
@@ -746,6 +774,10 @@ valiranka_no = 0;
 saumaranka_no = 0;
 
 
+/**
+ * Creates an Excel sheet with the data extracted from the canvas elements.
+ * @returns None
+ */
 function create__ranka__tuoexcel() {
   rangat = canvas.querySelectorAll(".rangat__grandrow > div");
   h = parseFloat(document.querySelector("#box_h").value);
@@ -978,6 +1010,11 @@ function create__ranka__tuoexcel() {
 //   XLSX.writeFile(wb, filename);
 // }
 
+/**
+ * Generates an Excel file containing the 'rangat_tuotanto_data' in a sheet named 'Rangat'.
+ * The file is saved with the filename based on the current_tila, current_room, and [Rangat Tuotanto].
+ * @returns None
+ */
 function lataa_ranka_tuo_excel() {
   filename = current_tila +" seinä "+ current_room+' [Rangat Tuotanto].xlsx';
   var ws = XLSX.utils.json_to_sheet(rangat_tuotanto_data);

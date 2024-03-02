@@ -1,3 +1,8 @@
+/**
+ * Takes a screenshot of all walls by capturing the content of a specified div element,
+ * converting it to an image, and saving it as a PDF file.
+ * @returns None
+ */
 function takeshotAllwalls() {
   let div = document.querySelector("#copiedcanvases");
   img_name = "Havainnekuva_seinät";
@@ -17,6 +22,11 @@ function takeshotAllwalls() {
   });
 }
 
+/**
+ * Executes the fixeight function to adjust the width of copied canvases and remove elements
+ * that exceed certain height limits.
+ * @returns None
+ */
 function fixeight() {
   console.log("fixeight executed");
   c_c = document.querySelector("#copiedcanvases");
@@ -39,6 +49,11 @@ function fixeight() {
   }
 }
 
+/**
+ * Function to handle navigation based on the selected levels in the UI.
+ * @param {arg} arg - The argument passed to the function.
+ * @returns None
+ */
 function eight__navigation(arg) {
   eight = document.querySelector("#copiedcanvases");
   e_levyt = eight.querySelectorAll(".levy");
@@ -102,6 +117,10 @@ function eight__navigation(arg) {
 
 realcount = 0;
 
+/**
+ * Moves room data to a different location based on the current room and its status.
+ * @returns None
+ */
 function siirto_muualle() {
   sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
   horizontals_original = canvas.querySelectorAll(".horizontalrow_saumat > div");
@@ -332,6 +351,11 @@ function siirto_muualle() {
 }
 
 
+/**
+ * This function performs a partial transfer of elements to another location based on certain conditions.
+ * It checks for specific elements in the document and manipulates their styles and properties accordingly.
+ * @returns None
+ */
 function osittainen_siirto_muualle() {
   if(document.querySelector("#copiedcanvases .canvas:nth-child(4)")) {
     document.querySelector("#copiedcanvases").style.display = "flex";
@@ -624,6 +648,12 @@ function osittainen_siirto_muualle() {
 }
 
 
+/**
+ * Creates an Excel file from the walls in the canvas.
+ * This function extracts data from the HTML elements representing the walls and their properties,
+ * and generates an Excel file with the extracted data.
+ * @returns None
+ */
 function create__excel_fromallwalls() {
   old_levy_excel = document.querySelector(".levy_excel").innerHTML;
   const saumas = document.querySelectorAll(".sauma");

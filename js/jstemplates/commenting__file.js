@@ -1,3 +1,7 @@
+/**
+ * Executes file upload functionality when a button with class 'ready_btn' is clicked.
+ * @returns None
+ */
 $(document).ready(function() {
     $('.ready_btn').click(function() {
         if(new_com_id == 0) {
@@ -34,6 +38,11 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * Sets up an event listener for when a button with the class 'sendcommentfiles' is clicked.
+ * It then retrieves the files from the input field with the class 'newcomment__files' and sends them via AJAX to the server for uploading.
+ * @returns None
+ */
 $(document).ready(function() {
     $('.sendcommentfiles').click(function() {
 

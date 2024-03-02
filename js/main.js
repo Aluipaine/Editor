@@ -1,3 +1,13 @@
+/**
+ * This script performs various operations on the page elements based on the data attributes and values.
+ * It includes functions to convert letters to Greek characters, encode and decode UTF-8 strings, and apply CSS classes to elements based on specific conditions.
+ * Additionally, it sets a timeout to update certain elements after a delay.
+ * @param {string} current_asiakas - The value of the current_asiakas element.
+ * @param {NodeList} all_apartments - A collection of elements with the class 'project__building_room'.
+ * @param {number} saumaset_hm - The horizontal spacing value.
+ * @param {number} saumaset_vm - The vertical spacing value.
+ * @returns None
+ */
 // Universal
 current_room = null;
 apartment = null;
@@ -132,6 +142,11 @@ $('.drawarea__navigation').hide();
 // // document.querySelector("#drawarea_w").value = "9975";
 // // setTimeout(changesize(),3000);
 
+/**
+ * Changes the walls for all rooms after a delay of 500 milliseconds.
+ * If there is a current room selected, it saves the rooms again.
+ * @returns None
+ */
 function changeWalls_all() {
   setTimeout(() => {
     saving_array = [];
@@ -145,6 +160,13 @@ function changeWalls_all() {
   }
   // submitprogress('', 'save');
 }
+
+/**
+ * This function performs a series of operations on elements selected by the class ".drawscreen_section_*name*".
+ * It iterates over each room element, checks certain conditions, and adds specific classes based on the data attributes of the room element.
+ * Additionally, it performs various DOM manipulations and updates the styles of different elements based on certain conditions.
+ * @returns None
+ */
 function refresh__drawcontrols() {
   $("#rooms").hide();
   $("#drawscreen_section_zero").hide();
@@ -266,6 +288,7 @@ function refresh__drawcontrols() {
 
 
 
+    
     let rooms = document.querySelectorAll(".project__building_room");
 
     for (let a = 0; a < rooms.length; a++) {
@@ -2080,6 +2103,11 @@ function refresh__drawcontrols() {
     submitprogress('', 'save');
   }
 }
+/**
+ * Adds a function to be executed when the window has fully loaded.
+ * @param {function} callback - The function to be executed on window load.
+ * @returns None
+ */
 var addFunctionOnWindowLoad = function (callback) {
   if (window.addEventListener) {
     window.addEventListener('load', callback, false);
@@ -2091,6 +2119,11 @@ var addFunctionOnWindowLoad = function (callback) {
 addFunctionOnWindowLoad(refresh__drawcontrols);
 
 
+/**
+ * Function to navigate between walls in a house layout.
+ * @param {Element} elem - The element representing the wall to navigate to.
+ * @returns None
+ */
 function nav_betweenwalls(elem) {
   setTimeout(function () {
     rooms_array = [];
@@ -2140,6 +2173,12 @@ function nav_betweenwalls(elem) {
   }, 1000);
 }
 
+/**
+ * Initializes a room based on the provided room and menu.
+ * @param {HTMLElement} room - The room element to initialize.
+ * @param {HTMLElement} menu - The menu element associated with the room.
+ * @returns None
+ */
 function initializeroom(room, menu) {
   ir_no = room.dataset.room;
   
@@ -3042,10 +3081,22 @@ function getElementCoords(bottom_input, left_input) {
 const origo = document.querySelector('#drawarea__origo_central');
 const canvas = document.querySelector('#box-wrapper > main');
 // touchedElement('.drawarea main', '#drawarea_w', '#drawarea_h', '#drawarea__origo_central', 'selector','#origo_x', '#origo_y')
+/**
+ * Rounds a given number to the nearest multiple of 25.
+ * @param {number} num - The number to round to the nearest multiple of 25.
+ * @returns {number} The rounded number.
+ */
 function roundToNearest25(num) {
   return Math.round(num / 25) * 25;
 }
 
+/**
+ * Function that adjusts the grid layout based on the dimensions of the canvas and draw area.
+ * It calculates the width and height of grid items and rows based on the canvas size and draw area dimensions.
+ * It also sets the value of the ".kokonaisalue" element to the concatenated values of drawarea_h and drawarea_w.
+ * Additionally, it prevents the default behavior of the Enter key when pressed.
+ * @returns None
+ */
 function gridify() {
   setTimeout(() => {
     drawarea = document.querySelector("#box-wrapper");
@@ -3092,14 +3143,29 @@ $(document).ready(function () {
 
 });
 
+/**
+ * Check if a given number is even.
+ * @param {number} num - The number to check for evenness.
+ * @returns {boolean} Returns true if the number is even, false otherwise.
+ */
 function isEven(num) {
   return num % 2 === 0;
 }
 
+/**
+ * Removes duplicate elements from an array while preserving the original order.
+ * @param {Array} arr - The input array from which duplicates are to be removed.
+ * @returns {Array} - A new array with duplicate elements removed.
+ */
 function removeDuplicates(arr) {
   return arr.filter((item, index) => arr.indexOf(item) === index);
 }
 
+/**
+ * Takes a screenshot of a specific element based on the argument provided.
+ * @param {number} arg - The argument to determine which element to take a screenshot of (0, 1, or 2).
+ * @returns None
+ */
 function takeshot(arg) {
   let div = document.querySelector("body > section.row.drawarea__section > div.drawarea__section_container");
   if (arg === 0) {
@@ -3151,6 +3217,10 @@ function takeshot(arg) {
   }
 }
 
+/**
+ * Creates and appends a new div element to the main box wrapper with specific styling and event listeners.
+ * @returns None
+ */
 function prepend__reclamation() {
   var newDiv = document.createElement("span");
   var newDiv__comment = document.createElement("span");
@@ -3222,6 +3292,11 @@ function prepend__reclamation() {
   }
 }
 
+/**
+ * Adds a problem status to a specific element based on the provided event.
+ * @param {Event} e - The event that triggered the function.
+ * @returns None
+ */
 function addproblemstatus(e) {
   elid = e.getAttribute('id');
   el_ = elid.replace('--Tila ', '').replace('', '').replaceAll(' ', '').toLowerCase();
@@ -3233,6 +3308,11 @@ function addproblemstatus(e) {
   }
   
 }
+/**
+ * Adds a click event listener to all radio buttons and checkboxes on the page to focus on the element when clicked.
+ * This helps with accessibility by making it easier for users to interact with the form elements using the keyboard.
+ * @returns None
+ */
 //Ultimate rule: all radiobuttons and checkboxes get focus on checked
 var radios = document.querySelectorAll('input[type="radio"]');
 radios.forEach(function (r) {
@@ -3251,6 +3331,10 @@ checkedboxes.forEach(function (ch) {
   });
 });
 
+/**
+ * Removes all canvas elements with the class "canvas" that are children of the element with the id "copiedcanvases".
+ * @returns None
+ */
 function delcanvases() {
   copiedcanvases = document.getElementById("copiedcanvases");
 
@@ -3261,6 +3345,12 @@ function delcanvases() {
 }
 
 
+/**
+ * This function is used to skip certain steps in a web application based on the URL parameters.
+ * It checks for specific URL parameters and performs actions accordingly to skip to the desired step.
+ * Note: This function relies on specific HTML elements and URL parameters to function correctly.
+ * @returns None
+ */
 function skipping() {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
   (async () => {
@@ -3295,11 +3385,23 @@ function skipping() {
   // if(current_user_permissions)
 }
 
+/**
+ * Executes the function 'skipping' after a delay of 550 milliseconds.
+ * @param {Function} skipping - The function to be executed after the delay.
+ * @param {number} 550 - The delay in milliseconds before executing the function.
+ * @returns None
+ */
 setTimeout(() => {
   skipping();
 }, "550");
 
 
+/**
+ * Initializes the house template based on the provided arguments and stage.
+ * @param {arguemento} arguemento - The argument to initialize the house template.
+ * @param {number} stage - The stage of initialization (1 or 2).
+ * @returns None
+ */
 function initialize__housetempla(arguemento,stage) {
   rdata = document.querySelector("."+current_apartment);
   if(stage === 1) {
@@ -3367,6 +3469,12 @@ function initialize__housetempla(arguemento,stage) {
 
 }
 
+/**
+ * Sends an AJAX request to "/kumoa.php" to undo a specific action.
+ * Retrieves the project ID and current user from the DOM elements with IDs "current_project_id" and "current_user".
+ * Displays an alert if there is a database error or a network error.
+ * @returns None
+ */
 function kumoa() {
   $.ajax({
     url: "/kumoa.php",
@@ -3390,6 +3498,12 @@ function kumoa() {
 
 
 
+/**
+ * Sends a value to the server using AJAX POST request.
+ * @param {any} val - The value to be sent to the server.
+ * @param {string} metakey - The meta key associated with the value.
+ * @returns None
+ */
 function send__value(val, metakey) {
   formData = {
       pr_id: document.querySelector("#current_project_id").value,
@@ -3410,6 +3524,11 @@ function send__value(val, metakey) {
 }
 
 
+/**
+ * Initializes the cropping functionality for tables with multiple rows and columns.
+ * It calculates the maximum height and width based on the data attributes of the elements.
+ * @returns None
+ */
 function initializecropping() {
   tables = document.querySelectorAll(".tablepreview");
 
@@ -3445,6 +3564,11 @@ function initializecropping() {
   }
 }
 
+/**
+ * Opens a settings modal based on the dataset value of the event target.
+ * @param {Event} e - The event object that triggered the function.
+ * @returns None
+ */
 function settings__modal_open(e) {
   asmodal_mode = e.dataset.asmodal_mode;
 
@@ -3455,6 +3579,10 @@ function settings__modal_open(e) {
 
 initializecropping(); 
 
+/**
+ * Initializes settings for measurements by making AJAX calls to retrieve preset settings.
+ * @returns None
+ */
 function initializesettings__mittaus() {
 
   
@@ -4804,6 +4932,16 @@ function initializesettings__mittaus() {
 initializesettings__mittaus();
 
 
+/**
+ * Submits progress data based on the provided parameters.
+ * @param {any} b - The data to be submitted.
+ * @param {string} moddingtype - The type of modification being made (adding, cancel, back, save).
+ * @param {string} id - The ID of the element being modified.
+ * @param {string} type - The type of data being modified (mp, aukot, lv, sau).
+ * @param {array} array - The array of data to be modified.
+ * @param {string} aukkotallennus - Additional data for a specific type of modification.
+ * @returns None
+ */
 function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
   setTimeout(function () {
     var input_step = $('#step_drawscreen').val();
@@ -5501,6 +5639,11 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
 
 
 
+/**
+ * Creates an Excel generation timestamp based on the provided event data.
+ * @param {Event} e - The event data that triggered the function.
+ * @returns None
+ */
 function create__excelgenerationtimestamp(e) {
 
   _who = current_user;
@@ -5542,12 +5685,23 @@ function create__excelgenerationtimestamp(e) {
   });
 }
 
+/**
+ * Converts a date string to a Unix timestamp in seconds.
+ * @param {string} strDate - The date string to convert to a timestamp.
+ * @returns {number} The Unix timestamp in seconds.
+ */
 function toTimestamp(strDate){
   var datum = Date.parse(strDate);
   return datum/1000;
 }
 
 
+/**
+ * Toggle function to switch between different modes in the application.
+ * @param {number} mode - The mode to switch to.
+ * @param {HTMLElement} b - The button element that triggered the toggle.
+ * @returns None
+ */
 function toggle__asexcel(mode, b) {
   current_tila = document.querySelector("#roomname_1").value + "_" + document.querySelector("#roomname_2").value + "_" + document.querySelector("#roomname_3").value;
   current_tila = current_tila.replaceAll(" ","");
@@ -5761,6 +5915,11 @@ function toggle__asexcel(mode, b) {
   });
 }
 
+/**
+ * Get the formatted date string in the format "YYYY-MM-DD HH:MM:SS" from the given date object.
+ * @param {Date} date - The date object to format.
+ * @returns {string} The formatted date string.
+ */
 function GetDatabaseDate(date) {
   var month = ("0" + (date.getMonth() + 1)).slice(-2);
   var day  = ("0" + (date.getDate())).slice(-2);
@@ -5771,6 +5930,11 @@ function GetDatabaseDate(date) {
   return year + "-" + month + "-" + day + " " + hour + ":" +  min + ":" + seg;
 }
 
+/**
+ * Function to load and format data from an Excel file based on the given arguments.
+ * @param {arg} arg - The argument to determine the data loading process.
+ * @returns None
+ */
 function lataa_seinaexcel(arg) {
   aslevytarray = [];
   asrangat_array = [];
@@ -6048,6 +6212,12 @@ function lataa_seinaexcel(arg) {
 
 
 
+/**
+ * Toggle the display of project excel sheets based on the mode provided.
+ * @param {number} mode - The mode to determine which project excel sheet to display.
+ * @param {HTMLElement} b - The button element that triggered the toggle.
+ * @returns None
+ */
 function toggle__projectexcel(mode, b) {
   sheets = document.querySelectorAll(".prthree_sheet_item");
   btns = document.querySelectorAll(".projektilista_btn");
@@ -6369,6 +6539,13 @@ function toggle__projectexcel(mode, b) {
 }
 
 
+/**
+ * Downloads an Excel file for the current project based on the argument provided.
+ * If the argument is true, it downloads an Excel file for approved orders only.
+ * If the argument is false, it downloads an Excel file for all orders.
+ * @param {boolean} arg - Determines whether to download for approved orders only.
+ * @returns None
+ */
 function lataa_projektiexcel(arg) {
   current_project = document.querySelector(".project_start_heading").innerText;
   prtilausarray = [];

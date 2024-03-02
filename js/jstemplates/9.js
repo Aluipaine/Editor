@@ -1,3 +1,8 @@
+/**
+ * Function to perform listoitus operation on the canvas element.
+ * This function creates and manipulates elements based on the canvas content.
+ * @returns None
+ */
 listoitettu = false;
 
 function listoitus() {
@@ -190,6 +195,14 @@ function listoitus() {
   }
 }
 
+/**
+ * Creates a list element based on the given parameters.
+ * @param {string} type - The type of the list element (either "pysty" or "vaaka").
+ * @param {number} distance - The distance of the list element.
+ * @param {HTMLElement} levymitta - The element representing the dimensions of the list.
+ * @param {HTMLElement} settingsarray - The array of settings for the list element.
+ * @returns None
+ */
 function create_lista(type,distance,levymitta,settingsarray) {
   listat_row = canvas.querySelector(".listat__grandrow");
   lista = document.createElement("div");
@@ -258,6 +271,10 @@ function create_lista(type,distance,levymitta,settingsarray) {
   lista.classList.add("lista_"+type);
   listat_row.append(lista);
 }
+/**
+ * Removes duplicate elements from the canvas based on their position and dimensions.
+ * @returns None
+ */
 function listat_remove_duplicates() {
   pystyt = canvas.querySelectorAll(".listat__grandrow > .lista_pysty");
   vaat = canvas.querySelectorAll(".listat__grandrow > .lista_vaaka");
@@ -366,6 +383,10 @@ function listat_remove_duplicates() {
   });
 }
 
+/**
+ * Creates an Excel sheet based on the data extracted from the HTML elements.
+ * @returns None
+ */
 function create__lista__tuoexcel() {
   listat = canvas.querySelectorAll(".listat__grandrow > div");
   h = parseFloat(document.querySelector("#box_h").value);
@@ -627,6 +648,12 @@ function create__lista__tuoexcel() {
 //   XLSX.writeFile(wb, filename);
 // }
 
+/**
+ * Generates an Excel file containing a list of data and downloads it.
+ * The filename is constructed based on the current_tila, current_room, and a fixed string.
+ * The data is converted to a worksheet, added to a workbook, and then downloaded as an Excel file.
+ * @returns None
+ */
 function lataa_lista_tuo_excel() {
   filename = current_tila +" seinä "+ current_room+' [Listat Tuotanto].xlsx';
   var ws = XLSX.utils.json_to_sheet(listat_real_data);

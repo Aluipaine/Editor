@@ -1,3 +1,13 @@
+/**
+ * Creates a levy element based on the provided parameters and appends it to the levy_array.
+ * @param {number} h - The height of the levy.
+ * @param {number} w - The width of the levy.
+ * @param {number} dex - The dex value.
+ * @param {number} col - The col value.
+ * @param {number} b - The b value.
+ * @param {number} l - The l value.
+ * @returns {HTMLElement} The created levy element.
+ */
 function luo__levy(h, w, dex, col, b, l) {
   dex += 1;
   var ind;
@@ -76,6 +86,11 @@ function luo__levy(h, w, dex, col, b, l) {
 
 }
 
+/**
+ * Function to perform levyta operation with the given priority.
+ * @param {string} priority - The priority of the operation.
+ * @returns None
+ */
 function levyta(priority) {
   console.log("LEVYTA CALLED");
   fixmissing__saumoitus();
@@ -217,6 +232,10 @@ function levyta(priority) {
     }
 }
 
+/**
+ * Removes elements with class "aukko" based on specific conditions related to their attributes.
+ * @returns None
+ */
 function poista__aukkoala() {
   aukkos = canvas.querySelectorAll(".aukko");
   levys = canvas.querySelectorAll(".levy");
@@ -258,6 +277,11 @@ function poista__aukkoala() {
   }
 }
 
+/**
+ * Opens or closes the Ladonta settings by adding or removing a CSS class.
+ * @param {boolean} e - A boolean value indicating whether to open (true) or close (false) the Ladonta settings.
+ * @returns None
+ */
 function open_ladonta_settings(e) {
   if (e === true) {
     document.querySelector(".ladonta_container").classList.add("two");
@@ -267,6 +291,11 @@ function open_ladonta_settings(e) {
   }
 }
 
+/**
+ * Function to perform a series of operations on a given element 'levy'.
+ * @param {Element} levy - The element on which the operations are performed.
+ * @returns None
+ */
 function raksita(levy) {
   console.log("RAKSITA CALLED");
   levy_c += 1;
@@ -321,6 +350,11 @@ function raksita(levy) {
   }
   // if(levy.getBoundingClientRect().bottom)
 }
+/**
+ * Moves the element to the left and combines it with the previous element if they have the same height.
+ * @param {HTMLElement} me - The element to move and potentially combine with the previous element.
+ * @returns None
+ */
 function closer_left(me) {
   c = parseFloat(me.dataset.levy);
   me_width = parseFloat(me.style.width);
@@ -372,6 +406,11 @@ function closer_left(me) {
     levys[i].dataset.levy = i;
   }
 }
+/**
+ * Function to handle the closer_top action on a given element.
+ * @param {Element} me - The element to perform the action on.
+ * @returns None
+ */
 function closer_top(me) {
   console.log("BTM");
   me_btm = parseFloat(me.getBoundingClientRect().bottom);
@@ -438,6 +477,18 @@ function closer_top(me) {
 
 // Restoring levy
 
+/**
+ * Creates and returns a DOM element representing a levy with the given parameters.
+ * @param {string} mod_nam - The name of the levy.
+ * @param {string} mod_type - The type of the levy (pysty or vaaka).
+ * @param {number} mod_b - The bottom position of the levy.
+ * @param {number} mod_left - The left position of the levy.
+ * @param {number} mod_height - The height of the levy.
+ * @param {number} mod_width - The width of the levy.
+ * @param {string} mod_title - The title of the levy.
+ * @param {number} mod_count - The count of the levy.
+ * @returns {
+ */
 function luo__levy_restore(mod_nam, mod_type, mod_b, mod_left, mod_height, mod_width, mod_title, mod_count) {
   dex += 1;
   var ind;
@@ -488,6 +539,10 @@ function luo__levy_restore(mod_nam, mod_type, mod_b, mod_left, mod_height, mod_w
 
 }
 
+/**
+ * Creates options for each levy item and appends them to the draw area controls.
+ * @returns None
+ */
 function create__ladontaoptions() {
   da_5 = document.querySelector(".drawarea__controls_fiveitems");
   da_5.innerHTML = "";
@@ -512,6 +567,11 @@ function create__ladontaoptions() {
   }
 
 }
+/**
+ * Finds and interacts with a specific element with the given 'number' in the dataset.
+ * @param {number} number - The number to search for in the dataset.
+ * @returns None
+ */
 function find__that_levy(number) {
   levys = canvas.querySelectorAll(".levy");
   for (var i = 0; i < levys.length; i++) {

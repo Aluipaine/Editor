@@ -1,3 +1,10 @@
+
+/**
+ * This function is used to change the value of a room based on the user's input.
+ * It updates the room value in the UI and makes an AJAX call to update the room value on the server.
+ * @param {HTMLElement} order - The element triggering the change event.
+ * @returns None
+ */
 let currect_arak = undefined;
 
 current_apartment = null;
@@ -23,6 +30,11 @@ function rooms__change_asjarj(order) {
 }
 
 
+/**
+ * Changes the name of a room based on the provided order.
+ * @param {HTMLElement} order - The element containing the order information.
+ * @returns None
+ */
 function rooms__change_name(order) {
   asj = order.dataset.tochange;
   mode_room = asj.toLowerCase();
@@ -43,6 +55,11 @@ function rooms__change_name(order) {
   });
 }
 
+/**
+ * Changes the description of a room based on the order data.
+ * @param {HTMLElement} order - The order element containing the data to change.
+ * @returns None
+ */
 function rooms__change_description(order) {
   asj = order.dataset.tochange;
   mode_room = asj.toLowerCase();
@@ -63,6 +80,11 @@ function rooms__change_description(order) {
   });
 }
 
+/**
+ * Function to hide or show a room and update the corresponding elements accordingly.
+ * @param {HTMLElement} room - The room element to hide or show.
+ * @returns None
+ */
 function hide__room(room) {
   thiswall = room.parentElement.parentElement;
   if (thiswall.classList.contains('hidden')) {
@@ -132,6 +154,11 @@ inputsName.forEach(item => {
   });
 });
 
+/**
+ * Changes the heights of various elements in the house based on the given number.
+ * @param {number} num - The number to set the heights to.
+ * @returns None
+ */
 function changeHeights(num) {
   const allHeights = document.querySelectorAll('.wall_height');
   allHeights.forEach(function(item) {
@@ -145,6 +172,11 @@ function changeHeights(num) {
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.height = num / 20 + "px";
 }
 
+/**
+ * Changes the widths of various elements in the house based on the given number.
+ * @param {number} num - The number to set the widths to.
+ * @returns None
+ */
 function changeWidths(num) {
   const allWidths = document.querySelectorAll('.wall_width');
   allWidths.forEach(function(item) {
@@ -164,6 +196,11 @@ function changeWidths(num) {
   document.querySelector("#house .house__wall_floor").style.left = (-35) + document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three.house__wall_c").offsetLeft + "px";
 }
 
+/**
+ * Changes the widths and heights of various elements in a house structure based on the given number.
+ * @param {number} num - The number to set the widths and heights to.
+ * @returns None
+ */
 function changeWidths_2(num) {
   allWidths = document.querySelectorAll('.wall_width_2');
   allWidths.forEach(function(item) {
@@ -182,6 +219,9 @@ function changeWidths_2(num) {
 
 }
 
+/**
+ * Changes the height and width of the roof based on user input.
+ */
 function change_roof() {
   const roof_height = document.querySelector('#wall_one_roof_h').value;
   const roof_width = document.querySelector('#wall_one_roof_w').value;
@@ -211,6 +251,10 @@ function change_floor() {
   save_rooms();
 }
 
+/**
+ * Changes the dimensions of element 'a' based on user input values.
+ * @returns None
+ */
 function change_a() {
   const a_height = document.querySelector('#wall_one_a_h').value;
   const a_width = document.querySelector('#wall_one_a_w').value;
@@ -226,6 +270,14 @@ function change_a() {
   save_rooms();
 }
 
+/**
+ * Changes the height and width of an element based on user input values.
+ * Adds and removes classes from a container element.
+ * Listens for a click event on a specific element and calls functions to change heights and widths.
+ * Updates the width and height of a specific element based on user input values.
+ * Calls a function to save room data.
+ * @returns None
+ */
 function change_b() {
   const b_height = document.querySelector('#wall_one_b_h').value;
   const b_width = document.querySelector('#wall_one_b_w').value;
@@ -241,6 +293,10 @@ function change_b() {
   save_rooms();
 }
 
+/**
+ * Changes the dimensions of an element based on the values provided in the input fields.
+ * @returns None
+ */
 function change_c() {
   const c_height = document.querySelector('#wall_one_c_h').value;
   const c_width = document.querySelector('#wall_one_c_w').value;
@@ -256,6 +312,12 @@ function change_c() {
   save_rooms();
 }
 
+/**
+ * Changes the dimensions of a wall element based on the input values from the user.
+ * Updates the height and width of the wall element, adds and removes classes from
+ * the question container, and sets event listeners for modal confirmation.
+ * @returns None
+ */
 function change_d() {
   const d_height = document.querySelector('#wall_one_d_h').value;
   const d_width = document.querySelector('#wall_one_d_w').value;
@@ -272,6 +334,12 @@ function change_d() {
 }
 
 
+/**
+ * This function is triggered when a specific element with the class 'project__building_room' is clicked.
+ * It performs a series of actions such as sliding up an element with the id 'project_start', refreshing draw controls,
+ * setting values for various elements based on the clicked element, and initializing a cross based on the text of the clicked element.
+ * @returns None
+ */
 $('.project__building div.project__building_room').click(function() {
   $("#project_start").slideUp(200);
   refresh__drawcontrols();
@@ -424,6 +492,16 @@ $('.project__building div.project__building_room').click(function() {
 });
 
 
+/**
+ * This function handles the click event on elements with the class 'house__wall_status' 
+ * within the '#rooms' div. It performs a series of actions such as sliding up the '#rooms' 
+ * element, showing and sliding down the '#drawscreen_section_zero' element, updating text 
+ * elements based on user input, setting attributes, and updating input values. It also 
+ * checks for the presence of an element with the id 'open_comments' and performs additional 
+ * actions accordingly. Finally, it initializes the 'initalize_cross' function.
+ * 
+ * @returns None
+ */
 $('#rooms div.house__wall_status').click(function() {
   $("#rooms").slideUp(200);
   $("#drawscreen_section_zero").show();
@@ -458,6 +536,11 @@ $('#rooms div.house__wall_status').click(function() {
  
 
 });
+/**
+ * Creates rooms based on the provided column count, row count, and wall quantity.
+ * Inserts cells into the table to represent the rooms.
+ * @returns None
+ */
 var tableId = document.querySelector("#project__room > table");
 
 function create_rooms() {
@@ -510,6 +593,11 @@ function create_rooms() {
 // } );
 
 
+/**
+ * Initializes the cross by processing the given argument and updating the apartment walls based on saved data.
+ * @param {any} arg - The argument to be processed.
+ * @returns None
+ */
 function initalize_cross(arg) {
 
   a_saved = apartment.dataset.aroom.replaceAll(",","~");
@@ -822,6 +910,17 @@ function initalize_cross(arg) {
  
 }
 
+/**
+ * Converts a string representation of a wall type to a numerical value.
+ * @param {string} a - The string representing the wall type (e.g., "a", "b", "c", etc.).
+ * @returns {number} The numerical value corresponding to the wall type:
+ *  - "a" -> 1
+ *  - "b" -> 2
+ *  - "c" -> 3
+ *  - "d" -> 4
+ *  - "k" or "roof" -> 5
+ *  - "l" or "floor" -> 6
+ */
 function wallAToNum(a) {
   a = a.toLowerCase();
   if(a == "a") {
@@ -839,6 +938,16 @@ function wallAToNum(a) {
   }
 }
 
+/**
+ * Adjusts the size of different walls in a house based on the input values.
+ * The function retrieves the elements representing different walls of the house
+ * and adjusts their height and width based on the values provided in the input fields.
+ * The heights and widths are converted from a unit to pixels by dividing by 20.
+ * Additionally, it adjusts the position and size of the roof and floor walls accordingly.
+ * This function assumes the presence of specific classes and structure in the HTML.
+ * If the elements representing the walls are found, their dimensions are updated accordingly.
+ * @returns None
+ */
 function adjust_roomsizes() {
 
   if(document.querySelector("#house div.house__wall")) {
@@ -875,6 +984,11 @@ function adjust_roomsizes() {
 }
 
 
+/**
+ * Degrades the URL by removing specified parameters based on the given stage.
+ * @param {number} stage - The stage at which to remove parameters from the URL.
+ * @returns None
+ */
 function degradate_url(stage) {
   urlString = window.location.href;
   url = new URL(urlString);
@@ -903,6 +1017,13 @@ function degradate_url(stage) {
   modified_url = JSON.stringify(url).replaceAll('"',"").replaceAll("'","").replaceAll("http://localhost/","").replaceAll("%22","").replaceAll("https://editori.westface.fi/","").replaceAll("http://editori.westface.fi/","");
   window.history.pushState({ path: modified_url }, '', modified_url);
 }
+/**
+ * Adds event listeners for popstate event on window and jQuery document ready function.
+ * If window history and pushState are supported, it adds a popstate event listener to
+ * degrade the URL and reload the location.
+ * @param None
+ * @returns None
+ */
 window.addEventListener('popstate', () => {
   
 });
@@ -919,6 +1040,13 @@ jQuery(document).ready(function($) {
   }
 });
 
+/**
+ * Initializes the building based on the current user and role.
+ * If the current user is 'tyonjohto' or the current role is 'mittaus', 
+ * it adds buttons for project functions to each element with the class 'coderdy'.
+ * It also displays or hides the house element based on the project type.
+ * @returns None
+ */
 function initializebuilding() {
   raput = document.querySelectorAll(".coderdy");
   current_user = document.querySelector("#current_user").value;
@@ -953,6 +1081,13 @@ function initializebuilding() {
 
 initializebuilding();
 
+/**
+ * This function is used to add more elements to a project function.
+ * It performs various operations like adding and removing classes, updating dataset values,
+ * setting display properties, updating innerHTML, and checking input values.
+ * @param {Element} elem - The element that triggered the function.
+ * @returns None
+ */
 function projectfunction__addmore(elem) {
 
   document.querySelector('.five_popup').classList.add("two");
@@ -1021,12 +1156,23 @@ function projectfunction__addmore(elem) {
   }
   
 }
+/**
+ * Modifies the classes of the specified element to show a popup.
+ * @param {Element} elem - The element to modify.
+ * @returns None
+ */
 function projectfunction__settings(elem) {
   document.querySelector('.first_popup').classList.add("two");
   document.querySelector('.first_popup').classList.remove("out");
   
 }
 
+/**
+ * Sends updated apartment information to the server.
+ * Iterates over selected apartments and non-working areas, constructs JSON objects
+ * and sends them via AJAX POST request to the server for processing.
+ * @returns None
+ */
 function send_new_aparts() {
   const upd__a_array = [];
   const upd__a_ = [];
@@ -1107,6 +1253,15 @@ function send_new_aparts() {
   }, 500);
 }
 
+/**
+ * Function to start or stop measuring based on the text content of the element.
+ * If the text is 'Aloita mittaaminen', it changes the text to 'Päätä mittaus' and sets project_type to 'after_measure_comment'.
+ * If the text is not 'Aloita mittaaminen', it changes the text back to 'Aloita mittaaminen' and clears the project_type.
+ * It also toggles the class 'yellow' on the element.
+ * Sends a POST request to modify the project type using AJAX.
+ * @param {Element} elem - The element that triggers the function.
+ * @returns None
+ */
 function start__measuring(elem) {
   project_id_ = parseFloat(document.querySelector("#current_project_id").value);
 
@@ -1137,6 +1292,11 @@ function start__measuring(elem) {
   });
 }
 
+/**
+ * Updates the project name in the database using an AJAX POST request.
+ * @param {Element} elem - The HTML element that triggered the change event.
+ * @returns None
+ */
 function projectname__change(elem) {
   project_id_ = parseFloat(document.querySelector("#current_project_id").value);
   project_name_ = elem.value;
@@ -1158,11 +1318,21 @@ function projectname__change(elem) {
   });
 }
 
+/**
+ * Function to open the change room name button by setting its opacity to 1.
+ * This function selects the change room name button element and sets its opacity to 1 to make it visible.
+ * @returns None
+ */
 function open__change_btn() {
   change__roomname_btn = document.querySelector(".change__roomname_btn");
   change__roomname_btn.style.opacity = 1;
 }
 
+/**
+ * Function to change the room name by concatenating values from input fields and sending
+ * an AJAX request to update the room name in the database.
+ * @returns None
+ */
 function change__roomname() {
   roomname_forchange = document.querySelector("#roomname_1").value.replaceAll(" ","") + " <br> " + document.querySelector("#roomname_2").value.replaceAll(" ","") + " <br> " + document.querySelector("#roomname_3").value.replaceAll(" ","");
   project_id_ = parseFloat(document.querySelector("#current_project_id").value);
@@ -1192,6 +1362,12 @@ function change__roomname() {
 }
 
 
+/**
+ * Function to add a new person entry in the settings form.
+ * Increments the prc_count variable and adds a new person entry form if the count is less than 13.
+ * @param {Element} elem - The element triggering the function.
+ * @returns None
+ */
 prc_count = 11;
 function settings_henkilolisays(elem) {
   elem.classList.add("active")
@@ -1238,6 +1414,11 @@ function settings_henkilolisays(elem) {
     document.querySelector("#settings__henkilolisays_inputs").append(group);
 }
 
+/**
+ * Retrieves and assigns values to elements based on the user selection.
+ * @param {string} elem - The element to retrieve values from.
+ * @returns None
+ */
 function prsettings__give_numbers(elem) {
   try {
       elements_array = document.querySelector("."+elem.replaceAll(' ','___').toLowerCase()+"_userselection").value.split("|");
@@ -1262,6 +1443,13 @@ function prsettings__give_numbers(elem) {
 
 } 
 
+/**
+ * Sends worker data to the database using an AJAX POST request.
+ * Retrieves input values from specific elements in the document and constructs a formData object.
+ * Sends the formData object to the server-side script for processing.
+ * Displays an alert in case of a database error and logs the formData object.
+ * @returns None
+ */
 function settings__sendworkers_db() {
   project_id_ = parseFloat(document.querySelector("#current_project_id").value);
   added__username_ = document.querySelector(".prc_new").value;
@@ -1296,6 +1484,12 @@ function settings__sendworkers_db() {
 }
 
 
+/**
+ * This function is triggered when a specific element with the class 'project__settings_uploadsend' is clicked.
+ * It performs multiple actions including uploading files via AJAX, formatting the file names, and sending data to the server.
+ * Additionally, it extends the Date object prototype to include a method 'getWeek' that calculates the week number of the year.
+ * @returns None
+ */
 $(document).ready(function() {
   $('.project__settings_uploadsend').click(function() {
       that_element_class = $(this).attr("name") + '_previewfiles';
@@ -1363,6 +1557,14 @@ setTimeout(() => {
 
 
 
+/**
+ * This script handles the click event on elements with the class 'project__building_room'.
+ * It prevents the default action, stops the event from propagating further, removes any overlay,
+ * and removes the 'active' class from the clicked element.
+ * It also handles the mousedown and touchstart events on elements with the class 'p_meaning'.
+ * It focuses on the target element, removes the 'active' class from all elements with the class 'p_meaning',
+ * sets a timer for a long click event, and retrieves the data-action and text content of the target element.
+ */
 let timer = 0
 
 $('.project__building_room').click((e) => {
@@ -1398,6 +1600,12 @@ $(".p_meaning")
   //   console.log("click")
   // });
 
+/**
+ * Attaches event listeners to the ".p_meaning_end" element for mouse down and touch start events.
+ * Saves new statuses, removes classes, and adds classes based on the event.
+ * @param {Event} e - The event object.
+ * @returns None
+ */
 $(".p_meaning_end")
   .on("mousedown touchstart", (e) => {
     save__newstatuses();
@@ -1440,6 +1648,12 @@ const longClick = (element) => {
   }
 };
 
+/**
+ * Enable or disable the comment based on the stage and criticality.
+ * @param {boolean} stage - The stage of the comment (true for enabled, false for disabled).
+ * @param {string} criticality - The criticality level of the comment.
+ * @returns None
+ */
 function elab__comment_enable(stage,criticality) {
   if(stage === false) {
     document.querySelector(`.status__elab_problem`).classList.add(`elab__status_hidden`);
@@ -1478,6 +1692,11 @@ const defaultClick = (e) => {
   
 };
 
+/**
+ * This function saves the new statuses of different rooms in a project.
+ * It retrieves data from specific elements in the document, processes the data, and sends it to the server for storage.
+ * @returns None
+ */
 function save__newstatuses() {
   a_rooms = '';b_rooms = '';c_rooms = '';d_rooms = '';e_rooms = '';f_rooms = '';g_rooms = '';h_rooms = '';
   if (document.querySelectorAll("#A")) {
@@ -1804,6 +2023,11 @@ function save__newstatuses() {
   }
 }
 
+/**
+ * Perform an action on a building element based on the event.
+ * @param {Event} evt - The event that triggered the action.
+ * @returns None
+ */
 function building__action(evt) {
   console.log(evt);
 
@@ -1862,10 +2086,20 @@ function building__action(evt) {
 }
 
 
+/**
+ * Toggles the 'active' class on the element with the class 'elab__statuses'.
+ * This function is used to open or close the workelab statuses.
+ * @returns None
+ */
 function open__workelab() {
   document.querySelector(".elab__statuses").classList.toggle("active");
 }
 
+/**
+ * Toggles the active user by adding and removing CSS classes and updating select options.
+ * @param {Element} elem - The element representing the active user.
+ * @returns None
+ */
 function toggle__pusers(elem) {
   p_li = document.querySelectorAll(".p_li");
 
@@ -1890,12 +2124,25 @@ function toggle__pusers(elem) {
   }
 }
 
+/**
+ * Enables the visibility of certain elements on the page by removing the 'elab__status_hidden' class.
+ * Specifically, it removes the 'elab__status_hidden' class from elements with classes '.t_elabstatus',
+ * '.t_elabday', and '.status__elab_noproblem'.
+ * @returns None
+ */
 function enable__elabelems() {
   document.querySelector(`.t_elabstatus`).classList.remove(`elab__status_hidden`);
   document.querySelector(`.t_elabday`).classList.remove(`elab__status_hidden`);
   document.querySelector(`.status__elab_noproblem`).classList.remove(`elab__status_hidden`);
 }
 
+/**
+ * Controls the visibility of elements based on the length of the input value.
+ * If the input value has a length greater than 1, it removes the "hidden" class from elements with the class "zero_popup .hidden".
+ * If the input value has a length of 1 or less, it adds the "hidden" class to elements with the class "zero_popup .modal_close_btn".
+ * @param {Event} e - The event object that triggered the function.
+ * @returns None
+ */
 function zero_controls(e) {
   if(e.value.length > 1) {
    zerocontrols = document.querySelectorAll(".zero_popup .hidden");
@@ -1911,6 +2158,11 @@ function zero_controls(e) {
   }
 }
 
+/**
+ * Closes the zero controls popup by adding and removing classes, 
+ * extracting necessary information from the current page, and redirecting the user.
+ * @returns None
+ */
 function zero_controls_close() {
   document.querySelector('.zero_popup').classList.add('out');
   document.querySelector('.zero_popup').classList.remove('two');
@@ -1928,6 +2180,11 @@ function zero_controls_close() {
 }
 
 
+/**
+ * Adds a new level project element to the table preview.
+ * @param {Element} elem - The element to which the new level project is added.
+ * @returns None
+ */
 function add_new_lvlproject(elem) {
   gp = elem.parentElement.parentElement.parentElement;
 
@@ -1979,6 +2236,12 @@ function add_new_lvlproject(elem) {
 
 
 
+/**
+ * This function is triggered when a change event occurs. It updates the values of certain elements
+ * on the page and sends an AJAX request to update metadata on the server.
+ * @param {Event} e - The event object that triggered the function.
+ * @returns None
+ */
 function change__stsplit(e) {
   allimps = document.querySelectorAll(".colormeaningsimps input");
   c_meanings = document.querySelectorAll(".c_meaning");
@@ -2020,6 +2283,11 @@ function change__stsplit(e) {
 
 
 
+/**
+ * Function to show the next element with class "coderdy" if the current user is 'tyonjohto' or the current role is 'mittaus'.
+ * It iterates through all elements with the class "coderdy" and displays the first element with a height less than 2.
+ * @returns None
+ */
 function next_rabbu() {
   if(current_user.toLowerCase() == 'tyonjohto' || current_role.toLowerCase() == 'mittaus') {
     allrappus = document.querySelectorAll(".coderdy");
@@ -2033,6 +2301,12 @@ function next_rabbu() {
   }
 }
 
+/**
+ * Saves room data for the current apartment by sending a POST request to the server.
+ * Replaces special characters in the apartment name, iterates through walls, and sends
+ * wall measurements to the server.
+ * @returns None
+ */
 function save_rooms() {
   togetroom = current_apartment.replaceAll("ä","a").replaceAll(" ","").replaceAll("ö","o").toLowerCase();
   walls=["a","b","c","d","K","L"];

@@ -1,3 +1,8 @@
+/**
+ * If the element with the id 'drawscreen_section_two' exists in the document,
+ * set the value of the element with id 'aukko_comment_from' to the value of the element with id 'current_user'.
+ * @returns None
+ */
 if(document.querySelector('#drawscreen_section_two')) {
   user = document.querySelector("#current_user").value;
   document.querySelector("#aukko_comment_from").value = user;
@@ -21,6 +26,12 @@ if(document.querySelector('#drawscreen_section_two')) {
 //   }
 // }
 
+/**
+ * This function is responsible for changing the size and type of an opening (aukko) based on user input.
+ * It retrieves the height and width values from input fields, checks the type of opening selected (door, window, etc.),
+ * and updates the corresponding values accordingly. It also dynamically generates radio buttons based on the selected type.
+ * @returns None
+ */
 var a = 0;
 var b = 0;
 var c = 0;
@@ -83,6 +94,12 @@ function change__aukko_sizecord() {
   // document.getElementById("settings__aukko").style.width = (document.getElementById("hole__width").value / width * 100) + '%';
   // change__aukko_size();
 }
+/**
+ * Updates the count of different types of elements based on the class of the element passed in.
+ * @param {Element} aukko - The element to update the count for.
+ * @param {number} count - The amount to increment the count by.
+ * @returns None
+ */
 ovi_count = 0;
 ikkuna_count = 0;
 palkki_count = 0;
@@ -112,6 +129,12 @@ function aukko_count_function(aukko, count) {
   }
 }
 
+/**
+ * Function to remove an element and update counts based on the element's class.
+ * @param {Element} aukko - The element to be removed.
+ * @param {number} count - The count of the element to be removed.
+ * @returns None
+ */
 function aukko_del(aukko, count) {
   console.log("AUKKO_DEL CALLED");
   if(aukko) {
@@ -218,6 +241,12 @@ function aukko_del(aukko, count) {
   }
 }
 
+/**
+ * Counts the number of different types of "aukkos" (openings) in the canvas element.
+ * Types of aukkos include "ovi" (door), "ikkuna" (window), "palkki" (beam), "pilari" (pillar), and "ilmastointi" (ventilation).
+ * Logs the count of each type of aukko to the console.
+ * @returns None
+ */
 function counting__aukkos() {
   ovi_count = 0;
   ikkuna_count = 0;
@@ -269,6 +298,11 @@ function counting__aukkos() {
 //   document.getElementById("settings__aukko").style.height = (document.getElementById("hole__height").value / height * 100) + '%';
 //   document.getElementById("settings__aukko").style.width = (document.getElementById("hole__width").value / width * 100) + '%';
 // }
+/**
+ * Changes the size of a lapivienti element based on the values provided.
+ * @param {Event} e - The event that triggered the function.
+ * @returns None
+ */
 function change__lapivienti_sizecord(e) {
   const height = document.querySelector('#box_h').value;
   const width = document.querySelector('#box_w').value;
@@ -292,6 +326,11 @@ function change__lapivienti_sizecord(e) {
   }
 }
 
+/**
+ * Updates the dimensions of a hole based on the input values.
+ * @param {any} input - The input values used to calculate the new dimensions of the hole.
+ * @returns None
+ */
 function changedimensions_aukko(input) {
   document.querySelector("#hole__width").value = ((eval(document.getElementById("aukotcord_right").value) - (eval(document.getElementById(
     "aukotcord_left").value))));
@@ -309,6 +348,11 @@ function changedimensions_aukko(input) {
   // }
 }
 var erikois_array_array = [];
+/**
+ * This function processes and updates the data attributes of elements based on the input arrays.
+ * It retrieves input values from the page, processes them, and updates the data attributes of elements accordingly.
+ * @returns None
+ */
 function ylitys__array() {
 
   ylitysas = document.querySelector(".aukko_ylitys input:checked").value;

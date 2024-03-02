@@ -1,3 +1,8 @@
+/**
+ * This function creates a levy_excel table based on the provided data.
+ * @param {Date} now - The current date and time.
+ * @returns None
+ */
 old_levy_excel = "";
 if(document.querySelector(".levy_excel")) {
   old_levy_excel = document.querySelector(".levy_excel").innerHTML;
@@ -734,6 +739,12 @@ function create__levy_excel(now) {
 }
 
 
+/**
+ * Generates an Excel file based on the data in the levyexcel_array.
+ * The Excel file will contain a sheet named "Levyt" with the data from levyexcel_array.
+ * The file will be saved with the filename format: current_tila + ' [Levyt].xlsx'.
+ * @returns None
+ */
 function generating_excel() {
   console.log("Starting EXCEL generating...");
   console.log("Levy Excel Array:", levyexcel_array);

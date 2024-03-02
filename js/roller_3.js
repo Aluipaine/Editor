@@ -1,3 +1,9 @@
+/**
+ * Repositions the box element to the specified coordinates.
+ * @param {number} x - The new horizontal position of the box element.
+ * @param {number} y - The new vertical position of the box element.
+ * @returns None
+ */
 var box_left = document.getElementById("box_left");
 var boxWrapper = document.getElementById("box-wrapper");
 var left_mm = document.querySelector('.box__left_mm');
@@ -10,6 +16,12 @@ function left_repositionElement(x, y) {
     boxWrapper.style.top = y;
 }
 
+/**
+ * Resize the left box element based on the provided width and height values.
+ * @param {number} w - The width value for the box.
+ * @param {number} h - The height value for the box.
+ * @returns None
+ */
 function left_resize(w, h) {
     box_left.style.maxWidth = (boxWrapper.offsetWidth) + 'px';
     box_left.style.width = (w * (parseFloat(document.querySelector("#box_h").value) / parseFloat(document.querySelector("#box_w").value))) + 'px';
@@ -23,6 +35,15 @@ function left_resize(w, h) {
     drawarea__update_cord();
 }
 // handle left_resize
+/**
+ * Handles the resizing of the left element based on the event and resize parameters.
+ * @param {Event} event - The event that triggered the resize action.
+ * @param {boolean} [left=false] - Indicates if the resize is towards the left.
+ * @param {boolean} [top=false] - Indicates if the resize is towards the top.
+ * @param {boolean} [xleft_resize=false] - Indicates if the resize is along the x-axis.
+ * @param {boolean} [yleft_resize=false] - Indicates if the resize is along the y-axis.
+ * @returns None
+ */
 var bottomMid = document.getElementById("box_left__right-mid");
 
 function left_resizeHandler(event, left = false, top = false, xleft_resize = false, yleft_resize = false) {

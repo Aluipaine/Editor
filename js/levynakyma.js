@@ -1,3 +1,9 @@
+/**
+ * This script initializes various DOM elements by selecting them using querySelector.
+ * It also defines a function to generate a random string of 16 characters using a given set of characters.
+ * The selected elements include inputs, canvas elements, and various other elements related to a levy system.
+ * @returns None
+ */
 let levy_name_input = document.querySelector(".levymodal__levyname");
 
 let levy_sizes_w_input = document.querySelector(".drawarea_w");
@@ -41,6 +47,13 @@ function generateRandomString() {
     return randomString;
 }
 
+/**
+ * Adds event listeners to input elements to update corresponding elements on the page.
+ * Updates the innerHTML of levy_name based on the value of levy_name_input.
+ * Updates the width of levy_canvas based on the value of levy_sizes_w_input divided by 5.
+ * Updates the innerHTML of levy_size to display the values of levy_sizes_w_input and levy_sizes_h_input.
+ * Updates the left style of tyosto_pysty based on the value of levy_sizes_w_input.
+ */
 levy_name_input.addEventListener("input", () => {
     levy_name.innerHTML = levy_name_input.value;
 });
@@ -55,6 +68,12 @@ levy_sizes_w_input.addEventListener("input", () => {
     tyosto_pysty.style.left = value - 6.5 + "px";
 });
 
+/**
+ * Adds an event listener to the levy_sizes_h_input element that updates the height of the levy_canvas,
+ * the text content of levy_size, and the bottom position of tyosto_vaaka based on the input value.
+ * @param {Event} input - The input event triggering the function.
+ * @returns None
+ */
 levy_sizes_h_input.addEventListener("input", () => {
     let value = levy_sizes_h_input.value / 5;
 
@@ -65,16 +84,34 @@ levy_sizes_h_input.addEventListener("input", () => {
     tyosto_vaaka.style.bottom = value - 6.5 + "px";
 });
 
+/**
+ * Adds an event listener to the levy_count_input element that updates the innerHTML
+ * of the levy_count element whenever the input value changes.
+ * @param None
+ * @returns None
+ */
 levy_count_input.addEventListener("input", () => {
     levy_count.innerHTML = levy_count_input.value;
 });
 
+/**
+ * Changes the background color of the levy_canvas element to the background color of the provided object.
+ * @param {Object} obj - The object containing the new background color.
+ * @returns None
+ */
 function levy_color_change(obj) {
     levy_canvas.style.backgroundColor =
         obj.style.backgroundColor;
 }
 
 // Radio-like checkboxes
+/**
+ * Adds event listeners to each element in the levyn_ruuvit array to handle click events.
+ * Depending on the clicked element, certain actions are taken such as toggling checkboxes,
+ * adding/removing classes, and displaying/hiding elements.
+ * @param None
+ * @returns None
+ */
 levyn_ruuvit.forEach((ruuvit) => {
     ruuvit.addEventListener("click", () => {
         levyn_ruuvit.forEach((levyn) => {
@@ -119,6 +156,12 @@ levyn_ruuvit.forEach((ruuvit) => {
     });
 });
 
+/**
+ * Adds event listener to the element with class "submit_add_tyosto_modal" to handle click events.
+ * Retrieves input values, calculates coordinates and type based on user input, and dynamically
+ * generates HTML elements to display the corresponding visual representation.
+ * @returns None
+ */
 document.querySelector(".submit_add_tyosto_modal").addEventListener("click", () => {
     let value = document.querySelector("#ruulit_cord").value;
     let cord = value / 5;
@@ -154,6 +197,12 @@ document.querySelector(".submit_add_tyosto_modal").addEventListener("click", () 
     }
 });
 
+/**
+ * Adds a click event listener to the element with the class "add_tyosto_modal_close_btn".
+ * When clicked, it adds the "out" class and removes the "two" class from the add_tyosto_modal element.
+ * It also sets the display style of elements in the levyn_lv_list to "flex".
+ * @returns None
+ */
 document.querySelector(".add_tyosto_modal_close_btn").addEventListener("click", () => {
     add_tyosto_modal.classList.add("out");
     add_tyosto_modal.classList.remove("two");
@@ -167,6 +216,12 @@ function tyosto__del(obj) {
     obj.parentElement.remove();
 }
 
+/**
+ * Changes the position of an element based on the value of an object and a specified type.
+ * @param {object} obj - The object containing the value to calculate the new position.
+ * @param {number} type - The type of position change (1 for bottom, any other value for left).
+ * @returns None
+ */
 function change__tyostocord(obj, type) {
     let cord = obj.value / 5;
 
@@ -179,6 +234,12 @@ function change__tyostocord(obj, type) {
     }
 }
 
+/**
+ * Event listener for the click event on the levyn_lv element. 
+ * Removes the "out" class and adds the "two" class to the add_lv_modal element.
+ * Hides all elements in the levyn_lv_list by setting their display to "none".
+ * Unchecks the levyn_lv checkbox.
+ */
 levyn_lv.addEventListener("click", () => {
     add_lv_modal.classList.remove("out");
     add_lv_modal.classList.add("two");
@@ -191,6 +252,12 @@ levyn_lv.addEventListener("click", () => {
 });
 
 
+/**
+ * Adds a click event listener to the element with the class "add_lv_modal_close_btn".
+ * When clicked, it adds the "out" class and removes the "two" class from the add_lv_modal element.
+ * It also sets the display style of elements in the levyn_lv_list to "flex".
+ * @returns None
+ */
 document.querySelector(".add_lv_modal_close_btn").addEventListener("click", () => {
     add_lv_modal.classList.add("out");
     add_lv_modal.classList.remove("two");
@@ -200,6 +267,11 @@ document.querySelector(".add_lv_modal_close_btn").addEventListener("click", () =
     });
 });
 
+/**
+ * Adds a click event listener to the element with the ID "lapiviennit__sade_muucord_input".
+ * When the element is clicked, it sets the checked property of the element with the ID "lapiviennit__sade_muucord" to true.
+ * @returns None
+ */
 document.querySelector("#lapiviennit__sade_muucord_input").addEventListener("click", () => {
     document.querySelector("#lapiviennit__sade_muucord").checked = true;
 });
@@ -222,6 +294,14 @@ document.querySelector("#lapiviennit__sade_muucord_input").addEventListener("cli
 //   }
 
   
+/**
+ * Adds an event listener to the submit button with class "submit_add_lv_modal".
+ * Generates a random string for an ID and retrieves values from various form elements.
+ * Calculates radius, from, distance, ylos, oikealle, and comment based on form inputs.
+ * If the name is not empty, dynamically adds HTML content to the "levy_canvas" element.
+ * Updates the display of elements with class "lv" and manages the visibility of the modal.
+ * @returns None
+ */
 document.querySelector(".submit_add_lv_modal").addEventListener("click", () => {
     let id = generateRandomString();
 
@@ -270,6 +350,11 @@ document.querySelector(".submit_add_lv_modal").addEventListener("click", () => {
 });
 
 
+/**
+ * Creates an Excel sheet based on the content of the canvas.
+ * @param {boolean} now - If true, generates the Excel file immediately; if false, sets up a click event listener to generate the Excel file.
+ * @returns None
+ */
 function create__levy_excel(now) {
     const saumas = document.querySelectorAll(".sauma");
     let horizontalBleam = 0;

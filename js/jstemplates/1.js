@@ -1,5 +1,10 @@
 let aukko_count = 0;
 
+/**
+ * This function is responsible for drawing a point on the screen based on the input step.
+ * It creates a new point element with associated controls and settings.
+ * @returns None
+ */
 // Рисование точки опоры на area canvas
  function draw__point() {
   const drawscreen_section_one = document.querySelector('#drawscreen_section_one');
@@ -59,6 +64,11 @@ let aukko_count = 0;
 }
 origo_position = "left_bottom";
 
+/**
+ * Moves the origin point on the draw area based on the direction specified in the button clicked.
+ * @param {Event} e - The event object triggered by the button click.
+ * @returns None
+ */
 function move_origo(e) {
   if (document.querySelector("#drawarea__origo_central")) {
     if (e.innerHTML == "Origo oikealle") {
@@ -94,6 +104,18 @@ function move_origo(e) {
   }
 }
 
+/**
+ * Opens an element based on the input step and adjusts its position and properties accordingly.
+ * @param {string} element - The element to open.
+ * @param {number} left_distance - The left distance of the element.
+ * @param {number} right_distance - The right distance of the element.
+ * @param {number} bottom_distance - The bottom distance of the element.
+ * @param {number} top_distance - The top distance of the element.
+ * @param {string} comment - The comment associated with the element.
+ * @param {string} comment_from - The starting point of the comment.
+ * @param {string} comment_to - The ending point of the comment.
+ * @returns None
+ */
 function open_element(element,left_distance,right_distance,bottom_distance,top_distance,comment,comment_from,comment_to) {
   if (input_step == "drawscreen_section_one") {
     document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');
@@ -154,6 +176,11 @@ function open_element(element,left_distance,right_distance,bottom_distance,top_d
 
   }
 }
+/**
+ * Draws a hole or a pass-through element based on the input step provided.
+ * @function draw__hole
+ * @returns None
+ */
 function draw__hole() {
   // aukko_count += 1;
   const input_step = document.querySelector('#step_drawscreen').value;
@@ -237,6 +264,11 @@ function draw__hole() {
   }
 }
 
+/**
+ * Updates the height and width coordinates for a wall element and sets the corresponding values in the draw area.
+ * @param {HTMLElement} elem - The element whose parent contains the wall height and width inputs.
+ * @returns None
+ */
 function transfer__height_cords(elem) {
   wallh_cord = elem.parentElement.querySelector(".wall_height").value;
   wallw_cord = elem.parentElement.querySelector(".wall_width").value;
@@ -247,6 +279,11 @@ function transfer__height_cords(elem) {
   // document.querySelector(".tohide__room_"+current_room.toLowerCase() + " .wall_height").value = wallh_cord;
   // document.querySelector(".tohide__room_"+current_room.toLowerCase() + " .wall_width").value = wallw_cord;
 }
+/**
+ * Updates the coordinates and dimensions of the draw area based on user input.
+ * If the maximum value is exceeded in either direction, the function returns early.
+ * @returns None
+ */
 // 2.1 Cord
 function drawarea__update_cord() {
   if (maxval) {
@@ -272,6 +309,11 @@ function drawarea__update_cord() {
   document.querySelector('.drawarea__w_cord').style.left = (parseFloat(box_left.offsetWidth) + 15) + 'px';
 }
 
+/**
+ * Updates the area dimensions based on the provided maximum value.
+ * @param {string} maxval - The maximum value for the area in the format "coordinate|direction".
+ * @returns None
+ */
 function updatearea(maxval) {
   // 2.1 Cord
   if (maxval) {
@@ -315,6 +357,11 @@ function updatearea(maxval) {
   
 }
 
+/**
+ * Adjusts the size of a box based on the input values and updates the corresponding elements.
+ * @param {string} maxval - The maximum value for resizing the box.
+ * @returns None
+ */
 function changesize__frominput(maxval) {
   if (maxval) {
     mval_cord = maxval.split("|")[0];
@@ -346,6 +393,14 @@ function changesize__frominput(maxval) {
  changeheights();
 
 }
+/**
+ * Updates the heights of elements based on the values of input fields.
+ * Sets the value of the element with class "kokonaisalue" to the concatenated values of
+ * elements with ids "drawarea_h" and "drawarea_w".
+ * Updates the value of elements with class "wall_height" within elements with class "house__wall"
+ * to the parsed float value of the element with id "drawarea_h".
+ * @returns None
+ */
 function changeheights() {
   document.querySelector(".kokonaisalue").value = document.querySelector("#drawarea_h").value + " " + document.querySelector("#drawarea_w").value;
 
@@ -356,6 +411,11 @@ function changeheights() {
  }
   
 }
+/**
+ * Adjusts the size of elements based on the maximum value provided.
+ * @param {number} maxval - The maximum value for resizing elements.
+ * @returns None
+ */
 function changesize(maxval) {
   try {
     changeheights();
@@ -465,6 +525,11 @@ function changesize(maxval) {
  changeheights();
  adjust_roomsizes();
 }
+/**
+ * Adjusts the size and dimensions of various elements based on the provided max value.
+ * @param {string} maxval - The maximum value for adjustment in the format "value|direction".
+ * @returns None
+ */
 function changesize__bottom(maxval) {
   
 
@@ -535,6 +600,10 @@ function changesize__bottom(maxval) {
   changeheights();
  
 }
+/**
+ * Function to handle settings related to measurements on the canvas.
+ * @returns None
+ */
 mittapiste_count = 0;
 lapivienti_count = 0;
 mp_previous_vord = null;
@@ -619,6 +688,10 @@ function settings__mitta() {
   }
 }
 
+/**
+ * Updates the settings for the aukko canvas based on the input step value.
+ * @returns None
+ */
 function settings__aukko() {
   const input_step = document.querySelector('#step_drawscreen').value;
   var aukot_settings = document.querySelector("#box-wrapper > main").cloneNode(true);
@@ -642,6 +715,10 @@ function settings__aukko() {
   document.querySelector('#type__door').click();
 }
 
+/**
+ * Sets the coordinates of different sections on the draw screen based on the input step.
+ * @returns None
+ */
 function null__origo_cord() {
   const drawscreen_section_one = document.querySelector('#drawscreen_section_one');
   const drawscreen_section_two = document.querySelector('#drawscreen_section_two');
@@ -667,6 +744,11 @@ function null__origo_cord() {
   }
 }
 
+/**
+ * Retrieves coordinates from custom map points based on the argument provided.
+ * @param {number} arg - The argument to match with the dataset number of map points.
+ * @returns None
+ */
 function get_from_custom_mp(arg) {
   mp_s = canvas.querySelectorAll(".mp");
   bottomcord = 0;
@@ -693,6 +775,10 @@ function get_from_custom_mp(arg) {
   }
 }
 
+/**
+ * Changes the coordinates of specific div elements based on the input step value.
+ * @returns None
+ */
 function change__newdiv_cord() {
   const drawscreen_section_one = document.querySelector('#drawscreen_section_one');
   const drawscreen_section_two = document.querySelector('#drawscreen_section_two');
@@ -717,6 +803,10 @@ function change__newdiv_cord() {
   
 }
 
+/**
+ * Retrieves the coordinates of specific elements based on the input step.
+ * @returns None
+ */
 function give__origo_cord() {
   const drawscreen_section_one = document.querySelector('#drawscreen_section_one');
   const drawscreen_section_two = document.querySelector('#drawscreen_section_two');
@@ -732,6 +822,18 @@ function give__origo_cord() {
     getElementCoords("#lvcord_low", "#lvcord_left");
   }
 }
+/**
+ * Creates a new element based on the mode, type, and other parameters provided.
+ * @param {string} mode - The mode of the element.
+ * @param {string} type - The type of the element.
+ * @param {string} mode_name - The name of the mode.
+ * @param {number} mode_ycord - The y-coordinate of the mode.
+ * @param {number} mode_xcord - The x-coordinate of the mode.
+ * @param {number} mode_hcord - The height coordinate of the mode.
+ * @param {number} mode_wcord - The width coordinate of the mode.
+ * @param {number} mode_count - The count of the mode.
+ * @param {string
+ */
 // Создание отверстия
 function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode_hcord, mode_wcord, mode_count, mode_id, mode_specifications,ir_mitta_comment,ir_mitta_cfrom,ir_mitta_cto) {
   const newDiv = document.createElement("span");
@@ -1651,6 +1753,11 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
 }
 
 
+/**
+ * Checks the input value against the maximum value and updates the styling of the input element and related buttons accordingly.
+ * @param {HTMLElement} inp - The input element to check.
+ * @returns None
+ */
 function cord__check(inp) {
  console.log("Cord check inp " + parseFloat(inp.value) + " --- " + parseFloat(inp.getAttribute("max")));
 

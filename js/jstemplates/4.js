@@ -11,6 +11,11 @@ editor_orientation = "horizontal";
 add_skipped_penalty_vertical = 0;
 add_skipped_penalty_horizontal = 0;
 
+/**
+ * Function to handle saumoita mode.
+ * @param {string} mode - The mode of operation.
+ * @returns None
+ */
 // 0 SAUMOITUS PÄÄTOIMINTO, V/H
 function saumoita(mode) {
     document.querySelector("#settings__sauma_interval_x").value = document.querySelector("#settings__sauma_intervalx").value;
@@ -167,6 +172,13 @@ function saumoita(mode) {
 
 }
 // 1 SAUMAKUVAT, V/H
+/**
+ * Updates the example photo based on the selected settings.
+ * If the vertical setting is checked, it updates the photo and sets the editor orientation to horizontal.
+ * If the horizontal setting is checked, it updates the photo and sets the editor orientation to vertical.
+ * It then checks the various seam options and updates the photo accordingly based on the selected options.
+ * @returns None
+ */
 function saumoitus__examplephoto() {
     var examplephoto = document.getElementById("sauma__saumoitus_photo");
     if (document.getElementById("settings__sauma_pysty").checked) {
@@ -254,6 +266,11 @@ function saumoitus__examplephoto() {
     }
 }
 // 2 SAUMAPOISTOT, V/H
+/**
+ * Function to handle the deletion of a sauma element based on the input event.
+ * @param {Event} e - The event that triggered the deletion.
+ * @returns None
+ */
 function sauma__del(e) {
     if (input_step !== "drawscreen_section_four") {
         return
@@ -359,6 +376,11 @@ function sauma__del(e) {
 
 }
 // 3 VAIHDA SAUMAN SIJANTI, V/H
+/**
+ * Function to change dimensions of elements based on input values.
+ * @param {any} input - The input element triggering the function.
+ * @returns None
+ */
 function changedimensions_sauma(input) {
     const elements = document.querySelectorAll('.sauma__vertical');
     const h_elements = document.querySelectorAll('.sauma__horizontal');
@@ -585,8 +607,17 @@ function changedimensions_sauma(input) {
 
     saumasize__checkup();
 }
-// 4 TYHJÄ
+// 4 TYHJÄ / EMPTY
 // 5 SAUMAN RAAHAUS V/H
+/**
+ * Resize the sauma element based on the event, axis, and sauma properties.
+ * @param {Event} e - The event that triggered the resize.
+ * @param {Element} sauma - The sauma element to resize.
+ * @param {Element} sauma__controls - The controls of the sauma element.
+ * @param {Element} sauma__control - The control element of the sauma.
+ * @param {string} axis - The axis ('h' for horizontal, 'v' for vertical) to resize the sauma.
+ * @returns None
+ */
 function resizeSauma(e, sauma, sauma__controls, sauma__control, axis) {
     const canvaRight = document.querySelector('.drawarea__top');
     const canvaForV = document.querySelector('.drawarea__right');
@@ -675,6 +706,11 @@ function resizeSauma(e, sauma, sauma__controls, sauma__control, axis) {
 
 }
 // 6 SAUMAN RAAHAUS, KOORDNIAATISTO V/H
+/**
+ * Function to change the coordinates of a raahaus element based on the provided input.
+ * @param {Element} uusi - The element to be modified.
+ * @returns None
+ */
 function change__cord_raahaus(uusi) {
     vs_summ = 0;
     hs_summ = 0;
@@ -790,6 +826,13 @@ function change__cord_raahaus(uusi) {
     }
 }
 // 7 POISTAA VIALLISET SAUMAT, V/H
+/**
+ * Function to delete specific elements from the DOM based on their class names.
+ * Removes elements with class names ".drawarea__controls_four-pysty > li", ".drawarea__controls_four-vaaka > li",
+ * ".newrow_vertical", ".drawarea__left_container > sauma__downctrl_container", ".drawarea__right > .sauma__controls",
+ * ".newrow_horizontal", ".levyt", ".sauma", ".sauma__controls", ".sauma__horizontal_ctrl", ".sauma__horizontal_ctrldown",
+ * ".sauma__vertical_ctrldown", ".drawarea__controls_fouritems > li", ".levy", ".verticalrow_saumat", and ".horizontalrow_saumat
+ */
 function saumoitus__deleterest() {
 
     if (document.querySelector(".drawarea__controls_four-pysty > li")) {
@@ -888,6 +931,11 @@ function saumoitus__deleterest() {
     }
 }
 // 8 TARKISTAA SAUMAT JA KORJAA VIRHEELLISET, V/H
+/**
+ * This function is responsible for fixing missing elements in the UI based on certain calculations and conditions.
+ * It retrieves values from specific elements in the document, performs calculations, and manipulates the DOM accordingly.
+ * @returns None
+ */
 function fixmissing__saumoitus() {
     h = parseFloat(document.querySelector("#box_h").value);
     w = parseFloat(document.querySelector("#box_w").value);
@@ -1096,6 +1144,11 @@ function fixmissing__saumoitus() {
     }
 }
 
+/**
+ * Function to handle the movement of elements based on certain conditions.
+ * This function manipulates the DOM elements to reposition them according to the specified rules.
+ * @returns None
+ */
 function aukoitus__siirto() {
     forward_prepending = false;
     if (document.querySelector(".seina_patka_x")) {
@@ -1399,6 +1452,11 @@ function aukoitus__siirto() {
     }
 }
 // 10 LASKEE SAUMAMITAT, PÄÄTOIMINTO, V/H
+/**
+ * Calculates various amounts based on the provided parameters and updates the UI accordingly.
+ * @param {boolean} aukoitusparam - A flag indicating whether aukoitusparam is true or false.
+ * @returns None
+ */
 function calculateamounts(aukoitusparam) {
     var canvas = document.querySelector(".canvas");
     var h = document.querySelector("#box_h").value;
@@ -1599,7 +1657,16 @@ function calculateamounts(aukoitusparam) {
 }
 
 col_ = 0;
+/**
+ * Function to remove overlapping elements on a canvas by adjusting their positions and sizes.
+ * @returns None
+ */
 // 11 MÄÄRITTÄÄ AUKKOJEN ALAISEN LEVYTTÄMÄTTÖMÄN ALUEEN, V/H
+/**
+ * This function is used to remove overlapping elements on a canvas by adjusting their positions and sizes.
+ * It iterates through the elements with class "aukko" and "levy" to check for overlapping conditions and performs necessary adjustments.
+ * @returns None
+ */
 function aukkojenallapoisto() {
     aukko = canvas.querySelectorAll(".aukko");
 
@@ -1740,6 +1807,10 @@ function aukkojenallapoisto() {
     }
 }
 ////// 12 - 19 PYSTY
+/**
+ * Function to create vertical seams based on user settings and input values.
+ * @returns None
+ */
 // 12 MÄÄRITTÄÄ PYSTYSAUMAT AUKKOJEN YLI, V
 function pystysaumat__aukkojenyli() {
     var w = parseFloat(document.getElementById('box_w').value);
@@ -1807,7 +1878,18 @@ function pystysaumat__aukkojenyli() {
     }
     // newrow_vertical.append(luo__lastsauma_vertical(canvas));
 }
+/**
+ * Function to create vertical seams based on the provided settings and dimensions of the canvas.
+ * This function calculates and creates vertical seams for the canvas elements.
+ * @returns None
+ */
 // 13 MÄÄRITTÄÄ PYSTYSAUMAT AUKKOJEN MUKAAN, V
+/**
+ * Function to adjust the layout of elements based on the presence of "aukko" elements.
+ * This function retrieves various values and elements from the DOM, calculates positions and dimensions,
+ * and dynamically creates and appends new elements to represent the layout adjustments.
+ * @returns None
+ */
 function pystysaumat__aukkojenmukaan() {
     // canvas = document.querySelector("#box-wrapper > main");
     if (canvas.querySelector(".aukko")) {
@@ -1968,6 +2050,13 @@ function pystysaumat__aukkojenmukaan() {
         pystysaumat__aukkojenyli();
     }
 }
+/**
+ * Creates a vertical seam in the design based on the provided parameters.
+ * @param {number} saumaWidth - The width of the seam.
+ * @param {number} tas_li - The tas_li value for the seam.
+ * @param {number} modcount - The modcount value for the seam.
+ * @returns {HTMLElement} - The created vertical seam element.
+ */
 function luo__sauma_vertical(saumaWidth, tas_li, modcount) {
     s_v += 1;
     console.log("VERTICAL TEST");
@@ -2087,6 +2176,11 @@ function luo__sauma_vertical(saumaWidth, tas_li, modcount) {
     return sauma;
 }
 // 15 LUO PYSTYHÄNNÄN, V
+/**
+ * Creates a vertical seam element based on the provided parameters and settings.
+ * @param {number} aukko - The gap size for the seam.
+ * @returns {Element} - The created vertical seam element.
+ */
 function luo__lastsauma_vertical(aukko) {
     s_v += 1;
 
@@ -2218,6 +2312,13 @@ function luo__lastsauma_vertical(aukko) {
     return sauma;
 }
 // 16 LUO YKSITTÄISEN KOORDINAATISTON PYSTYSAUMOILLE, V
+/**
+ * Creates a vertical control element for a given sauma value.
+ * @param {number} sauma - The sauma value for the control.
+ * @param {string} id - The id of the control element.
+ * @param {string} name - The name of the control element.
+ * @returns {HTMLElement} - The created vertical control element.
+ */
 function luo__scord_vertical(sauma, id, name) {
     const sauma__control = document.createElement("input");
     const sauma__control_down = document.createElement("b");
@@ -2289,6 +2390,10 @@ function luo__scord_vertical(sauma, id, name) {
     return sauma__controls;
 }
 // 17 LUO KOORDINAATISTON PYSTYSAUMOILLE KUN MENEE AUKKOJEN YLI, V
+/**
+ * Function to handle the creation of vertical seams on a canvas based on user settings.
+ * @returns None
+ */
 function cord_pystysaumat__aukotyli() {
     canvas = document.querySelector(".canvas");
     sauma = canvas.querySelectorAll(".sauma__vertical");
@@ -2344,6 +2449,10 @@ function cord_pystysaumat__aukotyli() {
     //else if(document.querySelector("#settings__saumahanta-tasoitus").checked) {}
 }
 // 18 LUO KOORDINAATISTON PYSTYSAUMOILLE KUN MENEE AUKKOJEN YLI TASOITUKSELLA, V
+/**
+ * Function to adjust the vertical seams and level the holes in the cord.
+ * @returns None
+ */
 function cord_pystysaumat__aukotyli_tasoitus() {
     var canvas = document.querySelector(".canvas");
     var h = document.querySelector("#box_h").value;
@@ -2380,6 +2489,11 @@ function cord_pystysaumat__aukotyli_tasoitus() {
     });
 }
 // 19 LUO KOORDINAATISTON PYSTYSAUMOILLE KUN MENEE AUKKOJEN MUKAAN, V
+/**
+ * This function is responsible for handling the vertical seams in a canvas.
+ * It retrieves the necessary elements from the DOM and manipulates them based on the selected settings.
+ * @returns None
+ */
 function cord_pystysaumat__aukotmukaan() {
     if (document.querySelector(".seina_patka_x")) {
         let seina_patkat = document.querySelectorAll(".seina_patka_x");
@@ -2460,6 +2574,10 @@ function cord_pystysaumat__aukotmukaan() {
 }
 ////// 20 - 27 VAAKA
 // 20 MÄÄRITTÄÄ VAAKASAUMAT AUKKOJEN YLI, H
+/**
+ * Function to create horizontal seams based on user input values.
+ * @returns None
+ */
 function vaakasaumat__aukkojenyli() {
     var h = parseFloat(document.getElementById('box_h').value);
     var sauma__interval_vertical, sauma__interval_horizontal;
@@ -2509,6 +2627,11 @@ function vaakasaumat__aukkojenyli() {
     newrow_horizontal.style.height = "100%";
 }
 // 21 MÄÄRITTÄÄ VAAKASAUMAT AUKKOJEN MUKAAN, H
+/**
+ * This function calculates and creates horizontal rows of div elements based on the provided input values.
+ * It retrieves the necessary elements from the DOM, performs calculations, and appends the created elements accordingly.
+ * @returns None
+ */
 function vaakasaumat__aukkojenmukaan() {
     var canvas = document.querySelector("#box-wrapper > main");
     if (canvas.querySelector(".aukko")) {
@@ -2672,6 +2795,13 @@ function vaakasaumat__aukkojenmukaan() {
     }
 }
 // 22 LUO YKSITTÄISEN VAAKASAUMAN, H
+/**
+ * Creates a horizontal seam based on the provided parameters.
+ * @param {number} saumaheight - The height of the seam.
+ * @param {string} tas_li - The tas_li value.
+ * @param {number} modcount - The modcount value.
+ * @returns {HTMLElement} - The created horizontal seam element.
+ */
 function luo__sauma_horizontal(saumaheight, tas_li, modcount) {
     s_h += 1;
     var sauma__interval_horizontal;
@@ -2787,6 +2917,11 @@ function luo__sauma_horizontal(saumaheight, tas_li, modcount) {
     return sauma;
 }
 // 23 LUO VAAKAHÄNNÄN, H
+/**
+ * Creates a horizontal seam element based on the provided parameters and settings.
+ * @param {number} aukko - The gap size for the seam.
+ * @returns {HTMLElement} - The created horizontal seam element.
+ */
 function luo__lastsauma_horizontal(aukko) {
     s_h += 1;
     if (document.getElementById("settings__sauma_pysty").checked) {
@@ -2911,6 +3046,13 @@ function luo__lastsauma_horizontal(aukko) {
     return sauma;
 }
 // 24 LUO YKSITTÄISEN KOORDINAATISTON VAAKASAUMOILLE, H
+/**
+ * Creates a horizontal control element for a specific sauma.
+ * @param {number} saumaheight - The height of the sauma control.
+ * @param {string} id - The id of the sauma control.
+ * @param {string} name - The name of the sauma control.
+ * @returns {HTMLElement} - The created sauma controls element.
+ */
 function luo__scord_horizontal(saumaheight, id, name) {
     const sauma__control = document.createElement("input");
     const sauma__control_down = document.createElement("b");
@@ -3007,6 +3149,10 @@ function luo__scord_horizontal(saumaheight, id, name) {
     // sauma__controls.append(sauma__controls_type);
     return sauma__controls;
 }
+/**
+ * Function to handle the resizing and manipulation of cord vaakasaumat aukotyli.
+ * @returns None
+ */
 // 25 LUO KOORDINAATISTON VAAKASAUMOILLE KUN MENEE AUKKOJEN YLI, H
 function cord_vaakasaumat__aukotyli() {
     var canvas = document.querySelector(".canvas");
@@ -3104,6 +3250,10 @@ function cord_vaakasaumat__aukotyli() {
     //   });
     // }
 }
+/**
+ * Function to adjust the horizontal seams based on user settings and interactions.
+ * @returns None
+ */
 // 26 LUO KOORDINAATISTON VAAKASAUMOILLE KUN MENEE AUKKOJEN YLI TASOITUKSELLA, H
 function cord_vaakasaumat__aukotyli_tasoitus() {
     let seina_patkat = document.querySelectorAll(".seina_patka_y");
@@ -3145,6 +3295,10 @@ function cord_vaakasaumat__aukotyli_tasoitus() {
         s_summ += saumaheight;
     });
 }
+/**
+ * Function to handle the creation of vertical seams on a wall based on user settings.
+ * @returns None
+ */
 // 27 LUO KOORDINAATISTON VAAKASAUMOILLE KUN MENEE AUKKOJEN MUKAAN, H
 function cord_vaakasaumat__aukotmukaan() {
     if (document.querySelector(".seina_patka_y")) {
@@ -3280,6 +3434,12 @@ function cord_vaakasaumat__aukotmukaan() {
 }
 ///// MUUT
 // 28 tee alkusaumat
+/**
+ * This function is responsible for creating and setting up the initial elements for a sewing pattern.
+ * It checks if certain elements exist in the DOM, creates them if they don't, and appends them to the appropriate parent elements.
+ * It also assigns various classes, attributes, and styles to the created elements.
+ * @returns None
+ */
 function alkusaumat() {
     if (document.querySelector(".saumat__grandrow")) {
         saumat = document.querySelector(".saumat__grandrow");
@@ -3427,6 +3587,12 @@ function alkusaumat() {
     }
 }
 // 29 Tarkista koot
+/**
+ * Function to perform a checkup on saumasize settings.
+ * It checks the input values based on the selected orientation (vertical or horizontal),
+ * and applies styling to the input elements accordingly.
+ * @returns None
+ */
 function saumasize__checkup() {
     v_input = document.querySelectorAll(".sauma__vertical_ctrl");
     if (document.getElementById("settings__sauma_pysty").checked) {
@@ -3458,6 +3624,12 @@ function saumasize__checkup() {
 
 saumoitettu_muut = false;
 // 30 Siirrä ladonta A-D
+/**
+ * Function to handle the transfer and weaving of rooms.
+ * This function retrieves the necessary elements from the DOM, calculates room dimensions,
+ * and performs various actions based on the current room and its properties.
+ * @returns None
+ */
 function siirto_ladonta() {
 
     horizontals_original = canvas.querySelectorAll(".horizontalrow_saumat > div");
@@ -3620,6 +3792,16 @@ function siirto_ladonta() {
     })();
 }
 // 31 Restoring sauma
+/**
+ * Creates various elements for a seam based on the provided parameters and appends them to the DOM.
+ * @param {string} mod_nam - The name of the seam.
+ * @param {string} mod_type - The type of seam (pysty or vaaka).
+ * @param {number} mod_b - The bottom position of the seam.
+ * @param {number} mod_left - The left position of the seam.
+ * @param {number} mod_cord - The coordinate of the seam.
+ * @param {string} mod_name - The name of the seam.
+ * @returns None
+ */
 function luo__sauma_restore(mod_nam, mod_type, mod_b, mod_left, mod_cord, mod_name) {
     const heightBox = document.querySelector('#box_h').value;
     const boxHeight = document.querySelector('#box-wrapper > main').offsetHeight;
@@ -3762,12 +3944,26 @@ function luo__sauma_restore(mod_nam, mod_type, mod_b, mod_left, mod_cord, mod_na
 
 }
 
+/**
+ * Clears the value of a given cord based on the type provided.
+ * @param {any} cord - The cord object to clear the value from.
+ * @param {string} type - The type of cord ('sau' or 'tyo') to determine if the value should be cleared.
+ * @returns None
+ */
 function clearcord(cord, type) {
     if (type === 'sau' || type === 'tyo') {
         cord.value = "";
     }
 
 }
+/**
+ * Function to handle the change event for sauma koko.
+ * Updates various global variables based on the dataset attributes of the element 'e'.
+ * If the dataset attribute 'levyimg' has a length greater than 3, updates additional variables.
+ * Updates input values of specific elements on the document based on the dataset attributes.
+ * @param {Event} e - The event object triggering the function.
+ * @returns None
+ */
 levy_bg = null;
 levy_sku = null;
 levy_thickness = null;
@@ -3811,6 +4007,11 @@ function change__sauma_koko(e) {
 }
 
 
+/**
+ * This function adds additional modules to the vertical and horizontal rows in the document.
+ * It also creates a table with sauma values and appends it to the draw area bottom.
+ * @returns None
+ */
 function saumoitus__additionalcord() {
     // Made 0812
     verticals = document.querySelectorAll(".verticalrow_saumat > div");
