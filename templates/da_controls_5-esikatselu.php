@@ -1,3 +1,5 @@
+<!-- Wall page right column for LEVYT section on the mittaus role -->
+
 <div class="drawarea__controls drawarea__controls_esikatselu">
    <h2>Levytys <span id="esikatselu__saumoitussuunta"></span></h2>
 <!--    <div class="drawarea__controls_settingsbtn drawarea__controls_btn m_btn">

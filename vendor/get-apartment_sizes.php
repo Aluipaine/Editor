@@ -1,6 +1,6 @@
 <?php
 
-// Include config file
+// This file gets apartments wall sizes and / or specs for future prorcessing
 require "config.php";
 
 $pr_id = $_POST['pr_id'];

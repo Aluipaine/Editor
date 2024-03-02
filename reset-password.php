@@ -1,5 +1,5 @@
 <?php
-// Initialize the session
+// THIS FILE RESETS THE PASSWORD
 session_start();
  
 // Check if the user is logged in, otherwise redirect to login page

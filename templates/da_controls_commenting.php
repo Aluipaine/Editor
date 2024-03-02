@@ -1,3 +1,4 @@
+<!-- Wall page commenting settings right column (deprecated) -->
 <div class="drawarea__controls da_controls_commenting">
    <!-- <h1>Kommentit</h1> -->
    <div class="drawarea__controls_elementsone drawarea__things">

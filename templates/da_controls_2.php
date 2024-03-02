@@ -1,3 +1,6 @@
+<!-- Wall page right column for AUKOT section on the mittaus role -->
+
+
 <div class="drawarea__controls drawarea__controls_two">
    <h1>Aukot</h1>
    <div class="drawarea__controls_elementstwo drawarea__things">

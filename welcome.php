@@ -1,4 +1,5 @@
 <?php
+// MAIN WELCOME PAGE FOR COMMENTING AND MEASURING ROLE (MITTAUS AND KOMMENTOINTI)
 // Initialize the session
 session_start();
 require_once "vendor/config.php";

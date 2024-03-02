@@ -1,3 +1,4 @@
+<!-- MAIN STARTING section FOR THE EDITOR -->
 <section class="popup__statuses">
   <div class="row">
     <div class="col-6">

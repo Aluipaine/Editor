@@ -1,6 +1,6 @@
 <?php 
 include('vendor/config.php');
-
+// THIS IS THE MAIN PAGE FOR CREATING THE PROJECT IN THE EDITOR
 include('header.php');
 
 ?>

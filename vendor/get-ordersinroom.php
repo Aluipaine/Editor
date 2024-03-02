@@ -1,6 +1,5 @@
 <?php
-
-// Include config file
+// This file gets rooms orders from the orderlog for the tilauskirja section
 require "config.php";
 
 $pr_id = $_POST['pr_id'];

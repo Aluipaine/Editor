@@ -1,3 +1,5 @@
+<!-- Wall page right column for LISTAT section on the mittaus role -->
+
 <div class="drawarea__controls drawarea__controls_seven">
    <h2>Listat</h2>
    <p>Voit hallita ja säätää listoja asetuksista</p>

@@ -1,3 +1,5 @@
+<!-- MAIN FOOTER FILE. CONFIGURING JS SCRIPTS, MODALS AND PRELOADER -->
+
 <div class="recl-container del_from_comments" id="reclamation__popup">
    <div class="modal-background">
       <div class="modal">

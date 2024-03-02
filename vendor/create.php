@@ -1,4 +1,5 @@
 <?php 
+//This file creates database files in the project creation
 
 // Enable error showing for debug
 // ini_set ('display_errors', 1); ini_set ('display_startup_errors', 1); error_reporting (E_ALL);

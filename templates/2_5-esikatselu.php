@@ -1,3 +1,5 @@
+<!-- KUOSIT section on the mittaus role -->
+
 <form class="step_screen drawscreen_section form__butsection" action="/updateproject.php" enctype='multipart/form-data' id="drawscreen_section_esikatselu">
      <!--  <input type="hidden" value="drawscreen_section_tyostot" name="step" class="step">
       <input type="hidden" value="" name="wall" class="wall">

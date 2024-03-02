@@ -1,3 +1,5 @@
+<!-- Wall page right column for RANGAT section on the mittaus role -->
+
 <div class="drawarea__controls drawarea__controls_six">
    <h2>Rangat</h2>
    <p>Voit hallita ja säätää rankoja asetuksista</p>

@@ -1,4 +1,5 @@
 <?php
+// This file gets projects orders from orderlog for the tilauskirja section
 
 // Include config file
 require "config.php";

@@ -1,3 +1,6 @@
+<!-- Wall page right column for ORIGO section on the mittaus role -->
+
+
 <div class="drawarea__controls drawarea__controls_one">
    <h1>MOD alue</h1>
    <div class="row" style="justify-content: center;">

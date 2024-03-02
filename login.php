@@ -1,4 +1,8 @@
 <?php 
+
+//LOGIN PAGE TAMPLATE & FUNCTIONALITY
+
+
 // Include config file
 require "vendor/config.php";
 // // Initialize the session

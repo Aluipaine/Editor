@@ -1,4 +1,5 @@
 <?php
+// This file changes shopping list item status to the invoiced (=ready)
 require "config.php";
 
 

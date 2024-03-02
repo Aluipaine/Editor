@@ -10,15 +10,15 @@ $wall = $_POST['wall'];
 $room = $_POST['room'];
 $settings = $_POST['settings'];
 $step = $_POST['step'];
-$mittapisteet = $_POST['mittapisteet'];
-$reijat = $_POST['reijat'];
-$saumat = $_POST['saumat'];
-$levyt = $_POST['levyt'];
-$rangat = $_POST['rangat'];
-$listat = $_POST['listat'];
-$kokonaisalue = $_POST['kokonaisalue'];
-$levytettava_alue = $_POST['levytettava_alue'];
-$poisjaava_alue = $_POST['poisjaava_alue'];
+$measure_point = $_POST['measure_point'];
+$small_holes = $_POST['reijat'];
+$seams = $_POST['saumat'];
+$panels = $_POST['levyt'];
+$armatures = $_POST['rangat'];
+$lists = $_POST['listat'];
+$totalcanvasarea = $_POST['kokonaisalue'];
+$topanel_area = $_POST['levytettava_alue'];
+$absent_area = $_POST['poisjaava_alue'];
 $keskusmittapiste_cord = $_POST['keskusmittapiste_cord'];
 $reklamaatiot = $_POST['reklamaatiot'];
 
@@ -27,13 +27,13 @@ $query .= "UPDATE `projectmeta` SET `meta_value`='$room' WHERE `id`=$id AND `met
 $query .= "UPDATE `projectmeta` SET `meta_value`='$settings' WHERE `id`=$id AND `meta_key`='settings';";
 $query .= "UPDATE `projectmeta` SET `meta_value`='$step' WHERE `id`=$id AND `meta_key`='step';";
 
-$query .= "UPDATE `projectmeta` SET `meta_value`='$mittapisteet' WHERE `id`=$id AND `meta_key`='mittapisteet';";
-$query .= "UPDATE `projectmeta` SET `meta_value`='$reijat' WHERE `id`=$id AND `meta_key`='reijat';";
-$query .= "UPDATE `projectmeta` SET `meta_value`='$levyt' WHERE `id`=$id AND `meta_key`='levyt';";
+$query .= "UPDATE `projectmeta` SET `meta_value`='$measure_point' WHERE `id`=$id AND `meta_key`='measure_point';";
+$query .= "UPDATE `projectmeta` SET `meta_value`='$small_holes' WHERE `id`=$id AND `meta_key`='reijat';";
+$query .= "UPDATE `projectmeta` SET `meta_value`='$panels' WHERE `id`=$id AND `meta_key`='levyt';";
 $query .= "UPDATE `projectmeta` SET `meta_value`='$listat' WHERE `id`=$id AND `meta_key`='listat';";
-$query .= "UPDATE `projectmeta` SET `meta_value`='$kokonaisalue' WHERE `id`=$id AND `meta_key`='kokonaisalue';";
-$query .= "UPDATE `projectmeta` SET `meta_value`='$levytettava_alue' WHERE `id`=$id AND `meta_key`='levytettava_alue';";
-$query .= "UPDATE `projectmeta` SET `meta_value`='$poisjaava_alue' WHERE `id`=$id AND `meta_key`='poisjaava_alue';";
+$query .= "UPDATE `projectmeta` SET `meta_value`='$totalcanvasarea' WHERE `id`=$id AND `meta_key`='kokonaisalue';";
+$query .= "UPDATE `projectmeta` SET `meta_value`='$topanel_area' WHERE `id`=$id AND `meta_key`='levytettava_alue';";
+$query .= "UPDATE `projectmeta` SET `meta_value`='$absent_area' WHERE `id`=$id AND `meta_key`='poisjaava_alue';";
 $query .= "UPDATE `projectmeta` SET `meta_value`='$keskusmittapiste_cord' WHERE `id`=$id AND `meta_key`='keskusmittapiste_cord';";
 $query .= "UPDATE `projectmeta` SET `meta_value`='$reklamaatiot' WHERE `id`=$id AND `meta_key`='reklamaatiot';";
 
@@ -45,7 +45,7 @@ $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['room'] . "' WHERE 
 $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['settings'] . "' WHERE `id`=$id AND `meta_key`='settings';";
 $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['step'] . "' WHERE `id`=$id AND `meta_key`='step';";
 
-$undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['mittapisteet'] . "' WHERE `id`=$id AND `meta_key`='mittapisteet';";
+$undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['measure_point'] . "' WHERE `id`=$id AND `meta_key`='measure_point';";
 $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['reijat'] . "' WHERE `id`=$id AND `meta_key`='reijat';";
 $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['levyt'] . "' WHERE `id`=$id AND `meta_key`='levyt';";
 $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['listat'] . "' WHERE `id`=$id AND `meta_key`='listat';";

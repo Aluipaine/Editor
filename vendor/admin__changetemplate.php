@@ -1,13 +1,10 @@
 <?php
+// This file inserts new settings template to settings templates 
 
 require "config.php";
-
 $index = $_POST['index'];
-
 $meta = mysqli_query($db, "INSERT INTO `settings__templates`(`id`, `name`) VALUES (NULL,'$index')");
 //echo "INSERT INTO `settings__templates`(`id`, `name`) VALUES (NULL,'$index')";
-
-
 $s_data = mysqli_query($db, "SELECT * FROM `settings__templates` WHERE `name`='$index'; ");
 $id = mysqli_fetch_all($s_data)[0][0];
 

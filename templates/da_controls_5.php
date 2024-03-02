@@ -1,3 +1,5 @@
+<!-- Wall page right column for LEVYT section on the mittaus role -->
+
 <div class="drawarea__controls drawarea__controls_five">
    <h2>Levyt</h2>
    <div class="drawarea__controls_fiveitems">

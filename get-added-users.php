@@ -1,5 +1,5 @@
 <?php
-
+// THIS FILE GETS ADDED USERS IN THE PROJECT ID
 require_once 'vendor/config.php';
 
 if(!isset($_POST['project_id'])) {

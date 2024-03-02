@@ -1,4 +1,7 @@
 <?php
+// LOGOUT PAGE FUNCTIONALITY
+
+
 // Initialize the session
 session_start();
  

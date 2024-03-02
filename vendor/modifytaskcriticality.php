@@ -8,11 +8,6 @@ $meta = mysqli_query($db, "UPDATE `comments` SET `urgency`='$urgency' WHERE `id`
 echo $meta;
 echo "UPDATE `comments` SET `urgency`='$urgency' WHERE `id`='$comment_id'";
 
-
-
-// $comment_id = "com0c52b4b147aa2";
-// $urgency = strtolower("critical");
-
 $c_ch_n_ = mysqli_query($db, "SELECT * FROM `comments` WHERE `id`='$comment_id'; ");
 $c_ch_n = mysqli_fetch_all($c_ch_n_)[0];
 print_r($c_ch_n[0]);

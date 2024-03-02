@@ -1,4 +1,5 @@
 <?php
+// This file saves rooms walls sizes to database
 require "config.php";
 
 $rowSQL = mysqli_query($db, "SELECT MAX( id ) AS max FROM `projects`;" );

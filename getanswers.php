@@ -1,4 +1,5 @@
 <?php
+// THIS FILE GETS ANSWER TO THE COMMENT
 
 require "vendor/config.php";
 

@@ -1,3 +1,5 @@
+<!-- Seinät section on the mittaus role -->
+
 <div id="copiedcanvases" style="display: none;">
 
    <section class="nav rangatnav">

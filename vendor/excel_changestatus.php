@@ -1,5 +1,5 @@
 <?php 
-// Include config file
+// This file Changes orders status in the orderlog. 
 require "config.php";
 
 $timedate = $_POST['timedate'];

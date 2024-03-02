@@ -1,3 +1,4 @@
+<!-- RANGAT section on the mittaus role -->
 
 <section class="step_screen drawscreen_section form__butsection" id="drawscreen_section_six">
 

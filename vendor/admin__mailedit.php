@@ -1,5 +1,6 @@
 <?php
 
+// This file updates mail template text
 require "config.php";
 $header_array = $_POST['header_array'];
 $subject_array = $_POST['subject_array'];

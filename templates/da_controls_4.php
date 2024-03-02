@@ -1,3 +1,5 @@
+<!-- Wall page right column for SAUMAT section on the mittaus role -->
+
 <div class="drawarea__controls drawarea__controls_four">
    <h2>Pystysaumat</h2>
    <ol class="drawarea__controls_four-pysty drawarea__controls_fouritems" reversed>

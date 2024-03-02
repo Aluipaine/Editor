@@ -1,3 +1,5 @@
+<!-- MAIN HEADER FILE. PUTS CSS FILES AND CONFIGURATION -->
+
 <!DOCTYPE html>
 <html lang="fi">
 <head>

@@ -1,3 +1,5 @@
+<!-- MAIN FOOTER FILE. CONFIGURING JS SCRIPTS  AND PRELOADER -->
+
 
 <!-- <script  src="js/script.js"></script>
    <script>

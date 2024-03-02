@@ -1,5 +1,5 @@
 <?php 
-// Include config file
+// This file updates projects specs in the walls (partially deprecated)
 require "vendor/config.php";
 header('Content-type: text/plain; charset=utf-8');
 

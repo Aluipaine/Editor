@@ -1,4 +1,6 @@
 <?php 
+// This file marks comment as finished in the database
+
 require "config.php";
 
 use PHPMailer\PHPMailer\PHPMailer;

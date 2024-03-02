@@ -24,13 +24,13 @@ $comment_from = $_POST['comment_from'];
 $comment_to = $_POST['comment_to'];
 $urgency = $_POST['urgency'];
 $ending_time = $_POST['ending_time']; 
-$aihe = $_POST['aihe']; 
+$subject = $_POST['aihe']; 
 $deadline = $_POST['deadline'];
 $answer_to = $_POST['answer_to'];  
 $time_estimate = $_POST['time_estimate'];  
 $starting_time = date("Y-m-d H:i:s");
 
-// $aihe= "tyonjohto kommentit";
+// $subject= "tyonjohto kommentit";
 // $answer_to = "";
 // $attachments = "https://editori.westface.fi/uploads/48950WIN_20231027_17_50_07_Pro.jpg\n";
 // $comment_from = "tyonjohto";
@@ -47,9 +47,9 @@ $starting_time = date("Y-m-d H:i:s");
 // $x_y = '1';
 
 
-$meta = mysqli_query($db, "INSERT INTO `comments` (`id`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$aihe', '$deadline', '$answer_to', '$time_estimate','aloittamatta','','','$time_estimate','','','');");
-echo "INSERT INTO `comments` (`id`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$aihe', '$deadline', '$answer_to', '$time_estimate','aloittamatta','','','$time_estimate','','','');";
-$meta = mysqli_query($db, "INSERT INTO `changed__comments_interactive` (`commentid`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$aihe', '$deadline', '$answer_to', '$time_estimate','aloitettu','','','','','','') ON DUPLICATE KEY UPDATE `commentid`='$comment_id', `projectid`='$project_id', `room`='$room', `name`='$name', `x_y`='$x_y', `content`='$content', `attachments`='$attachments', `comment_from`='$comment_from', `comment_to`='$comment_to', `urgency`='$urgency', `creation_time`='$starting_time', `ending_time`='$ending_time', `aihe`='$aihe', `deadline`='$deadline', `answer_to`='$answer_to', `time_estimate`='$time_estimate');");
+$meta = mysqli_query($db, "INSERT INTO `comments` (`id`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$subject', '$deadline', '$answer_to', '$time_estimate','aloittamatta','','','$time_estimate','','','');");
+echo "INSERT INTO `comments` (`id`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$subject', '$deadline', '$answer_to', '$time_estimate','aloittamatta','','','$time_estimate','','','');";
+$meta = mysqli_query($db, "INSERT INTO `changed__comments_interactive` (`commentid`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$subject', '$deadline', '$answer_to', '$time_estimate','aloitettu','','','','','','') ON DUPLICATE KEY UPDATE `commentid`='$comment_id', `projectid`='$project_id', `room`='$room', `name`='$name', `x_y`='$x_y', `content`='$content', `attachments`='$attachments', `comment_from`='$comment_from', `comment_to`='$comment_to', `urgency`='$urgency', `creation_time`='$starting_time', `ending_time`='$ending_time', `aihe`='$subject', `deadline`='$deadline', `answer_to`='$answer_to', `time_estimate`='$time_estimate');");
 // $date = date("Y-m-d H:i:s");
 $pr_name_ = mysqli_query($db, "SELECT * FROM `projects` WHERE `id`=$project_id ");
 $_pr_name = mysqli_fetch_all($pr_name_);
@@ -78,7 +78,7 @@ else {
   $from = $m_headers[0];
   $subject = $m_subject[0] . $pr_name . $m_subject[1];
   $txt = "Huone " . $room . ". 
-  <br>Aihe ".$aihe."
+  <br>Aihe ".$subject."
   <br>Sisältö: ".$content."
   <br>Tuntiarvio: ".$time_estimate."
   <br>Tiedostot: ".$attachments."

@@ -1,8 +1,7 @@
 <?php 
 
+// This file sends friday report to the administrator about the comments on all projects via email
 require "config.php";
-
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 

@@ -1,4 +1,6 @@
 <?php
+
+// This file adds order into the ordertable
 require "config.php";
 
 use PHPMailer\PHPMailer\PHPMailer;

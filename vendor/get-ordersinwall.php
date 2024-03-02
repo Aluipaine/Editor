@@ -1,6 +1,5 @@
 <?php
-
-// Include config file
+// This file gets walls Orders from orderlog for the tilauskirja section
 require "config.php";
 
 $pr_id = $_POST['pr_id'];

@@ -1,5 +1,5 @@
 <?php
-
+// THIS FILE GETS ROOMS WALL FOR THE ROOMS PAGE IN THE EDITOR
 require_once './vendor/config.php';
 
 $project_id = $_POST["project_id"];

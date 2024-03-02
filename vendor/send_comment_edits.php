@@ -1,5 +1,5 @@
 <?php
-
+// This file sends comment actions which is unreported for now to an MAnagements email 
 require "config.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -15,12 +15,10 @@ function utf8_for_xml($string)
 }
 
 $yes = 0;
-
-$c_ch_n_ = mysqli_query($db, "SELECT * FROM `changed__comments_interactive`");
-$c_ch_n = mysqli_fetch_all($c_ch_n_);
-$message__tyonjohto = $m_messages[0] . '';
-
-$message__tyonjohto .= "
+$changed__comments_interactive_ = mysqli_query($db, "SELECT * FROM `changed__comments_interactive`");
+$changed__comments_interactive = mysqli_fetch_all($changed__comments_interactive_);
+$message__to_management = $modified_messages[0] . '';
+$message__to_management .= "
 <h3 style='font-family:Arial,sans-serif;'>Nämä muutokset ovat tapahtuneet kommenteissa:</h3>
 <table><tr>
   <td style='border:1px solid black;min-width:200px;padding: 2px 5px;font-family:Arial,sans-serif;'>Kommentin tunniste</td>
@@ -48,61 +46,54 @@ $message__tyonjohto .= "
     <td style='border:1px solid black;min-width:200px;padding: 2px 5px;font-family:Arial,sans-serif;'>Myyjän lupaus pvm</td>
 
 </tr>";
-foreach ($c_ch_n as $ticket) {
-    $message__tyonjohto .= '<tr>';
+foreach ($changed__comments_interactive as $ticket) {
+    $message__to_management .= '<tr>';
     foreach ($ticket as $ticket_bit) {
-        $message__tyonjohto .= '<td style="border: 1px solid;font-family:Arial,sans-serif;">' . $ticket_bit . '</td>';
+        $message__to_management .= '<td style="border: 1px solid;font-family:Arial,sans-serif;">' . $ticket_bit . '</td>';
         $yes = 1;
         
     }
-    $message__tyonjohto .= '</tr>';
+    $message__to_management .= '</tr>';
 }
-$message__tyonjohto .= "</table>";
+$message__to_management .= "</table>";
 
 if($yes == 1) {
-  $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='project_sendedits'");
-  $m_da = mysqli_fetch_all($m_data);
-  $m_data = $m_da[0];
+  $modified_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='project_sendedits'");
+  $modified_da = mysqli_fetch_all($modified_data);
+  $modified_data = $modified_da[0];
 
-  $m_headers = explode("~~~~", $m_data[1]);
-  $m_subject = explode("~~~~", $m_data[3]);
-  $m_messages = explode("~~~~", $m_data[4]);
+  $modified_headers = explode("~~~~", $modified_data[1]);
+  $modified_subject = explode("~~~~", $modified_data[3]);
+  $modified_messages = explode("~~~~", $modified_data[4]);
+  $to = $modified_headers[0];
+  $mail = new PHPMailer(); 
+  $mail->CharSet = "UTF-8";
 
-    $to = $m_headers[0];
+  $from = $modified_headers[0];
+  $subject = $modified_subject[0] . date("d-m-Y") . $modified_subject[1];
 
-    $mail = new PHPMailer(); 
-    $mail->CharSet = "UTF-8";
+  $mail->isSMTP();                                            // Send using SMTP
+  $mail->Host       = 'mail.westface.fi';                    // Set the SMTP server to send through
+  $mail->SMTPAuth   = true;          
+  $mail->addReplyTo($from, $modified_headers[2]);
 
-    $from = $m_headers[0];
-    $subject = $m_subject[0] . date("d-m-Y") . $m_subject[1];
+  $mail->Username   = $from;                     // SMTP username
+  $mail->Password   = $modified_headers[3];                               // SMTP password
+  $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+  $mail->Port       = 587; 
+  $mail->From = $from; 
+  $mail->FromName = $modified_headers[2]; 
+  $mail->addAddress($to, $modified_headers[4]);    
+  $mail->isHTML(true); 
+  $mail->Subject = $subject; 
+  $mail->Body = $message__to_management; 
 
-    $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host       = 'mail.westface.fi';                    // Set the SMTP server to send through
-    $mail->SMTPAuth   = true;          
-    $mail->addReplyTo($from, $m_headers[2]);
-
-    $mail->Username   = $from;                     // SMTP username
-    $mail->Password   = $m_headers[3];                               // SMTP password
-    $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-    $mail->Port       = 587; 
-    $mail->From = $from; 
-
-    $mail->FromName = $m_headers[2]; 
-    $mail->addAddress($to, $m_headers[4]); 
-
-    
-    
-    $mail->isHTML(true); 
-    $mail->Subject = $subject; 
-    $mail->Body = $message__tyonjohto; 
-
-    if(!$mail->send()) 
-    { 
+  if(!$mail->send())  { 
     // $message__tekija .="Mailer Error: " . $mail->ErrorInfo;
-    } 
-    else 
-    {$ok= mysqli_query($db, "DELETE FROM `changed__comments_interactive`");
-    }
+  } 
+  else {
+    $ok= mysqli_query($db, "DELETE FROM `changed__comments_interactive`");
+  }
 }
 
 ?>

@@ -1,5 +1,6 @@
 <?php
 
+//THIS FILE MAKES CANCELS THE PREVIOUS MOVE IN THE EDITOR
 require_once 'vendor/config.php';
 
 $project_id = $_POST['project_id'];

@@ -1,4 +1,5 @@
 <?php
+// This file enables search function by time periods in work diary
 require "config.php";
 
 $start_time = $_POST['start_time'];

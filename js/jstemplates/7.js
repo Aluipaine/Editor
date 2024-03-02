@@ -747,5 +747,3 @@ function generating_excel() {
 
   
 }
-
-

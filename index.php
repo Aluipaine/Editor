@@ -1,6 +1,6 @@
 <?php 
 
-// // Initialize the session
+// THIS FILE REDIRECTS USER TO THE WELCOME OR LOGIN PAGE
 session_start();
  
 require "vendor/config.php";

@@ -2,9 +2,9 @@
 require "config.php";
 
 $comment_id = $_POST['comment_id'];
-$myyja_lupaus = strtolower($_POST['myyja_lupaus']);
+$sellers_promise = strtolower($_POST['myyja_lupaus']);
 
-$meta = mysqli_query($db, "UPDATE `comments` SET `myyja_lupaus`='$myyja_lupaus' WHERE `id`='$comment_id'");
+$meta = mysqli_query($db, "UPDATE `comments` SET `myyja_lupaus`='$sellers_promise' WHERE `id`='$comment_id'");
 print_r($meta);
 
 

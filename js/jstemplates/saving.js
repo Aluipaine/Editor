@@ -14,7 +14,7 @@ function save(array) {
         url: "/vendor/addsaving.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-            alert('Tietokantavirhe, soita numeroon +358449782028');
+            console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
     }).done(function (data) {
         console.log("Saving made on array: " + array.toString());
@@ -48,7 +48,7 @@ function restoreprogress() {
         url: "../vendor/get-sizesinroom.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-        alert('Tietokantavirhe, soita numeroon +358449782028');
+        console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
     }).done(function (success) {
         u_rooms = [];
@@ -85,7 +85,7 @@ function restoreprogress() {
         url: "../vendor/get-savedprogressroom.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
     }).done(function (success) {
         successful = success.split("],[");
@@ -281,7 +281,7 @@ function delete_from_db(t_array) {
         url: "/vendor/removesaving.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-            alert('Tietokantavirhe, soita numeroon +358449782028');
+            console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
     }).done(function (data) {
         console.log("Removal made on array: " + array.toString());

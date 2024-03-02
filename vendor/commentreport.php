@@ -1,5 +1,6 @@
 <?php 
 
+// This file sends comment report to admins email adress
 require "config.php";
 
 

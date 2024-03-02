@@ -1,3 +1,5 @@
+<!-- Wall page right column for KUOSIT section on the mittaus role -->
+
 <div class="drawarea__controls drawarea__controls_tyostot">
    <h2>Kiinnikkeet</h2>
    <div class="drawarea__controls_elementsthree drawarea__things">

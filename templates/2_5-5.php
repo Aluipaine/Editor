@@ -1,3 +1,5 @@
+<!-- KIINNIKKEET section on the mittaus role -->
+
 <form class="step_screen drawscreen_section form__butsection" action="/updateproject.php" enctype='multipart/form-data' id="drawscreen_section_tyostot">
 
 <section class="tyosto__navigation">

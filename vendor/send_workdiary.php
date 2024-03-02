@@ -1,6 +1,7 @@
 <?php
 require "config.php";
 
+// This file sends work diary events to database
 $pr_id = $_POST['pr_id'];
 $who = $_POST['who'];
 $what = $_POST['what'];

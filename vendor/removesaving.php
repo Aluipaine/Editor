@@ -1,4 +1,5 @@
 <?php
+// Remove saving from room
 require "config.php";
 
 

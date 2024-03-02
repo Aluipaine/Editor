@@ -1,3 +1,6 @@
+<!-- Wall page right column for LÄPIVIENNIT section on the mittaus role -->
+
+
 <div class="drawarea__controls drawarea__controls_three">
    <h2>Läpiviennit</h2>
    <div class="drawarea__controls_elementsthree drawarea__things">

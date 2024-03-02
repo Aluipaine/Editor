@@ -31,20 +31,20 @@ $project_id = $_pr_comm[0][1];
 $pr_name_ = mysqli_query($db, "SELECT * FROM `projects` WHERE `id`=$project_id ");
 $pr_name = mysqli_fetch_all($pr_name_)[0][1];
 
-$m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='deleted_without_consent'");
-$m_da = mysqli_fetch_all($m_data);
-$m_data = $m_da[0];
+$modified_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='deleted_without_consent'");
+$modified_da = mysqli_fetch_all($modified_data);
+$modified_data = $modified_da[0];
 
-$m_headers = explode("~~~~", $m_data[1]);
-$m_subject = explode("~~~~", $m_data[3]);
-$m_messages = explode("~~~~", $m_data[4]);
+$modified_headers = explode("~~~~", $modified_data[1]);
+$modified_subject = explode("~~~~", $modified_data[3]);
+$modified_messages = explode("~~~~", $modified_data[4]);
 
 $mail = new PHPMailer(); 
 $mail->CharSet = "UTF-8";
 
-$to =  $m_headers[1];
-$from =  $m_headers[0];
-$subject = $m_subject[0] . $pr_name . $m_subject[1];
+$to =  $modified_headers[1];
+$from =  $modified_headers[0];
+$subject = $modified_subject[0] . $pr_name . $modified_subject[1];
 $txt = "<br>" . "Huone " . $_pr_comm[0][2] . ". 
 <br>Aihe ".$_pr_comm[0][3]."
 <br>Sisältö: ".$_pr_comm[0][5]."
@@ -60,16 +60,16 @@ $txt = "<br>" . "Huone " . $_pr_comm[0][2] . ".
 $mail->isSMTP();                                            // Send using SMTP
 $mail->Host       = 'mail.westface.fi';                    // Set the SMTP server to send through
 $mail->SMTPAuth   = true;          
-$mail->addReplyTo($from,  $m_headers[2]);
+$mail->addReplyTo($from,  $modified_headers[2]);
 
 $mail->Username   =  $from;                     // SMTP username
-$mail->Password   = $m_headers[3];                               // SMTP password
+$mail->Password   = $modified_headers[3];                               // SMTP password
 $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 $mail->Port       = 587; 
 $mail->From = $from; 
 
-$mail->FromName = $m_headers[2]; 
-$mail->addAddress($to, $m_headers[4]); 
+$mail->FromName = $modified_headers[2]; 
+$mail->addAddress($to, $modified_headers[4]); 
 // $mail->addAddress('marko.virtanen@westface.fi', "Marko Virtanen"); 
 
 //Provide file path and name of the attachments 

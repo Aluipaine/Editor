@@ -1,4 +1,6 @@
 <?php
+//MAIN CONFIG FILE
+
 /* Database credentials. Assuming you are running MySQL
 // server with default setting (user 'root' with no password) */
 // define('DB_SERVER', 'mysql10.domainhotelli.fi:3306');

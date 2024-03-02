@@ -1,3 +1,5 @@
+<!-- This file is the drawarea section -->
+
 <section class="row drawarea__section">
     <section class="row levy__section" style="display: none;">
          <!-- < ? php include('./templates/da_controls_5-5.php'); ? > -->

@@ -1,3 +1,4 @@
+<!-- ORIGO section on the mittaus role -->
 
 <form class="step_screen drawscreen_section form__butsection" id="drawscreen_section_one" 
  action="/updateproject.php" enctype='multipart/form-data'>

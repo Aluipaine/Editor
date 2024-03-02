@@ -1,4 +1,6 @@
 <?php
+// THIS IS THE ADMIN PAGE TEMPLATE
+
 // Initialize the session
 session_start();
 

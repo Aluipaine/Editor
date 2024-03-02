@@ -1,3 +1,4 @@
+<!-- THIS IS THE PROJECT PAGE TEMPLATE -->
 <?php 
 
 require "vendor/config.php";

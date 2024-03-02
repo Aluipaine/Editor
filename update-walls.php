@@ -1,4 +1,5 @@
 <?php
+// This file updates rooms wall description and other data in the room selection
 
 require './vendor/config.php';
 
