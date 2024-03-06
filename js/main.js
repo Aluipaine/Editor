@@ -3429,10 +3429,21 @@ function initialize__housetempla(arguemento,stage) {
     
   }
   if(stage === 2) {
+
+    let housetemplate_name = prompt("Enter the name of the template:");
     
+    if (housetemplate_name == null) {
+      return;
+    }
+
+    if (housetemplate_name == ""){
+      alert("Invalid template name!");
+      return;
+    }  
+
     newtype = document.createElement("div");
     newtype.classList.add("house__types_type");
-    newtype.innerHTML = 'Uusi';
+    newtype.innerHTML = housetemplate_name;
     newtype.dataset.aroom = rdata.dataset.aroom;
     newtype.dataset.broom = rdata.dataset.broom;
     newtype.dataset.croom = rdata.dataset.croom;
@@ -3440,11 +3451,8 @@ function initialize__housetempla(arguemento,stage) {
     newtype.dataset.kroom = rdata.dataset.kroom;
     newtype.dataset.lroom = rdata.dataset.lroom;
 
-
-    document.querySelector(".house__types_row").appendChild(newtype);
-  
-
     formData = {
+      name: housetemplate_name,
       a: newtype.dataset.aroom.toString(),
       b: newtype.dataset.broom.toString(),
       c: newtype.dataset.croom.toString(),
@@ -3452,16 +3460,26 @@ function initialize__housetempla(arguemento,stage) {
       k: newtype.dataset.kroom.toString(), 
       l: newtype.dataset.lroom.toString(), 
     };
+
     $.ajax({
       type: "POST",
       url: "/vendor/updatepohjat.php",
       data: formData,
       error: function (jqxhr, status, exception) {
-        alert('Tietokantavirhe, soita numeroon +358449782028');
+        if(jqxhr.status == 409){
+          // if request returns status 409 - name is not unique
+          alert('Template name in not unique!');
+        } else{
+          alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
       }
     }).done(function (data) {
       // alert('Seinä ' + current_room + ' tallennettu');
       // console.log("saved Data: " + data);
+
+      document.querySelector(".house__types_row").appendChild(newtype);
+      // add button for template
+
       alert("function initialize__housetempla(9) OK");
 
     });

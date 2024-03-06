@@ -1514,24 +1514,23 @@
           else {
             echo '<div id="types" class="house__types">
             <h2>Parveketyypit</h2>
-            <div class="house__types_row row">'; 
-            
-              $alphabet = range('A', 'Z');            
+            <div class="house__types_row row">';           
               $p_data = mysqli_query($db, "SELECT * FROM `pohjat`");
               $p_da = mysqli_fetch_all($p_data);
               $p_data = $p_da;
               $key_name = -1;
               foreach ($p_data as $p_key) {
-                  $i_a = $p_key[1];
-                  $i_b = $p_key[2];
-                  $i_c = $p_key[3];
-                  $i_d = $p_key[4];
-                  $i_k = $p_key[5];
-                  $i_l = $p_key[6];
+                  $template_name = $p_key[1];
+                  $i_a = $p_key[2];
+                  $i_b = $p_key[3];
+                  $i_c = $p_key[4];
+                  $i_d = $p_key[5];
+                  $i_k = $p_key[6];
+                  $i_l = $p_key[7];
 
                   $key_name += 1;
 
-                  echo "<div onclick='initialize__housetempla(this,1);' data-aroom='" . strtolower($i_a) . "' data-broom='" . strtolower($i_b) . "' data-croom='" . strtolower($i_c) . "' data-droom='" . strtolower($i_d) . "' data-kroom='" . strtolower($i_k) . "' data-lroom='" . strtolower($i_l) . "' class='house__types_type'>" . $alphabet[$key_name] . "</div>";
+                  echo "<div onclick='initialize__housetempla(this,1);' data-aroom='" . strtolower($i_a) . "' data-broom='" . strtolower($i_b) . "' data-croom='" . strtolower($i_c) . "' data-droom='" . strtolower($i_d) . "' data-kroom='" . strtolower($i_k) . "' data-lroom='" . strtolower($i_l) . "' class='house__types_type'>" . $template_name . "</div>";
               }
               
             
