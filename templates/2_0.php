@@ -1550,49 +1550,8 @@
     
 
    <div class="row house__intro">
-      
-    <div class="col-6 col-with-table">  
-              <b> tiedot projektista </b> <br>
-              <b>Tiedot huoneesta </b> <br>
-              <b>Tiedot tekijästä</b> <br>
-              <div class="col-table">
-              <h2>Seinien asennusjärjestys</h2>
-              <table>
-                <tr>
-                    <td><input type="number" pattern="\d*"/ data-room="asjarj-1" maxlength="1" name="wall_one_asjarj asjarj" id="wall_order_a" data-tochange="a" onchange="rooms__change_asjarj(this); " value="1" class="lineinput inputname" required/></td>
-                    <td><input type="text" data-room="a" name="wall_one_a" id="wall_one_a" value="SEINÄ A" data-tochange="a" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                    <td><input type="text" name="wall_one_a_desc" id="wall_desc_a" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-                </tr>
-                <tr>
-                    <td><input type="number" pattern="\d*"/ data-room="asjarj-2" maxlength="1" name="wall_two_asjarj asjarj" id="wall_order_b" data-tochange="b" onchange="rooms__change_asjarj(this); "value="2" class="lineinput inputname" required/></td>
-                    <td><input type="text" data-room="b" name="wall_one_b" id="wall_one_b" value="SEINÄ B" data-tochange="b"  class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                    <td><input type="text" name="wall_one_b_desc" id="wall_desc_b" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-                </tr>
-                <tr>
-                    <td><input type="number" pattern="\d*"/ data-room="asjarj-3" maxlength="1" name="wall_three_asjarj asjarj" id="wall_order_c" data-tochange="c" onchange="rooms__change_asjarj(this); "value="3" class="lineinput inputname" required/></td>
-                    <td><input type="text" data-room="c" name="wall_one_c" id="wall_one_c" value="SEINÄ C" data-tochange="c" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                    <td><input type="text" name="wall_one_c_desc" id="wall_desc_c" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-                </tr>
-                <tr>
-                    <td><input type="number" pattern="\d*"/ data-room="asjarj-4" maxlength="1" name="wall_four_asjarj asjarj" id="wall_order_d" data-tochange="d" onchange="rooms__change_asjarj(this); "value="4" class="lineinput inputname" required/></td>
-                    <td><input type="text" data-room="d" name="wall_one_d" id="wall_one_d" value="SEINÄ D"  data-tochange="d" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                    <td><input type="text" name="wall_one_d_desc" id="wall_desc_d" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-                </tr>
-                <tr>
-                    <td><input type="number" pattern="\d*"/ data-room="asjarj-5" maxlength="1" name="wall_five_asjarj asjarj" id="wall_order_roof" data-tochange="k" onchange="rooms__change_asjarj(this); "value="5" class="lineinput inputname" required/></td>
-                    <td><input type="text" data-room="roof" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="r" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                    <td><input type="text" name="wall_one_roof_desc" id="wall_desc_roof" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-                </tr>
-                <tr>
-                    <td><input type="number" pattern="\d*"/ data-room="asjarj-6" maxlength="1" name="wall_six_asjarj asjarj" id="wall_order_floor" data-tochange="l" onchange="rooms__change_asjarj(this); "value="6" class="lineinput inputname" required/></td>
-                    <td><input type="text" data-room="floor" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
-                    <td><input type="text" name="wall_one_floor_desc" id="wall_desc_floor" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-                </tr>
-              </table>
-              <div class="row">
-                <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(0,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon tilaustaulu</div>
-              </div>
-            </div> 
+     
+    
     <?php 
 
       $available_users = '';
@@ -1680,337 +1639,341 @@
               <?php 
                 $id = $post['id'];
                 $role = $_GET['user'];
-                if(strtolower($_GET["user"]) == "tyonjohto") {
-                  $bosts = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='' AND `answer_to`=''");
-                  $bosts = mysqli_fetch_all($bosts);
-                  echo '<h3>Työt</h3>';
-                }
-                else {
-                  $bosts = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `comment_to` LIKE '%$role%' AND  `ending_time`='' AND `answer_to`=''");
-                  $bosts = mysqli_fetch_all($bosts);
-                  echo '<h3>Työt</h3>';
+                if(strtolower($usr_role) == "kommentointi") {
+                  if(strtolower($_GET["user"]) == "tyonjohto") {
+                    $bosts = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='' AND `answer_to`=''");
+                    $bosts = mysqli_fetch_all($bosts);
+                    echo '<h3>Työt</h3>';
+                  }
+                  else {
+                    $bosts = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `comment_to` LIKE '%$role%' AND  `ending_time`='' AND `answer_to`=''");
+                    $bosts = mysqli_fetch_all($bosts);
+                    echo '<h3>Työt</h3>';
 
-                }
-                  
-
-                  foreach ($bosts as $p) {
-                    $_p = explode("https://", $p[6]);
-                    $_z = "";
-                    foreach ($_p as $v) {
-                      if(strlen($v) >= 7 ) {
-                        $_z .= "<li><a href=https://" . $v . " target=`_blank`> <img style='max-width: 200px' src='https://" . $v . "' /></a></li>";
+                  }
+                  $usr = $_GET["user"];
+                  $usr_role = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr'; ");
+                  $usr_role = mysqli_fetch_all($usr_role)[0];
+                  $usr_role = $usr_role[3];
+                    foreach ($bosts as $p) {
+                      $_p = explode("https://", $p[6]);
+                      $_z = "";
+                      foreach ($_p as $v) {
+                        if(strlen($v) >= 7 ) {
+                          $_z .= "<li><a href=https://" . $v . " target=`_blank`> <img style='max-width: 200px' src='https://" . $v . "' /></a></li>";
+                        }
                       }
-                    }
-                    if(strtolower($_GET["user"]) == "tyonjohto") {
-                      $aloitus_btn ='';
-                    }
-                    else {
-                      $aloitus_btn ='';
-                    }
+                      if(strtolower($_GET["user"]) == "tyonjohto") {
+                        $aloitus_btn ='';
+                      }
+                      else {
+                        $aloitus_btn ='';
+                      }
 
-                    if(strtolower($p[8]) == "sahko") {
-                      $photo = '<img src="/img/comroles/light.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "sahkos") {
-                      $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "rakennustyo") {
-                      $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "rakennustyo3") {
-                      $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "rakennustyo2") {
-                      $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "ilmastointi") {
-                      $photo = '<img src="/img/comroles/ventilation.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "putki_ivs") {
-                      $photo = '<img src="/img/comroles/ventilation.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "vesi") {
-                      $photo = '<img src="/img/comroles/water.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "vesis") {
-                      $photo = '<img src="/img/comroles/water.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "siivous") {
-                      $photo = '<img src="/img/comroles/siivous.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "purku") {
-                      $photo = '<img src="/img/comroles/purku.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "westface") {
-                      $photo = '<img src="/img/comroles/wf.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "myynti") {
-                      $photo = '<img src="/img/comroles/myynti.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "lukkomies") {
-                      $photo = '<img src="/img/comroles/lock.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "suunnittelu") {
-                      $photo = '<img src="/img/comroles/suunnittelu.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "arak") {
-                      $photo = '<img src="/img/comroles/cup.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "rak") {
-                      $photo = '<img src="/img/comroles/cup.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else if(strtolower($p[8]) == "pu") {
-                      $photo = '<img src="/img/comroles/cup.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    else {
-                      $photo = '<img src="/img/comroles/others.png" style="width:24px; height: 21px;margin-top: -8px;">';
-                    }
-                    $comment_id = $p[0];
-                    $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($p[2])))))))))))))));                  
-                    if(strtolower($_GET["user"]) == "tyonjohto") {
-                      $start_btn = '<div class="modal_close_btn drawarea__controls_btn_ aloitus_nappula" onclick="copy_comment(this);">Kopioi</div>';
-                    }
-                    else {
+                      if(strtolower($p[8]) == "sahko") {
+                        $photo = '<img src="/img/comroles/light.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "sahkos") {
+                        $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "rakennustyo") {
+                        $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "rakennustyo3") {
+                        $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "rakennustyo2") {
+                        $photo = '<img src="/img/comroles/work.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "ilmastointi") {
+                        $photo = '<img src="/img/comroles/ventilation.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "putki_ivs") {
+                        $photo = '<img src="/img/comroles/ventilation.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "vesi") {
+                        $photo = '<img src="/img/comroles/water.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "vesis") {
+                        $photo = '<img src="/img/comroles/water.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "siivous") {
+                        $photo = '<img src="/img/comroles/siivous.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "purku") {
+                        $photo = '<img src="/img/comroles/purku.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "westface") {
+                        $photo = '<img src="/img/comroles/wf.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "myynti") {
+                        $photo = '<img src="/img/comroles/myynti.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "lukkomies") {
+                        $photo = '<img src="/img/comroles/lock.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "suunnittelu") {
+                        $photo = '<img src="/img/comroles/suunnittelu.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "arak") {
+                        $photo = '<img src="/img/comroles/cup.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "rak") {
+                        $photo = '<img src="/img/comroles/cup.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else if(strtolower($p[8]) == "pu") {
+                        $photo = '<img src="/img/comroles/cup.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      else {
+                        $photo = '<img src="/img/comroles/others.png" style="width:24px; height: 21px;margin-top: -8px;">';
+                      }
+                      $comment_id = $p[0];
+                      $classname = str_replace('a','o',str_replace('Ã','a',str_replace('Ã','a',str_replace('ã','a',str_replace('<br>', '', str_replace('<br> ', '', str_replace(' <br>', '', str_replace(' <br> ','',str_replace('---','',str_replace('ã','o',str_replace('ä','a',str_replace('--','',str_replace('','',utf8_encode(strtolower($p[2])))))))))))))));                  
+                      if(strtolower($_GET["user"]) == "tyonjohto") {
+                        $start_btn = '<div class="modal_close_btn drawarea__controls_btn_ aloitus_nappula" onclick="copy_comment(this);">Kopioi</div>';
+                      }
+                      else {
+                        if(strtolower($p[16]) == "aloitettu") {
+                          $start_btn = '<div class="modal_close_btn drawarea__controls_btn_ aloitus_nappula" onclick="changestatus(this,`'.$comment_id.'`);">Keskeytä</div>';
+                          $border_colour_status = "yellow";
+                        }
+                        else if(strtolower($p[16]) == "aloittamatta") {
+                          $start_btn = '<div class="modal_close_btn drawarea__controls_btn_ aloitus_nappula" onclick="changestatus(this,`'.$comment_id.'`);">Aloita</div>';
+                          $border_colour_status = "black";
+                        }
+                        else {
+                          $start_btn = '<div class="modal_close_btn drawarea__controls_btn_ aloitus_nappula" onclick="changestatus(this,`'.$comment_id.'`);">Aloita</div>';
+                          $border_colour_status = "red";
+                        }
+                      }
                       if(strtolower($p[16]) == "aloitettu") {
-                        $start_btn = '<div class="modal_close_btn drawarea__controls_btn_ aloitus_nappula" onclick="changestatus(this,`'.$comment_id.'`);">Keskeytä</div>';
                         $border_colour_status = "yellow";
                       }
                       else if(strtolower($p[16]) == "aloittamatta") {
-                        $start_btn = '<div class="modal_close_btn drawarea__controls_btn_ aloitus_nappula" onclick="changestatus(this,`'.$comment_id.'`);">Aloita</div>';
                         $border_colour_status = "black";
                       }
                       else {
-                        $start_btn = '<div class="modal_close_btn drawarea__controls_btn_ aloitus_nappula" onclick="changestatus(this,`'.$comment_id.'`);">Aloita</div>';
                         $border_colour_status = "red";
                       }
-                    }
-                    if(strtolower($p[16]) == "aloitettu") {
-                      $border_colour_status = "yellow";
-                    }
-                    else if(strtolower($p[16]) == "aloittamatta") {
-                      $border_colour_status = "black";
-                    }
-                    else {
-                      $border_colour_status = "red";
-                    }
 
-                    
+                      
 
-                    $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id ");
-                    $userslist = mysqli_fetch_all($_userslist);
-                    
+                      $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id ");
+                      $userslist = mysqli_fetch_all($_userslist);
+                      
 
-                    $ticket_options="";
+                      $ticket_options="";
 
-                    if(strpos($p[8], '|') !== false) {
-                      $chosen_users=str_replace('|', ' ja ', $p[8]);
-                    }
-                    else {
-                      $chosen_users = "";
-                    }
-                    
-                    
-                    
-                  
-                    
-                    foreach ($userslist as $usern) {
-                      if($usern[0] == $p[8]) {
-                        $ticket_options.='<option value="'.ucfirst($usern[0]).'" selected>'.ucfirst($usern[0]).'</option>';
+                      if(strpos($p[8], '|') !== false) {
+                        $chosen_users=str_replace('|', ' ja ', $p[8]);
                       }
                       else {
-                        $ticket_options.='<option value="'.ucfirst($usern[0]).'">'.ucfirst($usern[0]).'</option>';
+                        $chosen_users = "";
                       }
-                    }
-                    $is_the_critical_checked = '';
-
-                    if($p[9] == 'no_critical') {
-                      $is_the_critical_checked = '';
-                    }
-                    else if($p[9] == 'critical') {
-                      $is_the_critical_checked = 'checked';
-                    }
-
-                    if(strtolower($_GET["user"]) == "tyonjohto") {
-                      $criticality_option = '
-                    <div class="row" style="margin-top: 16px;width: 100%;">
-                      <div class="col-6"><h4>Onko kriitinen?</h4></div>
-                      <div class="col-6"><input class="commentbox__criticality" type="checkbox" value="Critical" '.$is_the_critical_checked.' min="0" onchange="change_task_criticality(`'.$p[0].'`,this);"/></div>
-                    </div>';
-                    }
-                    else {
-                      $criticality_option ='';
-                    }
-
-                    $cur_usr = strtolower($_GET["user"]);
-                    $_curusr = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$cur_usr';");
-                    $curusr = mysqli_fetch_all($_curusr);
-
-                    if($curusr[0][4] == 1) {
-                      // <h4>Poista kuittaamatta</h4>
-                      $usr_option = '
-                        <div class="row" style="margin-top: 16px;width: 100%;">
-                          <div class="col-6"></div>
-                          <div class="col-6"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula" onclick="comment__deletekuittaamatta(this);" name="' . $p[0] . '">Poista kuittaamatta</div></div>
-                        </div>';
-                    }
-                    else {
-                      $usr_option ='';
-                    }
-
-                    
-
-                    
-
-                    
-                    echo '<section class="commentbox ' . $p[0] . ' ' . $p[9] . '" data-room="' . strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($p[2],'HTML-ENTITIES','utf-8')))) . '" data-name="' . $p[0] . '">
-                      <div class="row commentbox__row">'.$photo.'
-                        <span class="comment__status" style="border-color: '.$border_colour_status.'">' . $p[16] . '</span>
-                        <input class="commentbox__name" oninput="change_task_texts(`'. $p[0] .'`)" value="'. $p[3] .'">
-                        <span class="comment_deadline" style="margin-top: -8px;">' . $p[13] . '</span>
-                        <div onclick="this.parentElement.parentElement.classList.toggle(`open`);" style="margin-top: -8px;">Avaa/sulje</div>
-                      </div>
                       
-                      <div class="row commentbox__secondrow">
-                        <div class="col-6">
-                          <h4>Tiedostot:</h4>
-                          <ul class="commentbox__tiedostot">' . $_z . '</ul>
-                        </div>
-                        <div class="col-6">
-                            <h4>Sisältö:</h4>
-                            <textarea class="commentbox__content" oninput="change_task_texts(`'. $p[0] .'`);" value="'. $p[5] . '">'. $p[5] . '</textarea>
-                        </div>
-                       
-                      </div>
-                      <div class="commentbox__text row">
-                        <div class="col-6">
-                            <h4>Keneltä:</h4>
-                            <span class="commentbox__from">' . $p[7] . '</span>
-                        </div>
-                        <div class="col-6">
-                            <h4>Kenelle:</h4>
-                            <select onchange="change_task_assignation(`'. $p[0] .'`);" multiple class="commentbox__to change_task_assignation '.$p[0].'">' . $ticket_options .  '</select> <br>
-                            <i class="commentbox__users">'.$chosen_users.'</i>
-                        </div>
-                      </div>
-                      <div class="row commentbox__btns">
-                        <div><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula" onclick="this.parentElement.parentElement.parentElement.classList.toggle(`open`);">Sulje</div></div>
-                        <div><div class="modal_close_btn drawarea__controls_btn_ vastaus_nappula" onclick="comment__help(this,`mode1`);" name="' . $p[0] . '">Pyydä apua</div></div>
-                        <div><div class="modal_close_btn drawarea__controls_btn_ vastaus_nappula" onclick="comment__help(this,`mode2`);" name="' . $p[0] . '">Tilaa materiaalit</div></div>
-                        <div>'.$start_btn.'</div>
-                        <div><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" name="' . $p[0] . '" onclick="comment__kuittaus(this);">Kuittaan tehdyksi</div></div>
-                      </div>
-                      <div class="row time__stamps" style="margin-top: 16px;width: 100%;">
-                        <div class="col-3"><h4>Työtunnit, arvio:</h4><input class="commentbox__hours" type="number" pattern="\d*"/ value="'.$p[15].'" min="0" onchange="change_task_hours(this,`'.$p[0].'`);"/></div>
-                        <div class="col-3"><h4>Työnjohdon määräaika:</h4><i class="commentbox__deadline">'.$p[17].'</i></div>
-                        <div class="col-3"><h4>Sinun arviosi valmistumiselle:</h4><input class="commentbox__tja" type="date" value="'.$p[18].'" oninput="change_task_tta(this,`'.$p[0].'`);"/></div>
-                        <div class="col-3"><h4>Deadline:</h4><i class="commentbox__deadline">'.$p[13].'</i></div>
-                      </div>'.$criticality_option.$usr_option.'  
                       
-                      <section class="commentbox commentbox__help" data-name="' . $p[0] . '">
-                        <h2><input type="text" value="Vastaus: " class="lineinput kommentti__name"></h2>
-                        <div class="row">
-                          <div class="col-6">  
-                            <div class="form-group">
-                                <h6>Lisää tiedostot:</h6>
-                                <input type="file" class="comment__files" name="comment__files[]" multiple>
-                                <div class="comment__preview_files ' . $p[0] . '_previewfiles"></div>
-                            </div>
-                            <h6>Keneltä</h6>
-                            <input name="kommentti_comment_from" class="kommentti_comment_from" type="text" value="' . $role . '">
-                          </div>
-                          
-                          <div class="col-6">
-                              <h6>Deadline:</h6>
-                              <input name="deadline_time" class="comment__deadline" type="date" min="' .  date("Y-m-d") . '">
-
-                              <h6 class="commentbox__help_who">Kenelle</h6>
-                              
-                              <select name="kommentti_comment_to" class="kommentti_comment_to commentbox__help_options"></select>
-                          </div>
-                          <div class="col-6 commentbox__help_order">
-                              <h6>Mitä tilataan:</h6>
-                              <input name="order_what" class="comment__deadline order_what" type="text" value="">
-                          </div>
-                          <div class="col-6 commentbox__help_order_2">
-                              <h6>Kappalemäärä:</h6>
-                              <input name="order_count" class="comment__deadline order_count" type="number" pattern="\d*"/ value="0" min="0">
-                          </div>
-                          <div class="col-6 commentbox__help_order_3">
-                              <h6>Hinta €:</h6>
-                              <input name="order_price" class="comment__deadline order_price" type="number" pattern="\d*"/ value="0" min="0">
-                          </div>
-                          <div class="col-6 commentbox__help_order_4">
-                            <h6>Noutaja:</h6>
-                            <input name="order_to" class="comment__deadline order_to" type="text">
-                          </div>
-                          <div class="col-6 commentbox__help_order_5 row">
-                            <div class="col-4">
-                              <h6>Pituus (mm):</h6>
-                              <input name="order_measures" class="comment__deadline order_measures order_measures_1" type="number" pattern="\d*"/ value="0" min="0">
-                            </div>
-                            <div class="col-4">
-                              <h6>Leveys (mm):</h6>
-                              <input name="order_measures" class="comment__deadline order_measures order_measures_2" type="number" pattern="\d*"/ value="0" min="0">
-                            </div>
-                            <div class="col-4">
-                              <h6>Syvyys (mm):</h6>
-                              <input name="order_measures" class="comment__deadline order_measures order_measures_3" type="number" pattern="\d*"/ value="0" min="0">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="commentbox__text">
-                          <h4>Sisältö</h4>
-                          <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
-                        </div>
-                        <div class="commentbox_btn drawarea__controls_btn btn ready_btn" onclick="comment__create_simpler(`' . $p[0] . '`,this);" name="' . $p[0] . '">Lähetä</div>
-
-                      </section>';
+                      
                     
-                  
-                    $bosts2 = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='' AND `answer_to`='$comment_id'");
-                    $bosts2 = mysqli_fetch_all($bosts2);
-
-                    
-
-                    foreach ($bosts2 as $p2) {
-                      $_p2 = explode("https://", $p2[6]);
-                      $_z2 = "";
-                      foreach ($_p2 as $v2) {
-                        if(strlen($v2) >= 7 ) {
-                          $_z2 .= "<li><a href=https://" . $v2 . " target=`_blank`> <img style='max-width: 200px' src='https://" . $v2 . "' /></a></li>";
+                      
+                      foreach ($userslist as $usern) {
+                        if($usern[0] == $p[8]) {
+                          $ticket_options.='<option value="'.ucfirst($usern[0]).'" selected>'.ucfirst($usern[0]).'</option>';
+                        }
+                        else {
+                          $ticket_options.='<option value="'.ucfirst($usern[0]).'">'.ucfirst($usern[0]).'</option>';
                         }
                       }
-                      echo '<section class="commentbox commentbox__helpticket ' . $p[0] . ' ' . $p[9] . '" data-room="' . $p[2] . '" data-name="' . $p[0] . '">
-                              <h2 class="commentbox__name">' . $p2[3] .'</h2>
-                              <div class="row">
-                                  <div class="col-3">
-                                    <h4>Tiedostot:</h4>
-                                    <ul class="commentbox__tiedostot">' . $_z2 .'</ul>
-                                  </div>
-                                  <div class="col-3">
-                                      <h4>Keneltä:</h4>
-                                      <span class="commentbox__from">' . $p2[7] .'</span>
-                                  </div>
-                                  <div class="col-3">
-                                      <h4>Kenelle:</h4>
-                                      <span class="commentbox__to">' . $p2[8] .'</span>
-                                  </div>
-                                  <div class="col-3">
-                                      <h4>Aihe:</h4>
-                                      <span class="commentbox__aihe">' . $p2[12] .'</span>
-                                  </div>
-                                  <div class="col-3">
-                                      <h4>Deadline:</h4>
-                                      <span class="commentbox__deadline">' . $p2[13] .'</span>
-                                  </div>
+                      $is_the_critical_checked = '';
+
+                      if($p[9] == 'no_critical') {
+                        $is_the_critical_checked = '';
+                      }
+                      else if($p[9] == 'critical') {
+                        $is_the_critical_checked = 'checked';
+                      }
+
+                      if(strtolower($_GET["user"]) == "tyonjohto") {
+                        $criticality_option = '
+                      <div class="row" style="margin-top: 16px;width: 100%;">
+                        <div class="col-6"><h4>Onko kriitinen?</h4></div>
+                        <div class="col-6"><input class="commentbox__criticality" type="checkbox" value="Critical" '.$is_the_critical_checked.' min="0" onchange="change_task_criticality(`'.$p[0].'`,this);"/></div>
+                      </div>';
+                      }
+                      else {
+                        $criticality_option ='';
+                      }
+
+                      $cur_usr = strtolower($_GET["user"]);
+                      $_curusr = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$cur_usr';");
+                      $curusr = mysqli_fetch_all($_curusr);
+
+                      if($curusr[0][4] == 1) {
+                        // <h4>Poista kuittaamatta</h4>
+                        $usr_option = '
+                          <div class="row" style="margin-top: 16px;width: 100%;">
+                            <div class="col-6"></div>
+                            <div class="col-6"><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula" onclick="comment__deletekuittaamatta(this);" name="' . $p[0] . '">Poista kuittaamatta</div></div>
+                          </div>';
+                      }
+                      else {
+                        $usr_option ='';
+                      }
+
+                      
+
+                      
+
+                      
+                      echo '<section class="commentbox ' . $p[0] . ' ' . $p[9] . '" data-room="' . strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($p[2],'HTML-ENTITIES','utf-8')))) . '" data-name="' . $p[0] . '">
+                        <div class="row commentbox__row">'.$photo.'
+                          <span class="comment__status" style="border-color: '.$border_colour_status.'">' . $p[16] . '</span>
+                          <input class="commentbox__name" oninput="change_task_texts(`'. $p[0] .'`)" value="'. $p[3] .'">
+                          <span class="comment_deadline" style="margin-top: -8px;">' . $p[13] . '</span>
+                          <div onclick="this.parentElement.parentElement.classList.toggle(`open`);" style="margin-top: -8px;">Avaa/sulje</div>
+                        </div>
+                        
+                        <div class="row commentbox__secondrow">
+                          <div class="col-6">
+                            <h4>Tiedostot:</h4>
+                            <ul class="commentbox__tiedostot">' . $_z . '</ul>
+                          </div>
+                          <div class="col-6">
+                              <h4>Sisältö:</h4>
+                              <textarea class="commentbox__content" oninput="change_task_texts(`'. $p[0] .'`);" value="'. $p[5] . '">'. $p[5] . '</textarea>
+                          </div>
+                        
+                        </div>
+                        <div class="commentbox__text row">
+                          <div class="col-6">
+                              <h4>Keneltä:</h4>
+                              <span class="commentbox__from">' . $p[7] . '</span>
+                          </div>
+                          <div class="col-6">
+                              <h4>Kenelle:</h4>
+                              <select onchange="change_task_assignation(`'. $p[0] .'`);" multiple class="commentbox__to change_task_assignation '.$p[0].'">' . $ticket_options .  '</select> <br>
+                              <i class="commentbox__users">'.$chosen_users.'</i>
+                          </div>
+                        </div>
+                        <div class="row commentbox__btns">
+                          <div><div class="modal_close_btn drawarea__controls_btn sulkemis_nappula" onclick="this.parentElement.parentElement.parentElement.classList.toggle(`open`);">Sulje</div></div>
+                          <div><div class="modal_close_btn drawarea__controls_btn_ vastaus_nappula" onclick="comment__help(this,`mode1`);" name="' . $p[0] . '">Pyydä apua</div></div>
+                          <div><div class="modal_close_btn drawarea__controls_btn_ vastaus_nappula" onclick="comment__help(this,`mode2`);" name="' . $p[0] . '">Tilaa materiaalit</div></div>
+                          <div>'.$start_btn.'</div>
+                          <div><div class="modal_close_btn drawarea__controls_btn kuittaus_nappula" name="' . $p[0] . '" onclick="comment__kuittaus(this);">Kuittaan tehdyksi</div></div>
+                        </div>
+                        <div class="row time__stamps" style="margin-top: 16px;width: 100%;">
+                          <div class="col-3"><h4>Työtunnit, arvio:</h4><input class="commentbox__hours" type="number" pattern="\d*"/ value="'.$p[15].'" min="0" onchange="change_task_hours(this,`'.$p[0].'`);"/></div>
+                          <div class="col-3"><h4>Työnjohdon määräaika:</h4><i class="commentbox__deadline">'.$p[17].'</i></div>
+                          <div class="col-3"><h4>Sinun arviosi valmistumiselle:</h4><input class="commentbox__tja" type="date" value="'.$p[18].'" oninput="change_task_tta(this,`'.$p[0].'`);"/></div>
+                          <div class="col-3"><h4>Deadline:</h4><i class="commentbox__deadline">'.$p[13].'</i></div>
+                        </div>'.$criticality_option.$usr_option.'  
+                        
+                        <section class="commentbox commentbox__help" data-name="' . $p[0] . '">
+                          <h2><input type="text" value="Vastaus: " class="lineinput kommentti__name"></h2>
+                          <div class="row">
+                            <div class="col-6">  
+                              <div class="form-group">
+                                  <h6>Lisää tiedostot:</h6>
+                                  <input type="file" class="comment__files" name="comment__files[]" multiple>
+                                  <div class="comment__preview_files ' . $p[0] . '_previewfiles"></div>
                               </div>
-                              <div class="commentbox__text">
-                                  <h4>Sisältö:</h4>
-                                  <p class="commentbox__content">' . $p2[5] .'</p>
+                              <h6>Keneltä</h6>
+                              <input name="kommentti_comment_from" class="kommentti_comment_from" type="text" value="' . $role . '">
+                            </div>
+                            
+                            <div class="col-6">
+                                <h6>Deadline:</h6>
+                                <input name="deadline_time" class="comment__deadline" type="date" min="' .  date("Y-m-d") . '">
+
+                                <h6 class="commentbox__help_who">Kenelle</h6>
+                                
+                                <select name="kommentti_comment_to" class="kommentti_comment_to commentbox__help_options"></select>
+                            </div>
+                            <div class="col-6 commentbox__help_order">
+                                <h6>Mitä tilataan:</h6>
+                                <input name="order_what" class="comment__deadline order_what" type="text" value="">
+                            </div>
+                            <div class="col-6 commentbox__help_order_2">
+                                <h6>Kappalemäärä:</h6>
+                                <input name="order_count" class="comment__deadline order_count" type="number" pattern="\d*"/ value="0" min="0">
+                            </div>
+                            <div class="col-6 commentbox__help_order_3">
+                                <h6>Hinta €:</h6>
+                                <input name="order_price" class="comment__deadline order_price" type="number" pattern="\d*"/ value="0" min="0">
+                            </div>
+                            <div class="col-6 commentbox__help_order_4">
+                              <h6>Noutaja:</h6>
+                              <input name="order_to" class="comment__deadline order_to" type="text">
+                            </div>
+                            <div class="col-6 commentbox__help_order_5 row">
+                              <div class="col-4">
+                                <h6>Pituus (mm):</h6>
+                                <input name="order_measures" class="comment__deadline order_measures order_measures_1" type="number" pattern="\d*"/ value="0" min="0">
                               </div>
-                            </section>';
-                    }    
-                    echo '</section>';
+                              <div class="col-4">
+                                <h6>Leveys (mm):</h6>
+                                <input name="order_measures" class="comment__deadline order_measures order_measures_2" type="number" pattern="\d*"/ value="0" min="0">
+                              </div>
+                              <div class="col-4">
+                                <h6>Syvyys (mm):</h6>
+                                <input name="order_measures" class="comment__deadline order_measures order_measures_3" type="number" pattern="\d*"/ value="0" min="0">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="commentbox__text">
+                            <h4>Sisältö</h4>
+                            <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
+                          </div>
+                          <div class="commentbox_btn drawarea__controls_btn btn ready_btn" onclick="comment__create_simpler(`' . $p[0] . '`,this);" name="' . $p[0] . '">Lähetä</div>
+
+                        </section>';
+                      
+                    
+                      $bosts2 = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='' AND `answer_to`='$comment_id'");
+                      $bosts2 = mysqli_fetch_all($bosts2);
+
+                      
+
+                      foreach ($bosts2 as $p2) {
+                        $_p2 = explode("https://", $p2[6]);
+                        $_z2 = "";
+                        foreach ($_p2 as $v2) {
+                          if(strlen($v2) >= 7 ) {
+                            $_z2 .= "<li><a href=https://" . $v2 . " target=`_blank`> <img style='max-width: 200px' src='https://" . $v2 . "' /></a></li>";
+                          }
+                        }
+                        echo '<section class="commentbox commentbox__helpticket ' . $p[0] . ' ' . $p[9] . '" data-room="' . $p[2] . '" data-name="' . $p[0] . '">
+                                <h2 class="commentbox__name">' . $p2[3] .'</h2>
+                                <div class="row">
+                                    <div class="col-3">
+                                      <h4>Tiedostot:</h4>
+                                      <ul class="commentbox__tiedostot">' . $_z2 .'</ul>
+                                    </div>
+                                    <div class="col-3">
+                                        <h4>Keneltä:</h4>
+                                        <span class="commentbox__from">' . $p2[7] .'</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <h4>Kenelle:</h4>
+                                        <span class="commentbox__to">' . $p2[8] .'</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <h4>Aihe:</h4>
+                                        <span class="commentbox__aihe">' . $p2[12] .'</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <h4>Deadline:</h4>
+                                        <span class="commentbox__deadline">' . $p2[13] .'</span>
+                                    </div>
+                                </div>
+                                <div class="commentbox__text">
+                                    <h4>Sisältö:</h4>
+                                    <p class="commentbox__content">' . $p2[5] .'</p>
+                                </div>
+                              </section>';
+                      }    
+                      echo '</section>';
+                  }
                 }
               ?>
           </div>
@@ -2099,6 +2062,53 @@
 
       ?>
           
+      </div>
+      <div class="row">
+          <div class="col-6 col-with-table">  
+          <b>Tiedot projektista </b> <br> 
+          <i>Ei ole</i> <br> <br>
+          <b>Tiedot huoneesta </b> <br>
+          <i>Ei ole</i> <br> <br>
+          <b>Tiedot tekijästä</b> <br>
+          <i>Ei ole</i> <br> <br>
+          <div class="col-table">
+          <h2>Seinien asennusjärjestys</h2>
+          <table>
+            <tr>
+                <td><input type="number" pattern="\d*"/ data-room="asjarj-1" maxlength="1" name="wall_one_asjarj asjarj" id="wall_order_a" data-tochange="a" onchange="rooms__change_asjarj(this); " value="1" class="lineinput inputname" required/></td>
+                <td><input type="text" data-room="a" name="wall_one_a" id="wall_one_a" value="SEINÄ A" data-tochange="a" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" name="wall_one_a_desc" id="wall_desc_a" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+            </tr>
+            <tr>
+                <td><input type="number" pattern="\d*"/ data-room="asjarj-2" maxlength="1" name="wall_two_asjarj asjarj" id="wall_order_b" data-tochange="b" onchange="rooms__change_asjarj(this); "value="2" class="lineinput inputname" required/></td>
+                <td><input type="text" data-room="b" name="wall_one_b" id="wall_one_b" value="SEINÄ B" data-tochange="b"  class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" name="wall_one_b_desc" id="wall_desc_b" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+            </tr>
+            <tr>
+                <td><input type="number" pattern="\d*"/ data-room="asjarj-3" maxlength="1" name="wall_three_asjarj asjarj" id="wall_order_c" data-tochange="c" onchange="rooms__change_asjarj(this); "value="3" class="lineinput inputname" required/></td>
+                <td><input type="text" data-room="c" name="wall_one_c" id="wall_one_c" value="SEINÄ C" data-tochange="c" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" name="wall_one_c_desc" id="wall_desc_c" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+            </tr>
+            <tr>
+                <td><input type="number" pattern="\d*"/ data-room="asjarj-4" maxlength="1" name="wall_four_asjarj asjarj" id="wall_order_d" data-tochange="d" onchange="rooms__change_asjarj(this); "value="4" class="lineinput inputname" required/></td>
+                <td><input type="text" data-room="d" name="wall_one_d" id="wall_one_d" value="SEINÄ D"  data-tochange="d" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" name="wall_one_d_desc" id="wall_desc_d" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+            </tr>
+            <tr>
+                <td><input type="number" pattern="\d*"/ data-room="asjarj-5" maxlength="1" name="wall_five_asjarj asjarj" id="wall_order_roof" data-tochange="k" onchange="rooms__change_asjarj(this); "value="5" class="lineinput inputname" required/></td>
+                <td><input type="text" data-room="roof" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="r" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" name="wall_one_roof_desc" id="wall_desc_roof" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+            </tr>
+            <tr>
+                <td><input type="number" pattern="\d*"/ data-room="asjarj-6" maxlength="1" name="wall_six_asjarj asjarj" id="wall_order_floor" data-tochange="l" onchange="rooms__change_asjarj(this); "value="6" class="lineinput inputname" required/></td>
+                <td><input type="text" data-room="floor" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" name="wall_one_floor_desc" id="wall_desc_floor" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+            </tr>
+          </table>
+          <div class="row">
+            <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(0,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon tilaustaulu</div>
+          </div>
+        </div>
       </div>
       <div class="row">
         <h3>Seinän nimen taustaväri</h3>    

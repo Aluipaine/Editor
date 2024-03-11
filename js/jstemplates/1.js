@@ -416,7 +416,16 @@ function changeheights() {
  * @param {number} maxval - The maximum value for resizing elements.
  * @returns None
  */
-function changesize(maxval) {
+
+function changesize(maxval,frominput) {
+  if(frominput && canvas.querySelector(".levyt") && canvas.querySelector(".saumat__grandrow")) {
+    if(canvas.querySelector(".levyt").innerHTML.length > 1 || canvas.querySelector(".saumat__grandrow").innerHTML.length > 1) {
+      canvas.querySelector(".saumat__grandrow").remove();
+      canvas.querySelector(".levyt").innerHTML = "";
+      alert("Syystä että alueen koko on vaihtunut, piirrosalueen ladonta pyyhitty.");
+    }
+  }
+  
   try {
     changeheights();
     if (maxval) {
@@ -530,9 +539,15 @@ function changesize(maxval) {
  * @param {string} maxval - The maximum value for adjustment in the format "value|direction".
  * @returns None
  */
-function changesize__bottom(maxval) {
+function changesize__bottom(maxval,frominput) {
   
-
+  if(frominput && canvas.querySelector(".levyt") && canvas.querySelector(".saumat__grandrow")) {
+    if(canvas.querySelector(".levyt").innerHTML.length > 1 || canvas.querySelector(".saumat__grandrow").innerHTML.length > 1) {
+      canvas.querySelector(".saumat__grandrow").remove();
+      canvas.querySelector(".levyt").innerHTML = "";
+      alert("Syystä että alueen koko on vaihtunut, piirrosalueen ladonta pyyhitty.");
+    }
+  }
   if (maxval) {
     mval_cord = maxval.split("|")[0];
     mval_dir = maxval.split("|")[1];
