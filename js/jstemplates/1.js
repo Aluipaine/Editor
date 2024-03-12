@@ -1549,7 +1549,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         au_previous_vord = "0|" + parseFloat(newDiv.style.bottom) * 5 + "|" + parseFloat(newDiv.style.left) * 5 + "|" + (parseFloat(newDiv.style.width) + 1) *
           5 + "|" + parseFloat(newDiv.style.height) * 5;
         newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');aukko_del(document.querySelector('#'+obj), -1);"); //aukko_del(document.querySelector('#'+obj), -1);
-        newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;delete_from_db('"+t_array+"');au_previous_vord = '" + au_previous_vord + "';");
+        newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;delete_from_db('"+t_array+"');au_previous_vord = '" + au_previous_vord + "';select__ylitys(document.querySelector('#'+obj).dataset.settingsmode);");
 
         aukko_lcord = document.createElement("div");
         aukko_lcord.classList.add("aukko__cord");
@@ -1833,3 +1833,14 @@ function cord__check(inp) {
  }
 }
 
+
+function select__ylitys(setmode) {
+  input_types = document.querySelectorAll(".aukko_ylitys input");
+
+  input_types.forEach(type => {
+    if(type.value === setmode) {
+      type.checked = true;
+    }
+  });
+   
+}
