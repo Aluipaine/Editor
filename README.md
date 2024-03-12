@@ -27,8 +27,8 @@
     duunari 
     Nakkimakkara456
 3. Админитсрация
-    Marko
-    NakkiMakkara123
+    Admin
+    Nakkimakkara123!
 
 
 Вход через *Название сайта на локалке*/login.php
