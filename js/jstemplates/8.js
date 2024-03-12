@@ -9,7 +9,7 @@ function rangat__navigation(arg) {
   rangat_blayer = canvas.querySelectorAll(".l2b");
   listat__grandrow = canvas.querySelector(".listat__grandrow");
 
-  
+
   if (document.querySelector("#rangoitus__lvl_one").checked) {
     for (var i = 0; i < levyt.length; i++) {
       levyt[i].classList.remove("six_hidden");
@@ -48,7 +48,7 @@ function rangat__navigation(arg) {
     }
   }
 
-  if(arg === false) {
+  if (arg === false) {
     for (var i = 0; i < levyt.length; i++) {
       levyt[i].classList.remove("six_hidden");
     }
@@ -64,22 +64,12 @@ function rangat__navigation(arg) {
   }
   tds = document.querySelectorAll('.ranka_tuo_excel .headingrow td');
   tds.forEach(td => {
-    if(td.innerText.replaceAll(" ","").length < 2) {
+    if (td.innerText.replaceAll(" ", "").length < 2) {
       td.remove();
     }
   });
 
 }
-
-
-/*
-  *This function create rangat elems for every aukot
-*/
-function rangat__aukot(){
-  // const aukots = document
-  console.log(1);
-}
-
 
 /**
  * This function performs a series of operations to create a visual representation of a design layout based on the provided input values.
@@ -93,10 +83,10 @@ function rangoita() {
   ar_c = "#9c00fe";
   yr_c = "#9c00fe";
   sr = "#ed0000";
-  vr_xc="#0040fe";
-  vr_yc="#00b5fe";
+  vr_xc = "#0040fe";
+  vr_yc = "#00b5fe";
 
-  
+
 
   h = parseFloat(document.querySelector("#box_h").value);
   w = parseFloat(document.querySelector("#box_w").value);
@@ -107,7 +97,7 @@ function rangoita() {
   td_p = [];
   td_v = [];
 
-  
+
   first_excel = document.querySelector("#drawscreen_section_six > section.ranka_excel > table > tbody > tr");
 
   for (var i = tyostot__tyosto_pysty.length - 1; i >= 0; i--) {
@@ -119,7 +109,7 @@ function rangoita() {
         td_p.push(t_p_array);
       }
     }
-    else {}
+    else { }
   }
   for (var i = tyostot__tyosto_vaaka.length - 1; i >= 0; i--) {
     if (tyostot__tyosto_vaaka[i].classList.contains("no_siirto") !== true) {
@@ -128,12 +118,12 @@ function rangoita() {
       td_v.push(t_v_array);
     }
   }
-  td_p.sort(function(a, b) {
+  td_p.sort(function (a, b) {
     if (a.split(",")[0] > b.split(",")[0]) return 1;
     if (a.split(",")[0] < b.split(",")[0]) return -1;
     return 0;
   });
-  td_v.sort(function(a, b) {
+  td_v.sort(function (a, b) {
     if (a.split(",")[0] > b.split(",")[0]) return 1;
     if (a.split(",")[0] < b.split(",")[0]) return -1;
     return 0;
@@ -153,7 +143,7 @@ function rangoita() {
   var tyostot;
   if (document.querySelector(".rangat__grandrow")) {
     tyostot = document.querySelector(".rangat__grandrow");
-    document.querySelector(".rangat__grandrow").innerHTML="";
+    document.querySelector(".rangat__grandrow").innerHTML = "";
   }
   else {
     tyostot = document.createElement("div");
@@ -227,15 +217,15 @@ function rangoita() {
   valiranka_array_pysty = [];
   tyostot_ = levy_tyostot;
   for (let c = 0; c < tyostot_.length; c++) {
-    if(tyostot_[c].parentElement.classList.contains('.no_siirto')) {
+    if (tyostot_[c].parentElement.classList.contains('.no_siirto')) {
       tyostot_[c].parentElement.style.opacity = 0;
     }
     else {
       tyostot_[c].parentElement.style.opacity = 0;
-      if(tyostot_[c].parentElement.classList.contains('tyostot__tyosto_pysty')) {
+      if (tyostot_[c].parentElement.classList.contains('tyostot__tyosto_pysty')) {
         valiranka_array_pysty.push(tyostot_[c].parentElement);
       }
-      else if(tyostot_[c].parentElement.classList.contains('tyostot__tyosto_vaaka')) {
+      else if (tyostot_[c].parentElement.classList.contains('tyostot__tyosto_vaaka')) {
         valiranka_array_vaaka.push(tyostot_[c].parentElement);
       }
     }
@@ -458,7 +448,7 @@ function rangoita() {
       tyostot.append(iry);
     }
   }
-  
+
   viimranka_pysty = document.createElement("div");
   viimranka_pysty.classList.add("ranka");
   viimranka_pysty.classList.add("ranka_unconfirmed");
@@ -477,10 +467,10 @@ function rangoita() {
 
   viimranka_vaaka.style.bottom = roundToNearest25(h - 2.5) / 5 + "px";
   tyostot.append(viimranka_vaaka);
-  if(document.querySelector(".saumat__grandrow")) {
+  if (document.querySelector(".saumat__grandrow")) {
     document.querySelector(".saumat__grandrow").style.opacity = 0;
   }
-  
+
   trow = tyostot;
   fixrangat();
   rangat__initializesettings();
@@ -560,7 +550,7 @@ function rangat__initializesettings() {
 
   ranka_sarray = [];
   s_rankaonsettings.forEach(s => {
-    if(ranka_sarray.includes(s.parentElement.parentElement.parentElement) === false) {
+    if (ranka_sarray.includes(s.parentElement.parentElement.parentElement) === false) {
       ranka_sarray.push(s.parentElement.parentElement.parentElement);
     }
   });
@@ -568,164 +558,164 @@ function rangat__initializesettings() {
 
   ranka_sarray.forEach(s => {
     trs = s.querySelectorAll("tr:not(.headingrow)");
-    if(s.classList.contains("l2a_table_pysty")) {
-      layer ="l2a";
+    if (s.classList.contains("l2a_table_pysty")) {
+      layer = "l2a";
       for (let a = 0; a < trs.length; a++) {
         settingvalue = trs[a].querySelector("td:nth-child(2) input");
 
-        setval = settingvalue.value.toLowerCase().replaceAll(" ","");
-        if(setval == "saumaranka") {
+        setval = settingvalue.value.toLowerCase().replaceAll(" ", "");
+        if (setval == "saumaranka") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.saumaranka");
-          
+
         }
-        if(setval == "väliranka") {
+        if (setval == "väliranka") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.valiranka");
         }
-        if(setval == "alueenalareuna") {
+        if (setval == "alueenalareuna") {
           tomod = [];
         }
-        if(setval == "alueenyläreuna") {
+        if (setval == "alueenyläreuna") {
           tomod = [];
         }
-        if(setval == "alueenvasenreuna") {
+        if (setval == "alueenvasenreuna") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.alkuranka_pysty");
         }
-        if(setval == "alueenoikeareuna") {
+        if (setval == "alueenoikeareuna") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.viimranka_pysty");
         }
 
         for (let b = 0; b < tomod.length; b++) {
           tomod[b].classList.remove("ranka_unconfirmed");
           tomod[b].classList.add(layer);
-          tomod[b].dataset.name	= trs[a].querySelector("td:nth-child(2) input").value;
-          tomod[b].dataset.rangan_koodin_alku	= trs[a].querySelector("td:nth-child(3) input").value;
+          tomod[b].dataset.name = trs[a].querySelector("td:nth-child(2) input").value;
+          tomod[b].dataset.rangan_koodin_alku = trs[a].querySelector("td:nth-child(3) input").value;
           tomod[b].dataset.tilauskoodi = trs[a].querySelector("td:nth-child(4) input").value;
-          tomod[b].dataset.materiaali	= trs[a].querySelector("td:nth-child(5) input").value;
-          tomod[b].dataset.paksuus	= trs[a].querySelector("td:nth-child(6) input").value;
-          tomod[b].dataset.laatu	= trs[a].querySelector("td:nth-child(7) input").value;
-          tomod[b].dataset.vari_nimi	= trs[a].querySelector("td:nth-child(8) input").value;
-          tomod[b].dataset.ncs_code	= trs[a].querySelector("td:nth-child(9) input").value;
-          tomod[b].dataset.suunta	= trs[a].querySelector("td:nth-child(10) input").value;
-          tomod[b].dataset.lisaa_poista_mitasta	= trs[a].querySelector("td:nth-child(11) input").value;
-          tomod[b].dataset.vahenna_mista	= trs[a].querySelector("td:nth-child(12) input").value;
+          tomod[b].dataset.materiaali = trs[a].querySelector("td:nth-child(5) input").value;
+          tomod[b].dataset.paksuus = trs[a].querySelector("td:nth-child(6) input").value;
+          tomod[b].dataset.laatu = trs[a].querySelector("td:nth-child(7) input").value;
+          tomod[b].dataset.vari_nimi = trs[a].querySelector("td:nth-child(8) input").value;
+          tomod[b].dataset.ncs_code = trs[a].querySelector("td:nth-child(9) input").value;
+          tomod[b].dataset.suunta = trs[a].querySelector("td:nth-child(10) input").value;
+          tomod[b].dataset.lisaa_poista_mitasta = trs[a].querySelector("td:nth-child(11) input").value;
+          tomod[b].dataset.vahenna_mista = trs[a].querySelector("td:nth-child(12) input").value;
         }
       }
     }
 
-    else if(s.classList.contains("l2a_table_vaaka")) {
-      layer ="l2a";
+    else if (s.classList.contains("l2a_table_vaaka")) {
+      layer = "l2a";
       for (let a = 0; a < trs.length; a++) {
         settingvalue = trs[a].querySelector("td:nth-child(2) input");
 
-        setval = settingvalue.value.toLowerCase().replaceAll(" ","");
-        if(setval == "saumaranka") {
-          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.saumaranka");     
+        setval = settingvalue.value.toLowerCase().replaceAll(" ", "");
+        if (setval == "saumaranka") {
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.saumaranka");
         }
-        if(setval == "väliranka") {
+        if (setval == "väliranka") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.valiranka");
         }
-        if(setval == "alueenalareuna") {
+        if (setval == "alueenalareuna") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.alkuranka_vaaka");
         }
-        if(setval == "alueenyläreuna") {
+        if (setval == "alueenyläreuna") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.viimranka_vaaka");
         }
-        
+
         for (let b = 0; b < tomod.length; b++) {
           tomod[b].classList.remove("ranka_unconfirmed");
           tomod[b].classList.add(layer);
-          tomod[b].dataset.name	= trs[a].querySelector("td:nth-child(2) input").value;
-          tomod[b].dataset.rangan_koodin_alku	= trs[a].querySelector("td:nth-child(3) input").value;
+          tomod[b].dataset.name = trs[a].querySelector("td:nth-child(2) input").value;
+          tomod[b].dataset.rangan_koodin_alku = trs[a].querySelector("td:nth-child(3) input").value;
           tomod[b].dataset.tilauskoodi = trs[a].querySelector("td:nth-child(4) input").value;
-          tomod[b].dataset.materiaali	= trs[a].querySelector("td:nth-child(5) input").value;
-          tomod[b].dataset.paksuus	= trs[a].querySelector("td:nth-child(6) input").value;
-          tomod[b].dataset.laatu	= trs[a].querySelector("td:nth-child(7) input").value;
-          tomod[b].dataset.vari_nimi	= trs[a].querySelector("td:nth-child(8) input").value;
-          tomod[b].dataset.ncs_code	= trs[a].querySelector("td:nth-child(9) input").value;
-          tomod[b].dataset.suunta	= trs[a].querySelector("td:nth-child(10) input").value;
-          tomod[b].dataset.lisaa_poista_mitasta	= trs[a].querySelector("td:nth-child(11) input").value;
-          tomod[b].dataset.vahenna_mista	= trs[a].querySelector("td:nth-child(12) input").value;
+          tomod[b].dataset.materiaali = trs[a].querySelector("td:nth-child(5) input").value;
+          tomod[b].dataset.paksuus = trs[a].querySelector("td:nth-child(6) input").value;
+          tomod[b].dataset.laatu = trs[a].querySelector("td:nth-child(7) input").value;
+          tomod[b].dataset.vari_nimi = trs[a].querySelector("td:nth-child(8) input").value;
+          tomod[b].dataset.ncs_code = trs[a].querySelector("td:nth-child(9) input").value;
+          tomod[b].dataset.suunta = trs[a].querySelector("td:nth-child(10) input").value;
+          tomod[b].dataset.lisaa_poista_mitasta = trs[a].querySelector("td:nth-child(11) input").value;
+          tomod[b].dataset.vahenna_mista = trs[a].querySelector("td:nth-child(12) input").value;
         }
       }
     }
 
-    if(s.classList.contains("l2b_table_pysty")) {
-      layer ="l2b";
+    if (s.classList.contains("l2b_table_pysty")) {
+      layer = "l2b";
       for (let a = 0; a < trs.length; a++) {
         settingvalue = trs[a].querySelector("td:nth-child(2) input");
 
-        setval = settingvalue.value.toLowerCase().replaceAll(" ","");
-        if(setval == "saumaranka") {
+        setval = settingvalue.value.toLowerCase().replaceAll(" ", "");
+        if (setval == "saumaranka") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.saumaranka");
-          
+
         }
-        if(setval == "väliranka") {
+        if (setval == "väliranka") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.valiranka");
         }
-        if(setval == "alueenalareuna") {
+        if (setval == "alueenalareuna") {
           tomod = [];
         }
-        if(setval == "alueenyläreuna") {
+        if (setval == "alueenyläreuna") {
           tomod = [];
         }
-        if(setval == "alueenvasenreuna") {
+        if (setval == "alueenvasenreuna") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.alkuranka_pysty");
         }
-        if(setval == "alueenoikeareuna") {
+        if (setval == "alueenoikeareuna") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_pysty.viimranka_pysty");
         }
 
         for (let b = 0; b < tomod.length; b++) {
           tomod[b].classList.remove("ranka_unconfirmed");
           tomod[b].classList.add(layer);
-          tomod[b].dataset.name	= trs[a].querySelector("td:nth-child(2) input").value;
-          tomod[b].dataset.rangan_koodin_alku	= trs[a].querySelector("td:nth-child(3) input").value;
+          tomod[b].dataset.name = trs[a].querySelector("td:nth-child(2) input").value;
+          tomod[b].dataset.rangan_koodin_alku = trs[a].querySelector("td:nth-child(3) input").value;
           tomod[b].dataset.tilauskoodi = trs[a].querySelector("td:nth-child(4) input").value;
-          tomod[b].dataset.materiaali	= trs[a].querySelector("td:nth-child(5) input").value;
-          tomod[b].dataset.paksuus	= trs[a].querySelector("td:nth-child(6) input").value;
-          tomod[b].dataset.laatu	= trs[a].querySelector("td:nth-child(7) input").value;
-          tomod[b].dataset.vari_nimi	= trs[a].querySelector("td:nth-child(8) input").value;
-          tomod[b].dataset.ncs_code	= trs[a].querySelector("td:nth-child(9) input").value;
-          tomod[b].dataset.suunta	= trs[a].querySelector("td:nth-child(10) input").value;
-          tomod[b].dataset.lisaa_poista_mitasta	= trs[a].querySelector("td:nth-child(11) input").value;
-          tomod[b].dataset.vahenna_mista	= trs[a].querySelector("td:nth-child(12) input").value;
+          tomod[b].dataset.materiaali = trs[a].querySelector("td:nth-child(5) input").value;
+          tomod[b].dataset.paksuus = trs[a].querySelector("td:nth-child(6) input").value;
+          tomod[b].dataset.laatu = trs[a].querySelector("td:nth-child(7) input").value;
+          tomod[b].dataset.vari_nimi = trs[a].querySelector("td:nth-child(8) input").value;
+          tomod[b].dataset.ncs_code = trs[a].querySelector("td:nth-child(9) input").value;
+          tomod[b].dataset.suunta = trs[a].querySelector("td:nth-child(10) input").value;
+          tomod[b].dataset.lisaa_poista_mitasta = trs[a].querySelector("td:nth-child(11) input").value;
+          tomod[b].dataset.vahenna_mista = trs[a].querySelector("td:nth-child(12) input").value;
         }
       }
     }
 
-    else if(s.classList.contains("l2b_table_vaaka")) {
-      layer ="l2b";
+    else if (s.classList.contains("l2b_table_vaaka")) {
+      layer = "l2b";
       for (let a = 0; a < trs.length; a++) {
         settingvalue = trs[a].querySelector("td:nth-child(2) input");
 
-        setval = settingvalue.value.toLowerCase().replaceAll(" ","");
-        if(setval == "saumaranka") {
-          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.saumaranka");     
+        setval = settingvalue.value.toLowerCase().replaceAll(" ", "");
+        if (setval == "saumaranka") {
+          tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.saumaranka");
         }
-        if(setval == "väliranka") {
+        if (setval == "väliranka") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.valiranka");
         }
-        if(setval == "alueenalareuna") {
+        if (setval == "alueenalareuna") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.alkuranka_vaaka");
         }
-        if(setval == "alueenyläreuna") {
+        if (setval == "alueenyläreuna") {
           tomod = canvas.querySelectorAll(".rangat__grandrow .ranka_vaaka.viimranka_vaaka");
         }
-        
+
         for (let b = 0; b < tomod.length; b++) {
           tomod[b].classList.remove("ranka_unconfirmed");
           tomod[b].classList.add(layer);
-          tomod[b].dataset.name	= trs[a].querySelector("td:nth-child(2) input").value;
-          tomod[b].dataset.rangan_koodin_alku	= trs[a].querySelector("td:nth-child(3) input").value;
+          tomod[b].dataset.name = trs[a].querySelector("td:nth-child(2) input").value;
+          tomod[b].dataset.rangan_koodin_alku = trs[a].querySelector("td:nth-child(3) input").value;
           tomod[b].dataset.tilauskoodi = trs[a].querySelector("td:nth-child(4) input").value;
-          tomod[b].dataset.materiaali	= trs[a].querySelector("td:nth-child(5) input").value;
-          tomod[b].dataset.paksuus	= trs[a].querySelector("td:nth-child(6) input").value;
-          tomod[b].dataset.laatu	= trs[a].querySelector("td:nth-child(7) input").value;
-          tomod[b].dataset.vari_nimi	= trs[a].querySelector("td:nth-child(8) input").value;
-          tomod[b].dataset.ncs_code	= trs[a].querySelector("td:nth-child(9) input").value;
-          tomod[b].dataset.suunta	= trs[a].querySelector("td:nth-child(10) input").value;
-          tomod[b].dataset.lisaa_poista_mitasta	= trs[a].querySelector("td:nth-child(11) input").value;
-          tomod[b].dataset.vahenna_mista	= trs[a].querySelector("td:nth-child(12) input").value;
+          tomod[b].dataset.materiaali = trs[a].querySelector("td:nth-child(5) input").value;
+          tomod[b].dataset.paksuus = trs[a].querySelector("td:nth-child(6) input").value;
+          tomod[b].dataset.laatu = trs[a].querySelector("td:nth-child(7) input").value;
+          tomod[b].dataset.vari_nimi = trs[a].querySelector("td:nth-child(8) input").value;
+          tomod[b].dataset.ncs_code = trs[a].querySelector("td:nth-child(9) input").value;
+          tomod[b].dataset.suunta = trs[a].querySelector("td:nth-child(10) input").value;
+          tomod[b].dataset.lisaa_poista_mitasta = trs[a].querySelector("td:nth-child(11) input").value;
+          tomod[b].dataset.vahenna_mista = trs[a].querySelector("td:nth-child(12) input").value;
         }
       }
     }
@@ -749,7 +739,7 @@ function rangat__setcord() {
   r_bottomsumm = 0;
   r_leftsumm = 0;
 
-  if(document.querySelector(".valiranka_module .ranka_selitykset")) {
+  if (document.querySelector(".valiranka_module .ranka_selitykset")) {
 
   }
   else {
@@ -780,13 +770,13 @@ function rangat__setcord() {
       bottom = parseFloat(rangat[i].style.bottom);
       r_cur_bottom = bottom - r_bottomsumm;
       r_cur_bottominput = r_cur_bottom * 5;
-      
+
       r_bottomsumm += r_cur_bottom;
     }
-    
+
     r_type = rangat[i].dataset.rangan_koodin_alku;
     try {
-       r_mittamuutos = rangat[i].dataset.lisaa_poista_mitasta.replaceAll(" ","").toLowerCase();
+      r_mittamuutos = rangat[i].dataset.lisaa_poista_mitasta.replaceAll(" ", "").toLowerCase();
     } catch (error) {
       console.log(error);
       console.log(rangat[i]);
@@ -794,62 +784,62 @@ function rangat__setcord() {
     }
 
     try {
-      r_vahenna_mista = rangat[i].dataset.vahenna_mista.replaceAll(" ","").toLowerCase();
+      r_vahenna_mista = rangat[i].dataset.vahenna_mista.replaceAll(" ", "").toLowerCase();
     } catch (error) {
       console.log(error);
       console.log(rangat[i]);
       r_vahenna_mista = parseFloat(rangat[i].dataset.vahenna_mista);
     }
-    
 
-    if(rangat[i].classList.contains("ranka_pysty") === true) {
-      if(r_mittamuutos === "vähennäsauma") {
-        correct_measure = (parseFloat(rangat[i].offsetHeight)*5-saumaset_vm);
+
+    if (rangat[i].classList.contains("ranka_pysty") === true) {
+      if (r_mittamuutos === "vähennäsauma") {
+        correct_measure = (parseFloat(rangat[i].offsetHeight) * 5 - saumaset_vm);
       }
       else {
-        correct_measure = (parseFloat(rangat[i].offsetHeight)*5 + parseFloat(r_mittamuutos));
+        correct_measure = (parseFloat(rangat[i].offsetHeight) * 5 + parseFloat(r_mittamuutos));
       }
     }
-    else if(rangat[i].classList.contains("ranka_vaaka") === true) {
-      if(r_mittamuutos === "vähennäsauma") {
-        correct_measure = (parseFloat(rangat[i].offsetWidth)*5-saumaset_vm);
+    else if (rangat[i].classList.contains("ranka_vaaka") === true) {
+      if (r_mittamuutos === "vähennäsauma") {
+        correct_measure = (parseFloat(rangat[i].offsetWidth) * 5 - saumaset_vm);
       }
       else {
-        correct_measure = (parseFloat(rangat[i].offsetWidth)*5 + parseFloat(r_mittamuutos));
+        correct_measure = (parseFloat(rangat[i].offsetWidth) * 5 + parseFloat(r_mittamuutos));
       }
     }
 
-    if (rangat[i].classList.contains("alkuranka_pysty") === true) { 
-      rangat[i].innerHTML = '<input value='+r_type+' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: '+parseFloat(rangat[i].offsetHeight)+'px" class="ranka_cord" >'+correct_measure+'</div><div class="ranka_secondcord" style="margin-top: '+parseFloat(rangat[i].offsetHeight)+'px">'+parseFloat(rangat[i].style.left)*5+'</div>';
+    if (rangat[i].classList.contains("alkuranka_pysty") === true) {
+      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px">' + parseFloat(rangat[i].style.left) * 5 + '</div>';
       rangat[i].style.background = pv_c;
     }
     else if (rangat[i].classList.contains("viimranka_pysty") === true) {
-      rangat[i].innerHTML = '<input value='+r_type+' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: '+parseFloat(rangat[i].offsetHeight)+'px" class="ranka_cord" >'+correct_measure+'</div><div class="ranka_secondcord" style="margin-top: '+parseFloat(rangat[i].offsetHeight)+'px">'+parseFloat(rangat[i].style.left)*5+'</div>';
+      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px">' + parseFloat(rangat[i].style.left) * 5 + '</div>';
       rangat[i].style.background = po_c;
     }
     else if (rangat[i].classList.contains("alkuranka_vaaka") === true) {
-      rangat[i].innerHTML = '<input value='+r_type+' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" style="margin-right: '+correct_measure/5+'px">'+correct_measure+'</div><div class="ranka_secondcord">'+parseFloat(rangat[i].style.bottom)*5+'</div>';
+      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" style="margin-right: ' + correct_measure / 5 + 'px">' + correct_measure + '</div><div class="ranka_secondcord">' + parseFloat(rangat[i].style.bottom) * 5 + '</div>';
       rangat[i].style.background = ar_c;
     }
     else if (rangat[i].classList.contains("viimranka_vaaka") === true) {
-      rangat[i].innerHTML = '<input value='+r_type+' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" style="margin-right: '+correct_measure/5+'px">'+correct_measure+'</div><div class="ranka_secondcord">'+parseFloat(rangat[i].style.bottom)*5+'</div>';
+      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" style="margin-right: ' + correct_measure / 5 + 'px">' + correct_measure + '</div><div class="ranka_secondcord">' + parseFloat(rangat[i].style.bottom) * 5 + '</div>';
       rangat[i].style.background = yr_c;
     }
-    else if(rangat[i].classList.contains("saumaranka") === true) {
-      if(rangat[i].classList.contains("ranka_pysty")) {
-        rangat[i].innerHTML = '<input value='+r_type+' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: '+parseFloat(rangat[i].offsetHeight)+'px" class="ranka_cord" >'+correct_measure+'</div><div class="ranka_secondcord" style="margin-top: '+parseFloat(rangat[i].offsetHeight)+'px">'+parseFloat(rangat[i].style.left)*5+'</div>';
+    else if (rangat[i].classList.contains("saumaranka") === true) {
+      if (rangat[i].classList.contains("ranka_pysty")) {
+        rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px">' + parseFloat(rangat[i].style.left) * 5 + '</div>';
       }
-      else if(rangat[i].classList.contains("ranka_vaaka")) {
-        rangat[i].innerHTML = '<input value='+r_type+' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" style="margin-right: '+correct_measure/5+'px">'+correct_measure+'</div><div class="ranka_secondcord">'+parseFloat(rangat[i].style.bottom)*5+'</div>';
+      else if (rangat[i].classList.contains("ranka_vaaka")) {
+        rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" style="margin-right: ' + correct_measure / 5 + 'px">' + correct_measure + '</div><div class="ranka_secondcord">' + parseFloat(rangat[i].style.bottom) * 5 + '</div>';
       }
       rangat[i].style.background = sr;
     }
-    else if(rangat[i].classList.contains("ranka_pysty") === true && rangat[i].classList.contains("valiranka") === true) {
-      rangat[i].innerHTML = '<input value='+r_type+' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: '+parseFloat(rangat[i].offsetHeight)+'px" class="ranka_cord" >'+correct_measure+'</div><div class="ranka_secondcord" style="margin-top: '+parseFloat(rangat[i].offsetHeight)+'px">'+parseFloat(rangat[i].style.left)*5+'</div>';
+    else if (rangat[i].classList.contains("ranka_pysty") === true && rangat[i].classList.contains("valiranka") === true) {
+      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px">' + parseFloat(rangat[i].style.left) * 5 + '</div>';
       rangat[i].style.background = vr_yc;
     }
-    else if(rangat[i].classList.contains("ranka_vaaka") === true && rangat[i].classList.contains("valiranka") === true) {
-      rangat[i].innerHTML = '<input value='+r_type+' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" style="margin-right: '+correct_measure/5+'px">'+correct_measure+'</div><div class="ranka_secondcord">'+parseFloat(rangat[i].style.bottom)*5+'</div>';
+    else if (rangat[i].classList.contains("ranka_vaaka") === true && rangat[i].classList.contains("valiranka") === true) {
+      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" style="margin-right: ' + correct_measure / 5 + 'px">' + correct_measure + '</div><div class="ranka_secondcord">' + parseFloat(rangat[i].style.bottom) * 5 + '</div>';
       rangat[i].style.background = vr_xc;
     }
   }
@@ -958,7 +948,7 @@ function create__ranka__tuoexcel() {
   tableExcel_trs.forEach(tr => {
     tr.remove();
   });
-  
+
   for (var i = 0; i < rangat.length; i++) {
     const row = document.createElement('tr');
     var h2 = document.createElement('td');
@@ -977,12 +967,12 @@ function create__ranka__tuoexcel() {
     var h15 = document.createElement('td');
     var h16 = document.createElement('td');
     var h17 = document.createElement('td');
-    var h18  = document.createElement('td');
-    var h19  = document.createElement('td');
+    var h18 = document.createElement('td');
+    var h19 = document.createElement('td');
     var h01 = document.createElement('td');
     var h02 = document.createElement('td');
     var h05 = document.createElement('td');
-       
+
     h01.innerHTML = rangat[i].dataset.rangan_koodin_alku;
     h02.innerHTML = rangat[i].dataset.name + " " + rangat[i].dataset.rangan_koodin_alku;
 
@@ -997,7 +987,7 @@ function create__ranka__tuoexcel() {
 
     current_date = new Date();
 
-       
+
     h2.innerHTML = rangat[i].dataset.rangan_koodin_alku;
     h3.innerHTML = rangat[i].dataset.tilauskoodi;
     h4.innerHTML = parseFloat(rangat[i].querySelector(".ranka_cord:not(.ranka_type)").innerText);
@@ -1019,7 +1009,7 @@ function create__ranka__tuoexcel() {
     h19.innerHTML = "";
 
     rangat_tuotanto_data.push({
-      "Rivinro": i+1,
+      "Rivinro": i + 1,
       "Nimi": h02.textContent,
       "Asennus": h05.textContent,
       "Rangan tyyppi": h2.textContent,
@@ -1040,21 +1030,21 @@ function create__ranka__tuoexcel() {
       "Asunto Nimi 1": h17.textContent,
       "Nimi 2": h18.textContent,
       "Työstöt": h19.textContent,
-    }, );
+    },);
   }
   rangat_real_data = [];
   rangat_real_data_names = [];
   for (let a = 0; a < rangat_tuotanto_data.length; a++) {
-    kpl=1;
+    kpl = 1;
     asennus = "";
     rangat_tuotanto_data.forEach(e => {
-      if(e["Nimi"] === rangat_tuotanto_data[a]["Nimi"] && rangat_tuotanto_data[a]["Asennus"] !== e["Asennus"] && e["Tilauskoodi"] === rangat_tuotanto_data[a]["Tilauskoodi"] && parseFloat(e["Pituus"]) === parseFloat(rangat_tuotanto_data[a]["Pituus"]) && e["Rivinro"] !== rangat_tuotanto_data[a]["Rivinro"]) {
-        kpl += 1; 
+      if (e["Nimi"] === rangat_tuotanto_data[a]["Nimi"] && rangat_tuotanto_data[a]["Asennus"] !== e["Asennus"] && e["Tilauskoodi"] === rangat_tuotanto_data[a]["Tilauskoodi"] && parseFloat(e["Pituus"]) === parseFloat(rangat_tuotanto_data[a]["Pituus"]) && e["Rivinro"] !== rangat_tuotanto_data[a]["Rivinro"]) {
+        kpl += 1;
         console.log(e["Asennus"]);
-        rangat_tuotanto_data[a]["Asennus"] += e["Asennus"] + ", "; 
+        rangat_tuotanto_data[a]["Asennus"] += e["Asennus"] + ", ";
       }
     });
-    if(rangat_real_data_names.includes(rangat_tuotanto_data[a]["Nimi"])) {
+    if (rangat_real_data_names.includes(rangat_tuotanto_data[a]["Nimi"])) {
 
     }
     else {
@@ -1062,7 +1052,7 @@ function create__ranka__tuoexcel() {
       rangat_real_data.push(rangat_tuotanto_data[a]);
       rangat_real_data_names.push(rangat_tuotanto_data[a]["Nimi"]);
     }
-    
+
   }
   tableExcel = document.querySelector(".ranka_tuo_excel tbody");
   tableExcel_trs = tableExcel.querySelectorAll("tr:not(.headingrow)");
@@ -1090,12 +1080,12 @@ function create__ranka__tuoexcel() {
     var h15 = document.createElement('td');
     var h16 = document.createElement('td');
     var h17 = document.createElement('td');
-    var h18  = document.createElement('td');
-    var h19  = document.createElement('td');
-    var h20  = document.createElement('td');
-    var h21  = document.createElement('td');
-    var h22  = document.createElement('td');
-  
+    var h18 = document.createElement('td');
+    var h19 = document.createElement('td');
+    var h20 = document.createElement('td');
+    var h21 = document.createElement('td');
+    var h22 = document.createElement('td');
+
     // h1.innerHTML = e["Rivinro"];
     h2.innerHTML = e["Nimi"];
     h3.innerHTML = e["Asennus"];
@@ -1117,8 +1107,8 @@ function create__ranka__tuoexcel() {
     h20.innerHTML = e["Asunto Nimi 1"];
     h21.innerHTML = e["Nimi 2"];
     h22.innerHTML = e["Työstöt"];
-  
-    
+
+
     rangat_real_data.push({
       // "Rivinro": h1.textContent,
       "Nimi": h2.textContent,
@@ -1141,8 +1131,8 @@ function create__ranka__tuoexcel() {
       "Asunto Nimi 1": h20.textContent,
       "Nimi 2": h21.textContent,
       "Työstöt": h22.textContent,
-    }, );
-  
+    },);
+
     // row.append(h1);
     row.append(h2);
     row.append(h3);
@@ -1183,7 +1173,7 @@ function create__ranka__tuoexcel() {
  * @returns None
  */
 function lataa_ranka_tuo_excel() {
-  filename = current_tila +" seinä "+ current_room+' [Rangat Tuotanto].xlsx';
+  filename = current_tila + " seinä " + current_room + ' [Rangat Tuotanto].xlsx';
   var ws = XLSX.utils.json_to_sheet(rangat_tuotanto_data);
   var wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Rangat");
