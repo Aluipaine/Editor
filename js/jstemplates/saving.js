@@ -71,18 +71,18 @@ function restoreprogress() {
                 return
             }
             s = s.split("~~");
-            document.querySelector("#drawarea_h").value = s[3];
-            document.querySelector("#drawarea_w").value = s[4];
+            document.querySelector("#drawarea_h").value = parseFloat(s[3]);
+            document.querySelector("#drawarea_w").value = parseFloat(s[4]);
 
-            changesize(document.querySelector("#drawarea_h").value+'|y');
-            changesize(document.querySelector("#drawarea_w").value+'|x');
+            changesize(parseFloat(document.querySelector("#drawarea_h").value)+'|y');
+            changesize(parseFloat(document.querySelector("#drawarea_w").value)+'|x');
 
             wallname = s[2].toLowerCase();
 
             walls = document.querySelectorAll(".tohide__room_"+wallname); 
             walls.forEach(w => {
-                w.querySelector(".wall_height").value = s[3];
-                w.querySelector(".wall_width").value = s[4];
+                w.querySelector(".wall_height").value = parseFloat(s[3]);
+                w.querySelector(".wall_width").value = parseFloat(s[4]);
             });
         });
     });

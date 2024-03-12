@@ -147,6 +147,10 @@ h1 {
   margin: 0 auto;
   position: relative;
 }
+.wide-container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
 
 .row {
   display: flex;
@@ -154,6 +158,9 @@ h1 {
   flex-wrap: wrap;
 }
 
+.nowrap {
+  flex-wrap: nowrap;
+}
 .preloader {
   display: none;
   z-index: -1;

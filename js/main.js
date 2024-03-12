@@ -2954,7 +2954,24 @@ function initializeroom(room, menu) {
 
 
   restoreprogress();
+
+  // added 110324
+  refresh__housenav();
 }
+
+// added 110324
+  
+function refresh__housenav() {
+  letter__array = ["a","b","c","d","k","l"];
+
+  letter__array.forEach(letter => {
+    document.querySelector(".tohide__room_"+letter+" .wall_height").value = parseFloat(document.querySelector("#wall_one_"+letter.replace('k','roof').replace('l','floor')+"_h").value); 
+    document.querySelector(".tohide__room_"+letter+" .wall_width").value = parseFloat(document.querySelector("#wall_one_"+letter.replace('k','roof').replace('l','floor')+"_w").value);
+    console.log(letter);
+  });
+  
+}
+
 // Function for changing element coords
 // Parametrs:
 // where - where is function called? Array in [where ("funcAXIS" or "inpAXIS (AXIS can be W - width or H - height, eg. inpW or funcH)" - input element), *if input* selector]. 

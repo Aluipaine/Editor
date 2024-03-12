@@ -1491,8 +1491,8 @@
     <input type="hidden" value="" name="reklamaatiot" class="reklamaatiot">
    <div class="container">
    
-    <div class="row house__parentrow">
-      <div class="col-6 row house__inputrow">
+    <div class="row house__parentrow nowrap">
+      <div class="col-6 row house__inputrow nowrap">
         <h2><input maxlength="10" type="hidden" placeholder="Tilan nimi tähän" value="" name="wall_name" class="lineinput" id="roomname" oninput="open__change_btn();"></h2>
         <h2><input maxlength="10" type="text" placeholder="Tilanimen 1 rivi" value="" name="wall_name" class="lineinput" id="roomname_1" oninput="open__change_btn();"></h2>
         <h2><input maxlength="10" type="text" placeholder="Tilanimen 2 rivi" value="" name="wall_name" class="lineinput" id="roomname_2" oninput="open__change_btn();"></h2>
@@ -1980,91 +1980,10 @@
         </div>
       </div>
     </div>
-    
-    <div id="house" class="house" style="">
-
-      <?php 
-        // project_type
-        $id = $post['id'];
-
-        $bosts = mysqli_query($db, "SELECT * FROM `projects` WHERE `id`=$id");
-        $bosts = mysqli_fetch_all($bosts);
-        foreach ($bosts as $p) {
-
-          if($p[4] == 'after_measure_comment') {
-            echo '
-            <div class="row">
-              <div class="house__wall house__wall_roof house__wall_k" style="width: 170px; height: 120px;">
-                <div class="house__wall_status house__wall_status_k" data-room="K" onclick="input_step = `drawscreen_section_one`;submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);refresh__drawcontrols();">KATTO</div>
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof();">
-              
-                <div class="house__wallspecial">
-                  <div class="house__wall_asjarj asjarjk">5</div>
-                  <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="k"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                </div>
-              </div>
-            </div>';
-            echo '
-            <div class="row">
-              <div class="house__wall house__wall_one house__wall_a" style="width: 170px; height: 120px;">
-                  <div class="house__wall_status house__wall_status_a" data-room="A" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä A</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_a_h" id="wall_one_a_h" onchange="change_a();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000" name="wall_one_a_w" id="wall_one_a_w" onchange="change_a();">
-                  <div class="house__wallspecial">
-                    <div class="house__wall_asjarj asjarja">1</div>
-                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="a"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                  </div>
-              </div>
-              <div class="house__wall house__wall_two house__wall_b" style="width: 120px; height: 120px;">
-                <div class="house__wall_status house__wall_status_b" data-room="B" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä B</div>
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_b_h" id="wall_one_b_h" onchange="change_b();">
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_b_w" id="wall_one_b_w" onchange="change_b();">
-                <div class="house__wallspecial">
-                    <div class="house__wall_asjarj asjarjb">2</div>
-                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="b"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                  </div>
-              </div>
-              <div class="house__wall house__wall_three house__wall_c" style="width: 170px; height: 120px;">
-                <div class="house__wall_status house__wall_status_c" data-room="C" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä C</div>
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_c_h" id="wall_one_c_h" onchange="change_c();">
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_c_w" id="wall_one_c_w" onchange="change_c();">
-                <div class="house__wallspecial">
-                    <div class="house__wall_asjarj asjarjc">3</div>
-                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="c"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                  </div>
-              </div>
-              <div class="house__wall house__wall_four house__wall_d" style="width: 120px; height: 120px;">
-                <div class="house__wall_status house__wall_status_d" data-room="D" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä D</div>
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_d_h" id="wall_one_d_h" onchange="change_d();">
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_d_w" id="wall_one_d_w" onchange="change_d();">
-                <div class="house__wallspecial">
-                    <div class="house__wall_asjarj asjarjd">4</div>
-                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="d"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                  </div>
-              </div>
-            </div>';
-            echo '
-            <div class="row">
-              <div class="house__wall house__wall_floor house__wall_l" style="width: 170px; height: 120px;">
-                <div class="house__wall_status house__wall_status_l" data-room="L" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">LATTIA</div>
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_floor_h" id="wall_one_floor_h" onchange="change_floor();">
-                <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_floor_w" id="wall_one_floor_w" onchange="change_floor();">
-                <div class="house__wallspecial">
-                  <div class="house__wall_asjarj asjarjl">6</div>
-                  <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="l"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
-                </div>
-              </div>
-            </div>';
-          }
-            
-        }
-
-      ?>
-          
-      </div>
-      <div class="row">
-          <div class="col-6 col-with-table">  
+    <article class="row wide-container nowrap">
+      <aside class="col-4">
+        <div class="row">
+          <div class="col-with-table">  
           <b>Tiedot projektista </b> <br> 
           <i>Ei ole</i> <br> <br>
           <b>Tiedot huoneesta </b> <br>
@@ -2076,32 +1995,32 @@
           <table>
             <tr>
                 <td><input type="number" pattern="\d*"/ data-room="asjarj-1" maxlength="1" name="wall_one_asjarj asjarj" id="wall_order_a" data-tochange="a" onchange="rooms__change_asjarj(this); " value="1" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="a" name="wall_one_a" id="wall_one_a" value="SEINÄ A" data-tochange="a" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" data-room="a" name="wall_one_a" id="wall_one_a" value="SEINÄ A" data-tochange="a" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
                 <td><input type="text" name="wall_one_a_desc" id="wall_desc_a" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
             </tr>
             <tr>
                 <td><input type="number" pattern="\d*"/ data-room="asjarj-2" maxlength="1" name="wall_two_asjarj asjarj" id="wall_order_b" data-tochange="b" onchange="rooms__change_asjarj(this); "value="2" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="b" name="wall_one_b" id="wall_one_b" value="SEINÄ B" data-tochange="b"  class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" data-room="b" name="wall_one_b" id="wall_one_b" value="SEINÄ B" data-tochange="b"  class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
                 <td><input type="text" name="wall_one_b_desc" id="wall_desc_b" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
             </tr>
             <tr>
                 <td><input type="number" pattern="\d*"/ data-room="asjarj-3" maxlength="1" name="wall_three_asjarj asjarj" id="wall_order_c" data-tochange="c" onchange="rooms__change_asjarj(this); "value="3" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="c" name="wall_one_c" id="wall_one_c" value="SEINÄ C" data-tochange="c" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" data-room="c" name="wall_one_c" id="wall_one_c" value="SEINÄ C" data-tochange="c" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
                 <td><input type="text" name="wall_one_c_desc" id="wall_desc_c" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
             </tr>
             <tr>
                 <td><input type="number" pattern="\d*"/ data-room="asjarj-4" maxlength="1" name="wall_four_asjarj asjarj" id="wall_order_d" data-tochange="d" onchange="rooms__change_asjarj(this); "value="4" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="d" name="wall_one_d" id="wall_one_d" value="SEINÄ D"  data-tochange="d" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" data-room="d" name="wall_one_d" id="wall_one_d" value="SEINÄ D"  data-tochange="d" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
                 <td><input type="text" name="wall_one_d_desc" id="wall_desc_d" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
             </tr>
             <tr>
                 <td><input type="number" pattern="\d*"/ data-room="asjarj-5" maxlength="1" name="wall_five_asjarj asjarj" id="wall_order_roof" data-tochange="k" onchange="rooms__change_asjarj(this); "value="5" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="roof" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="r" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" data-room="roof" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="r" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
                 <td><input type="text" name="wall_one_roof_desc" id="wall_desc_roof" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
             </tr>
             <tr>
                 <td><input type="number" pattern="\d*"/ data-room="asjarj-6" maxlength="1" name="wall_six_asjarj asjarj" id="wall_order_floor" data-tochange="l" onchange="rooms__change_asjarj(this); "value="6" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="floor" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);"></td>
+                <td><input type="text" data-room="floor" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
                 <td><input type="text" name="wall_one_floor_desc" id="wall_desc_floor" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
             </tr>
           </table>
@@ -2109,47 +2028,132 @@
             <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(0,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon tilaustaulu</div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <h3>Seinän nimen taustaväri</h3>    
-        <div class="col-2 popup__statuses_a">
-        <div class="c_meaning c_meaning_2" data-action="undone"><i data-action="undone"><?= $st_slplit[0]; ?> </i></div>
-        <div class="c_meaning c_meaning_1" data-action="nowork"><i data-action="nowork"><?= $st_slplit[1]; ?> </i></div>
-        <div class="c_meaning c_meaning_8" data-action="prob"><i data-action="prob" ><?= $st_slplit[2]; ?> </i></div>
-        <div class="c_meaning c_meaning_9" data-action="problem"><i data-action="problem"><?= $st_slplit[3]; ?> </i></div>
+        </div>
+        <div class="row">
+          <h3>Seinän nimen taustaväri</h3>    
+          <div class="col-2 popup__statuses_a">
+          <div class="c_meaning c_meaning_2" data-action="undone"><i data-action="undone"><?= $st_slplit[0]; ?> </i></div>
+          <div class="c_meaning c_meaning_1" data-action="nowork"><i data-action="nowork"><?= $st_slplit[1]; ?> </i></div>
+          <div class="c_meaning c_meaning_8" data-action="prob"><i data-action="prob" ><?= $st_slplit[2]; ?> </i></div>
+          <div class="c_meaning c_meaning_9" data-action="problem"><i data-action="problem"><?= $st_slplit[3]; ?> </i></div>
 
+        </div>
+        <div class="col-2 popup__statuses_f">
+          <div class="c_meaning" data-action="l5_a"><i data-action="l5_a"><?= $st_slplit[4]; ?></i></div>
+          <div class="c_meaning" data-action="l5_b"><i data-action="l5_b"><?= $st_slplit[5]; ?></i></div>
+          <div class="c_meaning" data-action="l5_c"><i data-action="l5_c"><?= $st_slplit[6]; ?></i></div>
+          <div class="c_meaning" data-action="l5_d"><i data-action="l5_d"><?= $st_slplit[7]; ?></i></div>
+        </div>
+        <div class="col-2 popup__statuses_b">
+          <div class="c_meaning" data-action="l4_a"><i data-action="l4_a"><?= $st_slplit[8]; ?></i></div>
+          <div class="c_meaning" data-action="l4_b"><i data-action="l4_b"><?= $st_slplit[9]; ?></i></div>
+          <div class="c_meaning" data-action="l4_c"><i data-action="l4_c"><?= $st_slplit[10]; ?></i></div>
+          <div class="c_meaning" data-action="l4_d"><i data-action="l4_d"><?= $st_slplit[11]; ?></i></div>
+        </div>
+        <div class="col-2 popup__statuses_c">
+          <div class="c_meaning" data-action="l3_a"><i data-action="l3_a"><?= $st_slplit[12]; ?></i></div>
+          <div class="c_meaning" data-action="l3_b"><i data-action="l3_b"><?= $st_slplit[13]; ?></i></div>
+          <div class="c_meaning" data-action="l3_c"><i data-action="l3_c"><?= $st_slplit[14]; ?></i></div>
+          <div class="c_meaning" data-action="l3_d"><i data-action="l3_d"><?= $st_slplit[15]; ?></i></div>
+        </div>
+        <div class="col-2 popup__statuses_d">
+          <div class="c_meaning" data-action="l2_a"><i data-action="l2_a"><?= $st_slplit[16]; ?> </i></div>
+          <div class="c_meaning" data-action="l2_b"><i data-action="l2_b"><?= $st_slplit[17]; ?> </i></div>
+          <div class="c_meaning" data-action="l2_c"><i data-action="l2_c"><?= $st_slplit[18]; ?> </i></div>
+          <div class="c_meaning" data-action="l2_d"><i data-action="l2_d"><?= $st_slplit[19]; ?> </i></div>
+        </div>
+        <div class="col-2 popup__statuses_e">
+          <div class="c_meaning" data-action="l1_a"><i data-action="l1_a"><?= $st_slplit[20]; ?> </i></div>
+          <div class="c_meaning" data-action="l1_b"><i data-action="l1_b"><?= $st_slplit[21]; ?> </i></div>
+          <div class="c_meaning" data-action="l1_c"><i data-action="l1_c"><?= $st_slplit[22]; ?> </i></div>
+          <div class="c_meaning" data-action="l1_d"><i data-action="l1_d"><?= $st_slplit[23]; ?> </i></div>
+        </div>
+      </aside>
+      <div id="house" class="house col-8">
+
+        <?php 
+          // project_type
+          $id = $post['id'];
+
+          $bosts = mysqli_query($db, "SELECT * FROM `projects` WHERE `id`=$id");
+          $bosts = mysqli_fetch_all($bosts);
+          foreach ($bosts as $p) {
+
+            if($p[4] == 'after_measure_comment') {
+              echo '
+              <div class="row">
+                <div class="house__wall house__wall_roof house__wall_k" style="width: 170px; height: 120px;">
+                  <div class="house__wall_status house__wall_status_k" data-room="K" onclick="input_step = `drawscreen_section_one`;submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);refresh__drawcontrols();">KATTO</div>
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof();">
+                
+                  <div class="house__wallspecial">
+                    <div class="house__wall_asjarj asjarjk">5</div>
+                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="k"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                  </div>
+                </div>
+              </div>';
+              echo '
+              <div class="row">
+                <div class="house__wall house__wall_one house__wall_a" style="width: 170px; height: 120px;">
+                    <div class="house__wall_status house__wall_status_a" data-room="A" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä A</div>
+                    <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_a_h" id="wall_one_a_h" onchange="change_a();">
+                    <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000" name="wall_one_a_w" id="wall_one_a_w" onchange="change_a();">
+                    <div class="house__wallspecial">
+                      <div class="house__wall_asjarj asjarja">1</div>
+                      <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="a"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                    </div>
+                </div>
+                <div class="house__wall house__wall_two house__wall_b" style="width: 120px; height: 120px;">
+                  <div class="house__wall_status house__wall_status_b" data-room="B" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä B</div>
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_b_h" id="wall_one_b_h" onchange="change_b();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_b_w" id="wall_one_b_w" onchange="change_b();">
+                  <div class="house__wallspecial">
+                      <div class="house__wall_asjarj asjarjb">2</div>
+                      <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="b"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                    </div>
+                </div>
+                <div class="house__wall house__wall_three house__wall_c" style="width: 170px; height: 120px;">
+                  <div class="house__wall_status house__wall_status_c" data-room="C" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä C</div>
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_c_h" id="wall_one_c_h" onchange="change_c();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_c_w" id="wall_one_c_w" onchange="change_c();">
+                  <div class="house__wallspecial">
+                      <div class="house__wall_asjarj asjarjc">3</div>
+                      <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="c"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                    </div>
+                </div>
+                <div class="house__wall house__wall_four house__wall_d" style="width: 120px; height: 120px;">
+                  <div class="house__wall_status house__wall_status_d" data-room="D" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä D</div>
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_d_h" id="wall_one_d_h" onchange="change_d();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_d_w" id="wall_one_d_w" onchange="change_d();">
+                  <div class="house__wallspecial">
+                      <div class="house__wall_asjarj asjarjd">4</div>
+                      <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="d"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                    </div>
+                </div>
+              </div>';
+              echo '
+              <div class="row">
+                <div class="house__wall house__wall_floor house__wall_l" style="width: 170px; height: 120px;">
+                  <div class="house__wall_status house__wall_status_l" data-room="L" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">LATTIA</div>
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_floor_h" id="wall_one_floor_h" onchange="change_floor();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_floor_w" id="wall_one_floor_w" onchange="change_floor();">
+                  <div class="house__wallspecial">
+                    <div class="house__wall_asjarj asjarjl">6</div>
+                    <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="l"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
+                  </div>
+                </div>
+              </div>';
+            }
+              
+          }
+
+        ?>
+            
+        </div>
+        
       </div>
-      <div class="col-2 popup__statuses_f">
-        <div class="c_meaning" data-action="l5_a"><i data-action="l5_a"><?= $st_slplit[4]; ?></i></div>
-        <div class="c_meaning" data-action="l5_b"><i data-action="l5_b"><?= $st_slplit[5]; ?></i></div>
-        <div class="c_meaning" data-action="l5_c"><i data-action="l5_c"><?= $st_slplit[6]; ?></i></div>
-        <div class="c_meaning" data-action="l5_d"><i data-action="l5_d"><?= $st_slplit[7]; ?></i></div>
-      </div>
-      <div class="col-2 popup__statuses_b">
-        <div class="c_meaning" data-action="l4_a"><i data-action="l4_a"><?= $st_slplit[8]; ?></i></div>
-        <div class="c_meaning" data-action="l4_b"><i data-action="l4_b"><?= $st_slplit[9]; ?></i></div>
-        <div class="c_meaning" data-action="l4_c"><i data-action="l4_c"><?= $st_slplit[10]; ?></i></div>
-        <div class="c_meaning" data-action="l4_d"><i data-action="l4_d"><?= $st_slplit[11]; ?></i></div>
-      </div>
-      <div class="col-2 popup__statuses_c">
-        <div class="c_meaning" data-action="l3_a"><i data-action="l3_a"><?= $st_slplit[12]; ?></i></div>
-        <div class="c_meaning" data-action="l3_b"><i data-action="l3_b"><?= $st_slplit[13]; ?></i></div>
-        <div class="c_meaning" data-action="l3_c"><i data-action="l3_c"><?= $st_slplit[14]; ?></i></div>
-        <div class="c_meaning" data-action="l3_d"><i data-action="l3_d"><?= $st_slplit[15]; ?></i></div>
-      </div>
-      <div class="col-2 popup__statuses_d">
-        <div class="c_meaning" data-action="l2_a"><i data-action="l2_a"><?= $st_slplit[16]; ?> </i></div>
-        <div class="c_meaning" data-action="l2_b"><i data-action="l2_b"><?= $st_slplit[17]; ?> </i></div>
-        <div class="c_meaning" data-action="l2_c"><i data-action="l2_c"><?= $st_slplit[18]; ?> </i></div>
-        <div class="c_meaning" data-action="l2_d"><i data-action="l2_d"><?= $st_slplit[19]; ?> </i></div>
-      </div>
-      <div class="col-2 popup__statuses_e">
-        <div class="c_meaning" data-action="l1_a"><i data-action="l1_a"><?= $st_slplit[20]; ?> </i></div>
-        <div class="c_meaning" data-action="l1_b"><i data-action="l1_b"><?= $st_slplit[21]; ?> </i></div>
-        <div class="c_meaning" data-action="l1_c"><i data-action="l1_c"><?= $st_slplit[22]; ?> </i></div>
-        <div class="c_meaning" data-action="l1_d"><i data-action="l1_d"><?= $st_slplit[23]; ?> </i></div>
-      </div>
-    </div>
+    </article>
   </div>
   <div class="modal-container">
     <div class="modal-background">

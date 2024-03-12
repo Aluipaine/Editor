@@ -18,6 +18,7 @@
       <input type="hidden" value="" name="poisjaava_alue" class="poisjaava_alue">
       <input type="hidden" value="" name="keskusmittapiste_cord" class="keskusmittapiste_cord">
       <input type="hidden" value="" name="reklamaatiot" class="reklamaatiot"> -->
+   <h4>Huomio! Aukkoja voi olla yhdessä seinässä max 3.</h4>
    <section class="nav">
       <nav>
          <ul>

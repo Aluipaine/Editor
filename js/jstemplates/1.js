@@ -270,8 +270,8 @@ function draw__hole() {
  * @returns None
  */
 function transfer__height_cords(elem) {
-  wallh_cord = elem.parentElement.querySelector(".wall_height").value;
-  wallw_cord = elem.parentElement.querySelector(".wall_width").value;
+  wallh_cord = parseFloat(elem.parentElement.querySelector(".wall_height").value);
+  wallw_cord = parseFloat(elem.parentElement.querySelector(".wall_width").value);
 
   drawarea_h.value = wallh_cord;
   drawarea_.value = wallw_cord;
@@ -407,7 +407,9 @@ function changeheights() {
  tochange_roomarray = document.querySelectorAll(".house__wall");
 
  for (var i = tochange_roomarray.length - 1; i >= 0; i--) {
-   tochange_roomarray[i].querySelector(".wall_height").value = parseFloat(document.querySelector("#drawarea_h").value);
+  //  tochange_roomarray[i].querySelector(".wall_height").value = parseFloat(document.querySelector("#drawarea_h").value);
+
+  //  console.log("tochange_roomarray[i].querySelector(.wall_height).value " + parseFloat(document.querySelector("#drawarea_h").value));
  }
   
 }
@@ -422,6 +424,12 @@ function changesize(maxval,frominput) {
     if(canvas.querySelector(".levyt").innerHTML.length > 1 || canvas.querySelector(".saumat__grandrow").innerHTML.length > 1) {
       canvas.querySelector(".saumat__grandrow").remove();
       canvas.querySelector(".levyt").innerHTML = "";
+      if(canvas.querySelector(".rangat__grandrow")) {
+        canvas.querySelector(".rangat__grandrow").remove();
+      }
+      if(canvas.querySelector(".listat__grandrow")) {
+        canvas.querySelector(".listat__grandrow").remove();
+      }
       alert("Syystä että alueen koko on vaihtunut, piirrosalueen ladonta pyyhitty.");
     }
   }
@@ -544,6 +552,13 @@ function changesize__bottom(maxval,frominput) {
   if(frominput && canvas.querySelector(".levyt") && canvas.querySelector(".saumat__grandrow")) {
     if(canvas.querySelector(".levyt").innerHTML.length > 1 || canvas.querySelector(".saumat__grandrow").innerHTML.length > 1) {
       canvas.querySelector(".saumat__grandrow").remove();
+      if(canvas.querySelector(".rangat__grandrow")) {
+        canvas.querySelector(".rangat__grandrow").remove();
+      }
+      if(canvas.querySelector(".listat__grandrow")) {
+        canvas.querySelector(".listat__grandrow").remove();
+      }
+      
       canvas.querySelector(".levyt").innerHTML = "";
       alert("Syystä että alueen koko on vaihtunut, piirrosalueen ladonta pyyhitty.");
     }
@@ -954,6 +969,11 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       
     }
     if (type == "au") {
+
+      if(canvas.querySelectorAll(".aukko").length > 2) {
+        alert("Huomio! Aukkoja voi olla yhdessä seinässä max 3.");
+        return;
+      }
       changedimensions_aukko();
       const newDiv__height = document.createElement("b");
       const newDiv__width = document.createElement("b");
@@ -1079,8 +1099,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         newDiv.dataset.prevcord = au_previous_vord;
         au_previous_vord = null;
       }
-      au_previous_vord = "0|" + parseFloat(newDiv.style.bottom) * 5 + "|" + parseFloat(newDiv.style.left) * 5 + "|" + (parseFloat(newDiv.style.width) + 1) *
-        5 + "|" + parseFloat(newDiv.style.height) * 5;
+      au_previous_vord = "0|" + parseFloat(newDiv.style.bottom) * 5 + "|" + parseFloat(newDiv.style.left) * 5 + "|" + (parseFloat(newDiv.style.width) + 1) * 5 + "|" + parseFloat(newDiv.style.height) * 5;
       newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');aukko_del(document.querySelector('#'+obj), -1);");
       newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;delete_from_db('"+t_array+"');");
 
@@ -1396,6 +1415,10 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       }
     }
     if (input_step == "drawscreen_section_two") {
+      if(canvas.querySelectorAll(".aukko").length > 2) {
+        alert("Huomio! Aukkoja voi olla yhdessä seinässä max 3.");
+        return;
+      }
         changedimensions_aukko();
         const newDiv__height = document.createElement("b");
         const newDiv__width = document.createElement("b");
@@ -1413,6 +1436,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         newDiv__hidden_attentioncommmets.type = "hidden";
         newDiv__hidden_attentioncommmets.name = "aukko__commmets";
         newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
+        newDiv.dataset.settingsmode = document.querySelector(".aukko_ylitys input:checked").value;
         document.querySelector(".drawarea__controls_elementstwo").prepend(newDiv__comment);
         document.querySelector(".drawarea__controls_elementstwo").prepend(newDiv__hidden_attention);
         document.querySelector(".drawarea__controls_elementstwo").prepend(newDiv__hidden_attentioncommmets);
@@ -1525,7 +1549,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         au_previous_vord = "0|" + parseFloat(newDiv.style.bottom) * 5 + "|" + parseFloat(newDiv.style.left) * 5 + "|" + (parseFloat(newDiv.style.width) + 1) *
           5 + "|" + parseFloat(newDiv.style.height) * 5;
         newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');aukko_del(document.querySelector('#'+obj), -1);"); //aukko_del(document.querySelector('#'+obj), -1);
-        newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;delete_from_db('"+t_array+"');au_previous_vord = '" + au_previous_vord + "';*/");
+        newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;delete_from_db('"+t_array+"');au_previous_vord = '" + au_previous_vord + "';");
 
         aukko_lcord = document.createElement("div");
         aukko_lcord.classList.add("aukko__cord");
@@ -1759,6 +1783,23 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
 
        lapiviennit__sade_muucord = document.querySelector("#lapiviennit__sade_muucord").value;
        save("lv~~"+lapiviennit__sade_muucord+"~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+document.querySelector("#lapiviennit__sade_muucord").value+"~~"+document.querySelector("#lv_comment").value+"~~"+document.querySelector("#lv_comment_from").value+"~~"+document.querySelector("#lv_comment_to").value);
+    }
+  }
+
+  if(canvas.querySelector(".levyt") && canvas.querySelector(".saumat__grandrow")) {
+    if(canvas.querySelector(".levyt").innerHTML.length > 1 || canvas.querySelector(".saumat__grandrow").innerHTML.length > 1) {
+      canvas.querySelector(".saumat__grandrow").remove();
+      canvas.querySelector(".levyt").innerHTML = "";
+      if(canvas.querySelector(".rangat__grandrow")) {
+        canvas.querySelector(".rangat__grandrow").remove();
+      }
+      if(canvas.querySelector(".listat__grandrow")) {
+        canvas.querySelector(".listat__grandrow").remove();
+      }
+
+      document.querySelector(".drawarea__controls_four-pysty.drawarea__controls_fouritems").innerHTML = "";
+      document.querySelector(".drawarea__controls_four-vaaka.drawarea__controls_fouritems").innerHTML = "";
+      alert("Syystä että alueelle tuli uusia huomiota kaipaavia kohteita, piirrosalueen vanhentunut ladonta on pyyhitty. Tee ladonta uudelleen.");
     }
   }
 

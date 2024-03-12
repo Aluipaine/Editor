@@ -866,8 +866,10 @@ function initalize_cross(arg) {
 
         walls = document.querySelectorAll(".tohide__room_"+wallname); 
         walls.forEach(w => {
-            w.querySelector(".wall_height").value = s[3];
-            w.querySelector(".wall_width").value = s[4];
+            w.querySelector(".wall_height").value = parseFloat(s[3]);
+            w.querySelector(".wall_width").value = parseFloat(s[4]);
+
+            console.log("parseFloat(s[3])  " + parseFloat(s[3]));
         });
       });
     });
