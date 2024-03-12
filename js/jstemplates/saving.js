@@ -142,6 +142,15 @@ function restoreprogress() {
                     document.querySelector("#aukko_comment").value = content.split("~~")[6];
                     document.querySelector("#aukko_comment_from").value = content.split("~~")[7];
                     document.querySelector("#aukko_comment_to").value = content.split("~~")[8];
+                    // aukko__types
+                    aukko__types = document.querySelectorAll(".aukko__types > input[name='aukko__types']");
+                    
+                    aukko__types.forEach(a_type => {
+                        if(content.split("~~")[9].toLowerCase() === a_type.value.toLowerCase()) {
+                            a_type.click();
+                            a_type.checked = true;
+                        }
+                    });
                     mitta__create_mitta("restore","au");
                     
                 }

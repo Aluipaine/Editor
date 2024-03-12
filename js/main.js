@@ -3610,6 +3610,22 @@ function settings__modal_open(e) {
   console.log("." + asmodal_mode);
   document.querySelector("."+asmodal_mode).classList.add("two");
   document.querySelector("."+asmodal_mode).classList.remove("out");
+
+  if(input_step === "drawscreen_section_one") {
+    give__origo_cord();
+  }
+  else if(input_step === "drawscreen_section_two") {
+    document.querySelector("#aukotcord_left").value = "";
+    document.querySelector("#aukotcord_right").value = "";
+    document.querySelector("#aukotcord_low").value = "";
+    document.querySelector("#aukotcord_up").value = "";
+
+    document.querySelector("#hole__width").value = "";
+    document.querySelector("#hole__height").value = "";
+  }
+  else if(input_step === "drawscreen_section_three") {
+    give__origo_cord();
+  }
 }
 
 initializecropping(); 

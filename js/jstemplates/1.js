@@ -766,6 +766,8 @@ function null__origo_cord() {
     document.querySelector("#aukotcord_left").value = "0";
     document.getElementById("settings__aukko").style.bottom = "0";
     document.getElementById("settings__aukko").style.left = "0";
+
+    
   }
   if (input_step == "drawscreen_section_three") {
     document.querySelector("#lvcord_low").value = "0";
@@ -868,11 +870,17 @@ function give__origo_cord() {
 // Создание отверстия
 function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode_hcord, mode_wcord, mode_count, mode_id, mode_specifications,ir_mitta_comment,ir_mitta_cfrom,ir_mitta_cto) {
   if(modding === true) {
-    obj = tomode_object.getAttribute('name');
-    delete_from_db('Ovi # 1|5|500|1|aukkoca606d6308fb7|2095|1000|aukko ovi|||__');
-    aukko_del(document.querySelector('#'+obj), -1);
-    tomode_object.remove();
-    modding = false;
+    correct_name = tomode_object.getAttribute('id');
+    
+    a_dels = document.querySelectorAll(".drawarea__controls_elementstwo.drawarea__things .newDiv__comment_del");
+
+    a_dels.forEach(a_del => {
+      if(a_del.getAttribute("name") === correct_name) {
+        a_del.click();
+        modding = false;
+        tomode_object = null;
+      }
+    });
   }
 
   
@@ -1045,24 +1053,29 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       // Add styles to new hole
       newDiv.dataset.no = "";
       if (document.querySelector("#type__door").checked) {
+        
+        newDiv.dataset.no = canvas.querySelectorAll(".ovi").length+1;
         newDiv.classList.add("ovi");
-        aukko_count_function(newDiv, 1);
       }
       if (document.querySelector("#type__window").checked) {
+        
+        newDiv.dataset.no = canvas.querySelectorAll(".ikkuna").length+1;
         newDiv.classList.add("ikkuna");
-        aukko_count_function(newDiv, 1);
       }
       if (document.querySelector("#type__palkki").checked) {
+        
+        newDiv.dataset.no = canvas.querySelectorAll(".palkki").length+1;
         newDiv.classList.add("palkki");
-        aukko_count_function(newDiv, 1);
       }
       if (document.querySelector("#type__collar").checked) {
+        
+        newDiv.dataset.no = canvas.querySelectorAll(".pilari").length+1;
         newDiv.classList.add("pilari");
-        aukko_count_function(newDiv, 1);
       }
       if (document.querySelector("#type__ventilation").checked) {
+        
+        newDiv.dataset.no = canvas.querySelectorAll(".tuuletus").length+1;
         newDiv.classList.add("tuuletus");
-        aukko_count_function(newDiv, 1);
       }
 
       realcount = newDiv.dataset.no;
@@ -1446,7 +1459,9 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         newDiv__hidden_attentioncommmets.type = "hidden";
         newDiv__hidden_attentioncommmets.name = "aukko__commmets";
         newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
-        newDiv.dataset.settingsmode = document.querySelector(".aukko_ylitys input:checked").value;
+        if(document.querySelector(".aukko_ylitys input")) {
+          newDiv.dataset.settingsmode = document.querySelector(".aukko_ylitys input:checked").value;
+        }
         document.querySelector(".drawarea__controls_elementstwo").prepend(newDiv__comment);
         document.querySelector(".drawarea__controls_elementstwo").prepend(newDiv__hidden_attention);
         document.querySelector(".drawarea__controls_elementstwo").prepend(newDiv__hidden_attentioncommmets);
@@ -1488,27 +1503,36 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         newDiv.appendChild(newDiv__width);
         newDiv.appendChild(newDiv__y);
         newDiv.appendChild(newDiv__x);
-        // Add styles to new hole
-        newDiv.dataset.no = "";
+        mytype = "";
         if (document.querySelector("#type__door").checked) {
+          
+          newDiv.dataset.no = canvas.querySelectorAll(".ovi").length +1;
           newDiv.classList.add("ovi");
-          aukko_count_function(newDiv, 1);
+          mytype = "ovi";
         }
         if (document.querySelector("#type__window").checked) {
+          
+          newDiv.dataset.no = canvas.querySelectorAll(".ikkuna").length+1;
           newDiv.classList.add("ikkuna");
-          aukko_count_function(newDiv, 1);
+          mytype = "ikkuna";
         }
         if (document.querySelector("#type__palkki").checked) {
+          
+          newDiv.dataset.no = canvas.querySelectorAll(".palkki").length+1;
           newDiv.classList.add("palkki");
-          aukko_count_function(newDiv, 1);
+          mytype = "palkki";
         }
         if (document.querySelector("#type__collar").checked) {
+          
+          newDiv.dataset.no = canvas.querySelectorAll(".pilari").length+1;
           newDiv.classList.add("pilari");
-          aukko_count_function(newDiv, 1);
+          mytype = "pilari";
         }
         if (document.querySelector("#type__ventilation").checked) {
+          
+          newDiv.dataset.no = canvas.querySelectorAll(".tuuletus").length+1;
           newDiv.classList.add("tuuletus");
-          aukko_count_function(newDiv, 1);
+          mytype = "tuuletus";
         }
 
         realcount = newDiv.dataset.no;
@@ -1642,7 +1666,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       comment = newDiv.dataset.comment;
       comment_from = newDiv.dataset.comment_from;
       comment_to = newDiv.dataset.comment_to;
-      save("au~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+(saving_leftcord+saving_w)+"~~"+(saving_bottomcord + saving_h)+"~~"+ylitys_mode+"~~"+comment+"~~"+comment_from+"~~"+comment_to);
+      save("au~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+(saving_leftcord+saving_w)+"~~"+(saving_bottomcord + saving_h)+"~~"+ylitys_mode+"~~"+comment+"~~"+comment_from+"~~"+comment_to+"~~"+mytype);
     
 
     }
