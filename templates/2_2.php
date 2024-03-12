@@ -42,7 +42,7 @@
    <div class="modal-container asetustaulu uusiaukko">
       <div class="modal-background">
          <div class="modal">
-            <div class="modal_close_btn">
+            <div class="modal_close_btn" onclick="modding=false;tomode_object=null;">
                <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path>
                </svg>
