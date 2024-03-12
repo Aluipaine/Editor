@@ -1,118 +1,93 @@
-# Editori WF
+Documentation This project allows you to create projects for the construction of houses.
 
-Документация
-Данный проект позволяет создавать проекты по постройке домов.
+On 24-07-2023, there are three roles:
 
-**На 24-07-2023 существует три роли:**
-1. Mittaus (измерение)
-2. Комментатор
-3. Админ
+Mittaus (measurement)
+Commentator
+Admin
+All the main work is in the first role. Comments the comments table is attached by the role of the commentator, the administrator can change the general settings of the moderator
 
+installation:
 
-Вся основная работа в первой роли. 
-Комментарии к табле comments прикладывает роль комментатора
-Администратор может менять общие настройки едитора
+Download this repository
+Install the database from the DB folder to your local server in phpmyadmin. It is recommended to use the Open Server program
+Connect the project to the database in files vendor/config.php and config.php
+The editor is ready to use
+Test accesses:
 
-**УСТАНОВКА:**
-1. Скачайте данный репозиторий
-2. Установите базу данных из папки DB к себе на локальный сервер в phpmyadmin. Рекомендуется к использованию программа Open Server
-3. Подключите проект к базе данных в файлах vendor/config.php и config.php
-4. Editor готов к пользованию
+Measuring Jyri Ipah6Xae!
+Commenting on duunari Nakkimakkara456
+Admin administration Nakkimakkara123!
+Login via the Site Name on локалке/login.php
 
-**Тестовые доступы:**
-1. Измерение
-    Jyri
-    Ipah6Xae!
-2. Комментирование
-    duunari 
-    Nakkimakkara456
-3. Админитсрация
-    Admin
-    Nakkimakkara123!
+HOW TO PUSH?
 
+Upload the current database to the db folder
+Write to readme.txt or directly tell us what has been done (which of the things done to check)
+Push all files into the repository
+The jamb of the project is what happens in php files, so we kindly provide a description of the functionality of each:
 
-Вход через *Название сайта на локалке*/login.php
+Connecting to the database: Edit vendor/config.php
 
+Functional:
 
-**КАК ПУШИТЬ?**
-1. Загружайте актуальную базу данных в папку db
-2. Пишите в readme.txt или нам напрямую, что сделано (что из сделанного проверять)
-3. Закидывайте все файлы пушом в репозиторий
+addcomment.php - Adds a comment to the database (role 2)
 
+ajaxupload.php - Uploads files to a folder when uploading a new project to new-project.php (role 1)
 
-Косяк проекта - происходящее в php файлах, поэтому любезно предоставляем описание к функционалу каждого:
+comment__kuittaus.php - Marks a comment as made (role 2)
 
-**Подключение к базе данных:**
-Отредактируйте vendor/config.php
+commentattachmentupload.php - Adds an attachment to the comment (role 2)
 
+commentreport.php - When entering, throws a report on completed comments to the administration's email (role 3)
 
-  
-**Функционал:**
+get-added-users.php - Returns users added to the project in JSON format. Requires project_id as an argument (POST) (role 2)
 
-addcomment.php - Добавляет в базу данных комментарий (роль 2) 
+getanswers.php - Returns responses to a comment in the same format as regular comments. Requires answer_to and user as arguments (POST) (role 2)
 
-ajaxupload.php - Загружает файлы в папку при загрузке нового проекта в new-project.php (роль 1) 
+get-walls.php - Returns names, descriptions, installation order and hiding of walls in JSON format (roles 1 and 2)
 
-comment__kuittaus.php - Помечает комментарий сделанным (роль 2)
+kumoa.php - Undo changes from the kumoalog table. Accepts the project_id and username (POST) arguments (Role 1)
 
-commentattachmentupload.php - Добавляет к комменатрию вложение (роль 2)
+updateproject.php - Pushes updated project data into the database (role 1)
 
-commentreport.php - При заходе, бросает на почту администрации рапорт о выполненных комментариях (роль 3)
+update-walls.php - Allows you to change the names, descriptions, installation order and hiding of walls (role 1)
 
-get-added-users.php - Возвращает добавленных в проект пользователей в формате JSON. Требует project_id в качестве аргумента (POST) (роль 2)
+upload.php - Old file downloader (role 1)
 
-getanswers.php - Возвращает ответы на комментарий в том же формате что и обычные комментарии. Требует answer_to и user в качестве аргументов (POST) (роль 2)
+db/updatepohjat.php - Saves and updates new room templates to the database (role 1)
 
-get-walls.php - Возвращает имена, описания, порядок установки и скрытие стен в формате JSON (роль 1 и 2)
+vendor/settings__update.php - updates the Administrator settings (role 3)
 
-kumoa.php - Отмена изменений из таблицы kumoalog. Принимает аргументы project_id и username (POST) (Роль 1)
+Parts header.php - Site header, scripts are connected in the front-end
 
-updateproject.php - Пушит в базу данных обновленные данные проекта (роль 1)
+footer.php - The basement of the site, scripts are connected and html is closed (role 3)
 
-update-walls.php - Позволяет изменять имена, описания, порядок установки и скрытие стен (роль 1)
+footer-post.php - The basement of the site, scripts are connected and html is closed (role 1, 2)
 
-upload.php - Старый загрузчик файлов (роль 1)
++php files in the 'templates' folder
 
-db/updatepohjat.php - Сохраняет и обновляет новые шаблоны помещений в базу данных (роль 1)
+levynakyma.php - The page for creating a single panel (will be public)
 
-vendor/settings__update.php - обновляет настройки Администратора (роль 3)
+new-project.php - A new project is being created here (role 1)
 
+post.php and the components in templates - the main page of the project (roles 1 and 2)
 
-**Части**
-header.php - Шапка сайта, подключаются скрипты в фронт-енде
+register.php - user registration page, not working 02-08-23
 
-footer.php - Подвал сайта, подключаются скрипты и закрывается html (роль 3)
+reset-password.php - password reset page (role 1, 2, 3)
 
-footer-post.php - Подвал сайта, подключаются скрипты и закрывается html (роль 1, 2)
+welcome.php - home page for work (roles 1 and 2)
 
-+php файлы в папке 'templates'
+welcome-marko.php - the main page of the administrator (role 3)
 
+templates/commentator.php - Pop-up window for commenting on points (role 2)
 
+logout.php - Exit page
 
+login.php - Login page 2
 
-levynakyma.php - Страница создания одной панели (будет публичным)
+index.php - Login page 1
 
-new-project.php - Здесь создается новый проект (роль 1)
-
-post.php и составляющие в templates - главная страница проекта (роль 1 и 2)
-
-register.php - страница регистрации пользователя, не работает 02-08-23
-
-reset-password.php - страница обнуления пароля (роль 1, 2, 3)
-
-welcome.php - главная страница для работы (роль 1 и 2)
-
-welcome-marko.php - главная страница администратора (роль 3)
-
-templates/commentator.php - Всплывающее окно комментирования точек (роль 2)
-
-logout.php - Страница выхода
-
-login.php - Страница входа 2
-
-index.php - Страница входа 1
-
-**ВАЖНО**
-Соблюдать пропорцию 5миллиметров на 1 пиксель в drawarea (роль 1 и 2)
-
+IT is IMPORTANT to observe the proportion of 5 millimeters per 1 pixel in drawarea (roles 1 and 2)
 
