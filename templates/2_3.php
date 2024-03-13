@@ -73,7 +73,7 @@
            <h4>Lisään läpiviennin</h4>
            <fieldset>
                <input name="lv_from" type="radio" onfocus="give__origo_cord();" id="from__origo_lapivienti">
-               <label for="from__origo_lapivienti">Origosta</label>
+               <label for="from__origo_lapivienti">MOD Origosta</label>
                <input name="lv__distances" type="radio" id="lvfrom__checkpoint_1" onfocus="get_from_custom_mp(1);">
                <label for="lvfrom__checkpoint_1">Mittapisteestä 1</label>
                <input name="lv__distances" type="radio" id="lvfrom__checkpoint_2" onfocus="get_from_custom_mp(2);">

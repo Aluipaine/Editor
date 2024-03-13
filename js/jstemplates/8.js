@@ -256,7 +256,7 @@ function rangoita() {
     tyosto.classList.add("ranka");
     tyosto.classList.add("valiranka");
     tyosto.classList.add("ranka_vaaka");
-    tyosto.style.bottom = parseFloat(valiranka_array_vaaka[i].style.bottom) + parseFloat(valiranka_array_pysty[i].parentElement.parentElement.style.bottom) + "px";
+    tyosto.style.bottom = parseFloat(valiranka_array_vaaka[i].style.bottom) + parseFloat(valiranka_array_vaaka[i].parentElement.parentElement.style.bottom) + "px";
     // tyosto.innerHTML = parseFloat(t_p[i].split(",")[0])-parseFloat(canvas.getBoundingClientRect().left);
     tyostot.append(tyosto);
   }

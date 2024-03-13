@@ -70,7 +70,7 @@
                <div class="col-6">
                   <fieldset class="aukko__asiat"> 
                      <input name="aukko__distances" type="radio" id="from__origo_aukko" onfocus="give__origo_cord();changedimensions_aukko();">
-                     <label for="from__origo_aukko">Origosta</label>
+                     <label for="from__origo_aukko">MOD Origosta</label>
                      <input name="aukko__distances" type="radio" id="from__checkpoint_1" onfocus="get_from_custom_mp(1);changedimensions_aukko();">
                      <label for="from__checkpoint_1">Mittapisteestä 1</label>
                      <input name="aukko__distances" type="radio" id="from__checkpoint_2" onfocus="get_from_custom_mp(2);changedimensions_aukko();">

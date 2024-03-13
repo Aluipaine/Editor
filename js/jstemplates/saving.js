@@ -113,8 +113,9 @@ function restoreprogress() {
                     else {
                         document.querySelector("#mittapiste__name").value = content.split("~~")[3];
                     }
-                    document.querySelector("#cord_left").value = parseFloat(content.split("~~")[2]);
-                    document.querySelector("#cord_up").value = parseFloat(content.split("~~")[1]);
+                    origo_position = "left_bottom";
+                    document.querySelector("#cord_left").value = parseFloat(content.split("~~")[1]);
+                    document.querySelector("#cord_up").value = parseFloat(content.split("~~")[2]);
                     mitta__create_mitta("restore","mp");
                 }
                 else if(content.split("~~")[0] === "au") {
@@ -123,6 +124,8 @@ function restoreprogress() {
                     ylitys__array();
                     console.log(content.split("~~"));
                     input_step = "drawscreen_section_two";
+                    origo_position = "left_bottom";
+
                     refresh__drawcontrols();
                     document.querySelector("#aukotcord_left").value = parseFloat(content.split("~~")[1]);
                     document.querySelector("#aukotcord_right").value = parseFloat(content.split("~~")[3]);
@@ -155,6 +158,8 @@ function restoreprogress() {
                     
                 }
                 else if(content.split("~~")[0] === "lv") {
+                    origo_position = "left_bottom";
+
                     document.querySelector("#lapiviennit__sade_muucord").value = content.split("~~")[1];
                     document.querySelector("#from__side_lapivienti").checked = true;
                     document.querySelector("#lvcord_low").value = content.split("~~")[3];
@@ -162,6 +167,7 @@ function restoreprogress() {
                     document.querySelector("#lv_comment").value = content.split("~~")[5];
                     document.querySelector("#lv_comment_from").value = content.split("~~")[6];
                     document.querySelector("#lv_comment_to").value = content.split("~~")[7];
+                    
                     mitta__create_mitta("restore","lv");
                 }
                 else if(sau_ok < timestamp && content.split("~~")[0] === "sau") {

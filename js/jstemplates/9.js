@@ -6,6 +6,7 @@
 listoitettu = false;
 
 function listoitus() {
+  alert("AUKKORANGAT TULEE SELVITTÄÄ ENNEN LISTOITUKSEN KULKUA.")
   rangat_grandrow = canvas.querySelector(".rangat__grandrow");
   if (document.querySelector(".listat__grandrow")) {
     document.querySelector(".listat__grandrow").remove();
@@ -228,7 +229,14 @@ function create_lista(type,distance,levymitta,settingsarray) {
       }
       
     }
-    lista.dataset.pituus = (parseFloat(levymitta.offsetHeight)*5) - parseFloat(trs[a].querySelector("td:nth-child(4) input").value);
+    try {
+          lista.dataset.pituus = (parseFloat(levymitta.offsetHeight)*5) - parseFloat(trs[a].querySelector("td:nth-child(4) input").value);
+
+    } catch (error) {
+      lista.dataset.pituus = (parseFloat(levymitta.offsetHeight)*5) - 10;
+
+      console.log(error);
+    }
   }
   else if(type === "vaaka") {
     lista.style.bottom = distance + "px";
@@ -248,7 +256,13 @@ function create_lista(type,distance,levymitta,settingsarray) {
       }
       
     }
-    lista.dataset.pituus = (parseFloat(levymitta.offsetWidth)*5) - parseFloat(trs[a].querySelector("td:nth-child(4) input").value);
+    try {
+      lista.dataset.pituus = (parseFloat(levymitta.offsetWidth)*5) - parseFloat(trs[a].querySelector("td:nth-child(4) input").value);
+    } catch (error) {
+      lista.dataset.pituus = (parseFloat(levymitta.offsetWidth)*5) - 10;
+
+      console.log(error);
+    }
   }
   else {
     return

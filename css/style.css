@@ -7714,3 +7714,11 @@ input[type="radio"].mass__selection_btn {
  
 }
 
+
+
+
+#drawscreen_section_three > div.modal-container.lv_modal.two > div > div > section:nth-child(3) > fieldset > label:nth-child(8),
+#drawscreen_section_two > div.modal-container.asetustaulu.uusiaukko.two > div > div > div.row > div:nth-child(2) > fieldset > label:nth-child(8) {
+  display: none;
+  /* Temprorary */
+}

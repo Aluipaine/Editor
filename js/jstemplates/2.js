@@ -332,11 +332,43 @@ function change__lapivienti_sizecord(e) {
  * @returns None
  */
 function changedimensions_aukko(input) {
-  document.querySelector("#hole__width").value = ((eval(document.getElementById("aukotcord_right").value) - (eval(document.getElementById(
-    "aukotcord_left").value))));
-  document.querySelector("#hole__height").value = ((eval(document.getElementById("aukotcord_up").value) - (eval(document.getElementById(
-    "aukotcord_low").value))));
-  // if(input) {
+  if(from_custom_mp !== true) {
+    if(origo_position === "left_bottom") {
+      document.querySelector("#hole__width").value = ((eval(document.getElementById("aukotcord_right").value) - (eval(document.getElementById(
+        "aukotcord_left").value))));
+      document.querySelector("#hole__height").value = ((eval(document.getElementById("aukotcord_up").value) - (eval(document.getElementById(
+        "aukotcord_low").value))));
+    
+    
+    }
+    else if(origo_position === "right_bottom") {
+      document.querySelector("#hole__width").value = ((eval(document.getElementById("aukotcord_left").value) - (eval(document.getElementById(
+        "aukotcord_right").value))));
+      document.querySelector("#hole__height").value = ((eval(document.getElementById("aukotcord_up").value) - (eval(document.getElementById(
+        "aukotcord_low").value))));
+    
+        }
+    else if(origo_position === "right_top") {
+      document.querySelector("#hole__width").value = ((eval(document.getElementById("aukotcord_left").value) - (eval(document.getElementById(
+        "aukotcord_right").value))));
+      document.querySelector("#hole__height").value = ((eval(document.getElementById("aukotcord_low").value) - (eval(document.getElementById(
+        "aukotcord_up").value))));
+    
+        }
+    else if(origo_position === "left_top") {
+      document.querySelector("#hole__width").value = ((eval(document.getElementById("aukotcord_right").value) - (eval(document.getElementById(
+        "aukotcord_left").value))));
+        document.querySelector("#hole__height").value = ((eval(document.getElementById("aukotcord_low").value) - (eval(document.getElementById(
+          "aukotcord_up").value))));
+    }
+  }
+  else {
+    document.querySelector("#hole__width").value = ((eval(document.getElementById("aukotcord_right").value) - (eval(document.getElementById(
+      "aukotcord_left").value))));
+    document.querySelector("#hole__height").value = ((eval(document.getElementById("aukotcord_up").value) - (eval(document.getElementById(
+      "aukotcord_low").value))));
+  }
+      // if(input) {
   //   if (input.value % 25 !== 0) {
   //     alert("Moduulimittaa, kiitos");
   //     // console.log(input);

@@ -4,6 +4,7 @@
  action="/updateproject.php" enctype='multipart/form-data'>
 
    </div>
+   <h3>Huom! Maksimi mittapistemäärä on 2.</h3>
    <section class="nav">
       <nav>
          <ul>
@@ -40,7 +41,7 @@
            <h4>Etäisyys (mm)</h4>
            <fieldset>
                <input id="dist_origo" name="mittapiste__distance" type="radio" onfocus="give__origo_cord();">
-               <label for="dist_origo">Origosta</label>
+               <label for="dist_origo">MOD Origosta</label>
                <input id="dist_side" name="mittapiste__distance" type="radio" onfocus="null__origo_cord();">
                <label for="dist_side">Omat mitat</label>
            </fieldset>

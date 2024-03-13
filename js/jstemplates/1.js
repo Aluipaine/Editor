@@ -1,6 +1,9 @@
 let aukko_count = 0;
 modding = false;
+from_custom_mp = false;
+userinteraction = false;
 tomode_object = null;
+
 /**
  * This function is responsible for drawing a point on the screen based on the input step.
  * It creates a new point element with associated controls and settings.
@@ -15,47 +18,46 @@ tomode_object = null;
 
     document.querySelector("div.drawarea__controls.drawarea__controls_one > div.drawarea__controls_btns > div:nth-child(2)").click();
     return;
-    let id = "mp" + Math.random().toString(16).slice(2).toLowerCase();
+    // let id = "mp" + Math.random().toString(16).slice(2).toLowerCase();
 
-    mittapiste_count += 1;
-    // Создаем блок
-    const newDiv = document.createElement("span");
-    const ba = document.querySelector("#box-wrapper");
-    const inputH = document.createElement('input');
-    const inputW = document.createElement('input');
-    inputH.setAttribute('type', 'num');
-    inputW.setAttribute('type', 'num');
-    newDiv.innerHTML = "";
-    const newDiv__comment = document.createElement("span");
-    newDiv__comment.innerHTML = "Mittapiste #" + mittapiste_count;
-    const newDiv__comment_settings = document.createElement("i");
-    const newDiv__comment_del = document.createElement("i");
-    // Расположение - по центру canvas
-    // newDiv.style.bottom = (canvas.offsetHeight / 2) + 'px';
-    // newDiv.style.left = (canvas.offsetWidth / 2) + 'px';
-    newDiv__comment_del.setAttribute("onclick",
-      "obj = this.getAttribute('name');document.querySelector('#'+obj).remove();this.parentElement.remove();mittapiste_count-=1;");
-    newDiv__comment_settings.setAttribute("onclick",
-      "open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"');submitprogress('','cancel','" +id + "','mp','" + t_array + "');mittapiste_count-=1;mp_previous_vord = '" + mp_previous_vord_ + "';"
-      );
-    newDiv__comment_settings.innerHTML =
-      "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.00159 9.45C6.33358 9.45 5.69293 9.19188 5.22058 8.73241C4.74822 8.27295 4.48286 7.64978 4.48286 7C4.48286 6.35022 4.74822 5.72705 5.22058 5.26759C5.69293 4.80812 6.33358 4.55 7.00159 4.55C7.6696 4.55 8.31025 4.80812 8.7826 5.26759C9.25495 5.72705 9.52032 6.35022 9.52032 7C9.52032 7.64978 9.25495 8.27295 8.7826 8.73241C8.31025 9.19188 7.6696 9.45 7.00159 9.45ZM12.3485 7.679C12.3773 7.455 12.3989 7.231 12.3989 7C12.3989 6.769 12.3773 6.538 12.3485 6.3L13.8669 5.159C14.0037 5.054 14.0396 4.865 13.9533 4.711L12.514 2.289C12.4277 2.135 12.2334 2.072 12.075 2.135L10.2831 2.835C9.90892 2.562 9.52032 2.324 9.06695 2.149L8.80068 0.294C8.7719 0.126 8.62077 0 8.1086 0H5.56231C5.38241 0 5.23128 0.126 5.2025 0.294L4.93623 2.149C4.48286 2.324 4.09425 2.562 3.72004 2.835L1.92815 2.135C1.76983 2.072 1.57552 2.135 1.48917 2.289L0.0498936 4.711C-0.0436593 4.865 -0.000480936 5.054 0.13625 5.159L1.65468 6.3C1.6259 6.538 1.60431 6.769 1.60431 7C1.60431 7.231 1.6259 7.455 1.65468 7.679L0.13625 8.841C-0.000480936 8.946 -0.0436593 9.135 0.0498936 9.289L1.48917 11.711C1.57552 11.865 1.76983 11.921 1.92815 11.865L3.72004 11.158C4.09425 11.438 4.48286 11.676 4.93623 11.851L5.2025 13.706C5.23128 13.874 5.38241 14 5.56231 14H8.1086C8.62077 14 8.7719 13.874 8.80068 13.706L9.06695 11.851C9.52032 11.669 9.90892 11.438 10.2831 11.158L12.075 11.865C12.2334 11.921 12.4277 11.865 12.514 11.711L13.9533 9.289C14.0396 9.135 14.0037 8.946 13.8669 8.841L12.3485 7.679Z' fill='#222222'/></svg>";
-    newDiv__comment_del.innerHTML =
-      '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg>';
-    newDiv.setAttribute("id", id);
-    newDiv.dataset.no = mittapiste_count;
-    newDiv__comment_settings.classList.add("m_btn");
-    newDiv__comment_settings.classList.add("newDiv__comment_settings");
-    newDiv__comment_del.classList.add("newDiv__comment_del");
-    newDiv__comment_settings.setAttribute("name", id);
-    newDiv__comment_del.setAttribute("name", id);
-    newDiv__comment.appendChild(newDiv__comment_settings);
-    newDiv__comment.appendChild(newDiv__comment_del);
-    newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
-    newDiv.classList = "mittapiste_element";
-    newDiv.setAttribute("name", id);
-    document.querySelector("#box-wrapper > main").prepend(newDiv);
-    document.querySelector(".drawarea__controls_elementsone").prepend(newDiv__comment);
+    // // Создаем блок
+    // const newDiv = document.createElement("span");
+    // const ba = document.querySelector("#box-wrapper");
+    // const inputH = document.createElement('input');
+    // const inputW = document.createElement('input');
+    // inputH.setAttribute('type', 'num');
+    // inputW.setAttribute('type', 'num');
+    // newDiv.innerHTML = "";
+    // const newDiv__comment = document.createElement("span");
+    // newDiv__comment.innerHTML = "Mittapiste #" + mittapiste_count;
+    // const newDiv__comment_settings = document.createElement("i");
+    // const newDiv__comment_del = document.createElement("i");
+    // // Расположение - по центру canvas
+    // // newDiv.style.bottom = (canvas.offsetHeight / 2) + 'px';
+    // // newDiv.style.left = (canvas.offsetWidth / 2) + 'px';
+    // newDiv__comment_del.setAttribute("onclick",
+    //   "obj = this.getAttribute('name');document.querySelector('#'+obj).remove();this.parentElement.remove();mittapiste_count-=1;");
+    // newDiv__comment_settings.setAttribute("onclick",
+    //   "open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"');submitprogress('','cancel','" +id + "','mp','" + t_array + "');mittapiste_count-=1;mp_previous_vord = '" + mp_previous_vord_ + "';"
+    //   );
+    // newDiv__comment_settings.innerHTML =
+    //   "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.00159 9.45C6.33358 9.45 5.69293 9.19188 5.22058 8.73241C4.74822 8.27295 4.48286 7.64978 4.48286 7C4.48286 6.35022 4.74822 5.72705 5.22058 5.26759C5.69293 4.80812 6.33358 4.55 7.00159 4.55C7.6696 4.55 8.31025 4.80812 8.7826 5.26759C9.25495 5.72705 9.52032 6.35022 9.52032 7C9.52032 7.64978 9.25495 8.27295 8.7826 8.73241C8.31025 9.19188 7.6696 9.45 7.00159 9.45ZM12.3485 7.679C12.3773 7.455 12.3989 7.231 12.3989 7C12.3989 6.769 12.3773 6.538 12.3485 6.3L13.8669 5.159C14.0037 5.054 14.0396 4.865 13.9533 4.711L12.514 2.289C12.4277 2.135 12.2334 2.072 12.075 2.135L10.2831 2.835C9.90892 2.562 9.52032 2.324 9.06695 2.149L8.80068 0.294C8.7719 0.126 8.62077 0 8.1086 0H5.56231C5.38241 0 5.23128 0.126 5.2025 0.294L4.93623 2.149C4.48286 2.324 4.09425 2.562 3.72004 2.835L1.92815 2.135C1.76983 2.072 1.57552 2.135 1.48917 2.289L0.0498936 4.711C-0.0436593 4.865 -0.000480936 5.054 0.13625 5.159L1.65468 6.3C1.6259 6.538 1.60431 6.769 1.60431 7C1.60431 7.231 1.6259 7.455 1.65468 7.679L0.13625 8.841C-0.000480936 8.946 -0.0436593 9.135 0.0498936 9.289L1.48917 11.711C1.57552 11.865 1.76983 11.921 1.92815 11.865L3.72004 11.158C4.09425 11.438 4.48286 11.676 4.93623 11.851L5.2025 13.706C5.23128 13.874 5.38241 14 5.56231 14H8.1086C8.62077 14 8.7719 13.874 8.80068 13.706L9.06695 11.851C9.52032 11.669 9.90892 11.438 10.2831 11.158L12.075 11.865C12.2334 11.921 12.4277 11.865 12.514 11.711L13.9533 9.289C14.0396 9.135 14.0037 8.946 13.8669 8.841L12.3485 7.679Z' fill='#222222'/></svg>";
+    // newDiv__comment_del.innerHTML =
+    //   '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg>';
+    // newDiv.setAttribute("id", id);
+    // newDiv.dataset.no = mittapiste_count;
+    // newDiv__comment_settings.classList.add("m_btn");
+    // newDiv__comment_settings.classList.add("newDiv__comment_settings");
+    // newDiv__comment_del.classList.add("newDiv__comment_del");
+    // newDiv__comment_settings.setAttribute("name", id);
+    // newDiv__comment_del.setAttribute("name", id);
+    // newDiv__comment.appendChild(newDiv__comment_settings);
+    // newDiv__comment.appendChild(newDiv__comment_del);
+    // newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
+    // newDiv.classList = "mittapiste_element";
+    // newDiv.setAttribute("name", id);
+    // document.querySelector("#box-wrapper > main").prepend(newDiv);
+    // document.querySelector(".drawarea__controls_elementsone").prepend(newDiv__comment);
     //touchedElement('#box-wrapper > main', '#drawarea_w', '#drawarea_h', newDiv, 'elem', inputW, inputH);
   }
   if (input_step == "drawscreen_section_two") {
@@ -128,7 +130,6 @@ function open_element(element,left_distance,right_distance,bottom_distance,top_d
     document.querySelector('#' + obj).remove();
     document.getElementsByName(element)[0].remove();
     document.querySelector('#setting__canvas_mitta > main > ' + '#' + obj).remove();
-    mittapiste_count -= 1;
     document.querySelector("#cord_left").value = right_distance*5;
     document.querySelector("#cord_up").value = left_distance*5;
   }
@@ -203,7 +204,7 @@ function draw__hole() {
       "svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z' fill='#EB1010'/></svg>";
     var id = "id" + Math.random().toString(16).slice(2).toLowerCase();
     newDiv.setAttribute("id", id);
-    newDiv__comment_settings.classList.add("m_btn");
+    // newDiv__comment_settings.classList.add("m_btn");
     newDiv__comment_settings.classList.add("newDiv__comment_settings");
     newDiv__comment_del.classList.add("newDiv__comment_del");
     newDiv__comment_settings.setAttribute("name", id);
@@ -224,7 +225,7 @@ function draw__hole() {
     var newDiv__comment_del = document.createElement("i");
     newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');document.querySelector('#'+obj).remove();this.parentElement.remove();");
     newDiv__comment_settings.setAttribute("onclick",
-      "document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');document.querySelector('#'+obj).remove();this.parentElement.remove();"
+      "document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');enable__modding(document.querySelector('#'+obj));"
       );
     newDiv__comment_settings.innerHTML =
       "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.00159 9.45C6.33358 9.45 5.69293 9.19188 5.22058 8.73241C4.74822 8.27295 4.48286 7.64978 4.48286 7C4.48286 6.35022 4.74822 5.72705 5.22058 5.26759C5.69293 4.80812 6.33358 4.55 7.00159 4.55C7.6696 4.55 8.31025 4.80812 8.7826 5.26759C9.25495 5.72705 9.52032 6.35022 9.52032 7C9.52032 7.64978 9.25495 8.27295 8.7826 8.73241C8.31025 9.19188 7.6696 9.45 7.00159 9.45ZM12.3485 7.679C12.3773 7.455 12.3989 7.231 12.3989 7C12.3989 6.769 12.3773 6.538 12.3485 6.3L13.8669 5.159C14.0037 5.054 14.0396 4.865 13.9533 4.711L12.514 2.289C12.4277 2.135 12.2334 2.072 12.075 2.135L10.2831 2.835C9.90892 2.562 9.52032 2.324 9.06695 2.149L8.80068 0.294C8.7719 0.126 8.62077 0 8.1086 0H5.56231C5.38241 0 5.23128 0.126 5.2025 0.294L4.93623 2.149C4.48286 2.324 4.09425 2.562 3.72004 2.835L1.92815 2.135C1.76983 2.072 1.57552 2.135 1.48917 2.289L0.0498936 4.711C-0.0436593 4.865 -0.000480936 5.054 0.13625 5.159L1.65468 6.3C1.6259 6.538 1.60431 6.769 1.60431 7C1.60431 7.231 1.6259 7.455 1.65468 7.679L0.13625 8.841C-0.000480936 8.946 -0.0436593 9.135 0.0498936 9.289L1.48917 11.711C1.57552 11.865 1.76983 11.921 1.92815 11.865L3.72004 11.158C4.09425 11.438 4.48286 11.676 4.93623 11.851L5.2025 13.706C5.23128 13.874 5.38241 14 5.56231 14H8.1086C8.62077 14 8.7719 13.874 8.80068 13.706L9.06695 11.851C9.52032 11.669 9.90892 11.438 10.2831 11.158L12.075 11.865C12.2334 11.921 12.4277 11.865 12.514 11.711L13.9533 9.289C14.0396 9.135 14.0037 8.946 13.8669 8.841L12.3485 7.679Z' fill='#222222'/></svg>";
@@ -232,7 +233,7 @@ function draw__hole() {
       "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z' fill='#EB1010'/></svg>";
     var id = "id" + Math.random().toString(16).slice(2).toLowerCase();
     newDiv.setAttribute("id", id);
-    newDiv__comment_settings.classList.add("m_btn");
+    // newDiv__comment_settings.classList.add("m_btn");
     newDiv__comment_settings.classList.add("newDiv__comment_settings");
     newDiv__comment_del.classList.add("newDiv__comment_del");
     newDiv__comment_settings.setAttribute("name", id);
@@ -434,6 +435,17 @@ function changesize(maxval,frominput) {
       alert("Syystä että alueen koko on vaihtunut, piirrosalueen ladonta pyyhitty.");
     }
   }
+
+  if(canvas.querySelectorAll(".mp").length > 0) {
+    mps = canvas.querySelectorAll(".mp");
+    mps.forEach(mp => {
+      if(canvas.offsetHeight < parseFloat(mp.style.bottom) || canvas.offsetWidth < parseFloat(mp.style.left)) {
+        console.log(mp.getAttribute("id"));
+        document.querySelector(".newDiv__comment_del[name='"+mp.getAttribute("id")+"']").click();
+        alert("Syystä että mittapiste on alueen ulkopuolella, se poistettiin"); 
+      }
+    });
+  }
   
   try {
     changeheights();
@@ -455,11 +467,23 @@ function changesize(maxval,frominput) {
     height = document.querySelector('.drawarea_h').value;
     width = document.querySelector('.drawarea_w').value;
 
-    thisroom = document.querySelector(".house__wall_" + current_room.toLowerCase());
+    if(userinteraction === true) {
+      thisroom = document.querySelector(".house__wall_" + current_room.toLowerCase());
 
-  
-    thisroom.querySelectorAll("input")[0].value = parseFloat(height);
-    thisroom.querySelectorAll("input")[1].value = parseFloat(width);
+      
+      thisroom.querySelectorAll("input")[0].value = parseFloat(height);
+      thisroom.querySelectorAll("input")[1].value = parseFloat(width);
+
+      document.querySelector('.question-container').classList.add("two");
+      document.querySelector('.question-container').classList.remove("out");
+      document.querySelector('.modal-yes').addEventListener("click", function() {
+        changeHeights(height);
+        changeWidths_2(width);
+      });
+      document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = width / 20 + "px";
+      document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.height = height / 20 + "px";
+      userinteraction = false;
+    }
   } catch (error) {
     setTimeout(() => {
       changesize(reserve_maxval);
@@ -777,6 +801,26 @@ function null__origo_cord() {
   }
 }
 
+function elem_del(e, count) {
+  console.log("elem_del CALLED");
+  if(e) {
+    obj = e.getAttribute("id");
+  }
+  else {
+    return
+  }
+  names = document.getElementsByName(obj);
+  for (var i = 0; i < names.length; i++) {
+    names[i].remove();
+  }
+
+  if(document.getElementsByName(obj)[0]) {
+    barent = document.getElementsByName(obj)[0];
+    barent.remove();
+  }
+  
+  e.remove();
+}
 /**
  * Retrieves coordinates from custom map points based on the argument provided.
  * @param {number} arg - The argument to match with the dataset number of map points.
@@ -786,6 +830,7 @@ function get_from_custom_mp(arg) {
   mp_s = canvas.querySelectorAll(".mp");
   bottomcord = 0;
   leftcord = 0;
+  from_custom_mp = true;
   if (input_step == "drawscreen_section_two") {
     for (var i = mp_s.length - 1; i >= 0; i--) {
       if (arg === parseFloat(mp_s[i].dataset.no)) {
@@ -793,8 +838,15 @@ function get_from_custom_mp(arg) {
         leftcord = parseFloat(mp_s[i].style.left) * 5;
       }
     }
-    document.querySelector("#aukotcord_left").value = leftcord;
-    document.querySelector("#aukotcord_low").value = bottomcord;
+    document.querySelector("#aukotcord_left").value = 0;
+    document.querySelector("#aukotcord_low").value = 0;
+
+    mp_bottomcord = bottomcord;
+    mp_leftcord = leftcord;
+
+    // Deprecated 130324
+    // document.querySelector("#aukotcord_left").value = leftcord;
+    // document.querySelector("#aukotcord_low").value = bottomcord;
   }
   if (input_step == "drawscreen_section_three") {
     for (var i = mp_s.length - 1; i >= 0; i--) {
@@ -803,8 +855,12 @@ function get_from_custom_mp(arg) {
         leftcord = parseFloat(mp_s[i].style.left) * 5;
       }
     }
-    document.querySelector("#lvcord_left").value = leftcord;
-    document.querySelector("#lvcord_low").value = bottomcord;
+    document.querySelector("#lvcord_left").value = 0;
+    document.querySelector("#lvcord_low").value = 0;
+    mp_bottomcord = bottomcord;
+    mp_leftcord = leftcord;
+    // document.querySelector("#lvcord_left").value = leftcord;
+    // document.querySelector("#lvcord_low").value = bottomcord;
   }
 }
 
@@ -872,7 +928,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
   if(modding === true) {
     correct_name = tomode_object.getAttribute('id');
     
-    a_dels = document.querySelectorAll(".drawarea__controls_elementstwo.drawarea__things .newDiv__comment_del");
+    a_dels = document.querySelectorAll(".newDiv__comment_del");
 
     a_dels.forEach(a_del => {
       if(a_del.getAttribute("name") === correct_name) {
@@ -907,23 +963,24 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
     "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.00159 9.45C6.33358 9.45 5.69293 9.19188 5.22058 8.73241C4.74822 8.27295 4.48286 7.64978 4.48286 7C4.48286 6.35022 4.74822 5.72705 5.22058 5.26759C5.69293 4.80812 6.33358 4.55 7.00159 4.55C7.6696 4.55 8.31025 4.80812 8.7826 5.26759C9.25495 5.72705 9.52032 6.35022 9.52032 7C9.52032 7.64978 9.25495 8.27295 8.7826 8.73241C8.31025 9.19188 7.6696 9.45 7.00159 9.45ZM12.3485 7.679C12.3773 7.455 12.3989 7.231 12.3989 7C12.3989 6.769 12.3773 6.538 12.3485 6.3L13.8669 5.159C14.0037 5.054 14.0396 4.865 13.9533 4.711L12.514 2.289C12.4277 2.135 12.2334 2.072 12.075 2.135L10.2831 2.835C9.90892 2.562 9.52032 2.324 9.06695 2.149L8.80068 0.294C8.7719 0.126 8.62077 0 8.1086 0H5.56231C5.38241 0 5.23128 0.126 5.2025 0.294L4.93623 2.149C4.48286 2.324 4.09425 2.562 3.72004 2.835L1.92815 2.135C1.76983 2.072 1.57552 2.135 1.48917 2.289L0.0498936 4.711C-0.0436593 4.865 -0.000480936 5.054 0.13625 5.159L1.65468 6.3C1.6259 6.538 1.60431 6.769 1.60431 7C1.60431 7.231 1.6259 7.455 1.65468 7.679L0.13625 8.841C-0.000480936 8.946 -0.0436593 9.135 0.0498936 9.289L1.48917 11.711C1.57552 11.865 1.76983 11.921 1.92815 11.865L3.72004 11.158C4.09425 11.438 4.48286 11.676 4.93623 11.851L5.2025 13.706C5.23128 13.874 5.38241 14 5.56231 14H8.1086C8.62077 14 8.7719 13.874 8.80068 13.706L9.06695 11.851C9.52032 11.669 9.90892 11.438 10.2831 11.158L12.075 11.865C12.2334 11.921 12.4277 11.865 12.514 11.711L13.9533 9.289C14.0396 9.135 14.0037 8.946 13.8669 8.841L12.3485 7.679Z' fill='#222222'/></svg>";
   newDiv__comment_del.innerHTML =
     "<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z' fill='#EB1010'/></svg>";
-  newDiv__comment_settings.classList.add("m_btn");
+  // newDiv__comment_settings.classList.add("m_btn");
   newDiv__comment_settings.classList.add("newDiv__comment_settings");
   newDiv__comment_del.classList.add("newDiv__comment_del");
   document.querySelector("#box-wrapper > main").prepend(newDiv);
   newDiv.innerHTML = "";
+  mittapiste_count = canvas.querySelectorAll(".mp").length+1;
   if (mode) {
     name = mode_name;
     realname = name.split("#")[0];
-    newDiv__comment.innerHTML = realname + "#" + mode_count;
+    newDiv__comment.innerHTML = realname + "# <b class='mp_count'>" + mode_count + "</b>";
     let id = mode_id;
     newDiv.setAttribute("id", id);
     newDiv__comment_settings.setAttribute("name", id);
     newDiv__comment_del.setAttribute("name", id);
     newDiv__comment.setAttribute("name", id);
     if (type == "mp") {
-      mittapiste_count += 1;
-      newDiv__comment.innerHTML = document.querySelector("#mittapiste__name").value + "#" + mittapiste_count;
+      
+      newDiv__comment.innerHTML = document.querySelector("#mittapiste__name").value + "# <b class='mp_count'>" + mittapiste_count + "</b>";
       newDiv__hidden_attention.type = "hidden";
       newDiv__hidden_attention.name = "attentions";
       newDiv__hidden_attentioncommmets.type = "hidden";
@@ -981,9 +1038,9 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       mode_xcord = parseFloat(newDiv.style.left) * 5;
       mode_ycord = parseFloat(newDiv.style.bottom) * 5;
 
-      newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');mittapiste_count-=1;");
-      newDiv__comment_settings.setAttribute("onclick",
-        " document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();delete_from_db('"+t_array+"');mittapiste_count-=1;mp_previous_vord = '';");
+      newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');elem_del(document.querySelector('#'+obj), -1);");
+      newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();enable__modding(document.querySelector('#'+obj));");
+      // newDiv__comment_settings.setAttribute("onclick", " document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();delete_from_db('"+t_array+"');mp_previous_vord = '';");
       
     }
     if (type == "au") {
@@ -1124,7 +1181,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       }
       au_previous_vord = "0|" + parseFloat(newDiv.style.bottom) * 5 + "|" + parseFloat(newDiv.style.left) * 5 + "|" + (parseFloat(newDiv.style.width) + 1) * 5 + "|" + parseFloat(newDiv.style.height) * 5;
       newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');aukko_del(document.querySelector('#'+obj), -1);");
-      newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;delete_from_db('"+t_array+"');");
+      newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');enable__modding(document.querySelector('#'+obj));");
 
       aukko_lcord = document.createElement("div");
       aukko_lcord.classList.add("aukko__cord");
@@ -1216,13 +1273,31 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       newDiv__hidden_attention.name = "attentions";
       newDiv__hidden_attentioncommmets.type = "hidden";
       newDiv__hidden_attentioncommmets.name = "commmets";
-      newDiv__comment.innerHTML = document.querySelector("#lv__name").value + "#" + lapivienti_count;
+      newDiv__comment.innerHTML = document.querySelector("#lv__name").value + "# <b class='lv_count'>" + lapivienti_count + "</b>";
       document.querySelector(".drawarea__controls_elementsthree").prepend(newDiv__comment);
       document.querySelector(".drawarea__controls_elementsthree").prepend(newDiv__hidden_attention);
       document.querySelector(".drawarea__controls_elementsthree").prepend(newDiv__hidden_attentioncommmets);
       newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
-      newDiv.style.bottom = (eval(document.getElementById("lvcord_low").value) / 5) + "px";
-      newDiv.style.left = (eval(document.getElementById("lvcord_left").value) / 5) + "px";
+      if(origo_position === "left_bottom") {
+        newDiv.style.left = eval(document.querySelector("#lvcord_left").value) / 5 + "px";
+        newDiv.style.bottom = eval(document.querySelector("#lvcord_low").value) / 5 + "px";
+      }
+      else if(origo_position === "right_bottom") {
+        newDiv.style.left = (parseFloat(canvas.offsetWidth) - eval(document.querySelector("#lvcord_left").value)/ 5)  + "px";
+        newDiv.style.bottom = eval(document.querySelector("#lvcord_low").value) / 5 + "px";
+      }
+      else if(origo_position === "right_top") {
+        newDiv.style.left = (parseFloat(canvas.offsetWidth) - eval(document.querySelector("#lvcord_left").value)/ 5)  + "px";
+        newDiv.style.bottom = (parseFloat(canvas.offsetHeight) - eval(document.querySelector("#lvcord_low").value) / 5) + "px";
+      }
+      else if(origo_position === "left_top") {
+        newDiv.style.left = eval(document.querySelector("#lvcord_left").value) / 5 + "px";
+        newDiv.style.bottom = (parseFloat(canvas.offsetHeight) - eval(document.querySelector("#lvcord_low").value) / 5) + "px";
+      }
+
+
+      // newDiv.style.bottom = (eval(document.getElementById("lvcord_low").value) / 5) + "px";
+      // newDiv.style.left = (eval(document.getElementById("lvcord_left").value) / 5) + "px";
 
 
       newDiv.innerHTML = document.getElementById("lapiviennit__sade_muucord").value;
@@ -1298,11 +1373,13 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       console.log("Things_arrayt_array: " + t_array);
       lv_previous_vord_ = "0|" + parseFloat(newDiv.style.bottom) * 5 + "|" + parseFloat(newDiv.style.left) * 5;
       newDiv__comment_del.setAttribute("onclick",
-        "obj = this.getAttribute('name');document.querySelector('#'+obj).remove();this.parentElement.remove();lapivienti_count-=1;delete_from_db('"+t_array+"');mittapiste_count-=1;");
+        "obj = this.getAttribute('name');document.querySelector('#'+obj).remove();this.parentElement.remove();lapivienti_count-=1;delete_from_db('"+t_array+"');elem_del(document.querySelector('#'+obj), -1);");
 
         newDiv__comment_settings.setAttribute("onclick",
-        "open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"','"+parseFloat(newDiv.style.height)+"','"+parseFloat(newDiv.style.width)+"','"+c_text.innerText+"','"+document.querySelector("#lv_comment_from").value+"','"+document.querySelector("#lv_comment_to").value+"');delete_from_db('"+t_array+"');lv_previous_vord = '"+lv_previous_vord_+"';"
+        "obj = this.getAttribute('name');open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"','"+parseFloat(newDiv.style.height)+"','"+parseFloat(newDiv.style.width)+"','"+c_text.innerText+"','"+document.querySelector("#lv_comment_from").value+"','"+document.querySelector("#lv_comment_to").value+"');lv_previous_vord = '"+lv_previous_vord_+"';enable__modding(document.querySelector('#'+obj));" 
       );
+
+      // delete_from_db('"+t_array+"');
 
       if (lv_previous_vord !== null) {
         newDiv.dataset.prevcord = lv_previous_vord;
@@ -1366,8 +1443,13 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
   else {
     input_step = document.querySelector('#step_drawscreen').value;
     if (input_step == "drawscreen_section_one") {
-      mittapiste_count += 1;
-      newDiv__comment.innerHTML = document.querySelector("#mittapiste__name").value + "#" + mittapiste_count;
+
+
+      if(canvas.querySelectorAll(".mp").length === 2) {
+        alert("Maksimi mittapistemäärä on 2.");
+        return
+      }
+      newDiv__comment.innerHTML = document.querySelector("#mittapiste__name").value + "# <b class='mp_count'>" + mittapiste_count + "</b>";
       newDiv__hidden_attention.type = "hidden";
       newDiv__hidden_attention.name = "attentions";
       newDiv__hidden_attentioncommmets.type = "hidden";
@@ -1377,9 +1459,24 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       document.querySelector(".drawarea__controls_elementsone").prepend(newDiv__hidden_attentioncommmets);
 
 
-       newDiv.style.left = eval(document.querySelector("#cord_left").value) / 5 + "px";
-      
-       newDiv.style.bottom = eval(document.querySelector("#cord_up").value) / 5 + "px";
+
+      if(origo_position === "left_bottom") {
+        newDiv.style.left = eval(document.querySelector("#cord_left").value) / 5 + "px";
+        newDiv.style.bottom = eval(document.querySelector("#cord_up").value) / 5 + "px";
+      }
+      else if(origo_position === "right_bottom") {
+        newDiv.style.left = (parseFloat(canvas.offsetWidth) - eval(document.querySelector("#cord_left").value)/ 5)  + "px";
+        newDiv.style.bottom = eval(document.querySelector("#cord_up").value) / 5 + "px";
+      }
+      else if(origo_position === "right_top") {
+        newDiv.style.left = (parseFloat(canvas.offsetWidth) - eval(document.querySelector("#cord_left").value)/ 5)  + "px";
+        newDiv.style.bottom = (parseFloat(canvas.offsetHeight) - eval(document.querySelector("#cord_up").value) / 5) + "px";
+      }
+      else if(origo_position === "left_top") {
+        newDiv.style.left = eval(document.querySelector("#cord_left").value) / 5 + "px";
+        newDiv.style.bottom = (parseFloat(canvas.offsetHeight) - eval(document.querySelector("#cord_up").value) / 5) + "px";
+      }
+       
       
       
       if (document.querySelector("#cord_up").value == "") {
@@ -1429,9 +1526,10 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       save("mp~~"+mode_xcord+"~~"+mode_ycord+"~~"+newDiv__comment.innerText);
 
       mp_previous_vord_ = "0|" + parseFloat(newDiv.style.bottom) * 5 + "|" + parseFloat(newDiv.style.left) * 5;
-      newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');mittapiste_count-=1;");
+      newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');elem_del(document.querySelector('#'+obj), -1);");
       newDiv__comment_settings.setAttribute("onclick",
-        " document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();delete_from_db('"+t_array+"');mittapiste_count-=1;mp_previous_vord = '" + mp_previous_vord_ + "';");
+        "obj = this.getAttribute('name');document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();enable__modding(document.querySelector('#'+obj));");
+        // delete_from_db('"+t_array+"');mittapiste_count-=1;mp_previous_vord = '" + mp_previous_vord_ + "';elem_del(document.querySelector('#'+obj), -1);
       if (mp_previous_vord !== null) {
         newDiv.dataset.prevcord = mp_previous_vord;
         mp_previous_vord = null;
@@ -1465,16 +1563,40 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         document.querySelector(".drawarea__controls_elementstwo").prepend(newDiv__comment);
         document.querySelector(".drawarea__controls_elementstwo").prepend(newDiv__hidden_attention);
         document.querySelector(".drawarea__controls_elementstwo").prepend(newDiv__hidden_attentioncommmets);
-        newDiv.style.width = eval(parseFloat(document.querySelector("#hole__width").value) / 5) + "px";
-        // parseFloat(parseFloat(document.querySelector("#hole__height").value)/5) + "px";
-        newDiv.style.height = eval(parseFloat(document.querySelector("#hole__height").value) / 5) + "px";
-        newDiv.style.bottom = (eval(document.getElementById("aukotcord_low").value) / 5) + "px";
-        newDiv.style.left = (eval(document.getElementById("aukotcord_left").value) / 5) + 'px';
-        if (document.querySelector("#aukotcord_low").value == "") {
-          newDiv.style.bottom = 0 + 'px';
+
+        if(from_custom_mp !== true) {
+          if(origo_position === "left_bottom") {
+            newDiv.style.left = eval(document.querySelector("#aukotcord_left").value) / 5 + "px";
+            newDiv.style.bottom = eval(document.querySelector("#aukotcord_low").value) / 5 + "px";
+          }
+          else if(origo_position === "right_bottom") {
+            newDiv.style.left = (parseFloat(canvas.offsetWidth) - eval(document.querySelector("#aukotcord_left").value)/ 5)  + "px";
+            newDiv.style.bottom = eval(document.querySelector("#aukotcord_low").value) / 5 + "px";
+          }
+          else if(origo_position === "right_top") {
+            newDiv.style.left = (parseFloat(canvas.offsetWidth) - eval(document.querySelector("#aukotcord_left").value)/ 5)  + "px";
+            newDiv.style.bottom = (parseFloat(canvas.offsetHeight) - eval(document.querySelector("#aukotcord_low").value) / 5) + "px";
+          }
+          else if(origo_position === "left_top") {
+            newDiv.style.left = eval(document.querySelector("#aukotcord_left").value) / 5 + "px";
+            newDiv.style.bottom = (parseFloat(canvas.offsetHeight) - eval(document.querySelector("#aukotcord_low").value) / 5) + "px";
+          }
+
+          // newDiv.style.bottom = (eval(document.getElementById("aukotcord_low").value) / 5) + "px";
+          // newDiv.style.left = (eval(document.getElementById("aukotcord_left").value) / 5) + 'px';
+          
         }
-        if (document.querySelector("#aukotcord_left").value == "") {
-          newDiv.style.left = 0 + 'px';
+        else {
+          newDiv.style.left =  parseFloat(mp_leftcord)/5 + (eval(document.querySelector("#aukotcord_left").value) / 5 ) + "px";
+          newDiv.style.bottom = parseFloat(mp_bottomcord)/5 + (eval(document.querySelector("#aukotcord_low").value) / 5)  + "px";
+          from_custom_mp = false;
+        }
+        newDiv.style.width = eval(parseFloat(document.querySelector("#hole__width").value) / 5) + "px";
+        newDiv.style.height = eval(parseFloat(document.querySelector("#hole__height").value) / 5) + "px";
+
+        if (document.querySelector("#aukotcord_low").value == "" || document.querySelector("#aukotcord_left").value == "" || document.querySelector("#aukotcord_right").value == "" || document.querySelector("#aukotcord_up").value == "") {
+          alert("Aukkoa ei lisätty, sillä jotain koordinaattia ei annettu. Kokeile uudelleen");
+          return
         }
         // if (document.querySelector("#m__a_sahko").checked) {
         //   newDiv__hidden_attention.value += document.querySelector("#m__a_sahko").value + '. ';
@@ -1583,7 +1705,8 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         au_previous_vord = "0|" + parseFloat(newDiv.style.bottom) * 5 + "|" + parseFloat(newDiv.style.left) * 5 + "|" + (parseFloat(newDiv.style.width) + 1) *
           5 + "|" + parseFloat(newDiv.style.height) * 5;
         newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');aukko_del(document.querySelector('#'+obj), -1);"); //aukko_del(document.querySelector('#'+obj), -1);
-        newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;delete_from_db('"+t_array+"');au_previous_vord = '" + au_previous_vord + "';select__ylitys(document.querySelector('#'+obj).dataset.settingsmode,document.querySelector('#'+obj));");
+        newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');open_element(this.getAttribute('name'),parseFloat(document.querySelector('#'+obj).style.left),parseFloat(document.querySelector('#'+obj).style.width),parseFloat(document.querySelector('#'+obj).style.bottom),parseFloat(document.querySelector('#'+obj).style.height),document.querySelector('#'+obj).dataset.comment,document.querySelector('#'+obj).dataset.comment_from,document.querySelector('#'+obj).dataset.comment_to);/*aukko_del(document.querySelector('#' + obj), -1);*/document.querySelector('#drawscreen_section_two > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_two > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();obj = this.getAttribute('name');aukko_count -= 1;au_previous_vord = '" + au_previous_vord + "';select__ylitys(document.querySelector('#'+obj).dataset.settingsmode,document.querySelector('#'+obj));enable__modding(document.querySelector('#'+obj));");
+        // delete_from_db('"+t_array+"');
 
         aukko_lcord = document.createElement("div");
         aukko_lcord.classList.add("aukko__cord");
@@ -1677,15 +1800,36 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       newDiv__hidden_attention.name = "attentions";
       newDiv__hidden_attentioncommmets.type = "hidden";
       newDiv__hidden_attentioncommmets.name = "commmets";
-      newDiv__comment.innerHTML = document.querySelector("#lv__name").value + "#" + lapivienti_count;
+      newDiv__comment.innerHTML = document.querySelector("#lv__name").value + "# <b class='lv_count'>" + lapivienti_count + "</b>";
       document.querySelector(".drawarea__controls_elementsthree").prepend(newDiv__comment);
       document.querySelector(".drawarea__controls_elementsthree").prepend(newDiv__hidden_attention);
       document.querySelector(".drawarea__controls_elementsthree").prepend(newDiv__hidden_attentioncommmets);
       newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
-      newDiv.style.bottom = (eval(document.getElementById("lvcord_low").value) / 5) + "px";
-      newDiv.style.left = (eval(document.getElementById("lvcord_left").value) / 5) + "px";
 
+      if(from_custom_mp !== true) {
+        if(origo_position === "left_bottom") {
+          newDiv.style.left = eval(document.querySelector("#lvcord_left").value) / 5 + "px";
+          newDiv.style.bottom = eval(document.querySelector("#lvcord_low").value) / 5 + "px";
+        }
+        else if(origo_position === "right_bottom") {
+          newDiv.style.left = (parseFloat(canvas.offsetWidth) - eval(document.querySelector("#lvcord_left").value)/ 5)  + "px";
+          newDiv.style.bottom = eval(document.querySelector("#lvcord_low").value) / 5 + "px";
+        }
+        else if(origo_position === "right_top") {
+          newDiv.style.left = (parseFloat(canvas.offsetWidth) - eval(document.querySelector("#lvcord_left").value)/ 5)  + "px";
+          newDiv.style.bottom = (parseFloat(canvas.offsetHeight) - eval(document.querySelector("#lvcord_low").value) / 5) + "px";
+        }
+        else if(origo_position === "left_top") {
+          newDiv.style.left = eval(document.querySelector("#lvcord_left").value) / 5 + "px";
+          newDiv.style.bottom = (parseFloat(canvas.offsetHeight) - eval(document.querySelector("#lvcord_low").value) / 5) + "px";
+        }
+      }
+      else {
+        newDiv.style.left =  parseFloat(mp_leftcord)/5 + (eval(document.querySelector("#lvcord_left").value) / 5 ) + "px";
+        newDiv.style.bottom = parseFloat(mp_bottomcord)/5 + (eval(document.querySelector("#lvcord_low").value) / 5)  + "px";
 
+        from_custom_mp = false;
+      }
       newDiv.innerHTML = document.getElementById("lapiviennit__sade_muucord").value;
 
       if(document.getElementById("lapiviennit__sade_muucord").value.includes("x")) {
@@ -1759,11 +1903,12 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       console.log("Things_arrayt_array: " + t_array);
       lv_previous_vord_ = "0|" + parseFloat(newDiv.style.bottom) * 5 + "|" + parseFloat(newDiv.style.left) * 5;
       newDiv__comment_del.setAttribute("onclick",
-        "obj = this.getAttribute('name');document.querySelector('#'+obj).remove();this.parentElement.remove();lapivienti_count-=1;delete_from_db('"+t_array+"');mittapiste_count-=1;");
+        "obj = this.getAttribute('name');document.querySelector('#'+obj).remove();this.parentElement.remove();lapivienti_count-=1;delete_from_db('"+t_array+"');");
 
       newDiv__comment_settings.setAttribute("onclick",
-        "open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"','"+parseFloat(newDiv.style.height)+"','"+parseFloat(newDiv.style.width)+"','"+c_text.innerText+"','"+document.querySelector("#lv_comment_from").value+"','"+document.querySelector("#lv_comment_to").value+"');delete_from_db('"+t_array+"');lv_previous_vord = '"+lv_previous_vord_+"';"
+        "obj = this.getAttribute('name');open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"','"+parseFloat(newDiv.style.height)+"','"+parseFloat(newDiv.style.width)+"','"+c_text.innerText+"','"+document.querySelector("#lv_comment_from").value+"','"+document.querySelector("#lv_comment_to").value+"');lv_previous_vord = '"+lv_previous_vord_+"';enable__modding(document.querySelector('#'+obj));"
       );
+      // delete_from_db('"+t_array+"');
       if (lv_previous_vord !== null) {
         newDiv.dataset.prevcord = lv_previous_vord;
         lv_previous_vord = null;
@@ -1838,7 +1983,8 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
   }
 
   // document.querySelector(".drawarea__bottom");
-
+  count__mp();
+  count__lv();
   
 }
 
@@ -1867,6 +2013,11 @@ function cord__check(inp) {
  }
 }
 
+function enable__modding(object) {
+  modding = true;
+  tomode_object = object;
+}
+
 
 function select__ylitys(setmode,object) {
   input_types = document.querySelectorAll(".aukko_ylitys input");
@@ -1876,9 +2027,36 @@ function select__ylitys(setmode,object) {
       type.checked = true;
     }
   });
-  
-  modding = true;
-  tomode_object = object;
+}
 
+function count__mp() {
 
+  mps = canvas.querySelectorAll(".mp");
+  mp_count=0;
+  mps.forEach(mp => {
+    mp_count+=1;
+    mp.dataset.no = mp_count;
+    obj = mp.getAttribute("id");
+    names = document.getElementsByName(obj);
+    for (var i = 0; i < names.length; i++) {
+      if(names[i].querySelector(".mp_count")) {
+        names[i].querySelector(".mp_count").innerHTML = mp_count;
+      }
+    }
+  });
+}
+function count__lv() {
+  lvs = canvas.querySelectorAll(".lv");
+  lv_count=0;
+  lvs.forEach(lv => {
+    lv_count+=1;
+    lv.dataset.no = lv_count;
+    obj = lv.getAttribute("id");
+    names = document.getElementsByName(obj);
+    for (var i = 0; i < names.length; i++) {
+      if(names[i].querySelector(".lv_count")) {
+        names[i].querySelector(".lv_count").innerHTML = lv_count;
+      }
+    }
+  });
 }

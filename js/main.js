@@ -468,6 +468,7 @@ function refresh__drawcontrols() {
         // degradate_url(3);
       }
       rangat__navigation(false);
+      document.querySelector(".drawarea__top").style.zIndex = 2;
     }
     else {
       let array__ofinputsy = [];
@@ -591,6 +592,8 @@ function refresh__drawcontrols() {
       room_status = 'tomeasure';
       document.querySelector("input.room_status").value = room_status; 
       rangat__navigation(false);
+      document.querySelector(".drawarea__top").style.zIndex = 2;
+
       // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     if (input_step == 'drawscreen_section_three') {
@@ -681,6 +684,8 @@ function refresh__drawcontrols() {
       room_status = 'tomeasure';
       document.querySelector("input.room_status").value = room_status;
       rangat__navigation(false);
+      document.querySelector(".drawarea__top").style.zIndex = 2;
+
       // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     if (input_step == 'drawscreen_section_four') {
@@ -995,6 +1000,8 @@ function refresh__drawcontrols() {
       room_status = 'saumatok';
       document.querySelector("input.room_status").value = room_status; 
       rangat__navigation(false);
+      document.querySelector(".drawarea__top").style.zIndex = -2;
+
       // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     else {
@@ -1105,6 +1112,7 @@ function refresh__drawcontrols() {
       }
 
       rangat__navigation(false);
+      document.querySelector(".drawarea__top").style.zIndex = -2;
     }
     else {
       sauma__controls = canvas.querySelectorAll(".sauma__controls");
@@ -1297,6 +1305,7 @@ function refresh__drawcontrols() {
       create__ladontaoptions();
 
       rangat__navigation(false);
+      document.querySelector(".drawarea__top").style.zIndex = -2;
     }
     else {
       // if(canvas.querySelector(".closer")) {
@@ -1483,6 +1492,7 @@ function refresh__drawcontrols() {
       }
 
       rangat__navigation(false);
+      document.querySelector(".drawarea__top").style.zIndex = -2;
 
       formData = {
         pr_id: document.querySelector("#current_project_id").value,
@@ -1673,6 +1683,7 @@ function refresh__drawcontrols() {
           document.querySelector("input.room_status").value = room_status;
         }
       });
+      document.querySelector(".drawarea__top").style.zIndex = -2;
       // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
     }
     else {
@@ -1868,7 +1879,7 @@ function refresh__drawcontrols() {
         // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
 
       }
-      
+      document.querySelector(".drawarea__top").style.zIndex = -2;
     }
     else {
       if (document.querySelector(".listat__grandrow")) {
@@ -1970,6 +1981,7 @@ function refresh__drawcontrols() {
       }
       
       rangat__navigation(false);
+      document.querySelector(".drawarea__top").style.zIndex = -2;
 
     }
     else {
@@ -3084,8 +3096,11 @@ function getElementCoords(bottom_input, left_input) {
     const cordsLeft = document.querySelector(left_input);
 
     if (origoBottom && origoLeft) {
-      cordsBottom.value = origoBottom * 5;
-      cordsLeft.value = origoLeft * 5;
+      // DEPRECATED 130324
+      // cordsBottom.value = origoBottom * 5;
+      // cordsLeft.value = origoLeft * 5;
+      cordsBottom.value = 5;
+      cordsLeft.value =  5;
       change__newdiv_cord();
     }
     else {
@@ -4037,7 +4052,7 @@ function initializesettings__mittaus() {
                 additional_lvclass = "drawarea__top_circle";
                 measurements = v[3];
               }
-              dt.innerHTML += `<div class="drawarea__top_item ${additional_lvclass}" style="background: #eee;display:flex;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = ${measurements};">${v[1]}</div>`;
+              dt.innerHTML += `<div class="drawarea__top_item ${additional_lvclass}" style="background: #eee;display:flex;" onclick="settings__mitta();document.querySelector('#lapiviennit__sade_muucord').value = ${measurements};">${v[1]} <br> ${v[2]}</div>`;
 
             }
             else {
