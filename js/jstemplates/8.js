@@ -119,7 +119,9 @@ function rangoita() {
         td_p.push(t_p_array);
       }
     }
-    else { }
+    else {
+      console.log("No xcord detected");
+    }
   }
   for (var i = tyostot__tyosto_vaaka.length - 1; i >= 0; i--) {
     if (tyostot__tyosto_vaaka[i].classList.contains("no_siirto") !== true) {
@@ -150,10 +152,10 @@ function rangoita() {
   for (var i = tyostot__tyosto_vaaka.length - 1; i >= 0; i--) {
     tyostot__tyosto_vaaka[i].style.opacity = 0;
   }
-  var tyostot;
-  if (document.querySelector(".rangat__grandrow")) {
-    tyostot = document.querySelector(".rangat__grandrow");
-    document.querySelector(".rangat__grandrow").innerHTML = "";
+  
+  if (canvas.querySelector(".rangat__grandrow")) {
+    tyostot = canvas.querySelector(".rangat__grandrow");
+    canvas.querySelector(".rangat__grandrow").innerHTML = "";
   }
   else {
     tyostot = document.createElement("div");
@@ -262,28 +264,36 @@ function rangoita() {
   }
   aukot = canvas.querySelectorAll(".aukko");
   for (var i = 0; i < aukot.length; i++) {
+    irv = document.createElement("div");
+    iro = document.createElement("div");
+    ira = document.createElement("div");
+    iry = document.createElement("div");
+    irv.classList.add("ranka");
+    iro.classList.add("ranka");
+    ira.classList.add("ranka");
+    iry.classList.add("ranka");
+    irv.classList.add("aukko__ranka");
+    iro.classList.add("aukko__ranka");
+    ira.classList.add("aukko__ranka");
+    iry.classList.add("aukko__ranka");
+    irv.classList.add("ranka_pysty");
+    iro.classList.add("ranka_pysty");
+    ira.classList.add("ranka_vaaka");
+    iry.classList.add("ranka_vaaka");
+    irv.dataset.from = aukot[i].getAttribute("id");
+    iro.dataset.from = aukot[i].getAttribute("id");
+    ira.dataset.from = aukot[i].getAttribute("id");
+    iry.dataset.from = aukot[i].getAttribute("id");
     if (aukot[i].classList.contains("ovi")) {
-      irv = document.createElement("div");
-      iro = document.createElement("div");
-      ira = document.createElement("div");
-      iry = document.createElement("div");
-      irv.classList.add("ranka");
-      irv.classList.add("ranka_pysty");
       irv.classList.add("oviranka");
       irv.classList.add("oviranka_irv");
       irv.dataset.name = "oviranka_irv";
-      iro.classList.add("ranka");
-      iro.classList.add("ranka_pysty");
       iro.classList.add("oviranka");
       iro.classList.add("oviranka_iro");
       iro.dataset.name = "oviranka_iro";
-      ira.classList.add("ranka");
-      ira.classList.add("ranka_vaaka");
       ira.classList.add("oviranka");
       ira.classList.add("oviranka_ira");
       ira.dataset.name = "oviranka_ira";
-      iry.classList.add("ranka");
-      iry.classList.add("ranka_vaaka");
       iry.classList.add("oviranka");
       iry.classList.add("oviranka_iry");
       iry.dataset.name = "oviranka_iry";
@@ -301,27 +311,15 @@ function rangoita() {
       tyostot.append(iry);
     }
     if (aukot[i].classList.contains("ikkuna")) {
-      irv = document.createElement("div");
-      iro = document.createElement("div");
-      ira = document.createElement("div");
-      iry = document.createElement("div");
-      irv.classList.add("ranka");
-      irv.classList.add("ranka_pysty");
       irv.classList.add("ikkunaranka");
       irv.classList.add("ikkunaranka_irv");
       irv.dataset.name = "ikkunaranka_irv";
-      iro.classList.add("ranka");
-      iro.classList.add("ranka_pysty");
       iro.classList.add("ikkunaranka");
       iro.classList.add("ikkunaranka_iro");
       iro.dataset.name = "ikkunaranka_iro";
-      ira.classList.add("ranka");
-      ira.classList.add("ranka_vaaka");
       ira.classList.add("ikkunaranka");
       ira.classList.add("ikkunaranka_ira");
       ira.dataset.name = "ikkunaranka_ira";
-      iry.classList.add("ranka");
-      iry.classList.add("ranka_vaaka");
       iry.classList.add("ikkunaranka");
       iry.classList.add("ikkunaranka_iry");
       iry.dataset.name = "ikkunaranka_iry";
@@ -343,23 +341,15 @@ function rangoita() {
       iro = document.createElement("div");
       ira = document.createElement("div");
       iry = document.createElement("div");
-      irv.classList.add("ranka");
-      irv.classList.add("ranka_pysty");
       irv.classList.add("pilariranka");
       irv.classList.add("pilariranka_irv");
       irv.dataset.name = "pilariranka_irv";
-      iro.classList.add("ranka");
-      iro.classList.add("ranka_pysty");
       iro.classList.add("pilariranka");
       iro.classList.add("pilariranka_iro");
       iro.dataset.name = "pilariranka_iro";
-      ira.classList.add("ranka");
-      ira.classList.add("ranka_vaaka");
       ira.classList.add("pilariranka");
       ira.classList.add("pilariranka_ira");
       ira.dataset.name = "pilariranka_ira";
-      iry.classList.add("ranka");
-      iry.classList.add("ranka_vaaka");
       iry.classList.add("pilariranka");
       iry.classList.add("pilariranka_iry");
       iry.dataset.name = "pilariranka_iry";
@@ -376,29 +366,20 @@ function rangoita() {
       tyostot.append(ira);
       tyostot.append(iry);
     }
-
     if (aukot[i].classList.contains("palkki")) {
       irv = document.createElement("div");
       iro = document.createElement("div");
       ira = document.createElement("div");
       iry = document.createElement("div");
-      irv.classList.add("ranka");
-      irv.classList.add("ranka_pysty");
       irv.classList.add("palkkiranka");
       irv.classList.add("palkkiranka_irv");
       irv.dataset.name = "palkkiranka_irv";
-      iro.classList.add("ranka");
-      iro.classList.add("ranka_pysty");
       iro.classList.add("palkkiranka");
       iro.classList.add("palkkiranka_iro");
       iro.dataset.name = "palkkiranka_iro";
-      ira.classList.add("ranka");
-      ira.classList.add("ranka_vaaka");
       ira.classList.add("palkkiranka");
       ira.classList.add("palkkiranka_ira");
       ira.dataset.name = "palkkiranka_ira";
-      iry.classList.add("ranka");
-      iry.classList.add("ranka_vaaka");
       iry.classList.add("palkkiranka");
       iry.classList.add("palkkiranka_iry");
       iry.dataset.name = "palkkiranka_iry";
@@ -415,29 +396,20 @@ function rangoita() {
       tyostot.append(ira);
       tyostot.append(iry);
     }
-
     if (aukot[i].classList.contains("tuuletus")) {
       irv = document.createElement("div");
       iro = document.createElement("div");
       ira = document.createElement("div");
       iry = document.createElement("div");
-      irv.classList.add("ranka");
-      irv.classList.add("ranka_pysty");
       irv.classList.add("tuuletusranka");
       irv.classList.add("tuuletusranka_irv");
       irv.dataset.name = "tuuletusranka_irv";
-      iro.classList.add("ranka");
-      iro.classList.add("ranka_pysty");
       iro.classList.add("tuuletusranka");
       iro.classList.add("tuuletusranka_iro");
       iro.dataset.name = "tuuletusranka_iro";
-      ira.classList.add("ranka");
-      ira.classList.add("ranka_vaaka");
       ira.classList.add("tuuletusranka");
       ira.classList.add("tuuletusranka_ira");
       ira.dataset.name = "tuuletusranka_ira";
-      iry.classList.add("ranka");
-      iry.classList.add("ranka_vaaka");
       iry.classList.add("tuuletusranka");
       iry.classList.add("tuuletusranka_iry");
       iry.dataset.name = "tuuletusranka_iry";
@@ -454,7 +426,17 @@ function rangoita() {
       tyostot.append(ira);
       tyostot.append(iry);
     }
+
+    irv.innerHTML = '<input value="irv" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetHeight)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.left) * 5 + '</div>';
+    iro.innerHTML = '<input value="iro" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetHeight)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.left) * 5 + '</div>';
+    ira.innerHTML = '<input value="ira" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetWidth)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.bottom) * 5 + '</div>';
+    iry.innerHTML = '<input value="iry" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetWidth)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.bottom) * 5 + '</div>';
+    irv.style.background = sr;
+    iro.style.background = sr;
+    ira.style.background = sr;
+    iry.style.background = sr;
   }
+  
   viimranka_pysty = document.createElement("div");
   viimranka_pysty.classList.add("ranka");
   viimranka_pysty.classList.add("ranka_unconfirmed");
@@ -473,8 +455,8 @@ function rangoita() {
 
   viimranka_vaaka.style.bottom = roundToNearest25(h - 2.5) / 5 + "px";
   tyostot.append(viimranka_vaaka);
-  if (document.querySelector(".saumat__grandrow")) {
-    document.querySelector(".saumat__grandrow").style.opacity = 0;
+  if (canvas.querySelector(".saumat__grandrow")) {
+    canvas.querySelector(".saumat__grandrow").style.opacity = 0;
   }
 
   trow = tyostot;
@@ -536,7 +518,7 @@ function fixrangat() {
     const bottomB = parseInt(b.style.bottom);
     return bottomA - bottomB;
   });
-  tyostot = document.querySelector(".rangat__grandrow");
+  tyostot = canvas.querySelector(".rangat__grandrow");
   for (var i = 0; i < sortedrangat_pysty.length; i++) {
     tyostot.append(sortedrangat_pysty[i]);
   }

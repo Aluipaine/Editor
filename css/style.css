@@ -414,11 +414,13 @@ form input[type="submit"]:focus {
   bottom: 0;
 }
 
-.canvas tbody * {
+.canvas tbody *,
+.preview_canvas tbody * {
   transition: all 0.1s ease-in-out;
 }
 
-.canvas tbody {
+.canvas tbody,
+.preview_canvas tbody {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -3840,13 +3842,15 @@ div.p_meaning {
   width: 80%;
   margin: 0 auto;
 }
-.canvas {
+.canvas,
+.preview_canvas {
   overflow: visible;
   position: relative;
   outline: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-main.canvas:before {
+main.canvas:before,
+article.preview_canvas:before {
   background: #fff;
   width: 100%;
   height: 1078px;
@@ -3856,7 +3860,8 @@ main.canvas:before {
   z-index: 0;
 }
 
-.canvas span {
+.canvas span,
+.preview_canvas span {
   position: absolute;
   bottom: 0;
   overflow: visible;
@@ -3875,7 +3880,9 @@ main.canvas:before {
   -webkit-user-drag: element;
 }
 .canvas span:before,
-.canvas span:after {
+.canvas span:after,
+.preview_canvas span:before,
+.preview_canvas span:after {
   position: absolute;
   content: "";
   display: block;
@@ -3885,11 +3892,13 @@ main.canvas:before {
   height: 7.5px;
 }
 
-.canvas span.mp {
+.canvas span.mp,
+.preview_canvas span.mp {
   margin-left: -7.5px;
   margin-bottom: -7.5px;
 }
-.canvas span:before {
+.canvas span:before,
+.preview_canvas span:before {
   top: 0;
   left: 0;
 
@@ -3899,7 +3908,8 @@ main.canvas:before {
   border-bottom-left-radius: 0;
 }
 
-.canvas span:after {
+.canvas span:after,
+.preview_canvas span:after {
   bottom: 0;
   right: 0;
 
@@ -3909,7 +3919,8 @@ main.canvas:before {
   border-bottom-left-radius: 0;
 }
 
-.canvas span.aukko {
+.canvas span.aukko,
+.preview_canvas span.aukko {
   border-radius: 0;
   background: #fff;
   margin-left: 0;
@@ -3926,24 +3937,37 @@ main.canvas:before {
 .canvas span.settings__lv:before,
 .canvas span.settings__lv:after,
 .canvas span.lapivienti:before,
-.canvas span.lapivienti:after {
+.canvas span.lapivienti:after,
+.preview_canvas span.aukko:before,
+.preview_canvas span.aukko:after,
+.preview_canvas span.settings__aukko:before,
+.preview_canvas span.settings__aukko:after,
+.preview_canvas span.settings__lv:before,
+.preview_canvas span.settings__lv:after,
+.preview_canvas span.lapivienti:before,
+.preview_canvas span.lapivienti:after {
   display: none;
 }
 
 .canvas span.settings__aukko,
 .canvas span.settings__lv,
-.canvas span.lapivienti {
+.canvas span.lapivienti,
+.preview_canvas span.settings__aukko,
+.preview_canvas span.settings__lv,
+.preview_canvas span.lapivienti {
   background: #fff;
 }
 
-.canvas span.lapivienti {
+.canvas span.lapivienti,
+.preview_canvas span.lapivienti {
   font-size: 50%;
   align-items: center;
   display: flex;
   z-index: 11;
   justify-content: center;
 }
-.canvas span.settings__aukko {
+.canvas span.settings__aukko,
+.preview_canvas span.settings__aukko {
   border-radius: 0;
 }
 .comment__container {
@@ -4249,7 +4273,8 @@ section.excel tr > td:nth-child(10) {
   margin-bottom: 5px;
 }
 
-.modal .canvas {
+.modal .canvas,
+.modal .preview_canvas {
   width: 400px;
 }
 
@@ -6301,7 +6326,8 @@ div.x_del.hidden {
 .lista_secondcord {
   display: none;
 }
-.canvas span.aukko.deformed:before {
+.canvas span.aukko.deformed:before,
+.preview_canvas span.aukko.deformed:before {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -6328,15 +6354,36 @@ div.x_del.hidden {
   width: 5500px;
   position: absolute;
 }
-#copiedcanvases .canvas {
-  /*  transform: scale(0.45);*/
-  margin: 0px 120px;
+#copiedcanvases .preview_canvas {
   overflow: visible;
+  margin-left: 240px;
 }
 
-#copiedcanvases .canvas .grid-container {
-  display: none;
+.preview_canvas .x_cord {
+  background-color: transparent;
 }
+
+.copiedcanvases__fixednav {
+  position: fixed;
+  z-index: 999;
+  margin-top: 50px;
+  margin-left: 250px;
+  display: block;
+  width: 15vw;
+}
+
+.copiedcanvases__fixednav li {
+  display: block;
+}
+
+.copiedcanvases__fixednav li input[type="checkbox"] + label {
+  margin: 0;
+  color: #fff;
+  font-size: 15px;
+}
+/* #copiedcanvases .preview_canvas .grid-container {
+  display: none;
+} */
 /*
 .drawarea__eight .drawarea__top {
   overflow-x: visible;
@@ -7338,7 +7385,8 @@ input[type="radio"] + label.levy__label:focus, input[type="radio"] + label.levy_
 .commentbox__tiedostot img {
   width: 49%;
 }
-.canvas span.com:before, .canvas span.com:after {
+.canvas span.com:before, .canvas span.com:after,
+.preview_canvas span.com:before, .preview_canvas span.com:after{
   background: #c73939;
 }
 

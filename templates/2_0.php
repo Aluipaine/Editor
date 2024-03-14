@@ -2178,7 +2178,7 @@
   <div class="modal-background">
     <div class="modal">
       <section class="comment__section">
-          <h2>Levytetäänkö muutkin seinät?</h2>
+          <h2>Siirretäänkö toiminto muihin seiniin?</h2>
           <div class="modal_close_btn modal-no" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeWalls_all();">Ei</div>
           <div class="modal_close_btn modal-yes" onclick="document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeWalls_all();">Kyllä</div>
       </section>

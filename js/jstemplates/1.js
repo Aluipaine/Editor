@@ -699,6 +699,9 @@ function settings__mitta() {
     newDiv.style.bottom = "0";
     newDiv.style.top = "unset";
     newDiv.style.right = "unset";
+
+    document.querySelector("#cord_up").value = 0;
+    document.querySelector("#cord_left").value = 0;
     //touchedElement('.setting__canvas > .canvas', '#drawarea_w', '#drawarea_h', newDiv, 'elem', document.querySelector('#cord_left'), document.querySelector('#cord_up') );
   }
   if (input_step == "drawscreen_section_three") {
@@ -1099,6 +1102,8 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
         
       }
       newDiv.classList.add("aukko");
+      newDiv.classList.add(mode_name);
+      newDiv.dataset.no = canvas.querySelectorAll("."+mode_name).length;
       newDiv__height.innerHTML = (eval(document.getElementById("hole__height").value));
       newDiv__width.innerHTML = (eval(document.getElementById("hole__width").value));
       newDiv__y.innerHTML = ("Y: " + eval(document.getElementById("aukotcord_up").value));
@@ -1107,36 +1112,12 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       newDiv.appendChild(newDiv__width);
       newDiv.appendChild(newDiv__y);
       newDiv.appendChild(newDiv__x);
-      // Add styles to new hole
-      newDiv.dataset.no = "";
-      if (document.querySelector("#type__door").checked) {
-        
-        newDiv.dataset.no = canvas.querySelectorAll(".ovi").length+1;
-        newDiv.classList.add("ovi");
-      }
-      if (document.querySelector("#type__window").checked) {
-        
-        newDiv.dataset.no = canvas.querySelectorAll(".ikkuna").length+1;
-        newDiv.classList.add("ikkuna");
-      }
-      if (document.querySelector("#type__palkki").checked) {
-        
-        newDiv.dataset.no = canvas.querySelectorAll(".palkki").length+1;
-        newDiv.classList.add("palkki");
-      }
-      if (document.querySelector("#type__collar").checked) {
-        
-        newDiv.dataset.no = canvas.querySelectorAll(".pilari").length+1;
-        newDiv.classList.add("pilari");
-      }
-      if (document.querySelector("#type__ventilation").checked) {
-        
-        newDiv.dataset.no = canvas.querySelectorAll(".tuuletus").length+1;
-        newDiv.classList.add("tuuletus");
-      }
 
       realcount = newDiv.dataset.no;
-      newDiv__comment.innerHTML = document.querySelector("#aukko__name").value + "# <b class='aukko_count'>" + newDiv.dataset.no + "</b>";
+
+      mode_name_title = mode_name.charAt(0).toUpperCase() + mode_name.slice(1);
+
+      newDiv__comment.innerHTML = mode_name_title + " # <b class='aukko_count'>" + newDiv.dataset.no + "</b>";
       let id = "aukko" + Math.random().toString(16).slice(2).toLowerCase().toLowerCase();
       newDiv.setAttribute("id", id);
       newDiv__comment_settings.setAttribute("name", id);

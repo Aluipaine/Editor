@@ -148,13 +148,14 @@ function restoreprogress() {
                     // aukko__types
                     aukko__types = document.querySelectorAll(".aukko__types > input[name='aukko__types']");
                     
-                    aukko__types.forEach(a_type => {
-                        if(content.split("~~")[9].toLowerCase() === a_type.value.toLowerCase()) {
-                            a_type.click();
-                            a_type.checked = true;
-                        }
-                    });
-                    mitta__create_mitta("restore","au");
+                    // DEPRECATED. NOT WORKING  130324
+                    // aukko__types.forEach(a_type => {
+                    //     if(content.split("~~")[9].toLowerCase() === a_type.value.toLowerCase()) {
+                    //         a_type.click();
+                    //         a_type.checked = true;
+                    //     }
+                    // });
+                    mitta__create_mitta("restore","au",content.split("~~")[9].toLowerCase());
                     
                 }
                 else if(content.split("~~")[0] === "lv") {
@@ -214,7 +215,6 @@ function restoreprogress() {
                 else if(tyostot_ok < timestamp && content.split("~~")[0] === "tyostot") {
                     tyostot_ok = timestamp;
                     tyostocontent = content;
-                    
                 }
                 
             });

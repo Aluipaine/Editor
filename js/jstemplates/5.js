@@ -109,24 +109,18 @@ function levyta(priority) {
     for (var i = 0; i < levysarake.length; i += 1) {
       levysarake[i].remove();
     }
-    // let verticalrow_saumat = document.querySelectorAll(".verticalrow_saumat");
-    // for (var i=0;i<verticalrow_saumat.length;i+=1){
-    //   verticalrow_saumat[i].style.position = "absolute";
-    // }
-    // let horizontalrow_saumat = document.querySelectorAll(".horizontalrow_saumat");
-    // for (var i=0;i<horizontalrow_saumat.length;i+=1){
-    //   horizontalrow_saumat[i].style.position = "absolute";
-    // }
+
   }
-  if(document.querySelector(".sauma__horizontal_ctrldown > div")) {
-    vaakamitat = document.querySelectorAll(".sauma__horizontal_ctrldown > div");
+  if(canvas.querySelector(".sauma__horizontal_ctrldown > div")) {
+    vaakamitat = canvas.querySelectorAll(".sauma__horizontal_ctrldown > div");
   }
   else {
-    vaakamitat = document.querySelectorAll(".sauma__horizontal_ctrldown");
+    vaakamitat = canvas.querySelectorAll(".sauma__horizontal_ctrldown");
   }
   
-  let pystymitat = document.querySelectorAll(".sauma__vertical_ctrldown");
+  let pystymitat = canvas.querySelectorAll(".sauma__vertical_ctrldown");
   var levyt = document.createElement("div");
+  levyt.classList.add("levyt")
   // var canvas = document.querySelector("#box-wrapper > main");
   myDivs_horizontal = [],
     myDivs_vertical = [],
@@ -134,28 +128,17 @@ function levyta(priority) {
   j = 0;
   levycount = parseFloat(vaakamitat.length * pystymitat.length);
   if (document.getElementById("settings__sauma_pysty").checked) {
-    // document.querySelector("#settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
-    // document.querySelector("#settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
-    // document.querySelector("#k_settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
-    // document.querySelector("#k_settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
     if (drawarea.querySelector("#drawscreen_section_tyostot .visible")) {
       drawarea.querySelector("#drawscreen_section_tyostot .visible").classList.add("dir_y");
     }
   }
   else if (document.getElementById("settings__sauma_vaaka").checked) {
-    // document.querySelector("#settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
-    // document.querySelector("#settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
-    // document.querySelector("#k_settings__levy_levysizeh").value = document.querySelector("#settings__sauma_interval_y").value;
-    // document.querySelector("#k_settings__levy_levysizew").value = document.querySelector("#settings__sauma_interval_x").value;
     if (drawarea.querySelector("#drawscreen_section_tyostot .visible")) {
       drawarea.querySelector("#drawscreen_section_tyostot .visible").classList.add("dir_x");
     }
   }
-  levyt.classList.add("levyt");
-  // if (document.getElementById("settings__saumahanta-vas").checked) {
-  //   levyt.style.flexDirection = "row-reverse";
-  // }
-  if (input_step == 'drawscreen_section_four' || priority=='important') {
+
+  if (input_step == 'drawscreen_section_four' || priority=='important' || input_step == 'drawscreen_section_eight') {
     var prev_b = 0;
     var preh_l = 0;
     for (var i = 0; i < vaakamitat.length; i++) {
@@ -177,16 +160,12 @@ function levyta(priority) {
       // levyt.append(levysarake);
     }
     canvas.append(levyt);
-    // var saumat__grandrow = document.querySelector(".saumat__grandrow");
-    // var verticalrow_saumat = document.querySelector(".verticalrow_saumat");
-    // saumat__grandrow.style.position = "absolute";
-    // verticalrow_saumat.style.top = "0";
-    // saumat__grandrow.remove();
+
     let levy = document.querySelectorAll(".levy");
     for (var i = 0; i < levy.length; i += 1) {
       raksita(levy[i]);
     }
-    if (document.querySelector(".levy") || document.querySelector(".levyt") || document.querySelector(".levysarake")) {
+    if (canvas.querySelector(".levy") || canvas.querySelector(".levyt") || canvas.querySelector(".levysarake")) {
       let levy = document.querySelectorAll(".levy");
       for (var i = 0; i < levy.length; i += 1) {
         // levy[i].style.background = "transparent";
@@ -200,14 +179,7 @@ function levyta(priority) {
         closer[i].style.zIndex = 4;
         closer[i].style.opacity = 1;
       }
-      // let verticalrow_saumat = document.querySelectorAll(".verticalrow_saumat");
-      // for (var i=0;i<verticalrow_saumat.length;i+=1){
-      //   verticalrow_saumat[i].style.position = "absolute";
-      // }
-      // let horizontalrow_saumat = document.querySelectorAll(".horizontalrow_saumat");
-      // for (var i=0;i<horizontalrow_saumat.length;i+=1){
-      //   horizontalrow_saumat[i].style.position = "absolute";
-      // }
+
     }
   }
     aukkojenallapoisto();
@@ -361,8 +333,8 @@ function closer_left(me) {
 
   zelector = c - 1;
 
-  prev = document.querySelector('div[data-levy="'+zelector+'"]');
-  prev_width = parseFloat(document.querySelector('div[data-levy="'+zelector+'"]').style.width);
+  prev = canvas.querySelector('div[data-levy="'+zelector+'"]');
+  prev_width = parseFloat(canvas.querySelector('div[data-levy="'+zelector+'"]').style.width);
   
 
   if(parseFloat(me.style.height) === parseFloat(prev.style.height)) {

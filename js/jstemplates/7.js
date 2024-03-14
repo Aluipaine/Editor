@@ -8,7 +8,7 @@ if(document.querySelector(".levy_excel")) {
   old_levy_excel = document.querySelector(".levy_excel").innerHTML;
 }
 function create__levy_excel(now) {
-  const saumas = document.querySelectorAll(".sauma");
+  const saumas = canvas.querySelectorAll(".sauma");
   let horizontalBleam = 0;
   let verticalBleam = 0;
   levyt = canvas.querySelectorAll(".levy");
@@ -18,7 +18,7 @@ function create__levy_excel(now) {
   // PF1_X   PF1_Y PF1_DX   PF1_DY
   // Siirto muualle
   levyt = canvas.querySelectorAll(".levy");
-  lv = document.querySelectorAll("#box-wrapper > main > .lv");
+  lv = canvas.querySelectorAll(".lv");
   for (var i = levyt.length - 1; i >= 0; i--) {
     if (levyt[i].querySelector(".lv")) {
       lvs_in_levy = levyt[i].querySelectorAll(".lv");
@@ -29,9 +29,9 @@ function create__levy_excel(now) {
   }
   levyt = canvas.querySelectorAll(".levy");
   for (var i = 0; i < levyt.length; i++) {
-    lv = document.querySelectorAll("#box-wrapper > main > .lv");
+    lv = canvas.querySelectorAll(".lv");
     for (var j = lv.length - 1; j >= 0; j--) {
-      if (document.querySelector("#box-wrapper > main > .lv")) {
+      if (canvas.querySelector(".lv")) {
         lv_b = parseFloat(lv[j].style.bottom);
         lv_l = parseFloat(lv[j].style.left);
         l_w = parseFloat(levyt[i].style.width);

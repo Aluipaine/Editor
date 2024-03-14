@@ -121,233 +121,136 @@ realcount = 0;
  * Moves room data to a different location based on the current room and its status.
  * @returns None
  */
-function siirto_muualle() {
-  sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-  horizontals_original = canvas.querySelectorAll(".horizontalrow_saumat > div");
-  rooms_vaaka = [];
-  room_summ = 0;
+function siirto_muualle(mode) {
+  (async () => {
+      document.querySelector(".preloader").classList.add("active");
+      await sleep(1000);
+      canvas_a = document.querySelector(".canvas_a");
+      canvas_b = document.querySelector(".canvas_b");
+      canvas_c = document.querySelector(".canvas_c");
+      canvas_d = document.querySelector(".canvas_d");
 
-  oneroom = document.querySelector("div.house__wall.house__wall_one");
-  tworoom = document.querySelector("div.house__wall.house__wall_two");
-  threeroom = document.querySelector("div.house__wall.house__wall_three");
-  fourroom = document.querySelector("div.house__wall.house__wall_four");
-
-  oneroom_h = parseFloat(oneroom.querySelector(".wall_height").value);
-  tworoom_h = parseFloat(tworoom.querySelector(".wall_height").value);
-  threeroom_h = parseFloat(threeroom.querySelector(".wall_height").value);
-  fourroom_h = parseFloat(fourroom.querySelector(".wall_height").value);
-
-  oneroom_w = parseFloat(oneroom.querySelector(".wall_width").value);
-  tworoom_w = parseFloat(tworoom.querySelector(".wall_width_2").value);
-  threeroom_w = parseFloat(threeroom.querySelector(".wall_width").value);
-  fourroom_w = parseFloat(fourroom.querySelector(".wall_width_2").value);
-
-  oneroom_name = oneroom.querySelector(".house__wall_status").innerText;
-  tworoom_name = tworoom.querySelector(".house__wall_status").innerText;
-  threeroom_name = threeroom.querySelector(".house__wall_status").innerText;
-  fourroom_name = fourroom.querySelector(".house__wall_status").innerText;
-
-  one = oneroom_h + "|" + oneroom_w + "|" + oneroom_name;
-  two = tworoom_h + "|" + tworoom_w + "|" + tworoom_name;
-  three = threeroom_h + "|" + threeroom_w + "|" + threeroom_name;
-  four = fourroom_h + "|" + fourroom_w + "|" + fourroom_name;
-
-  copiedcanvases = [];
-
-
-  if(current_room.toLowerCase() == 'a' || oneroom.querySelector(".house__wall_status").classList.contains('hidden') || oneroom.querySelector(".house__wall_status").classList.contains('measured') || oneroom.classList.contains('hidden') ) {
-    rooms_vaaka.push('skip');
-  } else {
-    rooms_vaaka.push(one);
-  } 
-
-  if(current_room.toLowerCase() == 'b' || tworoom.querySelector(".house__wall_status").classList.contains('hidden') || tworoom.querySelector(".house__wall_status").classList.contains('measured') || tworoom.classList.contains('hidden') ) {
-    rooms_vaaka.push('skip');
-  }
-  else {
-    rooms_vaaka.push(two);
-  }
-
-  if(current_room.toLowerCase() == 'c' || threeroom.querySelector(".house__wall_status").classList.contains('hidden') || threeroom.querySelector(".house__wall_status").classList.contains('measured') || threeroom.classList.contains('hidden') ) {
-    rooms_vaaka.push('skip');
-  }
-  else {
-    rooms_vaaka.push(three);
-  }
-
-  if(current_room.toLowerCase() == 'd' || fourroom.querySelector(".house__wall_status").classList.contains('hidden') || fourroom.querySelector(".house__wall_status").classList.contains('measured') || fourroom.classList.contains('hidden') ) {
-    rooms_vaaka.push('skip');
-  }
-  else {
-    rooms_vaaka.push(four);
-  }
-
-  
-  body = document.body;
-  body.classList.add("bg");
-  for (var z = 0; z < rooms_vaaka.length; z++) {
-    if(rooms_vaaka[z] == 'skip') {
-      if(realcount == rooms_vaaka.length) {
-        $('#step_drawscreen').val('drawscreen_section_eight');
-        refresh__drawcontrols();
-        break;
-      }
-      continue;
-    }
-    (async () => {
-      room_h = parseFloat(drawarea_h.value);
-      room_w = parseFloat(drawarea_h.value);
-
-      secondcanvas = canvas.cloneNode(true);
-      secondcanvas.style.height = room_h / 5 + "px";
-      secondcanvas.dataset.height = room_h / 5 + "px";
-      secondcanvas.style.width = room_w / 5 + "px";
-      secondcanvas.dataset.width = room_w / 5 + "px";
-      secondcanvas.style.display = "block";
-      copiedcanvases.push(secondcanvas);
-
-      document.querySelector(".wall").value = rooms_vaaka[z].split("|")[2];
-      if (canvas.querySelector("div.levyt")) {
-        canvas.querySelector("div.levyt").remove();
-      }
-      if (canvas.querySelector(".mp")) {
-        todel = canvas.querySelectorAll(".mp");
-        for (var i = 0; i < todel.length; i++) {
-          todel[i].remove();
-        }
-      }
-      if (canvas.querySelector(".lv")) {
-        todel = canvas.querySelectorAll(".lv");
-        for (var i = 0; i < todel.length; i++) {
-          todel[i].remove();
-        }
-      }
-      if (canvas.querySelector(".aukko")) {
-        todel = canvas.querySelectorAll(".aukko");
-        for (var i = 0; i < todel.length; i++) {
-          todel[i].remove();
-        }
-      }
-      if (canvas.querySelector("div.saumat__grandrow")) {
-        canvas.querySelector("div.saumat__grandrow").remove();
-      }
-      if (canvas.querySelector("div.rangat__grandrow")) {
-        canvas.querySelector("div.rangat__grandrow").remove();
-      }
-      if (canvas.querySelector("div.listat__grandrow")) {
-        canvas.querySelector("div.listat__grandrow").remove();
-      }
-      if (canvas.querySelector("div.newrow_vertical")) {
-        canvas.querySelector("div.newrow_vertical").remove();
-      }
-      await sleep(3000);
-      $("#project_start").hide();
-      console.log("z: " + z);
-      realcount = Math.floor(parseFloat(z) + 1);
-      console.log("z+1: " + realcount);
-      document.querySelector("div.house.drawarea__house > div:nth-child(2) > div:nth-child(" + realcount + ") > div.house__wall_status").click();
-      // updatearea();
-      // changesize();
-      await sleep(3000);
-      console.log("Saumoitetaan");
-      $('#step_drawscreen').val('drawscreen_section_four');
-      refresh__drawcontrols();
-      updatearea();
+      canvas_a.style.height = parseFloat(document.querySelector("#wall_one_a_h").value) / 5 + "px";
+      canvas_a.style.width = parseFloat(document.querySelector("#wall_one_a_w").value) / 5 + "px";
+      canvas_b.style.height = parseFloat(document.querySelector("#wall_one_b_h").value) / 5 + "px";
+      canvas_b.style.width = parseFloat(document.querySelector("#wall_one_b_w").value) / 5 + "px";
+      canvas_c.style.height = parseFloat(document.querySelector("#wall_one_c_h").value) / 5 + "px";
+      canvas_c.style.width = parseFloat(document.querySelector("#wall_one_c_w").value) / 5 + "px";
+      canvas_d.style.height = parseFloat(document.querySelector("#wall_one_d_h").value) / 5 + "px";
+      canvas_d.style.width = parseFloat(document.querySelector("#wall_one_d_w").value) / 5 + "px";
       
-      saumoita();
-      horizontals = canvas.querySelectorAll(".sauma__horizontal");
-      for (var i = 0; i < horizontals.length; i++) {
-        h_parent = horizontals[i].parentElement;
-        horizontals[i].remove();
+      
+
+      formData = {
+        pr_id: document.querySelector("#current_project_id").value,
+        room: current_apartment,
+        wall: current_room,
+    },
+    $.ajax({
+        type: "POST",
+        url: "../vendor/get-savedprogressroom.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (success) {
+      successful = success.split("],[");
+      if(successful[0].length > 3) {
+        successful.forEach(s_unprocessed => {
+            s = s_unprocessed.replaceAll('"','').replaceAll("]","").replaceAll("[","").split(",");
+            content = s[4];
+            timestamp = s[5];
+            if(sau_ok < timestamp && content.split("~~")[0] === "sau") {
+              sauma_content = content;
+            }
+            else if(tyostot_ok < timestamp && content.split("~~")[0] === "tyostot") {
+              tyosto_content = content;
+            }
+        });
       }
-      for (var i = 0; i < horizontals_original.length; i++) {
-        h_parent.appendChild(horizontals_original[i]);
+    });
+    await sleep(500);
+
+    room_array = ["a","b","c","d"];
+    canvas__original = canvas;
+    room__original = current_room;
+    room_array.forEach(room => {
+      if(room !== room__original) {
+        current_project_id = parseFloat(document.querySelector("#current_project_id").value);
+        current_room = room;
+        formData = {
+          projectid: parseFloat(current_project_id),
+          apartment: current_apartment,
+          wall: room,
+          function: sauma_content,
+          timestamp: Date.now()
+          };
+          
+        document.querySelector("#box_w").value = parseFloat(document.querySelector("#wall_one_"+room+"_w").value);
+        document.querySelector("#box_h").value = parseFloat(document.querySelector("#wall_one_"+room+"_h").value);
+
+        canvas = document.querySelector(".canvas_"+room);
+        saumoita();
+        
+        $.ajax({
+            type: "POST",
+            url: "/vendor/addsaving.php",
+            data: formData,
+            error: function (jqxhr, status, exception) {
+                console.log('Tietokantavirhe, soita numeroon +358449782028');
+            }
+        }).done(function (data) {
+            console.log("Saving made on array: " + sauma_content.toString());
+            console.log(data);
+        });
+        if(mode === "saumat") {
+          
+        }
+        else {
+          kiinnikkeet__siirto();
+          kiinnike_default_initialization();
+        }
+
       }
-      await sleep(3000);
-      $('#step_drawscreen').val('drawscreen_section_five');
-      refresh__drawcontrols();
-      updatearea();
-
-      console.log("Levytetty");
-      await sleep(3000);
-      $('#step_drawscreen').val('drawscreen_section_tyostot');
-
-      open_ladonta_settings(true);
-      await sleep(3000);
-      console.log("Kiinnikelinja valinta I&II");
-      open_ladonta_settings(false);
-      reorganise__newtyosto();
-      await sleep(3000);
-      console.log("Työstetty");
-      refresh__drawcontrols();
-      updatearea();
-
-      $('#step_drawscreen').val('drawscreen_section_esikatselu');
-      await sleep(3000);
-      refresh__drawcontrols();
-      updatearea();
-      $('#step_drawscreen').val('drawscreen_section_six');
-      await sleep(3000);
-      console.log("Menee rankoihin");
-      refresh__drawcontrols();
-      updatearea();
-      await sleep(3000);
-      $('#step_drawscreen').val('drawscreen_section_seven');
-      console.log("Menee listoihin");
-      await sleep(3000);
-      secondcanvas = canvas.cloneNode(true);
-      secondcanvas.style.height = room_h / 5 + "px";
-      secondcanvas.dataset.height = room_h / 5 + "px";
-      secondcanvas.style.width = room_w / 5 + "px";
-      secondcanvas.dataset.width = room_w / 5 + "px";
-      secondcanvas.style.display = "block";
-      copiedcanvases.push(secondcanvas);
+      else {
+        document.querySelector(".canvas_"+room).innerHTML = canvas__original.innerHTML;
+      }
+      console.log(room);
+    });
+    await sleep(2500);
     
-      for (var i = 0; i < copiedcanvases.length; i++) {
-        // item = copiedcanvases[i];
-        if (copiedcanvases[i].style.width == "100%") {
-          copiedcanvases[i].style.width = parseFloat(copiedcanvases[i].dataset.width) + 50;
-        }
 
-        document.querySelector("#copiedcanvases").appendChild(copiedcanvases[i]);
-        fixeight();
-      }
-      document.querySelector("#copiedcanvases").style.display = "flex";
-      document.querySelector("#box-wrapper > main").style.display = "none";
-      document.querySelector("#copiedcanvases").style.overflowX = "scroll";
-      fixeight();
-      setTimeout(fixeight(), 100);
-      await sleep(3000);
-      _levy = c_c.querySelectorAll(".levy");
-      for (var z = _levy.length - 1; z >= 0; z--) {
-        input_cord_btm = _levy[z].querySelectorAll(".tyostot__tyosto_vaaka");
-        for (var i = input_cord_btm.length - 1; i >= 0; i--) {
-          if (parseFloat(input_cord_btm[i].style.bottom) > parseFloat(_levy[z].style.height)) {
-            input_cord_btm[i].remove();
-          }
-        }
-      }
-      await sleep(3000);
-      refresh__drawcontrols();
-      $('#step_drawscreen').val('drawscreen_section_eight');
-      await sleep(3000);
-      // takeshotAllwalls();
+    document.querySelector("#box_w").value = parseFloat(document.querySelector("#wall_one_"+current_room+"_w").value);
+    document.querySelector("#box_h").value = parseFloat(document.querySelector("#wall_one_"+current_room+"_h").value);
 
-      for (let a = 0; a < copiedcanvases.length; a++) {
-        k_levys = copiedcanvases[a].querySelectorAll(".levy");
-        for (var i = k_levys.length - 1; i >= 0; i--) {
-          countdown__kiinnikkeet(k_levys[i]);
-        }      
-      }
+    room_array.forEach(room => {
 
-      $('#step_drawscreen').val('drawscreen_section_eight');
-      refresh__drawcontrols();
-      body.classList.remove("bg");
-      await sleep(3000);
-      $('#step_drawscreen').val('drawscreen_section_eight');
-      refresh__drawcontrols();
-    })();
-  }
+      canvas = document.querySelector(".canvas_"+room);
+
+      canvas.querySelectorAll(".levy").forEach(levy => {
+        countdown__kiinnikkeet(levy)
+      });
+    });
+    await sleep(2500);
+
+
+    room_array.forEach(room => {
+      canvas = document.querySelector(".canvas_"+room);
+      rangoita();
+    });
+    await sleep(1500);
+
+    room_array.forEach(room => {
+      canvas = document.querySelector(".canvas_"+room);
+      listoitus();
+    });
+    await sleep(500);
+    document.querySelector(".preloader").classList.remove("active");
+    alert("Valmis!"); 
+
+
+  })();
+   
 }
 
 
@@ -357,294 +260,7 @@ function siirto_muualle() {
  * @returns None
  */
 function osittainen_siirto_muualle() {
-  if(document.querySelector("#copiedcanvases .canvas:nth-child(4)")) {
-    document.querySelector("#copiedcanvases").style.display = "flex";
-    document.querySelector("#box-wrapper > main").style.display = "none";
-    return
-  }
-  horizontals_original = canvas.querySelectorAll(".horizontalrow_saumat > div");
-
-  rooms_vaaka = [];
-  room_summ = 0;
-
-  oneroom = document.querySelector("div.house__wall.house__wall_one");
-  tworoom = document.querySelector("div.house__wall.house__wall_two");
-  threeroom = document.querySelector("div.house__wall.house__wall_three");
-  fourroom = document.querySelector("div.house__wall.house__wall_four");
-
-  oneroom_h = parseFloat(oneroom.querySelector(".wall_height").value);
-  tworoom_h = parseFloat(tworoom.querySelector(".wall_height").value);
-  threeroom_h = parseFloat(threeroom.querySelector(".wall_height").value);
-  fourroom_h = parseFloat(fourroom.querySelector(".wall_height").value);
-  oneroom_w = parseFloat(oneroom.querySelector(".wall_width").value);
-  tworoom_w = parseFloat(tworoom.querySelector(".wall_width_2").value);
-  threeroom_w = parseFloat(threeroom.querySelector(".wall_width").value);
-  fourroom_w = parseFloat(fourroom.querySelector(".wall_width_2").value);
-  oneroom_name = parseFloat(oneroom.querySelector(".house__wall_status").innerText);
-  tworoom_name = parseFloat(tworoom.querySelector(".house__wall_status").innerText);
-  threeroom_name = parseFloat(threeroom.querySelector(".house__wall_status").innerText);
-  fourroom_name = parseFloat(fourroom.querySelector(".house__wall_status").innerText);
-
-  one = oneroom_h + "|" + oneroom_w + "|" + oneroom_name;
-  two = tworoom_h + "|" + tworoom_w + "|" + tworoom_name;
-  three = threeroom_h + "|" + threeroom_w + "|" + threeroom_name;
-  four = fourroom_h + "|" + fourroom_w + "|" + fourroom_name;
-
-
-  if(oneroom.querySelector(".house__wall_status").classList.contains('hidden') || oneroom.querySelector(".house__wall_status").classList.contains('measured') || oneroom.classList.contains('hidden') ) {
-    rooms_vaaka.push('skip');
-  } else {
-    rooms_vaaka.push(one);
-  } 
-
-  if(tworoom.querySelector(".house__wall_status").classList.contains('hidden') || tworoom.querySelector(".house__wall_status").classList.contains('measured') || tworoom.classList.contains('hidden') ) {
-    rooms_vaaka.push('skip');
-  }
-  else {
-    rooms_vaaka.push(two);
-  }
-
-  if(threeroom.querySelector(".house__wall_status").classList.contains('hidden') || threeroom.querySelector(".house__wall_status").classList.contains('measured') || threeroom.classList.contains('hidden') ) {
-    rooms_vaaka.push('skip');
-  }
-  else {
-    rooms_vaaka.push(three);
-  }
-
-  if(fourroom.querySelector(".house__wall_status").classList.contains('hidden') || fourroom.querySelector(".house__wall_status").classList.contains('measured') || fourroom.classList.contains('hidden') ) {
-    rooms_vaaka.push('skip');
-  }
-  else {
-    rooms_vaaka.push(four);
-  }
-
-  copiedcanvases = [];
-  // secondcanvas = document.querySelector("#box-wrapper > main").cloneNode(true);
-  // secondcanvas.dataset.height = 250+parseFloat(document.querySelector("#drawarea_h").value)/5 + "px";
-  // secondcanvas.dataset.width = 50+parseFloat(document.querySelector("#box_w").value)/5 + "px";
-  // secondcanvas.style.width = parseFloat(document.querySelector("#drawarea_w").value)/5 + "px";
-  // secondcanvas.style.height = parseFloat(document.querySelector("#drawarea_h").value)/5 + "px";
-  // secondcanvas.style.display ="block";
-  // copiedcanvases.push(secondcanvas);
-
-  skipping__room_ = current_room.replaceAll("a","0").replaceAll("b","1").replaceAll("c","2").replaceAll("d","3");
-  skipping__room = parseFloat(skipping__room_);
-
-
-  (async () => {
-    for (var z = 0; z < rooms_vaaka.length; z++) {
-
-      if(z == skipping__room) {
-        return
-      }
-      body = document.body;
-      body.classList.add("bg");
-      realcount = Math.floor(parseFloat(z) + 1);
-      console.log("z+1: " + realcount);
-      
-      room_h = parseFloat(rooms_vaaka[z].split("|")[0]);
-      room_w = parseFloat(rooms_vaaka[z].split("|")[1]);
-      document.querySelector(".wall").value = rooms_vaaka[z].split("|")[2];
-      if (canvas.querySelector("div.levyt")) {
-        canvas.querySelector("div.levyt").remove();
-      }
-      if (canvas.querySelector(".mp")) {
-        todel = canvas.querySelectorAll(".mp");
-        for (var i = 0; i < todel.length; i++) {
-          todel[i].remove();
-        }
-      }
-      if (canvas.querySelector(".lv")) {
-        todel = canvas.querySelectorAll(".lv");
-        for (var i = 0; i < todel.length; i++) {
-          todel[i].remove();
-        }
-      }
-      if (canvas.querySelector(".aukko")) {
-        todel = canvas.querySelectorAll(".aukko");
-        for (var i = 0; i < todel.length; i++) {
-          todel[i].remove();
-        }
-      }
-      if (canvas.querySelector("div.saumat__grandrow")) {
-        canvas.querySelector("div.saumat__grandrow").remove();
-      }
-      if (canvas.querySelector("div.rangat__grandrow")) {
-        canvas.querySelector("div.rangat__grandrow").remove();
-      }
-      if (canvas.querySelector("div.listat__grandrow")) {
-        canvas.querySelector("div.listat__grandrow").remove();
-      }
-      if (canvas.querySelector("div.newrow_vertical")) {
-        canvas.querySelector("div.newrow_vertical").remove();
-      }
-      await sleep(3000);
-      $("#project_start").hide();
-      console.log("z: " + z);
-      
-      document.querySelector("div.house.drawarea__house > div:nth-child(2) > div:nth-child(" + realcount + ") > div.house__wall_status").click();
-      // updatearea();
-      // changesize();
-      await sleep(3000);
-      console.log("Saumoitetaan");
-      $('#step_drawscreen').val('drawscreen_section_four');
-      refresh__drawcontrols();
-      updatearea();
-      
-      saumoita();
-      horizontals = canvas.querySelectorAll(".sauma__horizontal");
-      for (var i = 0; i < horizontals.length; i++) {
-        h_parent = horizontals[i].parentElement;
-        horizontals[i].remove();
-      }
-      for (var i = 0; i < horizontals_original.length; i++) {
-        h_parent.appendChild(horizontals_original[i]);
-      }
-      levyta();
-      await sleep(3000);
-      $('#step_drawscreen').val('drawscreen_section_five');
-      refresh__drawcontrols();
-      updatearea();
-
-      console.log("Levytetty");
-      await sleep(3000);
-      refresh__drawcontrols();
-      $('#step_drawscreen').val('drawscreen_section_tyostot');
-
-      open_ladonta_settings(true);
-      await sleep(3000);
-      console.log("Kiinnikelinja valinta I&II");
-      open_ladonta_settings(false);
-      reorganise__newtyosto();
-      await sleep(3000);
-      console.log("Työstetty");
-      refresh__drawcontrols();
-      updatearea();
-
-      await sleep(3000);
-      secondcanvas = canvas.cloneNode(true);
-      secondcanvas.style.height = room_h / 5 + "px";
-      secondcanvas.dataset.height = room_h / 5 + "px";
-      secondcanvas.style.width = room_w / 5 + "px";
-      secondcanvas.dataset.width = room_w / 5 + "px";
-      secondcanvas.style.display = "block";
-      copiedcanvases.push(secondcanvas);
-    }
-    for (var i = 0; i < copiedcanvases.length; i++) {
-      // item = copiedcanvases[i];
-      if (copiedcanvases[i].style.width == "100%") {
-        copiedcanvases[i].style.width = parseFloat(copiedcanvases[i].dataset.width) + 50;
-      }
-      // item.style.height = copiedcanvases[i].dataset.width;
-      document.querySelector("#copiedcanvases").appendChild(copiedcanvases[i]);
-
-      lineinbuts = copiedcanvases[i].querySelectorAll(".lineinput");
-
-      for (var a = 0; a < lineinbuts.length; a++) {
-        lineinbuts[a].remove();
-      }
-      fixeight();
-    }
-    document.querySelector("#copiedcanvases").style.display = "flex";
-    document.querySelector("#box-wrapper > main").style.display = "none";
-    // document.querySelector("#copiedcanvases").style.overflowX = "scroll";
-    fixeight();
-    setTimeout(fixeight(), 100);
-    await sleep(3000);
-    _levy = c_c.querySelectorAll(".levy");
-    for (var z = _levy.length - 1; z >= 0; z--) {
-      input_cord_btm = _levy[z].querySelectorAll(".tyostot__tyosto_vaaka");
-      for (var i = input_cord_btm.length - 1; i >= 0; i--) {
-        if (parseFloat(input_cord_btm[i].style.bottom) > parseFloat(_levy[z].style.height)) {
-          input_cord_btm[i].remove();
-        }
-      }
-    }
-    await sleep(3000);
-    
-    
-
-    copiedcanvases = document.querySelector("#copiedcanvases");
-    ck_levys = copiedcanvases.querySelectorAll(".levy");
-
-    for (var i = 0; i < ck_levys.length; i++) {
-        // The item (or items) to press and hold on
-        let item = ck_levys[i].querySelector("b");
-        console.log(item);
-        let timerID;
-        let counter = 0;
-
-        let pressHoldEvent = new CustomEvent("pressHold");
-
-        // Increase or decreae value to adjust how long
-        // one should keep pressing down before the pressHold
-        // event fires
-        let pressHoldDuration = 50;
-
-        // Listening for the mouse and touch events    
-        item.addEventListener("mousedown", c_pressingDown, false);
-        item.addEventListener("mouseup", c_notPressingDown, false);
-        item.addEventListener("mouseleave", c_notPressingDown, false);
-
-        item.addEventListener("touchstart", c_pressingDown, false);
-        item.addEventListener("touchend", c_notPressingDown, false);
-
-        // Listening for our custom pressHold event
-        item.addEventListener("pressHold", c_doSomething, false);
-
-        function c_pressingDown(e) {
-          // Start the timer
-          requestAnimationFrame(c_timer);
-
-          e.preventDefault();
-
-          // console.log("Pressing!");
-        }
-
-        function c_notPressingDown(e) {
-          // Stop the timer
-          cancelAnimationFrame(timerID);
-          counter = 0;
-
-          // console.log("Not pressing!");
-        }
-
-        //
-        // Runs at 60fps when you are pressing down
-        //
-        function c_timer() {
-          // console.log("Timer tick!");
-
-          if (counter < pressHoldDuration) {
-            timerID = requestAnimationFrame(c_timer);
-            counter++;
-          } else {
-            item.dispatchEvent(pressHoldEvent);
-          }
-        }
-
-        function c_doSomething(e) {
-          console.log("pressHold event fired!");
-          pressed__levy = item;
-          c_open_ltladonta_settings(true,item);
-          // alert("TYÖSTÖNÄYTTÖ TÄHÄN")
-        }
-
-      }
-
-      for (let a = 0; a < copiedcanvases.length; a++) {
-        k_levys = copiedcanvases[a].querySelectorAll(".levy");
-        for (var i = k_levys.length - 1; i >= 0; i--) {
-          countdown__kiinnikkeet(k_levys[i]);
-        }      
-      }
-
-    await sleep(1000);
-    document.querySelector("#copiedcanvases").style.display = "flex";
-    document.querySelector("#box-wrapper > main").style.display = "none";    
-  })();
-
-    
+  siirto_muualle('partial');
 }
 
 

@@ -11,7 +11,7 @@
    <!-- <div class="drawarea__controls_btn" onclick="$('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();">
      Kiinnikkeet
    </div> -->
-   <div class="drawarea__controls_btn greenbtn" onclick="osittainen_siirto_muualle();" style="background: darkgreen;text-align: center;">Siirrä mitat muille seinille</div>
+   <div class="drawarea__controls_btn greenbtn" onclick="$('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();updatearea(); siirto_muualle();" style="background: darkgreen;text-align: center;">Siirrä mitat muille seinille</div>
    
    <?php include("./templates/house_nav.php");  ?>
 </div>

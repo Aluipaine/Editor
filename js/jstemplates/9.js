@@ -6,10 +6,10 @@
 listoitettu = false;
 
 function listoitus() {
-  alert("AUKKORANGAT TULEE SELVITTÄÄ ENNEN LISTOITUKSEN KULKUA.")
+  console.log("AUKKORANGAT TULEE SELVITTÄÄ ENNEN LISTOITUKSEN KULKUA.")
   rangat_grandrow = canvas.querySelector(".rangat__grandrow");
-  if (document.querySelector(".listat__grandrow")) {
-    document.querySelector(".listat__grandrow").remove();
+  if (canvas.querySelector(".listat__grandrow")) {
+    canvas.querySelector(".listat__grandrow").remove();
   }
   aukot = canvas.querySelectorAll(".aukko");
   lapiviennit = canvas.querySelectorAll(".lapivienti");
@@ -21,7 +21,7 @@ function listoitus() {
   listat__grandrow.innerHTML = rangat_grandrow.innerHTML;
   listoitettu = false;
 
-  document.querySelector(".rangat__grandrow").style.opacity = 0;
+  canvas.querySelector(".rangat__grandrow").style.opacity = 0;
   ikkunaListaExcel = document.querySelector(".ikkunalista_excel");
   ListaExcel = document.querySelector(".lista_as_excel tbody");
   first_excel = document.querySelector(" table.ikkunalista_excel > tbody > tr");

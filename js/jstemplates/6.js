@@ -4,7 +4,7 @@
  * @returns None
  */
 let ltcontainer = document.querySelector("#levytyosto_container");
-let levy = document.querySelectorAll(".levy");
+let levy = canvas.querySelectorAll(".levy");
 
 
 function restore__kiinnikkeet(content_) {
@@ -170,18 +170,18 @@ function kiinnike_default_initialization() {
   lt_kv_four = document.querySelector("#lt-kiinniketys__vkiinnike_four");
 
   function tyostanaytto(evt) {
-    d_levyt = document.querySelectorAll(".levyt > .levy");
+    d_levyt = canvas.querySelectorAll(".levyt > .levy");
     for (var i = d_levyt.length - 1; i >= 0; i--) {
       tyosta(d_levyt[i], evt);
     }
-    tyostot__tyosto_input = document.querySelectorAll(".tyostot__tyosto > input");
+    tyostot__tyosto_input = canvas.querySelectorAll(".tyostot__tyosto > input");
     for (var i = tyostot__tyosto_input.length - 1; i >= 0; i--) {
       // tyostot__tyosto_input[i].remove();
       // tyostot__tyosto_input[i].setAttribute("onchange", "change__tyostocord(this,1);");
       tyostot__tyosto_input[i].classList.add("x_cord_mki");
       tyostot__tyosto_input[i].setAttribute("onclick", "clearcord(this,'tyo');");
     }
-    elements = document.querySelectorAll('.tyostot__tyosto');
+    elements = canvas.querySelectorAll('.tyostot__tyosto');
     // Create a new array to hold the elements sorted by their offset left position
     const sortedElements = [];
     // Loop through the array of HTML elements and add them to the sortedElements array
@@ -484,13 +484,6 @@ function kiinnike_default_initialization() {
     tyostot__tyosto_vaaka[i].style.opacity = 1;
   }
 
- 
-  // if(document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled")) {
-  //   document.querySelector("#box-wrapper > div.drawarea__control.drawarea__top.disabled").style.border = "unset";
-  //   document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled").style.border = "unset";
-  // }
-
-
   for (var i = k_levys.length - 1; i >= 0; i--) {
     give__tyosto_cord(k_levys[i]);
   }
@@ -531,7 +524,7 @@ function kiinnike_default_initialization() {
 // Function to start the work on green lines based on the provided specification
 function aloita_tyosto_kiinnikkeet(specification_launch) {
    // Select all elements with class "levy"
-  let levyt = document.querySelectorAll(".levy");
+  let levyt = canvas.querySelectorAll(".levy");
 
   // Initialize event variable
   evt = 0;
@@ -1035,7 +1028,7 @@ function tyosta(levy, evt) {
  * @returns None
  */
 function tyosto_func(evt){
-  const levy_list = document.querySelectorAll(".dir_y");
+  const levy_list = canvas.querySelectorAll(".dir_y");
   let levy;
   var levy_tyostot_y;
   var levy_tyostot_x;
@@ -1529,15 +1522,6 @@ function t_last_left(levy, tyosto, evt) {
       // x_cord.style.right = cord/10 + "px";
     }
     x.prepend(x_cord);
-    // var x_last_cord = document.createElement("input");
-    // x_last_cord.type = "text";
-    // x_last_cord.classList.add("x_cord");
-    // x_last_cord.classList.add("event_"+String.fromCharCode(64+evt).toLowerCase());
-    // x_last_cord.classList.add("x_cord_border");
-    // x_last_cord.setAttribute("onclick", "clearcord(this,'tyo');");
-    // x_last_cord_cord = parseFloat(levy_meta[0]) - parseFloat(x.style.left) * 5;
-    // x_last_cord.value = p_left;
-    // x.prepend(x_last_cord);
   }
   else {
     var x_cord = document.createElement("input");
@@ -1635,7 +1619,7 @@ function t_last_bottom(levy, tyosto, evt) {
  */
 function kiinnikkeet__siirto() {
   //console.log("kiinnikkeet__siirto() fired");
-  let levytys = document.querySelectorAll('.levyt .levy');
+  let levytys = canvas.querySelectorAll('.levyt .levy');
   levytys_array = [];
   for (var i = 0; i < levytys.length; i++) {
     t_hlevy = parseFloat(levytys[i].style.height) * 5;
@@ -1699,7 +1683,7 @@ function kiinnikkeet__siirto() {
  */
 function only_levy_transfer() {
   //console.log("only_levy_transfer() fired");
-  let levytys = document.querySelectorAll('.levyt .levy');
+  let levytys = canvas.querySelectorAll('.levyt .levy');
   levytys_array = [];
   for (var i = 0; i < levytys.length; i++) {
     t_hlevy = parseFloat(levytys[i].style.height) * 5;
@@ -1962,8 +1946,8 @@ function change__tyostocord(input, secondsetting, evt) {
         }
       }
     }
-    boxHeight = parseFloat(document.querySelector('#box-wrapper > main').offsetHeight);
-    boxWidth = parseFloat(document.querySelector('#box-wrapper > main').offsetWidth);
+    boxHeight = parseFloat(canvas.offsetHeight);
+    boxWidth = parseFloat(canvas.offsetWidth);
     if (thistyosto.classList.contains("tyostot__tyosto_pysty")) {
       if (grandbarent.querySelectorAll('.tyostot__tyosto')[currentIndex + 1]) {
         n_elem = grandbarent.querySelectorAll('.tyostot__tyosto')[currentIndex + 1];
@@ -2039,8 +2023,8 @@ function change__tyostocord(input, secondsetting, evt) {
         }
       }
     }
-    boxHeight = parseFloat(document.querySelector('#box-wrapper > main').offsetHeight);
-    boxWidth = parseFloat(document.querySelector('#box-wrapper > main').offsetWidth);
+    boxHeight = parseFloat(canvas.offsetHeight);
+    boxWidth = parseFloat(canvas.offsetWidth);
     if (thistyosto.classList.contains("tyostot__tyosto_pysty")) {
       if (grandbarent.querySelectorAll('.tyostot__tyosto')[currentIndex - 1]) {
         n_elem = grandbarent.querySelectorAll('.tyostot__tyosto')[currentIndex - 1];
@@ -2394,12 +2378,6 @@ function give__tyosto_cord(levy) {
             k_input[k].value = newvalue;
           }
         }
-        //console.log("k_input: " + k_input);
-        // if(parseFloat(k_input)<0) {
-        //   alert(k_input);
-        //   // parseFloat(document.querySelector("#p_target"))-parseFloat(k_input);
-        //   // k_input.remove();
-        // }
       }
     }
     if (kiinnikkeet[i].parentElement.querySelector(".tyostot__tyosto_pysty")) {
@@ -2426,8 +2404,8 @@ function give__tyosto_cord(levy) {
     
 
     
-    boxHeight = parseFloat(document.querySelector('#box-wrapper > main').offsetHeight);
-    boxWidth = parseFloat(document.querySelector('#box-wrapper > main').offsetWidth);
+    boxHeight = parseFloat(canvas.offsetHeight);
+    boxWidth = parseFloat(canvas.offsetWidth);
     leftend = parseFloat(document.querySelector(".drawarea__right").getBoundingClientRect().left) - 55;
     bottomend = 999; // old
     p_bottomend = 999;
@@ -2574,7 +2552,7 @@ function tyosto__del(item) {
         }
       }
 
-      tomodify_cord = document.querySelectorAll(".tyostot__tyosto_pysty")[current_delete_tyosto-1];
+      tomodify_cord = canvas.querySelectorAll(".tyostot__tyosto_pysty")[current_delete_tyosto-1];
       get__that_cordinput = identify__sameline(tomodify_cord,"x");
     }
     else if (thistyosto.classList.contains("tyostot__tyosto_vaaka")) {
@@ -2586,7 +2564,7 @@ function tyosto__del(item) {
           c_kiinnikkeet[i].remove();
         }
       }
-      tomodify_cord = document.querySelectorAll(".tyostot__tyosto_vaaka")[current_delete_tyosto-1];
+      tomodify_cord = canvas.querySelectorAll(".tyostot__tyosto_vaaka")[current_delete_tyosto-1];
       get__that_cordinput = identify__sameline(tomodify_cord,"y");
     }
     get__that_cordinput.forEach(g => {
@@ -2611,9 +2589,9 @@ function tyosto__del(item) {
   tyostot_keskitys.classList.add("two");
 
 }
-if (document.querySelector("#drawscreen_section_five .levy")) {
-  // document.querySelector("#drawscreen_section_five .visible").classList.remove("levy");
-}
+// if (document.querySelector("#drawscreen_section_five .levy")) {
+//   // document.querySelector("#drawscreen_section_five .visible").classList.remove("levy");
+// }
 
 
 /**
@@ -2831,13 +2809,13 @@ function reorganise__newtyosto() {
 
   //20/04 secondcord fix
 
-  p_s = document.querySelectorAll(".tyostot__tyosto_pysty .secondcord");
+  p_s = canvas.querySelectorAll(".tyostot__tyosto_pysty .secondcord");
   for (var i = 0; i < p_s.length; i++) {
     z_cord = parseFloat(p_s[i].parentElement.parentElement.parentElement.style.left);
     y_cord = parseFloat(p_s[i].parentElement.style.left);
     p_s[i].value = (z_cord + y_cord) * 5;
   }
-  v_s = document.querySelectorAll(".tyostot__tyosto_vaaka .secondcord");
+  v_s = canvas.querySelectorAll(".tyostot__tyosto_vaaka .secondcord");
   for (var i = 0; i < v_s.length; i++) {
     z_cord = parseFloat(v_s[i].parentElement.parentElement.parentElement.style.bottom);
     y_cord = parseFloat(v_s[i].parentElement.style.bottom);
@@ -3096,12 +3074,12 @@ function open_ltladonta_settings(e, levy) {
 
     ltcontainer.querySelector(".lt_levy_vis").title = levy.parentElement.title;
 
-    if (document.querySelector(".dir_y")) {
+    if (canvas.querySelector(".dir_y")) {
       levy_.classList.remove("dir_x");
       levy_.classList.add("dir_y");
     }
 
-    else if (document.querySelector(".dir_x")) {
+    else if (canvas.querySelector(".dir_x")) {
       levy_.classList.remove("dir_y");
       levy_.classList.add("dir_x");
     }
@@ -3736,15 +3714,15 @@ function removeduplicatecords__adjustcords() {
       });
     });
 
-    x_cords = document.querySelectorAll(".tyostot__tyosto_pysty .x_cord_mki");
-    y_cords = document.querySelectorAll(".tyostot__tyosto_vaaka .x_cord_mki");
+    x_cords = canvas.querySelectorAll(".tyostot__tyosto_pysty .x_cord_mki");
+    y_cords = canvas.querySelectorAll(".tyostot__tyosto_vaaka .x_cord_mki");
 
     x_cords.forEach(x => {
       x.style.left = (-1) * parseFloat(x.value)/10 + "px";
       x.style.marginLeft = "unset";
     });
 
-    s_cords_x = document.querySelectorAll(".tyostot__tyosto_pysty .secondcord");
+    s_cords_x = canvas.querySelectorAll(".tyostot__tyosto_pysty .secondcord");
     s_cords_x.forEach(x => {
       x.style.left =  -12 + "px";
       x.style.marginLeft = "unset";
@@ -4116,9 +4094,7 @@ function c_open_ltladonta_settings(e, levy) {
     ltcontainer.querySelector(".lt_levy_vis").title = levy.parentElement.getAttribute("title");
     cloning_levy = levy.parentElement.cloneNode(true);
     ltcontainer.querySelector(".lt_levy_vis").innerHTML = cloning_levy.innerHTML;
-    // kiinniketys = document.querySelector(".kiinniketys");
-    // kiinniketys.querySelector(".trow:nth-child(1) label").click()
-    // kiinniketys.querySelector(".trow:nth-child(2) label").click();
+
     ltcontainer.querySelector("b").remove();
     allvals = ltcontainer.querySelectorAll("input");
     for (var a = allvals.length - 1; a >= 0; a--) {
@@ -4144,19 +4120,10 @@ function c_open_ltladonta_settings(e, levy) {
  * @returns None
  */
 function c_reorganise__newtyosto_levy(levy__to_reorgaise) {
-  // ltcontainer = document.querySelector(".levytyosto_container");
-  // //console.log(ltcontainer);
-  // //console.log(levy__to_reorgaise.parentElement);
-  // //console.log(levy__to_reorgaise.parentElement.querySelector(".levy_tyostot_y").innerHTML);
-  // //console.log(ltcontainer.parentElement.querySelector(".levy_tyostot_x").innerHTML);
+
   levy__to_reorgaise.parentElement.querySelector(".levy_tyostot_y").innerHTML = ltcontainer.querySelector(".levy_tyostot_x").innerHTML;
   levy__to_reorgaise.parentElement.querySelector(".levy_tyostot_x").innerHTML = ltcontainer.querySelector(".levy_tyostot_y").innerHTML;
-  // levyt=copiedcanvases.querySelectorAll(".levy");
-  // for (var i = levyt.length - 1; i >= 0; i--) {
-  //   fixkiinnikkeet(levyt[i]);
-  // }
-  // aloita_tyosto_kiinnikkeet();
-  // reorganise__newtyosto();
+
 }
 
 /**

@@ -35,27 +35,18 @@ function saumoita(mode) {
     h = parseFloat(document.querySelector("#box_h").value);
     w = parseFloat(document.querySelector("#box_w").value);
 
-    // if(parseFloat(document.querySelector("#settings__sauma_interval_x").value) > parseFloat(h)) {
-    //     document.querySelector("#settings__sauma_interval_x").value = h;
-    //     document.querySelector("#settings__sauma_intervalx").value = h;
-    // }
-
-    // if(parseFloat(document.querySelector("#settings__sauma_interval_y").value) > parseFloat(w)) {
-    //     document.querySelector("#settings__sauma_interval_y").value = w;
-    //     document.querySelector("#settings__sauma_intervaly").value = w;
-    // }
     
     var newrow_horizontal = document.createElement("div");
     var newrow_vertical = document.createElement("div");
-    var canvas = document.querySelector("#box-wrapper > main");
-    var aukkos = document.getElementsByClassName("aukko");
+
+    var aukkos = canvas.getElementsByClassName("aukko");
     myDivs_horizontal = [],
         myDivs_vertical = [],
         i = 0;
     saumoitus__deleterest();
     if (document.getElementById("settings__sauma_pysty").checked) {
-        if (document.querySelector(".levyt")) {
-            document.querySelector(".levyt").style.flexDirection = "row";
+        if (canvas.querySelector(".levyt")) {
+            canvas.querySelector(".levyt").style.flexDirection = "row";
         }
         var sauma__interval_vertical = document.querySelector("#settings__sauma_interval_x").value;
         var sauma__interval_horizontal = document.querySelector("#settings__sauma_interval_y").value;
@@ -81,8 +72,8 @@ function saumoita(mode) {
             }
         }
     } else if (document.getElementById("settings__sauma_vaaka").checked) {
-        if (document.querySelector(".levyt")) {
-            document.querySelector(".levyt").style.flexDirection = "row-reverse";
+        if (canvas.querySelector(".levyt")) {
+            canvas.querySelector(".levyt").style.flexDirection = "row-reverse";
         }
         var sauma__interval_vertical = document.querySelector("#settings__sauma_interval_y").value;
         var sauma__interval_horizontal = document.querySelector("#settings__sauma_interval_x").value;
@@ -272,14 +263,14 @@ function saumoitus__examplephoto() {
  * @returns None
  */
 function sauma__del(e) {
-    if (input_step !== "drawscreen_section_four") {
+    if (input_step !== "drawscreen_section_four" && input_step !== "drawscreen_section_eight") {
         return
     }
 
     // alert(e.getAttribute("name"));
     name = e.getAttribute("name");
-    const elements = document.querySelectorAll('.sauma__vertical');
-    const h_elements = document.querySelectorAll('.sauma__horizontal');
+    const elements = canvas.querySelectorAll('.sauma__vertical');
+    const h_elements = canvas.querySelectorAll('.sauma__horizontal');
     if ((e.parentElement.parentElement).classList.contains("sauma__vertical")) {
         if ((e.parentElement).classList.contains("sauma__vertical")) {
             sauma = e.parentElement;
@@ -289,8 +280,8 @@ function sauma__del(e) {
         const currentIndex = Array.from(elements).indexOf(sauma);
         // //console.log("currentIndex " + currentIndex);
         // //console.log("elements.length " + elements.length );
-        if (document.querySelectorAll('.sauma__vertical')[currentIndex + 1]) {
-            next_sauma = document.querySelectorAll('.sauma__vertical')[currentIndex + 1];
+        if (canvas.querySelectorAll('.sauma__vertical')[currentIndex + 1]) {
+            next_sauma = canvas.querySelectorAll('.sauma__vertical')[currentIndex + 1];
             next_sauma_value = parseFloat(next_sauma.querySelector("input").value) + parseFloat(sauma.querySelector("input").value);
             next_sauma.querySelector("input").value = next_sauma_value;
             next_sauma.querySelector(".sauma__vertical_ctrldown").innerText = next_sauma_value - saumaset_vm;
@@ -300,8 +291,8 @@ function sauma__del(e) {
             next_lowerinput.style.width = next_sauma_value / 5 + "px";
             next_upperinput.style.left = ((-1) * next_sauma_value / 5) + "px";
             next_lowerinput.style.left = ((-1) * next_sauma_value / 5) + "px";
-        } else if (document.querySelectorAll('.sauma__vertical')[currentIndex - 1]) {
-            prev_sauma = document.querySelectorAll('.sauma__vertical')[currentIndex - 1];
+        } else if (canvas.querySelectorAll('.sauma__vertical')[currentIndex - 1]) {
+            prev_sauma = canvas.querySelectorAll('.sauma__vertical')[currentIndex - 1];
             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value) + parseFloat(sauma.querySelector("input").value);
             prev_sauma_cord = sauma.style.left;
             prev_sauma.querySelector("input").value = prev_sauma_value;
@@ -324,8 +315,8 @@ function sauma__del(e) {
         const h_currentIndex = Array.from(h_elements).indexOf(h_sauma);
         // //console.log("h_currentIndex " + h_currentIndex);
         // //console.log("elh_elementsements.length " + h_elements.length );
-        if (document.querySelectorAll('.sauma__horizontal')[h_currentIndex - 1]) {
-            prev_h_sauma = document.querySelectorAll('.sauma__horizontal')[h_currentIndex - 1];
+        if (canvas.querySelectorAll('.sauma__horizontal')[h_currentIndex - 1]) {
+            prev_h_sauma = canvas.querySelectorAll('.sauma__horizontal')[h_currentIndex - 1];
             prev_h_sauma_value = parseFloat(prev_h_sauma.querySelector("input").value) + parseFloat(h_sauma.querySelector("input").value);
             prev_h_sauma_cord = h_sauma.style.bottom;
             prev_h_sauma.style.bottom = prev_h_sauma_cord;
@@ -335,16 +326,13 @@ function sauma__del(e) {
             prev_h_lowerinput = prev_h_sauma.querySelector(".sauma__horizontal_ctrldown");
             prev_h_upperinput.style.height = prev_h_sauma_value / 5 + "px";
             prev_h_lowerinput.style.height = prev_h_sauma_value / 5 + "px";
-            // if(document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked || vaakahanta_alas === true) {
+
             prev_h_upperinput.style.bottom = ((-1) * prev_h_sauma_value / 5) + "px";
             prev_h_lowerinput.style.bottom = ((-1) * prev_h_sauma_value / 5) + "px";
-            // }
-            // else {
-            //   prev_h_upperinput.style.top = ((-1) * prev_h_sauma_value/5) + "px";
-            //   prev_h_lowerinput.style.top = ((-1) * prev_h_sauma_value/5) + "px";
-            // }
-        } else if (document.querySelectorAll('.sauma__horizontal')[h_currentIndex + 1]) {
-            next_h_sauma = document.querySelectorAll('.sauma__horizontal')[h_currentIndex];
+
+            
+        } else if (canvas.querySelectorAll('.sauma__horizontal')[h_currentIndex + 1]) {
+            next_h_sauma = canvas.querySelectorAll('.sauma__horizontal')[h_currentIndex];
             next_h_sauma_value = parseFloat(next_h_sauma.querySelector("input").value) + parseFloat(h_sauma.querySelector("input").value);
             next_h_sauma.querySelector("input").value = next_h_sauma_value;
             next_h_sauma.querySelector(".sauma__horizontal_ctrldown").innerText = next_h_sauma_value - saumaset_hm;
@@ -356,11 +344,11 @@ function sauma__del(e) {
             next_h_lowerinput.style.bottom = ((-1) * next_h_sauma_value / 5) + "px";
         }
     }
-    let sauma__del = document.getElementsByName(name);
+    sauma__del = canvas.getElementsByName(name);
     for (var i = sauma__del.length - 1; i >= 0; i--) {
         sauma__del[i].remove();
     }
-    let sauma__del2 = document.querySelectorAll("." + name);
+    let sauma__del2 = canvas.querySelectorAll("." + name);
     for (var i = sauma__del2.length - 1; i >= 0; i--) {
         sauma__del2[i].remove();
     }
@@ -382,10 +370,10 @@ function sauma__del(e) {
  * @returns None
  */
 function changedimensions_sauma(input) {
-    const elements = document.querySelectorAll('.sauma__vertical');
-    const h_elements = document.querySelectorAll('.sauma__horizontal');
+    const elements = canvas.querySelectorAll('.sauma__vertical');
+    const h_elements = canvas.querySelectorAll('.sauma__horizontal');
 
-    if (input_step !== "drawscreen_section_four") {
+    if (input_step !== "drawscreen_section_four" && input_step !== "drawscreen_section_eight") {
         return
     }
     if (input) {
@@ -433,9 +421,9 @@ function changedimensions_sauma(input) {
                     //console.log("changed_value " + changed_value);
                     //console.log("new_cord " + new_cord);
                     //console.log("erotus " + erotus);
-                    if (document.querySelectorAll('.sauma__vertical')[currentIndex + 1]) {
+                    if (canvas.querySelectorAll('.sauma__vertical')[currentIndex + 1]) {
                         if (erotus > 0) {
-                            next_sauma = document.querySelectorAll('.sauma__vertical')[currentIndex + 1];
+                            next_sauma = canvas.querySelectorAll('.sauma__vertical')[currentIndex + 1];
                             next_sauma_value = parseFloat(next_sauma.querySelector("input").value);
                             next_sauma_newvalue = parseFloat(next_sauma_value - erotus);
                             next_sauma.querySelector("input").value = parseFloat(next_sauma_newvalue);
@@ -450,7 +438,7 @@ function changedimensions_sauma(input) {
                             next_sauma.querySelector("input").style.left = (-1) * parseFloat(next_sauma_newvalue) / 5 + "px";
                             next_sauma.querySelector(".sauma__controls > b").style.left = (-1) * parseFloat(next_sauma_newvalue) / 5 + "px";
                         } else if (erotus < 0) {
-                            prev_sauma = document.querySelectorAll('.sauma__vertical')[currentIndex + 1];
+                            prev_sauma = canvas.querySelectorAll('.sauma__vertical')[currentIndex + 1];
                             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value);
                             prev_sauma_newvalue = parseFloat(prev_sauma_value - erotus);
                             prev_sauma.querySelector("input").value = parseFloat(prev_sauma_newvalue);
@@ -467,7 +455,7 @@ function changedimensions_sauma(input) {
                         }
                     } else {
                         if (erotus > 0) {
-                            next_sauma = document.querySelectorAll('.sauma__vertical')[currentIndex - 1];
+                            next_sauma = canvas.querySelectorAll('.sauma__vertical')[currentIndex - 1];
                             next_sauma_value = parseFloat(next_sauma.querySelector("input").value);
                             next_sauma_newvalue = parseFloat(next_sauma_value - erotus);
                             next_sauma.querySelector("input").value = parseFloat(next_sauma_newvalue);
@@ -482,7 +470,7 @@ function changedimensions_sauma(input) {
                             next_sauma.querySelector("input").style.left = (-1) * parseFloat(next_sauma_newvalue) / 5 + "px";
                             next_sauma.querySelector(".sauma__controls > b").style.left = (-1) * parseFloat(next_sauma_newvalue) / 5 + "px";
                         } else if (erotus < 0) {
-                            prev_sauma = document.querySelectorAll('.sauma__vertical')[currentIndex - 1];
+                            prev_sauma = canvas.querySelectorAll('.sauma__vertical')[currentIndex - 1];
                             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value);
                             prev_sauma_newvalue = parseFloat(prev_sauma_value - erotus);
                             prev_sauma.querySelector("input").value = parseFloat(prev_sauma_newvalue);
@@ -534,9 +522,9 @@ function changedimensions_sauma(input) {
                     // //console.log("new_cord " + new_cord);
                     erotus = newvalue - oldvalue;
                     // //console.log("erotus " + erotus);
-                    if (document.querySelectorAll('.sauma__horizontal')[currentIndex + 1]) {
+                    if (canvas.querySelectorAll('.sauma__horizontal')[currentIndex + 1]) {
                         if (erotus > 0) {
-                            next_sauma = document.querySelectorAll('.sauma__horizontal')[currentIndex + 1];
+                            next_sauma = canvas.querySelectorAll('.sauma__horizontal')[currentIndex + 1];
                             next_sauma_value = parseFloat(next_sauma.querySelector("input").value);
                             next_sauma_newvalue = parseFloat(next_sauma_value - erotus);
                             next_sauma.querySelector("input").value = parseFloat(next_sauma_newvalue);
@@ -551,7 +539,7 @@ function changedimensions_sauma(input) {
                             next_sauma.querySelector("input").style.bottom = (-1) * parseFloat(next_sauma_newvalue) / 5 + "px";
                             next_sauma.querySelector(".sauma__controls > b").style.bottom = (-1) * parseFloat(next_sauma_newvalue) / 5 + "px";
                         } else if (erotus < 0) {
-                            prev_sauma = document.querySelectorAll('.sauma__horizontal')[currentIndex + 1];
+                            prev_sauma = canvas.querySelectorAll('.sauma__horizontal')[currentIndex + 1];
                             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value);
                             prev_sauma_newvalue = parseFloat(prev_sauma_value - erotus);
                             prev_sauma.querySelector("input").value = parseFloat(prev_sauma_newvalue);
@@ -568,7 +556,7 @@ function changedimensions_sauma(input) {
                         }
                     } else {
                         if (erotus > 0) {
-                            next_sauma = document.querySelectorAll('.sauma__horizontal')[currentIndex - 1];
+                            next_sauma = canvas.querySelectorAll('.sauma__horizontal')[currentIndex - 1];
                             next_sauma_value = parseFloat(next_sauma.querySelector("input").value);
                             next_sauma_newvalue = parseFloat(next_sauma_value - erotus);
                             next_sauma.querySelector("input").value = parseFloat(next_sauma_newvalue);
@@ -583,7 +571,7 @@ function changedimensions_sauma(input) {
                             next_sauma.querySelector("input").style.bottom = (-1) * parseFloat(next_sauma_newvalue) / 5 + "px";
                             next_sauma.querySelector(".sauma__controls > b").style.bottom = (-1) * parseFloat(next_sauma_newvalue) / 5 + "px";
                         } else if (erotus < 0) {
-                            prev_sauma = document.querySelectorAll('.sauma__horizontal')[currentIndex - 1];
+                            prev_sauma = canvas.querySelectorAll('.sauma__horizontal')[currentIndex - 1];
                             prev_sauma_value = parseFloat(prev_sauma.querySelector("input").value);
                             prev_sauma_newvalue = parseFloat(prev_sauma_value - erotus);
                             prev_sauma.querySelector("input").value = parseFloat(prev_sauma_newvalue);
@@ -623,7 +611,7 @@ function resizeSauma(e, sauma, sauma__controls, sauma__control, axis) {
     const canvaForV = document.querySelector('.drawarea__right');
     const w = document.querySelector('#box_w').value;
     const h = document.querySelector('#box_h').value;
-    if (input_step !== 'drawscreen_section_four') {
+    if (input_step !== 'drawscreen_section_four' && input_step !== "drawscreen_section_eight") {
         return;
     } else {
         // submitprogress('', 'adding', '', 'sau');
@@ -638,12 +626,12 @@ function resizeSauma(e, sauma, sauma__controls, sauma__control, axis) {
         e.preventDefault();
         let h_elements = [];
         if (document.getElementById("saumoitus__sauma_one").checked && sauma.classList.contains("luo__lastsauma_vertical")) {} else {
-            const elements = document.querySelectorAll('.sauma__vertical');
+            const elements = canvas.querySelectorAll('.sauma__vertical');
             const currentIndex = Array.from(elements).indexOf(sauma);
             ns_vontrol = 101;
             ps_vontrol = 101;
-            n_elem = document.querySelectorAll('.sauma__vertical')[currentIndex + 1];
-            p_elem = document.querySelectorAll('.sauma__vertical')[currentIndex];
+            n_elem = canvas.querySelectorAll('.sauma__vertical')[currentIndex + 1];
+            p_elem = canvas.querySelectorAll('.sauma__vertical')[currentIndex];
             if (n_elem) {
                 ns_vontrol = n_elem.querySelector("input").value;
             }
@@ -719,7 +707,7 @@ function change__cord_raahaus(uusi) {
     let pystysauma = canvas.querySelectorAll(".sauma__vertical");
     let vaakasauma = canvas.querySelectorAll(".sauma__horizontal");
 
-    if (input_step !== 'drawscreen_section_four') {
+    if (input_step !== 'drawscreen_section_four' && input_step !== "drawscreen_section_eight") {
         return;
     }
     if(uusi) {
@@ -741,9 +729,9 @@ function change__cord_raahaus(uusi) {
                   vs_summ += saumawidth;
               }
           });
-          if (document.querySelector(".sauma__vertical_hanta")) {
+          if (canvas.querySelector(".sauma__vertical_hanta")) {
               hantawidth = w - vs_summ;
-              j = document.querySelector(".sauma__vertical_hanta");
+              j = canvas.querySelector(".sauma__vertical_hanta");
               j.style.left = w / 5 + "px";
               j.querySelector(".sauma__controls").style.left = "0";
               j.querySelector(".sauma__vertical_ctrldown").style.width = hantawidth / 5 + "px";
@@ -778,9 +766,9 @@ function change__cord_raahaus(uusi) {
               j.dataset.from = (saumaHeight);
               // vs_summ +=saumawidth;
           });
-          if (document.querySelector(".sauma__horizontal_hanta")) {
+          if (canvas.querySelector(".sauma__horizontal_hanta")) {
               hantawidth = h - hs_summ;
-              j = document.querySelector(".sauma__horizontal_hanta");
+              j = canvas.querySelector(".sauma__horizontal_hanta");
               j.style.bottom = h / 5 + "px";
               j.querySelector(".sauma__controls").style.bottom = "0";
               j.querySelector(".sauma__horizontal_ctrldown").style.height = hantawidth / 5 + "px";
@@ -847,40 +835,28 @@ function saumoitus__deleterest() {
             p_li_v[i].remove();
         }
     }
-    // if (document.querySelector(".horizontalrow_saumat")) {
-    //   let horizontalrow_saumat = document.querySelectorAll(".horizontalrow_saumat");
-    //   for (var i = 0; i < horizontalrow_saumat.length; i += 1) {
-    //     horizontalrow_saumat[i].remove();
-    //   }
-    // }
 
-    // if (document.querySelector(".horizontalrow_saumat")) {
-    //   let horizontalrow_saumat = document.querySelectorAll(".horizontalrow_saumat");
-    //   for (var i = 0; i < horizontalrow_saumat.length; i += 1) {
-    //     horizontalrow_saumat[i].remove();
-    //   }
-    // }
 
-    if (document.querySelector(".newrow_vertical")) {
-        let newrow_vertical = document.querySelectorAll(".newrow_vertical");
+    if (canvas.querySelector(".newrow_vertical")) {
+        let newrow_vertical = canvas.querySelectorAll(".newrow_vertical");
         for (var i = 0; i < newrow_vertical.length; i += 1) {
             newrow_vertical[i].remove();
         }
-        if (document.querySelector(".drawarea__left_container > sauma__downctrl_container")) {
-            document.querySelector(".drawarea__left_container > sauma__downctrl_container ").innerHTML = "";
+        if (canvas.querySelector(".drawarea__left_container > sauma__downctrl_container")) {
+            canvas.querySelector(".drawarea__left_container > sauma__downctrl_container ").innerHTML = "";
         }
-        if (document.querySelector(".drawarea__right > .sauma__controls")) {
-            document.querySelector(".drawarea__right > .sauma__controls").innerHTML = "";
+        if (canvas.querySelector(".drawarea__right > .sauma__controls")) {
+            canvas.querySelector(".drawarea__right > .sauma__controls").innerHTML = "";
         }
     }
-    if (document.querySelector(".newrow_horizontal")) {
-        let newrow_horizontal = document.querySelectorAll(".newrow_horizontal");
+    if (canvas.querySelector(".newrow_horizontal")) {
+        let newrow_horizontal = canvas.querySelectorAll(".newrow_horizontal");
         for (var i = 0; i < newrow_horizontal.length; i += 1) {
             newrow_horizontal[i].remove();
         }
     }
-    if (document.querySelector(".levyt")) {
-        document.querySelector(".levyt").remove();
+    if (canvas.querySelector(".levyt")) {
+        canvas.querySelector(".levyt").remove();
     }
     if (canvas.querySelector(".sauma") || canvas.querySelector(".sauma__controls") || canvas.querySelector(".sauma__horizontal_ctrl") || canvas
         .querySelector(".sauma__horizontal_ctrldown") || canvas.querySelector(".sauma__vertical_ctrldown") || document.querySelector(
@@ -941,21 +917,21 @@ function fixmissing__saumoitus() {
     w = parseFloat(document.querySelector("#box_w").value);
     horizontal = 0;
     vertical = 0;
-    let sauma__horizontal_ctrl = document.querySelectorAll(".sauma__horizontal_ctrl");
+    let sauma__horizontal_ctrl = canvas.querySelectorAll(".sauma__horizontal_ctrl");
     for (var i = 0; i < sauma__horizontal_ctrl.length; i += 1) {
         horizontal += parseFloat(sauma__horizontal_ctrl[i].value);
     }
-    if (document.querySelector(".sauma__vertical_ctrl")) {
-        let sauma__vertical_ctrl = document.querySelector(".sauma__vertical_ctrl");
+    if (canvas.querySelector(".sauma__vertical_ctrl")) {
+        let sauma__vertical_ctrl = canvas.querySelector(".sauma__vertical_ctrl");
         for (var i = 0; i < sauma__vertical_ctrl.length; i += 1) {
             vertical += parseFloat(sauma__vertical_ctrl[i].value);
         }
     }
-    horizontalrow_saumat = document.querySelector(".horizontalrow_saumat");
-    s_x = document.querySelector(".horizontalrow_saumat > .seina_patka_x");
-    s_y = document.querySelector(".horizontalrow_saumat > .seina_patka_y");
+    horizontalrow_saumat = canvas.querySelector(".horizontalrow_saumat");
+    s_x = canvas.querySelector(".horizontalrow_saumat > .seina_patka_x");
+    s_y = canvas.querySelector(".horizontalrow_saumat > .seina_patka_y");
     if (s_y) {
-        s_ys = document.querySelectorAll(".horizontalrow_saumat > .seina_patka_y");
+        s_ys = canvas.querySelectorAll(".horizontalrow_saumat > .seina_patka_y");
         for (var i = s_ys.length - 1; i >= 0; i--) {
             s_ys[i].title;
         }
@@ -965,7 +941,7 @@ function fixmissing__saumoitus() {
                 $(ids[1]).remove();
             }
         });
-        s_ys = document.querySelectorAll(".horizontalrow_saumat > .seina_patka_y");
+        s_ys = canvas.querySelectorAll(".horizontalrow_saumat > .seina_patka_y");
         title_summ = new Array();
         for (var i = s_ys.length - 1; i >= 0; i--) {
             title = parseFloat(s_ys[i].style.height);
@@ -1000,7 +976,7 @@ function fixmissing__saumoitus() {
     if (height__check == 0 || height__check == 15) {
         // //console.log("ALL OKE");
     } else {
-        var sauma__horizontal_ctrl_ = document.querySelector(".sauma_viim b.sauma__horizontal_ctrl.sauma__horizontal_ctrl-righted");
+        var sauma__horizontal_ctrl_ = canvas.querySelector(".sauma_viim b.sauma__horizontal_ctrl.sauma__horizontal_ctrl-righted");
         if (sauma__horizontal_ctrl_) {
             if (sauma__horizontal_ctrl_.value == 5 || sauma__horizontal_ctrl_.value == 0) {
                 sauma__horizontal_ctrl_.value = height__check;
@@ -1133,7 +1109,7 @@ function fixmissing__saumoitus() {
         }
     }
     to_alert = false;
-    let _nansauma2 = document.querySelectorAll(".sauma__control");
+    let _nansauma2 = canvas.querySelectorAll(".sauma__control");
     for (var i = _nansauma2.length - 1; i >= 0; i--) {
         if (parseFloat(_nansauma2[i].value) < 50) {
             to_alert = true;
@@ -1151,7 +1127,7 @@ function fixmissing__saumoitus() {
  */
 function aukoitus__siirto() {
     forward_prepending = false;
-    if (document.querySelector(".seina_patka_x")) {
+    if (canvas.querySelector(".seina_patka_x")) {
         let seina_patka_x = canvas.querySelectorAll(".seina_patka_x");
         //reversing array
         // for (let i = 0; i < seina_patka_x .length / 2; i++) {
@@ -1214,12 +1190,12 @@ function aukoitus__siirto() {
                         hanta = elems[s];
                         // elems[s].remove();
                     } else {
-                        document.querySelector(".verticalrow_saumat").append(elems[s]);
+                        canvas.querySelector(".verticalrow_saumat").append(elems[s]);
                     }
                     elems[s].classList.remove("sauma__vertical_hanta");
                     elems[s].classList.remove("luo__lastsauma_vertical");
                 }
-                document.querySelector(".verticalrow_saumat").append(hanta);
+                canvas.querySelector(".verticalrow_saumat").append(hanta);
                 calculateamounts();
             } else {
                 for (s = 0; s < saumat_.length; s++) {
@@ -1247,7 +1223,7 @@ function aukoitus__siirto() {
             calculateamounts();
         }
     }
-    if (document.querySelector(".seina_patka_y")) {
+    if (canvas.querySelector(".seina_patka_y")) {
         seina_patka_y = canvas.querySelectorAll(".seina_patka_y");
         seina_height = 0;
         seina_patka_ybtm = [];
@@ -1313,10 +1289,10 @@ function aukoitus__siirto() {
                     }
                 }
                 for (var i = saumoitus_t_v.length - 1; i >= 0; i--) {
-                    document.querySelector(".horizontalrow_saumat").prepend(saumoitus_t_v[i]);
+                    canvas.querySelector(".horizontalrow_saumat").prepend(saumoitus_t_v[i]);
                 }
             }
-            // if (document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked)
+
             else {
                 for (i = 0; i < seina_patka_y.length; i++) {
                     if (parseFloat(seina_patka_y[i].style.bottom) == seina_patka_ybtm[b] / 5) {
@@ -1358,14 +1334,14 @@ function aukoitus__siirto() {
             henta = luo__lastsauma_horizontal(h);
             henta.style.top = "unset";
             henta.style.bottom = h / 5 + "px";
-            document.querySelector(".horizontalrow_saumat").append(henta);
+            canvas.querySelector(".horizontalrow_saumat").append(henta);
             //console.log(saumoitus_t_v);
             vaakahanta_alas = true;
             calculateamounts();
         }
     }
     if (document.getElementById("settings__saumahanta-vas").checked && document.getElementById("saumoitus__sauma_one").checked) {
-        saumat_ = document.querySelectorAll(".sauma__vertical");
+        saumat_ = canvas.querySelectorAll(".sauma__vertical");
         if (saumat_[parseFloat(saumat_.length) - 1].classList.contains("sauma__vertical_hanta") !== true) {
             saumat_[parseFloat(saumat_.length) - 1].classList.add("sauma__vertical_hanta");
             saumat_[parseFloat(saumat_.length) - 1].classList.add("luo__lastsauma_vertical");
@@ -1458,7 +1434,7 @@ function aukoitus__siirto() {
  * @returns None
  */
 function calculateamounts(aukoitusparam) {
-    var canvas = document.querySelector(".canvas");
+    // var canvas = document.querySelector(".canvas");
     var h = document.querySelector("#box_h").value;
     var w = document.querySelector("#box_w").value;
     var s_summ = 0;
@@ -1481,7 +1457,7 @@ function calculateamounts(aukoitusparam) {
     try {
             document.querySelector(".drawarea__controls_four-pysty").innerHTML = "";
         document.querySelector(".drawarea__controls_four-vaaka").innerHTML = "";
-        if (document.querySelector(".seina_patka_x") && document.querySelector(".seina_patka_y")) {
+        if (canvas.querySelector(".seina_patka_x") && canvas.querySelector(".seina_patka_y")) {
             //OK?
             if (document.querySelector("#settings__saumahanta-tasoitus").checked && document.getElementById("saumoitus__sauma_three").checked && document
                 .getElementById("saumoitus__sauma_two").checked) {
@@ -1493,7 +1469,7 @@ function calculateamounts(aukoitusparam) {
                 cord_pystysaumat__aukotmukaan();
                 cord_vaakasaumat__aukotmukaan();
             }
-        } else if (document.querySelector(".seina_patka_x")) {
+        } else if (canvas.querySelector(".seina_patka_x")) {
             //OK
             if (document.querySelector("#settings__saumahanta-tasoitus").checked && document.getElementById("saumoitus__sauma_two").checked) {
                 cord_vaakasaumat__aukotyli_tasoitus();
@@ -1504,7 +1480,7 @@ function calculateamounts(aukoitusparam) {
                 cord_pystysaumat__aukotmukaan();
                 cord_vaakasaumat__aukotyli();
             }
-        } else if (document.querySelector(".seina_patka_y")) {
+        } else if (canvas.querySelector(".seina_patka_y")) {
             //OK
             if (document.querySelector("#settings__saumahanta-tasoitus").checked && document.getElementById("saumoitus__sauma_three").checked) {
                 cord_pystysaumat__aukotyli();
@@ -1612,12 +1588,6 @@ function calculateamounts(aukoitusparam) {
         }
     });
 
-    // _newDiv__comment = document.createElement("li");
-    // _newDiv__comment = "Päätysauma";
-    // document.querySelector(".drawarea__controls_four-pysty").prepend(_newDiv__comment);
-    // newDiv__comment_ = document.createElement("li");
-    // newDiv__comment_.innerHTML = "Päätysauma";
-    // document.querySelector(".drawarea__controls_four-vaaka").prepend(newDiv__comment_);
 
     dels = canvas.querySelectorAll(".sauma__controls_del");
 
@@ -1647,11 +1617,11 @@ function calculateamounts(aukoitusparam) {
     }
 
     setTimeout(() => {
-        if(document.querySelector(".fakesauma_v .delmeasure")) {
-            document.querySelector(".fakesauma_v .delmeasure").innerHTML = 0;
-            document.querySelector(".fakesauma_v .delmeasure").classList.add("delmeasure_vertical");
-            document.querySelector(".fakesauma_h .delmeasure").innerHTML = 0;
-            document.querySelector(".fakesauma_h .delmeasure").classList.add("delmeasure_horizontal");
+        if(canvas.querySelector(".fakesauma_v .delmeasure")) {
+            canvas.querySelector(".fakesauma_v .delmeasure").innerHTML = 0;
+            canvas.querySelector(".fakesauma_v .delmeasure").classList.add("delmeasure_vertical");
+            canvas.querySelector(".fakesauma_h .delmeasure").innerHTML = 0;
+            canvas.querySelector(".fakesauma_h .delmeasure").classList.add("delmeasure_horizontal");
         }
     }, 1500);
 }
@@ -1671,8 +1641,6 @@ function aukkojenallapoisto() {
     aukko = canvas.querySelectorAll(".aukko");
 
     for (var j = 0; j < aukko.length; j++) {
-        // aukko = document.querySelector("#aukko6418b82c6594b");
-
         acord = aukko[j].getAttribute("title");
         a_l = parseFloat(aukko[j].querySelector(".aukko_lcord").innerHTML);
         a_r = parseFloat(aukko[j].querySelector(".aukko_rcord").innerHTML);
@@ -1695,7 +1663,7 @@ function aukkojenallapoisto() {
             if (a_l <= l_l && a_r >= l_r && a_b >= l_b && a_t <= l_t) {
                 low_top = a_b - l_b;
                 up_top = l_t - a_t;
-                levyt = document.querySelector(".levyt");
+                levyt = canvas.querySelector(".levyt");
 
                 w = l_r - l_l;
                 dex = "Yhdistettylevy";
@@ -1711,7 +1679,7 @@ function aukkojenallapoisto() {
             if (a_l >= l_l && a_r <= l_r && a_b <= l_b && a_t >= l_t) {
                 l_left = a_l - l_l;
                 r_left = l_r - a_r;
-                levyt = document.querySelector(".levyt");
+                levyt = canvas.querySelector(".levyt");
                 h = l_t - l_b;
                 dex = "Yhdistettylevy";
                 col_ += 1;
@@ -1822,20 +1790,18 @@ function pystysaumat__aukkojenyli() {
         sauma__interval_vertical = parseFloat(document.querySelector("#settings__sauma_interval_y").value);
         sauma__interval_horizontal = parseFloat(document.querySelector("#settings__sauma_interval_x").value);
     }
-    // if (document.getElementById("settings__saumahanta-tasoitus").checked) {
-    //   numOfDivs__vertical+=1;
-    // }
+
     var newrow_horizontal = document.createElement("div");
     var newrow_vertical = document.createElement("div");
     newrow_vertical.classList.add("verticalrow_saumat");
-    var canvas = document.querySelector("#box-wrapper > main");
+    // var canvas = document.querySelector("#box-wrapper > main");
     var aukkos = document.getElementsByClassName("aukko");
     myDivs_horizontal = [],
         myDivs_vertical = [],
         i = 0;
 
-    if (document.querySelector(".saumat__grandrow")) {
-        saumat = document.querySelector(".saumat__grandrow");
+    if (canvas.querySelector(".saumat__grandrow")) {
+        saumat = canvas.querySelector(".saumat__grandrow");
     } else {
         saumat = document.createElement("div");
         saumat.classList.add("saumat__grandrow");
@@ -1906,8 +1872,8 @@ function pystysaumat__aukkojenmukaan() {
         }
         var newrow_horizontal = document.createElement("div");
         var newrow_vertical = document.createElement("div");
-        // var canvas = document.querySelector("#box-wrapper > main");
-        var aukkos = document.getElementsByClassName("aukko");
+        // // var canvas = document.querySelector("#box-wrapper > main");
+        var aukkos = canvas.getElementsByClassName("aukko");
         myDivs_horizontal = [],
             myDivs_vertical = [],
             i = 0;
@@ -1928,7 +1894,7 @@ function pystysaumat__aukkojenmukaan() {
             verticalrow_saumat.classList.add("verticalrow_saumat");
             saumat.appendChild(verticalrow_saumat);
         }
-        let v_aukkos = document.querySelectorAll(".drawarea > .canvas > .aukko");
+        let v_aukkos = canvas.querySelectorAll(".aukko");
         var aukko5, aukko4, aukko3, aukko2, aukko1;
         v_l = v_aukkos.length;
         if (v_l == 1) {
@@ -2081,7 +2047,7 @@ function luo__sauma_vertical(saumaWidth, tas_li, modcount) {
     var h = document.querySelector('#box_h').value;
     var w = document.querySelector('#box_w').value;
     let id = "pystysauma" + Math.random().toString(16).slice(2).toLowerCase();
-    var nvrtcl = document.querySelector(".newrow_vertical");
+    var nvrtcl = canvas.querySelector(".newrow_vertical");
     sauma.dataset.no = s_v;
     newrow_horis_vontal.classList.add(id);
     newDiv__comment_del.classList.add("newDiv__comment_del");
@@ -2198,15 +2164,15 @@ function luo__lastsauma_vertical(aukko) {
     const sauma__controls_type = document.createElement("input");
 
 
-    let saumas = document.querySelectorAll(".sauma__vertical");
-    let ctrl = document.querySelectorAll(".sauma__vertical_ctrl");
+    let saumas = canvas.querySelectorAll(".sauma__vertical");
+    let ctrl = canvas.querySelectorAll(".sauma__vertical_ctrl");
     var h = parseFloat(document.querySelector("#box_h").value);
     var w = parseFloat(document.querySelector("#box_w").value);
     var id = "lastsauma_vertical" + Math.random().toString(16).slice(2).toLowerCase();
     var newrow_vertical = document.createElement("div");
     var newDiv__comment = document.createElement("li");
     var newDiv__comment_del = document.createElement("i");
-    var nvrtcl = document.querySelector(".newrow_vertical");
+    var nvrtcl = canvas.querySelector(".newrow_vertical");
 
 
 
@@ -2324,7 +2290,7 @@ function luo__scord_vertical(sauma, id, name) {
     const sauma__control_down = document.createElement("b");
     const sauma__controls = document.createElement("div");
     const sauma__controls_del = document.createElement("div");
-    // const sauma__controls_type = document.createElement("input");
+
     sauma__control.classList.add("sauma__vertical_ctrl");
     sauma__control.classList.add("sauma__vertical_ctrl-lefted");
     sauma__control.classList.add("sauma__control");
@@ -2359,7 +2325,7 @@ function luo__scord_vertical(sauma, id, name) {
     sauma__controls_del.innerHTML = name;
     sauma__control.setAttribute("onchange", "changedimensions_sauma(this);");
     sauma__control.setAttribute("onclick", "clearcord(this,'sau');");
-    // sauma__control.setAttribute("onclick", "document.querySelector("+id+").remove();this.parentElement.style.opacity = '0';");
+
     if (document.getElementById("settings__saumahanta-oik").checked || document.querySelector("#settings__saumahanta-tasoitus").checked || pystyhanta_oikealle === true) {
         sauma__control_down.style.width = parseFloat(sauma) / 5 + "px";
         sauma__control_down.style.left = (-1) * parseFloat(sauma) / 5 + "px";
@@ -2395,16 +2361,8 @@ function luo__scord_vertical(sauma, id, name) {
  * @returns None
  */
 function cord_pystysaumat__aukotyli() {
-    canvas = document.querySelector(".canvas");
     sauma = canvas.querySelectorAll(".sauma__vertical");
-    // if(canvas.querySelector(".sauma__vertical")) {
-    //   distance = document.querySelector(".verticalrow_saumat");
-    //   // viim_sauma = luo__lastsauma_vertical();
-    //   distance.append(luo__lastsauma_vertical());
-    //   sauma = canvas.querySelectorAll(".sauma__vertical");
-    //   // //console.log("viim_sauma: "+viim_sauma);
-    //   //console.log("distance: "+distance);
-    // }
+
     if (document.getElementById("settings__saumahanta-oik").checked || document.querySelector("#settings__saumahanta-tasoitus").checked || pystyhanta_oikealle === true) {
         h = document.querySelector("#box_h").value;
         w = document.querySelector("#box_w").value;
@@ -2428,7 +2386,7 @@ function cord_pystysaumat__aukotyli() {
             s_summ += saumawidth;
         });
     } else if (document.getElementById("settings__saumahanta-vas").checked) {
-        var canvas = document.querySelector(".canvas");
+        // var canvas = document.querySelector(".canvas");
         var h = document.querySelector("#box_h").value;
         var w = document.querySelector("#box_w").value;
         var s_summ = 0;
@@ -2454,7 +2412,7 @@ function cord_pystysaumat__aukotyli() {
  * @returns None
  */
 function cord_pystysaumat__aukotyli_tasoitus() {
-    var canvas = document.querySelector(".canvas");
+    // var canvas = document.querySelector(".canvas");
     var h = document.querySelector("#box_h").value;
     var w = document.querySelector("#box_w").value;
     var s_summ = 0;
@@ -2495,10 +2453,10 @@ function cord_pystysaumat__aukotyli_tasoitus() {
  * @returns None
  */
 function cord_pystysaumat__aukotmukaan() {
-    if (document.querySelector(".seina_patka_x")) {
-        let seina_patkat = document.querySelectorAll(".seina_patka_x");
+    if (canvas.querySelector(".seina_patka_x")) {
+        let seina_patkat = canvas.querySelectorAll(".seina_patka_x");
         sp_lenght = parseFloat(seina_patkat.length) - 1;
-        var canvas = document.querySelector(".canvas");
+        // var canvas = document.querySelector(".canvas");
         var h = document.querySelector("#box_h").value;
         var w = document.querySelector("#box_w").value;
         if (document.getElementById("settings__saumahanta-oik").checked || document.querySelector("#settings__saumahanta-tasoitus").checked) {
@@ -2633,7 +2591,7 @@ function vaakasaumat__aukkojenyli() {
  * @returns None
  */
 function vaakasaumat__aukkojenmukaan() {
-    var canvas = document.querySelector("#box-wrapper > main");
+    // var canvas = document.querySelector("#box-wrapper > main");
     if (canvas.querySelector(".aukko")) {
         h = parseFloat(document.querySelector("#box_h").value);
         w = parseFloat(document.querySelector("#box_w").value);
@@ -2648,21 +2606,21 @@ function vaakasaumat__aukkojenmukaan() {
         }
         var newrow_horizontal = document.createElement("div");
         var newrow_vertical = document.createElement("div");
-        var canvas = document.querySelector("#box-wrapper > main");
-        var aukkos = document.getElementsByClassName("aukko");
+        // var canvas = document.querySelector("#box-wrapper > main");
+        var aukkos = canvas.getElementsByClassName("aukko");
         myDivs_horizontal = [],
             myDivs_vertical = [],
             i = 0;
         var horizontalrow_saumat = document.createElement("div");
 
-        if (document.querySelector(".saumat__grandrow")) {
-            saumat = document.querySelector(".saumat__grandrow");
+        if (canvas.querySelector(".saumat__grandrow")) {
+            saumat = canvas.querySelector(".saumat__grandrow");
         } else {
             saumat = document.createElement("div");
             saumat.classList.add("saumat__grandrow");
             canvas.appendChild(saumat);
         }
-        let h_aukkos = document.querySelectorAll(".drawarea > .canvas > .aukko");
+        let h_aukkos = canvas.querySelectorAll(".aukko");
         var aukko5, aukko4, aukko3, aukko2, aukko1;
         h_l = h_aukkos.length;
         if (h_l == 1) {
@@ -2811,7 +2769,7 @@ function luo__sauma_horizontal(saumaheight, tas_li, modcount) {
         sauma__interval_horizontal = document.querySelector("#settings__sauma_interval_x").value;
     }
     const heightBox = document.querySelector('#box_h').value;
-    const boxHeight = document.querySelector('#box-wrapper > main').offsetHeight;
+    const boxHeight = canvas.offsetHeight;
     const sauma = document.createElement("div");
     const sauma__control = document.createElement("input");
     const sauma__control_down = document.createElement("b");
@@ -2824,7 +2782,7 @@ function luo__sauma_horizontal(saumaheight, tas_li, modcount) {
     var h = document.querySelector('#box_h').value;
     var w = document.querySelector('#box_w').value;
     let id = "vaakasauma" + Math.random().toString(16).slice(2).toLowerCase();
-    var nvrtcl = document.querySelector(".newrow_horizontal");
+    var nvrtcl = canvas.querySelector(".newrow_horizontal");
     sauma.dataset.no = s_h;
     newrow_horis_vontal.classList.add(id);
     newDiv__comment_del.classList.add("newDiv__comment_del");
@@ -2935,15 +2893,15 @@ function luo__lastsauma_horizontal(aukko) {
     const sauma__controls = document.createElement("div");
     const sauma__controls_del = document.createElement("div");
     const sauma__controls_type = document.createElement("input");
-    let saumas = document.querySelectorAll(".sauma__horizontal");
-    let ctrl = document.querySelectorAll(".sauma__horizontal_ctrl");
+    let saumas = canvas.querySelectorAll(".sauma__horizontal");
+    let ctrl = canvas.querySelectorAll(".sauma__horizontal_ctrl");
     var h = document.querySelector("#box_h").value;
     var w = document.querySelector("#box_w").value;
     var id = "lastsauma_horizontal" + Math.random().toString(16).slice(2).toLowerCase();
     var newrow_vertical = document.createElement("div");
     var newDiv__comment = document.createElement("li");
     var newDiv__comment_del = document.createElement("i");
-    var nvrtcl = document.querySelector(".newrow_horizontal");
+    var nvrtcl = canvas.querySelector(".newrow_horizontal");
     sauma.dataset.no = s_h;
     sauma.classList.add("sauma");
     sauma.classList.add("sauma__horizontal");
@@ -3099,49 +3057,7 @@ function luo__scord_horizontal(saumaheight, id, name) {
         sauma__control_down.style.height = saumaheight / 5 + "px";
         sauma__control.style.height = saumaheight / 5 + "px";
     }
-    // if (document.getElementById("settings__saumahanta-oik").checked || document.querySelector("#settings__saumahanta-tasoitus").checked) {
-    //   
-    //   if(document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked || vaakahanta_alas === true) {
-    //     sauma__control_down.style.bottom = (-1) * sauma/5 + "px";
-    //   }
-    //   else {
-    //     sauma__control_down.style.top = (-1) * sauma/5 + "px";
-    //   }
-    //   sauma__control.style.height = sauma/5 + "px";
-    //   if(document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked || vaakahanta_alas === true) {
-    //     sauma__control.style.bottom = (-1) * sauma/5 + "px";
-    //   }
-    //   else {
-    //     sauma__control.style.top = (-1) * sauma/5 + "px";
-    //   }
-    // }
-    // if (document.getElementById("settings__saumahanta-vas").checked) {
-    //   sauma__control_down.style.height = sauma/5 + "px";
-    //   sauma__control_down.style.bottom = (-1) * sauma/5 + "px";
-    //   if(document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked || vaakahanta_alas === true) {
-    //     sauma__control.style.bottom = (-1) * sauma/5 + "px";
-    //   }
-    //   else {
-    //     sauma__control.style.top = (-1) * sauma/5 + "px";
-    //   }
-    //   sauma__control.style.height = sauma/5 + "px";
-    // }
-    // else {
-    //   sauma__control_down.style.height = sauma/5 + "px";
-    //   if(document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked || vaakahanta_alas === true) {
-    //     sauma__control_down.style.bottom = (-1) * sauma/5 + "px";
-    //   }
-    //   else {
-    //     sauma__control_down.style.top = (-1) * sauma/5 + "px";
-    //   }
-    //   sauma__control.style.height = sauma/5 + "px";
-    //   if(document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked || vaakahanta_alas === true) {
-    //     sauma__control.style.bottom = (-1) * sauma/5 + "px";
-    //   }
-    //   else {
-    //     sauma__control.style.top = (-1) * sauma/5 + "px";
-    //   }
-    // }
+
     sauma__control.setAttribute("data-from", parseFloat(sauma__control.value));
     sauma__controls.append(sauma__control);
     sauma__controls.append(sauma__control_down);
@@ -3155,7 +3071,7 @@ function luo__scord_horizontal(saumaheight, id, name) {
  */
 // 25 LUO KOORDINAATISTON VAAKASAUMOILLE KUN MENEE AUKKOJEN YLI, H
 function cord_vaakasaumat__aukotyli() {
-    var canvas = document.querySelector(".canvas");
+    // var canvas = document.querySelector(".canvas");
     var h = document.querySelector("#box_h").value;
     var w = document.querySelector("#box_w").value;
     let sauma = canvas.querySelectorAll(".sauma__horizontal");
@@ -3193,62 +3109,6 @@ function cord_vaakasaumat__aukotyli() {
         });
         s_summ += saumaheight;
     });
-    // if(document.getElementById("settings__saumahanta-oik").checked || document.querySelector("#settings__saumahanta-tasoitus").checked || document.getElementById("settings__saumahanta-vas").checked) {
-    //   sauma.forEach(function(j) {
-    //     if(document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked || vaakahanta_alas === true) {
-    //       saumaheight = parseFloat(j.style.bottom)*5 - s_summ;
-    //     }
-    //     else {
-    //       saumaheight = parseFloat(j.style.top)*5 - s_summ;
-    //     }
-    //     if(j.querySelector(".sauma__horizontal_ctrldown")) {
-    //       j.querySelector(".sauma__horizontal_ctrldown").remove();
-    //     }
-    //     if(j.querySelector(".sauma__horizontal_ctrl")) {
-    //       j.querySelector(".sauma__horizontal_ctrl").remove();
-    //     }
-    //     if(j.querySelector(".sauma__controls")) {
-    //       j.querySelector(".sauma__controls").remove();
-    //     }
-    //     id = j.getAttribute("name");
-    //     j.append(luo__scord_horizontal(saumaheight,id,j.dataset.no));
-    //     j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-    //         resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-    //       });
-    //       j.addEventListener('touchmove', (e) => {
-    //         resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-    //       });
-    //     s_summ +=saumaheight;
-    //   });
-    // }
-    // else if (document.getElementById("settings__saumahanta-vas").checked) {
-    //   sauma.forEach(function(j) {
-    //     if(document.querySelector("#settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked || vaakahanta_alas === true) {
-    //       saumaheight = parseFloat(j.style.bottom)*5 - s_summ;
-    //     }
-    //     else {
-    //       saumaheight = parseFloat(j.style.top)*5 - s_summ;
-    //     }
-    //     if(j.querySelector(".sauma__horizontal_ctrldown")) {
-    //       j.querySelector(".sauma__horizontal_ctrldown").remove();
-    //     }
-    //     if(j.querySelector(".sauma__horizontal_ctrl")) {
-    //       j.querySelector(".sauma__horizontal_ctrl").remove();
-    //     }
-    //     if(j.querySelector(".sauma__controls")) {
-    //       j.querySelector(".sauma__controls").remove();
-    //     }
-    //     id = j.getAttribute("name");
-    //     j.append(luo__scord_horizontal(saumaheight,id,j.dataset.no));
-    //     j.querySelector(".sauma__controls").addEventListener('touchmove', (e) => {
-    //       resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-    //     });
-    //     j.addEventListener('touchmove', (e) => {
-    //       resizeSauma(e, j, j.querySelector(".sauma__controls"), j.querySelector(".sauma__control"), "v");
-    //     });
-    //     s_summ +=saumaheight;
-    //   });
-    // }
 }
 /**
  * Function to adjust the horizontal seams based on user settings and interactions.
@@ -3257,7 +3117,7 @@ function cord_vaakasaumat__aukotyli() {
 // 26 LUO KOORDINAATISTON VAAKASAUMOILLE KUN MENEE AUKKOJEN YLI TASOITUKSELLA, H
 function cord_vaakasaumat__aukotyli_tasoitus() {
     let seina_patkat = document.querySelectorAll(".seina_patka_y");
-    var canvas = document.querySelector(".canvas");
+    // var canvas = document.querySelector(".canvas");
     var h = document.querySelector("#box_h").value;
     var w = document.querySelector("#box_w").value;
     var s_summ = 0;
@@ -3301,8 +3161,8 @@ function cord_vaakasaumat__aukotyli_tasoitus() {
  */
 // 27 LUO KOORDINAATISTON VAAKASAUMOILLE KUN MENEE AUKKOJEN MUKAAN, H
 function cord_vaakasaumat__aukotmukaan() {
-    if (document.querySelector(".seina_patka_y")) {
-        let seina_patkat = document.querySelectorAll(".seina_patka_y");
+    if (canvas.querySelector(".seina_patka_y")) {
+        let seina_patkat = canvas.querySelectorAll(".seina_patka_y");
         // sp_lenght = parseFloat(seina_patkat.length) - 1;
         if (document.getElementById("settings__saumahanta-oik").checked || document.getElementById("settings__saumahanta-vas").checked) {
             seina_patkat.forEach(function(i) {
@@ -3441,8 +3301,8 @@ function cord_vaakasaumat__aukotmukaan() {
  * @returns None
  */
 function alkusaumat() {
-    if (document.querySelector(".saumat__grandrow")) {
-        saumat = document.querySelector(".saumat__grandrow");
+    if (canvas.querySelector(".saumat__grandrow")) {
+        saumat = canvas.querySelector(".saumat__grandrow");
     } else {
         saumat = document.createElement("div");
         saumat.classList.add("saumat__grandrow");
@@ -3522,34 +3382,20 @@ function alkusaumat() {
     a_h.classList.add(h_id);
     a_h.setAttribute("id", h_id);
     a_h.setAttribute("name", h_id);
-    // if (document.getElementById("settings__saumahanta-oik").checked || document.querySelector("#settings__saumahanta-tasoitus").checked || pystyhanta_oikealle === true) {
     a_v.style.left = "0px";
-    // }
-    // else if (document.getElementById("settings__saumahanta-vas").checked) {
-    //   a_v.style.right = "0px";
-    // }
-    // if (document.getElementById("settings__saumahanta-yla").checked || document.getElementById("settings__saumahanta-vaakatasoitus").checked) {
     a_h.style.bottom = "0px";
-    // }
-    // else if (document.getElementById("settings__saumahanta-ala").checked) {
-    //   a_h.style.top = "0px";
-    // }
     v__control.classList.add("sauma__vertical_ctrl");
     v__control.classList.add("sauma__vertical_ctrl-righted");
     v__control.classList.add("sauma__control");
     v__controls_type.classList.add("lineinput");
-    // v__control_down.classList.add("sauma__vertical_ctrldown");
     v__controls.classList.add("sauma__controls");
     v__controls_del.classList.add("sauma__controls_del");
-    // v__control_down.classList.add("sauma__control_down");
     h__control.classList.add("sauma__horizontal_ctrl");
     h__control.classList.add("sauma__horizontal_ctrl-righted");
     h__control.classList.add("sauma__control");
     h__controls_type.classList.add("lineinput");
-    // h__control_down.classList.add("sauma__horizontal_ctrldown");
     h__controls.classList.add("sauma__controls");
     h__controls_del.classList.add("sauma__controls_del");
-    // h__control_down.classList.add("sauma__control_down");
     v__controls_del.innerHTML = 1;
     h__controls_del.innerHTML = "A";
     a_v.appendChild(v__controls);
@@ -3594,7 +3440,7 @@ function alkusaumat() {
  * @returns None
  */
 function saumasize__checkup() {
-    v_input = document.querySelectorAll(".sauma__vertical_ctrl");
+    v_input = canvas.querySelectorAll(".sauma__vertical_ctrl");
     if (document.getElementById("settings__sauma_pysty").checked) {
         int_y = parseFloat(document.querySelector("#settings__sauma_interval_y").value);
         int_x = parseFloat(document.querySelector("#settings__sauma_interval_x").value);
@@ -3610,7 +3456,7 @@ function saumasize__checkup() {
             v_input[i].style.borderBottom = "1px solid #000";
         }
     }
-    h_input = document.querySelectorAll(".sauma__horizontal_ctrl");
+    h_input = canvas.querySelectorAll(".sauma__horizontal_ctrl");
     for (var i = 0; i < h_input.length; i++) {
         if (parseFloat(h_input[i].value) > int_y) {
             h_input[i].style.border = "3px dashed red";
@@ -4014,8 +3860,8 @@ function change__sauma_koko(e) {
  */
 function saumoitus__additionalcord() {
     // Made 0812
-    verticals = document.querySelectorAll(".verticalrow_saumat > div");
-    horizontals = document.querySelectorAll(".horizontalrow_saumat > div");
+    verticals = canvas.querySelectorAll(".verticalrow_saumat > div");
+    horizontals = canvas.querySelectorAll(".horizontalrow_saumat > div");
      
     verticals.forEach(v => {
         vertical_module = document.createElement("div");
@@ -4051,24 +3897,24 @@ function saumoitus__additionalcord() {
 
     
 
-    document.querySelectorAll(".fakesauma .horizontal_module").forEach(vm => {
+    canvas.querySelectorAll(".fakesauma .horizontal_module").forEach(vm => {
         vm.innerHTML = saumaset_hm/2;
     }); 
 
-    document.querySelectorAll(".fakesauma .vertical_module").forEach(vm => {
+    canvas.querySelectorAll(".fakesauma .vertical_module").forEach(vm => {
         vm.innerHTML = saumaset_vm/2;
     });
 
-    if(document.querySelector(".sauma__vertical_last")) {
-        document.querySelector(".sauma__vertical_last .vertical_module").innerHTML = saumaset_vm/2;
+    if(canvas.querySelector(".sauma__vertical_last")) {
+        canvas.querySelector(".sauma__vertical_last .vertical_module").innerHTML = saumaset_vm/2;
     }
     else {
-        document.querySelector(".sauma__vertical .vertical_module").innerHTML = saumaset_vm/2;
+        canvas.querySelector(".sauma__vertical .vertical_module").innerHTML = saumaset_vm/2;
     }
-    if(document.querySelector(".sauma__horizontal_last")) {
-        document.querySelector(".sauma__horizontal_last .horizontal_module").innerHTML = saumaset_hm/2;
+    if(canvas.querySelector(".sauma__horizontal_last")) {
+        canvas.querySelector(".sauma__horizontal_last .horizontal_module").innerHTML = saumaset_hm/2;
     }
     else {
-        document.querySelector(".sauma__horizontal .horizontal_module").innerHTML = saumaset_hm/2;
+        canvas.querySelector(".sauma__horizontal .horizontal_module").innerHTML = saumaset_hm/2;
     }
 }

@@ -205,6 +205,11 @@ function refresh__drawcontrols() {
   // $('.drawarea__controls_four').show();
   // $("#drawscreen_section_four").slideDown(200);
   input_step = document.querySelector('#step_drawscreen').value;
+  canvas = document.querySelector("#box-wrapper > main");
+
+  current_tila = document.querySelector("#roomname_1").value + "_" + document.querySelector("#roomname_2").value + "_" + document.querySelector("#roomname_3").value;
+  current_tila = current_tila.replaceAll(" ","");
+
 
   if (apartment != null) {
     // k_saved_input = apartment.dataset.kroom;
@@ -278,7 +283,7 @@ function refresh__drawcontrols() {
     var boxes = document.getElementsByClassName("box");
     var drawarea__top_circle = document.getElementsByClassName("drawarea__top_circle");
     // var drawarea__top_item = document.getElementsByClassName("")
-    var canvas = document.querySelector("#box-wrapper > main");
+    canvas = document.querySelector("#box-wrapper > main");
     drawarea = document.querySelector("#box-wrapper");
     if (input_step == 'project_start') {
       $("#project_start").slideDown(200);
@@ -465,7 +470,7 @@ function refresh__drawcontrols() {
       else {
         walls_content = document.querySelector(".house__wall_status_l").innerText + "," + document.querySelector(".house__wall_status_a").innerText + "," + document.querySelector(".house__wall_status_b").innerText + "," + document.querySelector(".house__wall_status_c").innerText + "," + document.querySelector(".house__wall_status_d").innerText + "," + document.querySelector(".house__wall_status_k").innerText;
         try { document.querySelector(".walls_content").value = walls_content; } catch(e) { console.log("TRY-CATCH ERROR:", e ) }
-        // degradate_url(3);
+        degradate_url(3);
       }
       rangat__navigation(false);
       document.querySelector(".drawarea__top").style.zIndex = 2;
@@ -3110,8 +3115,8 @@ function getElementCoords(bottom_input, left_input) {
     }
   }
 }
-const origo = document.querySelector('#drawarea__origo_central');
-const canvas = document.querySelector('#box-wrapper > main');
+origo = document.querySelector('#drawarea__origo_central');
+canvas = document.querySelector('#box-wrapper > main');
 // touchedElement('.drawarea main', '#drawarea_w', '#drawarea_h', '#drawarea__origo_central', 'selector','#origo_x', '#origo_y')
 /**
  * Rounds a given number to the nearest multiple of 25.
@@ -3384,8 +3389,11 @@ function delcanvases() {
  * @returns None
  */
 function skipping() {
+
+
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
   (async () => {
+    console.log("Skipping started");
     if(window.location.href.indexOf('&apartment=') > 1) { 
       try {
         skipping_apartment = document.querySelector('#skipping_apartment').value.replaceAll("ä","a").replaceAll("ö","o");
@@ -3407,13 +3415,16 @@ function skipping() {
           }
         }
       } catch (error) {
-        degradate_url(1);
-        location.reload();
+        console.log(error);
+        // degradate_url(1);
+        // location.reload();
       }   
      
     }
+    // await sleep(100);
+    $(".preloader").removeClass( "active" );
   })();
-
+  
   // if(current_user_permissions)
 }
 
@@ -3423,6 +3434,8 @@ function skipping() {
  * @param {number} 550 - The delay in milliseconds before executing the function.
  * @returns None
  */
+// document.querySelector(".preloader").classList.add("active");
+$(".preloader").addClass( "active" );
 setTimeout(() => {
   skipping();
 }, "550");
