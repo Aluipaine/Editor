@@ -10,7 +10,7 @@
       <div class="drawarea__controls_btn" onclick="$('#step_drawscreen').val('rooms');refresh__drawcontrols();">
          Ristivalikkoon
       </div>
-      <div class="drawarea__controls_btn" onclick="siirto_muualle();" style="background: #147605;text-align: center;">Levytä loput seinät tämän seinän mukaan</div>
+      <div class="drawarea__controls_btn" onclick="$('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();updatearea();siirto_muualle();" style="background: #147605;text-align: center;">Levytä loput seinät tämän seinän mukaan</div>
       <?php include("./templates/house_nav.php");  ?>
    </div>
 </div>

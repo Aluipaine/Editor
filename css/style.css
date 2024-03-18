@@ -1261,6 +1261,9 @@ body.step_screen .drawarea__control.disabled {
   cursor: auto;
 }
 
+.step_screen h3 {
+  margin-top: 40px;
+}
 .drawarea__top_itemtwo {
   flex: 0 0 20%;
   flex-direction: column;
@@ -1290,6 +1293,10 @@ body.step_screen .drawarea__control.disabled {
   margin-top: 30px;
   margin-right: 1px;
   float: right;
+
+  /* Add 170324 */
+  position: relative;
+  z-index: 9;
 }
 .drawarea__house div.row {
   display: flex;
@@ -4583,7 +4590,7 @@ section.excel tr > td:nth-child(10) {
   z-index: -1;
 }
 
-.sauma__setting_row .col-6 {
+.sauma__setting_row .col-4 {
   display: flex;
 }
 
@@ -6537,7 +6544,9 @@ div.x_del.hidden {
   justify-content: left;
   flex-direction: column;
 }
-
+.commentasking__section .SizeChooser {
+  align-items: unset;
+}
 .topbar {
   display: flex;
   align-items: center;

@@ -7,7 +7,7 @@
 // Include config file
 require "config.php";
 
-session_start();
+// session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -110,12 +110,12 @@ for ($i=0; $i < 31; $i++) {
 			$mail->isHTML(true); 
 			$mail->Subject = $subject; 
 			$mail->Body = $txt; 
-			if(!$mail->send()) 
-			{ 
-			echo "Mailer Error: " . $mail->ErrorInfo;
-			} 
-			else 
-			{  echo "Message has been sent successfully"; }
+			// if(!$mail->send()) 
+			// { 
+			// echo "Mailer Error: " . $mail->ErrorInfo;
+			// } 
+			// else 
+			// {  echo "Message has been sent successfully"; }
 		}
 		
 		
@@ -247,49 +247,49 @@ $h_rooms_nowork_processed = str_replace($raw, $processed, $h_rooms_nowork);
 
 
 $prc_3 = $_POST['prc_3'];
-// $post = mysqli_query($db, "INSERT INTO `projects` (`id`, `title`, `created_at`, `link`, `project_type`, `user`) VALUES ('$id', '$project_name', '$date', '', '$project_type', '$prc_3')");
+$post = mysqli_query($db, "INSERT INTO `projects` (`id`, `title`, `created_at`, `link`, `project_type`, `user`) VALUES ('$id', '$project_name', '$date', '', '$project_type', '$prc_3')");
 if (!$post) {
 	echo $project_name . "<br>" . $date . "<br>" . $project_type;
 }
 
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_id', '$id')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_name', '$project_name')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_id', '$id')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_name', '$project_name')");
 
 
 
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 's_settings', '$chosen_jarjestelma')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 's_materials', '')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 's_settings', '$chosen_jarjestelma')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 's_materials', '')");
 
 
 
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'a_rooms', '$a_rooms_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'b_rooms', '$b_rooms_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'c_rooms', '$c_rooms_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'd_rooms', '$d_rooms_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'e_rooms', '$e_rooms_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'f_rooms', '$f_rooms_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'g_rooms', '$g_rooms_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'h_rooms', '$h_rooms_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'a_rooms', '$a_rooms_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'b_rooms', '$b_rooms_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'c_rooms', '$c_rooms_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'd_rooms', '$d_rooms_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'e_rooms', '$e_rooms_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'f_rooms', '$f_rooms_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'g_rooms', '$g_rooms_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'h_rooms', '$h_rooms_processed')");
 
 
 
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'a_rooms_title', 'RAPPU A')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'b_rooms_title', 'RAPPU B')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'c_rooms_title', 'RAPPU C')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'd_rooms_title', 'RAPPU D')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'e_rooms_title', 'RAPPU E')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'f_rooms_title', 'RAPPU F')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'g_rooms_title', 'RAPPU G')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'h_rooms_title', 'RAPPU H')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'a_rooms_title', 'RAPPU A')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'b_rooms_title', 'RAPPU B')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'c_rooms_title', 'RAPPU C')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'd_rooms_title', 'RAPPU D')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'e_rooms_title', 'RAPPU E')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'f_rooms_title', 'RAPPU F')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'g_rooms_title', 'RAPPU G')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'h_rooms_title', 'RAPPU H')");
 
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'a_rooms_nowork', '$a_rooms_nowork_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'b_rooms_nowork', '$b_rooms_nowork_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'c_rooms_nowork', '$c_rooms_nowork_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'd_rooms_nowork', '$d_rooms_nowork_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'e_rooms_nowork', '$e_rooms_nowork_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'f_rooms_nowork', '$f_rooms_nowork_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'g_rooms_nowork', '$g_rooms_nowork_processed')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'h_rooms_nowork', '$h_rooms_nowork_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'a_rooms_nowork', '$a_rooms_nowork_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'b_rooms_nowork', '$b_rooms_nowork_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'c_rooms_nowork', '$c_rooms_nowork_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'd_rooms_nowork', '$d_rooms_nowork_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'e_rooms_nowork', '$e_rooms_nowork_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'f_rooms_nowork', '$f_rooms_nowork_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'g_rooms_nowork', '$g_rooms_nowork_processed')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'h_rooms_nowork', '$h_rooms_nowork_processed')");
 
 // $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'step', '')");
 // $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'wall', '')");
@@ -309,25 +309,25 @@ if (!$post) {
 // $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'reklamaatiot', '')");
 
 
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'kaupalliset_asiakirjat', '$kaupalliset_asiakirjat')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'tyomaan_asiakirjat', '$tyomaan_asiakirjat')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'arkkitehtisuunnitelmat', '$arkkitehtisuunnitelmat')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'rakennesuunnitelmat', '$rakennesuunnitelmat')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'omat_suunnitelmat', '$omat_suunnitelmat')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'muut_asiakirjat', '$muut_asiakirjat')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'statuses__text', 'KESKEN~~EI TYÖTÄ~~ONGELMA~~KRIITTINEN ONGELMA~~L5 TILATTU~~L5 TYÖMAALLA~~L5 ASENNETTU~~L5 HYVÄKSYTTY~~L4 TILATTU~~L4 TYÖMAALLA~~L4 ASENNETTU~~L4 HYVÄKSYTTY~~L3 TILATTU~~L3 TYÖMAALLA~~L3 ASENNETTU~~L3 HYVÄKSYTTY~~L2 TILATTU~~L2 TYÖMAALLA~~L2 ASENNETTU~~L2 HYVÄKSYTTY~~L1 TILATTU~~L1 TYÖMAALLA~~L1 ASENNETTU~~L1 HYVÄKSYTTY')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'kaupalliset_asiakirjat', '$kaupalliset_asiakirjat')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'tyomaan_asiakirjat', '$tyomaan_asiakirjat')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'arkkitehtisuunnitelmat', '$arkkitehtisuunnitelmat')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'rakennesuunnitelmat', '$rakennesuunnitelmat')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'omat_suunnitelmat', '$omat_suunnitelmat')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'muut_asiakirjat', '$muut_asiakirjat')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'statuses__text', 'KESKEN~~EI TYÖTÄ~~ONGELMA~~KRIITTINEN ONGELMA~~L5 TILATTU~~L5 TYÖMAALLA~~L5 ASENNETTU~~L5 HYVÄKSYTTY~~L4 TILATTU~~L4 TYÖMAALLA~~L4 ASENNETTU~~L4 HYVÄKSYTTY~~L3 TILATTU~~L3 TYÖMAALLA~~L3 ASENNETTU~~L3 HYVÄKSYTTY~~L2 TILATTU~~L2 TYÖMAALLA~~L2 ASENNETTU~~L2 HYVÄKSYTTY~~L1 TILATTU~~L1 TYÖMAALLA~~L1 ASENNETTU~~L1 HYVÄKSYTTY')");
 
 
 
-// $meta = mysqli_query($db, "INSERT INTO `addedusers`(`project_id`, `username`, `added_by`) VALUES ($id,'tyonjohto','tyonjohto')");
+$meta = mysqli_query($db, "INSERT INTO `addedusers`(`project_id`, `username`, `added_by`) VALUES ($id,'tyonjohto','tyonjohto')");
 
 
 $redirect_from = $_POST['project_slug'];
 $redirect_to = '/post.php?id='.$id.'&user=valinta';
-// $meta = mysqli_query($db, "INSERT INTO `rewritelib` (`slug`, `slugto`) VALUES ('$redirect_from', '$redirect_to')");
+$meta = mysqli_query($db, "INSERT INTO `rewritelib` (`slug`, `slugto`) VALUES ('$redirect_from', '$redirect_to')");
 
 
-// echo "<script>window.location.replace('/login.php');</script>";
+echo "<script>window.location.replace('/login.php');</script>";
 
 
 

@@ -434,12 +434,40 @@ function ylitys__array() {
   }
 
   if(vasen_array.length < 2 || ala_array.length < 2 || yla_array.length < 2 || oikea_array.length < 2) {
-    alert("VIRHE ASETUSTEN LUVUSSA");
+    console.log("VIRHE ASETUSTEN LUVUSSA");
     return;
   }
 
   aukko = canvas.querySelectorAll(".aukko");
   for (var i = 0; i < aukko.length; i++) {
+
+    aukko[i].dataset.l2a_or_ranka = oikea_array[3];
+    aukko[i].dataset.l2a_or_rankapituus = oikea_array[4];
+    aukko[i].dataset.l2a_or_rankalaatu = oikea_array[5];
+    aukko[i].dataset.l2a_vr_ranka = vasen_array[3];
+    aukko[i].dataset.l2a_vr_rankapituus = vasen_array[4];
+    aukko[i].dataset.l2a_vr_rankalaatu = vasen_array[5];
+    aukko[i].dataset.l2a_yr_ranka = yla_array[3];
+    aukko[i].dataset.l2a_yr_rankapituus = yla_array[4];
+    aukko[i].dataset.l2a_yr_rankalaatu = yla_array[5];
+    aukko[i].dataset.l2a_ar_ranka = ala_array[3];
+    aukko[i].dataset.l2a_ar_rankapituus = ala_array[4];
+    aukko[i].dataset.l2a_ar_rankalaatu = ala_array[5];
+
+
+    aukko[i].dataset.l2b_or_ranka = oikea_array[6];
+    aukko[i].dataset.l2b_or_rankapituus = oikea_array[7];
+    aukko[i].dataset.l2b_or_rankalaatu = oikea_array[8];
+    aukko[i].dataset.l2b_vr_ranka = vasen_array[6];
+    aukko[i].dataset.l2b_vr_rankapituus = vasen_array[7];
+    aukko[i].dataset.l2b_vr_rankalaatu = vasen_array[8];
+    aukko[i].dataset.l2b_yr_ranka = yla_array[6];
+    aukko[i].dataset.l2b_yr_rankapituus = yla_array[7];
+    aukko[i].dataset.l2b_yr_rankalaatu = yla_array[8];
+    aukko[i].dataset.l2b_ar_ranka = ala_array[6];
+    aukko[i].dataset.l2b_ar_rankapituus = ala_array[7];
+    aukko[i].dataset.l2b_ar_rankalaatu = ala_array[8];
+    
     aukko[i].dataset.l2a_or_lista = oikea_array[9];
     aukko[i].dataset.l2a_or_listapituus = oikea_array[10];
     aukko[i].dataset.l2a_or_listalaatu = oikea_array[11];

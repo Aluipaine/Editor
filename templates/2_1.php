@@ -4,7 +4,8 @@
  action="/updateproject.php" enctype='multipart/form-data'>
 
    </div>
-   <h3>Huom! Maksimi mittapistemäärä on 2.</h3>
+   <p>Mittapiste annetaan MOD ORIGOSTA. <br> Tässä näytössä annetaan uusia mittapisteitä levytyksen helpottamiseksi <br>
+   <b>Huom! Maksimi mittapistemäärä on 2.</b> </p>
    <section class="nav">
       <nav>
          <ul>
@@ -49,7 +50,7 @@
         <section class="row cord">
             <div class="col-6" style="display: flex;flex-direction: column;">
                <div class="cord__item">
-                  <label for="cord_up">Ylös</label>
+                  <label for="cord_up" class="label_mp_cord_a">Ylös</label>
                   <input id="cord_up" name="" type="tel" class="lineinput" oninput="change__newdiv_cord();" onchange="cord__check(this);">
                </div>
                <div class="cord__item" style="display: none;">
@@ -64,7 +65,7 @@
             </div>
            <div class="col-6">
             <div class="cord__item">
-                  <label for="cord_left">Oikealle</label>
+                  <label for="cord_left" class="label_mp_cord_b">Oikealle</label>
                   <input id="cord_left" name="" type="tel" class="lineinput" oninput="change__newdiv_cord();" onchange="cord__check(this);">
                </div>
 

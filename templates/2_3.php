@@ -3,23 +3,10 @@
 <form class="step_screen drawscreen_section form__butsection" action="/updateproject.php" enctype='multipart/form-data' id="drawscreen_section_three">
 
    </div>
-<!--     <input type="hidden" value="drawscreen_section_three" name="step" class="step">
-    <input type="hidden" value="" name="wall" class="wall">
-    <input type="hidden" value="" name="id" class="id">
-    <input type="hidden" value="" name="room" class="room">
-    <input type="hidden" value="" name="settings" class="settings">
-    <input type="hidden" value="" name="mittapisteet" class="mittapisteet">
-    <input type="hidden" value="" name="aukot" class="aukot">
-    <input type="hidden" value="" name="reijat" class="reijat">
-    <input type="hidden" value="" name="saumat" class="saumat">
-    <input type="hidden" value="" name="levyt" class="levyt">
-    <input type="hidden" value="" name="rangat" class="rangat">
-    <input type="hidden" value="" name="listat" class="listat">
-    <input type="hidden" value="" name="kokonaisalue" class="kokonaisalue">
-    <input type="hidden" value="" name="levytettava_alue" class="levytettava_alue">
-    <input type="hidden" value="" name="poisjaava_alue" class="poisjaava_alue">
-    <input type="hidden" value="" name="keskusmittapiste_cord" class="keskusmittapiste_cord">
-    <input type="hidden" value="" name="reklamaatiot" class="reklamaatiot"> -->
+   <p>Anna läpiviennin keskusta MOD ORIGOSTA <br>
+   EXCELissä näkyy yksi luku (halkaisia) X kun reikä on pyöreä , X ja Y kun reikä on neliskanttinen
+   </p>
+
     <section class="nav">
       <nav>
         <ul>
@@ -84,7 +71,7 @@
             <section class="row cord">
                <div class="col-6" style="display: flex;flex-direction: column;">
                   <div class="lvcord__item cord__item">
-                     <label for="lvcord_low">Ylös</label>
+                     <label for="lvcord_low" class="label_lv_cord_a">Ylös</label>
                      <input id="lvcord_low" name="" type="tel" class="lineinput" onchange="change__newdiv_cord();cord__check(this);">
                   </div>
                   
@@ -95,7 +82,7 @@
                </div>
               <div class="col-6">
                   <div class="lvcord__item cord__item">
-                     <label for="lvcord_left">Oikealle</label>
+                     <label for="lvcord_left" class="label_lv_cord_b">Oikealle</label>
                      <input id="lvcord_left" name="" type="tel" class="lineinput" onchange="change__newdiv_cord();cord__check(this);">
                   </div>
                  <div id="setting__canvas_lapiviennit" class="setting__canvas">

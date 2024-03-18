@@ -436,6 +436,18 @@ function changesize(maxval,frominput) {
     }
   }
 
+  if(input_step === "drawscreen_section_one") {
+    measureforcross_h = document.querySelector('.drawarea_h').value;
+    measureforcross_w = document.querySelector('.drawarea_w').value;
+    if(current_room === "b" || current_room === "d" || current_room === "k" || current_room === "l") {
+      document.querySelector('.modal-yes').setAttribute("onclick","document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(measureforcross_h);changeWidths_2(measureforcross_w);save_rooms();");
+    }
+    else if(current_room === "a" || current_room === "c") {
+      document.querySelector('.modal-yes').setAttribute("onclick","document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(measureforcross_h);changeWidths(measureforcross_w);save_rooms();");
+    }
+  }
+  
+
   if(canvas.querySelectorAll(".mp").length > 0) {
     mps = canvas.querySelectorAll(".mp");
     mps.forEach(mp => {
@@ -476,10 +488,7 @@ function changesize(maxval,frominput) {
 
       document.querySelector('.question-container').classList.add("two");
       document.querySelector('.question-container').classList.remove("out");
-      document.querySelector('.modal-yes').addEventListener("click", function() {
-        changeHeights(height);
-        changeWidths_2(width);
-      });
+
       document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = width / 20 + "px";
       document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.height = height / 20 + "px";
       userinteraction = false;
@@ -700,6 +709,27 @@ function settings__mitta() {
     newDiv.style.top = "unset";
     newDiv.style.right = "unset";
 
+    if(origo_position === "left_bottom") {
+      document.querySelector(".label_mp_cord_a").innerHTML = "Ylös";
+      document.querySelector(".label_mp_cord_b").innerHTML = "Oikealle";
+    }
+    else if(origo_position === "right_bottom") {
+      document.querySelector(".label_mp_cord_a").innerHTML = "Ylös";
+      document.querySelector(".label_mp_cord_b").innerHTML = "Vasemmalle";
+    }
+    else if(origo_position === "right_top") {
+      document.querySelector(".label_mp_cord_a").innerHTML = "Alas";
+      document.querySelector(".label_mp_cord_b").innerHTML = "Vasemmalle";
+    }
+    else if(origo_position === "left_top") {
+      document.querySelector(".label_mp_cord_a").innerHTML = "Alas";
+      document.querySelector(".label_mp_cord_b").innerHTML = "Oikealle";
+    }
+    else {
+      document.querySelector(".label_mp_cord_a").innerHTML = "Ylös"; 
+      document.querySelector(".label_mp_cord_b").innerHTML = "Oikealle"; 
+    }
+
     document.querySelector("#cord_up").value = 0;
     document.querySelector("#cord_left").value = 0;
     //touchedElement('.setting__canvas > .canvas', '#drawarea_w', '#drawarea_h', newDiv, 'elem', document.querySelector('#cord_left'), document.querySelector('#cord_up') );
@@ -717,6 +747,27 @@ function settings__mitta() {
     newDiv.setAttribute("id", "settings__lv");
     newDiv.innerHTML = "";
     document.querySelector("#setting__canvas_lapiviennit > main").prepend(newDiv);
+
+    if(origo_position === "left_bottom") {
+      document.querySelector(".label_lv_cord_a").innerHTML = "Ylös";
+      document.querySelector(".label_lv_cord_b").innerHTML = "Oikealle";
+    }
+    else if(origo_position === "right_bottom") {
+      document.querySelector(".label_lv_cord_a").innerHTML = "Ylös";
+      document.querySelector(".label_lv_cord_b").innerHTML = "Vasemmalle";
+    }
+    else if(origo_position === "right_top") {
+      document.querySelector(".label_lv_cord_a").innerHTML = "Alas";
+      document.querySelector(".label_lv_cord_b").innerHTML = "Vasemmalle";
+    }
+    else if(origo_position === "left_top") {
+      document.querySelector(".label_lv_cord_a").innerHTML = "Alas";
+      document.querySelector(".label_lv_cord_b").innerHTML = "Oikealle";
+    }
+    else {
+      document.querySelector(".label_lv_cord_a").innerHTML = "Ylös"; 
+      document.querySelector(".label_lv_cord_b").innerHTML = "Oikealle"; 
+    }
     // touchedElement('#setting__canvas_lapiviennit > main', '#box_w', '#box_h', newDiv, 'elem', document.querySelector('#lvcord_left'), document.querySelector('#lvcord_low') );
   }
 

@@ -1530,14 +1530,14 @@
 
                   $key_name += 1;
 
-                  echo "<div onclick='initialize__housetempla(this,1);' data-aroom='" . strtolower($i_a) . "' data-broom='" . strtolower($i_b) . "' data-croom='" . strtolower($i_c) . "' data-droom='" . strtolower($i_d) . "' data-kroom='" . strtolower($i_k) . "' data-lroom='" . strtolower($i_l) . "' class='house__types_type'>" . $template_name . "</div>";
+                  echo "<div onclick='initialize__housetempla(this,1);' data-presetid='".$p_key[0]."' data-aroom='" . strtolower($i_a) . "' data-broom='" . strtolower($i_b) . "' data-croom='" . strtolower($i_c) . "' data-droom='" . strtolower($i_d) . "' data-kroom='" . strtolower($i_k) . "' data-lroom='" . strtolower($i_l) . "' class='house__types_type'>" . $template_name . "</div>";
               }
               
             
 
             echo '
               </div>
-              <div class="house__types_button" onclick="initialize__housetempla(this,2);">
+              <div class="house__types_button" onclick="initialize__housetempla(this,2);" style="display: none;">
                 Tallenna tämä asunto pohjaksi
               </div>
             </div>';
@@ -2084,8 +2084,8 @@
               <div class="row">
                 <div class="house__wall house__wall_roof house__wall_k" style="width: 170px; height: 120px;">
                   <div class="house__wall_status house__wall_status_k" data-room="K" onclick="input_step = `drawscreen_section_one`;submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);refresh__drawcontrols();">KATTO</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_roof_h" id="wall_one_roof_h" onchange="change_roof(this);">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_roof_w" id="wall_one_roof_w" onchange="change_roof(this);">
                 
                   <div class="house__wallspecial">
                     <div class="house__wall_asjarj asjarjk">5</div>
@@ -2097,8 +2097,8 @@
               <div class="row">
                 <div class="house__wall house__wall_one house__wall_a" style="width: 170px; height: 120px;">
                     <div class="house__wall_status house__wall_status_a" data-room="A" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä A</div>
-                    <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_a_h" id="wall_one_a_h" onchange="change_a();">
-                    <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000" name="wall_one_a_w" id="wall_one_a_w" onchange="change_a();">
+                    <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_a_h" id="wall_one_a_h" onchange="change_a(this);">
+                    <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000" name="wall_one_a_w" id="wall_one_a_w" onchange="change_a(this);">
                     <div class="house__wallspecial">
                       <div class="house__wall_asjarj asjarja">1</div>
                       <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="a"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
@@ -2106,8 +2106,8 @@
                 </div>
                 <div class="house__wall house__wall_two house__wall_b" style="width: 120px; height: 120px;">
                   <div class="house__wall_status house__wall_status_b" data-room="B" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä B</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_b_h" id="wall_one_b_h" onchange="change_b();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_b_w" id="wall_one_b_w" onchange="change_b();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_b_h" id="wall_one_b_h" onchange="change_b(this);">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_b_w" id="wall_one_b_w" onchange="change_b(this);">
                   <div class="house__wallspecial">
                       <div class="house__wall_asjarj asjarjb">2</div>
                       <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="b"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
@@ -2115,8 +2115,8 @@
                 </div>
                 <div class="house__wall house__wall_three house__wall_c" style="width: 170px; height: 120px;">
                   <div class="house__wall_status house__wall_status_c" data-room="C" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä C</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_c_h" id="wall_one_c_h" onchange="change_c();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_c_w" id="wall_one_c_w" onchange="change_c();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200"  name="wall_one_c_h" id="wall_one_c_h" onchange="change_c(this);">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_c_w" id="wall_one_c_w" onchange="change_c(this);">
                   <div class="house__wallspecial">
                       <div class="house__wall_asjarj asjarjc">3</div>
                       <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="c"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
@@ -2124,8 +2124,8 @@
                 </div>
                 <div class="house__wall house__wall_four house__wall_d" style="width: 120px; height: 120px;">
                   <div class="house__wall_status house__wall_status_d" data-room="D" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">Seinä D</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_d_h" id="wall_one_d_h" onchange="change_d();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_d_w" id="wall_one_d_w" onchange="change_d();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_height" value="3200" name="wall_one_d_h" id="wall_one_d_h" onchange="change_d(this);">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width_2" value="2200" name="wall_one_d_w" id="wall_one_d_w" onchange="change_d(this);">
                   <div class="house__wallspecial">
                       <div class="house__wall_asjarj asjarjd">4</div>
                       <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="d"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>
@@ -2136,8 +2136,8 @@
               <div class="row">
                 <div class="house__wall house__wall_floor house__wall_l" style="width: 170px; height: 120px;">
                   <div class="house__wall_status house__wall_status_l" data-room="L" onclick="input_step = `drawscreen_section_one`;refresh__drawcontrols();submitprogress(this);nav_betweenwalls(this);current_room=this.dataset.room;initializeroom(this);">LATTIA</div>
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_floor_h" id="wall_one_floor_h" onchange="change_floor();">
-                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_floor_w" id="wall_one_floor_w" onchange="change_floor();">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_tochange_2 wall_height" value="3200"  name="wall_one_floor_h" id="wall_one_floor_h" onchange="change_floor(this);">
+                  <input type="number" pattern="\d*"/ class="lineinput house__wall_param wall_width" value="6000"  name="wall_one_floor_w" id="wall_one_floor_w" onchange="change_floor(this);">
                   <div class="house__wallspecial">
                     <div class="house__wall_asjarj asjarjl">6</div>
                     <div class="house__wall_hide" onclick="hide__room(this);" data-tochange="l"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#EB1010"></path></svg></div>

@@ -427,10 +427,47 @@ function rangoita() {
       tyostot.append(iry);
     }
 
-    irv.innerHTML = '<input value="irv" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetHeight)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.left) * 5 + '</div>';
-    iro.innerHTML = '<input value="iro" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetHeight)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.left) * 5 + '</div>';
-    ira.innerHTML = '<input value="ira" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetWidth)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.bottom) * 5 + '</div>';
-    iry.innerHTML = '<input value="iry" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetWidth)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.bottom) * 5 + '</div>';
+    array_rankas = [irv,iro,ira,iry];
+    array_rankas.forEach(r => {
+      r.dataset.name="Aukon ranka";
+      r.dataset.tilauskoodi="";
+      r.dataset.materiaali="Alumiini";
+      r.dataset.paksuus="";
+      r.dataset.laatu="Anodisoitu";
+      r.dataset.vari_nimi="Luonnon anodisointi";
+      r.dataset.ncs_code="";
+      r.dataset.suunta="Pysty/Vaaka";
+      r.dataset.lisaa_poista_mitasta="-25";
+      r.dataset.vahenna_mista="Pystymitasta";
+    });
+
+    iro.dataset.rangan_koodin_alku=aukot[i].dataset.l2a_or_ranka;
+    irv.dataset.rangan_koodin_alku=aukot[i].dataset.l2a_vr_ranka;
+    ira.dataset.rangan_koodin_alku=aukot[i].dataset.l2a_ar_ranka;
+    iry.dataset.rangan_koodin_alku=aukot[i].dataset.l2a_yr_ranka;
+
+    
+    array_rankas = [irv,iro,ira,iry];
+    array_rankas.forEach(r => {
+      // Array of ranka library
+      if(r.dataset.rangan_koodin_alku === '') {
+
+      }
+      r.dataset.name="Aukon ranka";
+      r.dataset.tilauskoodi="";
+      r.dataset.materiaali="Alumiini";
+      r.dataset.paksuus="";
+      r.dataset.laatu="Anodisoitu";
+      r.dataset.vari_nimi="Luonnon anodisointi";
+      r.dataset.ncs_code="";
+      r.dataset.suunta="Pysty/Vaaka";
+      r.dataset.lisaa_poista_mitasta="-25";
+      r.dataset.vahenna_mista="Pystymitasta";
+    });
+    irv.innerHTML = '<input value="'+aukot[i].dataset.l2a_vr_ranka+'" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetHeight)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.left) * 5 + '</div>';
+    iro.innerHTML = '<input value="'+aukot[i].dataset.l2a_or_ranka+'" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetHeight)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.left) * 5 + '</div>';
+    ira.innerHTML = '<input value="'+aukot[i].dataset.l2a_yr_ranka+'" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetWidth)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.bottom) * 5 + '</div>';
+    iry.innerHTML = '<input value="'+aukot[i].dataset.l2a_ar_ranka+'" type="text" class="ranka_cord ranka_type" /> <div style="opacity:0;" class="ranka_cord">' + (parseFloat(canvas.offsetWidth)-10) + '</div><div class="ranka_secondcord" style="opacity:0;">' + parseFloat(aukot[i].style.bottom) * 5 + '</div>';
     irv.style.background = sr;
     iro.style.background = sr;
     ira.style.background = sr;
@@ -726,6 +763,16 @@ function rangat__initializesettings() {
 function rangat__setcord() {
   r_bottomsumm = 0;
   r_leftsumm = 0;
+
+  if(document.querySelector(".valiranka_module")) {
+
+  }
+  else {
+    x = document.createElement("div");
+    x.classList = ["valiranka_module"];
+
+    document.querySelector(".db_saumatable").appendChild(x);
+  }
 
   if (document.querySelector(".valiranka_module .ranka_selitykset")) {
 

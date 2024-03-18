@@ -174,6 +174,29 @@ function restoreprogress() {
                 else if(sau_ok < timestamp && content.split("~~")[0] === "sau") {
                     input_step = "drawscreen_section_four";
                     sau_ok = timestamp;
+   
+                    if(content.split("~~")[11] === "vly") {
+                        document.querySelector(".settings__saumahanta-yla").click();
+                    }
+                    else if(content.split("~~")[11] === "vla") {
+                        document.querySelector(".settings__saumahanta-ala").click();
+                    }
+                    else if(content.split("~~")[11] === "tk") {
+                        document.querySelector(".settings__saumahanta-vaakatasoitus").click();
+                    }
+                    if(content.split("~~")[12] === "vlo") {
+                        document.querySelector(".settings__saumahanta-oik").click();
+                    }
+                    else if(content.split("~~")[12] === "vlv") {
+                        document.querySelector(".settings__saumahanta-vas").click();
+                    }
+                    else if(content.split("~~")[12] === "tl") {
+                        document.querySelector(".settings__saumahanta-tasoitus").click();
+
+                    }
+
+
+
                     if(content.split("~~")[1] == 'levytysvaakaan') {
                         document.querySelector("#settings__sauma_vaaka").checked = true;
                     }
@@ -201,10 +224,11 @@ function restoreprogress() {
                     });
                     document.querySelector("#settings__sauma_intervalx").value = content.split("~~")[4];
                     document.querySelector("#settings__sauma_intervaly").value = content.split("~~")[5];
-                    document.querySelector("#settings__sauma_aihiotrimx").value = content.split("~~")[6];
-                    document.querySelector("#settings__sauma_aihiotrimy").value = content.split("~~")[7];
+                    // document.querySelector("#settings__sauma_aihiotrimx").value = content.split("~~")[6];
+                    // document.querySelector("#settings__sauma_aihiotrimy").value = content.split("~~")[7];
                     document.querySelector("#settings__sauma_aihiopituus").value = content.split("~~")[8];
                     document.querySelector("#settings__sauma_aihioleveys").value = content.split("~~")[9];
+                    
                 }
                 else if(levyt_ok < timestamp && content.split("~~")[0] === "levyt") {
                     levyt_ok = timestamp;

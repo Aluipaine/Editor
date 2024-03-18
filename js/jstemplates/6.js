@@ -4,7 +4,7 @@
  * @returns None
  */
 let ltcontainer = document.querySelector("#levytyosto_container");
-let levy = canvas.querySelectorAll(".levy");
+// let levy = canvas.querySelectorAll(".levy");
 
 
 function restore__kiinnikkeet(content_) {

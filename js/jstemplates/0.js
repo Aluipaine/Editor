@@ -178,22 +178,27 @@ function changeHeights(num) {
  * @returns None
  */
 function changeWidths(num) {
-  const allWidths = document.querySelectorAll('.wall_width');
-  allWidths.forEach(function(item) {
-    item.value = num;
-  });
+
+  console.log("changeWidths called");
   document.querySelector("#house .house__wall_roof").style.width = num / 20 + "px";
   document.querySelector("#house .house__wall_floor").style.width = num / 20 + "px";
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.width = num / 20 + "px";
+  document.querySelector("#house .house__wall_one .wall_width").value = num;
+  document.querySelector("#house .house__wall_three .wall_width").value = num;
+  document.querySelector("#house .house__wall_roof .wall_width").value = num;
+  document.querySelector("#house .house__wall_floor .wall_width").value = num;
+
   // document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = num/10 + "px";
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.width = num / 20 + "px";
   // document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = num/10 + "px";
 
 
-  f_ap = document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one"); 
-  s_ap = document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two");
-  document.querySelector("#house .house__wall_roof").style.left = (-35) + document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three.house__wall_c").offsetLeft + "px";
-  document.querySelector("#house .house__wall_floor").style.left = (-35) + document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three.house__wall_c").offsetLeft + "px";
+
+
+  coefficient_left = parseFloat(document.querySelector("#house .house__wall_a").style.width) + 45 + parseFloat(document.querySelector("#house .house__wall_b").style.width) + 45;
+
+  document.querySelector("#house div.house__wall.house__wall_floor").style.left = coefficient_left + "px";
+  document.querySelector("#house div.house__wall.house__wall_roof").style.left = coefficient_left + "px";
 }
 
 /**
@@ -202,13 +207,14 @@ function changeWidths(num) {
  * @returns None
  */
 function changeWidths_2(num) {
+  console.log("changeWidths_2 Called");
   allWidths = document.querySelectorAll('.wall_width_2');
   allWidths.forEach(function(item) {
-    item.value = num;
+    item.value = parseFloat(num);
   });
   allWidths = document.querySelectorAll('.wall_tochange_2');
   allWidths.forEach(function(item) {
-    item.value = num;
+    item.value = parseFloat(num);
   });
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = num / 20 + "px";
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = num / 20 + "px";
@@ -217,35 +223,42 @@ function changeWidths_2(num) {
   document.querySelector("#house div.house__wall.house__wall_floor").style.height = num / 20 + "px";
   document.querySelector("#house div.house__wall.house__wall_roof").style.height = num / 20 + "px";
 
+  coefficient_left = parseFloat(document.querySelector("#house .house__wall_a").style.width) + 45 + parseFloat(document.querySelector("#house .house__wall_b").style.width) + 45;
+  document.querySelector("#house div.house__wall.house__wall_floor").style.left = coefficient_left + "px";
+  document.querySelector("#house div.house__wall.house__wall_roof").style.left = coefficient_left + "px";
 }
 
 /**
  * Changes the height and width of the roof based on user input.
  */
-function change_roof() {
-  const roof_height = document.querySelector('#wall_one_roof_h').value;
-  const roof_width = document.querySelector('#wall_one_roof_w').value;
+function change_roof(check) {
+  if(parseFloat(check.value) > 9990) {
+    alert("Arvo ei voi olla isompi kuin 9990mm.");
+    return
+  }
+  roof_height = document.querySelector('#wall_one_roof_h').value;
+  roof_width = document.querySelector('#wall_one_roof_w').value;
   document.querySelector('.question-container').classList.add("two");
   document.querySelector('.question-container').classList.remove("out");
-  document.querySelector('.modal-yes').addEventListener("click", function() {
-    changeHeights(roof_height);
-    changeWidths(roof_width);
-  });
+  document.querySelector('.modal-yes').setAttribute("onclick","document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(roof_height);changeWidths(roof_width);changeWidths_2(roof_height);");
   document.querySelector("#house > div:nth-child(1) > div").style.width = roof_width / 20 + "px";
   document.querySelector("#house > div:nth-child(1) > div").style.height = roof_height / 20 + "px";
 
   save_rooms();
 }
 
-function change_floor() {
-  const floor_height = document.querySelector('#wall_one_floor_h').value;
-  const floor_width = document.querySelector('#wall_one_floor_w').value;
+function change_floor(check) {
+  if(parseFloat(check.value) > 9990) {
+    alert("Arvo ei voi olla isompi kuin 9990mm.");
+    return
+  }
+  floor_height = document.querySelector('#wall_one_floor_h').value;
+  floor_width = document.querySelector('#wall_one_floor_w').value;
   document.querySelector('.question-container').classList.add("two");
   document.querySelector('.question-container').classList.remove("out");
-  document.querySelector('.modal-yes').addEventListener("click", function() {
-    changeHeights(floor_height);
-    changeWidths(floor_width);
-  });
+
+  document.querySelector('.modal-yes').setAttribute("onclick","document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(floor_height);changeWidths(floor_width);changeWidths_2(floor_height);");
+
   document.querySelector("#house > div:nth-child(3) > div").style.width = floor_width / 20 + "px";
   document.querySelector("#house > div:nth-child(3) > div").style.height = floor_height / 20 + "px";
   save_rooms();
@@ -255,15 +268,16 @@ function change_floor() {
  * Changes the dimensions of element 'a' based on user input values.
  * @returns None
  */
-function change_a() {
-  const a_height = document.querySelector('#wall_one_a_h').value;
-  const a_width = document.querySelector('#wall_one_a_w').value;
+function change_a(check) {
+  if(parseFloat(check.value) > 9990) {
+    alert("Arvo ei voi olla isompi kuin 9990mm.");
+    return
+  }
+  a_height = document.querySelector('#wall_one_a_h').value;
+  a_width = document.querySelector('#wall_one_a_w').value;
   document.querySelector('.question-container').classList.add("two");
   document.querySelector('.question-container').classList.remove("out");
-  document.querySelector('.modal-yes').addEventListener("click", function() {
-    changeHeights(a_height);
-    changeWidths(a_width);
-  });
+  document.querySelector('.modal-yes').setAttribute("onclick","document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(a_height);changeWidths(a_width);");
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.width = a_width / 20 + "px";
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_one").style.height = a_height / 20 + "px";
 
@@ -278,15 +292,18 @@ function change_a() {
  * Calls a function to save room data.
  * @returns None
  */
-function change_b() {
-  const b_height = document.querySelector('#wall_one_b_h').value;
-  const b_width = document.querySelector('#wall_one_b_w').value;
+function change_b(check) {
+  if(parseFloat(check.value) > 9990) {
+    alert("Arvo ei voi olla isompi kuin 9990mm.");
+    return
+  }
+  b_height = document.querySelector('#wall_one_b_h').value;
+  b_width = document.querySelector('#wall_one_b_w').value;
   document.querySelector('.question-container').classList.add("two");
   document.querySelector('.question-container').classList.remove("out");
-  document.querySelector('.modal-yes').addEventListener("click", function() {
-    changeHeights(b_height);
-    changeWidths_2(b_width);
-  });
+
+  document.querySelector('.modal-yes').setAttribute("onclick","document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(b_height);changeWidths_2(b_width);");
+
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = b_width / 20 + "px";
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.height = b_height / 20 + "px";
 
@@ -297,15 +314,17 @@ function change_b() {
  * Changes the dimensions of an element based on the values provided in the input fields.
  * @returns None
  */
-function change_c() {
-  const c_height = document.querySelector('#wall_one_c_h').value;
-  const c_width = document.querySelector('#wall_one_c_w').value;
+function change_c(check) {
+    if(parseFloat(check.value) > 9990) {
+      alert("Arvo ei voi olla isompi kuin 9990mm.");
+      return
+    }
+  c_height = document.querySelector('#wall_one_c_h').value;
+  c_width = document.querySelector('#wall_one_c_w').value;
   document.querySelector('.question-container').classList.add("two");
   document.querySelector('.question-container').classList.remove("out");
-  document.querySelector('.modal-yes').addEventListener("click", function() {
-    changeHeights(c_height);
-    changeWidths(c_width);
-  });
+  document.querySelector('.modal-yes').setAttribute("onclick","document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(c_height);changeWidths(c_width);");
+
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.width = c_width / 20 + "px";
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_three").style.height = c_height / 20 + "px";
 
@@ -318,15 +337,17 @@ function change_c() {
  * the question container, and sets event listeners for modal confirmation.
  * @returns None
  */
-function change_d() {
-  const d_height = document.querySelector('#wall_one_d_h').value;
-  const d_width = document.querySelector('#wall_one_d_w').value;
+function change_d(check) {
+    if(parseFloat(check.value) > 9990) {
+      alert("Arvo ei voi olla isompi kuin 9990mm.");
+      return
+    }
+  d_height = document.querySelector('#wall_one_d_h').value;
+  d_width = document.querySelector('#wall_one_d_w').value;
   document.querySelector('.question-container').classList.add("two");
   document.querySelector('.question-container').classList.remove("out");
-  document.querySelector('.modal-yes').addEventListener("click", function() {
-    changeHeights(d_height);
-    changeWidths_2(d_width);
-  });
+  document.querySelector('.modal-yes').setAttribute("onclick","document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(d_height);changeWidths_2(d_width);");
+
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = d_width / 20 + "px";
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.height = d_height / 20 + "px";
 

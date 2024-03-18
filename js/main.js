@@ -3440,38 +3440,70 @@ setTimeout(() => {
   skipping();
 }, "550");
 
+sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 
 /**
  * Initializes the house template based on the provided arguments and stage.
- * @param {arguemento} arguemento - The argument to initialize the house template.
+ * @param {templ} templ - The argument to initialize the house template.
  * @param {number} stage - The stage of initialization (1 or 2).
  * @returns None
  */
-function initialize__housetempla(arguemento,stage) {
+function initialize__housetempla(templ,stage) {
+  
   rdata = document.querySelector("."+current_apartment);
-  if(stage === 1) {
-    house__templeates = document.querySelectorAll(".house__types_type");
-    for (let a = 0; a < house__templeates.length; a++) {
-      house__templeates[a].classList.remove("active");
-    }
-    arguemento.classList.add("active");
 
-    rdata.dataset.aroom = arguemento.dataset.aroom;
-    rdata.dataset.broom = arguemento.dataset.broom;
-    rdata.dataset.croom = arguemento.dataset.croom;
-    rdata.dataset.droom = arguemento.dataset.droom;
-    rdata.dataset.kroom = arguemento.dataset.kroom;
-    rdata.dataset.lroom = arguemento.dataset.lroom;
+  if(stage === 1) {
     
-    
-    // input_step = "drawscreen_section_one";
-    submitprogress('','save');
-    
-    
-    setTimeout(() => {
-      location.reload();
-    }, "1050");
-    
+      house__templeates = document.querySelectorAll(".house__types_type");
+      for (let a = 0; a < house__templeates.length; a++) {
+        house__templeates[a].classList.remove("active");
+      }
+      templ.classList.add("active");
+
+      document.querySelector("#wall_one_a_h").value = templ.dataset.aroom.split(",")[3].split("|")[0];
+      document.querySelector("#wall_one_a_w").value = templ.dataset.aroom.split(",")[3].split("|")[1];
+      document.querySelector("#wall_one_b_h").value = templ.dataset.broom.split(",")[3].split("|")[0];
+      document.querySelector("#wall_one_b_w").value = templ.dataset.broom.split(",")[3].split("|")[1];
+      document.querySelector("#wall_one_c_h").value = templ.dataset.croom.split(",")[3].split("|")[0];
+      document.querySelector("#wall_one_c_w").value = templ.dataset.croom.split(",")[3].split("|")[1];
+      document.querySelector("#wall_one_d_h").value = templ.dataset.droom.split(",")[3].split("|")[0];
+      document.querySelector("#wall_one_d_w").value = templ.dataset.droom.split(",")[3].split("|")[1];
+      document.querySelector("#wall_one_roof_h").value = templ.dataset.kroom.split(",")[3].split("|")[0];
+      document.querySelector("#wall_one_roof_w").value = templ.dataset.kroom.split(",")[3].split("|")[1];
+      document.querySelector("#wall_one_floor_h").value = templ.dataset.lroom.split(",")[3].split("|")[0];
+      document.querySelector("#wall_one_floor_w").value = templ.dataset.lroom.split(",")[3].split("|")[1];
+      
+      preset_id = parseFloat(templ.dataset.presetid);
+      formData = {
+        preset_id: preset_id,
+        key: 'aukko'
+      };
+
+      $.ajax({
+        type: "POST",
+        url: "vendor/get-presetcontent.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+      }).done(function (settings) {
+        (async () => {
+          presetcontent = JSON.parse(settings);
+          console.log(presetcontent);
+          await sleep(100);
+          save_rooms();
+          await sleep(2000);
+          presetcontent.forEach(preset => {
+            current_room = preset[0].split("|")[0];
+            save(preset[0].split("|")[1]);
+          });
+          await sleep(200);
+          location.reload();
+        })();
+      });
+      
+   
   }
   if(stage === 2) {
 

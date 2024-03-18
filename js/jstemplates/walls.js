@@ -271,6 +271,7 @@ function osittainen_siirto_muualle() {
  * @returns None
  */
 function create__excel_fromallwalls() {
+  alert("tulossa");
   old_levy_excel = document.querySelector(".levy_excel").innerHTML;
   const saumas = document.querySelectorAll(".sauma");
   let horizontalBleam = 0;

@@ -8,6 +8,8 @@
  * @param {number} l - The l value.
  * @returns {HTMLElement} The created levy element.
  */
+
+
 function luo__levy(h, w, dex, col, b, l) {
   dex += 1;
   var ind;
@@ -97,9 +99,9 @@ function levyta(priority) {
   levy_c = -1;
   levy_array = [];
   if (canvas.querySelector(".levy") || canvas.querySelector(".levyt") || canvas.querySelector(".levysarake")) {
-    let levy = canvas.querySelectorAll(".levy");
-    for (var i = 0; i < levy.length; i += 1) {
-      levy[i].remove();
+    levyt = canvas.querySelectorAll(".levy");
+    for (var i = 0; i < levyt.length; i += 1) {
+      levyt[i].remove();
     }
     let levyrow = canvas.querySelectorAll(".levyt");
     for (var i = 0; i < levyrow.length; i += 1) {
@@ -183,23 +185,23 @@ function levyta(priority) {
     }
   }
     aukkojenallapoisto();
-
-    levy = canvas.querySelectorAll(".levy");
-    for (var i = 0; i < levy.length; i += 1) {
-      if(canvas.querySelector(".levyt").offsetTop > levy[i].offsetTop) { 
-        levy[i].remove();
+    
+    levyt = canvas.querySelectorAll(".levy");
+    for (var i = 0; i < levyt.length; i += 1) {
+      if(canvas.querySelector(".levyt").offsetTop > levyt[i].offsetTop) { 
+        levyt[i].remove();
       }
     }
 
-    for (var i = 0; i < levy.length; i += 1) {
-      if(canvas.querySelector(".levyt").offsetRight > levy[i].offsetRight) { 
-        levy[i].remove();
+    for (var i = 0; i < levyt.length; i += 1) {
+      if(canvas.querySelector(".levyt").offsetRight > levyt[i].offsetRight) { 
+        levyt[i].remove();
       }
     }
 
-    for (var i = 0; i < levy.length; i += 1) {
-      if(canvas.querySelector(".levyt").offsetWidth < levy[i].offsetLeft) { 
-        levy[i].remove();
+    for (var i = 0; i < levyt.length; i += 1) {
+      if(canvas.querySelector(".levyt").offsetWidth < levyt[i].offsetLeft) { 
+        levyt[i].remove();
       }
     }
 }

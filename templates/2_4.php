@@ -65,19 +65,19 @@
           <h4>Saumoituksen tyyppi</h4>
           <fieldset>
             <input type="radio" id="settings__saumahanta-oik" name="sauma__xtype" onclick="saumoitus__examplephoto()" <?php echo $sy[25] == "0" ? "checked" : "" ?>>
-            <label for="settings__saumahanta-oik">Vajaa levy oikealle</label>
+            <label for="settings__saumahanta-oik" class="settings__saumahanta-oik">Vajaa levy oikealle</label>
             <input type="radio" id="settings__saumahanta-vas" name="sauma__xtype" onclick="saumoitus__examplephoto()" <?php echo $sy[25] == "1" ? "checked" : "" ?>>
-            <label for="settings__saumahanta-vas">Vajaa levy vasemalle</label>
+            <label for="settings__saumahanta-vas" class="settings__saumahanta-vas">Vajaa levy vasemalle</label>
             <input type="radio" id="settings__saumahanta-tasoitus" name="sauma__xtype" onclick="saumoitus__examplephoto()" <?php echo $sy[25] == "2" ? "checked" : "" ?>>
-            <label for="settings__saumahanta-tasoitus">Tasaleveys</label>
+            <label for="settings__saumahanta-tasoitus" class="settings__saumahanta-tasoitus">Tasaleveys</label>
           </fieldset>
           <fieldset>
             <input type="radio" id="settings__saumahanta-yla" name="sauma__ytype" onclick="saumoitus__examplephoto()" <?php echo $sy[26] == "0" ? "checked" : "" ?>>
-            <label for="settings__saumahanta-yla">Vajaa levy ylös</label>
+            <label for="settings__saumahanta-yla" class="settings__saumahanta-yla">Vajaa levy ylös</label>
             <input type="radio" id="settings__saumahanta-ala" name="sauma__ytype" onclick="saumoitus__examplephoto()" <?php echo $sy[26] == "1" ? "checked" : "" ?>>
-            <label for="settings__saumahanta-ala">Vajaa levy alas</label>
+            <label for="settings__saumahanta-ala" class="settings__saumahanta-ala">Vajaa levy alas</label>
             <input type="radio" id="settings__saumahanta-vaakatasoitus" name="sauma__ytype" onclick="saumoitus__examplephoto()" <?php echo $sy[26] == "2" ? "checked" : "" ?>>
-            <label for="settings__saumahanta-vaakatasoitus">Tasakorkeus</label>
+            <label for="settings__saumahanta-vaakatasoitus" class="settings__saumahanta-vaakatasoitus">Tasakorkeus</label>
           </fieldset>
         </section>
         <section>

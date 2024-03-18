@@ -2,12 +2,14 @@
 
 
 <div class="drawarea__controls drawarea__controls_one">
-   <h1>MOD alue</h1>
-   <div class="row" style="justify-content: center;">
-      <input type="number" value="<?= $post["room_one_a-h"]; ?>" class="drawarea_h" id="drawarea_h" oninput="changesize(this.value+'|y',true);" onchange="userinteraction = true;changesize(this.value+'|y',true);" max="3650" step="25"><span> x </span>
-      <input type="number" value="<?= $post["room_one_a-w"]; ?>" class="drawarea_w" id="drawarea_w" oninput="changesize(this.value+'|x',true);" onchange="userinteraction = true;changesize(this.value+'|x',true);" max="9975" step="25"><span> mm</span>
-      <label for="drawarea_h" class="drawarea_hlabel"> (Korkeus)</label>
-      <label for="drawarea_w" class="drawarea_wlabel"> (Leveys)</label>
+  
+   <div class="row" style="justify-content: center;align-items:center;">
+      <b style="color:#334">MOD </b>
+      <i style="margin: 0 2px">h</i>
+      <input type="number" value="<?= $post["room_one_a-h"]; ?>" class="drawarea_h" id="drawarea_h" oninput="changesize(this.value+'|y',true);" onchange="userinteraction = true;changesize(this.value+'|y',true);" max="3650" step="25"><span> x <i>w</i></span>
+      <input type="number" value="<?= $post["room_one_a-w"]; ?>" class="drawarea_w" id="drawarea_w" oninput="changesize(this.value+'|x',true);" onchange="userinteraction = true;changesize(this.value+'|x',true);" max="9975" step="25">
+      <!-- <label for="drawarea_h" class="drawarea_hlabel"> (Korkeus)</label>
+      <label for="drawarea_w" class="drawarea_wlabel"> (Leveys)</label> -->
    </div>
    <h2>Mittapisteet</h2>
    <div class="drawarea__controls_elementsone drawarea__things">
