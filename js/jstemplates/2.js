@@ -41,22 +41,26 @@ var e = 0;
 function change__aukko_sizecord() {
   const height = document.querySelector('#box_h').value;
   const width = document.querySelector('#box_w').value;
-  if (document.querySelector("#type__door").checked) {
-    // document.getElementById("hole__height").value = 2000;
-    // document.getElementById("hole__width").value = 1000;
-    document.querySelector("#aukko__name").value = "Ovi ";
 
-
-  }
   cur_aukko_type = "";
   if (document.querySelector("#type__door").checked) {
     cur_aukko_type = "ovi";
     document.querySelector("#aukko__name").value = "Ovi ";
+    document.querySelector("#aukotcord_left").value = 500;
+    document.querySelector("#aukotcord_right").value = 1500;
+    document.querySelector("#aukotcord_low").value = 0;
+    document.querySelector("#aukotcord_up").value = 2100;
+    changedimensions_aukko();
   }
 
   if (document.querySelector("#type__window").checked) {
     cur_aukko_type = "ikkuna";
     document.querySelector("#aukko__name").value = "Ikkuna ";
+    document.querySelector("#aukotcord_left").value = 1500;
+    document.querySelector("#aukotcord_right").value = 3000;
+    document.querySelector("#aukotcord_low").value = 900;
+    document.querySelector("#aukotcord_up").value = 2100;
+    changedimensions_aukko();
   }
   
   if (document.querySelector("#type__palkki").checked) {

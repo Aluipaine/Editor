@@ -599,7 +599,17 @@ function refresh__drawcontrols() {
       rangat__navigation(false);
       document.querySelector(".drawarea__top").style.zIndex = 2;
 
+      aukot = canvas.querySelectorAll(".aukko");
+      aukot.forEach(a => {
+        a.style.outline = "1px solid black";
+      });
       // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
+    }
+    else {
+      aukot = canvas.querySelectorAll(".aukko");
+      aukot.forEach(a => {
+        a.style.outline = "unset";
+      });
     }
     if (input_step == 'drawscreen_section_three') {
       $('.drawarea__section').show();

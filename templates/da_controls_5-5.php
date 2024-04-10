@@ -14,13 +14,13 @@
          Näytä raksit
       </label>
    </fieldset>
-   <div class="drawarea__controls_settingsbtn drawarea__controls_btn" onclick="open_ladonta_settings(true);settings__modal_open(this);" data-asmodal_mode="kin_as">
+   <div class="drawarea__controls_settingsbtn drawarea__controls_btn" onclick="open_ladonta_settings(true);settings__modal_open(this);document.querySelector('.ladonta_allsetbtn').classList.add('hidden');document.querySelector('.ladonta_savesetbtn').classList.remove('hidden');" data-asmodal_mode="kin_as">
       Kiinnikkeiden asetukset
    </div>
    <div class="drawarea__controls_btn" onclick="$('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();">
       Korjaa yksittäisiä levyjä
    </div>
-   <div class="drawarea__controls_btn greenbtn" onclick="$('#step_drawscreen').val('drawscreen_section_eight');refresh__drawcontrols();updatearea(); siirto_muualle();" style="background: darkgreen;text-align: center;">Siirrä mitat muille seinille</div>
+   <div class="drawarea__controls_btn greenbtn" data-asmodal_mode="kin_as" onclick="open_ladonta_settings(true);settings__modal_open(this);document.querySelector('.ladonta_allsetbtn').classList.remove('hidden');document.querySelector('.ladonta_savesetbtn').classList.add('hidden');" style="background: darkgreen;text-align: center;">Siirrä mitat muille seinille</div>
    <?php include("./templates/house_nav.php");  ?>
 </div>
 

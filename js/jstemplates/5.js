@@ -4,8 +4,8 @@
  * @param {number} w - The width of the levy.
  * @param {number} dex - The dex value.
  * @param {number} col - The col value.
- * @param {number} b - The b value.
- * @param {number} l - The l value.
+ * @param {number} b - The bpttom value.
+ * @param {number} l - The left value.
  * @returns {HTMLElement} The created levy element.
  */
 
@@ -27,6 +27,10 @@ function luo__levy(h, w, dex, col, b, l) {
   var levy_h = document.createElement("div");
   var levy_w = document.createElement("div");
   var levy_name = document.createElement("div");
+  levy_kp = document.createElement("div");
+  levy_kp.classList.add("levy_kp");
+  levy_kp.innerHTML = "KP";
+
   levy.classList.add("levy");
   levy_h.classList.add("levy_h");
   levy_w.classList.add("levy_w");
@@ -83,6 +87,7 @@ function luo__levy(h, w, dex, col, b, l) {
   l_meta.type = "hidden";
   l_meta.classList = "l_meta";
   levy.appendChild(l_meta);
+  levy.appendChild(levy_kp);
   return levy;
   levy_array.append(levy);
 
@@ -555,4 +560,345 @@ function find__that_levy(number) {
         break;
     }
   }
+}
+
+
+/**
+ * Function to remove overlapping elements on a canvas by adjusting their positions and sizes.
+ * @returns None
+ */
+
+
+// 11 MÄÄRITTÄÄ AUKKOJEN ALAISEN LEVYTTÄMÄTTÖMÄN ALUEEN, V/H
+/**
+ * This function is used to remove overlapping elements on a canvas by adjusting their positions and sizes.
+ * It iterates through the elements with class "aukko" and "levy" to check for overlapping conditions and performs necessary adjustments.
+ * @returns None
+ */
+function aukkojenallapoisto() {
+  aukko = canvas.querySelectorAll(".aukko");
+
+  aukko.forEach(a => {
+      acord = a.getAttribute("title");
+      a_l = parseFloat(a.querySelector(".aukko_lcord").innerHTML);
+      a_r = parseFloat(a.querySelector(".aukko_rcord").innerHTML);
+      a_b = parseFloat(a.querySelector(".aukko_bcord").innerHTML);
+      a_t = parseFloat(a.querySelector(".aukko_tcord").innerHTML);
+
+      levy = canvas.querySelectorAll(".levy");
+
+      levy.forEach(l => {
+          lcord = l.getAttribute("title");
+          l_l = parseFloat(lcord.split(",")[3]);
+          l_r = parseFloat(lcord.split(",")[3]) + parseFloat(lcord.split(",")[0]);
+          l_b = parseFloat(lcord.split(",")[2]);
+          l_t = parseFloat(lcord.split(",")[1]) + parseFloat(lcord.split(",")[2]);
+
+          // SPLT IF MATCHES INSIDE Y     
+          if (a_l <= l_l && a_r >= l_r && a_b >= l_b && a_t <= l_t) {
+            console.log("SPLT IF MATCHES INSIDE Y");
+            console.log(a);
+            console.log(l);
+              low_top = a_b - l_b;
+              up_top = l_t - a_t;
+              levyt = canvas.querySelector(".levyt");
+
+              w = l_r - l_l;
+              dex = "Yhdistettylevy";
+              col_ += 1;
+              levyt.append(luo__levy(w, low_top, dex, col_, l_b, l_l));
+              levyt.append(luo__levy(w, up_top, dex, col_, a_t, l_l));
+
+              l.remove();
+
+          }
+
+          // SPLT IF MATCHES INSIDE X
+          if (a_l >= l_l && a_r <= l_r && a_b <= l_b && a_t >= l_t) {
+            console.log("SPLT IF MATCHES INSIDE X");
+            console.log(a);
+            console.log(l);
+              l_left = a_l - l_l;
+              r_left = l_r - a_r;
+              levyt = canvas.querySelector(".levyt");
+              h = l_t - l_b;
+              dex = "Yhdistettylevy";
+              col_ += 1;
+              levyt.append(luo__levy(l_left, h, dex, col_, l_b, l_l));
+              levyt.append(luo__levy(r_left, h, dex, col_, l_b, a_r));
+
+              l.remove();
+          }
+
+          // DEL IF MATCHES COMPLETELY
+          if (a_l == l_l && a_r == l_r && a_b == l_b && a_t == l_t) {
+            console.log(" DEL IF MATCHES COMPLETELY");
+            console.log(a);
+            console.log(l);
+              l.remove();
+          }
+
+
+          // DEL IF INSIDE
+          if (a_l <= l_l && a_r >= l_r && a_b <= l_b && a_t >= l_t) {
+            console.log("DEL IF INSIDE");
+            console.log(a);
+            console.log(l);
+              l.remove();
+          }
+
+
+
+
+          // REDUCE FROM LEFT OLD
+          // if(a_l >= l_l && l_b <= a_t-10) {
+          //   if(a_r <= l_r) {
+          //     //console.log("LL: " + l_l + ", LR: " + l_r + ", LB: "+ l_b + ", LT: "+ l_t);
+          //     //console.log("AL: " + a_l + ", AR: " + a_r + ", AB: "+ a_b + ", AT: "+ a_t);
+          //     erotus = parseFloat(l_r)-parseFloat(l_l);
+          //     inversed_erotus = parseFloat(a_r)-parseFloat(l_l);
+
+          //     l.style.width = parseFloat(l.style.width) - inversed_erotus/5 + "px";
+          //     l.style.left = parseFloat(l.style.left) + inversed_erotus/5 +"px";
+          //   }
+          // }
+
+          // DEL FROM LEFT
+          if (a_t >= l_t && a_l <= l_l && a_r <= l_r && a_b <= l_t && a_r >= l_l && a_b <= l_b + 15 || a_t >= l_t && a_l <= l_l + 15 && a_r <= l_r && a_b <= l_t && a_r >= l_l && a_b <= l_b + 15) {
+            console.log("DEL FROM LEFT");
+            console.log(a);
+            console.log(l);  
+            erotus = parseFloat(l_r) - parseFloat(a_r);
+              // inversed_erotus = parseFloat(a_r)-parseFloat(l_l);
+
+
+              l.style.width = erotus / 5 + "px";
+              l.style.left = parseFloat(a_l / 5) + parseFloat((a_r - a_l) / 5) + "px";
+          }
+
+          // DEL FROM UP
+          if (a_t >= l_t && a_l <= l_l && a_r >= l_r && a_b <= l_t || a_t >= l_t + 15 && a_l <= l_l && a_r >= l_r && a_b <= l_t) {
+            console.log(" DEL FROM UP");
+            console.log(a);
+            console.log(l);  
+            erotus = parseFloat(l_t) - parseFloat(a_b);
+              l.style.height = parseFloat(l.style.height) - erotus / 5 + "px";
+          }
+
+          // DEL FROM BOTTOM
+          // if (a_t <= l_t && a_l <= l_l + 5 && a_r >= l_r + 5 && a_t <= l_t && a_t >= l_b || a_t <= l_t && a_l <= l_l && a_r >= l_r && a_t <= l_t && a_t >= l_b || a_t <= l_t + 15 && a_l <= l_l && a_r >= l_r && a_t <= l_t && a_t >= l_b || a_t <= l_t && a_l <= l_l + 20 && a_r >= l_r + 20 && a_t <= l_t && a_t >= l_b) {
+          //   console.log("DEL FROM BOTTOM");
+          //   console.log(a);
+          //   console.log(l);  
+          //   erotus = parseFloat(l_t) - parseFloat(a_t);
+          //   l.style.height = erotus / 5 + "px";
+          //   l.style.bottom = parseFloat(a_b / 5) + parseFloat((a_t - a_b) / 5) + "px";
+          // }
+
+
+          // DEL HUKKA RIGHT
+          if (a_b <= l_b + 15 && a_l >= l_l && a_r >= l_r && a_t >= l_t && a_l <= l_r || a_b <= l_b + 15 && a_l >= l_l && a_r >= l_r && a_t >= l_t && a_l <= l_r + 15) {
+            erotus = parseFloat(l_r) - parseFloat(a_l);
+            // inversed_erotus = parseFloat(a_r)-parseFloat(l_l);
+            l.style.width = parseFloat(l.style.width) - erotus / 5 + "px";
+          }
+
+
+          // DEL SMOL
+          if (parseFloat(l.style.height) < 2 || parseFloat(l.style.width) < 2) {
+              l.remove();
+          }
+
+
+          // DEL IF INSIDE
+          
+          if (a_l <= l_l && a_r >= l_r && a_b <= l_b && a_t >= l_t) {
+            console.log("DEL IF INSIDE");
+            l.remove();
+          }
+
+
+          coolcord_w = parseFloat(l.style.width) * 5;
+          coolcord_h = parseFloat(l.style.height) * 5;
+          coolcord_b = parseFloat(l.style.bottom) * 5;
+          coolcord_l = parseFloat(l.style.left) * 5;
+
+          l.setAttribute("title", (parseFloat(coolcord_w) - 5) + "," + (parseFloat(coolcord_h) - 5) + "," + coolcord_b + "," + coolcord_l);
+          l.querySelector("i").innerHTML = (parseFloat(coolcord_w) - 5) + "x" + (parseFloat(coolcord_h) - 5);
+
+
+        });
+    });
+
+  setTimeout(() => {
+    split__half_panels();
+  }, 100);
+  // 
+}
+
+function split__half_panels() {
+  aukko.forEach(a => {
+    a_l = parseFloat(a.querySelector(".aukko_lcord").innerHTML);
+    a_r = parseFloat(a.querySelector(".aukko_rcord").innerHTML);
+    a_b = parseFloat(a.querySelector(".aukko_bcord").innerHTML);
+    a_t = parseFloat(a.querySelector(".aukko_tcord").innerHTML);
+    levys = canvas.querySelectorAll(".levy");
+
+
+    levys.forEach(l => {
+      lcord = l.getAttribute("title");
+      l_l = parseFloat(lcord.split(",")[3]);
+      l_r = parseFloat(lcord.split(",")[3]) + parseFloat(lcord.split(",")[0]);
+      l_b = parseFloat(lcord.split(",")[2]);
+      l_t = parseFloat(lcord.split(",")[1]) + parseFloat(lcord.split(",")[2]);
+
+      // 3PCS WHEN AUKKKO RIGHT SIDE HITS LEVY ON MIDDLE AND BOTTOM SIDE OF LEVY IS 0    
+      if (a_b >= l_b && a_r >= l_l && a_l <= l_l && l_b == saumaset_hm/2 && (a_b+(saumaset_hm/2)) >= l_b && a_t <= l_t && l_r >= a_r) {
+        console.log("AUKKKO RIGHT SIDE HITS LEVY ON MIDDLE AND BOTTOM SIDE OF LEVY IS 0");
+        console.log(l);
+        console.log(a);
+
+        levy_division_point_y1 = a_b; // Aukko bottom side
+        levy_division_point_y2 = a_t; // Aukko top side
+        levy_division_point_x = a_r; // Right side
+
+        a_levy_height = levy_division_point_y1;
+        b_levy_height = levy_division_point_y2-levy_division_point_y1;
+        c_levy_height = height-levy_division_point_y2;
+
+        a_levy_width = l_r-l_l;
+        b_levy_width = l_r-a_r;
+        c_levy_width = l_r-l_l;
+
+        dex = "___";
+        col_ += 1;
+        
+        a_levy_bottom = l_b;
+        b_levy_bottom = levy_division_point_y1;
+        c_levy_bottom = levy_division_point_y2;
+
+        a_levy_left = l_l;
+        b_levy_left = (a_r-l_l)+l_l;
+        c_levy_left = l_l;
+        
+        levygrid = canvas.querySelector(".levyt");
+        levygrid.append(luo__levy(a_levy_width,a_levy_height, "OIK", col_, a_levy_bottom, a_levy_left));
+        levygrid.append(luo__levy(b_levy_width,b_levy_height, "OIKKESK", col_, b_levy_bottom, b_levy_left));
+        levygrid.append(luo__levy(c_levy_width,c_levy_height, "OIKYLÄ", col_, c_levy_bottom, c_levy_left));
+
+        l.remove();
+        
+
+      }
+
+      // 3PCS WHEN AUKKKO LEFT SIDE HITS LEVY ON MIDDLE AND BOTTOM SIDE OF LEVY IS 0    
+      if (a_b >= l_b && a_l <= l_r && a_l <= l_r && l_b == saumaset_hm/2 && (a_b+(saumaset_hm/2)) >= l_b && a_t <= l_t && l_r <= a_r) {
+        console.log("AUKKKO LEFT SIDE HITS LEVY ON MIDDLE AND BOTTOM SIDE OF LEVY IS 0 ");
+        console.log(l);
+        console.log(a);
+        
+        levy_division_point_y1 = a_b; // Aukko bottom side
+        levy_division_point_y2 = a_t; // Aukko top side
+        levy_division_point_x = a_l; // Left side
+
+        a_levy_height = levy_division_point_y1;
+        b_levy_height = levy_division_point_y2-levy_division_point_y1;
+        c_levy_height = height-levy_division_point_y2;
+
+        a_levy_width = l_r-l_l;
+        b_levy_width = a_l-l_l;
+        c_levy_width = l_r-l_l;
+
+        dex = "___";
+        col_ += 1;
+        
+        a_levy_bottom = l_b;
+        b_levy_bottom = levy_division_point_y1;
+        c_levy_bottom = levy_division_point_y2;
+
+        a_levy_left = l_l;
+        b_levy_left = l_l;
+        c_levy_left = l_l;
+        
+        levygrid = canvas.querySelector(".levyt");
+        levygrid.append(luo__levy(a_levy_width,a_levy_height, "VAS", col_, a_levy_bottom, a_levy_left));
+        levygrid.append(luo__levy(b_levy_width,b_levy_height, "VASKESK", col_, b_levy_bottom, b_levy_left));
+        levygrid.append(luo__levy(c_levy_width,c_levy_height, "VASYLÄ", col_, c_levy_bottom, c_levy_left));
+
+        l.remove();
+        
+
+      }
+
+
+      // 2PCS SPLT IF LEVY IS INSIDE AUKKKO LEFT SIDE AND BOTTOM SIDE OF AUKKO IS 0    
+      if (a_b <= saumaset_hm && a_b == l_b+(saumaset_hm/2) && a_t <= l_t && l_r <= a_r || a_b == 0 && a_b+(saumaset_hm/2) == l_b && a_t <= l_t && l_r <= a_r) {
+        console.log("SPLT IF LEVY IS INSIDE AUKKKO LEFT SIDE AND BOTTOM SIDE OF AUKKO IS 0 ");
+        console.log(l);
+        console.log(a);
+          levy_division_point_y = h - (h-a_t);
+          levy_division_point_x = a_l; // Right side
+
+          a_levy_height = levy_division_point_y;
+          b_levy_height = height-a_t;
+
+          a_levy_width = a_l-l_l;
+          b_levy_width = l_r-l_l;
+
+          
+
+          dex = "___";
+          col_ += 1;
+          
+          a_levy_bottom = l_b;
+          b_levy_bottom = levy_division_point_y;
+
+          a_levy_left = l_l;
+          b_levy_left = l_l;
+          
+          levygrid = canvas.querySelector(".levyt");
+          levygrid.append(luo__levy(a_levy_width,a_levy_height, "VAS", col_, l_b, a_levy_left));
+          levygrid.append(luo__levy(b_levy_width,b_levy_height, "YLVAS", col_, a_t, b_levy_left));
+
+          l.remove();
+          
+
+      }
+
+      // 2PCS SPLT IF LEVY IS INSIDE AUKKKO RIGHT SIDE AND BOTTOM SIDE OF AUKKO IS 0    
+      if (a_b <= saumaset_hm && a_b == l_b+(saumaset_hm/2) && a_t <= l_t+50 && l_l <= a_r+50 && l_l <= a_l || a_b == 0 && a_b+(saumaset_hm/2) == l_b && a_t <= l_t && l_l <= a_r && l_r >= a_r) {
+        console.log("SPLT IF LEVY IS INSIDE AUKKKO RIGHT SIDE AND BOTTOM SIDE OF AUKKO IS 0   ");
+        console.log(l);
+        console.log(a);
+        levy_division_point_y = h - (h-a_t);
+        levy_division_point_x = a_r; // right side
+
+        a_levy_height = levy_division_point_y;
+        b_levy_height = height-a_t;
+
+        a_levy_width = l_r-a_r;
+        b_levy_width = l_r-l_l;
+
+
+        dex = "___";
+        col_ += 1;
+        
+        a_levy_bottom = l_b;
+        b_levy_bottom = levy_division_point_y;
+
+        a_levy_left = a_r;
+        b_levy_left = l_l;
+        
+        levygrid = canvas.querySelector(".levyt");
+        levygrid.append(luo__levy(a_levy_width,a_levy_height, "OIK", col_, l_b, a_levy_left));
+        levygrid.append(luo__levy(b_levy_width,b_levy_height, "YLOIK", col_, a_t, b_levy_left));
+
+        l.remove();
+        
+
+    }
+
+      
+    });
+  });
 }

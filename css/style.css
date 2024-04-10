@@ -2373,6 +2373,10 @@ td input.lineinput {
   text-align: center;
 }
 
+.modal_close_btn.hidden {
+  display: none;
+}
+
 .drawarea__controls .drawarea__controls_settingsbtn,
 .drawarea__controls.drawarea__controls_zero .drawarea__controls_settingsbtn {
   background: #feb700;
@@ -3216,6 +3220,8 @@ input[type="checkbox"] {
 .myinfo {
   border-collapse: collapse;
   position: relative;
+
+  display: none;
 }
 tr.bottom-border {
   border-bottom: 3px dashed black;
@@ -3872,7 +3878,6 @@ article.preview_canvas:before {
   position: absolute;
   bottom: 0;
   overflow: visible;
-  outline: 1px solid #1a1a1a;
   box-sizing: border-box;
   border-radius: 50%;
   width: 15px;
@@ -3885,6 +3890,9 @@ article.preview_canvas:before {
   user-select: none;
   -khtml-user-drag: element;
   -webkit-user-drag: element;
+}
+.preview_canvas span {
+  outline: 1px solid #1a1a1a;
 }
 .canvas span:before,
 .canvas span:after,
@@ -3932,7 +3940,7 @@ article.preview_canvas:before {
   background: #fff;
   margin-left: 0;
   margin-top: 0;
-  opacity: 1;
+  opacity: 0.65;
   z-index: 12;
   outline-offset: -1px;
 }
@@ -5093,6 +5101,32 @@ div.levy_transparent, .dir_y.levy_transparent:before, .dir_x.levy_transparent:be
   background-color: transparent;
 }
 
+.levy_kp {
+  position: absolute;
+  width: 9px;
+  height: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  /* margin-left: -8px; */
+  display: block;
+  margin: auto;
+  font-size: 8px;
+  text-align: center;
+  /* margin-bottom: -8px; */
+  display: block;
+  right: 0;
+}
+.levy_kp:after {
+  background-color: black;
+  border-radius: 50%;
+  content: '';
+  display: block;
+  margin: 0 auto;
+  width:2px;
+  height: 2px;
+
+}
 .levy_transparent b {
   color: transparent !important;
 }
@@ -5179,11 +5213,12 @@ div.levy_transparent, .dir_y.levy_transparent:before, .dir_x.levy_transparent:be
 
   transition: all .4s ease-in-out;
 }
-.tyostot_keskitys.two {
+/*.tyostot_keskitys.two {
   opacity: 1;
   pointer-events: all;
-  z-index: unset;
-}
+   z-index: unset; 
+  z-index: 9;
+}*/
 
 .tyostot_keskitys .spontanous__kiinniketys {
   display: flex;
@@ -5947,9 +5982,32 @@ input.secondcord {
   box-shadow: 0 0 5px magenta, inset 0 0 10px magenta;
 }
 
-.ranka.saumaranka {
+/* .ranka.saumaranka {
   box-shadow: 0 0 2px red, inset 0 0 3px red;
+} */
+
+.ranka_pysty:before {
+  border-right: 1px solid red;
+  border-left: 1px solid red;
+  width: 10px;
+  background: transparent;
+  margin-left: -5px;
+  display: block;
+  content:'';
+  height: 100%;
 }
+
+.ranka_vaaka:before {
+  border-top: 1px solid red;
+  border-bottom: 1px solid red;
+  height: 10px;
+  background: transparent;
+  margin-bottom: -5px;
+  display: block;
+  content:'';
+  width: 100%;
+}
+
 
 .tyostot__tyosto.ikkunaranka {
   box-shadow: 0 0 5px orange, inset 0 0 10px orange;

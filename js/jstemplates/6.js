@@ -854,11 +854,15 @@ function tyosta(levy, evt) {
           x.prepend(x_del);
         }
       }
+
+      
     }
     // Adjust the right side
     t_last_right(levy, levy_tyostot_x, evt);
     // Adjust the left side
     t_last_left(levy, levy_tyostot_x, evt);
+
+    
   }
   //VAAKAKIINNIKKEET
   if (evt === 5 || evt === 6 || evt === 7 || evt === 8) {
@@ -1018,6 +1022,20 @@ function tyosta(levy, evt) {
   
   removeduplicatecords__adjustcords();
   apply__deletion_rules();
+
+  if(evt === 3) {
+    tyosto_func(3);
+  }
+  else  if(evt === 4) {
+    tyosto_func(4);
+  }
+
+  if(evt === 7) {
+    tyosto_func(7);
+  }
+  else  if(evt === 8) {
+    tyosto_func(8);
+  }
 }
 
 /**
@@ -1152,6 +1170,8 @@ function tyosto_func(evt){
     give__tyosto_cord(k_levys[i]);
     countdown__kiinnikkeet(k_levys[i]);
   }
+
+
 }
 
 /**
@@ -4199,81 +4219,81 @@ function show__borders(e) {
  * @returns None
  */
 function apply__deletion_rules() {
-  setTimeout(() => {
-    s_two_pituus = parseFloat(document.querySelector("#v_two").value);
-    s_two_leveys = parseFloat(document.querySelector("#p_two").value);
+  // setTimeout(() => {
+  //   s_two_pituus = parseFloat(document.querySelector("#v_two").value);
+  //   s_two_leveys = parseFloat(document.querySelector("#p_two").value);
 
-    s_three_pituus = parseFloat(document.querySelector("#v_three").value);
-    s_three_leveys = parseFloat(document.querySelector("#p_three").value);
+  //   s_three_pituus = parseFloat(document.querySelector("#v_three").value);
+  //   s_three_leveys = parseFloat(document.querySelector("#p_three").value);
     
 
-    lasts = document.querySelectorAll(".temp_input_last");
-    lasts.forEach(last => {
-      p=last.parentElement;
-      gp=p.parentElement;
-      g_items = Array.prototype.slice.call( gp.children );
-      index = g_items.indexOf(p);
+  //   lasts = document.querySelectorAll(".temp_input_last");
+  //   lasts.forEach(last => {
+  //     p=last.parentElement;
+  //     gp=p.parentElement;
+  //     g_items = Array.prototype.slice.call( gp.children );
+  //     index = g_items.indexOf(p);
 
-      if(last.value.length > 0 && gp.children.length > 3 && p.classList.contains("tyostot__tyosto_vaaka")) {
-        if(s_three_pituus > parseFloat(last.value)) {
-          try {
-            try {
-              gp.querySelectorAll(".tyostot__tyosto")[index+1].querySelector(".x_del").click();
-            } catch (error) {
-              gp.querySelectorAll(".tyostot__tyosto")[index-1].querySelector(".x_del").click();
-            }
-          } catch (error) {
+  //     if(last.value.length > 0 && gp.children.length > 3 && p.classList.contains("tyostot__tyosto_vaaka")) {
+  //       if(s_three_pituus > parseFloat(last.value)) {
+  //         try {
+  //           try {
+  //             gp.querySelectorAll(".tyostot__tyosto")[index+1].querySelector(".x_del").click();
+  //           } catch (error) {
+  //             gp.querySelectorAll(".tyostot__tyosto")[index-1].querySelector(".x_del").click();
+  //           }
+  //         } catch (error) {
             
-          }
-        }
-      }
-      else if(last.value.length > 0 && gp.children.length <= 3 && p.classList.contains("tyostot__tyosto_vaaka")) {
-        if(s_two_pituus > parseFloat(last.value)) {
-          try {
-            try {
-              gp.querySelectorAll(".tyostot__tyosto")[index+1].querySelector(".x_del").click();
-            } catch (error) {
-              gp.querySelectorAll(".tyostot__tyosto")[index-1].querySelector(".x_del").click();
-            }
-          } catch (error) {
+  //         }
+  //       }
+  //     }
+  //     else if(last.value.length > 0 && gp.children.length <= 3 && p.classList.contains("tyostot__tyosto_vaaka")) {
+  //       if(s_two_pituus > parseFloat(last.value)) {
+  //         try {
+  //           try {
+  //             gp.querySelectorAll(".tyostot__tyosto")[index+1].querySelector(".x_del").click();
+  //           } catch (error) {
+  //             gp.querySelectorAll(".tyostot__tyosto")[index-1].querySelector(".x_del").click();
+  //           }
+  //         } catch (error) {
             
-          }
-        }
-      }
-      if(last.value.length > 0 && gp.children.length > 3 && p.classList.contains("tyostot__tyosto_pysty")) {
-        if(s_three_leveys > parseFloat(last.value)) {
-          try {
-            try {
-              gp.querySelectorAll(".tyostot__tyosto")[index+1].querySelector(".x_del").click();
-            } catch (error) {
-              gp.querySelectorAll(".tyostot__tyosto")[index-1].querySelector(".x_del").click();
-            }
-          } catch (error) {
+  //         }
+  //       }
+  //     }
+  //     if(last.value.length > 0 && gp.children.length > 3 && p.classList.contains("tyostot__tyosto_pysty")) {
+  //       if(s_three_leveys > parseFloat(last.value)) {
+  //         try {
+  //           try {
+  //             gp.querySelectorAll(".tyostot__tyosto")[index+1].querySelector(".x_del").click();
+  //           } catch (error) {
+  //             gp.querySelectorAll(".tyostot__tyosto")[index-1].querySelector(".x_del").click();
+  //           }
+  //         } catch (error) {
             
-          }
-        }
-      }
-      else if(last.value.length > 0 && gp.children.length <= 3 && p.classList.contains("tyostot__tyosto_pysty")) {
-        if(s_two_leveys > parseFloat(last.value)) {
-          try {
-            try {
-              gp.querySelectorAll(".tyostot__tyosto")[index+1].querySelector(".x_del").click();
-            } catch (error) {
-              gp.querySelectorAll(".tyostot__tyosto")[index-1].querySelector(".x_del").click();
-            }
-          } catch (error) {
+  //         }
+  //       }
+  //     }
+  //     else if(last.value.length > 0 && gp.children.length <= 3 && p.classList.contains("tyostot__tyosto_pysty")) {
+  //       if(s_two_leveys > parseFloat(last.value)) {
+  //         try {
+  //           try {
+  //             gp.querySelectorAll(".tyostot__tyosto")[index+1].querySelector(".x_del").click();
+  //           } catch (error) {
+  //             gp.querySelectorAll(".tyostot__tyosto")[index-1].querySelector(".x_del").click();
+  //           }
+  //         } catch (error) {
             
-          }
-        }
-      }
-      console.log(last.parentElement);
+  //         }
+  //       }
+  //     }
+  //     console.log(last.parentElement);
 
-      k_levys.forEach(kl => {
-        countdown__kiinnikkeet(kl);
-      });
-      countdown__kiinnikkeet(document.querySelector("div.visible.levy_vis.levy"));
+  //     k_levys.forEach(kl => {
+  //       countdown__kiinnikkeet(kl);
+  //     });
+  //     countdown__kiinnikkeet(document.querySelector("div.visible.levy_vis.levy"));
 
 
-    });
-  }, 2500);
+  //   });
+  // }, 2500);
 }
