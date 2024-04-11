@@ -1520,7 +1520,7 @@ function refresh__drawcontrols() {
         url: "../vendor/get-ordersinwall.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (success) {
         u_rooms = [];
@@ -1666,7 +1666,7 @@ function refresh__drawcontrols() {
         url: "../vendor/get-ordersinwall.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (success) {
         u_rooms = [];
@@ -1824,7 +1824,7 @@ function refresh__drawcontrols() {
           url: "../vendor/get-ordersinwall.php",
           data: formData,
           error: function (jqxhr, status, exception) {
-            alert('Tietokantavirhe, soita numeroon +358449782028');
+            console.log('Tietokantavirhe, soita numeroon +358449782028');
           }
         }).done(function (success) {
           u_rooms = [];
@@ -3495,7 +3495,7 @@ function initialize__housetempla(templ,stage) {
         url: "vendor/get-presetcontent.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          //alert('Tietokantavirhe, soita numeroon +358449782028');
+          //console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (settings) {
         (async () => {
@@ -3557,7 +3557,7 @@ function initialize__housetempla(templ,stage) {
           // if request returns status 409 - name is not unique
           alert('Template name in not unique!');
         } else{
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }
     }).done(function (data) {
@@ -3591,12 +3591,12 @@ function kumoa() {
     success: (answer) => {
       console.log("KUMOA:", answer);
       if(answer != "ok" && answer != "") {
-        alert('Tietokantavirhe, soita numeroon +358449782028');
+        console.log('Tietokantavirhe, soita numeroon +358449782028');
       }
     },
     error: (e) => {
       console.log("NETWORK ERROR:", e);
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   });
 }
@@ -3621,7 +3621,7 @@ function send__value(val, metakey) {
     url: "/vendor/updatemeta.php",
     data: formData,
     error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   }).done(function (data) {
 
@@ -3660,6 +3660,9 @@ function initializecropping() {
       tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
       tables[t].querySelector(".project__building").style.height = tables[t].style.maxHeight;
       tables[t].style.maxWidth = "calc("+rowcount_x+"*80px + 3px)";
+      if(tables[t].parentElement.querySelector(".project__building_liftingplaces")) {
+        tables[t].parentElement.querySelector(".project__building_liftingplaces").style.maxWidth = "calc("+rowcount_x+"*80px + 3px)";
+      }
       tables[t].style.overflowX = "clip";
     }
     
@@ -3718,7 +3721,7 @@ function initializesettings__mittaus() {
     url: "vendor/get-presetid.php",
     data: formData,
     error: function (jqxhr, status, exception) {
-      //alert('Tietokantavirhe, soita numeroon +358449782028');
+      //console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   }).done(function (settings) {
     preset_id = settings;
@@ -3747,7 +3750,7 @@ function initializesettings__mittaus() {
       url: "vendor/get-presetsettings.php",
       data: formData,
       error: function (jqxhr, status, exception) {
-        //alert('Tietokantavirhe, soita numeroon +358449782028');
+        //console.log('Tietokantavirhe, soita numeroon +358449782028');
       }
     }).done(function (settings) {
       let settings_array = settings.split("],[");
@@ -5748,7 +5751,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
         url: "/updateproject.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (data) {
         // alert('Seinä ' + current_room + ' tallennettu');
@@ -5798,7 +5801,7 @@ function create__excelgenerationtimestamp(e) {
     url: "../vendor/excel_orderlog.php",
     data: formData,
     error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   }).done(function (data) {
     console.log("excel generation timestamp initiated on type "+_type);
@@ -5884,7 +5887,7 @@ function toggle__asexcel(mode, b) {
         url: "../vendor/get-ordersinroom.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (success) {
         u_rooms = [];
@@ -5968,7 +5971,7 @@ function toggle__asexcel(mode, b) {
     url: "../vendor/get-ordersinroom.php",
     data: formData,
     error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   }).done(function (success) {
     trs = document.querySelectorAll(".tila"+_type+"__tbody tr:not(.headingrow)");
@@ -6074,7 +6077,7 @@ function lataa_seinaexcel(arg) {
         url: "../vendor/get-ordersinroom.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (success) {
         timest = 0;
@@ -6158,7 +6161,7 @@ function lataa_seinaexcel(arg) {
               url: "../vendor/excel_changestatus.php",
               data: formData,
               error: function (jqxhr, status, exception) {
-                alert('Tietokantavirhe, soita numeroon +358449782028');
+                console.log('Tietokantavirhe, soita numeroon +358449782028');
               }
             }).done(function (success) {
               console.log(success);
@@ -6210,7 +6213,7 @@ function lataa_seinaexcel(arg) {
         url: "../vendor/get-ordersinroom.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (success) {
 
@@ -6288,7 +6291,7 @@ function lataa_seinaexcel(arg) {
               url: "../vendor/excel_changestatus.php",
               data: formData,
               error: function (jqxhr, status, exception) {
-                alert('Tietokantavirhe, soita numeroon +358449782028');
+                console.log('Tietokantavirhe, soita numeroon +358449782028');
               }
             }).done(function (success) {
               console.log(success);
@@ -6384,7 +6387,7 @@ function toggle__projectexcel(mode, b) {
         url: "../vendor/get-ordersinproject.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (success) {
         // ITERATE ROOM>WALLARRAY
@@ -6562,7 +6565,7 @@ function toggle__projectexcel(mode, b) {
     url: "../vendor/get-ordersinproject.php",
     data: formData,
     error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   }).done(function (success) {
     trs = document.querySelectorAll(".project"+_type+"__tbody tr:not(.headingrow)");
@@ -6687,7 +6690,7 @@ function lataa_projektiexcel(arg) {
         url: "../vendor/get-ordersinproject.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (success) {
         // ITERATE ROOM>WALLARRAY
@@ -6792,7 +6795,7 @@ function lataa_projektiexcel(arg) {
                 url: "../vendor/excel_changestatus.php",
                 data: formData,
                 error: function (jqxhr, status, exception) {
-                  alert('Tietokantavirhe, soita numeroon +358449782028');
+                  console.log('Tietokantavirhe, soita numeroon +358449782028');
                 }
               }).done(function (success) {
                 console.log(success);
@@ -6851,7 +6854,7 @@ function lataa_projektiexcel(arg) {
         url: "../vendor/get-ordersinproject.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       }).done(function (success) {
         // ITERATE ROOM>WALLARRAY
@@ -6950,7 +6953,7 @@ function lataa_projektiexcel(arg) {
                 url: "../vendor/excel_changestatus.php",
                 data: formData,
                 error: function (jqxhr, status, exception) {
-                  alert('Tietokantavirhe, soita numeroon +358449782028');
+                  console.log('Tietokantavirhe, soita numeroon +358449782028');
                 }
               }).done(function (success) {
                 console.log(success);

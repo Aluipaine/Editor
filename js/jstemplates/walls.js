@@ -246,12 +246,13 @@ function siirto_muualle(mode) {
     });
     await sleep(500);
 
-    walls__correct();
     document.querySelector(".preloader").classList.remove("active");
 
-    await sleep(200);
-    alert("Valmis!"); 
+    await sleep(200);    
 
+    alert("Valmis!"); 
+    await sleep(200);
+    walls__correct();
 
   })();
 }
@@ -269,7 +270,67 @@ function walls__correct() {
       g.style.width = "100px";
       g.style.height = "100px";
     });
+
+    
+
+    y_not_secondcord = c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input:not(.secondcord)");
+    x_not_secondcord = c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input:not(.secondcord)");
+
+
+    y_secondcord = c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input.secondcord");
+    x_secondcord = c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input.secondcord");
+    if(c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input:not(.secondcord)")) {
+      y_not_secondcord.forEach(sc => {
+        sc.remove();
+      });
+    }
+    if(c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input:not(.secondcord)")) {
+      x_not_secondcord.forEach(sc => {
+        sc.remove();
+      });
+    }
+    // DELETE DUPLICATES
+    dupl_array = c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input.secondcord");
+    d_array = [];
+    dupl_array.forEach(d => {
+      if(d_array.includes(d.getBoundingClientRect().left)) {
+        d.remove();
+        console.log("d.remove()");
+      }
+      else {
+        d_array.push(d.getBoundingClientRect().left);
+      }
+    });
+
+    dupl_array = c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input.secondcord");
+    d_array = [];
+    dupl_array.forEach(d => {
+      if(d_array.includes(d.getBoundingClientRect().bottom)) {
+        d.remove();
+        console.log("d.remove()");
+      }
+      else {
+        d_array.push(d.getBoundingClientRect().bottom);
+      }
+    });
+
+    y_secondcord = c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input.secondcord");
+    x_secondcord = c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input.secondcord");
+    y_secondcord.forEach(sc => {
+      delta = sc.parentElement.parentElement.parentElement.parentElement.offsetWidth - (sc.parentElement.parentElement.parentElement.parentElement.offsetWidth - sc.parentElement.offsetWidth);
+      sc.style.right = (delta)+60  + "px";
+      sc.style.marginLeft = "unset";
+      sc.style.width = "36px";
+      sc.style.transform = "unset";
+      sc.style.left = "unset";
+    });
+    x_secondcord.forEach(sc => {
+      sc.style.bottom = -60 + "px";
+      sc.style.top =  "unset";
+    });
   });
+
+
 }
 
 /**

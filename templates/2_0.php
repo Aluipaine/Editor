@@ -385,6 +385,13 @@
             
             <!-- end of sizer -->    
         </div>
+        <article class="project__building_liftingplaces" style="height: 80px;">
+        <?php
+          for ($i=1; $i <= 50; $i++) { 
+            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput' data-forrow='" .$i . "' value='NP'> </li>";                      
+          }
+          ?>
+        </article>
     </div>
     <div class="per50 floatleft coderdy rappu-2" id="B" style="opacity: 1;">
         <?php
@@ -496,6 +503,13 @@
             
             <!-- end of sizer -->    
         </div>
+        <article class="project__building_liftingplaces" style="height: 80px;">
+        <?php
+          for ($i=1; $i <= 50; $i++) { 
+            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput' data-forrow='" .$i . "' value='NP'> </li>";                      
+          }
+          ?>
+        </article>
     </div>
     <div class="per50 floatleft coderdy rappu-3" id="C" style="opacity: 1;">
         <?php
@@ -608,6 +622,13 @@
             
             <!-- end of sizer -->    
         </div>
+        <article class="project__building_liftingplaces" style="height: 80px;">
+        <?php
+          for ($i=1; $i <= 50; $i++) { 
+            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput' data-forrow='" .$i . "' value='NP'> </li>";                      
+          }
+          ?>
+        </article>
     </div>
     <div class="per50 floatleft coderdy rappu-4" id="D" style="opacity: 1;">
        <?php
@@ -715,6 +736,13 @@
             
             <!-- end of sizer -->    
         </div>
+        <article class="project__building_liftingplaces" style="height: 80px;">
+        <?php
+          for ($i=1; $i <= 50; $i++) { 
+            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput' data-forrow='" .$i . "' value='NP'> </li>";                      
+          }
+          ?>
+        </article>
     </div>
     <div class="per50 floatleft coderdy rappu-5" id="E" style="opacity: 1;">
         <?php
@@ -723,8 +751,6 @@
           $roomtitle = $rooms_t[0][3];
         ?>
         <div class="tablepreview">
-            
-            
             <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $e_colc ?>; -->
@@ -824,6 +850,13 @@
             
             <!-- end of sizer -->    
         </div>
+        <article class="project__building_liftingplaces" style="height: 80px;">
+        <?php
+          for ($i=1; $i <= 50; $i++) { 
+            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput' data-forrow='" .$i . "' value='NP'> </li>";                      
+          }
+          ?>
+        </article>
     </div>
     <div class="per50 floatleft coderdy rappu-6" id="F" style="opacity: 1;">
         <?php
@@ -832,8 +865,6 @@
           $roomtitle = $rooms_t[0][3];
         ?>
         <div class="tablepreview">
-            
-            
             <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $f_colc ?>; -->
@@ -936,6 +967,13 @@
             
             <!-- end of sizer -->    
         </div>
+        <article class="project__building_liftingplaces" style="height: 80px;">
+        <?php
+          for ($i=1; $i <= 50; $i++) { 
+            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput' data-forrow='" .$i . "' value='NP'> </li>";                      
+          }
+          ?>
+        </article>
     </div>
     <div class="per50 floatleft coderdy rappu-7" id="G" style="opacity: 1;">
         <?php
@@ -943,9 +981,7 @@
           $rooms_t = mysqli_fetch_all($roomtitle);
           $roomtitle = $rooms_t[0][3];
         ?>
-        <div class="tablepreview">
-            
-            
+        <div class="tablepreview"> 
             <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $g_colc ?>; -->
@@ -1044,6 +1080,13 @@
             
             <!-- end of sizer -->    
         </div>
+        <article class="project__building_liftingplaces" style="height: 80px;">
+        <?php
+          for ($i=1; $i <= 50; $i++) { 
+            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput' data-forrow='" .$i . "' value='NP'> </li>";                      
+          }
+          ?>
+        </article>
     </div>
     <div class="per50 floatleft coderdy rappu-8" id="H" style="opacity: 1;">
         <?php
@@ -1052,8 +1095,6 @@
           $roomtitle = $rooms_t[0][3];
         ?>
         <div class="tablepreview">
-            
-            
             <h2><input type="text" value="<?= $roomtitle ?>"  onchange="send__value(this.value, `<?= $rooms_t[0][2] ?>`);" class="lineinput"> </h2>
             
             <div class="project__building"> <!-- grid-template-columns: < ?php echo $h_colc ?>; -->
@@ -1152,6 +1193,13 @@
             
             <!-- end of sizer -->    
         </div>
+        <article class="project__building_liftingplaces" style="height: 80px;">
+        <?php
+          for ($i=1; $i <= 50; $i++) { 
+            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput' data-forrow='" .$i . "' value='NP'> </li>";                      
+          }
+          ?>
+        </article>
     </div>
 
     <?php
@@ -1160,6 +1208,10 @@
     }
     ?>
   </div>
+  <div>
+
+  </div>
+  
   <div class="container colormeanings">
     <div class="row colormeaningsimps">
       <div class="col-2 popup__statuses_a">
