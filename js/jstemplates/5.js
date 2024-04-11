@@ -729,11 +729,11 @@ function aukkojenallapoisto() {
 
         });
     });
+ 
 
-  setTimeout(() => {
+  setTimeout(() => {   
     split__half_panels();
-  }, 100);
-  // 
+  }, 200);
 }
 
 function split__half_panels() {
@@ -792,7 +792,7 @@ function split__half_panels() {
       }
 
       // 3PCS WHEN AUKKKO LEFT SIDE HITS LEVY ON MIDDLE AND BOTTOM SIDE OF LEVY IS 0    
-      if (a_b >= l_b && a_l <= l_r && a_l <= l_r && l_b == saumaset_hm/2 && (a_b+(saumaset_hm/2)) >= l_b && a_t <= l_t && l_r <= a_r) {
+      if (a_b >= l_b && a_l <= l_r && a_l <= l_r && l_b == saumaset_hm/2 && a_b >= l_b && a_t <= l_t && l_r <= a_r) {
         console.log("AUKKKO LEFT SIDE HITS LEVY ON MIDDLE AND BOTTOM SIDE OF LEVY IS 0 ");
         console.log(l);
         console.log(a);
@@ -832,7 +832,8 @@ function split__half_panels() {
 
 
       // 2PCS SPLT IF LEVY IS INSIDE AUKKKO LEFT SIDE AND BOTTOM SIDE OF AUKKO IS 0    
-      if (a_b <= saumaset_hm && a_b == l_b+(saumaset_hm/2) && a_t <= l_t && l_r <= a_r || a_b == 0 && a_b+(saumaset_hm/2) == l_b && a_t <= l_t && l_r <= a_r) {
+      if (a_b <= saumaset_hm && a_b == l_b+(saumaset_hm/2) && a_t <= l_t && l_r <= a_r 
+      || a_b == 0 && a_b+(saumaset_hm/2) == l_b && a_t <= l_t && l_r <= a_r) {
         console.log("SPLT IF LEVY IS INSIDE AUKKKO LEFT SIDE AND BOTTOM SIDE OF AUKKO IS 0 ");
         console.log(l);
         console.log(a);
@@ -898,7 +899,78 @@ function split__half_panels() {
 
     }
 
+    
       
     });
   });
+
+  // DELETE IF LEVY (PANEL) IS UNDER TWO AUKKO ELEMENTS
+  for (let a = 0; a < aukko.length; a++) {
+    if(a < aukko.length-1) {
+      a_l1 = parseFloat(aukko[a].querySelector(".aukko_lcord").innerHTML);
+      a_l2 = parseFloat(aukko[a+1].querySelector(".aukko_lcord").innerHTML);
+      a_r1 = parseFloat(aukko[a].querySelector(".aukko_rcord").innerHTML);
+      a_r2 = parseFloat(aukko[a+1].querySelector(".aukko_rcord").innerHTML);
+      a_b1 = parseFloat(aukko[a].querySelector(".aukko_bcord").innerHTML);
+      a_b2 = parseFloat(aukko[a+1].querySelector(".aukko_bcord").innerHTML);
+      a_t1 = parseFloat(aukko[a].querySelector(".aukko_tcord").innerHTML);
+      a_t2 = parseFloat(aukko[a+1].querySelector(".aukko_tcord").innerHTML);
+
+      levys = canvas.querySelectorAll(".levy");
+      levys.forEach(l => {
+        lcord = l.getAttribute("title");
+        l_l = parseFloat(lcord.split(",")[3]);
+        l_r = parseFloat(lcord.split(",")[3]) + parseFloat(lcord.split(",")[0]);
+        l_b = parseFloat(lcord.split(",")[2]);
+        l_t = parseFloat(lcord.split(",")[1]) + parseFloat(lcord.split(",")[2]);
+
+        // UP CORD MATCHES
+        if(a_t1 - a_t2 >= -50 && a_t1 - a_t2 <= 0 || a_t2 - a_t1 >= -50  && a_t2 - a_t1 <= 0) {
+          console.log("UP CORD MATCHES");
+          if(a_r1 - a_l2 >= -50 && a_l1 - a_r2 <= 0 || a_r2 - a_l1 >= -50  && a_r2 - a_l1 <= 0) {
+            console.log("Detected aukko closure");
+            // DEFINE THE MOST BOTTOM CORD
+            if(a_b1 <= a_b2) {
+              a_bottom_cord = a_b2;
+            }
+            else {
+              a_bottom_cord = a_b1;
+            }
+
+            // DEFINE THE MOST TOP CORD
+            if(a_t1 <= a_t2) {
+              a_top_cord = a_t1;
+            }
+            else {
+              a_top_cord = a_t2;
+            }
+
+            // DEFINE THE MOST LEFT CORD
+            if(a_l1 <= a_l2) {
+              a_left_cord = a_l1;
+            }
+            else {
+              a_left_cord = a_l2;
+            }
+
+            // DEFINE THE MOST RIGHT CORD
+            if(a_r1 >= a_r2) {
+              a_right_cord = a_r1;
+            }
+            else {
+              a_right_cord = a_r2;
+            }
+
+            // DEL IF MATCHES Inside
+            if (a_left_cord <= l_l && a_right_cord >= l_r && a_bottom_cord <= l_b && a_top_cord >= l_t) {
+              console.log("DELETE IF LEVY (PANEL) IS UNDER TWO AUKKO ELEMENTS");
+              console.log(l);
+                l.remove();
+            }
+          }
+        }
+        
+      });
+    }
+  }
 }

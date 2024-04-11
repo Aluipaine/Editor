@@ -1,8 +1,9 @@
 <!-- Seinät section on the mittaus role -->
 
 <div id="copiedcanvases" style="display: none;">
-
-    <ul class="copiedcanvases__fixednav">
+  <section class="nav rangatnav">
+    <nav>
+      <ul style="display:flex;flex-direction: column;">
       <li><input type="checkbox" checked id="eight__lvl_zero" class="taso_btn drawarea__controls_btn taso__btns_one" onclick="eight__navigation(0);">
       <label for="eight__lvl_zero" class="taso__btns_one taso_btn">Näytä levyt</label></li>
       
@@ -14,10 +15,7 @@
       
       <li><input type="checkbox" checked id="eight__lvl_three" class="taso_btn drawarea__controls_btn taso__btns_three" onclick="eight__navigation(3)">
       <label for="eight__lvl_three" class="taso__btns_three taso_btn">Näytä listat</label></li>
-    </ul>
-  <section class="nav rangatnav">
-    <nav>
-      <ul style="display:flex;flex-direction: column;">
+
       <li><div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('rooms');">Ristivalikkoon</div></li>
     
       

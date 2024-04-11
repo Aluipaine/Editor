@@ -245,14 +245,32 @@ function siirto_muualle(mode) {
       listoitus();
     });
     await sleep(500);
+
+    walls__correct();
     document.querySelector(".preloader").classList.remove("active");
+
+    await sleep(200);
     alert("Valmis!"); 
 
 
   })();
-   
 }
 
+function walls__correct() {
+  canvases = document.querySelectorAll("#copiedcanvases .preview_canvas");
+
+  canvases.forEach(c => {
+    gridrow = c.querySelectorAll(".grid-row");
+    gridelem = c.querySelectorAll(".grid-item");
+    gridrow.forEach(g => {
+      g.style.width = "100px";
+    });
+    gridelem.forEach(g => {
+      g.style.width = "100px";
+      g.style.height = "100px";
+    });
+  });
+}
 
 /**
  * This function performs a partial transfer of elements to another location based on certain conditions.

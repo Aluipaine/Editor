@@ -868,7 +868,7 @@ function initalize_cross(arg) {
       url: "../vendor/get-apartment_sizes.php",
       data: formData,
       error: function (jqxhr, status, exception) {
-        alert('Tietokantavirhe, soita numeroon +358449782028');
+        console.log('Tietokantavirhe, soita numeroon +358449782028');
       }
     }).done(function (success) {
       u_rooms = [];
@@ -914,7 +914,7 @@ function initalize_cross(arg) {
     url: "../vendor/get-apartment_sizes.php",
     data: formData,
     error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   }).done(function (success) {
     u_rooms = [];
@@ -1266,7 +1266,7 @@ function send_new_aparts() {
       url: "/vendor/modify__project_apartments.php",
       data: formData,
       error: function (jqxhr, status, exception) {
-        alert('Tietokantavirhe, soita numeroon +358449782028');
+        console.log('Tietokantavirhe, soita numeroon +358449782028');
         console.log(formData);
       }
     }).done(function (data) {
@@ -1307,7 +1307,7 @@ function start__measuring(elem) {
   url: "../vendor/modifyproject_type.php",
   data: formData,
   error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
       console.log(formData);
   }
   }).done(function (data) {
@@ -1333,7 +1333,7 @@ function projectname__change(elem) {
   url: "../vendor/modifyproject_name.php",
   data: formData,
   error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
       console.log(formData);
   }
   }).done(function (data) {
@@ -1372,7 +1372,7 @@ function change__roomname() {
   url: "../vendor/modifyproject_roomname.php",
   data: formData,
   error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
       console.log(formData);
   }
   }).done(function (data) {
@@ -1497,7 +1497,7 @@ function settings__sendworkers_db() {
   url: "../vendor/modifyproject_adduser.php",
   data: formData,
   error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
       console.log(formData);
   }
   }).done(function (data) {
@@ -1993,7 +1993,7 @@ function save__newstatuses() {
     url: "/vendor/send_workdiary.php",
     data: formData,
     error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   }).done(function (data) {
     // alert('Seinä ' + current_room + ' tallennettu');
@@ -2027,7 +2027,7 @@ function save__newstatuses() {
     url: "/updateproject.php",
     data: formData,
     error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   }).done(function (data) {
     // alert('Seinä ' + current_room + ' tallennettu');
@@ -2297,7 +2297,7 @@ function change__stsplit(e) {
     url: "/vendor/updatemeta.php",
     data: formData,
     error: function (jqxhr, status, exception) {
-      alert('Tietokantavirhe, soita numeroon +358449782028');
+      console.log('Tietokantavirhe, soita numeroon +358449782028');
     }
   }).done(function (data) {
     console.log("saved Data: " + data);
@@ -2352,7 +2352,7 @@ function save_rooms() {
         url: "../vendor/save-apartment_sizes.php",
         data: formData,
         error: function (jqxhr, status, exception) {
-          alert('Tietokantavirhe, soita numeroon +358449782028');
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
       });
     }, 1400);
