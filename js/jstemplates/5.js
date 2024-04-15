@@ -12,15 +12,7 @@
 
 function luo__levy(h, w, dex, col, b, l) {
   dex += 1;
-  var ind;
   title_index = h + "," + w + "," + b + "," + l;
-  roomname = document.querySelector("#roomname_1").value.replaceAll(" ","");
-
-  if (roomname == "") {
-    roomname = "Seinän levy";
-  }
-  r = roomname+"_"+current_room.toUpperCase().replace("SEINÄ ", "").replace("1. ", "").replace("2. ", "").replace("3. ", "").replace("4. ", "").replace("5. ", "").replace("6. ", "").replace(
-    "KATTO ", "").replace("LATTIA ", "");
   var levy__interval_horizontal = parseFloat(h) / 5 + 1;
   var levy__interval_vertical = parseFloat(w) / 5 + 1;
   var levy = document.createElement("div");
@@ -46,9 +38,19 @@ function luo__levy(h, w, dex, col, b, l) {
     levy_h.innerHTML = w;
   }
   ind = String.fromCharCode(65 + col);
+  real_pos_value = col+1;
 
-  levy_name.innerHTML = r + "_" + ind + dex;
-  levy.innerHTML = "<b> <div class='levy_name'> " + levy_name.innerHTML + "</div><i>" + h + "x" + w + "mm</i></b>";
+  roomname = document.querySelector("#roomname_1").value.replaceAll(" ","");
+
+  if (roomname == "") {
+    roomname = "Seinän levy";
+  }
+  rname = current_room.toUpperCase().replace("SEINÄ ", "").replace("1. ", "").replace("2. ", "").replace("3. ", "").replace("4. ", "").replace("5. ", "").replace("6. ", "").replace(
+    "KATTO ", "").replace("LATTIA ", "");
+  r = ind+real_pos_value+" <i>" + h + "X" + w + "</i>"+"<br>"+current_apartment.toUpperCase()+" parveke Seinä " +rname+"<br>"+lift_spot+" "+current_floor+"krs";
+
+  levy_name.innerHTML = r;
+  levy.innerHTML = "<b> <div class='levy_name'> " + levy_name.innerHTML + "</div></b>";
   levy.setAttribute("title", title_index);
   levy.style.height = (parseFloat(levy__interval_vertical)) + 'px';
   // levy.style.width = (parseFloat(levy__interval_horizontal)) + 'px';

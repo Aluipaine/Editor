@@ -46,21 +46,29 @@ function change__aukko_sizecord() {
   if (document.querySelector("#type__door").checked) {
     cur_aukko_type = "ovi";
     document.querySelector("#aukko__name").value = "Ovi ";
-    document.querySelector("#aukotcord_left").value = 500;
-    document.querySelector("#aukotcord_right").value = 1500;
+    document.querySelector("#aukotcord_left").value = 1000;
+    document.querySelector("#aukotcord_right").value = 2000;
     document.querySelector("#aukotcord_low").value = 0;
     document.querySelector("#aukotcord_up").value = 2100;
     changedimensions_aukko();
   }
 
-  if (document.querySelector("#type__window").checked) {
+  else if (document.querySelector("#type__window").checked) {
     cur_aukko_type = "ikkuna";
     document.querySelector("#aukko__name").value = "Ikkuna ";
-    document.querySelector("#aukotcord_left").value = 1500;
-    document.querySelector("#aukotcord_right").value = 3000;
+    document.querySelector("#aukotcord_left").value = 2000;
+    document.querySelector("#aukotcord_right").value = 4000;
     document.querySelector("#aukotcord_low").value = 900;
     document.querySelector("#aukotcord_up").value = 2100;
     changedimensions_aukko();
+  }
+
+  
+  else {
+    document.querySelector("#aukotcord_left").value = "";
+    document.querySelector("#aukotcord_right").value = "";
+    document.querySelector("#aukotcord_low").value = "";
+    document.querySelector("#aukotcord_up").value = "";
   }
   
   if (document.querySelector("#type__palkki").checked) {

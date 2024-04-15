@@ -212,6 +212,8 @@ function refresh__drawcontrols() {
 
 
   if (apartment != null) {
+    lift_spot = apartment.dataset.liftpoint;
+    current_floor = apartment.dataset.y;
     // k_saved_input = apartment.dataset.kroom;
     // a_saved_input = apartment.dataset.aroom;
     // b_saved_input = apartment.dataset.broom;
@@ -7004,4 +7006,12 @@ function lataa_projektiexcel(arg) {
 
 }
 
-
+function change_np(val,forrow) {
+  project__building_rooms = document.querySelectorAll(".project__building_room");
+  
+  project__building_rooms.forEach(r => {
+    if(r.dataset.x === forrow) {
+      r.dataset.liftpoint = val;
+    }
+  });
+}
