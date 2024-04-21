@@ -559,7 +559,7 @@ function create__lista__tuoexcel() {
   lv.forEach(v => {
     real_listat.push({
       "Listan tyyppi": "LV",
-      "Pituus": v.dataset.listapituus % 1? (+v.dataset.listapituus).toFixed(2): v.dataset.listapituus,
+      "Pituus": v.dataset.listapituus % 1? Math.ceil(v.dataset.listapituus): v.dataset.listapituus,
       "KPL": "",
       "Asennus": "",
     });
