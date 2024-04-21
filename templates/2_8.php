@@ -1,9 +1,8 @@
 <!-- Seinät section on the mittaus role -->
 
 <div id="copiedcanvases" style="display: none;">
-  <section class="nav rangatnav">
-    <nav>
-      <ul style="display:flex;flex-direction: column;">
+
+    <ul class="copiedcanvases__fixednav">
       <li><input type="checkbox" checked id="eight__lvl_zero" class="taso_btn drawarea__controls_btn taso__btns_one" onclick="eight__navigation(0);">
       <label for="eight__lvl_zero" class="taso__btns_one taso_btn">Näytä levyt</label></li>
       
@@ -15,7 +14,10 @@
       
       <li><input type="checkbox" checked id="eight__lvl_three" class="taso_btn drawarea__controls_btn taso__btns_three" onclick="eight__navigation(3)">
       <label for="eight__lvl_three" class="taso__btns_three taso_btn">Näytä listat</label></li>
-
+    </ul>
+  <section class="nav rangatnav">
+    <nav>
+      <ul style="display:flex;flex-direction: column;">
       <li><div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('rooms');">Ristivalikkoon</div></li>
     
       
@@ -26,7 +28,8 @@
       <label for="eight__lvl_five" class="taso__btns_five taso_btn"></label> -->
 
       <li><div class="greenbtn" onclick="create__excel_fromallwalls();">Lataa Seinän Excel</div></li>
-      <li><div class="yellowbtn" onclick="takeshotAllwalls();">Ota PDF-kuvakaappaus</div></li>
+      <!-- remove Ota PDF-kuvakaappaus button -->
+      <!-- <li><div class="yellowbtn" onclick="takeshotAllwalls();">Ota PDF-kuvakaappaus</div></li> -->
       <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();" class="redbtn">Palaa Kuoseihin</div></li>
       </ul>
     </nav>

@@ -245,93 +245,14 @@ function siirto_muualle(mode) {
       listoitus();
     });
     await sleep(500);
-
     document.querySelector(".preloader").classList.remove("active");
-
-    await sleep(200);    
-
     alert("Valmis!"); 
-    await sleep(200);
-    walls__correct();
+
 
   })();
+   
 }
 
-function walls__correct() {
-  canvases = document.querySelectorAll("#copiedcanvases .preview_canvas");
-
-  canvases.forEach(c => {
-    gridrow = c.querySelectorAll(".grid-row");
-    gridelem = c.querySelectorAll(".grid-item");
-    gridrow.forEach(g => {
-      g.style.width = "100px";
-    });
-    gridelem.forEach(g => {
-      g.style.width = "100px";
-      g.style.height = "100px";
-    });
-
-    
-
-    y_not_secondcord = c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input:not(.secondcord)");
-    x_not_secondcord = c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input:not(.secondcord)");
-
-
-    y_secondcord = c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input.secondcord");
-    x_secondcord = c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input.secondcord");
-    if(c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input:not(.secondcord)")) {
-      y_not_secondcord.forEach(sc => {
-        sc.remove();
-      });
-    }
-    if(c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input:not(.secondcord)")) {
-      x_not_secondcord.forEach(sc => {
-        sc.remove();
-      });
-    }
-    // DELETE DUPLICATES
-    dupl_array = c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input.secondcord");
-    d_array = [];
-    dupl_array.forEach(d => {
-      if(d_array.includes(d.getBoundingClientRect().left)) {
-        d.remove();
-        console.log("d.remove()");
-      }
-      else {
-        d_array.push(d.getBoundingClientRect().left);
-      }
-    });
-
-    dupl_array = c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input.secondcord");
-    d_array = [];
-    dupl_array.forEach(d => {
-      if(d_array.includes(d.getBoundingClientRect().bottom)) {
-        d.remove();
-        console.log("d.remove()");
-      }
-      else {
-        d_array.push(d.getBoundingClientRect().bottom);
-      }
-    });
-
-    y_secondcord = c.querySelectorAll(".levy_tyostot_y .tyostot__tyosto input.secondcord");
-    x_secondcord = c.querySelectorAll(".levy_tyostot_x .tyostot__tyosto input.secondcord");
-    y_secondcord.forEach(sc => {
-      delta = sc.parentElement.parentElement.parentElement.parentElement.offsetWidth - (sc.parentElement.parentElement.parentElement.parentElement.offsetWidth - sc.parentElement.offsetWidth);
-      sc.style.right = (delta)+60  + "px";
-      sc.style.marginLeft = "unset";
-      sc.style.width = "36px";
-      sc.style.transform = "unset";
-      sc.style.left = "unset";
-    });
-    x_secondcord.forEach(sc => {
-      sc.style.bottom = -60 + "px";
-      sc.style.top =  "unset";
-    });
-  });
-
-
-}
 
 /**
  * This function performs a partial transfer of elements to another location based on certain conditions.
@@ -1045,7 +966,7 @@ function create__excel_fromallwalls() {
           if (e["Nimi"] === rangat_tuotanto_data[a]["Nimi"] && rangat_tuotanto_data[a]["Asennus"] !== e["Asennus"] && e["Tilauskoodi"] === rangat_tuotanto_data[a]["Tilauskoodi"] && parseFloat(e["Pituus"]) === parseFloat(rangat_tuotanto_data[a]["Pituus"]) && e["Rivinro"] !== rangat_tuotanto_data[a]["Rivinro"]) {
             kpl += 1;
             console.log(e["Asennus"]);
-            rangat_tuotanto_data[a]["Asennus"] += e["Asennus"] + ", ";
+            // rangat_tuotanto_data[a]["Asennus"] += e["Asennus"] + ", ";
           }
         });
       }
@@ -1141,7 +1062,7 @@ function create__excel_fromallwalls() {
       }
   
       await sleep(100);
-      filename = current_tila+' [4 Seinän Excel].xlsx';
+      filename = current_tila+' [4 Seinän Excel]';
       var ws1 = XLSX.utils.json_to_sheet(levyexcel_array);
       var ws2 = XLSX.utils.json_to_sheet(rangat_tuotanto_data);
       var ws3 = XLSX.utils.json_to_sheet(listat_tuotanto_data);
@@ -1150,13 +1071,33 @@ function create__excel_fromallwalls() {
       XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
       XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
       XLSX.utils.book_append_sheet(wb, ws3, "Listat");
-      XLSX.writeFile(wb, filename);
+      
+      //XLSX.writeFile(wb, filename); 
+      var wopts = { bookType:"xlsx", bookSST:false, type:"base64" }
+      var xlsdata = XLSX.write(wb, wopts);
+
+      var formData = new FormData();
+      formData.append('xlsname', filename + '.xlsx');
+      formData.append('xlsfile', xlsdata);
   
-    console.log("Shit Gonna Happen Functionality Done");
+      var xhr = new XMLHttpRequest();
+      
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log('XLS file uploaded successfully!');
+          console.log(xhr);
+        }
+      };
+      
+      xhr.open('POST', 'sendemail.php', true);
+      xhr.send(formData);
+
+      console.log("Shit Gonna Happen Functionality Done");
     // takeshotAllwalls();
     await sleep(100);
     let div = document.querySelector("#copiedcanvases");
     img_name = "Havainnekuva_seinät";
+    
     html2canvas(div).then(function(canvas3) {
       const imageData = canvas3.toDataURL('image/png');
       const screenshotImage = new Image();
@@ -1169,10 +1110,28 @@ function create__excel_fromallwalls() {
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       pdf.addImage(imageData, 'PNG', 3, 3, pdfWidth, pdfHeight, null, null, 0);
-      pdf.save(img_name + '.pdf');
+      //pdf.save(img_name + '.pdf');
+      
+      var pdfdata =  pdf. output('blob');
+
+      
+      var xhr = new XMLHttpRequest();
+      var formData = new FormData();
+      formData.append('pdffile', new File([pdfdata], filename + '.pdf'));
+      
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log('PDF file uploaded successfully!');
+          console.log(xhr);
+        }
+      };
+      
+      xhr.open('POST', 'sendemail.php', true);
+      xhr.send(formData);
     });
     await sleep(100);
     console.log("Shots taken");
+    alert('Tiedostot\n' + filename + '.xlsx' + '\n' + filename + '.pdf\nlähetettiin sähköpostitse.');
     send_shit_over();
     await sleep(100);
 

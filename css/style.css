@@ -5307,7 +5307,10 @@ div.alku__tyosto_vaaka input.event_f {
 .levy b .levy_name {
   margin-right: 4px;
 }
-
+.levy b .levy_name i {
+  font-style: normal;
+  font-weight: bold;
+}
 .levy b i {
   font-style: italic;
   left: 2%;
