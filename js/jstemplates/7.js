@@ -17,7 +17,7 @@ function create__levy_excel(now) {
   }
   // PF1_X   PF1_Y PF1_DX   PF1_DY
   // Siirto muualle
-  levyt = canvas.querySelectorAll(".levy");
+  /*levyt = canvas.querySelectorAll(".levy");
   lv = canvas.querySelectorAll(".lv");
   for (var i = levyt.length - 1; i >= 0; i--) {
     if (levyt[i].querySelector(".lv")) {
@@ -26,10 +26,11 @@ function create__levy_excel(now) {
         lvs_in_levy[j].remove();
       }
     }
-  }
+  }*/
   levyt = canvas.querySelectorAll(".levy");
   for (var i = 0; i < levyt.length; i++) {
-    lv = canvas.querySelectorAll(".lv");
+    //lv = canvas.querySelectorAll(".lv");
+    lv = canvas.querySelectorAll(":scope > .lv");
     for (var j = lv.length - 1; j >= 0; j--) {
       if (canvas.querySelector(".lv")) {
         lv_b = parseFloat(lv[j].style.bottom);

@@ -555,6 +555,16 @@ function create__lista__tuoexcel() {
     });
   });
 
+  let lv = canvas.querySelectorAll(".lv");
+  lv.forEach(v => {
+    real_listat.push({
+      "Listan tyyppi": "LV",
+      "Pituus": v.dataset.listapituus % 1? (+v.dataset.listapituus).toFixed(2): v.dataset.listapituus,
+      "KPL": "",
+      "Asennus": "",
+    });
+  })
+
   tableExcel = document.querySelector(".lista_tuo_excel tbody");
   tableExcel_trs = tableExcel.querySelectorAll("tr:not(.headingrow)");
 
@@ -604,7 +614,20 @@ function create__lista__tuoexcel() {
         })]; 
       }
     });
-    found_array = f_array[0];
+    if (e["Listan tyyppi"] === "LV") {
+      found_array = {
+        "Listan_SKU": "",
+        "Tilauskoodi": "",
+        "MATERIAALI": "",
+        "PAKSUUS": "",
+        "LAATU": "",
+        "Väri nimi": "",
+        "NCS code": "",
+      };
+    }
+    else {
+      found_array = f_array[0];
+    }
 
     h1.innerHTML = i;
     h2.innerHTML = e["Listan tyyppi"];
