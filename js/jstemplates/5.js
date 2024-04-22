@@ -912,9 +912,13 @@ function split__half_panels() {
       l_t = parseFloat(lcord.split(",")[1]) + parseFloat(lcord.split(",")[2]);
 
       let l_is_inside = a_l >= l_l && a_l <= l_r,
+          l_is_lower = a_l < l_l,
           t_is_inside = a_t <= l_t && a_t >= l_b,
+          t_is_higher = a_t > l_t,
           r_is_inside = a_r >= l_l && a_r <= l_r,
-          b_is_inside = a_b + saumaset_hm / 2 >= l_b && a_b <= l_t;
+          r_is_grater = a_r > l_r,
+          b_is_inside = a_b + saumaset_hm / 2 >= l_b && a_b <= l_t,
+          b_is_lower = a_b < l_b;
 
       let levygrid = canvas.querySelector(".levyt");
 
@@ -960,8 +964,21 @@ function split__half_panels() {
         to_add.bottom = true;
         to_add.right = true;
       }
+      if (l_is_lower && t_is_higher && b_is_lower) {
+        to_add.left = true;
+      }
+      if (r_is_grater && t_is_higher && b_is_lower) {
+        to_add.right = true;
+      }
+      if (t_is_higher && l_is_lower && r_is_grater) {
+        to_add.top = true;
+      }
+      if (b_is_lower && l_is_lower && r_is_grater) {
+        to_add.bottom = true;
+      }
 
-      if (to_add.top || to_add.bottom || to_add.right || to_add.left) {
+      if (to_add.top && levy_t_height > 0 || to_add.bottom && levy_b_height > 0
+          || to_add.right && levy_r_width > 0 || to_add.left && levy_l_width > 0) {
         dex = "___";
         col_ += 1;
         l.remove();
