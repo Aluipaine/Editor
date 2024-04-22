@@ -917,7 +917,7 @@ function split__half_panels() {
           t_is_higher = a_t > l_t,
           r_is_inside = a_r >= l_l && a_r <= l_r,
           r_is_grater = a_r > l_r,
-          b_is_inside = a_b + saumaset_hm / 2 >= l_b && a_b <= l_t,
+          b_is_inside = a_b + saumaset_hm / 2 >= l_b && a_b <= l_t || a_b <= 0 && l_b === saumaset_hm / 2,
           b_is_lower = a_b < l_b;
 
       let levygrid = canvas.querySelector(".levyt");
