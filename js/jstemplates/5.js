@@ -914,7 +914,11 @@ function split__half_panels() {
       let l_is_inside = a_l >= l_l && a_l <= l_r,
           t_is_inside = a_t <= l_t && a_t >= l_b,
           r_is_inside = a_r >= l_l && a_r <= l_r,
-          b_is_inside = a_b + saumaset_hm / 2 >= l_b && a_b <= l_t;
+          b_is_inside = a_b + saumaset_hm / 2 >= l_b && a_b <= l_t,
+          lr_is_over = a_l <= l_l && a_r >= l_r,
+          tb_is_over = a_t >= l_t && a_b <= l_b,
+          is_floor = a_b === 0,
+          is_ceiling = a_t === l_t;
 
       let levygrid = canvas.querySelector(".levyt");
 
