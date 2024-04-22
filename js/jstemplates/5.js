@@ -747,7 +747,7 @@ function split__half_panels() {
     levys = canvas.querySelectorAll(".levy");
 
 
-    levys.forEach(l => {
+    /*levys.forEach(l => {
       lcord = l.getAttribute("title");
       l_l = parseFloat(lcord.split(",")[3]);
       l_r = parseFloat(lcord.split(",")[3]) + parseFloat(lcord.split(",")[0]);
@@ -789,6 +789,7 @@ function split__half_panels() {
         levygrid.append(luo__levy(c_levy_width,c_levy_height, "OIKYLÄ", col_, c_levy_bottom, c_levy_left));
 
         l.remove();
+        return;
         
 
       }
@@ -832,10 +833,9 @@ function split__half_panels() {
 
       }
 
-
       // 2PCS SPLT IF LEVY IS INSIDE AUKKKO LEFT SIDE AND BOTTOM SIDE OF AUKKO IS 0    
       if (a_b <= saumaset_hm && a_b == l_b+(saumaset_hm/2) && a_t <= l_t && l_r <= a_r 
-      || a_b == 0 && a_b+(saumaset_hm/2) == l_b && a_t <= l_t && l_r <= a_r) {
+      || a_b == 0 && a_b+(saumaset_hm/2) == l_b && a_t <= l_t && a_t >= l_b && a_l >= l_l && a_l <= l_r) {
         console.log("SPLT IF LEVY IS INSIDE AUKKKO LEFT SIDE AND BOTTOM SIDE OF AUKKO IS 0 ");
         console.log(l);
         console.log(a);
@@ -864,12 +864,14 @@ function split__half_panels() {
           levygrid.append(luo__levy(b_levy_width,b_levy_height, "YLVAS", col_, a_t, b_levy_left));
 
           l.remove();
+          return;
           
 
       }
 
       // 2PCS SPLT IF LEVY IS INSIDE AUKKKO RIGHT SIDE AND BOTTOM SIDE OF AUKKO IS 0    
-      if (a_b <= saumaset_hm && a_b == l_b+(saumaset_hm/2) && a_t <= l_t+50 && l_l <= a_r+50 && l_l <= a_l || a_b == 0 && a_b+(saumaset_hm/2) == l_b && a_t <= l_t && l_l <= a_r && l_r >= a_r) {
+      if (a_b <= saumaset_hm && a_b == l_b+(saumaset_hm/2) && a_t <= l_t+50 && l_l <= a_r+50 && l_l <= a_l
+      || a_b == 0 && a_b+(saumaset_hm/2) == l_b && a_t <= l_t && l_l <= a_r && l_r >= a_r) {
         console.log("SPLT IF LEVY IS INSIDE AUKKKO RIGHT SIDE AND BOTTOM SIDE OF AUKKO IS 0   ");
         console.log(l);
         console.log(a);
@@ -900,9 +902,82 @@ function split__half_panels() {
         
 
     }
+    });*/
 
-    
-      
+    levys.forEach(l => {
+      lcord = l.getAttribute("title");
+      l_l = parseFloat(lcord.split(",")[3]);
+      l_r = parseFloat(lcord.split(",")[3]) + parseFloat(lcord.split(",")[0]);
+      l_b = parseFloat(lcord.split(",")[2]);
+      l_t = parseFloat(lcord.split(",")[1]) + parseFloat(lcord.split(",")[2]);
+
+      let l_is_inside = a_l >= l_l && a_l <= l_r,
+          t_is_inside = a_t <= l_t && a_t >= l_b,
+          r_is_inside = a_r >= l_l && a_r <= l_r,
+          b_is_inside = a_b + saumaset_hm / 2 >= l_b && a_b <= l_t;
+
+      let levygrid = canvas.querySelector(".levyt");
+
+      let levy_t_height = l_t - a_t;
+      let levy_t_width = l_r - l_l;
+      let levy_t_bottom = a_t;
+      let levy_t_left = l_l;
+
+      let levy_l_height = Math.min(a_t - a_b, l_t - l_b, a_t - l_b);
+      let levy_l_width = a_l - l_l;
+      let levy_l_bottom = Math.max(a_b, l_b);
+      let levy_l_left = l_l;
+
+      let levy_r_height = Math.min(a_t - a_b, l_t - l_b, a_t - l_b);
+      let levy_r_width = l_r - a_r;
+      let levy_r_bottom = Math.max(a_b, l_b);
+      let levy_r_left = a_r;
+
+      let levy_b_height = a_b - l_b;
+      let levy_b_width = l_r - l_l;
+      let levy_b_bottom = l_b;
+      let levy_b_left = l_l;
+
+      let to_add = {
+        top: false,
+        left: false,
+        bottom: false,
+        right: false
+      }
+      if (l_is_inside && t_is_inside) {
+        to_add.top = true;
+        to_add.left = true;
+      }
+      if (l_is_inside && b_is_inside) {
+        to_add.bottom = true;
+        to_add.left = true;
+      }
+      if (r_is_inside && t_is_inside) {
+        to_add.top = true;
+        to_add.right = true;
+      }
+      if (r_is_inside && b_is_inside) {
+        to_add.bottom = true;
+        to_add.right = true;
+      }
+
+      if (to_add.top || to_add.bottom || to_add.right || to_add.left) {
+        dex = "___";
+        col_ += 1;
+        l.remove();
+      }
+      if (to_add.top && levy_t_height > 0) {
+        levygrid.append(luo__levy(levy_t_width, levy_t_height, "OIK", col_, levy_t_bottom, levy_t_left));
+      }
+      if (to_add.bottom && levy_b_height > 0) {
+        levygrid.append(luo__levy(levy_b_width, levy_b_height, "OIKYLÄ", col_, levy_b_bottom, levy_b_left));
+      }
+      if (to_add.right && levy_r_width > 0) {
+        levygrid.append(luo__levy(levy_r_width, levy_r_height, "OIKKESK", col_, levy_r_bottom, levy_r_left));
+      }
+      if (to_add.left && levy_l_width > 0) {
+        levygrid.append(luo__levy(levy_l_width, levy_l_height, "OIKKESK", col_, levy_l_bottom, levy_l_left));
+      }
     });
   });
 
