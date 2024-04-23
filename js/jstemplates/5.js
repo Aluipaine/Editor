@@ -1097,6 +1097,12 @@ function split__half_panels() {
         if (l_w <= 50) {
           if (Math.abs(a_l2 - a_r1) <= 50 || Math.abs(a_r2 - a_l1) <= 50) {
             l.remove();
+            if (l_t > a_t1) {
+              dex = "___";
+              col_ += 1;
+              let l_h = l_t - a_t1;
+              levygrid.append(luo__levy(l_w, l_h, "OIKKESK", col_, a_t1, l_l));
+            }
           }
         }
       })
