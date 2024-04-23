@@ -735,10 +735,13 @@ function aukkojenallapoisto() {
 
   setTimeout(() => {   
     split__half_panels();
-  }, 200);
+  }, 500);
 }
 
 function split__half_panels() {
+
+  let levygrid = canvas.querySelector(".levyt");
+
   aukko.forEach(a => {
     a_l = parseFloat(a.querySelector(".aukko_lcord").innerHTML);
     a_r = parseFloat(a.querySelector(".aukko_rcord").innerHTML);
@@ -924,8 +927,6 @@ function split__half_panels() {
           b_is_equal = a_b + saumaset_vm / 2 === l_b,
           b_is_lower = a_b + saumaset_vm / 2 < l_b;
 
-      let levygrid = canvas.querySelector(".levyt");
-
       let levy_t_height = l_t - a_t,
           levy_t_width = l_r - l_l,
           levy_t_bottom = a_t,
@@ -980,7 +981,7 @@ function split__half_panels() {
       if (l_is_lower && r_is_grater && b_is_inside) {
         to_add.bottom = true;
       }
-      if (l_is_equal && r_is_equal) {
+      if (l_is_equal && r_is_equal && (t_is_inside || b_is_inside)) {
         to_add.top = true;
         to_add.bottom = true;
       }
@@ -1007,7 +1008,7 @@ function split__half_panels() {
   });
 
   // DELETE IF LEVY (PANEL) IS UNDER TWO AUKKO ELEMENTS
-  for (let a = 0; a < aukko.length; a++) {
+  /*for (let a = 0; a < aukko.length; a++) {
     if(a < aukko.length-1) {
       a_l1 = parseFloat(aukko[a].querySelector(".aukko_lcord").innerHTML);
       a_l2 = parseFloat(aukko[a+1].querySelector(".aukko_lcord").innerHTML);
@@ -1073,6 +1074,32 @@ function split__half_panels() {
         }
         
       });
+    }
+  }*/
+
+  for (let index_1 = 0; index_1 < aukko.length; index_1++) {
+    let a_l1 = parseFloat(aukko[index_1].querySelector(".aukko_lcord").innerHTML),
+        a_r1 = parseFloat(aukko[index_1].querySelector(".aukko_rcord").innerHTML),
+        a_b1 = parseFloat(aukko[index_1].querySelector(".aukko_bcord").innerHTML),
+        a_t1 = parseFloat(aukko[index_1].querySelector(".aukko_tcord").innerHTML);
+    for (let index_2 = index_1 + 1; index_2 < aukko.length; index_2++) {
+      let a_l2 = parseFloat(aukko[index_2].querySelector(".aukko_lcord").innerHTML),
+          a_r2 = parseFloat(aukko[index_2].querySelector(".aukko_rcord").innerHTML),
+          a_b2 = parseFloat(aukko[index_2].querySelector(".aukko_bcord").innerHTML),
+          a_t2 = parseFloat(aukko[index_2].querySelector(".aukko_tcord").innerHTML);
+      canvas.querySelectorAll(".levy").forEach(l => {
+        let lcord = l.getAttribute("title").split`,`,
+            l_l = parseFloat(lcord[3]),
+            l_r = parseFloat(lcord[3]) + parseFloat(lcord[0]),
+            l_b = parseFloat(lcord[2]),
+            l_t = parseFloat(lcord[1]) + parseFloat(lcord[2]),
+            l_w = l_r - l_l;
+        if (l_w <= 50) {
+          if (Math.abs(a_l2 - a_r1) <= 50 || Math.abs(a_r2 - a_l1) <= 50) {
+            l.remove();
+          }
+        }
+      })
     }
   }
 }
