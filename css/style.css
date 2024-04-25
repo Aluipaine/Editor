@@ -3416,12 +3416,19 @@ tr.bottom-border {
   
 }
 .hole_setting,
-.levy_type {
+.levy_type,
+.levy_preset {
   padding: 10px 15px;
   border: 1px solid black;
   border-radius: 5px;
   margin: 0 5px;
   cursor: pointer;
+}
+.levy_presets {
+  display: flex;
+  position: static;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .hole_setting:first-child {

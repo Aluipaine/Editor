@@ -782,13 +782,13 @@ function rangat__setcord() {
     x.classList = ["ranka_selitykset"];
 
     x.innerHTML = `
-      <div>PO=<b style="color:${po_c};">Pääte Oikea</b></div>
-      <div>PV=<b style="color:${pv_c};">Pääte Vasen</b></div>
-      <div>AR=<b style="color:${ar_c};">Alaranka</b></div>
-      <div>YR=<b style="color:${yr_c};">Yläranka</b></div>
-      <div>SR=<b style="color:${sr};">Saumaranka</b></div>
-      <div>L2A V=<b style="color:${vr_yc};">L2A Väliranka</b></div>
-      <div>L2B V=<b style="color:${vr_xc};">L2B Väliranka</b></div>
+      <div>O=<b style="color:${po_c};">Oikea Pääte</b></div>
+      <div>V=<b style="color:${pv_c};">Vasen Pääte</b></div>
+      <div>A=<b style="color:${ar_c};">Alaranka</b></div>
+      <div>Y=<b style="color:${yr_c};">Yläranka</b></div>
+      <div>S=<b style="color:${sr};">Saumaranka</b></div>
+      <div>L2A K=<b style="color:${vr_yc};">L2A Väliranka</b></div>
+      <div>L2B K=<b style="color:${vr_xc};">L2B Väliranka</b></div>
     `;
 
     document.querySelector(".valiranka_module").appendChild(x);

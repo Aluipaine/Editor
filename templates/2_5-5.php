@@ -27,95 +27,95 @@
   <div class="modal-background kin_as">
       <div class="modal">
          <div class="modal_close_btn" onclick="open_ladonta_settings(false)"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.87367L17.9857 0.0703049L10 7.21983L2.01429 0.0703049L0 1.87367L7.98572 9.0232L0 16.1727L2.01429 17.9761L10 10.8266L17.9857 17.9761L20 16.1727L12.0143 9.0232L20 1.87367Z" fill="#444444"></path></svg></div>
+          <div class="row">
+              <div class="col-12" style="position: relative;">
+                  <h1>Levyn Kiinnitykset <br>
+              </div>
+          </div>
          <div class="row">
-            <div class="col-6" style="position: relative;">
-              <h1>Levyn Kiinnitykset <br>
-               <span id="levy_koko"></span></h1>
-               <div class="visible levy_vis" style="">
-                   <div class="horizontalinputs horizontalinputs-left">
-                      <!-- <div style="" class="tyosto_measure"><label for="" class="k_vrmod">VR MOD</label><input type="text" name="_levymod" value="37.5" class="lineinput drawarea__mm levy_input" id="k_vrmod" onchange="change__levykiinnike();aloita_tyosto_kiinnikkeet();"></div> -->
-                      <!-- <div style="margin-top: 50px;" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_vrlevy" onchange="change__levykiinnike();"><label for="">VR LEVY</label></div> -->
-                   </div>
+            <div class="col-12" style="position: relative;">
+                <!--<div class="trow">
+                    <h5>Tämän projektin levyt:</h5>
+                    <div class="levy_types">
 
-                   <div class="horizontalinputs horizontalinputs-right">
-                      <!-- <div style="" class="tyosto_measure"><label for="" class="k_ormod">OR MOD</label><input type="text" name="_levymod" value="37.5" class="lineinput drawarea__mm levy_input" id="k_ormod" onchange="change__levykiinnike();aloita_tyosto_kiinnikkeet();"></div> -->
-                      <!-- <div style="margin-top: 50px;" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_orlevy" onchange="change__levykiinnike();"><label for="">OR LEVY</label></div> -->
-                      
-                   </div>
-
-                   <div class="verticalinputs verticalinputs-up" style="left: margin-left:30px;float: right;top:-30px;">
-                      <!-- <div style="margin-top: 0%;" class="tyosto_measure"><input type="text" name="_levymod" value="37.5" class="lineinput drawarea__mm levy_input" id="k_yrmod" onchange="change__levykiinnike();aloita_tyosto_kiinnikkeet();"><label for="">YR MOD</label></div> -->
-                      <!-- <div style="" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_yrlevy" onchange="change__levykiinnike();"><label for="">YR LEVY</label></div> -->
-                   </div>
-
-                   <div class="verticalinputs verticalinputs-down" style=" margin-left:30px;float: right;op: -33px;">
-                     <!-- <div class="tyosto_measure"><input type="text" name="_levymod" value="37.5" class="lineinput drawarea__mm levy_input" id="k_armod" onchange="change__levykiinnike();aloita_tyosto_kiinnikkeet();"><label for="">AR MOD</label></div> -->
-                     <!-- <div style="" class="tyosto_measure"><input type="text" name="_levymod" value="32.5" min="20" max="80" class="lineinput drawarea__mm levy_input" id="k_arlevy" onchange="change__levykiinnike();"><label for="">AR LEVY</label></div> -->
-                   </div>
-               </div>
-               <div>
-                 <table class="myinfo" style="margin-top: 190px;">
-                   <tr>
-                     <td>Tyyppi</td>
-                     <td>Nimi</td>
-                     <td>Väri</td>
-                     <td>Väli </td>
-                   </tr>
-                   <tr>
-                     <td>Saumaranka: </td>
-                     <td></td>
-                     <td>Punainen</td>
-                     <td></td>
-                   </tr>
-                   <tr>
-                     <td>Levyn väliranka: </td>
-                     <td></td>
-                     <td>Vihreä</td>
-                     <td></td>
-                   </tr>
-                   <tr>
-                     <td>Ikkunaranka: </td>
-                     <td></td>
-                     <td>Oranssi</td>
-                     <td></td>
-                   </tr>
-                   <tr>
-                     <td>Erikoisranka: </td>
-                     <td></td>
-                     <td>Lila</td>
-                     <td></td>
-                   </tr>
-                 </table>
-               </div>
-            </div>
-            <div class="col-6" style="position: relative;">
-             <div class="trow">
-               <h5>Tämän projektin levyt:</h5>
-               <div class="levy_types">
-                 
-               </div>
-             </div>
-               
-               <h1>Levyn parametrit, paksuus: <span id="k_thickness">6</span>mm</h1>
-               <!-- <input type="hidden" value="drawscreen_section_tyostot" name="step" class="step">
-               <input type="hidden" value="" name="wall" class="wall">
-               <input type="hidden" value="" name="room" class="room">
-               <input type="hidden" value="" name="id" class="id">
-               <input type="hidden" value="" name="settings" class="settings">
-               <input type="hidden" value="" name="mittapisteet" class="mittapisteet">
-               <input type="hidden" value="" name="aukot" class="aukot">
-               <input type="hidden" value="" name="reijat" class="reijat">
-               <input type="hidden" value="" name="saumat" class="saumat">
-               <input type="hidden" value="" name="levyt" class="levyt">
-               <input type="hidden" value="" name="rangat" class="rangat">
-               <input type="hidden" value="" name="listat" class="listat">
-               <input type="hidden" value="" name="kokonaisalue" class="kokonaisalue">
-               <input type="hidden" value="" name="levytettava_alue" class="levytettava_alue">
-               <input type="hidden" value="" name="poisjaava_alue" class="poisjaava_alue">
-               <input type="hidden" value="" name="keskusmittapiste_cord" class="keskusmittapiste_cord">
-               <input type="hidden" value="" name="reklamaatiot" class="reklamaatiot"> -->
+                    </div>
+                </div>-->
                <section>
-                 
+                 <section class="levy_presets">
+                     <div class="levy_preset" data-action="set_levy_preset" data-vertical="600" data-horizontal="600">
+                         P_K600 / V_K600
+                     </div>
+                     <div class="levy_preset" data-action="set_levy_preset" data-vertical="400" data-horizontal="600">
+                         P_K400 / V_K600
+                     </div>
+                     <div class="levy_preset" data-action="set_levy_preset" data-vertical="400" data-horizontal="400">
+                         P_K400 / V_K400
+                     </div>
+                 </section>
+
+                   <section>
+
+                       <h3>Reuna asetukset:</h3>
+                       <div class="row poraukset" style="height: 200px">
+                           <div class="col-2 trow">
+                               <h4>arvo</h4>
+                               <h4>min</h4>
+                               <h4>max</h4>
+                           </div>
+                           <div class="col-8 row poraukset"  style="height: 200px">
+                               <div class="col-6 trow ">
+                                   <div class="row">
+                                       <div class="col-6"><h4>Yläreunasta</h4></div>
+                                       <div class="col-6"><h4>Alareunasta:</h4></div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col-6">
+                                           <input type="number" id="settings__levy_yr_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80">
+                                       </div>
+                                       <div class="col-6">
+                                           <input type="number" id="settings__levy_ar_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80">
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col-6">
+                                           <input type="number" id="settings__levy_yr_min" placeholder="Poraus etäisyys min" min="25" value="25">
+                                       </div>
+                                       <div class="col-6">
+                                           <input type="number" id="settings__levy_ar_min" placeholder="Poraus etäisyys min" min="25" value="25">
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col-6">
+                                           <input type="number" id="settings__levy_yr_max" placeholder="Poraus etäisyys max" min="25" value="80">
+                                       </div>
+                                       <div class="col-6">
+                                           <input type="number" id="settings__levy_ar_max" placeholder="Poraus etäisyys max" min="25" value="80">
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-6 trow">
+                                   <div class="row">
+                                       <div class="col-6"><h4>Sivusta vas:</h4></div>
+                                       <div class="col-6"><h4>Sivusta oik:</h4></div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col-6"><input type="number" id="settings__levy_vr_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80"></div>
+                                       <div class="col-6"><input type="number" id="settings__levy_or_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80"></div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col-6"><input type="number" id="settings__levy_vr_min" placeholder="Poraus etäisyys min" min="25" value="25"> </div>
+                                       <div class="col-6"><input type="number" id="settings__levy_or_min" placeholder="Poraus etäisyys min" min="25" value="25"> </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col-6"><input type="number" id="settings__levy_vr_max" placeholder="Poraus etäisyys max" min="25" value="80"> </div>
+                                       <div class="col-6"><input type="number" id="settings__levy_or_max" placeholder="Poraus etäisyys max" min="25" value="80"></div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
+
+                   </section>
                  <section class="levy_settings">
                    <!-- <h2>Levyasetukset</h2> -->
                    <div class="row">
@@ -173,89 +173,12 @@
                                <input type="number" id="v_three" onchange="aloita_tyosto_kiinnikkeet();" placeholder="Tavoiteltu levyn leveys" value="1300">
                              </div>
                            </div>
-                          </fieldset>  
+                          </fieldset>
                         </div>
-                        
-                      </div>
-                      
-                      
-                   </section>
 
-                  <!--  <section>
-                     <h3></h3>
-                     <fieldset>
-                       <div class="modal__row">
-                         <input type="text">
-                         <label for=""></label>
-                         <input type="text">
-                         <label for=""></label>
-                         <input type="text">
-                         <label for=""></label>
-                       </div>
-                     </fieldset>
-                   </section> -->
-                   <section>
-                     
-                     <h3>Reuna asetukset:</h3>
-                     <div class="row poraukset" style="height: 200px">
-                       <div class="col-2 trow">
-                         <h4>arvo</h4>
-                         <h4>min</h4>
-                         <h4>max</h4>
-                       </div>
-                       <div class="col-8 row poraukset"  style="height: 200px">
-                         <div class="col-6 trow ">
-                           <div class="row">
-                             <div class="col-6"><h4>Yläreunasta</h4></div>
-                             <div class="col-6"><h4>Alareunasta:</h4></div>
-                           </div>
-                           <div class="row"> 
-                             <div class="col-6">
-                               <input type="number" id="settings__levy_yr_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80">
-                             </div>
-                             <div class="col-6">
-                               <input type="number" id="settings__levy_ar_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80">
-                             </div>
-                           </div>
-                           <div class="row">
-                             <div class="col-6">
-                               <input type="number" id="settings__levy_yr_min" placeholder="Poraus etäisyys min" min="25" value="25">
-                             </div> 
-                             <div class="col-6">
-                               <input type="number" id="settings__levy_ar_min" placeholder="Poraus etäisyys min" min="25" value="25">
-                             </div>
-                           </div>
-                           <div class="row">
-                             <div class="col-6">
-                               <input type="number" id="settings__levy_yr_max" placeholder="Poraus etäisyys max" min="25" value="80">
-                             </div> 
-                             <div class="col-6">
-                               <input type="number" id="settings__levy_ar_max" placeholder="Poraus etäisyys max" min="25" value="80">
-                             </div>
-                           </div>
-                         </div>
-                         <div class="col-6 trow">
-                           <div class="row">
-                             <div class="col-6"><h4>Sivusta vas:</h4></div>
-                             <div class="col-6"><h4>Sivusta oik:</h4></div>
-                           </div>
-                           <div class="row">
-                             <div class="col-6"><input type="number" id="settings__levy_vr_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80"></div>
-                             <div class="col-6"><input type="number" id="settings__levy_or_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80"></div>
-                           </div>
-                           <div class="row">
-                             <div class="col-6"><input type="number" id="settings__levy_vr_min" placeholder="Poraus etäisyys min" min="25" value="25"> </div>
-                             <div class="col-6"><input type="number" id="settings__levy_or_min" placeholder="Poraus etäisyys min" min="25" value="25"> </div>
-                           </div>
-                           <div class="row">
-                             <div class="col-6"><input type="number" id="settings__levy_vr_max" placeholder="Poraus etäisyys max" min="25" value="80"> </div>
-                             <div class="col-6"><input type="number" id="settings__levy_or_max" placeholder="Poraus etäisyys max" min="25" value="80"></div>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
-                     
-                     
+                      </div>
+
+
                    </section>
 
                    <section>
