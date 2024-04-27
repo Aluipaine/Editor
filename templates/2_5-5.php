@@ -127,18 +127,18 @@
                      </div>
                    </div>
                    <section class="trow">
-                      <h4>Levyjen mitat</h4>
-                      <fieldset>
-                        <div class="modal__row"> <!-- Levyn maksimipituus -->
+                      <!--<h4>Levyjen mitat</h4>-->
+                      <fieldset style="display: none">
+                        <div class="modal__row">
                          <label for="settings__levy_levysizeh"></label>
-                        <input type="text" id="k_settings__levy_levysizeh" placeholder="Tavoiteltu levyn pituus" value="">  <!-- Levyn maksimileveys -->
+                        <input type="text" id="k_settings__levy_levysizeh" placeholder="Tavoiteltu levyn pituus" value="">
                          <label for="settings__levy_levysizew"></label>
                          <input type="text" id="k_settings__levy_levysizew" placeholder="Tavoiteltu levyn leveys" value="">
                        </div>
                       </fieldset>
                       <div class="row">
                         <div class="col-6">
-                          <h4>Pysty Kiinnikelinjat</h4>
+                          <h4 data-role="modal_kiinnikkeet_pysty">Pysty Kiinnikelinjat</h4>
                           <fieldset>
                             <div class="trow leveyssuunnan">
                              <div class="modal__row_kvali">
@@ -157,7 +157,7 @@
                           </fieldset>
                         </div>
                         <div class="col-6">
-                          <h4>Vaaka Kiinnikelinjat </h4>
+                          <h4 data-role="modal_kiinnikkeet_vaaka">Vaaka Kiinnikelinjat </h4>
                           <fieldset>
                             <div class="trow pituussuunnan">
                              <div class="modal__row_kvali">
@@ -194,7 +194,7 @@
                              <label style="display: none;" for="kiinniketys__pkiinnike_three__" onclick="tyosto_func(3)">Tasamalli pysty</label>
 
                              <input type="radio" id="kiinniketys__pkiinnike_three" name="levy_porautus_vertical" value="Tasamalli">
-                             <label for="kiinniketys__pkiinnike_three">Tasamalli pysty</label>
+                             <label for="kiinniketys__pkiinnike_three">Tasamalli vaaka</label>
                              <input style="display: none;" type="radio" id="kiinniketys__pkiinnike_four" name="levy_porautus_vertical" value="Pariton tasa">
                              <label style="display: none;" for="kiinniketys__pkiinnike_four">Pariton tasa pysty (epävakaa)</label>
                            </fieldset>
@@ -206,7 +206,7 @@
                              <input style="display: none;" type="radio" id="kiinniketys__vkiinnike_three__" name="levy_porautus_horizontal" value="Tasamalli">
                              <label style="display: none;" for="kiinniketys__vkiinnike_three__" onclick="tyosto_func(7)">Tasamalli vaaka</label>
                              <input type="radio" id="kiinniketys__vkiinnike_three" name="levy_porautus_horizontal" value="Tasamalli">
-                             <label for="kiinniketys__vkiinnike_three">Tasamalli vaaka</label>
+                             <label for="kiinniketys__vkiinnike_three">Tasamalli pysty</label>
                              <input style="display:none;" type="radio" id="kiinniketys__vkiinnike_four" name="levy_porautus_horizontal" value="Pariton tasa">
                              <label style="display:none;" for="kiinniketys__vkiinnike_four">Pariton tasa vaaka (epävakaa)</label>
                            </fieldset>

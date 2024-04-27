@@ -1657,7 +1657,7 @@ function kiinnikkeet__siirto() {
 
 
   }
-  levy_siirto = levytys_array.filter((element, index) => {
+  /*levy_siirto = levytys_array.filter((element, index) => {
     return levytys_array.indexOf(element) === index;
   });
   levy_siirto.sort(function (a, b) {
@@ -1689,7 +1689,9 @@ function kiinnikkeet__siirto() {
   }
   else if (document.querySelector(".levy_type.selected")) {
     document.querySelector(".levy_type.selected").click();
-  }
+  }*/
+  let coords = levytys[0].title.split`,`;
+  change__klevy(`${coords[0]}x${coords[1]}`);
 
   setTimeout(function () {
     reorganise__newtyosto();
@@ -1721,7 +1723,7 @@ function only_levy_transfer() {
 
 
   }
-  levy_siirto = levytys_array.filter((element, index) => {
+  /*levy_siirto = levytys_array.filter((element, index) => {
     return levytys_array.indexOf(element) === index;
   });
   levy_siirto.sort(function (a, b) {
@@ -1747,7 +1749,7 @@ function only_levy_transfer() {
       $cols.removeClass(addclass);
       $(this).addClass(addclass);
     });
-  }
+  }*/
 
 }
 
@@ -4298,6 +4300,19 @@ function apply__deletion_rules() {
   // }, 2500);
 }
 
+$('[data-asmodal_mode="kin_as"]').on("click", () => {
+  let modal_ranka = [...document.querySelectorAll(".rankalista_as .s_rangat input:checked")];
+  let vertical = modal_ranka.filter(v => v.id.includes("one"));
+  let horizontal = modal_ranka.filter(v => v.id.includes("four"));
+  if (vertical.length > horizontal.length) {
+    $("[data-role=modal_kiinnikkeet_pysty]").text("Rangan Reijitys");
+    $("[data-role=modal_kiinnikkeet_vaaka]").text("Rangan Tiheys");
+  }
+  else {
+    $("[data-role=modal_kiinnikkeet_pysty]").text("Rangan Tiheys");
+    $("[data-role=modal_kiinnikkeet_vaaka]").text("Rangan Reijitys");
+  }
+});
 
 $("[data-action=set_levy_preset]").on("click", function () {
   let vertical = this.dataset.vertical,

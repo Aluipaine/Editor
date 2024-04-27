@@ -3774,3 +3774,1008 @@ function saumoitus__additionalcord() {
         canvas.querySelector(".sauma__horizontal .horizontal_module").innerHTML = saumaset_hm/2;
     }
 }
+
+
+
+
+
+
+
+
+
+/**
+ * Saves the range of materials in the admin panel.
+ * @param {string} key - The key for the materials being saved.
+ * @returns None
+ */
+function admin__saverangat(key) {
+    material_array="";
+    materialtabletr = document.querySelectorAll(".ranka__tbody_duplicate tr:not(.headingrow)");
+    for (let a = 0; a < materialtabletr.length; a++) {
+        materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
+        material_array += "[";
+        for (let b = 0; b < materialtabletd.length; b++) {
+            material_array += materialtabletd[b].value + ",";
+        }
+        if(a == (materialtabletr.length -1)) {
+            material_array+= "]";
+        }
+        else {
+            material_array+= "]~~";
+        }
+    }
+    id_ = preset_id;
+    formData = {
+        prid: id_,
+        mkey: 's_rangat',
+        material_array: material_array,
+    };
+    console.log(formData);
+    $.ajax({
+        type: "POST",
+        url: "vendor/admin__settingsedit.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+            //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (data) {
+        console.log("Piu piu pau pau");
+        console.log(data);
+    });
+}
+
+/**
+ * Saves the range data for a specific key in the admin settings.
+ * @param {string} key - The key for which the range data is being saved.
+ * @returns None
+ */
+function admin__saverangat_one(key) {
+    material_array="";
+    materialtabletr = document.querySelectorAll(".ranka__tbody_one_duplicate tr:not(.headingrow)");
+    for (let a = 0; a < materialtabletr.length; a++) {
+        materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
+        material_array += "[";
+        for (let b = 0; b < materialtabletd.length; b++) {
+            material_array += materialtabletd[b].value + ",";
+        }
+        if(a == (materialtabletr.length -1)) {
+            material_array+= "]";
+        }
+        else {
+            material_array+= "]~~";
+        }
+    }
+    id_ = preset_id;
+    formData = {
+        prid: id_,
+        mkey: 's_rangat_1',
+        material_array: material_array,
+    };
+    console.log(formData);
+    $.ajax({
+        type: "POST",
+        url: "vendor/admin__settingsedit.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+            //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (data) {
+        console.log("Piu piu pau pau");
+        console.log(data);
+    });
+}
+
+/**
+ * Saves the range of materials in a table to the database using an AJAX POST request.
+ * @param {string} key - The key used to identify the materials being saved.
+ * @returns None
+ */
+function admin__saverangat_two(key) {
+    material_array="";
+    materialtabletr = document.querySelectorAll(".ranka__tbody_two_duplicate tr:not(.headingrow)");
+    for (let a = 0; a < materialtabletr.length; a++) {
+        materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
+        material_array += "[";
+        for (let b = 0; b < materialtabletd.length; b++) {
+            material_array += materialtabletd[b].value + ",";
+        }
+        if(a == (materialtabletr.length -1)) {
+            material_array+= "]";
+        }
+        else {
+            material_array+= "]~~";
+        }
+    }
+    id_ = preset_id;
+    formData = {
+        prid: id_,
+        mkey: 's_rangat_2',
+        material_array: material_array,
+    };
+    console.log(formData);
+    $.ajax({
+        type: "POST",
+        url: "vendor/admin__settingsedit.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+            //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (data) {
+        console.log("Piu piu pau pau");
+        console.log(data);
+    });
+}
+
+/**
+ * Saves the range of materials in the admin panel by sending a POST request to the server.
+ * @param {string} key - The key used to identify the materials being saved.
+ * @returns None
+ */
+function admin__saverangat_three(key) {
+    material_array="";
+    materialtabletr = document.querySelectorAll(".ranka__tbody_three_duplicate tr:not(.headingrow)");
+    for (let a = 0; a < materialtabletr.length; a++) {
+        materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
+        material_array += "[";
+        for (let b = 0; b < materialtabletd.length; b++) {
+            material_array += materialtabletd[b].value + ",";
+        }
+        if(a == (materialtabletr.length -1)) {
+            material_array+= "]";
+        }
+        else {
+            material_array+= "]~~";
+        }
+    }
+    id_ = preset_id;
+    formData = {
+        prid: id_,
+        mkey: 's_rangat_3',
+        material_array: material_array,
+    };
+    console.log(formData);
+    $.ajax({
+        type: "POST",
+        url: "vendor/admin__settingsedit.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+            //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (data) {
+        console.log("Piu piu pau pau");
+        console.log(data);
+    });
+}
+
+/**
+ * Saves the material data for a specific key in the admin settings.
+ * @param {string} key - The key for which the material data is being saved.
+ * @returns None
+ */
+function admin__saverangat_four(key) {
+    material_array="";
+    materialtabletr = document.querySelectorAll(".ranka__tbody_four_duplicate tr:not(.headingrow)");
+    for (let a = 0; a < materialtabletr.length; a++) {
+        materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
+        material_array += "[";
+        for (let b = 0; b < materialtabletd.length; b++) {
+            material_array += materialtabletd[b].value + ",";
+        }
+        if(a == (materialtabletr.length -1)) {
+            material_array+= "]";
+        }
+        else {
+            material_array+= "]~~";
+        }
+    }
+    id_ = preset_id;
+    formData = {
+        prid: id_,
+        mkey: 's_rangat_4',
+        material_array: material_array,
+    };
+    console.log(formData);
+    $.ajax({
+        type: "POST",
+        url: "vendor/admin__settingsedit.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+            //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (data) {
+        console.log("Piu piu pau pau");
+        console.log(data);
+    });
+}
+
+/**
+ * Saves the data for the given key by sending an AJAX POST request to the server.
+ * @param {string} key - The key to save the data under.
+ * @returns None
+ */
+function admin__saverangat_five(key) {
+    material_array="";
+    materialtabletr = document.querySelectorAll(".ranka__tbody_five_duplicate tr:not(.headingrow)");
+    for (let a = 0; a < materialtabletr.length; a++) {
+        materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
+        material_array += "[";
+        for (let b = 0; b < materialtabletd.length; b++) {
+            material_array += materialtabletd[b].value + ",";
+        }
+        if(a == (materialtabletr.length -1)) {
+            material_array+= "]";
+        }
+        else {
+            material_array+= "]~~";
+        }
+    }
+    id_ = preset_id;
+    formData = {
+        prid: id_,
+        mkey: 's_rangat_5',
+        material_array: material_array,
+    };
+    console.log(formData);
+    $.ajax({
+        type: "POST",
+        url: "vendor/admin__settingsedit.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+            //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (data) {
+        console.log("Piu piu pau pau");
+        console.log(data);
+    });
+}
+
+/**
+ * Saves the material data for a specific key in the admin settings.
+ * @param {string} key - The key for which the material data is being saved.
+ * @returns None
+ */
+function admin__saverangat_six(key) {
+    material_array="";
+    materialtabletr = document.querySelectorAll(".ranka__tbody_six_duplicate tr:not(.headingrow)");
+    for (let a = 0; a < materialtabletr.length; a++) {
+        materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
+        material_array += "[";
+        for (let b = 0; b < materialtabletd.length; b++) {
+            material_array += materialtabletd[b].value + ",";
+        }
+        if(a == (materialtabletr.length -1)) {
+            material_array+= "]";
+        }
+        else {
+            material_array+= "]~~";
+        }
+    }
+    id_ = preset_id;
+    formData = {
+        prid: id_,
+        mkey: 's_rangat_6',
+        material_array: material_array,
+    };
+    console.log(formData);
+    $.ajax({
+        type: "POST",
+        url: "vendor/admin__settingsedit.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+            //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (data) {
+        console.log("Piu piu pau pau");
+        console.log(data);
+    });
+}
+
+/**
+ * Saves the material data for a specific key in the admin settings.
+ * @param {string} key - The key for which the material data is being saved.
+ * @returns None
+ */
+function admin__saverangat_seven(key) {
+    material_array="";
+    materialtabletr = document.querySelectorAll(".ranka__tbody_seven_duplicate tr:not(.headingrow)");
+    for (let a = 0; a < materialtabletr.length; a++) {
+        materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
+        material_array += "[";
+        for (let b = 0; b < materialtabletd.length; b++) {
+            material_array += materialtabletd[b].value + ",";
+        }
+        if(a == (materialtabletr.length -1)) {
+            material_array+= "]";
+        }
+        else {
+            material_array+= "]~~";
+        }
+    }
+    id_ = preset_id;
+    formData = {
+        prid: id_,
+        mkey: 's_rangat_7',
+        material_array: material_array,
+    };
+    console.log(formData);
+    $.ajax({
+        type: "POST",
+        url: "vendor/admin__settingsedit.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+            //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (data) {
+        console.log("Piu piu pau pau");
+        console.log(data);
+    });
+}
+
+/**
+ * Saves the material data for a specific key in the admin settings.
+ * @param {string} key - The key for which the material data is being saved.
+ * @returns None
+ */
+function admin__saverangat_eight(key) {
+    material_array="";
+    materialtabletr = document.querySelectorAll(".ranka__tbody_eight_duplicate tr:not(.headingrow)");
+    for (let a = 0; a < materialtabletr.length; a++) {
+        materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
+        material_array += "[";
+        for (let b = 0; b < materialtabletd.length; b++) {
+            material_array += materialtabletd[b].value + ",";
+        }
+        if(a == (materialtabletr.length -1)) {
+            material_array+= "]";
+        }
+        else {
+            material_array+= "]~~";
+        }
+    }
+    id_ = preset_id;
+    formData = {
+        prid: id_,
+        mkey: 's_rangat_8',
+        material_array: material_array,
+    };
+    console.log(formData);
+    $.ajax({
+        type: "POST",
+        url: "vendor/admin__settingsedit.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+            //alert('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (data) {
+        console.log("Piu piu pau pau");
+        console.log(data);
+    });
+}
+function welcome_marko_rangat_duplicate(key) {
+    if(key == 's_rangat') {
+        t = document.querySelector("#welcome_marko_rangat_duplicate .ranka__tbody_duplicate");
+        v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+                checked = 'checked';
+            }
+
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+                if(v[13] == rankatype_array[i]) {
+                    r_options += "<option selected>"+rankatype_array[i]+"</option>";
+                }
+                else {
+                    r_options += "<option>"+rankatype_array[i]+"</option>";
+
+                }
+            }
+            row.innerHTML += `
+            <td>
+              <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat();" id="ranka_`+count+`" ${checked}>
+              <label for="ranka_`+count+`"></label>
+            </td>`;
+            row.innerHTML += `
+            <td>
+                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[2]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[3]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[4]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[12]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[13]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[14]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[15]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[16]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+            <td>
+                <input type="text" value="${v[17]}" class="lineinput" oninput="admin__saverangat();">
+            </td>
+
+            
+            `;
+            t.appendChild(row);
+        });
+    }
+    if(key == 's_rangat_1') {
+        t = document.querySelector("#welcome_marko_rangat_duplicate .ranka__tbody_one_duplicate");
+        v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+                checked = 'checked';
+            }
+
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+                if(v[13] == rankatype_array[i]) {
+                    r_options += "<option selected>"+rankatype_array[i]+"</option>";
+                }
+                else {
+                    r_options += "<option>"+rankatype_array[i]+"</option>";
+
+                }
+            }
+
+            row.innerHTML += `
+            <td>
+              <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat_one();" id="ranka_one_`+count+`" ${checked}>
+              <label for="ranka_one_`+count+`"></label>
+            </td>`;
+            row.innerHTML += `
+            <td>
+                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+            <td>
+                <input type="text" value="${v[2]}" class="lineinput" oninput="admin__saverangat_one();" list="ranka_list"  onchange="give__rankaspecs(this);">
+            </td>
+            <td>
+                <input type="text" value="${v[3]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+            <td>
+                <input type="text" value="${v[4]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat_one();">
+            </td>
+
+            `;
+            t.appendChild(row);
+
+
+        });
+    }
+    if(key == 's_rangat_2') {
+        t = document.querySelector("#welcome_marko_rangat_duplicate .ranka__tbody_two_duplicate");
+        v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+                checked = 'checked';
+            }
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+                if(v[13] == rankatype_array[i]) {
+                    r_options += "<option selected>"+rankatype_array[i]+"</option>";
+                }
+                else {
+                    r_options += "<option>"+rankatype_array[i]+"</option>";
+
+                }
+            }
+
+            row.innerHTML += `
+            <td>
+              <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat_two();" id="ranka_two_`+count+`" ${checked}>
+              <label for="ranka_two_`+count+`"></label>
+            </td>`;
+            row.innerHTML += `
+            <td>
+                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            <td>
+                <input type="text" value="${v[2]}" class="lineinput" oninput="admin__saverangat_two();" list="ranka_list"  onchange="give__rankaspecs(this);">
+            </td>
+            <td>
+                <input type="text" value="${v[3]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            <td>
+                <input type="text" value="${v[4]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat_two();">
+            </td>
+            `;
+            t.appendChild(row);
+
+
+        });
+    }
+    if(key == 's_rangat_3') {
+        t = document.querySelector("#welcome_marko_rangat_duplicate .ranka__tbody_three_duplicate");
+        v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+                checked = 'checked';
+            }
+
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+                if(v[13] == rankatype_array[i]) {
+                    r_options += "<option selected>"+rankatype_array[i]+"</option>";
+                }
+                else {
+                    r_options += "<option>"+rankatype_array[i]+"</option>";
+
+                }
+            }
+            row.innerHTML += `
+            <td>
+              <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat_three();" id="ranka_three_`+count+`" ${checked}>
+              <label for="ranka_three_`+count+`"></label>
+            </td>`;
+            row.innerHTML += `
+            <td>
+                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            <td>
+                <input type="text" value="${v[2]}" class="lineinput" oninput="admin__saverangat_three();" list="ranka_list"  onchange="give__rankaspecs(this);">
+            </td>
+            <td>
+                <input type="text" value="${v[3]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            <td>
+                <input type="text" value="${v[4]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat_three();">
+            </td>
+            `;
+            t.appendChild(row);
+
+
+        });
+    }
+    if(key == 's_rangat_4') {
+        t = document.querySelector("#welcome_marko_rangat_duplicate .ranka__tbody_four_duplicate");
+        v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+                checked = 'checked';
+            }
+
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+                if(v[13] == rankatype_array[i]) {
+                    r_options += "<option selected>"+rankatype_array[i]+"</option>";
+                }
+                else {
+                    r_options += "<option>"+rankatype_array[i]+"</option>";
+
+                }
+            }
+            row.innerHTML += `
+            <td>
+              <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat_four();" id="ranka_four_`+count+`" ${checked}>
+              <label for="ranka_four_`+count+`"></label>
+            </td>`;
+            row.innerHTML += `
+            <td>
+                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            <td>
+                <input type="text" value="${v[2]}" class="lineinput" oninput="admin__saverangat_four();" list="ranka_list"  onchange="give__rankaspecs(this);">
+            </td>
+            <td>
+                <input type="text" value="${v[3]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            <td>
+                <input type="text" value="${v[4]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat_four();">
+            </td>
+            `;
+            t.appendChild(row);
+
+
+        });
+    }
+    if(key == 's_rangat_5') {
+        t = document.querySelector("#welcome_marko_rangat_duplicate .ranka__tbody_five_duplicate");
+        v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+                checked = 'checked';
+            }
+
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+                if(v[13] == rankatype_array[i]) {
+                    r_options += "<option selected>"+rankatype_array[i]+"</option>";
+                }
+                else {
+                    r_options += "<option>"+rankatype_array[i]+"</option>";
+
+                }
+            }
+            row.innerHTML += `
+            <td>
+              <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat_five();" id="ranka_five_`+count+`" ${checked}>
+              <label for="ranka_five_`+count+`"></label>
+            </td>`;
+            row.innerHTML += `
+            <td>
+                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            <td>
+                <input type="text" value="${v[2]}" class="lineinput" oninput="admin__saverangat_five();" list="ranka_list"  onchange="give__rankaspecs(this);">
+            </td>
+            <td>
+                <input type="text" value="${v[3]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            <td>
+                <input type="text" value="${v[4]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat_five();">
+            </td>
+            
+            `;
+            t.appendChild(row);
+
+
+        });
+    }
+    if(key == 's_rangat_6') {
+        t = document.querySelector("#welcome_marko_rangat_duplicate .ranka__tbody_six_duplicate");
+        v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+                checked = 'checked';
+            }
+
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+                if(v[13] == rankatype_array[i]) {
+                    r_options += "<option selected>"+rankatype_array[i]+"</option>";
+                }
+                else {
+                    r_options += "<option>"+rankatype_array[i]+"</option>";
+
+                }
+            }
+            row.innerHTML += `
+            <td>
+              <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat_six();" id="ranka_six_`+count+`" ${checked}>
+              <label for="ranka_six_`+count+`"></label>
+            </td>`;
+            row.innerHTML += `
+            <td>
+                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            <td>
+                <input type="text" value="${v[2]}" class="lineinput" oninput="admin__saverangat_six();" list="ranka_list"  onchange="give__rankaspecs(this);">
+            </td>
+            <td>
+                <input type="text" value="${v[3]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            <td>
+                <input type="text" value="${v[4]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat_six();">
+            </td>
+            `;
+            t.appendChild(row);
+
+
+        });
+    }
+    if(key == 's_rangat_7') {
+        t = document.querySelector("#welcome_marko_rangat_duplicate .ranka__tbody_seven_duplicate");
+        v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+                checked = 'checked';
+            }
+
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+                if(v[13] == rankatype_array[i]) {
+                    r_options += "<option selected>"+rankatype_array[i]+"</option>";
+                }
+                else {
+                    r_options += "<option>"+rankatype_array[i]+"</option>";
+
+                }
+            }
+
+            row.innerHTML += `
+            <td>
+              <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat_seven();" id="ranka_seven_`+count+`" ${checked}>
+              <label for="ranka_seven_`+count+`"></label>
+            </td>`;
+            row.innerHTML += `
+            <td>
+                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            <td>
+                <input type="text" value="${v[2]}" class="lineinput" oninput="admin__saverangat_seven();" list="ranka_list"  onchange="give__rankaspecs(this);">
+            </td>
+            <td>
+                <input type="text" value="${v[3]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            <td>
+                <input type="text" value="${v[4]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat_seven();">
+            </td>
+            `;
+            t.appendChild(row);
+
+
+        });
+    }
+    if(key == 's_rangat_8') {
+        t = document.querySelector("#welcome_marko_rangat_duplicate .ranka__tbody_eight_duplicate");
+        v_.split("~~").forEach((v) => {
+            v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
+
+            count = t.querySelectorAll("tr").length;
+            row = document.createElement("tr");
+            checked = '';
+            if(v[0] == 'on') {
+                checked = 'checked';
+            }
+
+            r_options = "";
+            for (let i = 0; i < rankatype_array.length; i++) {
+                if(v[13] == rankatype_array[i]) {
+                    r_options += "<option selected>"+rankatype_array[i]+"</option>";
+                }
+                else {
+                    r_options += "<option>"+rankatype_array[i]+"</option>";
+
+                }
+            }
+            row.innerHTML += `
+            <td>
+              <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat_eight();" id="ranka_eight_`+count+`" ${checked}>
+              <label for="ranka_eight_`+count+`"></label>
+            </td>`;
+            row.innerHTML += `
+            <td>
+                <input type="text" value="${v[1]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            <td>
+                <input type="text" value="${v[2]}" class="lineinput" oninput="admin__saverangat_eight();" list="ranka_list"  onchange="give__rankaspecs(this);">
+            </td>
+            <td>
+                <input type="text" value="${v[3]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            <td>
+                <input type="text" value="${v[4]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            <td>
+                <input type="text" value="${v[5]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            <td>
+                <input type="text" value="${v[6]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            <td>
+                <input type="text" value="${v[7]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            <td>
+                <input type="text" value="${v[8]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            <td>
+                <input type="text" value="${v[9]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            <td>
+                <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            <td>
+                <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat_eight();">
+            </td>
+            `;
+            t.appendChild(row);
+
+
+        });
+    }
+}

@@ -4889,6 +4889,8 @@ function initializesettings__mittaus() {
           });
         }
 
+        welcome_marko_rangat_duplicate(key);
+
         if(key == 's_listatpysty') {
           t = document.querySelector(".listapysty__tbody");
           v_.split("~~").forEach((v) => {

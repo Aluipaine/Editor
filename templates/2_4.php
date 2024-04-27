@@ -178,7 +178,209 @@
           </section>
 
 
-        <!-- <script>saumoitus__examplephoto();</script> -->
+         <section id="welcome_marko_rangat_duplicate" class="tabs__target_table">
+
+             <i>Kaavat: %RLEV% = Rangan Leveys</i>
+             <div>
+                 <h2>l2A</h2>
+                 <table>
+                     <tbody class="ranka__tbody_one_duplicate">
+                     <tr class="headingrow">
+                         <td>L2A Rangoitus pystyyn</td>
+                         <td>Tyyppi</td>
+                         <td>Rangan koodin alku</td>
+                         <td>Tilauskoodi </td>
+                         <td>Materiaali</td>
+                         <td>Paksuus</td>
+                         <td>Laatu</td>
+                         <td>Väri nimi </td>
+                         <td>NCS code</td>
+                         <td>Suunta </td>
+                         <td>Lisää / -poista mitasta</td>
+                         <td style="width: 150px;">Vähennä mistä</td>
+                     </tr>
+                     </tbody>
+                 </table>
+
+                 <table>
+                     <tbody class="ranka__tbody_six_duplicate">
+                     <tr class="headingrow">
+                         <td>L2A Rangoitus pystyyn</td>
+                         <td>Tyyppi</td>
+                         <td>Rangan koodin alku</td>
+                         <td>Tilauskoodi </td>
+                         <td>Materiaali</td>
+                         <td>Paksuus</td>
+                         <td>Laatu</td>
+                         <td>Väri nimi </td>
+                         <td>NCS code</td>
+                         <td>Suunta </td>
+                         <td>Lisää / -poista mitasta</td>
+                         <td style="width: 150px;">Vähennä mistä</td>
+                     </tr>
+
+
+                     </tbody>
+                 </table>
+
+                 <table>
+                     <tbody class="ranka__tbody_four_duplicate">
+                     <tr class="headingrow">
+                         <td>L2A Rangoitus vaakaan </td>
+                         <td>Tyyppi</td>
+                         <td>Rangan koodin alku</td>
+                         <td>Tilauskoodi </td>
+                         <td>Materiaali</td>
+                         <td>Paksuus</td>
+                         <td>Laatu</td>
+                         <td>Väri nimi </td>
+                         <td>NCS code</td>
+                         <td>Suunta </td>
+                         <td>Lisää / -poista mitasta</td>
+                         <td style="width: 150px;">Vähennä mistä</td>
+                     </tr>
+
+
+                     </tbody>
+                 </table>
+
+                 <table>
+                     <tbody class="ranka__tbody_eight_duplicate">
+                     <tr class="headingrow">
+                         <td>L2A Rangoitus vaakaan</td>
+                         <td>Tyyppi</td>
+                         <td>Rangan koodin alku</td>
+                         <td>Tilauskoodi </td>
+                         <td>Materiaali</td>
+                         <td>Paksuus</td>
+                         <td>Laatu</td>
+                         <td>Väri nimi </td>
+                         <td>NCS code</td>
+                         <td>Suunta </td>
+                         <td>Lisää / -poista mitasta</td>
+                         <td style="width: 150px;">Vähennä mistä</td>
+                     </tr>
+
+
+                     </tbody>
+                 </table>
+             </div>
+
+             <div>
+                 <h2>l2B</h2>
+                 <table>
+                     <tbody class="ranka__tbody_two_duplicate">
+                     <tr class="headingrow">
+                         <td>L2B Rangoitus pystyyn</td>
+                         <td>Tyyppi</td>
+                         <td>Rangan koodin alku</td>
+                         <td>Tilauskoodi </td>
+                         <td>Materiaali</td>
+                         <td>Paksuus</td>
+                         <td>Laatu</td>
+                         <td>Väri nimi </td>
+                         <td>NCS code</td>
+                         <td>Suunta </td>
+                         <td>Lisää / -poista mitasta</td>
+                         <td style="width: 150px;">Vähennä mistä</td>
+                     </tr>
+
+
+                     </tbody>
+                 </table>
+
+                 <table>
+                     <tbody class="ranka__tbody_three_duplicate">
+                     <tr class="headingrow">
+                         <td>L2B Rangoitus pystyyn</td>
+                         <td>Tyyppi</td>
+                         <td>Rangan koodin alku</td>
+                         <td>Tilauskoodi </td>
+                         <td>Materiaali</td>
+                         <td>Paksuus</td>
+                         <td>Laatu</td>
+                         <td>Väri nimi </td>
+                         <td>NCS code</td>
+                         <td>Suunta </td>
+                         <td>Lisää / -poista mitasta</td>
+                         <td style="width: 150px;">Vähennä mistä</td>
+                     </tr>
+
+
+                     </tbody>
+                 </table>
+
+                 <table>
+                     <tbody class="ranka__tbody_five_duplicate">
+                     <tr class="headingrow">
+                         <td>L2B Rangoitus vaakaan </td>
+                         <td>Tyyppi</td>
+                         <td>Rangan koodin alku</td>
+                         <td>Tilauskoodi </td>
+                         <td>Materiaali</td>
+                         <td>Paksuus</td>
+                         <td>Laatu</td>
+                         <td>Väri nimi </td>
+                         <td>NCS code</td>
+                         <td>Suunta </td>
+                         <td>Lisää / -poista mitasta</td>
+                         <td style="width: 150px;">Vähennä mistä</td>
+                     </tr>
+
+
+                     </tbody>
+                 </table>
+
+                 <table>
+                     <tbody class="ranka__tbody_seven_duplicate">
+                     <tr class="headingrow">
+                         <td>L2B Rangoitus vaakaan</td>
+                         <td>Tyyppi</td>
+                         <td>Rangan koodin alku</td>
+                         <td>Tilauskoodi </td>
+                         <td>Materiaali</td>
+                         <td>Paksuus</td>
+                         <td>Laatu</td>
+                         <td>Väri nimi </td>
+                         <td>NCS code</td>
+                         <td>Suunta </td>
+                         <td>Lisää / -poista mitasta</td>
+                         <td style="width: 150px;">Vähennä mistä</td>
+                     </tr>
+                     </tbody>
+                 </table>
+             </div>
+
+             <h2>
+                 Rankakirjasto
+             </h2>
+             <table>
+                 <tbody class="ranka__tbody_duplicate">
+                 <tr class="headingrow">
+                     <td>On/Off</td>
+                     <td style="width: 220px">Editorissa</td>
+                     <td>Rangan koodin alku</td>
+                     <td>Tilauskoodi</td>
+                     <td>Materiaali</td>
+                     <td>Laatu</td>
+                     <td>Väri nimi </td>
+                     <td>NCS code</td>
+                     <td>Rangan Tyyppi </td>
+                     <td>Kuuluu Sarjaan</td>
+                     <td>Leveys</td>
+                     <td>Korkeus</td>
+                     <td>Kuvalinkki</td>
+                     <td>Viivat</td>
+                     <td>Pituus 1</td>
+                     <td>Pituus 2</td>
+                     <td>Pituus 3</td>
+                     <td>Ehdotus pituudesta projektille</td>
+                 </tr>
+                 </tbody>
+             </table>
+         </section>
+
+
        <div class="modal_close_btn drawarea__controls_btn" onclick="saumoita();refresh__drawcontrols();updatearea();submitprogress('','adding','','sau');">Saumoita</div>
      </div>
    </div>
