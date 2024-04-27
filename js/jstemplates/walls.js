@@ -236,7 +236,7 @@ function siirto_muualle(mode) {
 
     room_array.forEach(room => {
       canvas = document.querySelector(".canvas_"+room);
-      rangoita();
+      rangoita(parseFloat(canvas.style.width) * 5);
     });
     await sleep(1500);
 

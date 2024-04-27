@@ -87,7 +87,7 @@ function rangat__aukot(){
  * The function handles the creation of various types of elements such as ranks, saumas, aukkos, and initializes settings for the design layout.
  * @returns None
  */
-function rangoita() {
+function rangoita(custom_w = null) {
   po_c = "#fedb00";
   pv_c = "#fedb00";
   ar_c = "#9c00fe";
@@ -99,7 +99,7 @@ function rangoita() {
 
 
   h = parseFloat(document.querySelector("#box_h").value);
-  w = parseFloat(document.querySelector("#box_w").value);
+  w = custom_w || parseFloat(document.querySelector("#box_w").value);
   tyostot__tyosto_pysty = canvas.querySelectorAll(".levy_tyostot_x > div");
   tyostot__tyosto_vaaka = canvas.querySelectorAll(".levy_tyostot_y > div");
   verticalrow_saumat = canvas.querySelectorAll(".sauma__vertical_ctrldown");
