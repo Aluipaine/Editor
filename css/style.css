@@ -5061,7 +5061,11 @@ section.excel tr > td:nth-child(10) {
     top: -100%;
 }
 
-
+.levyt .external_meta_area {
+  position: absolute;
+  bottom: calc(100% + 60px);
+  left: 20px;
+}
 
 /*.levyt {
   display: flex;
