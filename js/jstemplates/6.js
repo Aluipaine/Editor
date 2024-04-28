@@ -1678,6 +1678,7 @@ function t_last_left(levy, tyosto, evt) {
     for (var j = 0; j < jj.length; j++) {
       i_ += parseFloat(jj[j].value);
     }
+    
     cord = (parseFloat(p_h - i_));
     x_cord.value = cord.toFixed(2);
     x_cord.dataset.from = x_cord.value;
