@@ -6193,6 +6193,33 @@ div.x_del.hidden {
   inset: -20px 20px auto auto;
   margin: 0;
 }
+.tyostot__tyosto_vaaka .recreate_line.recreate_line.recreate_line {
+  position: absolute;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-left: none;
+  border-top: 10px solid transparent;
+  border-right: 15px solid #18ab00;
+  border-bottom: 10px solid transparent;
+  inset: 0 -70px 0 auto;
+  border-radius: 0;
+}
+.tyostot__tyosto_pysty .recreate_line.recreate_line.recreate_line {
+  position: absolute;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-bottom: none;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #18ab00;
+  inset: -20px 0 auto -10px;
+  border-radius: 0;
+}
+.recreate_line::after {
+  content: none !important;
+}
 
 .tyostot__tyosto_pysty .x_del {
   margin-top: -25px;
@@ -6202,6 +6229,8 @@ div.x_del.hidden {
   inset: auto auto 20px 20px;
   margin: 0;
 }
+
+
 
 .levy__adding_arrow {
   width: 32px;

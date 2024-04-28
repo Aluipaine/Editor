@@ -750,6 +750,12 @@ function tyosta(levy, evt) {
             x_del.classList.add("x_del");
             x_del.setAttribute("onclick", "tyosto__del(this);");
             x.prepend(x_del);
+
+            // Create delete button for the recreate line
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del", "recreate_line");
+            x_del.setAttribute("onclick", "recreate_line(this, 'vertical');");
+            x.append(x_del);
           }
           else {
             // Create delete button for the element
@@ -811,6 +817,12 @@ function tyosta(levy, evt) {
             x_del.classList.add("x_del");
             x_del.setAttribute("onclick", "tyosto__del(this);");
             x.prepend(x_del);
+
+            // Create delete button for the recreate line
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del", "recreate_line");
+            x_del.setAttribute("onclick", "recreate_line(this, 'vertical');");
+            x.append(x_del);
           }
           else {
             // Create delete button for the element
@@ -880,6 +892,12 @@ function tyosta(levy, evt) {
             x_del.classList.add("x_del");
             x_del.setAttribute("onclick", "tyosto__del(this);");
             x.prepend(x_del);
+
+            // Create delete button for the recreate line
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del", "recreate_line");
+            x_del.setAttribute("onclick", "recreate_line(this, 'vertical');");
+            x.append(x_del);
           }
           else {
             // Create delete button for the element
@@ -979,12 +997,16 @@ function tyosta(levy, evt) {
             x.append(x_del);
 
             // Create delete button for the fastener
-            if (canvas_width === levy_r) {
-              x_del = document.createElement("div");
-              x_del.classList.add("x_del");
-              x_del.setAttribute("onclick", "tyosto__del(this);");
-              x.prepend(x_del);
-            }
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del");
+            x_del.setAttribute("onclick", "tyosto__del(this);");
+            x.prepend(x_del);
+
+            // Create delete button for the recreate line
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del", "recreate_line");
+            x_del.setAttribute("onclick", "recreate_line(this);");
+            x.append(x_del);
           }
           else {
             //Delete button for element
@@ -1027,12 +1049,16 @@ function tyosta(levy, evt) {
             x.append(x_del);
 
             // Create delete button for the fastener
-            if (canvas_width === levy_r) {
-              x_del = document.createElement("div");
-              x_del.classList.add("x_del");
-              x_del.setAttribute("onclick", "tyosto__del(this);");
-              x.prepend(x_del);
-            }
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del");
+            x_del.setAttribute("onclick", "tyosto__del(this);");
+            x.prepend(x_del);
+
+            // Create delete button for the recreate line
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del", "recreate_line");
+            x_del.setAttribute("onclick", "recreate_line(this);");
+            x.append(x_del);
           }
           else {
             //Delete button for element
@@ -1107,12 +1133,16 @@ function tyosta(levy, evt) {
             x.append(x_del);
 
             // Create delete button for the fastener
-            if (canvas_width === levy_r) {
-              x_del = document.createElement("div");
-              x_del.classList.add("x_del");
-              x_del.setAttribute("onclick", "tyosto__del(this);");
-              x.prepend(x_del);
-            }
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del");
+            x_del.setAttribute("onclick", "tyosto__del(this);");
+            x.prepend(x_del);
+
+            // Create delete button for the recreate line
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del", "recreate_line");
+            x_del.setAttribute("onclick", "recreate_line(this);");
+            x.append(x_del);
           }
           else {
             //Delete button for element
@@ -4446,3 +4476,76 @@ $("[data-action=set_levy_preset]").on("click", function () {
 $("#add_lv_modal").on("click", () => {
   $("#levytyosto_container").removeClass("two out");
 });
+
+function recreate_line(item, type = "horizontal") {
+  if (type === "horizontal") {
+    let relative_line_bottom = (parseFloat(item.parentElement.style.bottom) + 1) * 5;
+    let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
+    let canvas_bottom = relative_line_bottom - levy_bottom;
+    let distance_between = document.querySelector("#v_target").value / 5;
+    canvas.querySelectorAll(".levy").forEach(levy => {
+      let coords = levy.title.split`,`,
+          levy_b = parseFloat(coords[2]) - 5,
+          levy_t = parseFloat(coords[1]) + parseFloat(coords[2]);
+      if (levy_b < canvas_bottom && levy_t > canvas_bottom) {
+        let x = document.createElement("div");
+        let bottom_cord = (canvas_bottom - levy_b + 5) / 5 - 1 + "px";
+        let levy_tyostot_y = levy.querySelector(".levy_tyostot_y");
+        levy_tyostot_y.querySelectorAll(".tyostot__tyosto:not(.no_siirto)").forEach(toystot => {
+          if (Math.abs(parseFloat(toystot.style.bottom) - parseFloat(bottom_cord)) < distance_between) {
+            toystot.querySelector(".x_del.only_self").click();
+          }
+        })
+        x.style.bottom = bottom_cord;
+        x.classList.add("tyostot__tyosto");
+        x.classList.add("tyostot__tyosto_vaaka");
+        x.classList.add("levy_blessedcord");
+        x.style.width = "100%";
+        x.style.height = parseFloat(8 / 5) + "px";
+        x.style.position = "absolute";
+        levy_tyostot_y.prepend(x);
+
+        //Delete button for element
+        let x_del = document.createElement("div");
+        x_del.classList.add("x_del", "only_self");
+        x_del.setAttribute("onclick", "tyosto__del(this, true);");
+        x.append(x_del);
+      }
+    })
+  }
+  if (type === "vertical") {
+    let relative_line_left = (parseFloat(item.parentElement.style.left) + 1) * 5;
+    let levy_left = parseFloat(item.closest(".levy").title.split`,`[3]);
+    let canvas_left = relative_line_left + levy_left;
+    let distance_between = document.querySelector("#p_target").value / 5;
+    canvas.querySelectorAll(".levy").forEach(levy => {
+      let coords = levy.title.split`,`,
+          levy_l = parseFloat(coords[3]) - 5,
+          levy_r = parseFloat(coords[0]) + parseFloat(coords[3]);
+      if (levy_l < canvas_left && levy_r > canvas_left) {
+        let x = document.createElement("div");
+        let left_cord = (canvas_left - levy_l - 5) / 5 - 1 + "px";
+        let levy_tyostot_x = levy.querySelector(".levy_tyostot_x");
+        levy_tyostot_x.querySelectorAll(".tyostot__tyosto:not(.no_siirto)").forEach(toystot => {
+          if (Math.abs(parseFloat(toystot.style.left) - parseFloat(left_cord)) < distance_between) {
+            toystot.querySelector(".x_del.only_self").click();
+          }
+        })
+        x.style.left = left_cord;
+        x.classList.add("tyostot__tyosto");
+        x.classList.add("tyostot__tyosto_pysty");
+        x.classList.add("levy_blessedcord");
+        x.style.height = "100%";
+        x.style.width = parseFloat(8 / 5) + "px";
+        x.style.position = "absolute";
+        levy_tyostot_x.prepend(x);
+
+        //Delete button for element
+        let x_del = document.createElement("div");
+        x_del.classList.add("x_del", "only_self");
+        x_del.setAttribute("onclick", "tyosto__del(this, true);");
+        x.append(x_del);
+      }
+    })
+  }
+}
