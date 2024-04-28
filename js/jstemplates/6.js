@@ -4320,4 +4320,11 @@ $("[data-action=set_levy_preset]").on("click", function () {
   $(this).addClass("selected").siblings().removeClass("selected");
   $("#p_target").val(vertical);
   $("#v_target").val(horizontal);
+  let kiinniketys = $(".kiinniketys:first-child");
+  kiinniketys.find("input:checked")[0].click();
+  kiinniketys.find("input:checked")[1].click()
+});
+
+$("#add_lv_modal").on("click", () => {
+  $("#levytyosto_container").removeClass("two out");
 });

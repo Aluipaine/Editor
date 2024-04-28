@@ -92,6 +92,11 @@
                 <input type="radio" name="levyn_ruuvit" id="levy_ruuvit_1"><label for="levy_ruuvit_1" style="background: #F65B34" class="wt levy__label" onclick="levy__interaction(2,this);" data-type="del">POISTA RUUVILINJOJA</label>
                 <input type="radio" name="levyn_ruuvit" id="levy_ruuvit_2"><label for="levy_ruuvit_2" style="background: #F6CB34" class="wt levy__label" onclick="levy__interaction(2,this);" data-type="mod">MUOKKAA RUUVILINJOJA</label>
               </div>
+              <h5>Läpiviennit</h5>
+                <fieldset class="form-subgroup">
+                    <input type="checkbox" name="levyn_lv" id="add_lv_modal" style="display: none;" class="levyn_lv">
+                    <label for="add_lv_modal" style="background: rgba(241, 241, 241,1);" class="levy__label" onclick="settings__modal_open(this);close" data-asmodal_mode="lv_modal">ASETA LÄPIVIENTEJÄ</label>
+                </fieldset>
               <h5 style="pointer-events:none;opacity:0;">Mitat</h5>
               <div class="form-subgroup" style="pointer-events:none;opacity:0;">
                 <input type="checkbox" name="levyn_mitat" id="levyn_mitat_1"><label for="levyn_mitat_1" style="background: #F6CB34" class="wt levy__label" onclick="levy__interaction(3,this);">MUOKKAA LEVYMITTOJA</label>

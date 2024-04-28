@@ -978,7 +978,7 @@ function give__origo_cord() {
  * @param {string
  */
 // Создание отверстия
-function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode_hcord, mode_wcord, mode_count, mode_id, mode_specifications,ir_mitta_comment,ir_mitta_cfrom,ir_mitta_cto) {
+async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode_hcord, mode_wcord, mode_count, mode_id, mode_specifications,ir_mitta_comment,ir_mitta_cfrom,ir_mitta_cto) {
   if(modding === true) {
     correct_name = tomode_object.getAttribute('id');
     
@@ -1825,7 +1825,7 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
     
 
     }
-    if (input_step == "drawscreen_section_three") {
+    if (input_step == "drawscreen_section_three" || input_step === "drawscreen_section_five") {
       let id = "lv" + Math.random().toString(16).slice(2).toLowerCase().toLowerCase();
       lapivienti_count += 1;
       newDiv__hidden_attention.type = "hidden";
@@ -2011,6 +2011,26 @@ function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode
       document.querySelector(".drawarea__controls_four-pysty.drawarea__controls_fouritems").innerHTML = "";
       document.querySelector(".drawarea__controls_four-vaaka.drawarea__controls_fouritems").innerHTML = "";
       alert("Syystä että alueelle tuli uusia huomiota kaipaavia kohteita, piirrosalueen vanhentunut ladonta on pyyhitty. Tee ladonta uudelleen.");
+      if (input_step === "drawscreen_section_five") {
+        let preloader = $(".preloader"),
+            step_drawscreen = $('#step_drawscreen');
+        preloader.addClass("active");
+        step_drawscreen.val('drawscreen_section_four');
+        refresh__drawcontrols();
+        updatearea();
+        await sleep(1000);
+        $(".sauma_as .drawarea__controls_btn").trigger("click");
+        await sleep(1000);
+        step_drawscreen.val('drawscreen_section_tyostot');
+        refresh__drawcontrols();
+        updatearea();
+        await sleep(1000);
+        step_drawscreen.val('drawscreen_section_five');
+        refresh__drawcontrols();
+        updatearea();
+        await sleep(1000);
+        preloader.removeClass("active");
+      }
     }
   }
 
