@@ -6008,6 +6008,11 @@ input.secondcord {
   box-sizing: border-box;
 }
 
+.tyostot__tyosto_pysty.hidden,
+.tyostot__tyosto_vaaka.hidden {
+  box-shadow: none;
+}
+
 .tyostot__tyosto_pysty {
   height: 100%;
   width: 1.6px;
@@ -6151,6 +6156,11 @@ div.x_del {
   left: unset;
 }
 
+.tyostot__tyosto.levy_blessedcord div.x_del.only_self {
+  border-color: #fff;
+  z-index: 10;
+}
+
 div.x_del:after {
   position: absolute;
   top: 0;
@@ -6164,6 +6174,10 @@ div.x_del:after {
   text-align: center;
 }
 
+.tyostot__tyosto.levy_blessedcord div.x_del.only_self:after {
+  background-color: #fff;
+}
+
 div.x_del.hidden {
   display: none;
   
@@ -6175,9 +6189,18 @@ div.x_del.hidden {
   float: right;
   /*  z-index: 1;*/
 }
+.tyostot__tyosto_vaaka.tyostot__tyosto.levy_blessedcord .x_del.only_self {
+  inset: -20px 20px auto auto;
+  margin: 0;
+}
 
 .tyostot__tyosto_pysty .x_del {
   margin-top: -25px;
+}
+
+.tyostot__tyosto_pysty.tyostot__tyosto.levy_blessedcord .x_del.only_self {
+  inset: auto auto 20px 20px;
+  margin: 0;
 }
 
 .levy__adding_arrow {

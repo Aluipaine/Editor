@@ -668,6 +668,11 @@ function tyosta(levy, evt) {
 
   //PYSTYKIINNIKKEET
   if (evt === 1 || evt === 2 || evt === 3 || evt === 4) {
+
+    let canvas_height = parseFloat($("#box_h").val());
+    let levy_coords = levy.title.split(",");
+    let levy_t = parseFloat(levy_coords[1]) +  parseFloat(levy_coords[2]) + 5;
+
     // Remove existing vertical work elements
     let tyosto_levy = levy.querySelectorAll(".tyostot__tyosto_pysty");
     for (var i = tyosto_levy.length - 1; i >= 0; i--) {
@@ -732,12 +737,27 @@ function tyosta(levy, evt) {
           // Append input element to the fastener
           x.prepend(x_cord);
 
-          // Create delete button for the fastener
-          var x_del = document.createElement("div");
-          x_del.classList.add("x_del");
-          x_del.setAttribute("onclick", "tyosto__del(this);");
-          x.prepend(x_del);
+          //Levy on canvas edge
+          if (canvas_height === levy_t) {
+            // Create delete button for the element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true, true);");
+            x.append(x_del);
 
+            // Create delete button for the fastener
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del");
+            x_del.setAttribute("onclick", "tyosto__del(this);");
+            x.prepend(x_del);
+          }
+          else {
+            // Create delete button for the element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true);");
+            x.append(x_del);
+          }
 
         }
         else if (evt === 2) {
@@ -778,11 +798,27 @@ function tyosta(levy, evt) {
           // Prepend the input element to the vertical fastener
           x.prepend(x_cord);
 
-          // Create a delete button element for the vertical fastener
-          var x_del = document.createElement("div");
-          x_del.classList.add("x_del");
-          x_del.setAttribute("onclick", "tyosto__del(this);");
-          x.prepend(x_del);
+          //Levy on canvas edge
+          if (canvas_height === levy_t) {
+            // Create delete button for the element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true, true);");
+            x.append(x_del);
+
+            // Create delete button for the fastener
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del");
+            x_del.setAttribute("onclick", "tyosto__del(this);");
+            x.prepend(x_del);
+          }
+          else {
+            // Create delete button for the element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true);");
+            x.append(x_del);
+          }
         }
       }
     }
@@ -830,12 +866,28 @@ function tyosta(levy, evt) {
           // Append the new element to the container (levy_tyostot_x)
           levy_tyostot_x.prepend(x);
 
-          // Create an input element for the coordinate value
-          var x_cord = document.createElement("input");
-          x_cord.setAttribute("onchange", "change__tyostocord(this,1," + evt + ");");
-          x_cord.classList.add("x_cord_mki");
-          x_cord.classList.add("event_" + String.fromCharCode(64 + evt).toLowerCase());
-          x_cord.type = "text";
+
+          //Levy on canvas edge
+          if (canvas_height === levy_t) {
+            // Create delete button for the element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true, true);");
+            x.append(x_del);
+
+            // Create delete button for the fastener
+            x_del = document.createElement("div");
+            x_del.classList.add("x_del");
+            x_del.setAttribute("onclick", "tyosto__del(this);");
+            x.prepend(x_del);
+          }
+          else {
+            // Create delete button for the element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true);");
+            x.append(x_del);
+          }
 
           // Calculate and set the coordinate value for the input
           cord = (j * l_i) - (j - 1) * (parseFloat(l_i));
@@ -846,12 +898,6 @@ function tyosta(levy, evt) {
 
           // Append the coordinate input to the new element
           x.prepend(x_cord);
-
-          // Create a delete button element and append it to the new element
-          var x_del = document.createElement("div");
-          x_del.classList.add("x_del");
-          x_del.setAttribute("onclick", "tyosto__del(this);");
-          x.prepend(x_del);
         }
       }
 
@@ -866,6 +912,11 @@ function tyosta(levy, evt) {
   }
   //VAAKAKIINNIKKEET
   if (evt === 5 || evt === 6 || evt === 7 || evt === 8) {
+
+    let canvas_width = parseFloat($("#box_w").val());
+    let levy_coords = levy.title.split(",");
+    let levy_r = parseFloat(levy_coords[0]) +  parseFloat(levy_coords[3]) + 5;
+
     // Select all existing horizontal work elements within the 'levy' element and remove them
     let tyosto_levy = levy.querySelectorAll(".tyostot__tyosto_vaaka");
     for (var i = tyosto_levy.length - 1; i >= 0; i--) {
@@ -917,10 +968,32 @@ function tyosta(levy, evt) {
           x_cord.style.top = "-15px";
           x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
           x.prepend(x_cord);
-          var x_del = document.createElement("div");
-          x_del.classList.add("x_del");
-          x_del.setAttribute("onclick", "tyosto__del(this);");
-          x.prepend(x_del);
+
+
+          //Levy on canvas edge
+          if (canvas_width === levy_r) {
+            //Delete button for element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true, true);");
+            x.append(x_del);
+
+            // Create delete button for the fastener
+            if (canvas_width === levy_r) {
+              x_del = document.createElement("div");
+              x_del.classList.add("x_del");
+              x_del.setAttribute("onclick", "tyosto__del(this);");
+              x.prepend(x_del);
+            }
+          }
+          else {
+            //Delete button for element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true);");
+            x.append(x_del);
+          }
+
           levy.append(levy_tyostot_y);
         }
         else if (evt === 6) {
@@ -943,11 +1016,32 @@ function tyosta(levy, evt) {
           x_cord.dataset.from = x_cord.value;
           x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
           // x_cord.style.top = "-15px";
-          x.prepend(x_cord);
-          var x_del = document.createElement("div");
-          x_del.classList.add("x_del");
-          x_del.setAttribute("onclick", "tyosto__del(this);");
-          x.prepend(x_del);
+          x.prepend(x_cord)
+
+          //Levy on canvas edge
+          if (canvas_width === levy_r) {
+            //Delete button for element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true, true);");
+            x.append(x_del);
+
+            // Create delete button for the fastener
+            if (canvas_width === levy_r) {
+              x_del = document.createElement("div");
+              x_del.classList.add("x_del");
+              x_del.setAttribute("onclick", "tyosto__del(this);");
+              x.prepend(x_del);
+            }
+          }
+          else {
+            //Delete button for element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true);");
+            x.append(x_del);
+          }
+
           levy.append(levy_tyostot_y);
         }
       }
@@ -1002,11 +1096,31 @@ function tyosta(levy, evt) {
           x_cord.value = cord.toFixed(0);
           x_cord.dataset.from = x_cord.value;
           // x_cord.style.bottom = "19px";
-          x.prepend(x_cord);
-          var x_del = document.createElement("div");
-          x_del.classList.add("x_del");
-          x_del.setAttribute("onclick", "tyosto__del(this);");
-          x.prepend(x_del);
+          x.prepend(x_cord)
+
+          //Levy on canvas edge
+          if (canvas_width === levy_r) {
+            //Delete button for element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true, true);");
+            x.append(x_del);
+
+            // Create delete button for the fastener
+            if (canvas_width === levy_r) {
+              x_del = document.createElement("div");
+              x_del.classList.add("x_del");
+              x_del.setAttribute("onclick", "tyosto__del(this);");
+              x.prepend(x_del);
+            }
+          }
+          else {
+            //Delete button for element
+            let x_del = document.createElement("div");
+            x_del.classList.add("x_del", "only_self");
+            x_del.setAttribute("onclick", "tyosto__del(this, true);");
+            x.append(x_del);
+          }
         }
       }
     }
@@ -2546,16 +2660,27 @@ function getElementIndex(element) {
 /**
  * Deletes a specific item from the DOM based on certain conditions and updates related values.
  * @param {Element} item - The item to be deleted from the DOM.
+ * @param {Boolean} only_self - Indicates to remove only element itself but not the whole line
+ * @param {Boolean} just_hide - Indicates not to remove element but hide it to keep edge delete button
  * @returns None
  */
-function tyosto__del(item) {
+function tyosto__del(item, only_self = false, just_hide = false) {
+  if (just_hide) {
+    item.parentNode.classList.add("hidden");
+    item.parentNode.querySelector(".only_self").remove();
+    return null;
+  }
+
+  if (only_self) {
+    item.parentElement.remove();
+    return null;
+  }
 
   if(item.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.classList.contains("modal")) {
     thistyosto = item.parentElement;
     thistyosto.remove();
   }
 
-  //console.log(" tyosto__del(item) fired");
   try {
     c_kiinnikkeet = canvas.querySelectorAll(".tyostot__tyosto");
     thistyosto = item.parentElement;
@@ -2563,13 +2688,10 @@ function tyosto__del(item) {
     current_delete_tyosto = getElementIndex(thistyosto);
     deleted_tyosto_value = parseFloat(item.parentElement.querySelector("input:not(.secondcord):not(temp_input_last)").value);
 
-    //console.log("current_delete_tyosto: "+current_delete_tyosto);
     if (thistyosto.classList.contains("tyostot__tyosto_pysty")) {
       thisinput_l = parseFloat(thistyosto.getBoundingClientRect().left);
-      //console.log("thisinput_l: " + thisinput_l);
       for (var i = c_kiinnikkeet.length - 1; i >= 0; i--) {
-        //console.log("c_kiinnikkeet " + parseFloat(c_kiinnikkeet[i].getBoundingClientRect().left));
-        if (Math.round(thisinput_l) == Math.round(parseFloat(c_kiinnikkeet[i].getBoundingClientRect().left))) {
+        if (Math.round(thisinput_l) === Math.round(parseFloat(c_kiinnikkeet[i].getBoundingClientRect().left))) {
           c_kiinnikkeet[i].remove();
         }
       }
@@ -2579,10 +2701,8 @@ function tyosto__del(item) {
     }
     else if (thistyosto.classList.contains("tyostot__tyosto_vaaka")) {
       thisinput_b = parseFloat(thistyosto.getBoundingClientRect().bottom);
-      //console.log("thisinput_b: " + thisinput_b);
       for (var i = c_kiinnikkeet.length - 1; i >= 0; i--) {
-        //console.log("c_kiinnikkeet Btm" + parseFloat(c_kiinnikkeet[i].getBoundingClientRect().bottom));
-        if (Math.trunc(thisinput_b) == Math.trunc(parseFloat(c_kiinnikkeet[i].getBoundingClientRect().bottom))) {
+        if (Math.trunc(thisinput_b) === Math.trunc(parseFloat(c_kiinnikkeet[i].getBoundingClientRect().bottom))) {
           c_kiinnikkeet[i].remove();
         }
       }
@@ -2597,9 +2717,7 @@ function tyosto__del(item) {
         tomod_input.dataset.from = deleted_tyosto_value + tomod_inputcur_value;
       }
     });
-  } catch {
-    //console.log("canvas is not set");
-  }
+  } catch { }
 
   t_levys = canvas.querySelectorAll(".levy");
 
