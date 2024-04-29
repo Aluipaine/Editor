@@ -6190,7 +6190,7 @@ div.x_del.hidden {
   /*  z-index: 1;*/
 }
 .tyostot__tyosto_vaaka.tyostot__tyosto.levy_blessedcord .x_del.only_self {
-  inset: -20px 20px auto auto;
+  inset: -30px 15px auto auto;
   margin: 0;
 }
 .tyostot__tyosto_vaaka .recreate_line.recreate_line.recreate_line {
@@ -6199,11 +6199,15 @@ div.x_del.hidden {
   width: 0;
   height: 0;
   border-left: none;
-  border-top: 10px solid transparent;
-  border-right: 15px solid #18ab00;
-  border-bottom: 10px solid transparent;
-  inset: 0 -70px 0 auto;
+  border-top: 8px solid transparent;
+  border-right: 12px solid #00ff43;
+  border-bottom: 8px solid transparent;
+  inset: 0 auto 0 15px;
   border-radius: 0;
+}
+.tyostot__tyosto_vaaka .recreate_line.recreate_line.recreate_line.opposite {
+  inset: 0 15px 0 auto;
+  rotate: 180deg;
 }
 .tyostot__tyosto_pysty .recreate_line.recreate_line.recreate_line {
   position: absolute;
@@ -6211,11 +6215,16 @@ div.x_del.hidden {
   width: 0;
   height: 0;
   border-bottom: none;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #18ab00;
-  inset: -20px 0 auto -10px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid #00ff43;
+  inset: auto 0 15px -7px;
   border-radius: 0;
+  background: none;
+}
+.tyostot__tyosto_pysty .recreate_line.recreate_line.recreate_line.opposite {
+  inset: 15px 0 auto -7px;
+  rotate: 180deg;
 }
 .recreate_line::after {
   content: none !important;
@@ -6226,7 +6235,7 @@ div.x_del.hidden {
 }
 
 .tyostot__tyosto_pysty.tyostot__tyosto.levy_blessedcord .x_del.only_self {
-  inset: auto auto 20px 20px;
+  inset: auto auto 15px 20px;
   margin: 0;
 }
 
