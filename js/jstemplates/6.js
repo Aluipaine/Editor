@@ -4482,7 +4482,7 @@ function recreate_line(item, type = "horizontal") {
   if (type === "horizontal") {
     let relative_line_bottom = (parseFloat(item.parentElement.style.bottom) + 1) * 5;
     let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
-    let canvas_bottom = relative_line_bottom - levy_bottom;
+    let canvas_bottom = relative_line_bottom + levy_bottom;
     let distance_between = document.querySelector("#v_target").value / 5;
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
@@ -4494,7 +4494,7 @@ function recreate_line(item, type = "horizontal") {
         let levy_tyostot_y = levy.querySelector(".levy_tyostot_y");
         levy_tyostot_y.querySelectorAll(".tyostot__tyosto:not(.no_siirto)").forEach(toystot => {
           if (Math.abs(parseFloat(toystot.style.bottom) - parseFloat(bottom_cord)) < distance_between) {
-            toystot.querySelector(".x_del.only_self").click();
+            toystot.querySelector(".x_del.only_self")?.click();
           }
         })
         x.style.bottom = bottom_cord;
@@ -4529,7 +4529,7 @@ function recreate_line(item, type = "horizontal") {
         let levy_tyostot_x = levy.querySelector(".levy_tyostot_x");
         levy_tyostot_x.querySelectorAll(".tyostot__tyosto:not(.no_siirto)").forEach(toystot => {
           if (Math.abs(parseFloat(toystot.style.left) - parseFloat(left_cord)) < distance_between) {
-            toystot.querySelector(".x_del.only_self").click();
+            toystot.querySelector(".x_del.only_self")?.click();
           }
         })
         x.style.left = left_cord;
