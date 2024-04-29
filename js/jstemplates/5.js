@@ -1128,8 +1128,11 @@ function reorder_levy_names() {
     if (l1_l < l2_l) {
       return -1;
     }
-    if ((l1_l === l2_l || l1_r === l2_r) && l1_b < l2_b) {
+    if (l1_l === l2_l && l1_r <= l2_r && l1_b < l2_b) {
       return -1
+    }
+    if (l1_r === l2_r && l1_l >= l2_l && l1_b < l2_b) {
+      return 1
     }
   })
 
@@ -1143,7 +1146,7 @@ function reorder_levy_names() {
       lcord = chunk.at(-1).title.split`,`;
       let l2_l = parseFloat(lcord[3]),
           l2_r = parseFloat(lcord[3]) + parseFloat(lcord[0]);
-      if (l1_l === l2_l || l1_r === l2_r) {
+      if (l1_l === l2_l) {
         chunk.push(levy)
       }
       else {
