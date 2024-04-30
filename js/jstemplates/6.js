@@ -614,6 +614,8 @@ function aloita_tyosto_kiinnikkeet(specification_launch) {
     });
   }
 
+  draw_recreate_buttons();
+
   save("tyostot~~"+levyarray);
 }
 /**
@@ -760,22 +762,6 @@ function tyosta(levy, evt) {
             x.append(x_del);
           }
 
-          if (levy_b !== 5) {
-            // Create button for the continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line");
-            x_del.setAttribute("onclick", "recreate_line(this, 'vertical');");
-            x.append(x_del);
-          }
-
-          if (levy_t !== canvas_height) {
-            // Create button for the continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line", "opposite");
-            x_del.setAttribute("onclick", "recreate_line(this, 'vertical_opposite');");
-            x.append(x_del);
-          }
-
         }
         else if (evt === 2) {
           // Create a new div element for the vertical fastener
@@ -834,22 +820,6 @@ function tyosta(levy, evt) {
             let x_del = document.createElement("div");
             x_del.classList.add("x_del", "only_self");
             x_del.setAttribute("onclick", "tyosto__del(this, true);");
-            x.append(x_del);
-          }
-
-          if (levy_b !== 5) {
-            // Create button for the continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line");
-            x_del.setAttribute("onclick", "recreate_line(this, 'vertical');");
-            x.append(x_del);
-          }
-
-          if (levy_t !== canvas_height) {
-            // Create button for the continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line", "opposite");
-            x_del.setAttribute("onclick", "recreate_line(this, 'vertical_opposite');");
             x.append(x_del);
           }
         }
@@ -919,22 +889,6 @@ function tyosta(levy, evt) {
             let x_del = document.createElement("div");
             x_del.classList.add("x_del", "only_self");
             x_del.setAttribute("onclick", "tyosto__del(this, true);");
-            x.append(x_del);
-          }
-
-          if (levy_b !== 5) {
-            // Create button for the continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line");
-            x_del.setAttribute("onclick", "recreate_line(this, 'vertical');");
-            x.append(x_del);
-          }
-
-          if (levy_t !== canvas_height) {
-            // Create button for the continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line", "opposite");
-            x_del.setAttribute("onclick", "recreate_line(this, 'vertical_opposite');");
             x.append(x_del);
           }
 
@@ -1042,22 +996,6 @@ function tyosta(levy, evt) {
             x.append(x_del);
           }
 
-          if (levy_l !== 5) {
-            // Create button for continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line");
-            x_del.setAttribute("onclick", "recreate_line(this);");
-            x.append(x_del);
-          }
-
-          if (levy_r !== canvas_width) {
-            // Create button for continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line", "opposite");
-            x_del.setAttribute("onclick", "recreate_line(this, 'horizontal_opposite');");
-            x.append(x_del);
-          }
-
           levy.append(levy_tyostot_y);
         }
         else if (evt === 6) {
@@ -1101,22 +1039,6 @@ function tyosta(levy, evt) {
             let x_del = document.createElement("div");
             x_del.classList.add("x_del", "only_self");
             x_del.setAttribute("onclick", "tyosto__del(this, true);");
-            x.append(x_del);
-          }
-
-          if (levy_l !== 5) {
-            // Create button for continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line");
-            x_del.setAttribute("onclick", "recreate_line(this);");
-            x.append(x_del);
-          }
-
-          if (levy_r !== canvas_width) {
-            // Create button for continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line", "opposite");
-            x_del.setAttribute("onclick", "recreate_line(this, 'horizontal_opposite');");
             x.append(x_del);
           }
 
@@ -1195,22 +1117,6 @@ function tyosta(levy, evt) {
             let x_del = document.createElement("div");
             x_del.classList.add("x_del", "only_self");
             x_del.setAttribute("onclick", "tyosto__del(this, true);");
-            x.append(x_del);
-          }
-
-          if (levy_l !== 5) {
-            // Create button for continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line");
-            x_del.setAttribute("onclick", "recreate_line(this);");
-            x.append(x_del);
-          }
-
-          if (levy_r !== canvas_width) {
-            // Create button for continue line
-            let x_del = document.createElement("div");
-            x_del.classList.add("x_del", "recreate_line", "opposite");
-            x_del.setAttribute("onclick", "recreate_line(this, 'horizontal_opposite');");
             x.append(x_del);
           }
         }
@@ -2760,13 +2666,14 @@ function getElementIndex(element) {
 function tyosto__del(item, only_self = false, just_hide = false) {
   if (just_hide) {
     item.parentNode.classList.add("hidden");
-    item.parentNode.querySelector(".recreate_line").remove();
     item.parentNode.querySelector(".only_self").remove();
+    draw_recreate_buttons();
     return null;
   }
 
   if (only_self) {
     item.parentElement.remove();
+    draw_recreate_buttons();
     return null;
   }
 
@@ -2822,6 +2729,7 @@ function tyosto__del(item, only_self = false, just_hide = false) {
 
   tyostot_keskitys.classList.add("two");
 
+  draw_recreate_buttons();
 }
 // if (document.querySelector("#drawscreen_section_five .levy")) {
 //   // document.querySelector("#drawscreen_section_five .visible").classList.remove("levy");
@@ -4534,7 +4442,9 @@ $("[data-action=set_levy_preset]").on("click", function () {
   $("#v_target").val(horizontal);
   let kiinniketys = $(".kiinniketys:first-child");
   kiinniketys.find("input:checked")[0].click();
-  kiinniketys.find("input:checked")[1].click()
+  kiinniketys.find("input:checked")[1].click();
+
+  draw_recreate_buttons();
 });
 
 $("#add_lv_modal").on("click", () => {
@@ -4542,13 +4452,13 @@ $("#add_lv_modal").on("click", () => {
 });
 
 function recreate_line(item, type = "horizontal") {
+  const touch = (a,b) => Math.abs(a-b) <= 50;
   if (type === "horizontal") {
     let relative_line_bottom = (parseFloat(item.parentElement.style.bottom) + 1) * 5;
     let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
     let levy_left = parseFloat(item.closest(".levy").title.split`,`[3]);
     let canvas_bottom = relative_line_bottom + levy_bottom;
     let distance_between = document.querySelector("#v_target").value / 5;
-    let canvas_width = parseFloat($("#box_w").val());
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
@@ -4556,7 +4466,7 @@ function recreate_line(item, type = "horizontal") {
           levy_l = parseFloat(coords[3]) + 5,
           levy_r = parseFloat(coords[0]) + parseFloat(coords[3]) + 10,
           levy_t = parseFloat(coords[1]) + parseFloat(coords[2]) + 10;
-      if (levy_b < canvas_bottom && levy_t > canvas_bottom && levy_left === levy_r) {
+      if (levy_b < canvas_bottom && levy_t > canvas_bottom && touch(levy_left,  levy_r)) {
         let x = document.createElement("div");
         let bottom_cord = (canvas_bottom - levy_b + 5) / 5 - 1 + "px";
         let levy_tyostot_y = levy.querySelector(".levy_tyostot_y");
@@ -4580,21 +4490,7 @@ function recreate_line(item, type = "horizontal") {
         x_del.setAttribute("onclick", "tyosto__del(this, true);");
         x.append(x_del);
 
-        if (levy_l !== 10) {
-          // Create button for continue line
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "recreate_line");
-          x_del.setAttribute("onclick", "recreate_line(this);");
-          x.append(x_del);
-        }
-
-        if (levy_r !== canvas_width) {
-          // Create button for continue line
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "recreate_line", "opposite");
-          x_del.setAttribute("onclick", "recreate_line(this, 'horizontal_opposite');");
-          x.append(x_del);
-        }
+        add_recreate_button(x, "horizontal");
       }
     })
   }
@@ -4604,15 +4500,13 @@ function recreate_line(item, type = "horizontal") {
     let levy_right = parseFloat(item.closest(".levy").title.split`,`[3]) + parseFloat(item.closest(".levy").title.split`,`[0]);
     let canvas_bottom = relative_line_bottom + levy_bottom;
     let distance_between = document.querySelector("#v_target").value / 5;
-    let canvas_width = parseFloat($("#box_w").val());
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
           levy_b = parseFloat(coords[2]) + 5,
           levy_l = parseFloat(coords[3]) - 10,
-          levy_r = parseFloat(coords[0]) + parseFloat(coords[3]) + 5,
           levy_t = parseFloat(coords[1]) + parseFloat(coords[2]) + 10;
-      if (levy_b < canvas_bottom && levy_t > canvas_bottom && levy_right === levy_l) {
+      if (levy_b < canvas_bottom && levy_t > canvas_bottom && touch(levy_right, levy_l)) {
         let x = document.createElement("div");
         let bottom_cord = (canvas_bottom - levy_b + 5) / 5 - 1 + "px";
         let levy_tyostot_y = levy.querySelector(".levy_tyostot_y");
@@ -4630,37 +4524,13 @@ function recreate_line(item, type = "horizontal") {
         x.style.position = "absolute";
         levy_tyostot_y.prepend(x);
 
-        //Levy on canvas edge
-        if (canvas_width === levy_r) {
-          //Delete button for element
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "only_self");
-          x_del.setAttribute("onclick", "tyosto__del(this, true, true);");
-          x.append(x_del);
-        }
-        else {
-          //Delete button for element
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "only_self");
-          x_del.setAttribute("onclick", "tyosto__del(this, true);");
-          x.append(x_del);
-        }
+        //Delete button for element
+        let x_del = document.createElement("div");
+        x_del.classList.add("x_del", "only_self");
+        x_del.setAttribute("onclick", "tyosto__del(this, true);");
+        x.append(x_del);
 
-        if (levy_l !== 10) {
-          // Create button for continue line
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "recreate_line");
-          x_del.setAttribute("onclick", "recreate_line(this);");
-          x.append(x_del);
-        }
-
-        if (levy_r !== canvas_width) {
-          // Create button for continue line
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "recreate_line", "opposite");
-          x_del.setAttribute("onclick", "recreate_line(this, 'horizontal_opposite');");
-          x.append(x_del);
-        }
+        add_recreate_button(x, "horizontal");
       }
     })
   }
@@ -4670,15 +4540,13 @@ function recreate_line(item, type = "horizontal") {
     let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
     let canvas_left = relative_line_left + levy_left;
     let distance_between = document.querySelector("#p_target").value / 5;
-    let canvas_height = parseFloat($("#box_h").val());
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
           levy_l = parseFloat(coords[3]) - 5,
           levy_r = parseFloat(coords[0]) + parseFloat(coords[3]),
-          levy_b = parseFloat(coords[2]) + 5,
           levy_t = parseFloat(coords[2]) + parseFloat(coords[1]);
-      if (levy_l < canvas_left && levy_r > canvas_left && levy_bottom === levy_t) {
+      if (levy_l < canvas_left && levy_r > canvas_left && touch(levy_bottom, levy_t)) {
         let x = document.createElement("div");
         let left_cord = (canvas_left - levy_l - 5) / 5 - 1 + "px";
         let levy_tyostot_x = levy.querySelector(".levy_tyostot_x");
@@ -4702,21 +4570,7 @@ function recreate_line(item, type = "horizontal") {
         x_del.setAttribute("onclick", "tyosto__del(this, true);");
         x.append(x_del);
 
-        if (levy_b !== 10) {
-          // Create button for continue line
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "recreate_line");
-          x_del.setAttribute("onclick", "recreate_line(this, 'vertical');");
-          x.append(x_del);
-        }
-
-        if (levy_t !== canvas_height) {
-          // Create button for continue line
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "recreate_line", "opposite");
-          x_del.setAttribute("onclick", "recreate_line(this, 'vertical_opposite');");
-          x.append(x_del);
-        }
+        add_recreate_button(x, "vertical");
       }
     })
   }
@@ -4726,15 +4580,13 @@ function recreate_line(item, type = "horizontal") {
     let levy_top = parseFloat(item.closest(".levy").title.split`,`[2]) + parseFloat(item.closest(".levy").title.split`,`[1]);
     let canvas_left = relative_line_left + levy_left;
     let distance_between = document.querySelector("#p_target").value / 5;
-    let canvas_height = parseFloat($("#box_h").val());
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
           levy_l = parseFloat(coords[3]) - 5,
           levy_r = parseFloat(coords[0]) + parseFloat(coords[3]),
-          levy_b = parseFloat(coords[2]),
-          levy_t = parseFloat(coords[2]) + parseFloat(coords[1]);
-      if (levy_l < canvas_left && levy_r > canvas_left && levy_top === levy_b) {
+          levy_b = parseFloat(coords[2]);
+      if (levy_l < canvas_left && levy_r > canvas_left && touch(levy_top, levy_b)) {
         let x = document.createElement("div");
         let left_cord = (canvas_left - levy_l - 5) / 5 - 1 + "px";
         let levy_tyostot_x = levy.querySelector(".levy_tyostot_x");
@@ -4758,26 +4610,124 @@ function recreate_line(item, type = "horizontal") {
         x_del.setAttribute("onclick", "tyosto__del(this, true);");
         x.append(x_del);
 
-        if (levy_b !== 10) {
-          // Create button for continue line
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "recreate_line");
-          x_del.setAttribute("onclick", "recreate_line(this, 'vertical');");
-          x.append(x_del);
-        }
-
-        if (levy_t !== canvas_height) {
-          // Create button for continue line
-          let x_del = document.createElement("div");
-          x_del.classList.add("x_del", "recreate_line", "opposite");
-          x_del.setAttribute("onclick", "recreate_line(this, 'vertical_opposite');");
-          x.append(x_del);
-        }
+        add_recreate_button(x, "vertical");
       }
     })
   }
+  draw_recreate_buttons();
+}
+
+function draw_recreate_buttons() {
+  canvas.querySelectorAll(".recreate_line").forEach(v => v.remove());
+  const touch = (a,b) => Math.abs(a-b) <= 10;
+  let canvas_width = parseFloat($("#box_w").val());
+  let canvas_height = parseFloat($("#box_h").val());
+  let levys = [...canvas.querySelectorAll(".levy")];
+  let tyostots = [...canvas.querySelectorAll(".levy_tyostot_y .tyostot__tyosto:not(.no_siirto)")];
+  tyostots.forEach(tyostot => {
+    let rect = tyostot.getBoundingClientRect();
+    let left = rect.left;
+    let right = rect.right;
+    let top = rect.top;
+    let to_the_left = tyostots.filter(v => {
+      let rect = v.getBoundingClientRect();
+      return touch(rect.top, top) && touch(rect.right, left);
+    });
+    let levy_to_the_left = levys.filter(v => {
+      let rect = v.getBoundingClientRect();
+      return rect.bottom > top && rect.top < top && touch(rect.right, left);
+    });
+    if (!to_the_left.length && levy_to_the_left.length) {
+      add_recreate_button(tyostot, "horizontal");
+    }
+    let to_the_right = tyostots.filter(v => {
+      let rect = v.getBoundingClientRect();
+      return touch(rect.top, top) && touch(rect.left, right);
+    });
+    let levy_to_the_right = levys.filter(v => {
+      let rect = v.getBoundingClientRect();
+      return rect.bottom > top && rect.top < top && touch(rect.left, right);
+    });
+    if (!to_the_right.length && levy_to_the_right.length) {
+      add_recreate_button(tyostot, "horizontal_opposite");
+    }
+  });
+  tyostots = [...canvas.querySelectorAll(".levy_tyostot_x .tyostot__tyosto:not(.no_siirto)")];
+  tyostots.forEach(tyostot => {
+    let rect = tyostot.getBoundingClientRect();
+    let top = rect.top;
+    let bottom = rect.bottom;
+    let left = rect.left;
+    let to_the_top = tyostots.filter(v => {
+      let rect = v.getBoundingClientRect();
+      return touch(rect.left, left) && touch(rect.bottom, top);
+    });
+    let levy_to_the_top = levys.filter(v => {
+      let rect = v.getBoundingClientRect();
+      return rect.left < left && rect.right > left && touch(rect.bottom, top);
+    });
+    if (!to_the_top.length && levy_to_the_top.length) {
+      add_recreate_button(tyostot, "vertical_opposite");
+    }
+    let to_the_bottom = tyostots.filter(v => {
+      let rect = v.getBoundingClientRect();
+      return touch(rect.left, left) && touch(rect.top, bottom);
+    });
+    let levy_to_the_bottom = levys.filter(v => {
+      let rect = v.getBoundingClientRect();
+      return rect.left < left && rect.right > left && touch(rect.top, bottom);
+    });
+    if (!to_the_bottom.length && levy_to_the_bottom.length) {
+      add_recreate_button(tyostot, "vertical");
+    }
+  });
 }
 
 function add_recreate_button(target, type) {
+  let levy = target.closest(".levy");
+  let coords = levy.title.split`,`;
+  let levy_b = parseFloat(coords[2]) + 5;
+  let levy_l = parseFloat(coords[3]) + 5;
+  let levy_r = parseFloat(coords[0]) + parseFloat(coords[3]) + 10;
+  let levy_t = parseFloat(coords[1]) + parseFloat(coords[2]) + 10;
+  let canvas_width = parseFloat($("#box_w").val());
+  let canvas_height = parseFloat($("#box_h").val());
+  const touch = (a,b) => Math.abs(a-b) <= 50;
 
+  if (type === "horizontal") {
+    if (!touch(levy_l, 10)) {
+      // Create button for continue line
+      let x_del = document.createElement("div");
+      x_del.classList.add("x_del", "recreate_line");
+      x_del.setAttribute("onclick", "recreate_line(this);");
+      target.append(x_del);
+    }
+  }
+  else if (type === "horizontal_opposite") {
+    if (!touch(levy_r, canvas_width)) {
+      // Create button for continue line
+      let x_del = document.createElement("div");
+      x_del.classList.add("x_del", "recreate_line", "opposite");
+      x_del.setAttribute("onclick", "recreate_line(this, 'horizontal_opposite');");
+      target.append(x_del);
+    }
+  }
+  else if (type === "vertical") {
+    if (!touch(levy_b, 10)) {
+      // Create button for continue line
+      let x_del = document.createElement("div");
+      x_del.classList.add("x_del", "recreate_line");
+      x_del.setAttribute("onclick", "recreate_line(this, 'vertical');");
+      target.append(x_del);
+    }
+  }
+  else if (type === "vertical_opposite") {
+    if (!touch(levy_t, canvas_height)) {
+      // Create button for continue line
+      let x_del = document.createElement("div");
+      x_del.classList.add("x_del", "recreate_line", "opposite");
+      x_del.setAttribute("onclick", "recreate_line(this, 'vertical_opposite');");
+      target.append(x_del);
+    }
+  }
 }
