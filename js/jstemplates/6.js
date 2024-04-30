@@ -4777,3 +4777,7 @@ function recreate_line(item, type = "horizontal") {
     })
   }
 }
+
+function add_recreate_button(target, type) {
+
+}
