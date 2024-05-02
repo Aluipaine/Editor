@@ -845,11 +845,11 @@ function rangat__setcord() {
     }
 
     if (rangat[i].classList.contains("alkuranka_pysty") === true) {
-      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px">' + parseFloat(rangat[i].style.left) * 5 + '</div>';
+      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" >' + parseFloat(rangat[i].style.left) * 5 + '</div>';
       rangat[i].style.background = pv_c;
     }
     else if (rangat[i].classList.contains("viimranka_pysty") === true) {
-      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px">' + parseFloat(rangat[i].style.left) * 5 + '</div>';
+      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" >' + parseFloat(rangat[i].style.left) * 5 + '</div>';
       rangat[i].style.background = po_c;
     }
     else if (rangat[i].classList.contains("alkuranka_vaaka") === true) {
@@ -862,7 +862,7 @@ function rangat__setcord() {
     }
     else if (rangat[i].classList.contains("saumaranka") === true) {
       if (rangat[i].classList.contains("ranka_pysty")) {
-        rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px">' + parseFloat(rangat[i].style.left) * 5 + '</div>';
+        rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text"  class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" >' + parseFloat(rangat[i].style.left) * 5 + '</div>';
       }
       else if (rangat[i].classList.contains("ranka_vaaka")) {
         rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" class="ranka_cord" style="margin-right: ' + correct_measure / 5 + 'px">' + correct_measure + '</div><div class="ranka_secondcord">' + parseFloat(rangat[i].style.bottom) * 5 + '</div>';
@@ -870,7 +870,7 @@ function rangat__setcord() {
       rangat[i].style.background = sr;
     }
     else if (rangat[i].classList.contains("ranka_pysty") === true && rangat[i].classList.contains("valiranka") === true) {
-      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px" class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" style="margin-top: ' + parseFloat(rangat[i].offsetHeight) + 'px">' + parseFloat(rangat[i].style.left) * 5 + '</div>';
+      rangat[i].innerHTML = '<input value=' + r_type + ' type="text" class="ranka_cord ranka_type"><div type="text"  class="ranka_cord" >' + correct_measure + '</div><div class="ranka_secondcord" >' + parseFloat(rangat[i].style.left) * 5 + '</div>';
       rangat[i].style.background = vr_yc;
     }
     else if (rangat[i].classList.contains("ranka_vaaka") === true && rangat[i].classList.contains("valiranka") === true) {

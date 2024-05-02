@@ -6535,16 +6535,7 @@ div.x_del.hidden {
   background-color: transparent;
 }
 
-.copiedcanvases__fixednav {
-  position: fixed;
-  z-index: 999;
-  margin-top: 50px;
-  margin-left: 250px;
-  display: block;
-  width: 15vw;
-}
-
-.copiedcanvases__fixednav li {
+.copiedcanvases__fixednav, .copiedcanvases__fixednav li {
   display: block;
 }
 
@@ -6552,6 +6543,60 @@ div.x_del.hidden {
   margin: 0;
   color: #fff;
   font-size: 15px;
+  line-height: normal;
+  padding: 7px 12px 6px 12px;
+  border: none;
+}
+
+.copiedcanvases__fixednav li input[type="checkbox"]:checked + label {
+  background: #18ab00;
+}
+
+#copiedcanvases .nav.rangatnav, #copiedcanvases .bottom_nav {
+  position: sticky;
+  top: 40px;
+  left: 10px;
+  z-index: 999;
+  padding: 0;
+}
+
+#copiedcanvases .nav.rangatnav {
+  width: 200px;
+}
+
+#copiedcanvases .nav.rangatnav ul {
+  display: block;
+  max-width: unset;
+  margin-bottom: 20px;
+}
+
+#copiedcanvases .nav.rangatnav ul li div {
+  width: auto;
+}
+#copiedcanvases .bottom_nav {
+  top: 690px;
+  width: 5500px;
+  position: absolute;
+}
+
+#copiedcanvases .bottom_nav nav {
+  width: fit-content;
+  position: sticky;
+  left: 10px;
+  margin: 0;
+}
+
+#copiedcanvases .bottom_nav ul {
+  display:flex;
+  max-width:100%;
+}
+
+#copiedcanvases .bottom_nav ul li {
+  cursor: pointer;
+}
+
+#copiedcanvases .preview_canvas {
+  margin-left: 0;
 }
 /* #copiedcanvases .preview_canvas .grid-container {
   display: none;

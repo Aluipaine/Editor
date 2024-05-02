@@ -1,29 +1,15 @@
 <!-- Seinät section on the mittaus role -->
 
 <div id="copiedcanvases" style="display: none;">
-
-    <ul class="copiedcanvases__fixednav">
-      <li><input type="checkbox" checked id="eight__lvl_zero" class="taso_btn drawarea__controls_btn taso__btns_one" onclick="eight__navigation(0);">
-      <label for="eight__lvl_zero" class="taso__btns_one taso_btn">Näytä levyt</label></li>
-      
-      <li><input type="checkbox"  id="eight__lvl_one" class="taso_btn drawarea__controls_btn taso__btns_one" onclick="eight__navigation(1);">
-      <label for="eight__lvl_one" class="taso__btns_one taso_btn">Näytä kiinnikkeet</label></li>
-      
-      <li><input type="checkbox"  id="eight__lvl_two" class="taso_btn drawarea__controls_btn taso__btns_two" onclick="eight__navigation(2)">
-      <label for="eight__lvl_two" class="taso__btns_two taso_btn">Näytä Rangat</label></li>
-      
-      <li><input type="checkbox" checked id="eight__lvl_three" class="taso_btn drawarea__controls_btn taso__btns_three" onclick="eight__navigation(3)">
-      <label for="eight__lvl_three" class="taso__btns_three taso_btn">Näytä listat</label></li>
-    </ul>
   <section class="nav rangatnav">
     <nav>
-      <ul style="display:flex;flex-direction: column;">
+      <ul>
       <li><div onclick="refresh__drawcontrols();updatearea();$('#step_drawscreen').val('rooms');">Ristivalikkoon</div></li>
-    
-      
+
+
       <!--  <input type="checkbox" checked id="eight__lvl_four" class="taso_btn drawarea__controls_btn taso__btns_four" onclick="eight__navigation(4)">
       <label for="eight__lvl_four" class="taso__btns_four taso_btn">Näytä saumat</label> -->
-      
+
       <!-- <input type="checkbox" checked id="eight__lvl_five" class="taso_btn drawarea__controls_btn taso__btns_five" onclick="eight__navigation(5)">
       <label for="eight__lvl_five" class="taso__btns_five taso_btn"></label> -->
 
@@ -32,27 +18,40 @@
       <!-- <li><div class="yellowbtn" onclick="takeshotAllwalls();">Ota PDF-kuvakaappaus</div></li> -->
       <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();" class="redbtn">Palaa Kuoseihin</div></li>
       </ul>
-    </nav>
-    <nav style="margin: 15px 0 0 0;">
-    <h4>Valikko</h4>
-      <ul style="display:flex;flex-direction: column;max-width:100%;">
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_one'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Origo</div></li>
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_two'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Aukot</div></li>
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Läpiviennit</div></li>
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Saumat</div></li>
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Kiinnikkeet</div></li>
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Kuosit</div></li>
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav_current">Seinät</div></li>
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu'); refresh__drawcontrols();updatearea(); delcanvases();">Levyt</div></li>
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_six'); refresh__drawcontrols();updatearea(); delcanvases();">Rangat</div></li>
-        <li><div onclick="$('#step_drawscreen').val('drawscreen_section_seven'); refresh__drawcontrols();updatearea(); delcanvases();">Listat</div></li>
-        <li><div onclick="$('#step_drawscreen').val('project_start'); refresh__drawcontrols();updatearea(); delcanvases();">Päävalikkoon</div></li>
-        <!-- <li><div onclick="levyta();refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_five');">Seuraava</div></li> -->
-      </ul>
+        <ul class="copiedcanvases__fixednav">
+            <li><input type="checkbox" checked id="eight__lvl_zero" class="taso_btn drawarea__controls_btn taso__btns_one" onclick="eight__navigation(0);">
+                <label for="eight__lvl_zero" class="taso__btns_one taso_btn">Näytä levyt</label></li>
 
-    </nav>
+            <li><input type="checkbox"  id="eight__lvl_one" class="taso_btn drawarea__controls_btn taso__btns_one" onclick="eight__navigation(1);">
+                <label for="eight__lvl_one" class="taso__btns_one taso_btn">Näytä kiinnikkeet</label></li>
 
+            <li><input type="checkbox"  id="eight__lvl_two" class="taso_btn drawarea__controls_btn taso__btns_two" onclick="eight__navigation(2)">
+                <label for="eight__lvl_two" class="taso__btns_two taso_btn">Näytä Rangat</label></li>
+
+            <li><input type="checkbox" checked id="eight__lvl_three" class="taso_btn drawarea__controls_btn taso__btns_three" onclick="eight__navigation(3)">
+                <label for="eight__lvl_three" class="taso__btns_three taso_btn">Näytä listat</label></li>
+        </ul>
+    </nav>
   </section>
+    <section class="bottom_nav">
+        <nav>
+            <h4>Valikko</h4>
+            <ul>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_one'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Origo</div></li>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_two'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Aukot</div></li>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_three'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Läpiviennit</div></li>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_four'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav__comleted">Saumat</div></li>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_tyostot'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Kiinnikkeet</div></li>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_five'); refresh__drawcontrols();updatearea(); delcanvases();"class="nav__comleted" >Kuosit</div></li>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_eight'); refresh__drawcontrols();updatearea(); delcanvases();" class="nav_current">Seinät</div></li>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_esikatselu'); refresh__drawcontrols();updatearea(); delcanvases();">Levyt</div></li>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_six'); refresh__drawcontrols();updatearea(); delcanvases();">Rangat</div></li>
+                <li><div onclick="$('#step_drawscreen').val('drawscreen_section_seven'); refresh__drawcontrols();updatearea(); delcanvases();">Listat</div></li>
+                <li><div onclick="$('#step_drawscreen').val('project_start'); refresh__drawcontrols();updatearea(); delcanvases();">Päävalikkoon</div></li>
+                <!-- <li><div onclick="levyta();refresh__drawcontrols();updatearea();$('#step_drawscreen').val('drawscreen_section_five');">Seuraava</div></li> -->
+            </ul>
+        </nav>
+    </section>
   <article class="canvas_a preview_canvas" style="width: 100%;">
     <table class="grid-container">
     <?php
