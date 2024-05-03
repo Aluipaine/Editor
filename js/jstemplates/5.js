@@ -1109,6 +1109,20 @@ function split__half_panels() {
       })
     }
   }
+
+  let all_levys = canvas.querySelectorAll(".levy"),
+      all_aukkos = canvas.querySelectorAll(".aukko");
+  for (let levy of all_levys) {
+    let levy_coords = levy.getBoundingClientRect();
+    for (let aukko of all_aukkos) {
+      let aukko_coords = aukko.getBoundingClientRect();
+      if (levy_coords.left >= aukko_coords.left && levy_coords.right <= aukko_coords.right
+          && levy_coords.top >= aukko_coords.top && levy_coords.bottom <= aukko_coords.bottom
+      ) {
+        levy.remove();
+      }
+    }
+  }
 }
 
 function reorder_levy_names() {
