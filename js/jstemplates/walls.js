@@ -248,6 +248,11 @@ function siirto_muualle(mode) {
     room_array.forEach(room => {
       canvas = document.querySelector(".canvas_"+room);
       rangoita(parseFloat(canvas.style.width) * 5);
+      document.querySelectorAll(".erikoisranka.ranka_vaaka").forEach(ranka => {
+        if (parseFloat(ranka.style.bottom) > 0) {
+          ranka.style.bottom = ranka.parentElement.clientHeight + "px";
+        }
+      })
     });
     await sleep(1500);
 

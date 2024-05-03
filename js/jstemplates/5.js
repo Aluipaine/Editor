@@ -1114,69 +1114,80 @@ function split__half_panels() {
 }
 
 function reorder_levy_names() {
-  let levys = [...canvas.querySelectorAll(".levy")];
+  let levyts = [];
+  if (document.querySelector("#copiedcanvases").style.display !== "none") {
+    levyts = [...document.querySelectorAll(".preview_canvas .levyt")];
+  }
+  else {
+    levyts = [canvas.querySelector(".levyt")];
+  }
+  for (let levyt of levyts) {
+    if (!levyt.querySelector(".external_meta_area")) {
+      let levys = [...levyt.querySelectorAll(".levy")];
 
-  //Sort levys from left to right and from bottom to top
-  levys = levys.sort((l1, l2) => {
-    let lcord = l1.title.split`,`,
-        l1_l = parseFloat(lcord[3]),
-        l1_r = parseFloat(lcord[3]) + parseFloat(lcord[0]),
-        l1_b = parseFloat(lcord[2]);
+      //Sort levys from left to right and from bottom to top
+      levys = levys.sort((l1, l2) => {
+        let lcord = l1.title.split`,`,
+            l1_l = parseFloat(lcord[3]),
+            l1_r = parseFloat(lcord[3]) + parseFloat(lcord[0]),
+            l1_b = parseFloat(lcord[2]);
 
-    lcord = l2.title.split`,`;
-    let l2_l = parseFloat(lcord[3]),
-        l2_r = parseFloat(lcord[3]) + parseFloat(lcord[0]),
-        l2_b = parseFloat(lcord[2]);
-    if (l1_l < l2_l) {
-      return -1;
-    }
-    if (l1_l === l2_l && l1_r <= l2_r && l1_b < l2_b) {
-      return -1
-    }
-    if (l1_r === l2_r && l1_l >= l2_l && l1_b < l2_b) {
-      return 1
-    }
-  })
+        lcord = l2.title.split`,`;
+        let l2_l = parseFloat(lcord[3]),
+            l2_r = parseFloat(lcord[3]) + parseFloat(lcord[0]),
+            l2_b = parseFloat(lcord[2]);
+        if (l1_l < l2_l) {
+          return -1;
+        }
+        if (l1_l === l2_l && l1_r <= l2_r && l1_b < l2_b) {
+          return -1
+        }
+        if (l1_r === l2_r && l1_l >= l2_l && l1_b < l2_b) {
+          return 1
+        }
+      })
 
-  let chunked_levys = [],
-      chunk = [];
-  for (let levy of levys) {
-    let lcord = levy.title.split`,`,
-        l1_l = parseFloat(lcord[3]),
-        l1_r = parseFloat(lcord[3]) + parseFloat(lcord[0]);
-    if (chunk.at(-1)) {
-      lcord = chunk.at(-1).title.split`,`;
-      let l2_l = parseFloat(lcord[3]),
-          l2_r = parseFloat(lcord[3]) + parseFloat(lcord[0]);
-      if (l1_l === l2_l) {
-        chunk.push(levy)
+      let chunked_levys = [],
+          chunk = [];
+      for (let levy of levys) {
+        let lcord = levy.title.split`,`,
+            l1_l = parseFloat(lcord[3]),
+            l1_r = parseFloat(lcord[3]) + parseFloat(lcord[0]);
+        if (chunk.at(-1)) {
+          lcord = chunk.at(-1).title.split`,`;
+          let l2_l = parseFloat(lcord[3]),
+              l2_r = parseFloat(lcord[3]) + parseFloat(lcord[0]);
+          if (l1_l === l2_l) {
+            chunk.push(levy)
+          }
+          else {
+            chunked_levys.push(chunk);
+            chunk = [levy]
+          }
+        }
+        else {
+          chunk = [levy]
+        }
       }
-      else {
+      if (chunk.length) {
         chunked_levys.push(chunk);
-        chunk = [levy]
       }
-    }
-    else {
-      chunk = [levy]
+      let char = 65;
+      for (let chunk of chunked_levys) {
+        for (let index = 0; index < chunk.length; index++) {
+          let levy = chunk[index];
+          let levy_name = levy.querySelector(".levy_name").innerHTML.split` `;
+          levy_name[1] = String.fromCharCode(char) + (index + 1);
+          levy.querySelector(".levy_name").innerHTML = levy_name.join` `
+        }
+        char++;
+      }
+      put_levy_meta_in_external_area(levyt, levys);
     }
   }
-  if (chunk.length) {
-    chunked_levys.push(chunk);
-  }
-  let char = 65;
-  for (let chunk of chunked_levys) {
-    for (let index = 0; index < chunk.length; index++) {
-      let levy = chunk[index];
-      let levy_name = levy.querySelector(".levy_name").innerHTML.split` `;
-      levy_name[1] = String.fromCharCode(char) + (index + 1);
-      levy.querySelector(".levy_name").innerHTML = levy_name.join` `
-    }
-    char++;
-  }
-  put_levy_meta_in_external_area(levys);
 }
 
-function put_levy_meta_in_external_area(levys) {
+function put_levy_meta_in_external_area(levyt, levys) {
   let metas = new Set();
   for (let levy of levys) {
     let meta = levy.querySelector(".levy_name").innerHTML;
@@ -1185,11 +1196,10 @@ function put_levy_meta_in_external_area(levys) {
     levy.querySelector(".levy_name").innerHTML = meta.split`<br>`.slice(0, -2);
   }
 
-  canvas.querySelector(".levyt .external_meta_area")?.remove();
   let external_area = document.createElement("div");
   external_area.innerText = [...metas].join("<br>");
   external_area.classList.add("external_meta_area");
-  canvas.querySelector(".levyt").prepend(external_area);
+  levyt.prepend(external_area);
 }
 
 function remove_levy_under_aukkos() {
