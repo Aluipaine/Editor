@@ -113,6 +113,17 @@ function eight__navigation(arg) {
   // }
   // else {
   // }
+  let aukko__cord = eight.querySelectorAll(".aukko__cord");
+  if (document.querySelector("#eight__lvl_six").checked) {
+    for (let i = aukko__cord.length - 1; i >= 0; i--) {
+      aukko__cord[i].style.opacity = 1;
+    }
+  }
+  else {
+    for (let i = aukko__cord.length - 1; i >= 0; i--) {
+      aukko__cord[i].style.opacity = 0;
+    }
+  }
 }
 
 realcount = 0;

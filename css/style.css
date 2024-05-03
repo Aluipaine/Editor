@@ -6564,6 +6564,10 @@ div.x_del.hidden {
   width: 200px;
 }
 
+#copiedcanvases .nav.rangatnav nav {
+  margin: 0 40px 0 0;
+}
+
 #copiedcanvases .nav.rangatnav ul {
   display: block;
   max-width: unset;
@@ -6595,7 +6599,7 @@ div.x_del.hidden {
   cursor: pointer;
 }
 
-#copiedcanvases .preview_canvas {
+#copiedcanvases .preview_canvas:first-of-type {
   margin-left: 0;
 }
 /* #copiedcanvases .preview_canvas .grid-container {

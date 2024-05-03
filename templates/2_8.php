@@ -30,6 +30,9 @@
 
             <li><input type="checkbox" checked id="eight__lvl_three" class="taso_btn drawarea__controls_btn taso__btns_three" onclick="eight__navigation(3)">
                 <label for="eight__lvl_three" class="taso__btns_three taso_btn">Näytä listat</label></li>
+
+            <li><input type="checkbox" checked id="eight__lvl_six" class="taso_btn drawarea__controls_btn taso__btns_three" onclick="eight__navigation()">
+                <label for="eight__lvl_six" class="taso__btns_three taso_btn">Näytä gridi</label></li>
         </ul>
     </nav>
   </section>
