@@ -518,6 +518,7 @@ function luo__levy_restore(mod_nam, mod_type, mod_b, mod_left, mod_height, mod_w
   dex = mod_nam.split("_")[1][1];
   col = mod_nam.split("_")[1][0];
 
+  remove_levy_under_aukkos();
 }
 
 /**
@@ -1109,20 +1110,7 @@ function split__half_panels() {
       })
     }
   }
-
-  let all_levys = canvas.querySelectorAll(".levy"),
-      all_aukkos = canvas.querySelectorAll(".aukko");
-  for (let levy of all_levys) {
-    let levy_coords = levy.getBoundingClientRect();
-    for (let aukko of all_aukkos) {
-      let aukko_coords = aukko.getBoundingClientRect();
-      if (levy_coords.left >= aukko_coords.left && levy_coords.right <= aukko_coords.right
-          && levy_coords.top >= aukko_coords.top && levy_coords.bottom <= aukko_coords.bottom
-      ) {
-        levy.remove();
-      }
-    }
-  }
+  remove_levy_under_aukkos();
 }
 
 function reorder_levy_names() {
@@ -1202,4 +1190,20 @@ function put_levy_meta_in_external_area(levys) {
   external_area.innerText = [...metas].join("<br>");
   external_area.classList.add("external_meta_area");
   canvas.querySelector(".levyt").prepend(external_area);
+}
+
+function remove_levy_under_aukkos() {
+  let all_levys = canvas.querySelectorAll(".levy"),
+      all_aukkos = canvas.querySelectorAll(".aukko");
+  for (let levy of all_levys) {
+    let levy_coords = levy.getBoundingClientRect();
+    for (let aukko of all_aukkos) {
+      let aukko_coords = aukko.getBoundingClientRect();
+      if (levy_coords.left + 10 >= aukko_coords.left && levy_coords.right - 10 <= aukko_coords.right
+          && levy_coords.top + 10 >= aukko_coords.top && levy_coords.bottom - 10 <= aukko_coords.bottom
+      ) {
+        levy.remove();
+      }
+    }
+  }
 }
