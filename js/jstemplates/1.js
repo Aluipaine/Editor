@@ -1992,8 +1992,48 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
        saving_h = parseFloat(newDiv.style.height)*5;
 
 
-       lapiviennit__sade_muucord = document.querySelector("#lapiviennit__sade_muucord").value;
-       save("lv~~"+lapiviennit__sade_muucord+"~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+document.querySelector("#lapiviennit__sade_muucord").value+"~~"+document.querySelector("#lv_comment").value+"~~"+document.querySelector("#lv_comment_from").value+"~~"+document.querySelector("#lv_comment_to").value);
+      await sleep(250);
+
+      let aukkos = [...canvas.querySelectorAll(".aukko")]
+      let lv_coords = newDiv.getBoundingClientRect();
+      let lv_remove_confirm = document.querySelector("#lv_remove_confirm");
+      if (aukkos.filter(aukko => {
+        let aukko_coords = aukko.getBoundingClientRect();
+        return aukko_coords.left <= lv_coords.left && aukko_coords.right >= lv_coords.right
+            && aukko_coords.bottom >= lv_coords.bottom && aukko_coords.top <= lv_coords.top
+      }).length) {
+        lv_remove_confirm.showModal();
+        lv_remove_confirm.querySelector(".okay").addEventListener("click", () => {
+          lv_remove_confirm.close();
+          modal_result = 1;
+        });
+        lv_remove_confirm.querySelector(".cancel").addEventListener("click", () => {
+          lv_remove_confirm.close();
+          modal_result = -1;
+        });
+      }
+
+      var modal_result = 0;
+      var modal_promise = new Promise((resolve) => {
+        let interval = setInterval(() => {
+          if (modal_result > 0) {
+            clearInterval(interval);
+            resolve(true);
+          }
+          if (modal_result < 0) {
+            clearInterval(interval);
+            resolve(false);
+          }
+        }, 100);
+      });
+      
+      if (await modal_promise) {
+        lapiviennit__sade_muucord = document.querySelector("#lapiviennit__sade_muucord").value;
+        save("lv~~"+lapiviennit__sade_muucord+"~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+document.querySelector("#lapiviennit__sade_muucord").value+"~~"+document.querySelector("#lv_comment").value+"~~"+document.querySelector("#lv_comment_from").value+"~~"+document.querySelector("#lv_comment_to").value);
+      }
+      else {
+        document.querySelector(`.newDiv__comment_del[name=${newDiv.id}]`).click();
+      }
     }
   }
 
@@ -2033,7 +2073,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       }
     }
   }
-
+  
   // document.querySelector(".drawarea__bottom");
   count__mp();
   count__lv();

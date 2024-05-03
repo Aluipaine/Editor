@@ -7994,3 +7994,45 @@ input[type="radio"].mass__selection_btn {
   display: none;
   /* Temprorary */
 }
+
+#lv_remove_confirm {
+  border: none;
+  max-width: unset;
+  max-height: unset;
+  width: 100%;
+  height: 100%;
+  background: none;
+}
+#lv_remove_confirm .content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+#lv_remove_confirm .content .center {
+  margin: auto;
+  padding: 2rem 1rem;
+  background: #fff;
+  box-shadow: 0 2px 5px #ccc;
+}
+#lv_remove_confirm .content p {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+#lv_remove_confirm .content button {
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+}
+#lv_remove_confirm .content .drawarea__controls_btn.okay {
+  background: #18ab00;
+}
+#lv_remove_confirm .content .drawarea__controls_btn.cancel {
+  background: lightcoral;
+}
+
+#lv_remove_confirm::backdrop {
+  background: rgb(255 255 255 / .7);
+}
