@@ -158,8 +158,8 @@
 <dialog id="lv_remove_confirm">
     <div class="content">
         <div class="center">
-            <p>Läpivienti-elementti on aukkon sisällä. Pitäisikö minun poistaa se?</p>
-            <button class="okay drawarea__controls_btn">kyllä</button>
+            <p>Et voi luoda läpivientiä aukon päälle</p>
+            <button class="okay drawarea__controls_btn">Kyllä</button>
             <button class="cancel drawarea__controls_btn">Ei</button>
         </div>
     </div>
