@@ -510,7 +510,7 @@ function kiinnike_default_initialization() {
   document.querySelector("#kin_toggle_1").checked = true;
   rangat__navigation(false);
 
-  
+
   
 }
 
@@ -3182,6 +3182,8 @@ function reset__ltlevy_cords(levy) {
     }
 
     realinputs = levy.querySelectorAll("input");
+
+
 }
 
 /**
@@ -4101,6 +4103,7 @@ function toggle__kinnikkeet_specs(arg) {
   x_cords = canvas.querySelectorAll("input:not(.secondcord):not(.y_cord_border):not(.x_cord_border)");
   x_dels = canvas.querySelectorAll(".x_del");
   if(arg == 1) {
+    canvas.querySelectorAll(".levy_name").forEach(name => delete name.parentElement.style.zIndex);
 
     for (let i = 0; i < x_cords.length; i++) {
       x_cords[i].style.display = 'block';
@@ -4111,6 +4114,7 @@ function toggle__kinnikkeet_specs(arg) {
     }
   }
   else if(arg == 2) {
+    canvas.querySelectorAll(".levy_name").forEach(name => name.parentElement.style.zIndex = "0");
     for (let i = 0; i < x_cords.length; i++) {
       x_cords[i].style.display = 'none';
     }
