@@ -1821,6 +1821,50 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       comment = newDiv.dataset.comment;
       comment_from = newDiv.dataset.comment_from;
       comment_to = newDiv.dataset.comment_to;
+
+
+
+
+      await sleep(250);
+
+      let lvs = [...canvas.querySelectorAll(".lv")]
+      let aukko_coords = newDiv.getBoundingClientRect();
+      let lv_remove_confirm = document.querySelector("#lv_remove_confirm");
+      lvs = lvs.filter(lv => {
+        let lv_coords = lv.getBoundingClientRect();
+        return aukko_coords.left <= lv_coords.left && aukko_coords.right >= lv_coords.right
+            && aukko_coords.bottom >= lv_coords.bottom && aukko_coords.top <= lv_coords.top
+      });
+      if (lvs.length) {
+        lv_remove_confirm.showModal();
+        lv_remove_confirm.querySelector(".okay").addEventListener("click", () => {
+          lv_remove_confirm.close();
+          modal_result = 1;
+        });
+        lv_remove_confirm.querySelector(".cancel").addEventListener("click", () => {
+          lv_remove_confirm.close();
+          modal_result = -1;
+        });
+      }
+
+      var modal_result = 0;
+      var modal_promise = new Promise((resolve) => {
+        let interval = setInterval(() => {
+          if (modal_result > 0) {
+            clearInterval(interval);
+            resolve(true);
+          }
+          if (modal_result < 0) {
+            clearInterval(interval);
+            resolve(false);
+          }
+        }, 100);
+      });
+      debugger;
+      if (await modal_promise) {
+        document.querySelector(`.newDiv__comment_del[name=${lvs[0].id}]`).click();
+      }
+
       save("au~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+(saving_leftcord+saving_w)+"~~"+(saving_bottomcord + saving_h)+"~~"+ylitys_mode+"~~"+comment+"~~"+comment_from+"~~"+comment_to+"~~"+mytype);
     
 
