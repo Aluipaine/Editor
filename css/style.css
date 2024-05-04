@@ -428,6 +428,14 @@ form input[type="submit"]:focus {
   overflow: hidden;
 }
 
+.preview_canvas .grid-row {
+  width: 100px !important;
+}
+.preview_canvas .grid-row .grid-item {
+  width: 100px !important;
+  height: 100px !important;
+}
+
 .grid-row {
   display: flex;
   flex-direction: column;
