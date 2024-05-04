@@ -6586,7 +6586,7 @@ div.x_del.hidden {
   width: auto;
 }
 #copiedcanvases .bottom_nav {
-  top: 690px;
+  top: calc(100% + 20px);
   width: 5500px;
   position: absolute;
 }
