@@ -2067,12 +2067,12 @@
             </tr>
             <tr>
                 <td><input type="number" pattern="\d*"/ data-room="asjarj-5" maxlength="1" name="wall_five_asjarj asjarj" id="wall_order_roof" data-tochange="k" onchange="rooms__change_asjarj(this); "value="5" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="roof" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="r" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
+                <td><input type="text" data-room="k" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="k" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
                 <td><input type="text" name="wall_one_roof_desc" id="wall_desc_roof" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
             </tr>
             <tr>
                 <td><input type="number" pattern="\d*"/ data-room="asjarj-6" maxlength="1" name="wall_six_asjarj asjarj" id="wall_order_floor" data-tochange="l" onchange="rooms__change_asjarj(this); "value="6" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="floor" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
+                <td><input type="text" data-room="l" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
                 <td><input type="text" name="wall_one_floor_desc" id="wall_desc_floor" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
             </tr>
           </table>
