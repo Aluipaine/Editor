@@ -619,8 +619,7 @@ function create_rooms() {
  * @param {any} arg - The argument to be processed.
  * @returns None
  */
-function initalize_cross(arg) {
-
+async function initalize_cross(arg) {
   a_saved = apartment.dataset.aroom.replaceAll(",","~");
   b_saved = apartment.dataset.broom.replaceAll(",","~");
   c_saved = apartment.dataset.croom.replaceAll(",","~");
@@ -908,7 +907,7 @@ function initalize_cross(arg) {
   formData = {
     pr_id: document.querySelector("#current_project_id").value,
     apartment: togetroom
-  },
+  };
   $.ajax({
     type: "POST",
     url: "../vendor/get-apartment_sizes.php",
@@ -930,7 +929,29 @@ function initalize_cross(arg) {
       document.querySelector("#wall_one_"+a+"_w").value = s[4];
     });
   });
- 
+
+  let room_walls = await new Promise((resolve) => {
+    $.ajax({
+      url: "/get-walls.php",
+      type: "POST",
+      data: {
+        project_id: document.querySelector("#current_project_id").value,
+        username: document.querySelector("#current_user").value,
+        arak: currect_arak
+      },
+      success: (answer) => {
+        resolve(answer);
+      }
+    });
+  })
+
+  room_walls = JSON.parse(room_walls);
+  room_walls.forEach(wall => {
+    let container = $("#house").parent();
+    container.find(`[data-room="${wall.wall.toLowerCase()}"]`).val(wall.name)
+    container.find(`[data-room="${wall.wall.toUpperCase()}"]`).text(wall.name)
+  });
+
 }
 
 /**

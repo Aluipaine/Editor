@@ -43,9 +43,10 @@ if(isset($hidden)) {
 
 $kumoa = "INSERT INTO `kumoalog` (`project_id`, `username`, `redo`, `undo`) VALUES ($project_id, '$username', '" . mysqli_real_escape_string($db, $query) . "' , '" . mysqli_real_escape_string($db, $undo) . "');";
 
-$queries = explode(";", $query . $kumora);
+//$queries = explode(";", $query . $kumoa);
+$queries = explode(";", $query);
 
-var_dump($values);
+//var_dump($values);
 
 foreach($queries as $q) {
     if($q != "")
