@@ -160,7 +160,6 @@
         <div class="center">
             <p>Et voi luoda läpivientiä aukon päälle</p>
             <button class="okay drawarea__controls_btn">Kyllä</button>
-            <button class="cancel drawarea__controls_btn">Ei</button>
         </div>
     </div>
 </dialog>

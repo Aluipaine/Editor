@@ -1841,10 +1841,6 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
           lv_remove_confirm.close();
           modal_result = 1;
         });
-        lv_remove_confirm.querySelector(".cancel").addEventListener("click", () => {
-          lv_remove_confirm.close();
-          modal_result = -1;
-        });
       }
 
       var modal_result = 0;
@@ -1852,18 +1848,13 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         let interval = setInterval(() => {
           if (modal_result > 0) {
             clearInterval(interval);
+            document.querySelector(`.drawarea__controls_three .newDiv__comment_del[name=${lvs[0].id}]`).click();
             resolve(true);
-          }
-          if (modal_result < 0) {
-            clearInterval(interval);
-            resolve(false);
           }
         }, 100);
       });
-      debugger;
-      if (await modal_promise) {
-        document.querySelector(`.newDiv__comment_del[name=${lvs[0].id}]`).click();
-      }
+
+      await modal_promise
 
       save("au~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+(saving_leftcord+saving_w)+"~~"+(saving_bottomcord + saving_h)+"~~"+ylitys_mode+"~~"+comment+"~~"+comment_from+"~~"+comment_to+"~~"+mytype);
     
@@ -2051,33 +2042,23 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
           lv_remove_confirm.close();
           modal_result = 1;
         });
-        lv_remove_confirm.querySelector(".cancel").addEventListener("click", () => {
-          lv_remove_confirm.close();
-          modal_result = -1;
+
+        var modal_result = 0;
+        var modal_promise = new Promise((resolve) => {
+          let interval = setInterval(() => {
+            if (modal_result > 0) {
+              clearInterval(interval);
+              document.querySelector(`.drawarea__controls_three .newDiv__comment_del[name=${newDiv.id}]`).click();
+              resolve(true);
+            }
+          }, 100);
         });
+
+        await modal_promise
       }
 
-      var modal_result = 0;
-      var modal_promise = new Promise((resolve) => {
-        let interval = setInterval(() => {
-          if (modal_result > 0) {
-            clearInterval(interval);
-            resolve(true);
-          }
-          if (modal_result < 0) {
-            clearInterval(interval);
-            resolve(false);
-          }
-        }, 100);
-      });
-      
-      if (await modal_promise) {
-        lapiviennit__sade_muucord = document.querySelector("#lapiviennit__sade_muucord").value;
-        save("lv~~"+lapiviennit__sade_muucord+"~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+document.querySelector("#lapiviennit__sade_muucord").value+"~~"+document.querySelector("#lv_comment").value+"~~"+document.querySelector("#lv_comment_from").value+"~~"+document.querySelector("#lv_comment_to").value);
-      }
-      else {
-        document.querySelector(`.newDiv__comment_del[name=${newDiv.id}]`).click();
-      }
+      lapiviennit__sade_muucord = document.querySelector("#lapiviennit__sade_muucord").value;
+      save("lv~~"+lapiviennit__sade_muucord+"~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+document.querySelector("#lapiviennit__sade_muucord").value+"~~"+document.querySelector("#lv_comment").value+"~~"+document.querySelector("#lv_comment_from").value+"~~"+document.querySelector("#lv_comment_to").value);
     }
   }
 
