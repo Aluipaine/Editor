@@ -2665,8 +2665,9 @@ function getElementIndex(element) {
  */
 function tyosto__del(item, only_self = false, just_hide = false) {
   if (just_hide) {
-    item.parentNode.classList.add("hidden");
-    item.parentNode.querySelector(".only_self").remove();
+    let parent = item.parentNode;
+    parent.classList.add("hidden");
+    parent.querySelector(".only_self").remove();
     draw_recreate_buttons();
     return null;
   }
@@ -4635,13 +4636,13 @@ function draw_recreate_buttons() {
     let top = rect.top;
     let to_the_left = tyostots.filter(v => {
       let rect = v.getBoundingClientRect();
-      return touch(rect.top, top) && touch(rect.right, left);
+      return touch(rect.top, top) && touch(rect.right, left) && !v.classList.contains("hidden");
     });
     let levy_to_the_left = levys.filter(v => {
       let rect = v.getBoundingClientRect();
       return rect.bottom > top && rect.top < top && touch(rect.right, left);
     });
-    if (!to_the_left.length && levy_to_the_left.length) {
+    if (!to_the_left.length && levy_to_the_left.length && !tyostot.classList.contains("hidden")) {
       add_recreate_button(tyostot, "horizontal");
     }
     let to_the_right = tyostots.filter(v => {
@@ -4664,7 +4665,7 @@ function draw_recreate_buttons() {
     let left = rect.left;
     let to_the_top = tyostots.filter(v => {
       let rect = v.getBoundingClientRect();
-      return touch(rect.left, left) && touch(rect.bottom, top);
+      return touch(rect.left, left) && touch(rect.bottom, top) && !v.classList.contains("hidden");
     });
     let levy_to_the_top = levys.filter(v => {
       let rect = v.getBoundingClientRect();
@@ -4681,7 +4682,7 @@ function draw_recreate_buttons() {
       let rect = v.getBoundingClientRect();
       return rect.left < left && rect.right > left && touch(rect.top, bottom);
     });
-    if (!to_the_bottom.length && levy_to_the_bottom.length) {
+    if (!to_the_bottom.length && levy_to_the_bottom.length && !tyostot.classList.contains("hidden")) {
       add_recreate_button(tyostot, "vertical");
     }
   });
