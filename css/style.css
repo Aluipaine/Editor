@@ -393,14 +393,14 @@ form input[type="submit"]:focus {
 }
 .finalization_downloadbtn {
   position: fixed;
-  bottom: 5vh;
-  left: 0;
+  bottom: 5px;
   right: 0;
   text-align: center;
   top: unset;
   align-items: center;
   display: block;
   margin: 0 auto;
+  padding: .5rem 1rem;
 }
 
 /*GRID*/

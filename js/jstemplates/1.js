@@ -1841,20 +1841,20 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
           lv_remove_confirm.close();
           modal_result = 1;
         });
+
+        var modal_result = 0;
+        var modal_promise = new Promise((resolve) => {
+          let interval = setInterval(() => {
+            if (modal_result > 0) {
+              clearInterval(interval);
+              document.querySelector(`.drawarea__controls_three .newDiv__comment_del[name=${lvs[0].id}]`).click();
+              resolve(true);
+            }
+          }, 100);
+        });
+
+        await modal_promise
       }
-
-      var modal_result = 0;
-      var modal_promise = new Promise((resolve) => {
-        let interval = setInterval(() => {
-          if (modal_result > 0) {
-            clearInterval(interval);
-            document.querySelector(`.drawarea__controls_three .newDiv__comment_del[name=${lvs[0].id}]`).click();
-            resolve(true);
-          }
-        }, 100);
-      });
-
-      await modal_promise
 
       save("au~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+(saving_leftcord+saving_w)+"~~"+(saving_bottomcord + saving_h)+"~~"+ylitys_mode+"~~"+comment+"~~"+comment_from+"~~"+comment_to+"~~"+mytype);
     

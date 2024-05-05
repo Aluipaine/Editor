@@ -262,7 +262,15 @@ function siirto_muualle(mode) {
     });
     await sleep(500);
     document.querySelector(".preloader").classList.remove("active");
-    alert("Valmis!"); 
+
+    await sleep(100);
+
+    let canvases = $(".preview_canvas").get();
+    $("#copiedcanvases .bottom_nav").css(
+        "top", canvases.reduce((a, b) => Math.max(a, b.clientHeight), 0) + 20 + "px"
+    );
+
+    alert("Valmis!");
 
 
   })();
