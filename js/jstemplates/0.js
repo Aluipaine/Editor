@@ -948,9 +948,10 @@ async function initalize_cross(arg) {
   room_walls = JSON.parse(room_walls);
   room_walls.forEach(wall => {
     let container = $("#house").parent();
-    container.find(`[data-room="${wall.wall.toLowerCase()}"]`).val(wall.name)
-    container.find(`#wall_desc_${wall.wall.toLowerCase()}`).val(wall.description)
-    container.find(`[data-room="${wall.wall.toUpperCase()}"]`).text(wall.name)
+    let name = container.find(`[data-room="${wall.wall.toLowerCase()}"]`);
+    name.val(wall.name || name.val());
+    container.find(`#wall_desc_${wall.wall.toLowerCase()}`).val(wall.description);
+    container.find(`[data-room="${wall.wall.toUpperCase()}"]`).text(name.val());
   });
 
 }
