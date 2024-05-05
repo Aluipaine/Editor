@@ -151,23 +151,23 @@ function siirto_muualle(mode) {
       canvas_d.style.width = parseFloat(document.querySelector("#wall_one_d_w").value) / 5 + "px";
       
       
-
+    let NORMAL_AWAIT = new Promise((resolve) => {
       formData = {
         pr_id: document.querySelector("#current_project_id").value,
         room: current_apartment,
         wall: current_room,
-    },
-    $.ajax({
+      };
+      $.ajax({
         type: "POST",
         url: "../vendor/get-savedprogressroom.php",
         data: formData,
         error: function (jqxhr, status, exception) {
           console.log('Tietokantavirhe, soita numeroon +358449782028');
         }
-    }).done(function (success) {
-      successful = success.split("],[");
-      if(successful[0].length > 3) {
-        successful.forEach(s_unprocessed => {
+      }).done(function (success) {
+        successful = success.split("],[");
+        if(successful[0].length > 3) {
+          successful.forEach(s_unprocessed => {
             s = s_unprocessed.replaceAll('"','').replaceAll("]","").replaceAll("[","").split(",");
             content = s[4];
             timestamp = s[5];
@@ -177,10 +177,12 @@ function siirto_muualle(mode) {
             else if(tyostot_ok < timestamp && content.split("~~")[0] === "tyostot") {
               tyosto_content = content;
             }
-        });
-      }
+          });
+        }
+        resolve();
+      });
     });
-    await sleep(500);
+    await NORMAL_AWAIT;
 
     room_array = ["a","b","c","d"];
     canvas__original = canvas;
@@ -269,6 +271,21 @@ function siirto_muualle(mode) {
     $("#copiedcanvases .bottom_nav").css(
         "top", canvases.reduce((a, b) => Math.max(a, b.clientHeight), 0) + 40 + "px"
     );
+
+    canvases.forEach(canvas => {
+      let x = $(canvas).find(".levy_tyostot_x"),
+          tyosto = x.find(".tyostot__tyosto:not(.no_siirto)").get();
+      tyosto.forEach(tyosto => {
+        $(tyosto).find(".secondcord").css("top", canvas.clientHeight - Math.abs(tyosto.getBoundingClientRect().top - canvas.getBoundingClientRect().top) + 20 + "px")
+      });
+      let y = $(canvas).find(".levy_tyostot_y").get();
+      y.forEach(tyostot => {
+        tyosto = $(tyostot).find(".tyostot__tyosto:not(.no_siirto)").get();
+        tyosto.forEach(tyosto => {
+          $(tyosto).find(".secondcord").css("right", tyostot.getBoundingClientRect().left - canvas.getBoundingClientRect().left + tyostot.clientWidth + "px")
+        });
+      })
+    });
 
     alert("Valmis!");
 

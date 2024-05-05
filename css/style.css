@@ -8045,10 +8045,10 @@ input[type="radio"].mass__selection_btn {
   background: rgb(255 255 255 / .7);
 }
 
-#copiedcanvases .levy_tyostot_y .secondcord {
-  right: -90px !important;
-}
-
 #copiedcanvases .x_cord_mki  {
   right: 0 !important;
+}
+
+#copiedcanvases .thirdcord  {
+  opacity: 0;
 }

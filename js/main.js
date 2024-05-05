@@ -5520,13 +5520,14 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
         room_status = 'measured';
 
         if(current_room) {
-          current_room = current_room.replaceAll("seinä ","");
+          //current_room = current_room.replaceAll("seinä ","");
+          current_room = current_room.split` `[1] || current_room;
           if(current_room === "lattia") {
             current_room = "l";
           } else if(current_room === "katto") {
             current_room = "k";
           }
-          if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("problem")) {
+            if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("problem")) {
             room_status = 'problem';
           }
           else if (document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.contains("prob")) {
