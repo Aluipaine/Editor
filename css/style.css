@@ -8045,7 +8045,7 @@ input[type="radio"].mass__selection_btn {
   background: rgb(255 255 255 / .7);
 }
 
-#copiedcanvases .x_cord_mki  {
+#copiedcanvases .x_cord_mki:not(.secondcord)  {
   right: 0 !important;
 }
 
