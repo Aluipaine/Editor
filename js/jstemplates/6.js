@@ -1754,6 +1754,7 @@ function kiinnikkeet__siirto() {
   //console.log("kiinnikkeet__siirto() fired");
   let levytys = canvas.querySelectorAll('.levyt .levy');
   levytys_array = [];
+  let max_w = 0, max_h = 0;
   for (var i = 0; i < levytys.length; i++) {
     t_hlevy = parseFloat(levytys[i].style.height) * 5;
     t_wlevy = parseFloat(levytys[i].style.width) * 5;
@@ -1768,7 +1769,8 @@ function kiinnikkeet__siirto() {
     title = titteli[0] + "," + titteli[1];
     levytys_array.push("" + title + "");
 
-
+    max_w = Math.max(max_w, titteli[0]);
+    max_h = Math.max(max_h, titteli[1]);
   }
   /*levy_siirto = levytys_array.filter((element, index) => {
     return levytys_array.indexOf(element) === index;
@@ -1803,8 +1805,7 @@ function kiinnikkeet__siirto() {
   else if (document.querySelector(".levy_type.selected")) {
     document.querySelector(".levy_type.selected").click();
   }*/
-  let coords = levytys[0].title.split`,`;
-  change__klevy(`${coords[0]}x${coords[1]}`);
+  change__klevy(`${max_w}x${max_h}`);
 
   setTimeout(function () {
     reorganise__newtyosto();
