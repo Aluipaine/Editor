@@ -3051,6 +3051,13 @@ function reorganise__newtyosto() {
   }
 
   removeduplicatecords__adjustcords();
+
+
+  let kiinniketys = $(".kiinniketys:first-child");
+  kiinniketys.find("input:checked")[0].click();
+  kiinniketys.find("input:checked")[1].click();
+
+  draw_recreate_buttons();
 }
 
 /**
@@ -4445,9 +4452,6 @@ $("[data-action=set_levy_preset]").on("click", function () {
   $(this).addClass("selected").siblings().removeClass("selected");
   $("#p_target").val(vertical);
   $("#v_target").val(horizontal);
-  let kiinniketys = $(".kiinniketys:first-child");
-  kiinniketys.find("input:checked")[0].click();
-  kiinniketys.find("input:checked")[1].click();
 
   draw_recreate_buttons();
 });
