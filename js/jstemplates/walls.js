@@ -74,6 +74,9 @@ function eight__navigation(arg) {
       e_kin = e_levyt[i].querySelectorAll(".tyostot__tyosto");
       for (var v = e_kin.length - 1; v >= 0; v--) {
         e_kin[v].style.opacity = 1;
+        if (e_kin[v].querySelector(".secondcord ")) {
+          e_kin[v].querySelector(".secondcord ").style.opacity = 1;
+        }
       }
     }
   }
