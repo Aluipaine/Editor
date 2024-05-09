@@ -387,8 +387,16 @@
         </div>
         <article class="project__building_liftingplaces" style="height: 80px;">
         <?php
-          for ($i=1; $i <= 50; $i++) { 
-            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput'oninput='change_np(this.value,this.dataset.forrow)' data-forrow='" .$i . "' value='NP" .$i . "'> </li>";                      
+            $entrance = "a";
+            $np_sql_result = $db->query("SELECT `meta_value` FROM `projectmeta` WHERE `id`=$id AND `meta_key` = '{$entrance}_np_text'");
+            if ($np_sql_result && $np_sql_result->num_rows) {
+                $np = json_decode($np_sql_result->fetch_row()[0], true);
+            }
+            else {
+                $np = [];
+            }
+          for ($i=1; $i <= 50; $i++) {
+              echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
           }
           ?>
         </article>
@@ -505,10 +513,18 @@
         </div>
         <article class="project__building_liftingplaces" style="height: 80px;">
         <?php
-          for ($i=1; $i <= 50; $i++) { 
-            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput'oninput='change_np(this.value,this.dataset.forrow)' data-forrow='" .$i . "' value='NP" .$i . "'> </li>";                      
-          }
-          ?>
+        $entrance = "b";
+        $np_sql_result = $db->query("SELECT `meta_value` FROM `projectmeta` WHERE `id`=$id AND `meta_key` = '{$entrance}_np_text'");
+        if ($np_sql_result && $np_sql_result->num_rows) {
+            $np = json_decode($np_sql_result->fetch_row()[0], true);
+        }
+        else {
+            $np = [];
+        }
+        for ($i=1; $i <= 50; $i++) {
+            echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
+        }
+        ?>
         </article>
     </div>
     <div class="per50 floatleft coderdy rappu-3" id="C" style="opacity: 1;">
@@ -624,10 +640,18 @@
         </div>
         <article class="project__building_liftingplaces" style="height: 80px;">
         <?php
-          for ($i=1; $i <= 50; $i++) { 
-            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput'oninput='change_np(this.value,this.dataset.forrow)' data-forrow='" .$i . "' value='NP" .$i . "'> </li>";                      
-          }
-          ?>
+        $entrance = "c";
+        $np_sql_result = $db->query("SELECT `meta_value` FROM `projectmeta` WHERE `id`=$id AND `meta_key` = '{$entrance}_np_text'");
+        if ($np_sql_result && $np_sql_result->num_rows) {
+            $np = json_decode($np_sql_result->fetch_row()[0], true);
+        }
+        else {
+            $np = [];
+        }
+        for ($i=1; $i <= 50; $i++) {
+            echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
+        }
+        ?>
         </article>
     </div>
     <div class="per50 floatleft coderdy rappu-4" id="D" style="opacity: 1;">
@@ -738,9 +762,18 @@
         </div>
         <article class="project__building_liftingplaces" style="height: 80px;">
         <?php
-          for ($i=1; $i <= 50; $i++) { 
-            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput'oninput='change_np(this.value,this.dataset.forrow)' data-forrow='" .$i . "' value='NP" .$i . "'> </li>";                      
-          }
+        $entrance = "d";
+        $np_sql_result = $db->query("SELECT `meta_value` FROM `projectmeta` WHERE `id`=$id AND `meta_key` = '{$entrance}_np_text'");
+        if ($np_sql_result && $np_sql_result->num_rows) {
+            $np = json_decode($np_sql_result->fetch_row()[0], true);
+        }
+        else {
+            $np = [];
+        }
+        for ($i=1; $i <= 50; $i++) {
+            echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
+        }
+        ?>
           ?>
         </article>
     </div>
@@ -852,9 +885,18 @@
         </div>
         <article class="project__building_liftingplaces" style="height: 80px;">
         <?php
-          for ($i=1; $i <= 50; $i++) { 
-            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput'oninput='change_np(this.value,this.dataset.forrow)' data-forrow='" .$i . "' value='NP" .$i . "'> </li>";                      
-          }
+        $entrance = "e";
+        $np_sql_result = $db->query("SELECT `meta_value` FROM `projectmeta` WHERE `id`=$id AND `meta_key` = '{$entrance}_np_text'");
+        if ($np_sql_result && $np_sql_result->num_rows) {
+            $np = json_decode($np_sql_result->fetch_row()[0], true);
+        }
+        else {
+            $np = [];
+        }
+        for ($i=1; $i <= 50; $i++) {
+            echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
+        }
+        ?>
           ?>
         </article>
     </div>
@@ -969,9 +1011,18 @@
         </div>
         <article class="project__building_liftingplaces" style="height: 80px;">
         <?php
-          for ($i=1; $i <= 50; $i++) { 
-            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput'oninput='change_np(this.value,this.dataset.forrow)' data-forrow='" .$i . "' value='NP" .$i . "'> </li>";                      
-          }
+        $entrance = "f";
+        $np_sql_result = $db->query("SELECT `meta_value` FROM `projectmeta` WHERE `id`=$id AND `meta_key` = '{$entrance}_np_text'");
+        if ($np_sql_result && $np_sql_result->num_rows) {
+            $np = json_decode($np_sql_result->fetch_row()[0], true);
+        }
+        else {
+            $np = [];
+        }
+        for ($i=1; $i <= 50; $i++) {
+            echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
+        }
+        ?>
           ?>
         </article>
     </div>
@@ -1082,9 +1133,18 @@
         </div>
         <article class="project__building_liftingplaces" style="height: 80px;">
         <?php
-          for ($i=1; $i <= 50; $i++) { 
-            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput'oninput='change_np(this.value,this.dataset.forrow)' data-forrow='" .$i . "' value='NP" .$i . "'> </li>";                      
-          }
+        $entrance = "g";
+        $np_sql_result = $db->query("SELECT `meta_value` FROM `projectmeta` WHERE `id`=$id AND `meta_key` = '{$entrance}_np_text'");
+        if ($np_sql_result && $np_sql_result->num_rows) {
+            $np = json_decode($np_sql_result->fetch_row()[0], true);
+        }
+        else {
+            $np = [];
+        }
+        for ($i=1; $i <= 50; $i++) {
+            echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
+        }
+        ?>
           ?>
         </article>
     </div>
@@ -1195,9 +1255,18 @@
         </div>
         <article class="project__building_liftingplaces" style="height: 80px;">
         <?php
-          for ($i=1; $i <= 50; $i++) { 
-            echo "<li class='project__room_lifting__".$i." project__room_lifting ' style='left:calc(".$i . "px*80)'><input class='lineinput'oninput='change_np(this.value,this.dataset.forrow)' data-forrow='" .$i . "' value='NP" .$i . "'> </li>";                      
-          }
+        $entrance = "h";
+        $np_sql_result = $db->query("SELECT `meta_value` FROM `projectmeta` WHERE `id`=$id AND `meta_key` = '{$entrance}_np_text'");
+        if ($np_sql_result && $np_sql_result->num_rows) {
+            $np = json_decode($np_sql_result->fetch_row()[0], true);
+        }
+        else {
+            $np = [];
+        }
+        for ($i=1; $i <= 50; $i++) {
+            echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
+        }
+        ?>
           ?>
         </article>
     </div>
