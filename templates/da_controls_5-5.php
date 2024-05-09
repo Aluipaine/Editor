@@ -11,7 +11,7 @@
       </label>
       <input type="radio" name="kin_toggle" id="kin_toggle_2">
       <label for="kin_toggle_2" onclick="toggle__kinnikkeet_specs(2);">
-         Näytä raksit
+         Näytä raksit ja nuolet
       </label>
    </fieldset>
    <div class="drawarea__controls_settingsbtn drawarea__controls_btn" onclick="open_ladonta_settings(true);settings__modal_open(this);document.querySelector('.ladonta_allsetbtn').classList.add('hidden');document.querySelector('.ladonta_savesetbtn').classList.remove('hidden');" data-asmodal_mode="kin_as">
