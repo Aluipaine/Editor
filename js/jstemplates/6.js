@@ -143,7 +143,6 @@ function restore_tyosto(levy,content) {
   countdown__kiinnikkeet(levy);
 }
 
-
 /**
  * Initializes the default settings for the kiinnike elements on the page.
  * This function sets event listeners for various kiinnike elements and handles their click events.
@@ -630,7 +629,6 @@ tyostot_keskitys = document.querySelector(".tyostot_keskitys");
 tyostot_keskitys.classList.remove("two");
 // Function to perform work on a given "levy" element based on the specified event "evt"
 function tyosta(levy, evt) {
-
   levy_c_x = 0;
   levy_c_y = 0;
   //console.log("tyosta(levy, evt) ");
@@ -894,9 +892,11 @@ function tyosta(levy, evt) {
 
           // Calculate and set the coordinate value for the input
           cord = (j * l_i) - (j - 1) * (parseFloat(l_i));
+          var x_cord = document.createElement("input");
           x_cord.value = cord.toFixed(0);
           x_cord.dataset.from = x_cord.value;
           x_cord.style.float = "right";
+          x_cord.style.opcity = 0;
           x_cord.setAttribute("onclick", "clearcord(this,'tyo');");
 
           // Append the coordinate input to the new element
@@ -3202,7 +3202,6 @@ function reset__ltlevy_cords(levy) {
  * @returns None
  */
 function open_ltladonta_settings(e, levy) {
-
   //console.log("open_ltladonta_settings(" + e + "," + levy + ") ");
   ltcontainer = document.querySelector("#levytyosto_container");
 
@@ -4625,6 +4624,57 @@ function recreate_line(item, type = "horizontal") {
     })
   }
   draw_recreate_buttons();
+
+
+  // Checkboxes for green lines
+  let pysty_event;
+  switch (true) {
+    case (document.querySelector("#kiinniketys__pkiinnike_one").checked): {
+      pysty_event = 1;
+    } break;
+    case (document.querySelector("#kiinniketys__pkiinnike_two").checked): {
+      pysty_event = 2;
+    } break;
+    case (document.querySelector("#kiinniketys__pkiinnike_three").checked): {
+      pysty_event = 3;
+    } break;
+    case (document.querySelector("#kiinniketys__pkiinnike_four").checked): {
+      pysty_event = 4;
+    } break;
+  }
+  let vaaka_event;
+  switch (true) {
+    case (document.querySelector("#kiinniketys__vkiinnike_one").checked): {
+      vaaka_event = 5;
+    } break;
+    case (document.querySelector("#kiinniketys__vkiinnike_two").checked): {
+      vaaka_event = 6;
+    } break;
+    case (document.querySelector("#kiinniketys__vkiinnike_three").checked): {
+      vaaka_event = 7;
+    } break;
+    case (document.querySelector("#kiinniketys__vkiinnike_four").checked): {
+      vaaka_event = 8;
+    } break;
+  }
+
+  let levyarray = "";
+  let levyt = canvas.querySelectorAll(".levy");
+  for (let a = 0; a < levyt.length; a++) {
+    levyarray += "&";
+    levyarray += levyt[a].querySelector(".levy_h").innerText + "|";
+    levyarray += levyt[a].querySelector(".levy_w").innerText + "|";
+    levyarray += levyt[a].querySelector(".levy_name").innerText + "|";
+    levyarray += levyt[a].querySelector(".levy b i").innerText + "|";
+    levyt[a].querySelectorAll(".tyostot__tyosto_pysty").forEach(k => {
+      levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+pysty_event+"---";
+    });
+    levyarray += "|";
+    levyt[a].querySelectorAll(".tyostot__tyosto_vaaka").forEach(k => {
+      levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+vaaka_event+"---";
+    });
+  }
+  save("tyostot~~"+levyarray);
 }
 
 function draw_recreate_buttons() {
