@@ -7009,12 +7009,28 @@ function lataa_projektiexcel(arg) {
 
 }
 
-function change_np(val,forrow) {
+function change_np(val, forrow, entrance = "a") {
+  debugger;
   project__building_rooms = document.querySelectorAll(".project__building_room");
   
   project__building_rooms.forEach(r => {
     if(r.dataset.x === forrow) {
       r.dataset.liftpoint = val;
+    }
+  });
+
+  $.ajax({
+    url: "/update_project_np.php",
+    type: "POST",
+    data: {
+      project_id: document.querySelector("#current_project_id").value,
+      username: document.querySelector("#current_user").value,
+      entrance: entrance,
+      np: val,
+      index: forrow
+    },
+    success: (answer) => {
+      console.log(answer);
     }
   });
 }
