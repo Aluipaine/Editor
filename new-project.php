@@ -598,6 +598,8 @@ include('header.php');
       i2.dataset.alt = plusone_rappu_O.toLowerCase()+"nextnum_2" + "|" + plusone_rappu_O.toLowerCase()+"nextnum_3";
       i2.setAttribute("oninput", "change__toggling(this,1)");
       i2.setAttribute("value",1);
+      i2.setAttribute("type","number");
+      i2.setAttribute("min",0);
 
 
       var i2_additional = document.createElement('input');
