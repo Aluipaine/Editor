@@ -7010,7 +7010,6 @@ function lataa_projektiexcel(arg) {
 }
 
 function change_np(val, forrow, entrance = "a") {
-  debugger;
   project__building_rooms = document.querySelectorAll(".project__building_room");
   
   project__building_rooms.forEach(r => {
