@@ -37,4 +37,7 @@
          <input type="number" class="lineinput house__wall_param wall_width" value="6000" name="wall_one_floor_w" disabled>
          </div>
    </div>
+   <div class="db_table_2">
+
+   </div>
 </div>

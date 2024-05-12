@@ -764,36 +764,22 @@ function rangat__setcord() {
   r_bottomsumm = 0;
   r_leftsumm = 0;
 
-  if(document.querySelector(".valiranka_module")) {
-
-  }
-  else {
-    x = document.createElement("div");
-    x.classList = ["valiranka_module"];
-
-    document.querySelector(".db_saumatable").appendChild(x);
-  }
-
-  if (document.querySelector(".valiranka_module .ranka_selitykset")) {
-
-  }
-  else {
-    x = document.createElement("div");
-    x.classList = ["ranka_selitykset"];
-
-    x.innerHTML = `
-      <div>O=<b style="color:${po_c};">Oikea Pääte</b></div>
-      <div>V=<b style="color:${pv_c};">Vasen Pääte</b></div>
-      <div>A=<b style="color:${ar_c};">Alaranka</b></div>
-      <div>Y=<b style="color:${yr_c};">Yläranka</b></div>
-      <div>S=<b style="color:${sr};">Saumaranka</b></div>
-      <div>L2A K=<b style="color:${vr_yc};">L2A Väliranka</b></div>
-      <div>L2B K=<b style="color:${vr_xc};">L2B Väliranka</b></div>
+  db_twos = document.querySelectorAll(".db_table_2");
+  db_twos.forEach(db_two => {
+      db_two.innerHTML = `
+        <div class="valiranka_module">K=<b class="valirankaset">Väliranka</b></div>
+        <div class="reika_module">R=<b class="reikaset">Reikä</b></div>
+        <div class="valiranka_module">
+          <div>O=<b style="color:${po_c};">Oikea Pääte</b></div>
+          <div>V=<b style="color:${pv_c};">Vasen Pääte</b></div>
+          <div>A=<b style="color:${ar_c};">Alaranka</b></div>
+          <div>Y=<b style="color:${yr_c};">Yläranka</b></div>
+          <div>S=<b style="color:${sr};">Saumaranka</b></div>
+          <div>L2A K=<b style="color:${vr_yc};">L2A Väliranka</b></div>
+          <div>L2B K=<b style="color:${vr_xc};">L2B Väliranka</b></div>
+        </div>
     `;
-
-    document.querySelector(".valiranka_module").appendChild(x);
-
-  }
+  });
   for (var i = 0; i < rangat.length; i++) {
     if (rangat[i].classList.contains("ranka_pysty") === true) {
       left = parseFloat(rangat[i].style.left);

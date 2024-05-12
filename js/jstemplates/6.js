@@ -591,6 +591,15 @@ function aloita_tyosto_kiinnikkeet(specification_launch) {
       <div class="valiranka_module">K=<b class="valirankaset">Väliranka</b></div>
       <div class="reika_module">R=<b class="reikaset">Reikä</b></div>  
   `;
+
+  db_twos = document.querySelectorAll(".db_table_2");
+  db_twos.forEach(db_two => {
+      db_two.innerHTML = `
+        <div class="valiranka_module">K=<b class="valirankaset">Väliranka</b></div>
+        <div class="reika_module">R=<b class="reikaset">Reikä</b></div>  
+    `;
+  });
+  
   document.querySelector(".drawarea__bottom").appendChild(db_saumatable);
 
 
@@ -4794,6 +4803,12 @@ function add_recreate_button(target, type) {
 
 function influence__coordinates(mode) {
   if(mode === 'enable') {
+    if(canvas.querySelector(".tyostot__tyosto")) {
+      tyostot__tyostos = canvas.querySelectorAll(".tyostot__tyosto");
+      for (var i = tyostot__tyostos.length - 1; i >= 0; i--) {
+        tyostot__tyostos[i].style.opacity = 1;    
+      }
+    }
     if(canvas.querySelector(".tyostot__tyosto input:not(.secondcord):not(.thirdcord):not(.y_cord_border):not(.x_cord_border)")) {
       input = canvas.querySelectorAll(".tyostot__tyosto input:not(.secondcord):not(.thirdcord):not(.y_cord_border):not(.x_cord_border)");
       for (var i = input.length - 1; i >= 0; i--) {

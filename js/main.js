@@ -2015,6 +2015,9 @@ function refresh__drawcontrols() {
         listat__grandrow.remove();
         listoitettu = false;
       }
+
+
+      document.querySelector("#box-wrapper > main").style.display = "block";
       
 
 
