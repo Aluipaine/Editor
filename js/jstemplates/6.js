@@ -4475,7 +4475,7 @@ function recreate_line(item, type = "horizontal") {
           levy_l = parseFloat(coords[3]) + 5,
           levy_r = parseFloat(coords[0]) + parseFloat(coords[3]) + 10,
           levy_t = parseFloat(coords[1]) + parseFloat(coords[2]) + 10;
-      if (levy_b < canvas_bottom && levy_t > canvas_bottom && touch(levy_left,  levy_r)) {
+      if (levy_b < canvas_bottom && levy_t > canvas_bottom && levy_r <= levy_left) {
         let x = document.createElement("div");
         let bottom_cord = (canvas_bottom - levy_b + 5) / 5 - 1 + "px";
         let levy_tyostot_y = levy.querySelector(".levy_tyostot_y");
@@ -4515,7 +4515,7 @@ function recreate_line(item, type = "horizontal") {
           levy_b = parseFloat(coords[2]) + 5,
           levy_l = parseFloat(coords[3]) - 10,
           levy_t = parseFloat(coords[1]) + parseFloat(coords[2]) + 10;
-      if (levy_b < canvas_bottom && levy_t > canvas_bottom && touch(levy_right, levy_l)) {
+      if (levy_b < canvas_bottom && levy_t > canvas_bottom && levy_l >= levy_right) {
         let x = document.createElement("div");
         let bottom_cord = (canvas_bottom - levy_b + 5) / 5 - 1 + "px";
         let levy_tyostot_y = levy.querySelector(".levy_tyostot_y");
@@ -4555,7 +4555,7 @@ function recreate_line(item, type = "horizontal") {
           levy_l = parseFloat(coords[3]) - 5,
           levy_r = parseFloat(coords[0]) + parseFloat(coords[3]),
           levy_t = parseFloat(coords[2]) + parseFloat(coords[1]);
-      if (levy_l < canvas_left && levy_r > canvas_left && touch(levy_bottom, levy_t)) {
+      if (levy_l < canvas_left && levy_r > canvas_left && levy_t <= levy_bottom) {
         let x = document.createElement("div");
         let left_cord = (canvas_left - levy_l - 5) / 5 - 1 + "px";
         let levy_tyostot_x = levy.querySelector(".levy_tyostot_x");
@@ -4595,7 +4595,7 @@ function recreate_line(item, type = "horizontal") {
           levy_l = parseFloat(coords[3]) - 5,
           levy_r = parseFloat(coords[0]) + parseFloat(coords[3]),
           levy_b = parseFloat(coords[2]);
-      if (levy_l < canvas_left && levy_r > canvas_left && touch(levy_top, levy_b)) {
+      if (levy_l < canvas_left && levy_r > canvas_left && levy_b >= levy_top) {
         let x = document.createElement("div");
         let left_cord = (canvas_left - levy_l - 5) / 5 - 1 + "px";
         let levy_tyostot_x = levy.querySelector(".levy_tyostot_x");
@@ -4680,8 +4680,6 @@ function recreate_line(item, type = "horizontal") {
 function draw_recreate_buttons() {
   canvas.querySelectorAll(".recreate_line").forEach(v => v.remove());
   const touch = (a,b) => Math.abs(a-b) <= 10;
-  let canvas_width = parseFloat($("#box_w").val());
-  let canvas_height = parseFloat($("#box_h").val());
   let levys = [...canvas.querySelectorAll(".levy")];
   let tyostots = [...canvas.querySelectorAll(".levy_tyostot_y .tyostot__tyosto:not(.no_siirto)")];
   tyostots.forEach(tyostot => {
@@ -4695,7 +4693,7 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_left = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.bottom > top && rect.top < top && touch(rect.right, left);
+      return rect.bottom > top && rect.top < top && rect.right <= left;
     });
     if (!to_the_left.length && levy_to_the_left.length && !tyostot.classList.contains("hidden")) {
       add_recreate_button(tyostot, "horizontal");
@@ -4706,7 +4704,7 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_right = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.bottom > top && rect.top < top && touch(rect.left, right);
+      return rect.bottom > top && rect.top < top && rect.left <= right;
     });
     if (!to_the_right.length && levy_to_the_right.length) {
       add_recreate_button(tyostot, "horizontal_opposite");
@@ -4724,7 +4722,7 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_top = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.left < left && rect.right > left && touch(rect.bottom, top);
+      return rect.left < left && rect.right > left && rect.bottom <= top;
     });
     if (!to_the_top.length && levy_to_the_top.length) {
       add_recreate_button(tyostot, "vertical_opposite");
@@ -4735,7 +4733,7 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_bottom = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.left < left && rect.right > left && touch(rect.top, bottom);
+      return rect.left < left && rect.right > left && rect.top <= bottom;
     });
     if (!to_the_bottom.length && levy_to_the_bottom.length && !tyostot.classList.contains("hidden")) {
       add_recreate_button(tyostot, "vertical");
