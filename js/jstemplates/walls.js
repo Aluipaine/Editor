@@ -237,8 +237,12 @@ function siirto_muualle(mode) {
         else {
           kiinnikkeet__siirto();
           kiinnike_default_initialization();
+
+          document.querySelector(".canvas_"+room).innerHTML = canvas.innerHTML;
+
         }
 
+        
       }
       else {
         document.querySelector(".canvas_"+room).innerHTML = canvas__original.innerHTML;
@@ -278,6 +282,7 @@ function siirto_muualle(mode) {
       listoitus();
     });
     await sleep(500);
+    current_room = room__original;
     document.querySelector(".preloader").classList.remove("active");
 
     await sleep(100);
@@ -301,7 +306,9 @@ function siirto_muualle(mode) {
         });
       })
     });
+    await sleep(100);
 
+    
     alert("Valmis!");
 
 
