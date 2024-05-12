@@ -8049,6 +8049,7 @@ input[type="radio"].mass__selection_btn {
   right: 0 !important;
 }
 
-#copiedcanvases .thirdcord  {
-  opacity: 0;
+#copiedcanvases .tyostot__tyosto .x_del + .secondcord  {
+  margin-top: 25px;
+  display: block !important;
 }
