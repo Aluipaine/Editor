@@ -8057,3 +8057,7 @@ input[type="radio"].mass__selection_btn {
   margin-top: 25px;
   display: block !important;
 }
+
+#copiedcanvases .ranka_cord.ranka_type {
+  top: 0;
+}
