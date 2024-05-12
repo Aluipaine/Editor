@@ -5574,6 +5574,9 @@ input.secondcord {
   width: 28px;
   text-align: center;
   overflow: visible !important;
+
+
+  display: none;
 }
 
 .thirdcord b {
