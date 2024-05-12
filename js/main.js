@@ -1112,11 +1112,10 @@ function refresh__drawcontrols() {
         }
       }
 
-      
-
       if(tyostot_ok !== 0) {
-        only_levy_transfer();
+        // only_levy_transfer();
         restore__kiinnikkeet(tyostocontent);
+        influence__coordinates('enable');
       }
       else {
         kiinnikkeet__siirto();
@@ -1145,18 +1144,7 @@ function refresh__drawcontrols() {
         document.querySelector("#box-wrapper > div.drawarea__control.drawarea__top.disabled").style.borderBottom = "1px solid black";
       }
     
-      if(canvas.querySelector(".tyostot__tyosto input:not(.secondcord)")) {
-        input = canvas.querySelectorAll(".tyostot__tyosto input:not(.secondcord)");
-        for (var i = input.length - 1; i >= 0; i--) {
-          input[i].remove();
-        }
-      }
-      if(canvas.querySelector(".tyostot__tyosto input.secondcord")) {
-        input = canvas.querySelectorAll(".tyostot__tyosto input.secondcord");
-        for (var i = input.length - 1; i >= 0; i--) {
-          input[i].style.opacity = 0;
-        }
-      }
+      influence__coordinates('disable');
     }
     if (input_step == 'drawscreen_section_five') {
       if (canvas.querySelector("div.saumat__grandrow")) {
