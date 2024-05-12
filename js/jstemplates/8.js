@@ -780,6 +780,7 @@ function rangat__setcord() {
         </div>
     `;
   });
+  
   for (var i = 0; i < rangat.length; i++) {
     if (rangat[i].classList.contains("ranka_pysty") === true) {
       left = parseFloat(rangat[i].style.left);

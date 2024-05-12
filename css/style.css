@@ -6610,6 +6610,10 @@ div.x_del.hidden {
 #copiedcanvases .preview_canvas:first-of-type {
   margin-left: 0;
 }
+
+#copiedcanvases .tyostot__tyosto_pysty .secondcord {
+  margin-top: -18px;
+}
 /* #copiedcanvases .preview_canvas .grid-container {
   display: none;
 } */

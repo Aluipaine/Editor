@@ -79,6 +79,18 @@ function eight__navigation(arg) {
         }
       }
     }
+
+    canvases = document.querySelectorAll("#copiedcanvases .preview_canvas");
+
+    canvases.forEach(cs => {
+      canvas = cs;
+      influence__coordinates('enable');
+      removeduplicatecords__adjustcords();
+      countdown__kiinnikkeet();
+
+    });
+
+    canvas = document.querySelector("#box-wrapper > main");
   }
   else {
     for (var i = e_levyt.length - 1; i >= 0; i--) {
