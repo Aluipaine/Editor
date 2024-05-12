@@ -272,7 +272,7 @@ function siirto_muualle(mode) {
 
     let canvases = $(".preview_canvas").get();
     $("#copiedcanvases .bottom_nav").css(
-        "top", canvases.reduce((a, b) => Math.max(a, b.clientHeight), 0) + 40 + "px"
+        "top", canvases.reduce((a, b) => Math.max(a, b.clientHeight), 0) + 80 + "px"
     );
 
     canvases.forEach(canvas => {
