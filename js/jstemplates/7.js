@@ -88,6 +88,7 @@ function create__levy_excel(now) {
     items.forEach((item) => {
       const row = document.createElement('tr');
       var h1 = document.createElement('td');
+      var _h1 = document.createElement('td');
       var h2 = document.createElement('td');
       var h3 = document.createElement('td');
       var h4 = document.createElement('td');
@@ -166,6 +167,8 @@ function create__levy_excel(now) {
       var h77 = document.createElement('td');
       var h78 = document.createElement('td');
       var h79 = document.createElement('td');
+      var _h78 = document.createElement('td');
+      var _h79 = document.createElement('td');
       var h80 = document.createElement('td');
       var h81 = document.createElement('td');
       var h82 = document.createElement('td');
@@ -196,6 +199,7 @@ function create__levy_excel(now) {
       var h107 = document.createElement('td');
       var h108 = document.createElement('td');
       h1.innerHTML = 'W22_ST_CLASSIC'; //TO BE CHANGED!
+      _h1.innerHTML = 'W22_ST_CLASSIC'; //TO BE CHANGED!
       if(item.dataset.sku) {
         h2.innerHTML = item.dataset.sku;
       }
@@ -222,8 +226,16 @@ function create__levy_excel(now) {
         lw = [lh, lh = lw][0];
       }
 
-      h3.innerHTML = lw;
-      h4.innerHTML = lh;
+      
+
+      if (lw > lh) {
+        h3.innerHTML = lh;
+        h4.innerHTML = lw;
+      }
+      else if(lw <= lh) {
+        h3.innerHTML = lw;
+        h4.innerHTML = lh;
+      }
 
       for (var i = x_kiinnikkeet.length - 1; i >= 0; i--) {
         if (lw > lh) {
@@ -454,6 +466,8 @@ function create__levy_excel(now) {
       h77.innerHTML = '';
       h78.innerHTML = '';
       h79.innerHTML = '';
+      _h78.innerHTML = '';
+      _h79.innerHTML = '';
       h80.innerHTML = '';
       h81.innerHTML = '';
       h82.innerHTML = '';
@@ -484,34 +498,13 @@ function create__levy_excel(now) {
       h107.innerHTML = '';
       h108.innerHTML = '';
       levyexcel_array.push({
-        'Type (drawing)': h1.textContent,
+        'Part number': h9.textContent,
         'Materialcode': h2.textContent,
+        'Type': "W22_ST_CLASSIC",
         'Leveys (X)': h3.textContent,
         'Pituus (Y)': h4.textContent,
-        'Thickness': h5.textContent,
-        'Structure': h6.textContent,
         'Quantity': h7.textContent,
-        'Plus': h8.textContent,
-        'Part number': h9.textContent,
         'Nimi 1': h10.textContent,
-        'Nimi 2': h11.textContent,
-        'MPR': h12.textContent,
-        'Palletgroup': h13.textContent,
-        'Prioriteetti': h14.textContent,
-        'Asiakas': h15.textContent,
-        'Asennus': h16.textContent,
-        'Työstöt': h17.textContent,
-        '': h18.textContent,
-        'X KPL': h19.textContent,
-        'Y KPL': h20.textContent,
-        'Yhteensä': h21.textContent,
-        '  ': h22.textContent,
-        '   ': h23.textContent,
-        '    ': h24.textContent,
-        '     ': h25.textContent,
-        '      ': h26.textContent,
-        'Tarra': h27.textContent,
-        'Diameter': h28.textContent,
         'X1': h29.textContent,
         'X2': h30.textContent,
         'X3': h31.textContent,
@@ -532,16 +525,19 @@ function create__levy_excel(now) {
         'Y8': h46.textContent,
         'Y9': h47.textContent,
         'Y10': h48.textContent,
+        'Palletgroup': h13.textContent,
+        'Diameter': h28.textContent,
+        'Prioriteetti': h14.textContent,
         'X': h49.textContent,
         'Y': h50.textContent,
         'X ': h51.textContent,
         'Y ': h52.textContent,
         'PR1_X': h53.textContent,
         'PR1_Y': h54.textContent,
-        'PR1_DX': h55.textContent,
-        'PR1_DY': h56.textContent,
-        'PR2_X': h57.textContent,
-        'PR2_Y': h58.textContent,
+        'PR1_DX ': h55.textContent,
+        'PR1_DY ': h56.textContent,
+        'PR2_X ': h57.textContent,
+        'PR2_Y ': h58.textContent,
         'PR1_DX': h59.textContent,
         'PR2_DY': h60.textContent,
         'PR3_X': h61.textContent,
@@ -563,21 +559,27 @@ function create__levy_excel(now) {
         'CH 0=OFF 1= ON': h77.textContent,
         'Y Vasen': h78.textContent,
         'Y oikea': h79.textContent,
-        // 'Y Vasen ': h80.textContent,
-        // 'Y oikea ': h81.textContent,
+        'Y Vasen ': _h78.textContent,
+        'Y oikea ': _h79.textContent,
         'X ala': h82.textContent,
         'x ylä': h83.textContent,
-        'X ala': h84.textContent,
-        'X ylä': h85.textContent,
+        'X ala ': h84.textContent,
+        'X ylä ': h85.textContent,
         'VH1_X': h86.textContent,
         'VH1_Y': h87.textContent,
         'VH1_L': h88.textContent,
         'VH1_KPL': h89.textContent,
         'VH1_K': h90.textContent,
-        '       ': h91.textContent,
-        '        ': h92.textContent,
-        '         ': h93.textContent,
-        '          ': h94.textContent,
+        'Asiakas': h15.textContent,
+        'Tarra': h27.textContent,
+        'Nimi 2': h11.textContent,
+        'Asennus': h16.textContent,
+        'Työstöt': h17.textContent,
+        'MPR': h12.textContent,
+        'Type (drawing)': h1.textContent,
+        'Thickness': h5.textContent,
+        'Structure': h6.textContent,
+        'Plus': h8.textContent,
         'AR Edge 1': h95.textContent,
         'YR Edge 1': h96.textContent,
         'VR Edge 1': h97.textContent,
@@ -592,102 +594,91 @@ function create__levy_excel(now) {
         'OR Trim': h106.textContent,
         'Yhdistä Xx-XX': h107.textContent,
         'Yhdistä Yx-YX': h108.textContent
+       
       }, );
       try {
-      row.append(h1)
-      row.append(h2)
+      row.append(h9) // Changed! 130524
+      row.append(h2) // Changed! 130524
+      row.append(_h1)
       row.append(h3)
       row.append(h4)
-      row.append(h5)
-      row.append(h6)
-      row.append(h7)
-      row.append(h8)
-      row.append(h9)
-      row.append(h10)
-      row.append(h11)
-      row.append(h12)
-      row.append(h13)
-      row.append(h14)
+      row.append(h7) // Changed! 130524
+      row.append(h10) // Changed! 130524
+      row.append(h29) // Changed! 130524
+      row.append(h30) // Changed! 130524
+      row.append(h31) // Changed! 130524
+      row.append(h32) // Changed! 130524
+      row.append(h33) // Changed! 130524
+      row.append(h34) // Changed! 130524
+      row.append(h35) // Changed! 130524
+      row.append(h36) // Changed! 130524
+      row.append(h37) // Changed! 130524
+      row.append(h38) // Changed! 130524
+      row.append(h39) // Changed! 130524
+      row.append(h40) // Changed! 130524
+      row.append(h41) // Changed! 130524
+      row.append(h42) // Changed! 130524
+      row.append(h43) // Changed! 130524
+      row.append(h44) // Changed! 130524
+      row.append(h45) // Changed! 130524
+      row.append(h46) // Changed! 130524
+      row.append(h47) // Changed! 130524
+      row.append(h48) // Changed! 130524
+      row.append(h13) // Changed! 130524
+      row.append(h28)  // Changed! 130524
+      row.append(h14) // Changed! 130524
+      row.append(h49) // Changed! 130524
+      row.append(h50) // Changed! 130524
+      row.append(h51) // Changed! 130524
+      row.append(h52) // Changed! 130524
+      row.append(h53) // Changed! 130524
+      row.append(h54) // Changed! 130524
+      row.append(h55) // Changed! 130524
+      row.append(h56) // Changed! 130524
+      row.append(h57) // Changed! 130524
+      row.append(h58) // Changed! 130524
+      row.append(h59) // Changed! 130524
+      row.append(h60) // Changed! 130524
+      row.append(h61) // Changed! 130524
+      row.append(h62) // Changed! 130524
+      row.append(h63) // Changed! 130524
+      row.append(h64) // Changed! 130524
+      row.append(h65) // Changed! 130524
+      row.append(h66) // Changed! 130524
+      row.append(h67) // Changed! 130524
+      row.append(h68) // Changed! 130524
+      row.append(h69) // Changed! 130524
+      row.append(h70) // Changed! 130524
+      row.append(h71) // Changed! 130524
+      row.append(h72) // Changed! 130524
+      row.append(h73) // Changed! 130524
+      row.append(h74) // Changed! 130524
+      row.append(h75) // Changed! 130524
+      row.append(h76) // Changed! 130524
+      row.append(h77) // Changed! 130524
+      row.append(h78) // Changed! 130524
+      row.append(h79) // Changed! 130524
+      row.append(_h78) // Changed! 130524
+      row.append(_h79) // Changed! 130524
+      row.append(h82) // Changed! 130524
+      row.append(h83) // Changed! 130524
+      row.append(h84) // Changed! 130524
+      row.append(h85) // Changed! 130524
+      row.append(h86) // Changed! 130524
+      row.append(h87) // Changed! 130524
+      row.append(h88) // Changed! 130524
+      row.append(h89) // Changed! 130524
+      row.append(h90) // Changed! 130524
       row.append(h15)
+      row.append(h27)
+      row.append(h11)
       row.append(h16)
       row.append(h17)
-      row.append(h18)
-      row.append(h19)
-      row.append(h20)
-      row.append(h21)
-      row.append(h22)
-      row.append(h23)
-      row.append(h24)
-      row.append(h25)
-      row.append(h26)
-      row.append(h27)
-      row.append(h28)
-      row.append(h29)
-      row.append(h30)
-      row.append(h31)
-      row.append(h32)
-      row.append(h33)
-      row.append(h34)
-      row.append(h35)
-      row.append(h36)
-      row.append(h37)
-      row.append(h38)
-      row.append(h39)
-      row.append(h40)
-      row.append(h41)
-      row.append(h42)
-      row.append(h43)
-      row.append(h44)
-      row.append(h45)
-      row.append(h46)
-      row.append(h47)
-      row.append(h48)
-      row.append(h49)
-      row.append(h50)
-      row.append(h51)
-      row.append(h52)
-      row.append(h53)
-      row.append(h54)
-      row.append(h55)
-      row.append(h56)
-      row.append(h57)
-      row.append(h58)
-      row.append(h59)
-      row.append(h60)
-      row.append(h61)
-      row.append(h62)
-      row.append(h63)
-      row.append(h64)
-      row.append(h65)
-      row.append(h66)
-      row.append(h67)
-      row.append(h68)
-      row.append(h69)
-      row.append(h70)
-      row.append(h71)
-      row.append(h72)
-      row.append(h73)
-      row.append(h74)
-      row.append(h75)
-      row.append(h76)
-      row.append(h77)
-      row.append(h78)
-      row.append(h79)
-      // row.append(h80)
-      // row.append(h81)
-      row.append(h82)
-      row.append(h83)
-      row.append(h84)
-      row.append(h85)
-      row.append(h86)
-      row.append(h87)
-      row.append(h88)
-      row.append(h89)
-      row.append(h90)
-      row.append(h91)
-      row.append(h92)
-      row.append(h93)
-      row.append(h94)
+      row.append(h12)
+      row.append(h1)
+      row.append(h5)
+      row.append(h6)
+      row.append(h8)
       row.append(h95)
       row.append(h96)
       row.append(h97)
@@ -695,13 +686,14 @@ function create__levy_excel(now) {
       row.append(h99)
       row.append(h100)
       row.append(h101)
-      row.append(h102)
+      row.append(h102)     
       row.append(h103)
       row.append(h104)
       row.append(h105)
       row.append(h106)
       row.append(h107)
-      row.append(h108)
+      row.append(h108)      
+
       tableExcel.append(row);
       } catch(e) {
         console.log("TRY-CATCH ERROR:", e);
