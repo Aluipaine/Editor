@@ -1418,11 +1418,11 @@ function refresh__drawcontrols() {
       for (var i = five_levy_closers.length - 1; i >= 0; i--) {
         five_levy_closers[i].remove();
       }
-      let k_levys = canvas.querySelectorAll(".levy");
-      for (var i = k_levys.length - 1; i >= 0; i--) {
-        give__tyosto_cord(k_levys[i]);
-        countdown__kiinnikkeet(k_levys[i]);
-      }
+      // let k_levys = canvas.querySelectorAll(".levy");
+      // for (var i = k_levys.length - 1; i >= 0; i--) {
+      //   give__tyosto_cord(k_levys[i]);
+      //   countdown__kiinnikkeet(k_levys[i]);
+      // }
       tyostot__tyosto_pysty = canvas.querySelectorAll(".levy_tyostot_x > div");
       tyostot__tyosto_vaaka = canvas.querySelectorAll(".levy_tyostot_y > div");
       for (var i = tyostot__tyosto_pysty.length - 1; i >= 0; i--) {

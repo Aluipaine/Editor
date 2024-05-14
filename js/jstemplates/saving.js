@@ -4,7 +4,7 @@
  * @returns None
  */
 function save(array) {
-    if(restoring__mode = true) {
+    if(restoring__mode === true) {
         return
     }
     type = array.split("~~")[0];
@@ -304,9 +304,9 @@ function restoreprogress() {
             }
         }
     });
-
-    $(".preloader").removeClass( "active" );
     restoring__mode = false;
+    $(".preloader").removeClass( "active" );
+    
 }
 
 

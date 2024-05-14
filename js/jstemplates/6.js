@@ -4461,6 +4461,7 @@ function recreate_line(item, type = "horizontal") {
       levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+b_evt+"---";
     });
   }
+
   save("tyostot~~"+levyarray);
 }
 
