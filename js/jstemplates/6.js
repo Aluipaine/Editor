@@ -2082,7 +2082,26 @@ function change__tyostocord(input, secondsetting, evt) {
 
   }
 
-  save_tyostot();
+  // save_tyostot();
+
+  let levyarray = "";
+  let levyt = canvas.querySelectorAll(".levy:not(.hidden)");
+  for (let a = 0; a < levyt.length; a++) {
+    levyarray += "&";
+    levyarray += levyt[a].querySelector(".levy_h").innerText + "|";
+    levyarray += levyt[a].querySelector(".levy_w").innerText + "|";
+    levyarray += levyt[a].querySelector(".levy_name").innerText + "|";
+    levyarray += levyt[a].querySelector(".levy b i").innerText + "|";
+    levyt[a].querySelectorAll(".tyostot__tyosto_pysty").forEach(k => {
+      levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+a_evt+"---";
+    });
+    levyarray += "|";
+    levyt[a].querySelectorAll(".tyostot__tyosto_vaaka").forEach(k => {
+      levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+b_evt+"---";
+    });
+  }
+
+  save("tyostot~~"+levyarray);
 }
 
 /**
@@ -4443,7 +4462,26 @@ function recreate_line(item, type = "horizontal") {
   }
   draw_recreate_buttons();
 
-  save_tyostot();
+  // save_tyostot();
+
+  let levyarray = "";
+  let levyt = canvas.querySelectorAll(".levy:not(.hidden)");
+  for (let a = 0; a < levyt.length; a++) {
+    levyarray += "&";
+    levyarray += levyt[a].querySelector(".levy_h").innerText + "|";
+    levyarray += levyt[a].querySelector(".levy_w").innerText + "|";
+    levyarray += levyt[a].querySelector(".levy_name").innerText + "|";
+    levyarray += levyt[a].querySelector(".levy b i").innerText + "|";
+    levyt[a].querySelectorAll(".tyostot__tyosto_pysty").forEach(k => {
+      levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+a_evt+"---";
+    });
+    levyarray += "|";
+    levyt[a].querySelectorAll(".tyostot__tyosto_vaaka").forEach(k => {
+      levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+b_evt+"---";
+    });
+  }
+
+  save("tyostot~~"+levyarray);
 }
 
 function draw_recreate_buttons() {
@@ -4610,6 +4648,7 @@ function influence__coordinates(mode) {
 }
 
 function save_tyostot() {
+
   // Checkboxes for green lines
   let a_evt;
   switch (true) {
