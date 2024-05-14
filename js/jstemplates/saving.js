@@ -244,6 +244,8 @@ function restoreprogress() {
                     tyostot_ok = timestamp;
                     tyostot__timestamp = timestamp;
                     tyostocontent = content;
+
+                   
                 }
                 
             });
@@ -305,6 +307,7 @@ function restoreprogress() {
         }
     });
     restoring__mode = false;
+
     $(".preloader").removeClass( "active" );
     
 }

@@ -10,31 +10,39 @@ a_evt = 0;
 b_evt = 0;
 
 function restore__kiinnikkeet(content_) {
-  console.log("function restore__kiinnikkeet");
-  content = content_.split("~~")[1].split("&");
-  //console.log(content);
+  setTimeout(() => {
+    console.log("function restore__kiinnikkeet");
+    content = content_.split("~~")[1].split("&");
+    //console.log(content);
 
-  content.forEach(levy_iteration_data => {
-    if(levy_iteration_data.length < 1) {
+    content.forEach(levy_iteration_rawdata => {
+      if(levy_iteration_rawdata.length < 1) {
+        
+      }
+      else {
+        levy_iteration_data = levy_iteration_rawdata.split("|");
+        
+        levyname = levy_iteration_data[2].split(" ")[0].replaceAll(" ","");
+        console.log("levyname: "+levyname);
+        levykoko = levy_iteration_data[3].replaceAll(" ","");
+
+        k_levyt = canvas.querySelectorAll(".levy");
+        k_levyt.forEach(l => {
+          k_levyname = l.querySelector(".levy_name").innerText.split(" ")[0].replaceAll(" ","");
+
+          k_levykoko = l.querySelector("b i").innerText.replaceAll(" ","");
+
+          if(k_levyname === levyname) {
+            console.log("k_levyname MATCH: "+k_levyname);
+
+            restore_tyosto(l,levy_iteration_data);
+          }
+        });
+      }
       
-    }
-    else {
-      levy_iteration_data = levy_iteration_data.split("|");
-      levyname = levy_iteration_data[2].replaceAll(" ","");
-      levykoko = levy_iteration_data[3].replaceAll(" ","");
+    });
+  }, 550);
 
-      k_levyt = canvas.querySelectorAll(".levy");
-      k_levyt.forEach(l => {
-        k_levyname = l.querySelector(".levy_name").innerText.replaceAll(" ","");
-        k_levykoko = l.querySelector("b i").innerText.replaceAll(" ","");
-
-        if(k_levyname.replaceAll(" ","") === levyname.replaceAll(" ","") && k_levykoko.replaceAll(" ","") === levykoko.replaceAll(" ","")) {
-          restore_tyosto(l,levy_iteration_data);
-        }
-      });
-    }
-    
-  });
 }
 
 /**
