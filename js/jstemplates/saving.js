@@ -4,6 +4,9 @@
  * @returns None
  */
 function save(array) {
+    if(restoring__mode = true) {
+        return
+    }
     type = array.split("~~")[0];
     current_project_id = parseFloat(document.querySelector("#current_project_id").value);
 
@@ -36,6 +39,7 @@ function save(array) {
  */
 function restoreprogress() {
     lvalarm = true;
+    restoring__mode = true;
     sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
     
     $(".preloader").addClass( "active" );
@@ -238,6 +242,7 @@ function restoreprogress() {
                 }
                 else if(tyostot_ok < timestamp && content.split("~~")[0] === "tyostot") {
                     tyostot_ok = timestamp;
+                    tyostot__timestamp = timestamp;
                     tyostocontent = content;
                 }
                 
@@ -256,8 +261,8 @@ function restoreprogress() {
                     input_step = "drawscreen_section_tyostot";
                     $('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();
                     restore__kiinnikkeet(tyostocontent);
-                    reorganise__newtyosto();
-                    removeduplicatecords__adjustcords();
+                    // reorganise__newtyosto();
+                    // removeduplicatecords__adjustcords();
                 }, 250);
                 setTimeout(() => {
                     input_step = "drawscreen_section_esikatselu";
@@ -269,8 +274,8 @@ function restoreprogress() {
                     input_step = "drawscreen_section_tyostot";
                     $('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();
                     restore__kiinnikkeet(tyostocontent);
-                    reorganise__newtyosto();
-                    removeduplicatecords__adjustcords();
+                    // reorganise__newtyosto();
+                    // removeduplicatecords__adjustcords();
                 }, 250);
 
                 setTimeout(() => {
@@ -283,8 +288,8 @@ function restoreprogress() {
                     input_step = "drawscreen_section_tyostot";
                     $('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();
                     restore__kiinnikkeet(tyostocontent);
-                    reorganise__newtyosto();
-                    removeduplicatecords__adjustcords();
+                    // reorganise__newtyosto();
+                    // removeduplicatecords__adjustcords();
                 }, 250);     
             }
 
@@ -293,14 +298,15 @@ function restoreprogress() {
                     input_step = "drawscreen_section_tyostot";
                     $('#step_drawscreen').val('drawscreen_section_tyostot');refresh__drawcontrols();updatearea();
                     restore__kiinnikkeet(tyostocontent);
-                    reorganise__newtyosto();
-                    removeduplicatecords__adjustcords();
+                    // reorganise__newtyosto();
+                    // removeduplicatecords__adjustcords();
                 }, 250);     
             }
         }
     });
 
     $(".preloader").removeClass( "active" );
+    restoring__mode = false;
 }
 
 

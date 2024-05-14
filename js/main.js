@@ -1118,13 +1118,13 @@ function refresh__drawcontrols() {
         influence__coordinates('enable');
       }
       else {
-        kiinnikkeet__siirto();
-        kiinnike_default_initialization();
+        // kiinnikkeet__siirto();
+        // kiinnike_update_settingsinit();
       }
       
       if(tyostot_ok !== 0 && canvas.querySelector(".tyostot__tyosto") == null) {
-        kiinnikkeet__siirto();
-        kiinnike_default_initialization();
+        // kiinnikkeet__siirto();
+        // kiinnike_update_settingsinit();
       }
 
       rangat__navigation(false);
