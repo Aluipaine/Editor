@@ -41,6 +41,7 @@ function restore__kiinnikkeet(content_) {
       }
       
     });
+    draw_recreate_buttons();
   }, 550);
 
 }
@@ -93,10 +94,22 @@ function restore_tyosto(levy,content) {
       k.style.left = (parseFloat(t.split("^^")[0])/5) + "px";
       pysty_evt = parseFloat(t.split("^^")[2]);
       a_evt= parseFloat(t.split("^^")[2]);
-      k.innerHTML = `
-        <div class="x_del hidden" onclick="tyosto__del(this);"></div>
-        <input class="temp_input" onchange="change__tyostocord(this,1,${pysty_evt});" onclick="clearcord(this,'tyo');" data-from="">
-      `;
+
+      if(k.classList.contains("tyostot__tyosto_pysty") === true) {
+        k.innerHTML = `
+          <div class="x_del hidden" onclick="tyosto__del(this);"></div>
+          <div class="x_del only_self" onclick="tyosto__del(this, true,true);" style="display: block;"></div>
+          <input class="temp_input" onchange="change__tyostocord(this,1,${pysty_evt});" onclick="clearcord(this,'tyo');" data-from="">
+        `;
+      }
+      else if(k.classList.contains("tyostot__tyosto_vaaka") === true) {
+        k.innerHTML = `
+          <div class="x_del hidden" onclick="tyosto__del(this);"></div>
+          <div class="x_del only_self" onclick="tyosto__del(this, true);" style="display: block;"></div>
+          <input class="temp_input" onchange="change__tyostocord(this,1,${pysty_evt});" onclick="clearcord(this,'tyo');" data-from="">
+        `;
+      }
+      
 
    
       if(k.classList.contains("alku__tyosto_pysty") || k.classList.contains("viim__tyosto_pysty")) {
