@@ -23,6 +23,9 @@ function restore__kiinnikkeet(content_) {
         levy_iteration_data = levy_iteration_rawdata.split("|");
         
         levyname = levy_iteration_data[2].split(" ")[0].replaceAll(" ","");
+        if(levyname.length < 1) {
+          levyname = levy_iteration_data[2].split(" ")[1].replaceAll(" ","");
+        }
         console.log("levyname: "+levyname);
         levykoko = levy_iteration_data[3].replaceAll(" ","");
 
@@ -1101,6 +1104,7 @@ function tyosto_func(evt){
   }
   removeduplicatecords__adjustcords();
   apply__deletion_rules();
+  k_levys = canvas.querySelectorAll(".levy");
   for (var i = k_levys.length - 1; i >= 0; i--) {
     give__tyosto_cord(k_levys[i]);
     countdown__kiinnikkeet(k_levys[i]);

@@ -135,14 +135,21 @@ function listoitus() {
     } 
   });
   for (let c = 0; c < aukot.length; c++) {
-    or_distance = parseFloat(aukot[c].querySelector(".aukko_rcord").innerText)/5;
-    vr_distance = parseFloat(aukot[c].querySelector(".aukko_lcord").innerText)/5;
-    yr_distance = parseFloat(aukot[c].querySelector(".aukko_tcord").innerText)/5;
-    ar_distance = parseFloat(aukot[c].querySelector(".aukko_bcord").innerText)/5;
+    or_distance = parseFloat(aukot[c].style.left) + parseFloat(aukot[c].style.width);
+    vr_distance = parseFloat(aukot[c].style.left);
+    yr_distance = parseFloat(aukot[c].style.bottom) + parseFloat(aukot[c].style.height);
+    ar_distance = parseFloat(aukot[c].style.bottom);
+
+    or_distance_text = parseFloat(aukot[c].querySelector(".aukko_rcord").innerText)/5;
+    vr_distance_text = parseFloat(aukot[c].querySelector(".aukko_lcord").innerText)/5;
+    yr_distance_text = parseFloat(aukot[c].querySelector(".aukko_tcord").innerText)/5;
+    ar_distance_text = parseFloat(aukot[c].querySelector(".aukko_bcord").innerText)/5;
+
     if(or_distance <= parseFloat(canvas.offsetWidth)) {
       create_lista('pysty',or_distance,aukot[c]);
       lista.dataset.name	= aukot[c].dataset.l2a_or_lista;
       lista.dataset.listaname	= aukot[c].dataset.l2a_or_lista;
+      lista.dataset.realcord	= or_distance_text;
       lista.classList.remove("levy_lista");
       lista.classList.add("aukko_lista");
     }
@@ -150,6 +157,7 @@ function listoitus() {
       create_lista('pysty',vr_distance,aukot[c]);
       lista.dataset.name	= aukot[c].dataset.l2a_vr_lista;
       lista.dataset.listaname	= aukot[c].dataset.l2a_vr_lista;
+      lista.dataset.realcord	= vr_distance_text;
       lista.classList.remove("levy_lista");
       lista.classList.add("aukko_lista");
     }
@@ -157,6 +165,7 @@ function listoitus() {
       create_lista('vaaka',yr_distance,aukot[c]);
       lista.dataset.name	= aukot[c].dataset.l2a_yr_lista;
       lista.dataset.listaname	= aukot[c].dataset.l2a_yr_lista;
+      lista.dataset.realcord	= yr_distance_text;
       lista.classList.remove("levy_lista");
       lista.classList.add("aukko_lista");
     }
@@ -164,6 +173,7 @@ function listoitus() {
       create_lista('vaaka',ar_distance,aukot[c]);
       lista.dataset.name	= aukot[c].dataset.l2a_ar_lista;
       lista.dataset.listaname	= aukot[c].dataset.l2a_ar_lista;
+      lista.dataset.realcord	= ar_distance_text;
       lista.classList.remove("levy_lista");
       lista.classList.add("aukko_lista");
     }
@@ -215,10 +225,10 @@ function create_lista(type,distance,levymitta,settingsarray) {
     lista.style.width = "1px";
     if(levymitta) {
       if(levymitta.classList.contains("aukko")) {
-        or_distance = parseFloat(levymitta.querySelector(".aukko_rcord").innerText)/5;
-        vr_distance = parseFloat(levymitta.querySelector(".aukko_lcord").innerText)/5;
-        yr_distance = parseFloat(levymitta.querySelector(".aukko_tcord").innerText)/5;
-        ar_distance = parseFloat(levymitta.querySelector(".aukko_bcord").innerText)/5;
+        // or_distance = parseFloat(levymitta.querySelector(".aukko_rcord").innerText)/5;
+        // vr_distance = parseFloat(levymitta.querySelector(".aukko_lcord").innerText)/5;
+        // yr_distance = parseFloat(levymitta.querySelector(".aukko_tcord").innerText)/5;
+        // ar_distance = parseFloat(levymitta.querySelector(".aukko_bcord").innerText)/5;
 
         lista.style.height = yr_distance-ar_distance + "px";
         lista.style.bottom = ar_distance+1+ "px";
@@ -243,10 +253,10 @@ function create_lista(type,distance,levymitta,settingsarray) {
     lista.style.height = "1px";
     if(levymitta) {
       if(levymitta.classList.contains("aukko")) {
-        or_distance = parseFloat(levymitta.querySelector(".aukko_rcord").innerText)/5;
-        vr_distance = parseFloat(levymitta.querySelector(".aukko_lcord").innerText)/5;
-        yr_distance = parseFloat(levymitta.querySelector(".aukko_tcord").innerText)/5;
-        ar_distance = parseFloat(levymitta.querySelector(".aukko_bcord").innerText)/5;
+        // or_distance = parseFloat(levymitta.querySelector(".aukko_rcord").innerText)/5;
+        // vr_distance = parseFloat(levymitta.querySelector(".aukko_lcord").innerText)/5;
+        // yr_distance = parseFloat(levymitta.querySelector(".aukko_tcord").innerText)/5;
+        // ar_distance = parseFloat(levymitta.querySelector(".aukko_bcord").innerText)/5;
         lista.style.width = or_distance - vr_distance + "px";
         lista.style.left = vr_distance+1+ "px";
       }

@@ -198,7 +198,8 @@ function siirto_muualle(mode) {
       });
     });
     await NORMAL_AWAIT;
-
+    draw__kiinnikkeet();
+    await sleep(600);
     room_array = ["a","b","c","d"];
     canvas__original = canvas;
     room__original = current_room;
@@ -236,7 +237,7 @@ function siirto_muualle(mode) {
         }
         else {
           kiinnikkeet__siirto();
-          kiinnike_default_initialization();
+          kiinnike_update_settingsinit();
 
           document.querySelector(".canvas_"+room).innerHTML = canvas.innerHTML;
 
@@ -307,6 +308,8 @@ function siirto_muualle(mode) {
       })
     });
     await sleep(100);
+    let copiedcanvases__levy_closers = copiedcanvases.querySelectorAll(".closer");
+    copiedcanvases__levy_closers.forEach(element => element.style.display = "none");
 
     
     alert("Valmis!");
@@ -341,6 +344,34 @@ function send_shit_over() {
  
 }
 
+function delete__listas_underaukko() {
+  aukko = copiedcanvases.querySelectorAll(".aukko");
+
+  aukko.forEach(a => {
+    acord = a.getBoundingClientRect();
+    a_l = acord['left'];
+    a_r = acord['left'] + acord['width'];
+    a_b = acord['bottom'];
+    a_t = acord['top'];
+    aukko_listas = copiedcanvases.querySelectorAll(".aukko_lista");
+
+    aukko_listas.forEach(l => {
+      lcord = l.getBoundingClientRect();
+      l_l = lcord['left'];
+      l_r = lcord['right'];
+      l_b = lcord['bottom'];
+      l_t = lcord['top'];
+      
+        // DEL IF INSIDE
+        if (a_l <= l_l && a_r >= l_r && a_b >= l_b && a_t >= l_t) {
+        console.log("DEL IF INSIDE");
+        console.log(a);
+        console.log(l);
+          l.style.display = "none";
+      }
+    });
+  });
+}
 
 function create__excel_fromallwalls() {
       $(".preloader").addClass( "active" );

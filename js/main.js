@@ -1334,7 +1334,7 @@ function refresh__drawcontrols() {
 
       }
       else {
-        alert("Sinun tulee asettaa kiinnikkeet ennen tätä vaihetta.");
+        // alert("Sinun tulee asettaa kiinnikkeet ennen tätä vaihetta.");
         $('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();
         return
       }
@@ -1557,7 +1557,7 @@ function refresh__drawcontrols() {
 
       }
       else {
-        alert("Sinun tulee asettaa kiinnikkeet ennen tätä vaihetta.");
+        // alert("Sinun tulee asettaa kiinnikkeet ennen tätä vaihetta.");
         $('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();
         return
       }
@@ -1710,7 +1710,7 @@ function refresh__drawcontrols() {
 
       }
       else {
-        alert("Sinun tulee asettaa kiinnikkeet ennen tätä vaihetta.");
+        // alert("Sinun tulee asettaa kiinnikkeet ennen tätä vaihetta.");
         $('#step_drawscreen').val('drawscreen_section_five');refresh__drawcontrols();updatearea();
         return
       }

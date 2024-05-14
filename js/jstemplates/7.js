@@ -718,11 +718,11 @@ function create__levy_excel(now) {
       kiinnikkeet_x = levyt[a].querySelectorAll(".tyostot__tyosto_pysty");
       kiinnikkeet_y = levyt[a].querySelectorAll(".tyostot__tyosto_vaaka");
       kiinnikkeet_x.forEach(k => {
-        levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+pysty_event+"---";
+        levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+a_evt+"---";
       });
       levyarray += "|";
       kiinnikkeet_y.forEach(k => {
-        levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+vaaka_event+"---";
+        levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+b_evt+"---";
       });
     }
     save("levyt~~"+levyarray);
