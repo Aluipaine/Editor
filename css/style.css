@@ -6193,6 +6193,10 @@ div.x_del.hidden {
   display: none;
   
 }
+
+.tyostot__tyosto.hidden .x_del {
+  display: none;
+}
 .tyostot__tyosto_vaaka .x_del {
   left: unset;
   margin-right: -40px;
