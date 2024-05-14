@@ -14,25 +14,26 @@ function restore__kiinnikkeet(content_) {
   content = content_.split("~~")[1].split("&");
   //console.log(content);
 
-  content.forEach(levy => {
-    if(levy.length < 1) {
-  
+  content.forEach(levy_iteration_data => {
+    if(levy_iteration_data.length < 1) {
+      
     }
     else {
-      levy = levy.split("|");
-      levyname = levy[2];
-      levykoko = levy[3];
+      levy_iteration_data = levy_iteration_data.split("|");
+      levyname = levy_iteration_data[2].replaceAll(" ","");
+      levykoko = levy_iteration_data[3].replaceAll(" ","");
 
       k_levyt = canvas.querySelectorAll(".levy");
       k_levyt.forEach(l => {
-        k_levyname = l.querySelector(".levy_name").innerText;
-        k_levykoko = l.querySelector("b i").innerText;
+        k_levyname = l.querySelector(".levy_name").innerText.replaceAll(" ","");
+        k_levykoko = l.querySelector("b i").innerText.replaceAll(" ","");
 
         if(k_levyname.replaceAll(" ","") === levyname.replaceAll(" ","") && k_levykoko.replaceAll(" ","") === levykoko.replaceAll(" ","")) {
-          restore_tyosto(l,levy);
+          restore_tyosto(l,levy_iteration_data);
         }
       });
     }
+    
   });
 }
 
