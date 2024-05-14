@@ -2660,17 +2660,17 @@ function reorganise__newtyosto() {
   d_r_tyosto = d_r.querySelectorAll(".aukko__cord");
 
   for (var i = d_l_tyosto.length - 1; i >= 0; i--) {
-    d_l_tyosto[i].remove();
+    // d_l_tyosto[i].remove();
   }
 
   for (var i = d_b_tyosto.length - 1; i >= 0; i--) {
-    d_b_tyosto[i].remove();
+    // d_b_tyosto[i].remove();
   }
   for (var i = d_t_tyosto.length - 1; i >= 0; i--) {
-    d_t_tyosto[i].remove();
+    // d_t_tyosto[i].remove();
   }
   for (var i = d_r_tyosto.length - 1; i >= 0; i--) {
-    d_r_tyosto[i].remove();
+    // d_r_tyosto[i].remove();
   }
   uniq = [...new Set(levy_array_pysty)];
   uniq_v = [...new Set(levy_array_vaaka)];

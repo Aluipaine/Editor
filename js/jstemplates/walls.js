@@ -198,8 +198,8 @@ function siirto_muualle(mode) {
       });
     });
     await NORMAL_AWAIT;
-    draw__kiinnikkeet();
-    await sleep(600);
+    // draw__kiinnikkeet();
+    // await sleep(600);
     room_array = ["a","b","c","d"];
     canvas__original = canvas;
     room__original = current_room;
@@ -308,6 +308,7 @@ function siirto_muualle(mode) {
       })
     });
     await sleep(100);
+    kiinnikkeet__siirto();
     let copiedcanvases__levy_closers = copiedcanvases.querySelectorAll(".closer");
     copiedcanvases__levy_closers.forEach(element => element.style.display = "none");
 
