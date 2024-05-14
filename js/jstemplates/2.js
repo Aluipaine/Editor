@@ -97,9 +97,16 @@ function change__aukko_sizecord() {
     `;
   }
 
-
+  try {
+    document.querySelectorAll(".aukko_ylitys input")[0].checked = true;
+  } catch (error) {
+    setTimeout(() => {
+      document.querySelectorAll(".aukko_ylitys input")[0].checked = true;
+      change__aukko_sizecord();
+    }, 1000);
+    return;
+  }
   
-  document.querySelectorAll(".aukko_ylitys input")[0].checked = true;
 
 
   // document.getElementById("settings__aukko").style.height = (document.getElementById("hole__height").value / height * 100) + '%';
@@ -399,8 +406,19 @@ var erikois_array_array = [];
  */
 function ylitys__array() {
 
-  ylitysas = document.querySelector(".aukko_ylitys input:checked").value;
-  headings = document.querySelectorAll("#hole_set h4."+cur_aukko_type+"__asetusheading");
+  try {
+    ylitysas = document.querySelector(".aukko_ylitys input:checked").value;
+    headings = document.querySelectorAll("#hole_set h4."+cur_aukko_type+"__asetusheading");
+  } catch (error) {
+
+    setTimeout(() => {
+      ylitysas = document.querySelector(".aukko_ylitys input:checked").value;
+      headings = document.querySelectorAll("#hole_set h4."+cur_aukko_type+"__asetusheading");
+      ylitys__array();
+    }, 1000);
+    return;
+  }
+  
   
   all_tr_array = [];
   // SEARCH FOR CORRECT TYPE

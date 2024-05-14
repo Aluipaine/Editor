@@ -2360,6 +2360,10 @@ function give__tyosto_cord(levy) {
           input.remove();
         }
       }
+      else {
+        
+      }
+      
     }
     levy_tyostot_y = levy.querySelector(".levy_tyostot_y");
     if (levy_tyostot_y.querySelectorAll("div").length == 2 || levy_tyostot_y.querySelector("input")) {
@@ -2575,13 +2579,13 @@ function change__levykiinnike(argument) {
 function reorganise__newtyosto() {
   console.log("function reorganise__newtyosto()");
   t1 = canvas.querySelectorAll(".x_cord");
-  // for (var i = t1.length - 1; i >= 0; i--) {
-  //   t1[i].remove();
-  // }
+  for (var i = t1.length - 1; i >= 0; i--) {
+    // t1[i].remove();
+  }
   t2 = canvas.querySelectorAll(".x_cord_mki");
-  // for (var i = t2.length - 1; i >= 0; i--) {
-  //   t2[i].remove();
-  // }
+  for (var i = t2.length - 1; i >= 0; i--) {
+    // t2[i].remove();
+  }
 
   t3 = canvas.querySelectorAll(".secondcord");
   // for (var i = t3.length - 1; i >= 0; i--) {
@@ -2595,7 +2599,7 @@ function reorganise__newtyosto() {
 
   setTimeout(() => {
     //console.log("Delayed for 1 second.");
-    // k_levys = canvas.querySelectorAll(".levy");
+    k_levys = canvas.querySelectorAll(".levy");
     for (var i = k_levys.length - 1; i >= 0; i--) {
       give__tyosto_cord(k_levys[i]);
       countdown__kiinnikkeet(k_levys[i]);
@@ -2660,17 +2664,17 @@ function reorganise__newtyosto() {
   d_r_tyosto = d_r.querySelectorAll(".aukko__cord");
 
   for (var i = d_l_tyosto.length - 1; i >= 0; i--) {
-    // d_l_tyosto[i].remove();
+    d_l_tyosto[i].style.display = "none";
   }
 
   for (var i = d_b_tyosto.length - 1; i >= 0; i--) {
-    // d_b_tyosto[i].remove();
+    d_b_tyosto[i].style.display = "none";
   }
   for (var i = d_t_tyosto.length - 1; i >= 0; i--) {
-    // d_t_tyosto[i].remove();
+    d_t_tyosto[i].style.display = "none";
   }
   for (var i = d_r_tyosto.length - 1; i >= 0; i--) {
-    // d_r_tyosto[i].remove();
+    d_r_tyosto[i].style.display = "none";
   }
   uniq = [...new Set(levy_array_pysty)];
   uniq_v = [...new Set(levy_array_vaaka)];

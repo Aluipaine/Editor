@@ -1100,7 +1100,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
     if (type == "au") {
 
       if(canvas.querySelectorAll(".aukko").length > 2) {
-        alert("Huomio! Aukkoja voi olla yhdessä seinässä max 3.");
+        // alert("Huomio! Aukkoja voi olla yhdessä seinässä max 3.");
         return;
       }
       changedimensions_aukko();
@@ -1569,7 +1569,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
     }
     if (input_step == "drawscreen_section_two") {
       if(canvas.querySelectorAll(".aukko").length > 2) {
-        alert("Huomio! Aukkoja voi olla yhdessä seinässä max 3.");
+        // alert("Huomio! Aukkoja voi olla yhdessä seinässä max 3.");
         return;
       }
         changedimensions_aukko();
