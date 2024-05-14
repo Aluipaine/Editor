@@ -83,7 +83,7 @@ function restore_tyosto(levy,content) {
 
       k.style.left = (parseFloat(t.split("^^")[0])/5) + "px";
       pysty_evt = parseFloat(t.split("^^")[2]);
-      pysty_event = parseFloat(t.split("^^")[2]);
+      a_evt= parseFloat(t.split("^^")[2]);
       k.innerHTML = `
         <div class="x_del hidden" onclick="tyosto__del(this);"></div>
         <input class="temp_input" onchange="change__tyostocord(this,1,${pysty_evt});" onclick="clearcord(this,'tyo');" data-from="">
@@ -115,7 +115,7 @@ function restore_tyosto(levy,content) {
       }
       k.style.bottom = (parseFloat(t.split("^^")[0])/5) + "px";
       vaaka_evt = parseFloat(t.split("^^")[2]);
-      vaaka_event = parseFloat(t.split("^^")[2]);
+      b_evt = parseFloat(t.split("^^")[2]);
       k.innerHTML = `
         <div class="x_del hidden" onclick="tyosto__del(this);"></div>
         <input class="temp_input" onchange="change__tyostocord(this,1,${vaaka_evt});" onclick="clearcord(this,'tyo');" data-from="">
@@ -157,7 +157,7 @@ function restore_tyosto(levy,content) {
 ladonta_savesetbtn = document.querySelector(".ladonta_savesetbtn");
 ladonta_savesetbtn.addEventListener("click", function () {
   kiinnike_update_settingsinit();
-  start__kiinnikkeet();
+  draw__kiinnikkeet();
 
   l_container = document.querySelector(".ladonta_container");
   levy_visualisation = l_container.querySelector(".levy");
@@ -351,57 +351,28 @@ function kiinnike_update_settingsinit() {
  * @returns None
  */
 // Function to start the work on green lines based on the provided specification
-function start__kiinnikkeet(specification_launch) {
-  console.log("function start__kiinnikkeet(specification_launch)");
+function draw__kiinnikkeet(specification_launch) {
+  console.log("function draw__kiinnikkeet(specification_launch)");
    // Select all elements with class "levy"
   let levyt = canvas.querySelectorAll(".levy");
+  levyt.forEach(element => tyosta(element));
 
-  // Initialize event variable
-
-  s_ar = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);
-  s_yr = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);
-  s_vr = parseFloat(document.querySelector("#settings__levy_vr_arvo").value);
-  s_or = parseFloat(document.querySelector("#settings__levy_or_arvo").value);
-  // Code commented out for clarity (possible part of future development)
-
-  // Checkboxes for green lines
-  if (document.querySelector("#kiinniketys__pkiinnike_one").checked === true) {
-    a_evt = 1;
-    let levyt = canvas.querySelectorAll(".levy");
-    levyt.forEach(element => tyosta(element));
-  }
-  if (document.querySelector("#kiinniketys__pkiinnike_two").checked === true) {
-    a_evt = 2;
-    levyt.forEach(element => tyosta(element));
-  }
-  if (document.querySelector("#kiinniketys__pkiinnike_three").checked === true) {
-    a_evt = 3;
-    levyt.forEach(element => tyosta(element));
-  }
-  if (document.querySelector("#kiinniketys__pkiinnike_four").checked === true) {
-    a_evt = 4;
-    levyt.forEach(element => tyosta(element));
+  tyostot__tyosto_input = canvas.querySelectorAll(".tyostot__tyosto > input");
+  for (var i = tyostot__tyosto_input.length - 1; i >= 0; i--) {
+    tyostot__tyosto_input[i].classList.add("x_cord_mki");
+    tyostot__tyosto_input[i].setAttribute("onclick", "clearcord(this,'tyo');");
   }
 
+  elements = canvas.querySelectorAll('.tyostot__tyosto');
+  sortedElements = [];
 
-
-  // pysty_event = evt;
-  if (document.querySelector("#kiinniketys__vkiinnike_one").checked === true) {
-    b_evt = 5;
-    levyt.forEach(element => tyosta(element));
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements[i];
+    sortedElements.push(element);
   }
-  if (document.querySelector("#kiinniketys__vkiinnike_two").checked === true) {
-    b_evt = 6;
-    levyt.forEach(element => tyosta(element));
-  }
-  if (document.querySelector("#kiinniketys__vkiinnike_three").checked === true) {
-    b_evt = 7;
-    levyt.forEach(element => tyosta(element));
-  }
-  if (document.querySelector("#kiinniketys__vkiinnike_four").checked === true) {
-    b_evt = 8;
-    levyt.forEach(element => tyosta(element));
-  }
+  // Sort the array of HTML elements by their offset left position
+  sortedElements.sort((a, b) => a.offsetLeft - b.offsetLeft);
+  draw_recreate_buttons();
 
   if(document.querySelector(".db_saumatable")) {
     document.querySelector(".db_saumatable").remove();
@@ -409,6 +380,8 @@ function start__kiinnikkeet(specification_launch) {
   else {
       
   }
+
+
   db_saumatable = document.createElement("div");
   db_saumatable.classList = "db_saumatable";
   s_pset = "S=<b class='saumaset_vm'>" +document.querySelector(".saumapysty__tbody td:nth-child(2) > input").value + "</b>";
@@ -442,15 +415,13 @@ function start__kiinnikkeet(specification_launch) {
     kiinnikkeet_x = levyt[a].querySelectorAll(".tyostot__tyosto_pysty");
     kiinnikkeet_y = levyt[a].querySelectorAll(".tyostot__tyosto_vaaka");
     kiinnikkeet_x.forEach(k => {
-      levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+pysty_event+"---";
+      levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+a_evt+"---";
     });
     levyarray += "|";
     kiinnikkeet_y.forEach(k => {
-      levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+vaaka_event+"---";
+      levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+b_evt+"---";
     });
   }
-
-  draw_recreate_buttons();
 
   save("tyostot~~"+levyarray);
 }
@@ -1773,7 +1744,7 @@ function change__klevy(info) {
   levy.title = info_cord[0] + "," + info_cord[1];
   document.querySelector("#k_settings__levy_levysizew").value = parseFloat(info_cord[0]);
   document.querySelector("#k_settings__levy_levysizeh").value = parseFloat(info_cord[1]);
-  start__kiinnikkeet();
+  draw__kiinnikkeet();
 
   l_container = document.querySelector(".ladonta_container");
   levy_visualisation = l_container.querySelector(".levy");
@@ -2884,9 +2855,9 @@ function reset__ltlevy_cords(levy) {
     for (var i = pystyt_tyostot.length - 1; i >= 0; i--) {
       temp_input = document.createElement("input");
       temp_input.classList.add("temp_input");
-      temp_input.setAttribute("onchange", "change__tyostocord(this,1," + pysty_event + ");");
+      temp_input.setAttribute("onchange", "change__tyostocord(this,1," + a_evt+ ");");
       temp_input.setAttribute("onclick", "clearcord(this,'tyo');");
-      temp_input.classList.add("event_" + String.fromCharCode(64 + pysty_event).toLowerCase());
+      temp_input.classList.add("event_" + String.fromCharCode(64 + a_evt).toLowerCase());
       pystyt_tyostot[i].appendChild(temp_input);
 
       real_cord = parseFloat(pystyt_tyostot[i].style.left) * 5 - pysty_tsumm;
@@ -2940,8 +2911,8 @@ function reset__ltlevy_cords(levy) {
     for (var i = vaat_tyostot.length - 1; i >= 0; i--) {
       temp_input = document.createElement("input");
       temp_input.classList.add("temp_input");
-      temp_input.setAttribute("onchange", "change__tyostocord(this,1," + vaaka_event + ");");
-      temp_input.classList.add("event_" + String.fromCharCode(64 + vaaka_event).toLowerCase());
+      temp_input.setAttribute("onchange", "change__tyostocord(this,1," + b_evt + ");");
+      temp_input.classList.add("event_" + String.fromCharCode(64 + b_evt).toLowerCase());
       temp_input.setAttribute("onclick", "clearcord(this,'tyo');");
       vaat_tyostot[i].appendChild(temp_input);
       real_cord_vaaka = parseFloat(vaat_tyostot[i].style.bottom) * 5 - vaaka_tsumm;
@@ -3163,11 +3134,11 @@ function open_ltladonta_settings(e, levy) {
       kiinnikkeet_x = levyt[a].querySelectorAll(".tyostot__tyosto_pysty");
       kiinnikkeet_y = levyt[a].querySelectorAll(".tyostot__tyosto_vaaka");
       kiinnikkeet_x.forEach(k => {
-        levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+pysty_event+"---";
+        levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+a_evt+"---";
       });
       levyarray += "|";
       kiinnikkeet_y.forEach(k => {
-        levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+vaaka_event+"---";
+        levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+b_evt+"---";
       });
     }
 
@@ -3973,7 +3944,7 @@ function lt_addmitta(mode) {
 
     a.innerHTML = `
       <div class="x_del hidden" onclick="tyosto__del(this);"></div>
-      <input class="temp_input" onchange="change__tyostocord(this,1,${pysty_event});" onclick="clearcord(this,'tyo');" data-from="">
+      <input class="temp_input" onchange="change__tyostocord(this,1,${a_evt});" onclick="clearcord(this,'tyo');" data-from="">
       <div class="thirdcord" onclick="clearcord(this,'tyo');" data-from="${ltnew_mitta}" style="display: none; display: block;">${ltnew_mitta}</div>
     `;
 
@@ -4008,7 +3979,7 @@ function lt_addmitta(mode) {
     thirdcord_kinet = parseFloat(p_levy.style.height) + "px";
     a.innerHTML = `
       <div class="x_del hidden" onclick="tyosto__del(this);"></div>
-      <input class="temp_input" onchange="change__tyostocord(this,1,${vaaka_event});" onclick="clearcord(this,'tyo');" data-from="">
+      <input class="temp_input" onchange="change__tyostocord(this,1,${b_evt});" onclick="clearcord(this,'tyo');" data-from="">
       <div class="thirdcord" onclick="clearcord(this,'tyo');" data-from="${ltnew_mitta}" style="top:${thirdcord_kinet};">${ltnew_mitta}</div>
     `;
 
@@ -4072,7 +4043,7 @@ function c_open_ltladonta_settings(e, levy) {
     c_reorganise__newtyosto_levy(pressed__levy);
     pressed__levy = null;
   }
-  // start__kiinnikkeet();
+  // draw__kiinnikkeet();
   // reorganise__newtyosto();
 }
 
@@ -4443,34 +4414,34 @@ function recreate_line(item, type = "horizontal") {
 
 
   // Checkboxes for green lines
-  let pysty_event;
+  let a_evt;
   switch (true) {
     case (document.querySelector("#kiinniketys__pkiinnike_one").checked): {
-      pysty_event = 1;
+      a_evt= 1;
     } break;
     case (document.querySelector("#kiinniketys__pkiinnike_two").checked): {
-      pysty_event = 2;
+      a_evt= 2;
     } break;
     case (document.querySelector("#kiinniketys__pkiinnike_three").checked): {
-      pysty_event = 3;
+      a_evt= 3;
     } break;
     case (document.querySelector("#kiinniketys__pkiinnike_four").checked): {
-      pysty_event = 4;
+      a_evt= 4;
     } break;
   }
-  let vaaka_event;
+  let b_evt;
   switch (true) {
     case (document.querySelector("#kiinniketys__vkiinnike_one").checked): {
-      vaaka_event = 5;
+      b_evt = 5;
     } break;
     case (document.querySelector("#kiinniketys__vkiinnike_two").checked): {
-      vaaka_event = 6;
+      b_evt = 6;
     } break;
     case (document.querySelector("#kiinniketys__vkiinnike_three").checked): {
-      vaaka_event = 7;
+      b_evt = 7;
     } break;
     case (document.querySelector("#kiinniketys__vkiinnike_four").checked): {
-      vaaka_event = 8;
+      b_evt = 8;
     } break;
   }
 
@@ -4483,11 +4454,11 @@ function recreate_line(item, type = "horizontal") {
     levyarray += levyt[a].querySelector(".levy_name").innerText + "|";
     levyarray += levyt[a].querySelector(".levy b i").innerText + "|";
     levyt[a].querySelectorAll(".tyostot__tyosto_pysty").forEach(k => {
-      levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+pysty_event+"---";
+      levyarray += parseFloat(k.style.left)*5+"^^"+k.classList+"^^"+a_evt+"---";
     });
     levyarray += "|";
     levyt[a].querySelectorAll(".tyostot__tyosto_vaaka").forEach(k => {
-      levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+vaaka_event+"---";
+      levyarray += parseFloat(k.style.bottom)*5+"^^"+k.classList+"^^"+b_evt+"---";
     });
   }
   save("tyostot~~"+levyarray);
