@@ -6065,7 +6065,7 @@ input.secondcord {
   border-bottom: 1px solid red;
   height: 10px;
   background: transparent;
-  margin-bottom: -5px;
+  margin-top: -5px;
   display: block;
   content:'';
   width: 100%;

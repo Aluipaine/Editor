@@ -498,6 +498,70 @@ function rangoita(custom_w = null) {
 
   trow = tyostot;
   fixrangat();
+
+  let aukko_rankas = [...canvas.querySelectorAll(".aukko__ranka")];
+  let aukkos = [...canvas.querySelectorAll(".aukko")];
+  aukko_rankas.forEach(ranka => {
+    if (ranka.classList.contains("ranka_pysty")) {
+      let touching_aukkos;
+      touching_aukkos = aukkos.filter(aukko => aukko.style.left === ranka.style.left || parseInt(aukko.style.left) + aukko.clientWidth === parseInt(ranka.style.left));
+      if (touching_aukkos.length) {
+        let a_top = 0,
+            a_bottom = 0;
+        touching_aukkos.forEach(touching_aukko => {
+          a_top = Math.max(a_top, roundToNearest25(parseFloat(touching_aukko.style.height) + parseFloat(touching_aukko.style.bottom)));
+          a_bottom = Math.max(a_bottom, roundToNearest25(parseFloat(touching_aukko.style.bottom)))
+        })
+        let top_height = ranka.clientHeight - a_top;
+        if (top_height) {
+          let additional = ranka.cloneNode();
+          additional.classList.add("additional_aukko_ranka")
+          additional.style.background = "#24FF00";
+          additional.style.bottom = `${a_top + 5}px`
+          additional.style.height = `${top_height - 5}px`;
+          ranka.after(additional);
+        }
+        if (a_bottom) {
+          let additional = ranka.cloneNode();
+          additional.classList.add("additional_aukko_ranka")
+          additional.style.background = "#24FF00";
+          additional.style.bottom = `0px`
+          additional.style.height = `${a_bottom - 5}px`;
+          ranka.after(additional);
+        }
+      }
+    }
+    else if (ranka.classList.contains("ranka_vaaka")) {
+      let touching_aukkos;
+      touching_aukkos = aukkos.filter(aukko => parseInt(ranka.style.bottom) > 0 && (parseInt(aukko.style.bottom) <= parseInt(ranka.style.bottom) + 5 || parseInt(aukko.style.bottom) + aukko.clientHeight >= parseInt(ranka.style.bottom) - 5));
+      if (touching_aukkos.length) {
+        let a_left = ranka.clientWidth,
+            a_right = 0;
+        touching_aukkos.forEach(touching_aukko => {
+          a_right = Math.max(a_right, roundToNearest25(parseFloat(touching_aukko.style.width) + parseFloat(touching_aukko.style.left)));
+          a_left = Math.min(a_left, roundToNearest25(parseFloat(touching_aukko.style.left)));
+        })
+        if (a_left) {
+          let additional = ranka.cloneNode();
+          additional.classList.add("additional_aukko_ranka")
+          additional.style.background = "#24FF00";
+          additional.style.left = `0px`
+          additional.style.width = `${a_left - 5}px`;
+          ranka.after(additional);
+        }
+        let right_width = ranka.clientWidth - a_right;
+        if (right_width) {
+          let additional = ranka.cloneNode();
+          additional.classList.add("additional_aukko_ranka")
+          additional.style.background = "#24FF00";
+          additional.style.left = `${a_right + 5}px`
+          additional.style.width = `${right_width - 5}px`;
+          ranka.after(additional);
+        }
+      }
+    }
+  })
+
   rangat__initializesettings();
   rangat__setcord();
   // create__ranka__asexcel();
