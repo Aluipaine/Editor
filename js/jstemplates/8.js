@@ -546,7 +546,7 @@ function rangoita(custom_w = null) {
           additional.classList.add("additional_aukko_ranka")
           additional.style.background = "#24FF00";
           additional.style.left = `0px`
-          additional.style.width = `${a_left - 5}px`;
+          additional.style.width = `${a_left - saumaset_vm}px`;
           ranka.after(additional);
         }
         let right_width = ranka.clientWidth - a_right;
@@ -554,8 +554,8 @@ function rangoita(custom_w = null) {
           let additional = ranka.cloneNode();
           additional.classList.add("additional_aukko_ranka")
           additional.style.background = "#24FF00";
-          additional.style.left = `${a_right + 5}px`
-          additional.style.width = `${right_width - 5}px`;
+          additional.style.left = `${a_right + saumaset_vm}px`
+          additional.style.width = `${right_width - saumaset_vm}px`;
           ranka.after(additional);
         }
       }
