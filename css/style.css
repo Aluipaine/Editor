@@ -263,7 +263,8 @@ form input,
 .commentbox input,
 .kommentti_comment_to,
 .roomconfig_second_prefixes input,
-.first__container input {
+.first__container input,
+#new_project textarea {
   background: #fefefe;
   box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.12);
   border-radius: 3px;
@@ -6730,6 +6731,23 @@ div.x_del.hidden {
 #roomconfig_second h2 {
   margin-bottom: 40px;
   text-align: center;
+}
+
+#new_project .tiedot_textareas {
+  margin-block: 1rem;
+  max-width: unset;
+}
+#new_project .tiedot_textareas .form-group {
+  width: 100%;
+  gap: 20px;
+}
+#new_project .tiedot_textareas .form-subgroup {
+  flex: 1;
+}
+#new_project textarea {
+  max-width: unset;
+  width: 100%;
+  resize: none;
 }
 
 .start_set {

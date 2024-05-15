@@ -2104,13 +2104,36 @@
     <article class="row wide-container nowrap">
       <aside class="col-4">
         <div class="row">
+        <?php
+            $tiedot_projektista = $db->query("SELECT * FROM `projectmeta` WHERE `id`= $id AND `meta_key` = 'tiedot_projektista'");
+            if ($tiedot_projektista && $tiedot_projektista->num_rows) {
+                $tiedot_projektista = $tiedot_projektista->fetch_assoc()["meta_value"];
+            }
+            else {
+                $tiedot_projektista = "Ei ole";
+            }
+            $tiedot_huoneista = $db->query("SELECT * FROM `projectmeta` WHERE `id`= $id AND `meta_key` = 'tiedot_huoneista'");
+            if ($tiedot_huoneista && $tiedot_huoneista->num_rows) {
+                $tiedot_huoneista = $tiedot_huoneista->fetch_assoc()["meta_value"];
+            }
+            else {
+                $tiedot_huoneista = "Ei ole";
+            }
+            $tiedot_tekijasta = $db->query("SELECT * FROM `projectmeta` WHERE `id`= $id AND `meta_key` = 'tiedot_tekijasta'");
+            if ($tiedot_tekijasta && $tiedot_tekijasta->num_rows) {
+                $tiedot_tekijasta = $tiedot_tekijasta->fetch_assoc()["meta_value"];
+            }
+            else {
+                $tiedot_tekijasta = "Ei ole";
+            }
+        ?>
           <div class="col-with-table">  
           <b>Tiedot projektista </b> <br> 
-          <i>Ei ole</i> <br> <br>
+          <i><?= $tiedot_projektista ?></i> <br> <br>
           <b>Tiedot huoneesta </b> <br>
-          <i>Ei ole</i> <br> <br>
+          <i><?= $tiedot_huoneista ?></i> <br> <br>
           <b>Tiedot tekijästä</b> <br>
-          <i>Ei ole</i> <br> <br>
+          <i><?= $tiedot_tekijasta ?></i> <br> <br>
           <div class="col-table">
           <h2>Seinien asennusjärjestys</h2>
           <table>

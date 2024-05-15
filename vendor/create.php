@@ -255,7 +255,13 @@ if (!$post) {
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_id', '$id')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_name', '$project_name')");
 
+$tiedot_projektista = $db->real_escape_string($_POST["tiedot_projektista"]);
+$tiedot_huoneista = $db->real_escape_string($_POST["tiedot_huoneista"]);
+$tiedot_tekijasta = $db->real_escape_string($_POST["tiedot_tekijasta"]);
 
+$meta = $db->query("INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'tiedot_projektista', '$tiedot_projektista')");
+$meta = $db->query("INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'tiedot_huoneista', '$tiedot_huoneista')");
+$meta = $db->query("INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'tiedot_tekijasta', '$tiedot_tekijasta')");
 
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 's_settings', '$chosen_jarjestelma')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 's_materials', '')");
