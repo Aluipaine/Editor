@@ -8090,6 +8090,6 @@ input[type="radio"].mass__selection_btn {
   display: block !important;
 }
 
-#copiedcanvases .ranka_cord.ranka_type {
+.ranka_cord.ranka_type {
   top: 0;
 }

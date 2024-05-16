@@ -4271,7 +4271,7 @@ function recreate_line(item, type = "horizontal") {
     let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
     let levy_left = parseFloat(item.closest(".levy").title.split`,`[3]);
     let canvas_bottom = relative_line_bottom + levy_bottom;
-    let distance_between = document.querySelector("#v_target").value / 5;
+    let distance_between = document.querySelector("#v_target").value / 5 - 50;
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
@@ -4312,7 +4312,7 @@ function recreate_line(item, type = "horizontal") {
     let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
     let levy_right = parseFloat(item.closest(".levy").title.split`,`[3]) + parseFloat(item.closest(".levy").title.split`,`[0]);
     let canvas_bottom = relative_line_bottom + levy_bottom;
-    let distance_between = document.querySelector("#v_target").value / 5;
+    let distance_between = document.querySelector("#v_target").value / 5 - 50;
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
@@ -4352,7 +4352,7 @@ function recreate_line(item, type = "horizontal") {
     let levy_left = parseFloat(item.closest(".levy").title.split`,`[3]);
     let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
     let canvas_left = relative_line_left + levy_left;
-    let distance_between = document.querySelector("#p_target").value / 5;
+    let distance_between = document.querySelector("#p_target").value / 5 - 50;
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
@@ -4392,7 +4392,7 @@ function recreate_line(item, type = "horizontal") {
     let levy_left = parseFloat(item.closest(".levy").title.split`,`[3]);
     let levy_top = parseFloat(item.closest(".levy").title.split`,`[2]) + parseFloat(item.closest(".levy").title.split`,`[1]);
     let canvas_left = relative_line_left + levy_left;
-    let distance_between = document.querySelector("#p_target").value / 5;
+    let distance_between = document.querySelector("#p_target").value / 5 - 50;
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
@@ -4499,18 +4499,18 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_left = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.bottom > top && rect.top < top && rect.right <= left;
+      return rect.bottom >= top && rect.top <= top && rect.right <= left;
     });
-    if (!to_the_left.length && levy_to_the_left.length && !tyostot.classList.contains("hidden")) {
+    if (!to_the_left.length && levy_to_the_left.length) {
       add_recreate_button(tyostot, "horizontal");
     }
     let to_the_right = tyostots.filter(v => {
       let rect = v.getBoundingClientRect();
-      return touch(rect.top, top) && touch(rect.left, right);
+      return touch(rect.top, top) && touch(rect.left, right) && !v.classList.contains("hidden");
     });
     let levy_to_the_right = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.bottom > top && rect.top < top && rect.left <= right;
+      return rect.bottom >= top && rect.top <= top && rect.left >= right;
     });
     if (!to_the_right.length && levy_to_the_right.length) {
       add_recreate_button(tyostot, "horizontal_opposite");
@@ -4528,7 +4528,7 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_top = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.left < left && rect.right > left && rect.bottom <= top;
+      return rect.left <= left && rect.right >= left && rect.bottom >= top;
     });
     if (!to_the_top.length && levy_to_the_top.length) {
       add_recreate_button(tyostot, "vertical_opposite");
@@ -4539,9 +4539,9 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_bottom = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.left < left && rect.right > left && rect.top <= bottom;
+      return rect.left <= left && rect.right >= left && rect.top <= bottom;
     });
-    if (!to_the_bottom.length && levy_to_the_bottom.length && !tyostot.classList.contains("hidden")) {
+    if (!to_the_bottom.length && levy_to_the_bottom.length) {
       add_recreate_button(tyostot, "vertical");
     }
   });
