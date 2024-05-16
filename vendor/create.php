@@ -70,8 +70,8 @@ for ($i=0; $i < 31; $i++) {
 			$p_symbols = rand_string(8);
 			$password = password_hash($p_symbols, PASSWORD_DEFAULT); #2022-01-26 15:12:01
 			$created_att = date("Y-m-d H:i:s");
-			//print_r("INSERT INTO `users` (`username`, `password`, `role`, `permissionrank`, `visible_forall`, `phone`, `email`, `company`, `created_at`) VALUES ('$prc_1', '$password', '$prc_1_role', '$prc_1_permission', '$prc_1_hiding', '$prc_1_phone', '$prc_1_email', '$prc_1_company', '$created_att')");
-			// $meta = mysqli_query($db, "INSERT INTO `users` (`username`, `password`, `role`, `permissionrank`, `visible_forall`, `phone`, `email`, `company`, `created_at`) VALUES ('$name', '$password', '$role', '$permission', '$hiding', '$phone', '$email', '$company', '$created_att')");
+			// print_r("INSERT INTO `users` (`username`, `password`, `role`, `permissionrank`, `visible_forall`, `phone`, `email`, `company`, `created_at`) VALUES ('$prc_1', '$password', '$prc_1_role', '$prc_1_permission', '$prc_1_hiding', '$prc_1_phone', '$prc_1_email', '$prc_1_company', '$created_att')");
+			$meta = mysqli_query($db, "INSERT INTO `users` (`username`, `password`, `role`, `permissionrank`, `visible_forall`, `phone`, `email`, `company`, `created_at`) VALUES ('$name', '$password', '$role', '$permission', '$hiding', '$phone', '$email', '$company', '$created_att')");
 			$project_id = mysqli_fetch_array(mysqli_query($db, "SELECT MAX(id) as max_id FROM `projects`"))["max_id"] + 1;
 			$user = $_SESSION["username"];
 			$mail = new PHPMailer(); 
@@ -127,7 +127,7 @@ for ($i=0; $i < 31; $i++) {
 		
 		$user = $_SESSION["username"];
 		$myyja = $_POST['prc_3'];
-		// mysqli_query($db, "INSERT INTO `addedusers` (`username`, `project_id`, `added_by`) VALUES ('$adduser', $project_id, '$myyja')");
+		mysqli_query($db, "INSERT INTO `addedusers` (`username`, `project_id`, `added_by`) VALUES ('$adduser', $project_id, '$myyja')");
 		
 		
 	}
@@ -307,22 +307,7 @@ $db->query("INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($
 $db->query("INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'g_np_text', '[]')");
 $db->query("INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'h_np_text', '[]')");
 
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'step', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'wall', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'room', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'settings', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'mittapisteet', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'aukot', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'reijat', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'saumat', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'levyt', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'rangat', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'listat', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'kokonaisalue', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'levytettava_alue', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'poisjaava_alue', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'keskusmittapiste_cord', '')");
-// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'reklamaatiot', '')");
+
 
 
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'kaupalliset_asiakirjat', '$kaupalliset_asiakirjat')");
@@ -438,6 +423,22 @@ echo "<script>window.location.replace('/login.php');</script>";
 // $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_4_1_name', '')");
 // $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_4_1_num', '')");
 // $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'pr_4_1_type', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'step', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'wall', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'room', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'settings', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'mittapisteet', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'aukot', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'reijat', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'saumat', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'levyt', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'rangat', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'listat', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'kokonaisalue', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'levytettava_alue', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'poisjaava_alue', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'keskusmittapiste_cord', '')");
+// $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'reklamaatiot', '')");
 
 ?>
 
