@@ -620,6 +620,7 @@ function create_rooms() {
  * @returns None
  */
 async function initalize_cross(arg) {
+
   a_saved = apartment.dataset.aroom.replaceAll(",","~");
   b_saved = apartment.dataset.broom.replaceAll(",","~");
   c_saved = apartment.dataset.croom.replaceAll(",","~");
@@ -1116,7 +1117,7 @@ function initializebuilding() {
     }
   }
   project_type = document.querySelector("#current_project_measurement").value;
-  if(project_type === 'after_measure_comment') {
+  if(project_type === 'after_measure_comment' || project_type === "Huone/seinä") {
       document.querySelector("#house").style.display = "block";
   }
   else {
