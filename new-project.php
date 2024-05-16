@@ -32,6 +32,7 @@ include('header.php');
 <form action="vendor/create.php" method="post" id="new_project__form">
    
    <section id="new_project">
+       <input type="hidden" name="project_type" id="project_type" value="Huone/seinä" required>
          <div class="form-subgroup main">
             <label>Projektin nimi: </label>
             <input type="text" name="project_name" class="form-control project_name_slugfrom" value="" required oninput="slugify__prname();">   
@@ -41,7 +42,23 @@ include('header.php');
             <div class="row project__linkrow">
                <b>https://editori.westface.fi/</b><input type="text" name="project_slug" class="form-control project_name_slugto" id="project_name_slugto" value="">   
             </div>
-         </div>    
+         </div>
+       <fieldset class="tiedot_textareas">
+           <div class="form-group">
+               <div class="form-subgroup">
+                   <label for="tiedot_projektista">Tiedot projektista</label>
+                   <textarea rows="4" type="text" id="tiedot_projektista" name="tiedot_projektista" class="form-control"></textarea>
+               </div>
+               <div class="form-subgroup">
+                   <label for="tiedot_huoneista">Tiedot huoneista</label>
+                   <textarea rows="4" type="text" id="tiedot_huoneista" name="tiedot_huoneista" class="form-control"></textarea>
+               </div>
+               <div class="form-subgroup">
+                   <label for="tiedot_tekijasta">Tiedot tekijästä</label>
+                   <textarea rows="4" type="text" id="tiedot_tekijasta" name="tiedot_tekijasta" class="form-control"></textarea>
+               </div>
+           </div>
+       </fieldset>
          <fieldset>
             <?php
                $options = "";
@@ -355,6 +372,7 @@ include('header.php');
       <div class="rappu_more" onclick="plusone_rappu();">
           Lisää rappu
       </div>
+
       <input type="hidden" name="a_pr_rap" class="pr_rap a_pr_rap" value="">
       <input type="hidden" name="a_pr_krs" class="pr_krs a_pr_krs" value="">
       <input type="hidden" name="b_pr_rap" class="pr_rap b_pr_rap" value="">
