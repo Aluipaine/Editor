@@ -501,10 +501,11 @@ function rangoita(custom_w = null) {
 
   let aukko_rankas = [...canvas.querySelectorAll(".aukko__ranka")];
   let aukkos = [...canvas.querySelectorAll(".aukko")];
+  const touch = (a, b) => Math.abs(parseInt(a) - parseInt(b)) <= 10;
   aukko_rankas.forEach(ranka => {
     if (ranka.classList.contains("ranka_pysty")) {
-      let left_touching_aukko = aukkos.filter(aukko => aukko.style.left === ranka.style.left)[0];
-      let right_touching_aukko = aukkos.filter(aukko => parseInt(aukko.style.left) + aukko.clientWidth === parseInt(ranka.style.left))[0];
+      let left_touching_aukko = aukkos.filter(aukko => touch(aukko.style.left, ranka.style.left))[0];
+      let right_touching_aukko = aukkos.filter(aukko => touch(parseInt(aukko.style.left) + aukko.clientWidth, ranka.style.left))[0];
       let a_top, a_bottom;
       if (left_touching_aukko && right_touching_aukko) {
         a_top = Math.max(
@@ -531,9 +532,9 @@ function rangoita(custom_w = null) {
         ranka.after(additional);
       }
     }
-    else if (ranka.classList.contains("ranka_vaaka")) {
+    else if (ranka.classList.contains("ranka_vaaka") && parseInt(ranka.style.bottom) > 0) {
       let touching_aukkos = aukkos.filter(aukko =>
-          parseInt(ranka.style.bottom) > 0 && (parseInt(aukko.style.bottom) === parseInt(ranka.style.bottom) + 5 || parseInt(aukko.style.bottom) + aukko.clientHeight === parseInt(ranka.style.bottom) - 5)
+          touch(aukko.style.bottom, ranka.style.bottom) || touch(parseInt(aukko.style.bottom) + aukko.clientHeight, ranka.style.bottom)
       );
       if (touching_aukkos.length) {
         touching_aukkos.forEach(touching_aukko => {
