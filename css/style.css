@@ -1054,6 +1054,9 @@ td.hidden {
 }
 .drawarea__section {
   flex-wrap: wrap;
+
+  /* 150524 FIX */
+  flex-direction: column;
 }
 
 .drawarea__section_container {
@@ -4278,7 +4281,7 @@ article.preview_canvas:before {
   width: 100%;
   top: 50px;
   overflow-x: scroll;
-  max-width: 150vw;
+   max-width: 100vw; /* Prev value 150vw */
 }
 
 
@@ -4358,6 +4361,10 @@ section.excel tr > td:nth-child(10) {
 
 .lv_modal section {
   padding-top: 10px;
+}
+
+.lv_modal .lvcord__item {
+  flex: 0 0 48%;
 }
 
 .lvcord__item input {

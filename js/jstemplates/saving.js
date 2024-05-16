@@ -38,6 +38,7 @@ function save(array) {
  * @returns None
  */
 function restoreprogress() {
+    (async () => {
     lvalarm = true;
     restoring__mode = true;
     sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -109,23 +110,11 @@ function restoreprogress() {
                 s = s_unprocessed.replaceAll('"','').replaceAll("]","").replaceAll("[","").split(",");
                 content = s[4];
                 timestamp = s[5];
-                if(content.split("~~")[0] === "mp") {
-                    input_step = "drawscreen_section_one";
-                    if(content.split("~~")[3].includes("#")) {
-                        document.querySelector("#mittapiste__name").value = content.split("~~")[3].split("#")[0];
-                    }
-                    else {
-                        document.querySelector("#mittapiste__name").value = content.split("~~")[3];
-                    }
-                    origo_position = "left_bottom";
-                    document.querySelector("#cord_left").value = parseFloat(content.split("~~")[1]);
-                    document.querySelector("#cord_up").value = parseFloat(content.split("~~")[2]);
-                    mitta__create_mitta("restore","mp");
-                }
-                else if(content.split("~~")[0] === "au") {
+                if(content.split("~~")[0] === "au") {
                     $('#step_drawscreen').val('drawscreen_section_two');refresh__drawcontrols();updatearea();           
                     settings__aukko();
-                    ylitys__array();
+                    ylitysas = content.split("~~")[5];
+                    ylitys__array(content.split("~~")[5]);
                     console.log(content.split("~~"));
                     input_step = "drawscreen_section_two";
                     origo_position = "left_bottom";
@@ -161,8 +150,46 @@ function restoreprogress() {
                     // });
                     mitta__create_mitta("restore","au",content.split("~~")[9].toLowerCase());
                     
+                 }
+            });
+        }
+    });
+    
+    formData = {
+        pr_id: document.querySelector("#current_project_id").value,
+        room: current_apartment,
+        wall: current_room,
+    },
+    $.ajax({
+        type: "POST",
+        url: "../vendor/get-savedprogressroom.php",
+        data: formData,
+        error: function (jqxhr, status, exception) {
+          console.log('Tietokantavirhe, soita numeroon +358449782028');
+        }
+    }).done(function (success) {
+        successful = success.split("],[");
+        if(successful[0].length > 3) {
+            successful.forEach(s_unprocessed => {
+                s = s_unprocessed.replaceAll('"','').replaceAll("]","").replaceAll("[","").split(",");
+                content = s[4];
+                timestamp = s[5];
+                if(content.split("~~")[0] === "mp") {
+                    input_step = "drawscreen_section_one";
+                    if(content.split("~~")[3].includes("#")) {
+                        document.querySelector("#mittapiste__name").value = content.split("~~")[3].split("#")[0];
+                    }
+                    else {
+                        document.querySelector("#mittapiste__name").value = content.split("~~")[3];
+                    }
+                    origo_position = "left_bottom";
+                    document.querySelector("#cord_left").value = parseFloat(content.split("~~")[1]);
+                    document.querySelector("#cord_up").value = parseFloat(content.split("~~")[2]);
+                    mitta__create_mitta("restore","mp");
                 }
+                
                 else if(content.split("~~")[0] === "lv") {
+                    update_lv_ondrawarea();
                     origo_position = "left_bottom";
 
                     document.querySelector("#lapiviennit__sade_muucord").value = content.split("~~")[1];
@@ -172,6 +199,14 @@ function restoreprogress() {
                     document.querySelector("#lv_comment").value = content.split("~~")[5];
                     document.querySelector("#lv_comment_from").value = content.split("~~")[6];
                     document.querySelector("#lv_comment_to").value = content.split("~~")[7];
+
+                    if(content.split("~~")[8] === 'dust') {
+                        document.querySelector("#lvframing_dust").checked;
+                    }
+                    else if(content.split("~~")[8] === 'frame') {
+                        document.querySelector("#lvframing_frame").checked;
+                    }
+                    document.querySelector("#lv_comment_to").value = content.split("~~")[8];
                     
                     mitta__create_mitta("restore","lv");
                 }
@@ -310,6 +345,7 @@ function restoreprogress() {
 
     $(".preloader").removeClass( "active" );
     
+    })();
 }
 
 

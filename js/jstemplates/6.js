@@ -10,10 +10,10 @@ a_evt = 0;
 b_evt = 0;
 
 function restore__kiinnikkeet(content_) {
+  console.log(content_);
   setTimeout(() => {
     console.log("function restore__kiinnikkeet");
     content = content_.split("~~")[1].split("&");
-    //console.log(content);
 
     content.forEach(levy_iteration_rawdata => {
       if(levy_iteration_rawdata.length < 1) {

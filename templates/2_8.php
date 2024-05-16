@@ -55,7 +55,7 @@
             </ul>
         </nav>
     </section>
-  <article class="canvas_a preview_canvas" style="width: 100%;">
+  <article class="canvas_a preview_canvas" style="width: 100%;" data-wallname="A">
     <table class="grid-container">
     <?php
     for ($i=0; $i < 40; $i++) { 
@@ -68,7 +68,7 @@
     ?>
     </table>
   </article>
-  <article class="canvas_b preview_canvas" style="width: 100%;">
+  <article class="canvas_b preview_canvas" style="width: 100%;" data-wallname="B">
     <table class="grid-container">
     <?php
     for ($i=0; $i < 40; $i++) { 
@@ -81,7 +81,7 @@
     ?>
     </table>
   </article>
-  <article class="canvas_c preview_canvas" style="width: 100%;">
+  <article class="canvas_c preview_canvas" style="width: 100%;" data-wallname="C">
     <table class="grid-container">
     <?php
     for ($i=0; $i < 40; $i++) { 
@@ -94,7 +94,7 @@
     ?>
     </table>
   </article>
-  <article class="canvas_d preview_canvas" style="width: 100%;">
+  <article class="canvas_d preview_canvas" style="width: 100%;" data-wallname="D">
     <table class="grid-container">
     <?php
     for ($i=0; $i < 40; $i++) { 

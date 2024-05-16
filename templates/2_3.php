@@ -78,6 +78,9 @@
                 <div class="col-6"><h2><input type="text" value="Läpivienti " class="lineinput" id="lv__name"></h2></div>
                 <div class="col-6">
                     <fieldset class="modal__lvtypes">
+                        <input name="lv__sade" type="radio" id="lapiviennit__sade_zero" onchange="change__lapivienti_sizecord(this);" value="6">
+                        <label for="lapiviennit__sade_zero">6mm</label>
+
                         <input name="lv__sade" type="radio" id="lapiviennit__sade_first" onchange="change__lapivienti_sizecord(this);" value="25">
                         <label for="lapiviennit__sade_first">25</label>
                         <input name="lv__sade" type="radio" id="lapiviennit__sade_second" onchange="change__lapivienti_sizecord(this);" value="50">
@@ -109,10 +112,14 @@
                     <label for="from__side_lapivienti">Omat mitat</label>
                 </fieldset>
                 <section class="row cord">
-                    <div class="col-6" style="display: flex;flex-direction: column;">
+                    <div class="col-6 row" style="display: flex;flex-direction: column;">
                         <div class="lvcord__item cord__item">
                             <label for="lvcord_low" class="label_lv_cord_a">Ylös</label>
                             <input id="lvcord_low" name="" type="tel" class="lineinput" onchange="change__newdiv_cord();cord__check(this);">
+                        </div>
+                        <div class="lvcord__item cord__item">
+                            <label for="lvcord_left" class="label_lv_cord_b">Oikealle</label>
+                            <input id="lvcord_left" name="" type="tel" class="lineinput" onchange="change__newdiv_cord();cord__check(this);">
                         </div>
 
                         <div class="lvcord__item cord__item" style="display: none;">
@@ -121,10 +128,12 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="lvcord__item cord__item">
-                            <label for="lvcord_left" class="label_lv_cord_b">Oikealle</label>
-                            <input id="lvcord_left" name="" type="tel" class="lineinput" onchange="change__newdiv_cord();cord__check(this);">
-                        </div>
+                    <fieldset>
+                        <input name="lvframing" type="radio" id="lvframing_dust" onfocus="" checked>
+                        <label for="lvframing_dust">Dustiksi</label>
+                        <input name="lvframing" type="radio" id="lvframing_frame" onfocus="">
+                        <label for="lvframing_frame">Frameksi</label>
+                    </fieldset>
                         <div id="setting__canvas_lapiviennit" class="setting__canvas">
 
                         </div>

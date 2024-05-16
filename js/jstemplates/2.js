@@ -103,7 +103,8 @@ function change__aukko_sizecord() {
     setTimeout(() => {
       document.querySelectorAll(".aukko_ylitys input")[0].checked = true;
       change__aukko_sizecord();
-    }, 1000);
+    }, 100);
+    console.log("AUKKO ERROR!" + error);
     return;
   }
   
@@ -322,28 +323,7 @@ function counting__aukkos() {
  * @param {Event} e - The event that triggered the function.
  * @returns None
  */
-function change__lapivienti_sizecord(e) {
-  const height = document.querySelector('#box_h').value;
-  const width = document.querySelector('#box_w').value;
-  if (document.querySelector("#lapiviennit__sade_first").checked) {
-    document.querySelector("#lapiviennit__sade_muucord").value = e.value;
-  }
-  if (document.querySelector("#lapiviennit__sade_second").checked) {
-    document.querySelector("#lapiviennit__sade_muucord").value = e.value;
-  }
-  if (document.querySelector("#lapiviennit__sade_third").checked) {
-    document.querySelector("#lapiviennit__sade_muucord").value = e.value;
-  }
-  if (document.querySelector("#lapiviennit__sade_fourth").checked) {
-    document.querySelector("#lapiviennit__sade_muucord").value = e.value;
-  }
-  if (document.querySelector("#lapiviennit__sade_fifth").checked) {
-    document.querySelector("#lapiviennit__sade_muucord").value = e.value;
-  }
-  if (document.querySelector("#lapiviennit__sade_muucord").value != "") {
-    document.querySelector("#lapiviennit__sade_muucord").value = e.value;
-  }
-}
+
 
 /**
  * Updates the dimensions of a hole based on the input values.
@@ -404,20 +384,29 @@ var erikois_array_array = [];
  * It retrieves input values from the page, processes them, and updates the data attributes of elements accordingly.
  * @returns None
  */
-function ylitys__array() {
+function ylitys__array(arg) {
 
-  try {
-    ylitysas = document.querySelector(".aukko_ylitys input:checked").value;
+  if(arg) {
+    ylitysas = arg;
     headings = document.querySelectorAll("#hole_set h4."+cur_aukko_type+"__asetusheading");
-  } catch (error) {
-
-    setTimeout(() => {
+  }
+  else {
+    try {
       ylitysas = document.querySelector(".aukko_ylitys input:checked").value;
       headings = document.querySelectorAll("#hole_set h4."+cur_aukko_type+"__asetusheading");
-      ylitys__array();
-    }, 1000);
-    return;
+    } catch (error) {
+
+      setTimeout(() => {
+        ylitysas = document.querySelector(".aukko_ylitys input:checked").value;
+        headings = document.querySelectorAll("#hole_set h4."+cur_aukko_type+"__asetusheading");
+        ylitys__array();
+        console.log("AUKKO ERROR!" + error);
+
+      }, 100);
+
+    }
   }
+  
   
   
   all_tr_array = [];

@@ -158,8 +158,8 @@ function open_element(element,left_distance,right_distance,bottom_distance,top_d
     document.querySelector("#aukko_comment_to").value = comment_to;
   }
   if (input_step == "drawscreen_section_three") {
-    document.querySelector('#drawscreen_section_three > div.modal-container').classList.add('two');
-    document.querySelector('#drawscreen_section_three > div.modal-container').classList.remove('out');
+    document.querySelector('.lv_modal').classList.add('two');
+    document.querySelector('.lv_modal').classList.remove('out');
     document.querySelector('body').classList.add('modal-active');
     settings__mitta();
     change__newdiv_cord();
@@ -1334,6 +1334,13 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
 
       newDiv.innerHTML = document.getElementById("lapiviennit__sade_muucord").value;
 
+      if(document.querySelector("#lvframing_dust").checked) {
+        newDiv.dataset.lvframing = "dust";
+      }
+      else if(document.querySelector("#lvframing_frame").checked) {
+        newDiv.dataset.lvframing = "frame";
+      }
+
       if(document.getElementById("lapiviennit__sade_muucord").value.includes("x")) {
         lv_sade = document.getElementById("lapiviennit__sade_muucord").value.split("x");
         newDiv.style.marginBottom = (-1) * lv_sade[0] / 10 + "px";
@@ -2058,7 +2065,14 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       }
 
       lapiviennit__sade_muucord = document.querySelector("#lapiviennit__sade_muucord").value;
-      save("lv~~"+lapiviennit__sade_muucord+"~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+document.querySelector("#lapiviennit__sade_muucord").value+"~~"+document.querySelector("#lv_comment").value+"~~"+document.querySelector("#lv_comment_from").value+"~~"+document.querySelector("#lv_comment_to").value);
+
+      if(document.querySelector("#lvframing_dust").checked) {
+        newDiv.dataset.lvframing = "dust";
+      }
+      else if(document.querySelector("#lvframing_frame").checked) {
+        newDiv.dataset.lvframing = "frame";
+      }
+      save("lv~~"+lapiviennit__sade_muucord+"~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+document.querySelector("#lapiviennit__sade_muucord").value+"~~"+document.querySelector("#lv_comment").value+"~~"+document.querySelector("#lv_comment_from").value+"~~"+document.querySelector("#lv_comment_to").value+"~~"+newDiv.dataset.lvframing);
     }
   }
 

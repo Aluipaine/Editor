@@ -7,6 +7,15 @@ old_levy_excel = "";
 if(document.querySelector(".levy_excel")) {
   old_levy_excel = document.querySelector(".levy_excel").innerHTML;
 }
+
+function check_fornans(value) {
+  if(isNaN(value)) {
+    return '';   
+  }
+  else {
+    return value;
+  }
+}
 function create__levy_excel(now) {
   const saumas = canvas.querySelectorAll(".sauma");
   let horizontalBleam = 0;
@@ -199,7 +208,7 @@ function create__levy_excel(now) {
       var h107 = document.createElement('td');
       var h108 = document.createElement('td');
       h1.innerHTML = 'W22_ST_CLASSIC'; //TO BE CHANGED!
-      _h1.innerHTML = 'W22_ST_CLASSIC'; //TO BE CHANGED!
+      // _h1.innerHTML = 'W22_ST_CLASSIC'; //TO BE CHANGED!
       if(item.dataset.sku) {
         h2.innerHTML = item.dataset.sku;
       }
@@ -371,8 +380,8 @@ function create__levy_excel(now) {
       h7.innerHTML = '1';
       h8.innerHTML = ' ';
       h9.innerHTML = indexes;
-      h10.innerHTML = item.querySelector(".levy_name").innerText;
-      h11.innerHTML = indexes;
+      h10.innerHTML = "S" +current_room.toUpperCase() + " " + item.querySelector(".levy_name").innerText;
+      h11.innerHTML = document.querySelector(".external_meta_area").innerText.toUpperCase().replaceAll("PARVEKE SEINÄ " + current_room.toUpperCase() +" ","");
       h12.innerHTML = ' ';
       h13.innerHTML = '1';
       h14.innerHTML = '1';
@@ -388,7 +397,7 @@ function create__levy_excel(now) {
       h24.innerHTML = '';
       h25.innerHTML = '';
       h26.innerHTML = '';
-      h27.innerHTML = '';
+      h27.innerHTML = document.querySelector("h1.project_start_heading").innerText.toUpperCase();
       h28.innerHTML = '8'; // aggregate_val[0]
       h29.innerHTML = h29_;
       h30.innerHTML = h30_;
@@ -410,35 +419,13 @@ function create__levy_excel(now) {
       h46.innerHTML = h46_;
       h47.innerHTML = h47_;
       h48.innerHTML = h48_;
-      h49.innerHTML = '';
-      h50.innerHTML = '';
-      h51.innerHTML = '';
-      h52.innerHTML = '';
-      h53.innerHTML = '';
-      h54.innerHTML = '';
-      h55.innerHTML = '';
-      h56.innerHTML = '';
-      h57.innerHTML = '';
-      h58.innerHTML = '';
-      h59.innerHTML = '';
-      h60.innerHTML = '';
-      h61.innerHTML = '';
-      h62.innerHTML = '';
-      h63.innerHTML = '';
-      h64.innerHTML = '';
-      h65.innerHTML = '';
-      h66.innerHTML = '';
-      h67.innerHTML = '';
-      h68.innerHTML = '';
-      h69.innerHTML = '';
-      h70.innerHTML = '';
-      h71.innerHTML = '';
-      h72.innerHTML = '';
-      h73.innerHTML = '';
-      h74.innerHTML = '';
-      h75.innerHTML = '';
-      h76.innerHTML = '';
-      inlevy_lvarray = [];
+      
+      
+      
+     
+      inlevy_lvarray_pf = [];
+      inlevy_lvarray_pr = [];
+      six_mm_lvs_array = [];
       inlevy_lvs = item.querySelectorAll(".lv");
       if (inlevy_lvs.length > 0) {
         for (var i = 0; i < inlevy_lvs.length; i++) {
@@ -446,22 +433,122 @@ function create__levy_excel(now) {
           pf_y = parseFloat(inlevy_lvs[i].style.bottom) * 5;
           pf_dx = parseFloat(inlevy_lvs[i].style.width) * 5;
           pf_dy = parseFloat(inlevy_lvs[i].style.height) * 5;
-          onelv = pf_x + "|" + pf_y + "|" + pf_dx + "|" + pf_dy;
-          inlevy_lvarray.push(onelv);
-          console.log("inlevy_lvarray " + inlevy_lvarray);
+
+          if(getComputedStyle(inlevy_lvs[i]).borderRadius !== "50%") {
+             onelv = pf_x + "|" + pf_y + "|" + pf_dx + "|" + pf_dy;
+          }
+          else {
+            onelv = pf_x + "|" + pf_y + "|" + pf_dx + "|";
+          }
+
+          if(pf_dx === 6 && pf_dy === 6) {
+            one_six_lv = pf_x + "|" + pf_y;
+            six_mm_lvs_array.push(one_six_lv);
+            console.log("six_mm_lvs_array " + six_mm_lvs_array);
+          }
+          else {
+            if(inlevy_lvs[i].dataset.lvframing === "dust") {
+              inlevy_lvarray_pr.push(onelv);
+            }
+            else if(inlevy_lvs[i].dataset.lvframing === "frame") {
+              inlevy_lvarray_pf.push(onelv);
+            }
+             
+            console.log("inlevy_lvarray_pr " + inlevy_lvarray_pr);
+            console.log("inlevy_lvarray_pf " + inlevy_lvarray_pf);
+          }
+         
         }
       }
-      if (inlevy_lvarray.length > 0) {
-        h69.innerHTML = parseFloat(inlevy_lvarray[0].split("|")[0]);
-        h70.innerHTML = parseFloat(inlevy_lvarray[0].split("|")[1]);
-        h71.innerHTML = parseFloat(inlevy_lvarray[0].split("|")[2]);
-        h72.innerHTML = parseFloat(inlevy_lvarray[0].split("|")[3]);
+      if (six_mm_lvs_array.length > 0) {
+        h49.innerHTML = check_fornans(six_mm_lvs_array[0].split("|")[0]);
+        h50.innerHTML = check_fornans(six_mm_lvs_array[0].split("|")[1]);
       }
-      if (inlevy_lvarray.length > 1) {
-        h73.innerHTML = parseFloat(inlevy_lvarray[1].split("|")[0]);
-        h74.innerHTML = parseFloat(inlevy_lvarray[1].split("|")[1]);
-        h75.innerHTML = parseFloat(inlevy_lvarray[1].split("|")[2]);
-        h76.innerHTML = parseFloat(inlevy_lvarray[1].split("|")[3]);
+      else {
+        h49.innerHTML = '';
+        h50.innerHTML = '';
+      }
+      if (six_mm_lvs_array.length > 1) {
+        h51.innerHTML = check_fornans(six_mm_lvs_array[1].split("|")[0]);
+        h52.innerHTML = check_fornans(six_mm_lvs_array[1].split("|")[1]);
+      }
+      else {
+        h51.innerHTML = '';
+        h52.innerHTML = '';
+      }  
+
+      if (inlevy_lvarray_pr.length > 0) {
+        h53.innerHTML = check_fornans(inlevy_lvarray_pr[0].split("|")[0]);
+        h54.innerHTML = check_fornans(inlevy_lvarray_pr[0].split("|")[1]);
+        h55.innerHTML = check_fornans(inlevy_lvarray_pr[0].split("|")[2]);
+        h56.innerHTML = check_fornans(inlevy_lvarray_pr[0].split("|")[3]);
+
+      }
+      else {
+        h53.innerHTML = '';
+        h54.innerHTML = '';
+        h55.innerHTML = '';
+        h56.innerHTML = '';
+      }
+      if (inlevy_lvarray_pr.length > 1) {
+        h57.innerHTML = check_fornans(inlevy_lvarray_pr[1].split("|")[0]);
+        h58.innerHTML = check_fornans(inlevy_lvarray_pr[1].split("|")[1]);
+        h59.innerHTML = check_fornans(inlevy_lvarray_pr[1].split("|")[2]);
+        h60.innerHTML = check_fornans(inlevy_lvarray_pr[1].split("|")[3]);
+      }
+      else {
+        h57.innerHTML = '';
+        h58.innerHTML = '';
+        h59.innerHTML = '';
+        h60.innerHTML = '';
+      }
+      if (inlevy_lvarray_pr.length > 2) {
+        h61.innerHTML = check_fornans(inlevy_lvarray_pr[2].split("|")[0]);
+        h62.innerHTML = check_fornans(inlevy_lvarray_pr[2].split("|")[1]);
+        h63.innerHTML = check_fornans(inlevy_lvarray_pr[2].split("|")[2]);
+        h64.innerHTML = check_fornans(inlevy_lvarray_pr[2].split("|")[3]);
+      }
+      else {
+        h61.innerHTML = '';
+        h62.innerHTML = '';
+        h63.innerHTML = '';
+        h64.innerHTML = '';
+      }
+      if (inlevy_lvarray_pr.length > 3) {
+        h65.innerHTML = check_fornans(inlevy_lvarray_pr[3].split("|")[0]);
+        h66.innerHTML = check_fornans(inlevy_lvarray_pr[3].split("|")[1]);
+        h67.innerHTML = check_fornans(inlevy_lvarray_pr[3].split("|")[2]);
+        h68.innerHTML = check_fornans(inlevy_lvarray_pr[3].split("|")[3]);
+      }
+      else {
+        h65.innerHTML = '';
+        h66.innerHTML = '';
+        h67.innerHTML = '';
+        h68.innerHTML = '';
+      }
+      if (inlevy_lvarray_pf.length > 0) {
+        h69.innerHTML = check_fornans(inlevy_lvarray_pf[0].split("|")[0]);
+        h70.innerHTML = check_fornans(inlevy_lvarray_pf[0].split("|")[1]);
+        h71.innerHTML = check_fornans(inlevy_lvarray_pf[0].split("|")[2]);
+        h72.innerHTML = check_fornans(inlevy_lvarray_pf[0].split("|")[3]);
+      }
+      else {
+        h69.innerHTML = '';
+        h70.innerHTML = '';
+        h71.innerHTML = '';
+        h72.innerHTML = '';
+      }
+      if (inlevy_lvarray_pf.length > 1) {
+        h73.innerHTML = check_fornans(inlevy_lvarray_pf[1].split("|")[0]);
+        h74.innerHTML = check_fornans(inlevy_lvarray_pf[1].split("|")[1]);
+        h75.innerHTML = check_fornans(inlevy_lvarray_pf[1].split("|")[2]);
+        h76.innerHTML = check_fornans(inlevy_lvarray_pf[1].split("|")[3]);
+      }
+      else {
+        h73.innerHTML = '';
+        h74.innerHTML = '';
+        h75.innerHTML = '';
+        h76.innerHTML = '';
       }
       h77.innerHTML = '';
       h78.innerHTML = '';
@@ -500,7 +587,6 @@ function create__levy_excel(now) {
       levyexcel_array.push({
         'Part number': h9.textContent,
         'Materialcode': h2.textContent,
-        'Type': "W22_ST_CLASSIC",
         'Leveys (X)': h3.textContent,
         'Pituus (Y)': h4.textContent,
         'Quantity': h7.textContent,
@@ -599,7 +685,7 @@ function create__levy_excel(now) {
       try {
       row.append(h9) // Changed! 130524
       row.append(h2) // Changed! 130524
-      row.append(_h1)
+      // row.append(_h1)
       row.append(h3)
       row.append(h4)
       row.append(h7) // Changed! 130524

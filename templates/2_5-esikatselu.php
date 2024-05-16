@@ -46,7 +46,6 @@
         <tr class="headingrow">
           <td>Part number</td>
           <td>Materialcode</td>
-          <td>Type</td>
           <td>Leveys (X)</td>
           <td>Pituus (Y)</td>
           <td>Quantity</td>
