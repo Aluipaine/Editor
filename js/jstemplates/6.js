@@ -4499,18 +4499,18 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_left = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.bottom > top && rect.top < top && rect.right <= left;
+      return rect.bottom >= top && rect.top <= top && rect.right <= left;
     });
-    if (!to_the_left.length && levy_to_the_left.length && !tyostot.classList.contains("hidden")) {
+    if (!to_the_left.length && levy_to_the_left.length) {
       add_recreate_button(tyostot, "horizontal");
     }
     let to_the_right = tyostots.filter(v => {
       let rect = v.getBoundingClientRect();
-      return touch(rect.top, top) && touch(rect.left, right);
+      return touch(rect.top, top) && touch(rect.left, right) && !v.classList.contains("hidden");
     });
     let levy_to_the_right = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.bottom > top && rect.top < top && rect.left <= right;
+      return rect.bottom >= top && rect.top <= top && rect.left >= right;
     });
     if (!to_the_right.length && levy_to_the_right.length) {
       add_recreate_button(tyostot, "horizontal_opposite");
@@ -4528,7 +4528,7 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_top = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.left < left && rect.right > left && rect.bottom <= top;
+      return rect.left <= left && rect.right >= left && rect.bottom >= top;
     });
     if (!to_the_top.length && levy_to_the_top.length) {
       add_recreate_button(tyostot, "vertical_opposite");
@@ -4539,9 +4539,9 @@ function draw_recreate_buttons() {
     });
     let levy_to_the_bottom = levys.filter(v => {
       let rect = v.getBoundingClientRect();
-      return rect.left < left && rect.right > left && rect.top <= bottom;
+      return rect.left <= left && rect.right >= left && rect.top <= bottom;
     });
-    if (!to_the_bottom.length && levy_to_the_bottom.length && !tyostot.classList.contains("hidden")) {
+    if (!to_the_bottom.length && levy_to_the_bottom.length) {
       add_recreate_button(tyostot, "vertical");
     }
   });
