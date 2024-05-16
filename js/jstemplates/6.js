@@ -4271,7 +4271,7 @@ function recreate_line(item, type = "horizontal") {
     let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
     let levy_left = parseFloat(item.closest(".levy").title.split`,`[3]);
     let canvas_bottom = relative_line_bottom + levy_bottom;
-    let distance_between = document.querySelector("#v_target").value / 5;
+    let distance_between = document.querySelector("#v_target").value / 5 - 50;
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
@@ -4312,7 +4312,7 @@ function recreate_line(item, type = "horizontal") {
     let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
     let levy_right = parseFloat(item.closest(".levy").title.split`,`[3]) + parseFloat(item.closest(".levy").title.split`,`[0]);
     let canvas_bottom = relative_line_bottom + levy_bottom;
-    let distance_between = document.querySelector("#v_target").value / 5;
+    let distance_between = document.querySelector("#v_target").value / 5 - 50;
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
@@ -4352,7 +4352,7 @@ function recreate_line(item, type = "horizontal") {
     let levy_left = parseFloat(item.closest(".levy").title.split`,`[3]);
     let levy_bottom = parseFloat(item.closest(".levy").title.split`,`[2]);
     let canvas_left = relative_line_left + levy_left;
-    let distance_between = document.querySelector("#p_target").value / 5;
+    let distance_between = document.querySelector("#p_target").value / 5 - 50;
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
@@ -4392,7 +4392,7 @@ function recreate_line(item, type = "horizontal") {
     let levy_left = parseFloat(item.closest(".levy").title.split`,`[3]);
     let levy_top = parseFloat(item.closest(".levy").title.split`,`[2]) + parseFloat(item.closest(".levy").title.split`,`[1]);
     let canvas_left = relative_line_left + levy_left;
-    let distance_between = document.querySelector("#p_target").value / 5;
+    let distance_between = document.querySelector("#p_target").value / 5 - 50;
 
     canvas.querySelectorAll(".levy").forEach(levy => {
       let coords = levy.title.split`,`,
