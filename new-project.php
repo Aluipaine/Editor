@@ -32,6 +32,7 @@ include('header.php');
 <form action="vendor/create.php" method="post" id="new_project__form">
    
    <section id="new_project">
+       <input type="hidden" name="project_type" id="project_type" value="Huone/seinä" required>
          <div class="form-subgroup main">
             <label>Projektin nimi: </label>
             <input type="text" name="project_name" class="form-control project_name_slugfrom" value="" required oninput="slugify__prname();">   

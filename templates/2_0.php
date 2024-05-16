@@ -2223,7 +2223,7 @@
           $bosts = mysqli_fetch_all($bosts);
           foreach ($bosts as $p) {
 
-            if($p[4] == 'after_measure_comment') {
+            if($p[4] == 'after_measure_comment' || $p[4] == "Huone/seinä") {
               echo '
               <div class="row">
                 <div class="house__wall house__wall_roof house__wall_k" style="width: 170px; height: 120px;">
