@@ -318,7 +318,18 @@ $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_va
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'muut_asiakirjat', '$muut_asiakirjat')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'statuses__text', 'KESKEN~~EI TYÖTÄ~~ONGELMA~~KRIITTINEN ONGELMA~~L5 TILATTU~~L5 TYÖMAALLA~~L5 ASENNETTU~~L5 HYVÄKSYTTY~~L4 TILATTU~~L4 TYÖMAALLA~~L4 ASENNETTU~~L4 HYVÄKSYTTY~~L3 TILATTU~~L3 TYÖMAALLA~~L3 ASENNETTU~~L3 HYVÄKSYTTY~~L2 TILATTU~~L2 TYÖMAALLA~~L2 ASENNETTU~~L2 HYVÄKSYTTY~~L1 TILATTU~~L1 TYÖMAALLA~~L1 ASENNETTU~~L1 HYVÄKSYTTY')");
 
-
+$customer_info = json_decode($_POST["customer_contacts"], true);
+$raw = ["ö", "", " "];
+$processed = ["o", "a", "_"];
+foreach ($customer_info as $customer) {
+	$room_name = $db->real_escape_string(str_replace($raw, $processed, $customer["name"]));
+	$customer_name = $db->real_escape_string($customer["info"]["name"]);
+	$customer_phone = $db->real_escape_string($customer["info"]["phone"]);
+	$customer_email = $db->real_escape_string($customer["info"]["email"]);
+	$customer_type = $db->real_escape_string($customer["info"]["type"]);
+	$db->query("INSERT INTO `customer_contacts` (`project`, `roomattached`, `name`, `tel`, `email`, `type`) 
+						VALUES ($id, '$room_name', '$customer_name', '$customer_phone', '$customer_email', '$customer_type')");
+}
 
 $meta = mysqli_query($db, "INSERT INTO `addedusers`(`project_id`, `username`, `added_by`) VALUES ($id,'tyonjohto','tyonjohto')");
 

@@ -249,7 +249,29 @@ include('header.php');
             <div onclick='$("#roomconfig_second").hide();$("#roomconfig_second").slideUp(200);$("#roomconfig_third").slideDown(200);$("#roomconfig_third").show();' class="next_btn btn ready_btn">Seuraava</div>
           </div>
       </div>
-   </section> 
+   </section>
+
+    <?php
+        $customer_contacts = $db->query("SELECT * FROM `customer_contacts` GROUP BY `email`");
+        if ($customer_contacts && $customer_contacts->num_rows) {
+            $customer_contacts = $customer_contacts->fetch_all(MYSQLI_ASSOC);
+            $customer_contacts = array_map(function ($val) {
+                $val["phone"] = $val["tel"];
+                return $val;
+            }, $customer_contacts);
+        }
+        else {
+            $customer_contacts = [];
+        }
+    ?>
+    <script>
+        let customer_contacts_list = <?= json_encode($customer_contacts, JSON_UNESCAPED_UNICODE) ?>;
+    </script>
+    <datalist id="customer_contacts_list">
+        <?php foreach ($customer_contacts as $contact): ?>
+        <option value="<?= $contact["name"] ?>"><?= $contact["name"] ?></option>
+        <?php endforeach; ?>
+    </datalist>
 
    <section id="roomconfig_third" class="project__roomcount">
       <h1>Kerrosten, rappujen, ja huoneiden valinta </h1>
@@ -285,6 +307,30 @@ include('header.php');
                         <input type="text" maxlength="15" list="" id="a_nextnum_third_3" name="a_nextnum_third_3" value="" data-alt="a_nextnum_third_1|a_nextnum_third_2" class="prefixnum" oninput="change__toggling(this,3)">
                      </h5>
                      <div class="greenbtn newproject__addinglvl" onclick="add_new_lvl(this);">Lisää uusi kerros</div>
+                      <div class="customer_contacts">
+                          <div class="contact">
+                              <label>
+                                  <span>Nimi</span>
+                                  <input type="text" list="customer_contacts_list" class="customer_name">
+                              </label>
+                              <label>
+                                  <span>Puh</span>
+                                  <input type="tel" class="customer_phone">
+                              </label>
+                              <label>
+                                  <span>Email</span>
+                                  <input type="email" class="customer_email">
+                              </label>
+                              <label>
+                                  <span>Tyyppi</span>
+                                  <select class="customer_type">
+                                      <option value="asukas">Asukas</option>
+                                      <option value="omistaja">Omistaja</option>
+                                  </select>
+                              </label>
+                          </div>
+                          <button class="add_contact greenbtn">Lisää</button>
+                      </div>
                   </div>    
                   <div class="table_size_chooser sizer">
                       <div class="SizeChooser">
@@ -388,7 +434,7 @@ include('header.php');
       <div class="row">
           <div class="col-6"><div class="prev_btn" onclick="$('#roomconfig_third').hide();$('#roomconfig_third').slideUp(200);$('#roomconfig_second').slideDown(200);$('#roomconfig_second').show();">Edellinen</div></div>
           <div class="col-6">
-              <div class="col-6"><butto class="finalization_btn ready_btn">Aloita projekti</button></div>
+              <div class="col-6"><button class="finalization_btn ready_btn">Aloita projekti</button></div>
           </div>
       </div>
    </section>
@@ -796,8 +842,15 @@ include('header.php');
       roomgconfig_h2_4_a.appendChild(i4_additional3);
       roomconfig_second_prefixes.appendChild(i5);
 
-
-
+       let customer_contact = document.querySelector(".customer_contacts").cloneNode(true);
+       customer_contact.querySelectorAll(".contact:not(:first-child)").forEach(v => v.remove());
+       customer_contact.querySelectorAll("input").forEach(v => {
+           v.value = "";
+       });
+       customer_contact.querySelectorAll("select").forEach(v => {
+           v.selectedIndex = 0;
+       });
+       roomconfig_second_prefixes.append(customer_contact);
             
    }
 </script>

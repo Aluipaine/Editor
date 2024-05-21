@@ -316,7 +316,8 @@ $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
     if (e.type == 'click') {
         if ($(this).hasClass("nowork") && $('input#pohjakierros').is(':checked')) {
             $(this).removeClass("nowork");
-        } else if ($('input#pohjakierros').is(':checked')) {
+        }
+        else if ($('input#pohjakierros').is(':checked')) {
             console.log("Pohja checkattu");
             var cells = $(this).parent().children("td");
             var tds = $('#A_ .table_size_chooser td').removeClass("SizeChooser-clicked")
@@ -324,16 +325,19 @@ $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
                 if ($(this).find('label').text().length > 1) {
                     $(this).removeClass("nowork");
                     $(this).find('label').text("");
+                    $(this).find('label').removeAttr("data-customer");
                     cellindex = i;
                     console.log("IF EVENT");
-                } else {
+                }
+                else {
                     $(this).addClass("nowork");
                     $(this).removeClass("checked");
                     $(this).find('label').val("");
                     console.log("ELSE EVENT");
                 }
             }
-        } else if ($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
+        }
+        else if ($(this).hasClass("noindex") || $(this).parent().hasClass("noindex")) {
             z = 0;
             z_letter = toAlpha(z_alphabet).toUpperCase();
             if ($('#a_nextnum').val().length >= 1) {
@@ -356,7 +360,8 @@ $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
                 $('#a_nextnum_third_2').val(z_letter);
             }
             console.log($(this));
-        } else if ($(this).hasClass("checked") || $(this).hasClass("nowork")) {
+        }
+        else if ($(this).hasClass("checked") || $(this).hasClass("nowork")) {
             if ($(this).hasClass("nowork")) {
                 $(this).removeClass("nowork");
                 return
@@ -365,6 +370,7 @@ $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
                 $(this).removeClass("checked");
                 $(this).find('input').val("");
                 $(this).find('label').text("");
+                $(this).find('label').removeAttr("data-customer");
                 z -= 1;
                 z_alphabet -= 1;
 
@@ -396,6 +402,7 @@ $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
             z_letter = toAlpha(z_alphabet).toUpperCase();
             $(this).find('input').val("");
             $(this).find('label').text("");
+            $(this).find('label').removeAttr("data-customer");
 
             if ($('#a_nextnum').val().length >= 1) {
                 $('#a_nextnum').val(z);
@@ -417,7 +424,8 @@ $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
                 $('#a_nextnum_third_2').val(z_letter);
             }
 
-        } else {
+        }
+        else {
             $(this).addClass("checked");
             var cells = $(this).parent().children("td");
             var tds = $('#A_ .table_size_chooser td').removeClass("SizeChooser-clicked");
@@ -426,7 +434,8 @@ $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
                 console.log("Z::" + z);
                 z += 1;
                 z_alphabet += 1;
-            } else {
+            }
+            else {
                 // z = parseFloat($('#a_nextnum').val().replace(/\D/g, ''));
                 console.log("Z::" + z);
                 z += 1;
@@ -481,6 +490,42 @@ $("#A_").delegate('td', 'mouseover mouseleave click', function(e) {
                 $(this).find('label').html(a_val + a_val_num + a_val_2 + a_val_num2 + a_val_3 + a_val_num3);
                 var a_rooms = $('#a_rooms');
             }
+
+            let customers = [];
+            $(this).closest(".per50").find(".customer_contacts .contact").each(function() {
+                let name = $(this).find(".customer_name"),
+                    phone = $(this).find(".customer_phone"),
+                    email = $(this).find(".customer_email"),
+                    type = $(this).find(".customer_type");
+                if (name.val()) {
+                    customers.push({
+                        name: name.val(),
+                        phone: phone.val(),
+                        email: email.val(),
+                        type: type.val(),
+                    });
+                    if (!customer_contacts_list.find(v => v.name === name.val())) {
+                        customer_contacts_list.push({
+                            name: name.val(),
+                            phone: phone.val(),
+                            email: email.val(),
+                            type: type.val(),
+                        });
+                    }
+                    $("#customer_contacts_list").empty();
+                    customer_contacts_list.forEach(v => {
+                        $("#customer_contacts_list").append(`<option value="${v.name}">${v.name}</option>`)
+                    });
+                }
+                name.val("");
+                phone.val("");
+                email.val("");
+                type[0].selectedIndex = 0;
+            });
+            $(this).closest(".per50").find(".customer_contacts .contact:not(:first-child)").remove();
+            $(this).find('label').attr("data-customer", JSON.stringify(customers));
+
+
             $(this).parent().addClass("row");
             var rows = $(this).parent().parent().children("tr");
             for (var i = 0; i < rows.length; i++) {
@@ -2498,8 +2543,8 @@ $('.finalization_btn').click(function(e) {
     const h_array = [];
     const h_ = [];
 
-
-
+    let form = $('#new_project__form');
+    let customer_contacts = [];
 
     $("#A_ .checked").each(function(index) {
         posX = $(this).parent().data("no");
@@ -2519,6 +2564,12 @@ $('.finalization_btn').click(function(e) {
                 l_room: "13~undone~1|1~2200|4000~~~~~"
             });
             $("#a_rooms").val(JSON.stringify(a_array));
+            JSON.parse($(this).find("label").attr("data-customer")).forEach(v => {
+                customer_contacts.push({
+                    name: nam,
+                    info: v
+                });
+            });
         }
     });
 
@@ -2553,6 +2604,12 @@ $('.finalization_btn').click(function(e) {
                 l_room: "13~undone~1|1~2200|4000~~~~~"
             });
             $("#b_rooms").val(JSON.stringify(b_array));
+            JSON.parse($(this).find("label").attr("data-customer")).forEach(v => {
+                customer_contacts.push({
+                    name: nam,
+                    info: v
+                });
+            });
         }
 
     });
@@ -2588,6 +2645,12 @@ $('.finalization_btn').click(function(e) {
                 l_room: "13~undone~1|1~2200|4000~~~~~"
             });
             $("#c_rooms").val(JSON.stringify(c_array));
+            JSON.parse($(this).find("label").attr("data-customer")).forEach(v => {
+                customer_contacts.push({
+                    name: nam,
+                    info: v
+                });
+            });
         }
 
     });
@@ -2623,6 +2686,12 @@ $('.finalization_btn').click(function(e) {
                 l_room: "13~undone~1|1~2200|4000~~~~~"
             });
             $("#d_rooms").val(JSON.stringify(d_array));
+            JSON.parse($(this).find("label").attr("data-customer")).forEach(v => {
+                customer_contacts.push({
+                    name: nam,
+                    info: v
+                });
+            });
         }
 
     });
@@ -2657,6 +2726,12 @@ $('.finalization_btn').click(function(e) {
                 l_room: "13~undone~1|1~2200|4000~~~~~"
             });
             $("#e_rooms").val(JSON.stringify(e_array));
+            JSON.parse($(this).find("label").attr("data-customer")).forEach(v => {
+                customer_contacts.push({
+                    name: nam,
+                    info: v
+                });
+            });
         }
 
 
@@ -2692,6 +2767,12 @@ $('.finalization_btn').click(function(e) {
                 l_room: "13~undone~1|1~2200|4000~~~~~"
             });
             $("#f_rooms").val(JSON.stringify(f_array));
+            JSON.parse($(this).find("label").attr("data-customer")).forEach(v => {
+                customer_contacts.push({
+                    name: nam,
+                    info: v
+                });
+            });
         }
 
     });
@@ -2725,6 +2806,12 @@ $('.finalization_btn').click(function(e) {
                 l_room: "13~undone~1|1~2200|4000~~~~~"
             });
             $("#g_rooms").val(JSON.stringify(g_array));
+            JSON.parse($(this).find("label").attr("data-customer")).forEach(v => {
+                customer_contacts.push({
+                    name: nam,
+                    info: v
+                });
+            });
         }
 
 
@@ -2760,6 +2847,12 @@ $('.finalization_btn').click(function(e) {
                 l_room: "13~undone~1|1~2200|4000~~~~~"
             });
             $("#h_rooms").val(JSON.stringify(h_array));
+            JSON.parse($(this).find("label").attr("data-customer")).forEach(v => {
+                customer_contacts.push({
+                    name: nam,
+                    info: v
+                });
+            });
         }
 
 
@@ -2777,6 +2870,9 @@ $('.finalization_btn').click(function(e) {
         $("#h_rooms_nowork").val(JSON.stringify(h_));
     });
 
+    customer_contacts = JSON.stringify(customer_contacts);
+
+    form.append(`<input type="hidden" name="customer_contacts" value='${customer_contacts}' />`)
 
     giga_array = [a_array, b_array, c_array, d_array, e_array, f_array, g_array, h_array];
     giga_array.forEach(g => {
@@ -2807,7 +2903,7 @@ $('.finalization_btn').click(function(e) {
         });
     });
 
-    $('#new_project__form').submit();
+    form.submit();
 });
 
 
@@ -3073,4 +3169,20 @@ jQuery(document).ready(function($) {
             $('#new_project').show();
         });
     }
+
+    $("#roomconfig_third").on("click", ".add_contact", function() {
+        let copy = $(this).prev().clone();
+        copy.find("input").val("");
+        copy.find("select")[0].selectedIndex = 0;
+        $(this).before(copy);
+    })
+    .on("change", ".customer_name", function() {
+        let match = [...customer_contacts_list].find(v => v.name === this.value);
+        if (match) {
+            $(this).closest(".contact").find(".customer_phone").val(match.phone);
+            $(this).closest(".contact").find(".customer_email").val(match.email);
+            $(this).closest(".contact").find(".customer_type").val(match.type);
+        }
+    });
 });
+

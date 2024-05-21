@@ -1,0 +1,1 @@
+CREATE TABLE `customer_contacts` ( `id` INT NOT NULL AUTO_INCREMENT ,  `project` INT NOT NULL ,  `roomattached` VARCHAR(255) NOT NULL ,  `name` VARCHAR(255) NOT NULL ,  `tel` VARCHAR(50) NOT NULL ,  `email` VARCHAR(255) NOT NULL ,  `type` VARCHAR(255) NOT NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB;
