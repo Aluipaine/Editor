@@ -35,6 +35,7 @@
         </table>
         <div class="project__start_elaborate" onclick="open__workelab();">Kuittaa työt</div>
         <div class="open_modal yellowbtn get_project_modal col-6" onclick="settings__modal_open(this);toggle__projectexcel(0,document.querySelector(`.projektilista_btn:nth-child(1)`));" data-asmodal_mode="projektiexcel">Avaa tilaustaulu</div>
+          <button class="toggle_customer_modal">Lähetä sähköpostia asukkaille</button>
 
       </div>  
     </div>
@@ -2101,6 +2102,33 @@
         </div>
       </div>
     </div>
+    <dialog id="add_customer_dialog">
+        <div class="dialog_container">
+            <div class="form">
+                <button id="close_add_customer_dialog">x</button>
+                <label>
+                    <span>Nimi</span>
+                    <input type="text" class="customer_name">
+                </label>
+                <label>
+                    <span>Puh</span>
+                    <input type="tel" class="customer_phone">
+                </label>
+                <label>
+                    <span>Email</span>
+                    <input type="email" class="customer_email">
+                </label>
+                <label>
+                    <span>Tyyppi</span>
+                    <select class="customer_type">
+                        <option value="asukas">Asukas</option>
+                        <option value="omistaja">Omistaja</option>
+                    </select>
+                </label>
+                <button id="add_new_customer_contact" class="add_new_customer_contact_button">Lisää uusi kontakti</button>
+            </div>
+        </div>
+    </dialog>
     <article class="row wide-container nowrap">
       <aside class="col-4">
         <div class="row">
@@ -2127,7 +2155,13 @@
                 $tiedot_tekijasta = "Ei ole";
             }
         ?>
-          <div class="col-with-table">  
+          <div class="col-with-table">
+              <p><strong>Yhteystiedot </strong></p>
+              <div class="customer_contacts">
+
+              </div><br>
+              <button id="show_add_new_customer_contact" class="add_new_customer_contact_button">Lisää uusi kontakti</button>
+              <br><br>
           <b>Tiedot projektista </b> <br> 
           <i><?= $tiedot_projektista ?></i> <br> <br>
           <b>Tiedot huoneesta </b> <br>
@@ -3218,3 +3252,37 @@ if($remove_overflowY === true) {
     ticket.querySelector(".comment__status").style.borderColor = "red";
   }
 </script>
+
+<dialog id="send_email_dialog">
+    <div class="dialog_container">
+        <div class="form">
+            <button id="close_send_email_dialog">x</button>
+            <h2>Presetit</h2>
+            <div id="email_presets" class="presets">
+                <div class="preset">Sähkö</div>
+                <div class="preset">Ikkuna</div>
+                <div class="preset">Putki</div>
+                <div class="preset">Patteri</div>
+                <div class="preset">Parveke</div>
+                <div class="preset">Parveke 2</div>
+                <div class="preset">Muu 1</div>
+                <div class="preset">Muu 2</div>
+            </div>
+            <label>
+                <span>Aihe</span>
+                <input type="text" class="title">
+            </label>
+            <label>
+                <span>Viesti</span>
+                <textarea class="message"></textarea>
+            </label>
+            <h3>Asukkaat Yleinen</h3>
+            <table class="without_phone"></table>
+            <h3>Asukkaat Tiedot</h3>
+            <table class="with_phone"></table>
+            <h3>Omistajat </h3>
+            <table class="owner"></table>
+            <a href="#" id="send_email" target="_blank" class="send_email_button">Tee luonnos</a>
+        </div>
+    </div>
+</dialog>

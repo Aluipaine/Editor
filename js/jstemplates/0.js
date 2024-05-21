@@ -362,6 +362,12 @@ function change_d(check) {
  * @returns None
  */
 $('.project__building div.project__building_room').click(function() {
+
+  if ($(".toggle_customer_modal").hasClass("active")) {
+    $("#send_email_dialog")[0].showModal();
+    return;
+  }
+
   $("#project_start").slideUp(200);
   refresh__drawcontrols();
  
@@ -620,6 +626,51 @@ function create_rooms() {
  * @returns None
  */
 async function initalize_cross(arg) {
+
+  if ($(".toggle_customer_modal").hasClass("active")) {
+    let dialog = $("#send_email_dialog");
+    dialog[0].showModal();
+    dialog.find(".without_phone").empty();
+    dialog.find(".with_phone").empty();
+    dialog.find(".owner").empty();
+    dialog.find(".send_email_button").attr("disabled", "disabled").attr("href", "#");
+
+    $.ajax({
+      url: "../vendor/get-customer-contacts.php",
+      type: "POST",
+      data: {
+        project_id: document.querySelector("#current_project_id").value,
+        room: arg.innerText.replaceAll(" ","").toLowerCase()
+      },
+      success: (answer) => {
+        let contacts = JSON.parse(answer);
+        let without_phones = contacts.filter(v => v.tel === "");
+        dialog.find(".without_phone").empty();
+        without_phones.forEach(v => {
+          dialog.find(".without_phone").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
+        });
+        let with_phones = contacts.filter(v => v.tel !== "");
+        dialog.find(".with_phone").empty();
+        with_phones.forEach(v => {
+          dialog.find(".with_phone").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
+        });
+        let owner = contacts.filter(v => v.type === "omistaja");
+        dialog.find(".owner").empty();
+        owner.forEach(v => {
+          dialog.find(".owner").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
+        });
+        dialog.find(".send_email_button").removeAttr("disabled");
+
+        let emails = new Set();
+        dialog.find("table .email").each(function() {
+          emails.add($(this).text());
+        });
+        emails = [...emails];
+        dialog.find(".send_email_button").attr("href", `mailto:${emails[0] ?? ""}?subject=&body=&cc=${emails.slice(1).join(";")}`);
+      }
+    });
+    return;
+  }
 
   a_saved = apartment.dataset.aroom.replaceAll(",","~");
   b_saved = apartment.dataset.broom.replaceAll(",","~");
@@ -931,6 +982,9 @@ async function initalize_cross(arg) {
     });
   });
 
+  let container = $(".col-with-table .customer_contacts");
+  container.empty();
+
   let room_walls = await new Promise((resolve) => {
     $.ajax({
       url: "/get-walls.php",
@@ -955,6 +1009,26 @@ async function initalize_cross(arg) {
     container.find(`[data-room="${wall.wall.toUpperCase()}"]`).text(name.val());
   });
 
+  let room_contacts = await new Promise((resolve) => {
+    $.ajax({
+      url: "../vendor/get-customer-contacts.php",
+      type: "POST",
+      data: {
+        project_id: document.querySelector("#current_project_id").value,
+        room: currect_arak
+      },
+      success: (answer) => {
+        container.empty();
+        resolve(answer);
+      }
+    });
+  });
+  room_contacts = JSON.parse(room_contacts);
+  room_contacts.forEach(contact => {
+    container.append(
+        `<i>${contact.name}, ${contact.tel}, ${contact.email}, ${contact.type}</i><br>`
+    );
+  })
 }
 
 /**
@@ -1617,6 +1691,11 @@ let timer = 0
 $('.project__building_room').click((e) => {
   e.preventDefault()
   e.stopPropagation()
+
+  if ($(".toggle_customer_modal").hasClass("active")) {
+    $("#send_email_dialog")[0].showModal();
+    return;
+  }
   
   $('.project__building_room-overlay').remove()
   $(e.target).find('.active').removeClass('active')
@@ -2383,3 +2462,113 @@ function save_rooms() {
   });
  
 }
+
+$("#show_add_new_customer_contact").on("click", function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  $("#add_customer_dialog")[0].showModal();
+});
+$("#close_add_customer_dialog").on("click", function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  $("#add_customer_dialog")[0].close();
+});
+$("#add_new_customer_contact").on("click", function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  $(this).attr("disabled", "disabled");
+  let form = $("#add_customer_dialog .form"),
+      name = form.find(".customer_name"),
+      phone = form.find(".customer_phone"),
+      email = form.find(".customer_email"),
+      type = form.find(".customer_type");
+  if (name.val()) {
+    $.ajax({
+      url: "../vendor/add-customer-contacts.php",
+      type: "POST",
+      data: {
+        project_id: document.querySelector("#current_project_id").value,
+        room: currect_arak,
+        name: name.val(),
+        phone: phone.val(),
+        email: email.val(),
+        type: type.val()
+      },
+      success: () => {
+        let container = $(".col-with-table .customer_contacts");
+        container.append(
+            `<i>${name.val()}, ${phone.val()}, ${email.val()}, ${type.val()}</i><br>`
+        );
+        let dialog = $("#add_customer_dialog");
+        dialog.find("input").val("");
+        dialog.find("select")[0].selectedIndex = 0;
+        dialog[0].close();
+        $(this).removeAttr("disabled");
+      }
+    });
+  }
+});
+$("#close_send_email_dialog").on("click", function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  $("#send_email_dialog")[0].close();
+});
+
+let presets = [
+  {
+    Title: "Sähkötyöt tulossa",
+    Message: "Sähkötyöt tulossa asuntoosi"
+  },
+  {
+    Title: "Ikkunahommat tulossa",
+    Message: "Ikkunahommat tulossa asuntoosi"
+  },
+  {
+    Title: "Putkihommat tulossa",
+    Message: "Putkihommat tulossa asuntoosi"
+  },
+  {
+    Title: "Patterihommat tulossa",
+    Message: "Patterihommat tulossa asuntoosi"
+  },
+  {
+    Title: "Parvekehommat tulossa",
+    Message: "Parvekehommat tulossa asuntoosi"
+  },
+  {
+    Title: "Parveke 2 hommat tulossa",
+    Message:  "Parveke 2 hommat tulossa asuntoosi"
+  },
+  {
+    Title: "Muu 1 hommat tulossa",
+    Message: "Muu 1 tulossa asuntoosi"
+  },
+  {
+    Title: "Muu 2 hommat tulossa",
+    Message: "Muu 2 tulossa asuntoosi"
+  }
+];
+$("#email_presets").find(".preset").on("click", function() {
+  let index = $(this).index();
+  let dialog = $("#send_email_dialog");
+  dialog.find(".title").val(presets[index].Title);
+  dialog.find(".message").val(presets[index].Message);
+  let emails = new Set();
+  dialog.find("table .email").each(function() {
+    emails.add($(this).text());
+  });
+  emails = [...emails];
+  dialog.find(".send_email_button").attr("href", `mailto:${emails[0]}?subject=${presets[index].Title}&body=${presets[index].Message}&cc=${emails.slice(1).join(";")}`);
+});
+
+$("#send_email_dialog").find(".title, .message").on("keyup", function() {
+  let dialog = $("#send_email_dialog"),
+      title = dialog.find(".title").val(),
+      message = dialog.find(".message").val(),
+      emails = new Set();
+  dialog.find("table .email").each(function() {
+    emails.add($(this).text());
+  });
+  emails = [...emails];
+  dialog.find(".send_email_button").attr("href", `mailto:${emails[0]}?subject=${title}&body=${message}&cc=${emails.slice(1).join(";")}`);
+});
