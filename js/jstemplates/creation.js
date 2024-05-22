@@ -769,6 +769,40 @@ $("#B_").delegate('td', 'mouseover mouseleave click', function(e) {
             posX = $(this).parent().data("no");
             posY = $(this).index();
 
+            let customers = [];
+            $(this).closest(".per50").find(".customer_contacts .contact").each(function() {
+                let name = $(this).find(".customer_name"),
+                    phone = $(this).find(".customer_phone"),
+                    email = $(this).find(".customer_email"),
+                    type = $(this).find(".customer_type");
+                if (name.val()) {
+                    customers.push({
+                        name: name.val(),
+                        phone: phone.val(),
+                        email: email.val(),
+                        type: type.val(),
+                    });
+                    if (!customer_contacts_list.find(v => v.name === name.val())) {
+                        customer_contacts_list.push({
+                            name: name.val(),
+                            phone: phone.val(),
+                            email: email.val(),
+                            type: type.val(),
+                        });
+                    }
+                    $("#customer_contacts_list").empty();
+                    customer_contacts_list.forEach(v => {
+                        $("#customer_contacts_list").append(`<option value="${v.name}">${v.name}</option>`)
+                    });
+                }
+                name.val("");
+                phone.val("");
+                email.val("");
+                type[0].selectedIndex = 0;
+            });
+            $(this).closest(".per50").find(".customer_contacts .contact:not(:first-child)").remove();
+            $(this).find('label').attr("data-customer", JSON.stringify(customers));
+
             zb_letter = toAlpha(zb_alphabet).toUpperCase();
 
             if ($('#b_nextnum').val().length >= 1) {
@@ -967,6 +1001,40 @@ $("#C_").delegate('td', 'mouseover mouseleave click', function(e) {
             posX = $(this).parent().data("no");
             posY = $(this).index();
 
+            let customers = [];
+            $(this).closest(".per50").find(".customer_contacts .contact").each(function() {
+                let name = $(this).find(".customer_name"),
+                    phone = $(this).find(".customer_phone"),
+                    email = $(this).find(".customer_email"),
+                    type = $(this).find(".customer_type");
+                if (name.val()) {
+                    customers.push({
+                        name: name.val(),
+                        phone: phone.val(),
+                        email: email.val(),
+                        type: type.val(),
+                    });
+                    if (!customer_contacts_list.find(v => v.name === name.val())) {
+                        customer_contacts_list.push({
+                            name: name.val(),
+                            phone: phone.val(),
+                            email: email.val(),
+                            type: type.val(),
+                        });
+                    }
+                    $("#customer_contacts_list").empty();
+                    customer_contacts_list.forEach(v => {
+                        $("#customer_contacts_list").append(`<option value="${v.name}">${v.name}</option>`)
+                    });
+                }
+                name.val("");
+                phone.val("");
+                email.val("");
+                type[0].selectedIndex = 0;
+            });
+            $(this).closest(".per50").find(".customer_contacts .contact:not(:first-child)").remove();
+            $(this).find('label').attr("data-customer", JSON.stringify(customers));
+
             zc_letter = toAlpha(zc_alphabet).toUpperCase();
 
             if ($('#c_nextnum').val().length >= 1) {
@@ -1162,6 +1230,40 @@ $("#D_").delegate('td', 'mouseover mouseleave click', function(e) {
             Vd = $('#d_val').val() + parseFloat($('#d_nextnum').val().replace(/\D/g, ''));
             posX = $(this).parent().data("no");
             posY = $(this).index();
+
+            let customers = [];
+            $(this).closest(".per50").find(".customer_contacts .contact").each(function() {
+                let name = $(this).find(".customer_name"),
+                    phone = $(this).find(".customer_phone"),
+                    email = $(this).find(".customer_email"),
+                    type = $(this).find(".customer_type");
+                if (name.val()) {
+                    customers.push({
+                        name: name.val(),
+                        phone: phone.val(),
+                        email: email.val(),
+                        type: type.val(),
+                    });
+                    if (!customer_contacts_list.find(v => v.name === name.val())) {
+                        customer_contacts_list.push({
+                            name: name.val(),
+                            phone: phone.val(),
+                            email: email.val(),
+                            type: type.val(),
+                        });
+                    }
+                    $("#customer_contacts_list").empty();
+                    customer_contacts_list.forEach(v => {
+                        $("#customer_contacts_list").append(`<option value="${v.name}">${v.name}</option>`)
+                    });
+                }
+                name.val("");
+                phone.val("");
+                email.val("");
+                type[0].selectedIndex = 0;
+            });
+            $(this).closest(".per50").find(".customer_contacts .contact:not(:first-child)").remove();
+            $(this).find('label').attr("data-customer", JSON.stringify(customers));
 
             zd_letter = toAlpha(zd_alphabet).toUpperCase();
 
@@ -1359,6 +1461,40 @@ $("#E_").delegate('td', 'mouseover mouseleave click', function(e) {
             posX = $(this).parent().data("no");
             posY = $(this).index();
 
+            let customers = [];
+            $(this).closest(".per50").find(".customer_contacts .contact").each(function() {
+                let name = $(this).find(".customer_name"),
+                    phone = $(this).find(".customer_phone"),
+                    email = $(this).find(".customer_email"),
+                    type = $(this).find(".customer_type");
+                if (name.val()) {
+                    customers.push({
+                        name: name.val(),
+                        phone: phone.val(),
+                        email: email.val(),
+                        type: type.val(),
+                    });
+                    if (!customer_contacts_list.find(v => v.name === name.val())) {
+                        customer_contacts_list.push({
+                            name: name.val(),
+                            phone: phone.val(),
+                            email: email.val(),
+                            type: type.val(),
+                        });
+                    }
+                    $("#customer_contacts_list").empty();
+                    customer_contacts_list.forEach(v => {
+                        $("#customer_contacts_list").append(`<option value="${v.name}">${v.name}</option>`)
+                    });
+                }
+                name.val("");
+                phone.val("");
+                email.val("");
+                type[0].selectedIndex = 0;
+            });
+            $(this).closest(".per50").find(".customer_contacts .contact:not(:first-child)").remove();
+            $(this).find('label').attr("data-customer", JSON.stringify(customers));
+
             ze_letter = toAlpha(ze_alphabet).toUpperCase();
 
             if ($('#e_nextnum').val().length >= 1) {
@@ -1553,6 +1689,40 @@ $("#F_").delegate('td', 'mouseover mouseleave click', function(e) {
             Vf = $('#f_val').val() + parseFloat($('#f_nextnum').val().replace(/\D/g, ''));
             posX = $(this).parent().data("no");
             posY = $(this).index();
+
+            let customers = [];
+            $(this).closest(".per50").find(".customer_contacts .contact").each(function() {
+                let name = $(this).find(".customer_name"),
+                    phone = $(this).find(".customer_phone"),
+                    email = $(this).find(".customer_email"),
+                    type = $(this).find(".customer_type");
+                if (name.val()) {
+                    customers.push({
+                        name: name.val(),
+                        phone: phone.val(),
+                        email: email.val(),
+                        type: type.val(),
+                    });
+                    if (!customer_contacts_list.find(v => v.name === name.val())) {
+                        customer_contacts_list.push({
+                            name: name.val(),
+                            phone: phone.val(),
+                            email: email.val(),
+                            type: type.val(),
+                        });
+                    }
+                    $("#customer_contacts_list").empty();
+                    customer_contacts_list.forEach(v => {
+                        $("#customer_contacts_list").append(`<option value="${v.name}">${v.name}</option>`)
+                    });
+                }
+                name.val("");
+                phone.val("");
+                email.val("");
+                type[0].selectedIndex = 0;
+            });
+            $(this).closest(".per50").find(".customer_contacts .contact:not(:first-child)").remove();
+            $(this).find('label').attr("data-customer", JSON.stringify(customers));
 
             zf_letter = toAlpha(zf_alphabet).toUpperCase();
 
@@ -1749,6 +1919,40 @@ $("#G_").delegate('td', 'mouseover mouseleave click', function(e) {
             posX = $(this).parent().data("no");
             posY = $(this).index();
 
+            let customers = [];
+            $(this).closest(".per50").find(".customer_contacts .contact").each(function() {
+                let name = $(this).find(".customer_name"),
+                    phone = $(this).find(".customer_phone"),
+                    email = $(this).find(".customer_email"),
+                    type = $(this).find(".customer_type");
+                if (name.val()) {
+                    customers.push({
+                        name: name.val(),
+                        phone: phone.val(),
+                        email: email.val(),
+                        type: type.val(),
+                    });
+                    if (!customer_contacts_list.find(v => v.name === name.val())) {
+                        customer_contacts_list.push({
+                            name: name.val(),
+                            phone: phone.val(),
+                            email: email.val(),
+                            type: type.val(),
+                        });
+                    }
+                    $("#customer_contacts_list").empty();
+                    customer_contacts_list.forEach(v => {
+                        $("#customer_contacts_list").append(`<option value="${v.name}">${v.name}</option>`)
+                    });
+                }
+                name.val("");
+                phone.val("");
+                email.val("");
+                type[0].selectedIndex = 0;
+            });
+            $(this).closest(".per50").find(".customer_contacts .contact:not(:first-child)").remove();
+            $(this).find('label').attr("data-customer", JSON.stringify(customers));
+
             zg_letter = toAlpha(zg_alphabet).toUpperCase();
 
             if ($('#g_nextnum').val().length >= 1) {
@@ -1943,6 +2147,40 @@ $("#H_").delegate('td', 'mouseover mouseleave click', function(e) {
             Vh = $('#h_val').val() + parseFloat($('#h_nextnum').val().replace(/\D/g, ''));
             posX = $(this).parent().data("no");
             posY = $(this).index();
+
+            let customers = [];
+            $(this).closest(".per50").find(".customer_contacts .contact").each(function() {
+                let name = $(this).find(".customer_name"),
+                    phone = $(this).find(".customer_phone"),
+                    email = $(this).find(".customer_email"),
+                    type = $(this).find(".customer_type");
+                if (name.val()) {
+                    customers.push({
+                        name: name.val(),
+                        phone: phone.val(),
+                        email: email.val(),
+                        type: type.val(),
+                    });
+                    if (!customer_contacts_list.find(v => v.name === name.val())) {
+                        customer_contacts_list.push({
+                            name: name.val(),
+                            phone: phone.val(),
+                            email: email.val(),
+                            type: type.val(),
+                        });
+                    }
+                    $("#customer_contacts_list").empty();
+                    customer_contacts_list.forEach(v => {
+                        $("#customer_contacts_list").append(`<option value="${v.name}">${v.name}</option>`)
+                    });
+                }
+                name.val("");
+                phone.val("");
+                email.val("");
+                type[0].selectedIndex = 0;
+            });
+            $(this).closest(".per50").find(".customer_contacts .contact:not(:first-child)").remove();
+            $(this).find('label').attr("data-customer", JSON.stringify(customers));
 
             zh_letter = toAlpha(zh_alphabet).toUpperCase();
 
@@ -3170,7 +3408,9 @@ jQuery(document).ready(function($) {
         });
     }
 
-    $("#roomconfig_third").on("click", ".add_contact", function() {
+    $("#roomconfig_third").on("click", ".add_contact", function(event) {
+        event.preventDefault();
+        event.stopPropagation();
         let copy = $(this).prev().clone();
         copy.find("input").val("");
         copy.find("select")[0].selectedIndex = 0;
