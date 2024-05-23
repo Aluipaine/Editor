@@ -3276,6 +3276,14 @@ if($remove_overflowY === true) {
                 <span>Viesti</span>
                 <textarea class="message"></textarea>
             </label>
+            <div class="type_select">
+                <div class="type" data-type="asukas">
+                    <span>asukas</span>
+                </div>
+                <div class="type" data-type="omistaja">
+                    <span>omistaja</span>
+                </div>
+            </div>
             <div class="tables">
                 <h3>Asukkaat Yleinen</h3>
                 <table class="without_phone"></table>

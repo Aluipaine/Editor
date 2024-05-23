@@ -2512,7 +2512,7 @@ $("#email_presets").find(".preset").on("click", function() {
   dialog.find(".title").val(presets[index].Title);
   dialog.find(".message").val(presets[index].Message);
   let emails = new Set();
-  dialog.find("table .email").each(function() {
+  dialog.find("table .owner_checked .email").each(function() {
     emails.add($(this).text());
   });
   emails = [...emails];
@@ -2524,7 +2524,7 @@ $("#send_email_dialog").find(".title, .message").on("keyup", function() {
       title = dialog.find(".title").val(),
       message = dialog.find(".message").val(),
       emails = new Set();
-  dialog.find("table .email").each(function() {
+  dialog.find("table .owner_checked .email").each(function() {
     emails.add($(this).text());
   });
   emails = [...emails];
@@ -2543,6 +2543,8 @@ $("#show_send_email_dialog").on("click", () => {
   dialog.find(".with_phone").empty();
   dialog.find(".owner").empty();
   dialog.find(".send_email_button").attr("disabled", "disabled").attr("href", "#");
+  let owner_types = dialog.find(".type_select .type");
+  owner_types.addClass("checked");
   let rooms = $(".send_email_selected").get().map(v => v.getAttribute("data-room"));
 
   $.ajax({
@@ -2553,21 +2555,29 @@ $("#show_send_email_dialog").on("click", () => {
       rooms: rooms
     },
     success: (answer) => {
+      let selected_owner_types = owner_types.filter(".checked").get().map(v => $(v).attr("data-type"));
+
       let contacts = JSON.parse(answer);
       let without_phones = contacts.filter(v => v.tel === "");
       dialog.find(".without_phone").empty();
       without_phones.forEach(v => {
-        dialog.find(".without_phone").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
+        dialog.find(".without_phone").append(
+          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
+        )
       });
       let with_phones = contacts.filter(v => v.tel !== "");
       dialog.find(".with_phone").empty();
       with_phones.forEach(v => {
-        dialog.find(".with_phone").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
+        dialog.find(".with_phone").append(
+          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
+        )
       });
       let owner = contacts.filter(v => v.type === "omistaja");
       dialog.find(".owner").empty();
       owner.forEach(v => {
-        dialog.find(".owner").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
+        dialog.find(".owner").append(
+          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
+        )
       });
       dialog.find(".send_email_button").removeAttr("disabled");
 
@@ -2579,4 +2589,27 @@ $("#show_send_email_dialog").on("click", () => {
       dialog.find(".send_email_button").attr("href", `mailto:${emails[0] ?? ""}?subject=&body=&cc=${emails.slice(1).join(";")}`);
     }
   });
+});
+
+$("#send_email_dialog .type_select .type").on("click", function() {
+  $(this).toggleClass("checked");
+  let dialog = $("#send_email_dialog");
+  let owner_types = dialog.find(".type_select .type");
+  let selected_owner_types = owner_types.filter(".checked").get().map(v => $(v).attr("data-type"));
+  dialog.find(".with_phone tr, .without_phone tr, .owner tr").each(function () {
+    if (selected_owner_types.includes($(this).find(".owner_type").text())) {
+      $(this).addClass("owner_checked");
+    }
+    else {
+      $(this).removeClass("owner_checked");
+    }
+  });
+  let title = dialog.find(".title").val(),
+      message = dialog.find(".message").val(),
+      emails = new Set();
+  dialog.find("table .owner_checked .email").each(function() {
+    emails.add($(this).text());
+  });
+  emails = [...emails];
+  dialog.find(".send_email_button").attr("href", `mailto:${emails[0]}?subject=${title}&body=${message}&cc=${emails.slice(1).join(";")}`);
 });
