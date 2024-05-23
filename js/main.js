@@ -7030,7 +7030,3 @@ function change_np(val, forrow, entrance = "a") {
     }
   });
 }
-
-document.querySelector(".toggle_customer_modal").addEventListener("click", function () {
-  this.classList.toggle("active");
-});

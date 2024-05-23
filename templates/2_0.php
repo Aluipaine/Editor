@@ -3276,13 +3276,19 @@ if($remove_overflowY === true) {
                 <span>Viesti</span>
                 <textarea class="message"></textarea>
             </label>
-            <h3>Asukkaat Yleinen</h3>
-            <table class="without_phone"></table>
-            <h3>Asukkaat Tiedot</h3>
-            <table class="with_phone"></table>
-            <h3>Omistajat </h3>
-            <table class="owner"></table>
+            <div class="tables">
+                <h3>Asukkaat Yleinen</h3>
+                <table class="without_phone"></table>
+                <h3>Asukkaat Tiedot</h3>
+                <table class="with_phone"></table>
+                <h3>Omistajat </h3>
+                <table class="owner"></table>
+            </div>
             <a href="#" id="send_email" target="_blank" class="send_email_button">Tee luonnos</a>
         </div>
     </div>
 </dialog>
+
+<div id="send_email_popup">
+    <button id="show_send_email_dialog">Lähetä sähköpostia asukkaille</button>
+</div>

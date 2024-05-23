@@ -364,7 +364,7 @@ function change_d(check) {
 $('.project__building div.project__building_room').click(function() {
 
   if ($(".toggle_customer_modal").hasClass("active")) {
-    $("#send_email_dialog")[0].showModal();
+    $(this).toggleClass("send_email_selected active");
     return;
   }
 
@@ -628,47 +628,6 @@ function create_rooms() {
 async function initalize_cross(arg) {
 
   if ($(".toggle_customer_modal").hasClass("active")) {
-    let dialog = $("#send_email_dialog");
-    dialog[0].showModal();
-    dialog.find(".without_phone").empty();
-    dialog.find(".with_phone").empty();
-    dialog.find(".owner").empty();
-    dialog.find(".send_email_button").attr("disabled", "disabled").attr("href", "#");
-
-    $.ajax({
-      url: "../vendor/get-customer-contacts.php",
-      type: "POST",
-      data: {
-        project_id: document.querySelector("#current_project_id").value,
-        room: arg.innerText.replaceAll(" ","").toLowerCase()
-      },
-      success: (answer) => {
-        let contacts = JSON.parse(answer);
-        let without_phones = contacts.filter(v => v.tel === "");
-        dialog.find(".without_phone").empty();
-        without_phones.forEach(v => {
-          dialog.find(".without_phone").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
-        });
-        let with_phones = contacts.filter(v => v.tel !== "");
-        dialog.find(".with_phone").empty();
-        with_phones.forEach(v => {
-          dialog.find(".with_phone").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
-        });
-        let owner = contacts.filter(v => v.type === "omistaja");
-        dialog.find(".owner").empty();
-        owner.forEach(v => {
-          dialog.find(".owner").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
-        });
-        dialog.find(".send_email_button").removeAttr("disabled");
-
-        let emails = new Set();
-        dialog.find("table .email").each(function() {
-          emails.add($(this).text());
-        });
-        emails = [...emails];
-        dialog.find(".send_email_button").attr("href", `mailto:${emails[0] ?? ""}?subject=&body=&cc=${emails.slice(1).join(";")}`);
-      }
-    });
     return;
   }
 
@@ -1693,7 +1652,6 @@ $('.project__building_room').click((e) => {
   e.stopPropagation()
 
   if ($(".toggle_customer_modal").hasClass("active")) {
-    $("#send_email_dialog")[0].showModal();
     return;
   }
   
@@ -2571,4 +2529,54 @@ $("#send_email_dialog").find(".title, .message").on("keyup", function() {
   });
   emails = [...emails];
   dialog.find(".send_email_button").attr("href", `mailto:${emails[0]}?subject=${title}&body=${message}&cc=${emails.slice(1).join(";")}`);
+});
+
+$(".toggle_customer_modal").on("click", function () {
+  $(this).toggleClass("active");
+  $("#send_email_popup").toggleClass("active");
+});
+
+$("#show_send_email_dialog").on("click", () => {
+  let dialog = $("#send_email_dialog");
+  dialog[0].showModal();
+  dialog.find(".without_phone").empty();
+  dialog.find(".with_phone").empty();
+  dialog.find(".owner").empty();
+  dialog.find(".send_email_button").attr("disabled", "disabled").attr("href", "#");
+  let rooms = $(".send_email_selected").get().map(v => v.getAttribute("data-room"));
+
+  $.ajax({
+    url: "../vendor/get-customer-contacts.php",
+    type: "POST",
+    data: {
+      project_id: document.querySelector("#current_project_id").value,
+      rooms: rooms
+    },
+    success: (answer) => {
+      let contacts = JSON.parse(answer);
+      let without_phones = contacts.filter(v => v.tel === "");
+      dialog.find(".without_phone").empty();
+      without_phones.forEach(v => {
+        dialog.find(".without_phone").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
+      });
+      let with_phones = contacts.filter(v => v.tel !== "");
+      dialog.find(".with_phone").empty();
+      with_phones.forEach(v => {
+        dialog.find(".with_phone").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
+      });
+      let owner = contacts.filter(v => v.type === "omistaja");
+      dialog.find(".owner").empty();
+      owner.forEach(v => {
+        dialog.find(".owner").append(`<tr><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td>${v.type}</td></tr>`)
+      });
+      dialog.find(".send_email_button").removeAttr("disabled");
+
+      let emails = new Set();
+      dialog.find("table .email").each(function() {
+        emails.add($(this).text());
+      });
+      emails = [...emails];
+      dialog.find(".send_email_button").attr("href", `mailto:${emails[0] ?? ""}?subject=&body=&cc=${emails.slice(1).join(";")}`);
+    }
+  });
 });

@@ -8152,7 +8152,8 @@ input[type="radio"].mass__selection_btn {
 }
 
 #rooms .add_new_customer_contact_button,
-#send_email  {
+#send_email,
+#show_send_email_dialog {
   background: #00ac25;
   color: #fff;
   padding: .5rem 1rem;
@@ -8217,7 +8218,13 @@ input[type="radio"].mass__selection_btn {
   filter: grayscale(100%);
   cursor: not-allowed;
 }
-
+#send_email_dialog .tables {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 35vh;
+  overflow: auto;
+}
 #send_email_dialog textarea {
   resize: none;
 }
@@ -8233,4 +8240,21 @@ input[type="radio"].mass__selection_btn {
 #email_presets .preset:hover {
   color: #fff;
   background: #000;
+}
+
+#send_email_popup {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 1rem;
+  height: 20dvh;
+  backdrop-filter: blur(10px);
+  transform: translateY(100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#send_email_popup.active {
+  transform: translateY(0);
 }

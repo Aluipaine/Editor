@@ -329,7 +329,7 @@ include('header.php');
                                   </select>
                               </label>
                           </div>
-                          <button class="add_contact greenbtn">Lisää</button>
+                          <button class="add_contact greenbtn">Uusi kontaktirivi</button>
                       </div>
                   </div>    
                   <div class="table_size_chooser sizer">
