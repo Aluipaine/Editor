@@ -2534,6 +2534,9 @@ $("#send_email_dialog").find(".title, .message").on("keyup", function() {
 $(".toggle_customer_modal").on("click", function () {
   $(this).toggleClass("active");
   $("#send_email_popup").toggleClass("active");
+  if (!$(this).hasClass("active")) {
+    $(".send_email_selected.active").removeClass("active send_email_selected")
+  }
 });
 
 $("#show_send_email_dialog").on("click", () => {
