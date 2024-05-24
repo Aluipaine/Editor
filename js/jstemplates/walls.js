@@ -1408,7 +1408,6 @@ function create__excel_fromallwalls() {
       }
       pdf.addImage(wall, 'PNG', 3, 3, pdfWidth, pdfHeight, null, "FAST", 0);
     });
-    pdf.save();
     let pdfdata =  pdf.output("blob");
 
 
