@@ -1412,7 +1412,6 @@ function create__excel_fromallwalls() {
 
 
     let pdf_formData = new FormData();
-    pdf_formData.append('test 1', "test 2");
     pdf_formData.append('pdffile', new File([pdfdata], filename + '.pdf'));
 
     $.ajax({
