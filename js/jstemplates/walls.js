@@ -1123,14 +1123,20 @@ function create__excel_fromallwalls() {
   
         h01.innerHTML = rangat[i].dataset.rangan_koodin_alku;
         h02.innerHTML = rangat[i].dataset.name + " " + rangat[i].dataset.rangan_koodin_alku;
-  
+
         if (rangat[i].classList.contains("ranka_pysty")) {
-          etaisyys = parseFloat(rangat[i].querySelector(".ranka_secondcord").innerText);
-          h05.innerHTML = etaisyys + " mm vasemmalle tilan " + current_tila + " seinässä " + current_room;
+          if(rangat[i].querySelector(".ranka_secondcord")) {
+            // TEMPORARY RANKA MEASURE
+            h05.innerHTML = etaisyys + " mm vasemmalle tilan " + current_tila + " seinässä " + current_room;
+            etaisyys = parseFloat(rangat[i].querySelector(".ranka_secondcord").innerText);
+
+          }
         }
         else if (rangat[i].classList.contains("ranka_vaaka")) {
-          etaisyys = parseFloat(rangat[i].querySelector(".ranka_secondcord").innerText);
-          h05.innerHTML = etaisyys + " mm ylös tilan " + current_tila + " seinässä " + current_room;
+          if(rangat[i].querySelector(".ranka_secondcord")) {
+            etaisyys = parseFloat(rangat[i].querySelector(".ranka_secondcord").innerText);
+            h05.innerHTML = etaisyys + " mm ylös tilan " + current_tila + " seinässä " + current_room;
+          }
         }
   
         current_date = new Date();
@@ -1138,7 +1144,14 @@ function create__excel_fromallwalls() {
   
         h2.innerHTML = rangat[i].dataset.rangan_koodin_alku;
         h3.innerHTML = rangat[i].dataset.tilauskoodi;
-        h4.innerHTML = parseFloat(rangat[i].querySelector(".ranka_cord:not(.ranka_type)").innerText);
+
+        if(rangat[i].querySelector(".ranka_cord:not(.ranka_type)")) {
+          h4.innerHTML = parseFloat(rangat[i].querySelector(".ranka_cord:not(.ranka_type)").innerText);
+        }
+        else {
+          h4.innerHTML = "";
+        }
+
         h5.innerHTML = "1";
         h6.innerHTML = rangat[i].dataset.materiaali;
   
@@ -1317,39 +1330,101 @@ function create__excel_fromallwalls() {
     // takeshotAllwalls();
     await sleep(100);
     let div = document.querySelector("#copiedcanvases");
-    img_name = "Havainnekuva_seinät";
-    
-    html2canvas(div).then(function(canvas3) {
-      const imageData = canvas3.toDataURL('image/png');
-      const screenshotImage = new Image();
-      screenshotImage.src = imageData;
-      var pdf = new jsPDF({
-        orientation: 'landscape',
-        title: 'Havainnekuva_seinät',
-      });
-      imgProps = pdf.getImageProperties(imageData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(imageData, 'PNG', 3, 3, pdfWidth, pdfHeight, null, null, 0);
-      //pdf.save(img_name + '.pdf');
-      
-      var pdfdata =  pdf. output('blob');
+    const set_checkbox = (checkbox, state) => {
+      if (state && !checkbox.checked) {
+        checkbox.click()
+      }
+      if (!state && checkbox.checked) {
+        checkbox.click()
+      }
+    }
+    const crop_by_wall = async (div) => {
+      return (await html2canvas(div, {
+        x: -100,
+        y: -100,
+        width: div.clientWidth + 200,
+        height: div.clientHeight + 200
+      })).toDataURL('image/png');
+    }
+    let eight__lvl_zero = document.querySelector("#eight__lvl_zero"),
+        eight__lvl_one = document.querySelector("#eight__lvl_one"),
+        eight__lvl_two = document.querySelector("#eight__lvl_two"),
+        eight__lvl_three = document.querySelector("#eight__lvl_three"),
+        eight__lvl_six = document.querySelector("#eight__lvl_six"),
+        walls = [];
 
-      
-      var xhr = new XMLHttpRequest();
-      var formData = new FormData();
-      formData.append('pdffile', new File([pdfdata], filename + '.pdf'));
-      
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          console.log('PDF file uploaded successfully!');
-          console.log(xhr);
-        }
-      };
-      
-      xhr.open('POST', 'sendemail.php', true);
-      xhr.send(formData);
+    set_checkbox(eight__lvl_zero, true);
+    set_checkbox(eight__lvl_one, true);
+    set_checkbox(eight__lvl_two, false);
+    set_checkbox(eight__lvl_three, false);
+    set_checkbox(eight__lvl_six, true);
+    walls.push(await crop_by_wall(div.querySelector(".canvas_a")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_b")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_c")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_d")));
+
+    set_checkbox(eight__lvl_zero, false);
+    set_checkbox(eight__lvl_one, false);
+    set_checkbox(eight__lvl_two, true);
+    set_checkbox(eight__lvl_three, false);
+    set_checkbox(eight__lvl_six, true);
+    walls.push(await crop_by_wall(div.querySelector(".canvas_a")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_b")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_c")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_d")));
+
+    set_checkbox(eight__lvl_zero, false);
+    set_checkbox(eight__lvl_one, false);
+    set_checkbox(eight__lvl_two, false);
+    set_checkbox(eight__lvl_three, true);
+    set_checkbox(eight__lvl_six, true);
+    walls.push(await crop_by_wall(div.querySelector(".canvas_a")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_b")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_c")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_d")));
+
+    set_checkbox(eight__lvl_zero, true);
+    set_checkbox(eight__lvl_one, false);
+    set_checkbox(eight__lvl_two, false);
+    set_checkbox(eight__lvl_three, false);
+    set_checkbox(eight__lvl_six, true);
+    walls.push(await crop_by_wall(div.querySelector(".canvas_a")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_b")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_c")));
+    walls.push(await crop_by_wall(div.querySelector(".canvas_d")));
+    let pdf = new jsPDF("l", "mm", "a4", true);
+    walls.forEach((wall, index) => {
+      let imgProps = pdf.getImageProperties(wall),
+          pdfHeight, pdfWidth;
+      pdfWidth = pdf.internal.pageSize.getWidth();
+      pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      if (pdfHeight > pdf.internal.pageSize.getHeight()) {
+        pdfHeight = pdf.internal.pageSize.getHeight();
+        pdfWidth = (imgProps.width * pdfHeight) / imgProps.height;
+      }
+      if (index > 0) {
+        pdf.addPage();
+        pdf.setPage(index + 1);
+      }
+      pdf.addImage(wall, 'PNG', 3, 3, pdfWidth, pdfHeight, null, "FAST", 0);
     });
+    pdf.save();
+    let pdfdata =  pdf.output("blob");
+
+
+    let pdf_formData = new FormData();
+    pdf_formData.append('test 1', "test 2");
+    pdf_formData.append('pdffile', new File([pdfdata], filename + '.pdf'));
+
+    $.ajax({
+      method: "POST",
+      url: "sendemail.php",
+      data: pdf_formData,
+      encType: "multipart/form-data",
+      contentType: false,
+      processData: false
+    });
+
     await sleep(100);
     console.log("Shots taken");
     alert('Tiedostot\n' + filename + '.xlsx' + '\n' + filename + '.pdf\nlähetettiin sähköpostitse.');
