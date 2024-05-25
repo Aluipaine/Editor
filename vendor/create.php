@@ -322,8 +322,9 @@ $customer_info = json_decode($_POST["customer_contacts"], true);
 $raw = ["ö", "ä", " "];
 $processed = ["o", "a", "_"];
 foreach ($customer_info as $customer) {
-	$room_name = $db->real_escape_string(str_replace($raw, $processed, $customer["name"]));
+	$room_name = $db->real_escape_string($customer["name"]);
 	$room_name = strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($room_name,'HTML-ENTITIES','utf-8'))));
+	$room_name = str_replace($raw, $processed, $room_name);
 	$customer_name = $db->real_escape_string($customer["info"]["name"]);
 	$customer_phone = $db->real_escape_string($customer["info"]["phone"]);
 	$customer_email = $db->real_escape_string($customer["info"]["email"]);
