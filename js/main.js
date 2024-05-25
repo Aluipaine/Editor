@@ -6496,22 +6496,25 @@ function toggle__projectexcel(mode, b) {
     setTimeout(() => {      
       rooms_data = document.querySelectorAll(".project__building_room");
       rooms_data.forEach(r => {
-        _tr = document.createElement("tr");
-        rinnerText = r.innerText;
-        rinnerText_selector = rinnerText.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
-        _tr.classList.add(rinnerText_selector);
-        _tr.innerHTML = `
-          <td>${rinnerText}</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        `;
-        if(rinnerText !== "[]") {
-          document.querySelector(".project"+_type+"__tbody").appendChild(_tr);
+        if(r.innerText.length > 1) {
+          _tr = document.createElement("tr");
+          rinnerText = r.innerText;
+          rinnerText_selector = rinnerText.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
+          _tr.classList.add(rinnerText_selector);
+          _tr.innerHTML = `
+            <td>${rinnerText}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          `;
+          if(rinnerText !== "[]") {
+            document.querySelector(".project"+_type+"__tbody").appendChild(_tr);
+          }
         }
+        
       });
     }, 550);
 

@@ -8198,8 +8198,10 @@ input[type="radio"].mass__selection_btn {
 #send_email_dialog .form #close_send_email_dialog {
   position: absolute;
   font-size: 1.5rem;
-  top: -3rem;
-  right: -3rem;
+  /* top: -3rem;
+  right: -3rem; */
+  top: 0rem;
+  right: 0rem;
   color: #fff;
   background: #c73939;
   padding: .25rem 1rem;
