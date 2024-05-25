@@ -2549,26 +2549,25 @@ $("#show_send_email_dialog").on("click", () => {
   let owner_types = dialog.find(".type_select .type");
   owner_types.addClass("checked");
   let rooms = $(".send_email_selected").get().map(v => v.getAttribute("data-room"));
-
   $.ajax({
     url: "../vendor/get-customer-contacts.php",
     type: "POST",
     data: {
-      project_id: document.querySelector("#current_project_id").value,
+      project_id: parseFloat(document.querySelector("#current_project_id").value),
       rooms: rooms
     },
     success: (answer) => {
       let selected_owner_types = owner_types.filter(".checked").get().map(v => $(v).attr("data-type"));
 
       let contacts = JSON.parse(answer);
-      let without_phones = contacts.filter(v => v.tel === "" && v.type !== "omistaja");
+
+      let with_phones = contacts.filter(v => v.tel !== "" && v.type !== "omistaja");
       dialog.find(".without_phone").empty();
-      without_phones.forEach(v => {
+      with_phones.forEach(v => {
         dialog.find(".without_phone").append(
-          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
+          `<tr class="${selected_owner_types.includes(v.type)? '': ''}"><td>${v.name}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
         )
       });
-      let with_phones = contacts.filter(v => v.tel !== "" && v.type !== "omistaja");
       dialog.find(".with_phone").empty();
       with_phones.forEach(v => {
         dialog.find(".with_phone").append(
@@ -2599,13 +2598,16 @@ $("#send_email_dialog .type_select .type").on("click", function() {
   let dialog = $("#send_email_dialog");
   let owner_types = dialog.find(".type_select .type");
   let selected_owner_types = owner_types.filter(".checked").get().map(v => $(v).attr("data-type"));
-  dialog.find(".with_phone tr, .without_phone tr, .owner tr").each(function () {
+  dialog.find(".with_phone tr, .owner tr").each(function () {
     if (selected_owner_types.includes($(this).find(".owner_type").text())) {
       $(this).addClass("owner_checked");
     }
     else {
       $(this).removeClass("owner_checked");
     }
+  });
+  dialog.find(".without_phone tr").each(function () {
+    $(this).removeClass("owner_checked");
   });
   let title = dialog.find(".title").val(),
       message = dialog.find(".message").val(),
