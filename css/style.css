@@ -8104,8 +8104,15 @@ input[type="radio"].mass__selection_btn {
   background: rgb(255 255 255 / .7);
 }
 
-#copiedcanvases .x_cord_mki:not(.secondcord)  {
+#copiedcanvases .tyostot__tyosto_pysty .x_cord_mki:not(.secondcord)  {
   right: 0 !important;
+  height: 25px;
+  padding-bottom: 5px;
+  translate: 0 -10px;
+}
+
+#copiedcanvases .tyostot__tyosto_vaaka .x_cord_mki:not(.secondcord)  {
+  translate: 10px 0;
 }
 
 #copiedcanvases .tyostot__tyosto .x_del + .secondcord  {
