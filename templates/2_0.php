@@ -1325,8 +1325,12 @@
     </div>
     <?php
 
+      
+
+
     if(strtolower($_GET["user"]) == "tyonjohto") {
       echo'
+      
       <div class="row">
         <h3>Työt</h3>
         <div class="cr_meaning cr_meaning_1">
@@ -1614,7 +1618,14 @@
    <div class="container">
    
     <div class="row house__parentrow nowrap">
-      <div class="col-6 row house__inputrow nowrap">
+      <?php
+        if(strtolower($usr_role) !== "mittaus") {
+          echo '<div class="col-6 row house__inputrow">';
+        }
+        else {
+          echo '<div class="col-6 row house__inputrow nowrap">';
+        }
+      ?>
         <h2><input maxlength="10" type="hidden" placeholder="Tilan nimi tähän" value="" name="wall_name" class="lineinput" id="roomname" oninput="open__change_btn();"></h2>
         <h2><input maxlength="10" type="text" placeholder="Tilanimen 1 rivi" value="" name="wall_name" class="lineinput" id="roomname_1" oninput="open__change_btn();"></h2>
         <h2><input maxlength="10" type="text" placeholder="Tilanimen 2 rivi" value="" name="wall_name" class="lineinput" id="roomname_2" oninput="open__change_btn();"></h2>
@@ -1622,8 +1633,91 @@
         <div class="change__roomname_btn" style="opacity: 0;" onclick="change__roomname();">
           Vaihda tilan nimi
         </div>
+      <?php 
+       $available_users = '';
+            
+       if(strtolower($_GET["user"]) == "tyonjohto") {
+         $role = $_GET['user'];
+         $_id = $_GET['id'];
+ 
+         $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id");
+         $userslist = mysqli_fetch_all($_userslist);
+         
+ 
+         $ul="";
+         
+         foreach ($userslist as $usern) {
+           $ul.='<option value="'.ucfirst($usern[0]).'">'.ucfirst($usern[0]).'</option>';
+         }
+ 
+         $ddate = date("Y-m-d");
+         $date = new DateTime($ddate);
+         $week = $date->format("W");
+         $weekcount = $week;
+         $cur_week = $week;
+ 
+         
+         echo '
+           <div class="row">
+             <h2 style="width: 100%;">Jätä työ</h2>
+             <hr style="margin-top: 50px;">
+             <section class="commentbox commentbox__new commentbox__newfirst">
+               <div class="row">
+                 <div class="col-6">  
+                   <h2><input type="text" value="" class="lineinput kommentti__name" placeholder="Mikä murehduttaa?" onchange="window.scrollTo(0, 150);"></h2>
+                   
+                 </div>
+                 <div class="col-3">  
+                   <h6>Deadline:</h6>
+                   <input name="deadline_time" class="comment__deadline newcomment__deadline" type="date" min="' .  date("Y-m-d") . '" value="'.date("Y-m-t", strtotime(date("Y-m-d"))).'" onchange="this.parentElement.parentElement.parentElement.querySelector(`.newcomment__vko`).value= new Date(this.value).getWeek();">
+                 </div>
+                 <div class="col-3">  
+                     <h6>Arvio työtunneista</h6>
+                     <input name="time_estimate" class="time_estimate newcomment__estimatehours" type="number" pattern="\d*"/ value="0" style="max-width: 70px;" min="0">h
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="col-6">
+                 <div class="form-group">
+                       <h6>Lisää tiedostot:</h6>
+                       <input type="file" class="comment__files newcomment__files newcomment__files_input" name="comment__files[]" multiple>
+                       <div class="comment__preview_files newcomment__previewfiles"></div>
+                   </div>
+                   <h6>Keneltä</h6>
+                   <input name="kommentti_comment_from" class="kommentti_comment_from" type="text" value="' . $role . '">
+                     
+                     
+                 </div>
+                 <div class="col-6">
+                     <h6>Tehdään viikolla</h6>
+                     <input name="vko_estimate" class="vko_estimate newcomment__vko" type="number" pattern="\d*"/ value="'.$cur_week.'" min="1" max="52" style="max-width: 70px;">
+                     <div class="row elevated_spaces">
+                       <div class="col-6">
+                         <h6>Kenelle</h6>
+                         <select name="kommentti_comment_to" class="kommentti_comment_to kommentti_comment_newto" multiple>'.$ul.'</select>
+                       </div>
+                     
+                     </div>
+                 </div>
+               </div>
+               <div class="commentbox__text">
+                 <h4>Sisältö</h4>
+                 <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
+                 <div class="row pohjakierros">
+                   <input id="is_thecomment_critical" class="is_thecomment_critical" type="checkbox" value="Critical">
+                   <label for="is_thecomment_critical">Onko kriittinen?</label>
+                 </div>
+               </div>
+             </section>
+           </div>';
+         } 
+ 
+ 
+       
+       
+      ?>
       </div>
-      <div class="col-3">
+     
         <?php
           $usr = $_GET["user"];
 
@@ -1632,8 +1726,11 @@
           
           $usr_role = $usr_role_[3];
         
-          if(strtolower($usr_role) == "kommentointi") {}
+          if(strtolower($usr_role) == "kommentointi") {
+            echo ' <div class="col-6">';
+          }
           else {
+            echo ' <div class="col-3">';
             echo '<div id="types" class="house__types">
             <h2>Parveketyypit</h2>
             <div class="house__types_row row">';           
@@ -1758,10 +1855,13 @@
 
         <div id="house__intro_commenting">
           <div class="house__intro_comments">
+            
               <?php 
                 $id = $post['id'];
                 $role = $_GET['user'];
                 if(strtolower($usr_role) == "kommentointi") {
+                  echo '<div class="prev_btn" onclick="$(&quot;#step_drawscreen&quot;).val(&quot;project_start&quot;);refresh__drawcontrols();degradate_url(1);">Edellinen</div>';
+
                   if(strtolower($_GET["user"]) == "tyonjohto") {
                     $bosts = mysqli_query($db, "SELECT * FROM `comments` WHERE `projectid`=$id AND `ending_time`='' AND `answer_to`=''");
                     $bosts = mysqli_fetch_all($bosts);
@@ -2130,7 +2230,21 @@
         </div>
     </dialog>
     <article class="row wide-container nowrap">
-      <aside class="col-4">
+    <?php 
+       $id = $post['id'];
+       $role = $_GET['user'];
+       if(strtolower($usr_role) !== "mittaus") {
+        echo '<aside class="col-6">';
+       }
+       else {
+        echo '<aside class="col-4">';
+       }
+
+      ?>
+      
+      <?php
+
+     ?>
         <div class="row">
         <?php
             $tiedot_projektista = $db->query("SELECT * FROM `projectmeta` WHERE `id`= $id AND `meta_key` = 'tiedot_projektista'");
@@ -2168,86 +2282,110 @@
           <i><?= $tiedot_huoneista ?></i> <br> <br>
           <b>Tiedot tekijästä</b> <br>
           <i><?= $tiedot_tekijasta ?></i> <br> <br>
-          <div class="col-table">
-          <h2>Seinien asennusjärjestys</h2>
-          <table>
-            <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-1" maxlength="1" name="wall_one_asjarj asjarj" id="wall_order_a" data-tochange="a" onchange="rooms__change_asjarj(this); " value="1" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="a" name="wall_one_a" id="wall_one_a" value="SEINÄ A" data-tochange="a" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_a_desc" id="wall_desc_a" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-            </tr>
-            <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-2" maxlength="1" name="wall_two_asjarj asjarj" id="wall_order_b" data-tochange="b" onchange="rooms__change_asjarj(this); "value="2" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="b" name="wall_one_b" id="wall_one_b" value="SEINÄ B" data-tochange="b"  class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_b_desc" id="wall_desc_b" data-tochange="b" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-            </tr>
-            <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-3" maxlength="1" name="wall_three_asjarj asjarj" id="wall_order_c" data-tochange="c" onchange="rooms__change_asjarj(this); "value="3" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="c" name="wall_one_c" id="wall_one_c" value="SEINÄ C" data-tochange="c" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_c_desc" id="wall_desc_c" data-tochange="c" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-            </tr>
-            <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-4" maxlength="1" name="wall_four_asjarj asjarj" id="wall_order_d" data-tochange="d" onchange="rooms__change_asjarj(this); "value="4" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="d" name="wall_one_d" id="wall_one_d" value="SEINÄ D"  data-tochange="d" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_d_desc" id="wall_desc_d" data-tochange="d" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-            </tr>
-            <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-5" maxlength="1" name="wall_five_asjarj asjarj" id="wall_order_roof" data-tochange="k" onchange="rooms__change_asjarj(this); "value="5" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="k" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="k" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_roof_desc" id="wall_desc_k" data-tochange="k" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-            </tr>
-            <tr>
-                <td><input type="number" pattern="\d*"/ data-room="asjarj-6" maxlength="1" name="wall_six_asjarj asjarj" id="wall_order_floor" data-tochange="l" onchange="rooms__change_asjarj(this); "value="6" class="lineinput inputname" required/></td>
-                <td><input type="text" data-room="l" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
-                <td><input type="text" name="wall_one_floor_desc" id="wall_desc_l" data-tochange="l" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
-            </tr>
-          </table>
-          <div class="row">
-            <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(0,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon tilaustaulu</div>
-          </div>
-        </div>
-        </div>
-        <div class="row">
+          <?php 
+       $id = $post['id'];
+       $role = $_GET['user'];
+       if(strtolower($usr_role) !== "mittaus") {
+       }
+       else {
+        echo '<div class="col-table">
+                <h2>Seinien asennusjärjestys</h2>
+                <table>
+                  <tr>
+                      <td><input type="number" pattern="\d*"/ data-room="asjarj-1" maxlength="1" name="wall_one_asjarj asjarj" id="wall_order_a" data-tochange="a" onchange="rooms__change_asjarj(this); " value="1" class="lineinput inputname" required/></td>
+                      <td><input type="text" data-room="a" name="wall_one_a" id="wall_one_a" value="SEINÄ A" data-tochange="a" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
+                      <td><input type="text" name="wall_one_a_desc" id="wall_desc_a" data-tochange="a" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  </tr>
+                  <tr>
+                      <td><input type="number" pattern="\d*"/ data-room="asjarj-2" maxlength="1" name="wall_two_asjarj asjarj" id="wall_order_b" data-tochange="b" onchange="rooms__change_asjarj(this); "value="2" class="lineinput inputname" required/></td>
+                      <td><input type="text" data-room="b" name="wall_one_b" id="wall_one_b" value="SEINÄ B" data-tochange="b"  class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
+                      <td><input type="text" name="wall_one_b_desc" id="wall_desc_b" data-tochange="b" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  </tr>
+                  <tr>
+                      <td><input type="number" pattern="\d*"/ data-room="asjarj-3" maxlength="1" name="wall_three_asjarj asjarj" id="wall_order_c" data-tochange="c" onchange="rooms__change_asjarj(this); "value="3" class="lineinput inputname" required/></td>
+                      <td><input type="text" data-room="c" name="wall_one_c" id="wall_one_c" value="SEINÄ C" data-tochange="c" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
+                      <td><input type="text" name="wall_one_c_desc" id="wall_desc_c" data-tochange="c" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  </tr>
+                  <tr>
+                      <td><input type="number" pattern="\d*"/ data-room="asjarj-4" maxlength="1" name="wall_four_asjarj asjarj" id="wall_order_d" data-tochange="d" onchange="rooms__change_asjarj(this); "value="4" class="lineinput inputname" required/></td>
+                      <td><input type="text" data-room="d" name="wall_one_d" id="wall_one_d" value="SEINÄ D"  data-tochange="d" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
+                      <td><input type="text" name="wall_one_d_desc" id="wall_desc_d" data-tochange="d" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  </tr>
+                  <tr>
+                      <td><input type="number" pattern="\d*"/ data-room="asjarj-5" maxlength="1" name="wall_five_asjarj asjarj" id="wall_order_roof" data-tochange="k" onchange="rooms__change_asjarj(this); "value="5" class="lineinput inputname" required/></td>
+                      <td><input type="text" data-room="k" name="wall_one_roof" id="wall_one_roof" value="KATTO" data-tochange="k" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
+                      <td><input type="text" name="wall_one_roof_desc" id="wall_desc_k" data-tochange="k" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  </tr>
+                  <tr>
+                      <td><input type="number" pattern="\d*"/ data-room="asjarj-6" maxlength="1" name="wall_six_asjarj asjarj" id="wall_order_floor" data-tochange="l" onchange="rooms__change_asjarj(this); "value="6" class="lineinput inputname" required/></td>
+                      <td><input type="text" data-room="l" name="wall_one_floor" id="wall_one_floor" value="LATTIA" data-tochange="l" class="lineinput inputname" required onchange="rooms__change_name(this);" oninput="rooms__change_name(this);"></td>
+                      <td><input type="text" name="wall_one_floor_desc" id="wall_desc_l" data-tochange="l" onchange="rooms__change_description(this);" placeholder="Kuvausen voit kirjoittaa tähän..." class="lineinput"></td>
+                  </tr>
+                </table>
+                <div class="row">
+                  <div class="open_modal yellowbtn get_apartment_modal col-6" onclick="settings__modal_open(this);toggle__asexcel(0,document.querySelector(`.tilalista_btn:nth-child(1)`));" data-asmodal_mode="asuntoexcel">Avaa asunnon tilaustaulu</div>
+                </div>
+              </div>';
+       }
+       echo '</div>';
+       if(strtolower($usr_role) !== "mittaus") {
+      }
+      else {
+        echo '<div class="row">
           <h3>Seinän nimen taustaväri</h3>    
           <div class="col-2 popup__statuses_a">
-          <div class="c_meaning c_meaning_2" data-action="undone"><i data-action="undone"><?= $st_slplit[0]; ?> </i></div>
-          <div class="c_meaning c_meaning_1" data-action="nowork"><i data-action="nowork"><?= $st_slplit[1]; ?> </i></div>
-          <div class="c_meaning c_meaning_8" data-action="prob"><i data-action="prob" ><?= $st_slplit[2]; ?> </i></div>
-          <div class="c_meaning c_meaning_9" data-action="problem"><i data-action="problem"><?= $st_slplit[3]; ?> </i></div>
-
+          <div class="c_meaning c_meaning_2" data-action="undone"><i data-action="undone">'. $st_slplit[0] .' </i></div>
+          <div class="c_meaning c_meaning_1" data-action="nowork"><i data-action="nowork">'. $st_slplit[1] .' </i></div>
+          <div class="c_meaning c_meaning_8" data-action="prob"><i data-action="prob" >'. $st_slplit[2] .' </i></div>
+          <div class="c_meaning c_meaning_9" data-action="problem"><i data-action="problem">'. $st_slplit[3] .' </i></div>
         </div>
         <div class="col-2 popup__statuses_f">
-          <div class="c_meaning" data-action="l5_a"><i data-action="l5_a"><?= $st_slplit[4]; ?></i></div>
-          <div class="c_meaning" data-action="l5_b"><i data-action="l5_b"><?= $st_slplit[5]; ?></i></div>
-          <div class="c_meaning" data-action="l5_c"><i data-action="l5_c"><?= $st_slplit[6]; ?></i></div>
-          <div class="c_meaning" data-action="l5_d"><i data-action="l5_d"><?= $st_slplit[7]; ?></i></div>
+          <div class="c_meaning" data-action="l5_a"><i data-action="l5_a">'. $st_slplit[4] .'</i></div>
+          <div class="c_meaning" data-action="l5_b"><i data-action="l5_b">'. $st_slplit[5] .'</i></div>
+          <div class="c_meaning" data-action="l5_c"><i data-action="l5_c">'. $st_slplit[6] .'</i></div>
+          <div class="c_meaning" data-action="l5_d"><i data-action="l5_d">'. $st_slplit[7] .'</i></div>
         </div>
         <div class="col-2 popup__statuses_b">
-          <div class="c_meaning" data-action="l4_a"><i data-action="l4_a"><?= $st_slplit[8]; ?></i></div>
-          <div class="c_meaning" data-action="l4_b"><i data-action="l4_b"><?= $st_slplit[9]; ?></i></div>
-          <div class="c_meaning" data-action="l4_c"><i data-action="l4_c"><?= $st_slplit[10]; ?></i></div>
-          <div class="c_meaning" data-action="l4_d"><i data-action="l4_d"><?= $st_slplit[11]; ?></i></div>
+          <div class="c_meaning" data-action="l4_a"><i data-action="l4_a">'. $st_slplit[8] .'</i></div>
+          <div class="c_meaning" data-action="l4_b"><i data-action="l4_b">'. $st_slplit[9] .'</i></div>
+          <div class="c_meaning" data-action="l4_c"><i data-action="l4_c">'. $st_slplit[10] .'</i></div>
+          <div class="c_meaning" data-action="l4_d"><i data-action="l4_d">'. $st_slplit[11] .'</i></div>
         </div>
         <div class="col-2 popup__statuses_c">
-          <div class="c_meaning" data-action="l3_a"><i data-action="l3_a"><?= $st_slplit[12]; ?></i></div>
-          <div class="c_meaning" data-action="l3_b"><i data-action="l3_b"><?= $st_slplit[13]; ?></i></div>
-          <div class="c_meaning" data-action="l3_c"><i data-action="l3_c"><?= $st_slplit[14]; ?></i></div>
-          <div class="c_meaning" data-action="l3_d"><i data-action="l3_d"><?= $st_slplit[15]; ?></i></div>
+          <div class="c_meaning" data-action="l3_a"><i data-action="l3_a">'. $st_slplit[12] .'</i></div>
+          <div class="c_meaning" data-action="l3_b"><i data-action="l3_b">'. $st_slplit[13] .'</i></div>
+          <div class="c_meaning" data-action="l3_c"><i data-action="l3_c">'. $st_slplit[14] .'</i></div>
+          <div class="c_meaning" data-action="l3_d"><i data-action="l3_d">'. $st_slplit[15] .'</i></div>
         </div>
         <div class="col-2 popup__statuses_d">
-          <div class="c_meaning" data-action="l2_a"><i data-action="l2_a"><?= $st_slplit[16]; ?> </i></div>
-          <div class="c_meaning" data-action="l2_b"><i data-action="l2_b"><?= $st_slplit[17]; ?> </i></div>
-          <div class="c_meaning" data-action="l2_c"><i data-action="l2_c"><?= $st_slplit[18]; ?> </i></div>
-          <div class="c_meaning" data-action="l2_d"><i data-action="l2_d"><?= $st_slplit[19]; ?> </i></div>
+          <div class="c_meaning" data-action="l2_a"><i data-action="l2_a">'. $st_slplit[16] .' </i></div>
+          <div class="c_meaning" data-action="l2_b"><i data-action="l2_b">'. $st_slplit[17] .' </i></div>
+          <div class="c_meaning" data-action="l2_c"><i data-action="l2_c">'. $st_slplit[18] .' </i></div>
+          <div class="c_meaning" data-action="l2_d"><i data-action="l2_d">'. $st_slplit[19] .' </i></div>
         </div>
         <div class="col-2 popup__statuses_e">
-          <div class="c_meaning" data-action="l1_a"><i data-action="l1_a"><?= $st_slplit[20]; ?> </i></div>
-          <div class="c_meaning" data-action="l1_b"><i data-action="l1_b"><?= $st_slplit[21]; ?> </i></div>
-          <div class="c_meaning" data-action="l1_c"><i data-action="l1_c"><?= $st_slplit[22]; ?> </i></div>
-          <div class="c_meaning" data-action="l1_d"><i data-action="l1_d"><?= $st_slplit[23]; ?> </i></div>
-        </div>
+          <div class="c_meaning" data-action="l1_a"><i data-action="l1_a">'. $st_slplit[20] .' </i></div>
+          <div class="c_meaning" data-action="l1_b"><i data-action="l1_b">'. $st_slplit[21] .' </i></div>
+          <div class="c_meaning" data-action="l1_c"><i data-action="l1_c">'. $st_slplit[22] .' </i></div>
+          <div class="c_meaning" data-action="l1_d"><i data-action="l1_d">'. $st_slplit[23] .' </i></div>
+        </div>';
+        }
+      
+      ?>
+      
       </aside>
-      <div id="house" class="house col-8">
+      <?php 
+       $id = $post['id'];
+       $role = $_GET['user'];
+       if(strtolower($usr_role) !== "mittaus") {
+        echo '<div id="house" class="house col-8" style="display: none;opacity:0;z-index:-1;position: absolute;">';
+       }
+       else {
+        echo '<div id="house" class="house col-8">';
+       }
+
+      ?>
+      
 
         <?php 
           // project_type
@@ -3193,6 +3331,10 @@ if(strtolower($usr_role) == "kommentointi") {
   }
   #types {
     display: none;
+  }
+
+  .house__parentrow {
+    align-items: unset;
   }
   </style>";
 }

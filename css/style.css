@@ -7570,7 +7570,7 @@ input[type="radio"] + label.levy__label:focus, input[type="radio"] + label.levy_
 }
 .commentmodal_active .commentbox,
 .commentbox.commentbox__new {
-
+  margin: 12px 0;
   display: block;
 }
 .commentbox.commentbox__new {

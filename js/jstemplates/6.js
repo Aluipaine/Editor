@@ -10,6 +10,9 @@ a_evt = 0;
 b_evt = 0;
 
 function restore__kiinnikkeet(content_) {
+  if(document.querySelector('.commentbox')) {
+    return
+  }
   console.log(content_);
   setTimeout(() => {
     console.log("function restore__kiinnikkeet");
@@ -55,6 +58,9 @@ function restore__kiinnikkeet(content_) {
  * @returns None
  */
 function restore_tyosto(levy,content) {
+  if(document.querySelector('.commentbox')) {
+    return
+  }
   console.log("function restore_tyosto");
   x_tyostot = content[4].split("---");
   y_tyostot = content[5].split("---");
@@ -166,135 +172,139 @@ function restore_tyosto(levy,content) {
  * @returns None
  */
 
-ladonta_savesetbtn = document.querySelector(".ladonta_savesetbtn");
-ladonta_savesetbtn.addEventListener("click", function () {
-  kiinnike_update_settingsinit();
-  draw__kiinnikkeet();
+if(document.querySelector('.commentbox')) {}
+else {
+    ladonta_savesetbtn = document.querySelector(".ladonta_savesetbtn");
+  ladonta_savesetbtn.addEventListener("click", function () {
+    kiinnike_update_settingsinit();
+    draw__kiinnikkeet();
 
-  l_container = document.querySelector(".ladonta_container");
-  levy_visualisation = l_container.querySelector(".levy");
-  countdown__kiinnikkeet(levy_visualisation);
-});
+    l_container = document.querySelector(".ladonta_container");
+    levy_visualisation = l_container.querySelector(".levy");
+    countdown__kiinnikkeet(levy_visualisation);
+  });
 
-kp_one = document.querySelector("#kiinniketys__pkiinnike_one");
-kp_two = document.querySelector("#kiinniketys__pkiinnike_two");
-kp_three = document.querySelector("#kiinniketys__pkiinnike_three");
-kp_four = document.querySelector("#kiinniketys__pkiinnike_four");
-kv_one = document.querySelector("#kiinniketys__vkiinnike_one");
-kv_two = document.querySelector("#kiinniketys__vkiinnike_two");
-kv_three = document.querySelector("#kiinniketys__vkiinnike_three");
-kv_four = document.querySelector("#kiinniketys__vkiinnike_four");
+  kp_one = document.querySelector("#kiinniketys__pkiinnike_one");
+  kp_two = document.querySelector("#kiinniketys__pkiinnike_two");
+  kp_three = document.querySelector("#kiinniketys__pkiinnike_three");
+  kp_four = document.querySelector("#kiinniketys__pkiinnike_four");
+  kv_one = document.querySelector("#kiinniketys__vkiinnike_one");
+  kv_two = document.querySelector("#kiinniketys__vkiinnike_two");
+  kv_three = document.querySelector("#kiinniketys__vkiinnike_three");
+  kv_four = document.querySelector("#kiinniketys__vkiinnike_four");
 
-lt_kp_one = document.querySelector("#lt-kiinniketys__pkiinnike_one");
-lt_kp_two = document.querySelector("#lt-kiinniketys__pkiinnike_two");
-lt_kp_three = document.querySelector("#lt-kiinniketys__pkiinnike_three");
-lt_kp_four = document.querySelector("#lt-kiinniketys__pkiinnike_four");
-lt_kv_one = document.querySelector("#lt-kiinniketys__vkiinnike_one");
-lt_kv_two = document.querySelector("#lt-kiinniketys__vkiinnike_two");
-lt_kv_three = document.querySelector("#lt-kiinniketys__vkiinnike_three");
-lt_kv_four = document.querySelector("#lt-kiinniketys__vkiinnike_four");
+  lt_kp_one = document.querySelector("#lt-kiinniketys__pkiinnike_one");
+  lt_kp_two = document.querySelector("#lt-kiinniketys__pkiinnike_two");
+  lt_kp_three = document.querySelector("#lt-kiinniketys__pkiinnike_three");
+  lt_kp_four = document.querySelector("#lt-kiinniketys__pkiinnike_four");
+  lt_kv_one = document.querySelector("#lt-kiinniketys__vkiinnike_one");
+  lt_kv_two = document.querySelector("#lt-kiinniketys__vkiinnike_two");
+  lt_kv_three = document.querySelector("#lt-kiinniketys__vkiinnike_three");
+  lt_kv_four = document.querySelector("#lt-kiinniketys__vkiinnike_four");
 
-kp_one.addEventListener("click", function () {
-  kp_two.checked = false;
-  kp_three.checked = false;
-  kp_four.checked = false;
-  a_evt = 1;
-});
-kp_two.addEventListener("click", function () {
-  kp_one.checked = false;
-  kp_three.checked = false;
-  kp_four.checked = false;
-  a_evt = 2;
+  kp_one.addEventListener("click", function () {
+    kp_two.checked = false;
+    kp_three.checked = false;
+    kp_four.checked = false;
+    a_evt = 1;
+  });
+  kp_two.addEventListener("click", function () {
+    kp_one.checked = false;
+    kp_three.checked = false;
+    kp_four.checked = false;
+    a_evt = 2;
 
-});
-kp_three.addEventListener("click", function () {
-  kp_one.checked = false;
-  kp_two.checked = false;
-  kp_four.checked = false;
-  a_evt = 3;
-});
-kp_four.addEventListener("click", function () {
-  kp_one.checked = false;
-  kp_two.checked = false;
-  kp_three.checked = false;
-  a_evt = 4;
-});
-kv_one.addEventListener("click", function () {
-  kv_two.checked = false;
-  kv_three.checked = false;
-  kv_four.checked = false;
-  b_evt = 5;
-});
-kv_two.addEventListener("click", function () {
-  kv_one.checked = false;
-  kv_three.checked = false;
-  kv_four.checked = false;
-  b_evt = 6;
-});
-kv_three.addEventListener("click", function () {
-  kv_one.checked = false;
-  kv_two.checked = false;
-  kv_four.checked = false;
-  b_evt = 7;
-});
-kv_four.addEventListener("click", function () {
-  kv_one.checked = false;
-  kv_two.checked = false;
-  kv_three.checked = false;
-  b_evt = 8;
-});
+  });
+  kp_three.addEventListener("click", function () {
+    kp_one.checked = false;
+    kp_two.checked = false;
+    kp_four.checked = false;
+    a_evt = 3;
+  });
+  kp_four.addEventListener("click", function () {
+    kp_one.checked = false;
+    kp_two.checked = false;
+    kp_three.checked = false;
+    a_evt = 4;
+  });
+  kv_one.addEventListener("click", function () {
+    kv_two.checked = false;
+    kv_three.checked = false;
+    kv_four.checked = false;
+    b_evt = 5;
+  });
+  kv_two.addEventListener("click", function () {
+    kv_one.checked = false;
+    kv_three.checked = false;
+    kv_four.checked = false;
+    b_evt = 6;
+  });
+  kv_three.addEventListener("click", function () {
+    kv_one.checked = false;
+    kv_two.checked = false;
+    kv_four.checked = false;
+    b_evt = 7;
+  });
+  kv_four.addEventListener("click", function () {
+    kv_one.checked = false;
+    kv_two.checked = false;
+    kv_three.checked = false;
+    b_evt = 8;
+  });
 
 
 
-lt_kp_one.addEventListener("click", function () {
-  lt_kp_two.checked = false;
-  lt_kp_three.checked = false;
-  lt_kp_four.checked = false;
-  a_evt = 1;
-});
-lt_kp_two.addEventListener("click", function () {
-  lt_kp_one.checked = false;
-  lt_kp_three.checked = false;
-  lt_kp_four.checked = false;
-  a_evt = 2;
-});
-lt_kp_three.addEventListener("click", function () {
-  lt_kp_one.checked = false;
-  lt_kp_two.checked = false;
-  lt_kp_four.checked = false;
-  a_evt = 3;
-});
-lt_kp_four.addEventListener("click", function () {
-  lt_kp_one.checked = false;
-  lt_kp_two.checked = false;
-  lt_kp_three.checked = false;
-  a_evt = 4;
-});
-lt_kv_one.addEventListener("click", function () {
-  lt_kv_two.checked = false;
-  lt_kv_three.checked = false;
-  lt_kv_four.checked = false;
-  b_evt = 5;
-});
-lt_kv_two.addEventListener("click", function () {
-  lt_kv_one.checked = false;
-  lt_kv_three.checked = false;
-  lt_kv_four.checked = false;
-  b_evt = 6;
-});
-lt_kv_three.addEventListener("click", function () {
-  lt_kv_one.checked = false;
-  lt_kv_two.checked = false;
-  lt_kv_four.checked = false;
-  b_evt = 7;
-});
-lt_kv_four.addEventListener("click", function () {
-  lt_kv_one.checked = false;
-  lt_kv_two.checked = false;
-  lt_kv_three.checked = false;
-  b_evt = 8;
-});
+  lt_kp_one.addEventListener("click", function () {
+    lt_kp_two.checked = false;
+    lt_kp_three.checked = false;
+    lt_kp_four.checked = false;
+    a_evt = 1;
+  });
+  lt_kp_two.addEventListener("click", function () {
+    lt_kp_one.checked = false;
+    lt_kp_three.checked = false;
+    lt_kp_four.checked = false;
+    a_evt = 2;
+  });
+  lt_kp_three.addEventListener("click", function () {
+    lt_kp_one.checked = false;
+    lt_kp_two.checked = false;
+    lt_kp_four.checked = false;
+    a_evt = 3;
+  });
+  lt_kp_four.addEventListener("click", function () {
+    lt_kp_one.checked = false;
+    lt_kp_two.checked = false;
+    lt_kp_three.checked = false;
+    a_evt = 4;
+  });
+  lt_kv_one.addEventListener("click", function () {
+    lt_kv_two.checked = false;
+    lt_kv_three.checked = false;
+    lt_kv_four.checked = false;
+    b_evt = 5;
+  });
+  lt_kv_two.addEventListener("click", function () {
+    lt_kv_one.checked = false;
+    lt_kv_three.checked = false;
+    lt_kv_four.checked = false;
+    b_evt = 6;
+  });
+  lt_kv_three.addEventListener("click", function () {
+    lt_kv_one.checked = false;
+    lt_kv_two.checked = false;
+    lt_kv_four.checked = false;
+    b_evt = 7;
+  });
+  lt_kv_four.addEventListener("click", function () {
+    lt_kv_one.checked = false;
+    lt_kv_two.checked = false;
+    lt_kv_three.checked = false;
+    b_evt = 8;
+  });
 
+
+}
 
 // This functions makes updating of the kiinnikkeet based on the settings event on the canvas screen.
 // function tyostanaytto(event) {
@@ -445,8 +455,13 @@ function draw__kiinnikkeet(specification_launch) {
  * @param {string} levy - The levy parameter.
  * @param {number} evt - The event parameter.
  */
-tyostot_keskitys = document.querySelector(".tyostot_keskitys");
-tyostot_keskitys.classList.remove("two");
+
+if(document.querySelector('.commentbox')) {}
+else {
+  tyostot_keskitys = document.querySelector(".tyostot_keskitys");
+  tyostot_keskitys.classList.remove("two");
+}
+
 // Function to perform work on a given "levy" element based on the specified event "evt"
 function tyosta(levy, evt) {
   console.log("function tyosta(levy, evt) ");

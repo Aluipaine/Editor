@@ -3708,7 +3708,9 @@ initializecropping();
  */
 function initializesettings__mittaus() {
 
-  
+  if(document.querySelector('.commentbox')) {
+    return
+  }
 
   formData = {
       pr_id: parseFloat(document.querySelector("#current_project_id").value),

@@ -56,7 +56,7 @@ function sendEmail(string $filename) {
   $m_subject = explode("~~~~", $m_data[3]);
   $m_messages = explode("~~~~", $m_data[4]);
 
-  $to = 'marko.virtanen@westface.fi';
+  $to = 'jyri@gromi.fi';
   $from = $m_headers[0];
   $subject = 'Projektitiedostot';
   $txt = $xlsattach . '<br>' . $pdfattach;
