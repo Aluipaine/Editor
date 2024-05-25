@@ -974,7 +974,7 @@ async function initalize_cross(arg) {
       type: "POST",
       data: {
         project_id: document.querySelector("#current_project_id").value,
-        room: currect_arak
+        rooms: [currect_arak]
       },
       success: (answer) => {
         container.empty();
