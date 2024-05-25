@@ -319,10 +319,12 @@ $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_va
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'statuses__text', 'KESKEN~~EI TYÖTÄ~~ONGELMA~~KRIITTINEN ONGELMA~~L5 TILATTU~~L5 TYÖMAALLA~~L5 ASENNETTU~~L5 HYVÄKSYTTY~~L4 TILATTU~~L4 TYÖMAALLA~~L4 ASENNETTU~~L4 HYVÄKSYTTY~~L3 TILATTU~~L3 TYÖMAALLA~~L3 ASENNETTU~~L3 HYVÄKSYTTY~~L2 TILATTU~~L2 TYÖMAALLA~~L2 ASENNETTU~~L2 HYVÄKSYTTY~~L1 TILATTU~~L1 TYÖMAALLA~~L1 ASENNETTU~~L1 HYVÄKSYTTY')");
 
 $customer_info = json_decode($_POST["customer_contacts"], true);
-$raw = ["ö", "", " ","<br>"];
-$processed = ["o", "a", "_",""];
+$raw = ["ö", "ä", " "];
+$processed = ["o", "a", "_"];
 foreach ($customer_info as $customer) {
-	$room_name = $db->real_escape_string(strtolower(str_replace($raw, $processed, $customer["name"])));
+	$room_name = $db->real_escape_string($customer["name"]);
+	$room_name = strtolower(str_replace('<br>','',str_replace(' ','',mb_convert_encoding($room_name,'HTML-ENTITIES','utf-8'))));
+	$room_name = str_replace($raw, $processed, $room_name);
 	$customer_name = $db->real_escape_string($customer["info"]["name"]);
 	$customer_phone = $db->real_escape_string($customer["info"]["phone"]);
 
