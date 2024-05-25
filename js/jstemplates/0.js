@@ -2561,11 +2561,11 @@ $("#show_send_email_dialog").on("click", () => {
       let selected_owner_types = owner_types.filter(".checked").get().map(v => $(v).attr("data-type"));
 
       let contacts = JSON.parse(answer);
-      let without_phones = contacts.filter(v => v.tel === "" && v.type !== "omistaja");
+      let without_phones = contacts.filter(v => v.type !== "omistaja");
       dialog.find(".without_phone").empty();
       without_phones.forEach(v => {
         dialog.find(".without_phone").append(
-          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
+          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
         )
       });
       let with_phones = contacts.filter(v => v.tel !== "" && v.type !== "omistaja");
