@@ -8106,8 +8106,6 @@ input[type="radio"].mass__selection_btn {
 
 #copiedcanvases .tyostot__tyosto_pysty .x_cord_mki:not(.secondcord)  {
   right: 0 !important;
-  height: 25px;
-  padding-bottom: 5px;
   translate: 0 -10px;
 }
 

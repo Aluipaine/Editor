@@ -1339,12 +1339,14 @@ function create__excel_fromallwalls() {
       }
     }
     const crop_by_wall = async (div) => {
-      return (await html2canvas(div, {
-        x: -100,
-        y: -100,
-        width: div.clientWidth + 200,
-        height: div.clientHeight + 200
-      })).toDataURL('image/png');
+      return await domtoimage.toPng(div, {
+        style: {
+          margin: "100px",
+        },
+        quality: 0.5,
+        width: (div.clientWidth + 200),
+        height: (div.clientHeight + 200)
+      });
     }
     let eight__lvl_zero = document.querySelector("#eight__lvl_zero"),
         eight__lvl_one = document.querySelector("#eight__lvl_one"),
@@ -1406,7 +1408,8 @@ function create__excel_fromallwalls() {
         pdf.addPage();
         pdf.setPage(index + 1);
       }
-      pdf.addImage(wall, 'PNG', 3, 3, pdfWidth, pdfHeight, null, "FAST", 0);
+      //pdf.addImage(wall, 'PNG', 3, 3, pdfWidth, pdfHeight, null, "FAST", 0);
+      pdf.addImage(wall, 'PNG', 3, 3, pdfWidth, pdfHeight, null, null, 0);
     });
     let pdfdata =  pdf.output("blob");
 
