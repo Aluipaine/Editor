@@ -1854,7 +1854,7 @@ td input {
 }
 
 .house__wall.hidden {
-      background: transparent;
+    background: transparent !important;
     border: 0;
 }
 

@@ -723,6 +723,91 @@ async function initalize_cross(arg) {
         console.log(pair[0] + ", " + pair[1]);
       }
     }
+
+    let preloader = $(".preloader");
+    preloader.css({
+      "position": "absolute",
+      "top": "-60px",
+      "left": "-60px",
+      "display": "block",
+      "width": "calc(100vw + 60px)",
+      "height": "calc(100vw + 60px)",
+      "z-index": "99999"
+    });
+    let preview_generation = async () => {
+      await sleep(1000);
+      let temp_alert = alert
+      window.alert = () => {}
+      let div = $("#canvas3 .canvas");
+      document.querySelector("[data-room=A]").click();
+      await sleep(2000);
+      let image_a = await domtoimage.toPng(div[0], {
+        width: div.find(".levyt").width(),
+        height: div.find(".levyt").height()
+      });
+      document.querySelector("[data-room=B]").click();
+      await sleep(2000);
+      let image_b = await domtoimage.toPng(div[0], {
+        width: div.find(".levyt").width(),
+        height: div.find(".levyt").height()
+      });
+      document.querySelector("[data-room=C]").click();
+      await sleep(2000);
+      let image_c = await domtoimage.toPng(div[0], {
+        width: div.find(".levyt").width(),
+        height: div.find(".levyt").height()
+      });
+      document.querySelector("[data-room=D]").click();
+      await sleep(2000);
+      let image_d = await domtoimage.toPng(div[0], {
+        width: div.find(".levyt").width(),
+        height: div.find(".levyt").height()
+      });
+      document.querySelector("[data-room=K]").click();
+      await sleep(2000);
+      let image_k = await domtoimage.toPng(div[0], {
+        width: div.find(".levyt").width(),
+        height: div.find(".levyt").height()
+      });
+      document.querySelector("[data-room=L]").click();
+      await sleep(2000);
+      let image_l = await domtoimage.toPng(div[0], {
+        width: div.find(".levyt").width(),
+        height: div.find(".levyt").height()
+      });
+      window.alert = temp_alert;
+      $('#step_drawscreen').val('rooms');
+      refresh__drawcontrols();
+      updatearea();
+      $(".house__wall_one").css({
+        "background": `url("${image_a}")`,
+        "background-size": "100% 100%"
+      });
+      $(".house__wall_two").css({
+        "background": `url("${image_b}")`,
+        "background-size": "100% 100%"
+      });
+      $(".house__wall_three").css({
+        "background": `url("${image_c}")`,
+        "background-size": "100% 100%"
+      });
+      $(".house__wall_four").css({
+        "background": `url("${image_d}")`,
+        "background-size": "100% 100%"
+      });
+      $(".house__wall_roof").css({
+        "background": `url("${image_k}")`,
+        "background-size": "100% 100%"
+      });
+      $(".house__wall_floor").css({
+        "background": `url("${image_k}")`,
+        "background-size": "100% 100%"
+      });
+      preloader.removeAttr( "style");
+    }
+
+    preview_generation();
+
   }
   
   setTimeout(() => {
@@ -987,7 +1072,7 @@ async function initalize_cross(arg) {
     container.append(
         `<i>${contact.name}, ${contact.tel}, ${contact.email}, ${contact.type}</i><br>`
     );
-  })
+  });
 }
 
 /**
