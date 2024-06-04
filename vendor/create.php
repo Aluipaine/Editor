@@ -1,4 +1,4 @@
-<?php 
+<?php
 //This file creates database files in the project creation
 
 // Enable error showing for debug
@@ -51,7 +51,7 @@ $muut_asiakirjat = $_POST['muut_asiakirjat'];
 
 
 //LOOP FOR 30
-for ($i=0; $i < 31; $i++) { 
+for ($i=0; $i < 31; $i++) {
 	if(isset($_POST['prc_'.$i]) && strlen($_POST['prc_'.$i]) > 5){
 		$name = $_POST['prc_'.$i];
 		$puh = $_POST['prc_'.$i.'_puh'];
@@ -74,7 +74,7 @@ for ($i=0; $i < 31; $i++) {
 			$meta = mysqli_query($db, "INSERT INTO `users` (`username`, `password`, `role`, `permissionrank`, `visible_forall`, `phone`, `email`, `company`, `created_at`) VALUES ('$name', '$password', '$role', '$permission', '$hiding', '$phone', '$email', '$company', '$created_att')");
 			$project_id = mysqli_fetch_array(mysqli_query($db, "SELECT MAX(id) as max_id FROM `projects`"))["max_id"] + 1;
 			$user = $_SESSION["username"];
-			$mail = new PHPMailer(); 
+			$mail = new PHPMailer();
 			$mail->CharSet = "UTF-8";
 			$to =  $email;
 			$m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='project_newuser'");
@@ -88,60 +88,60 @@ for ($i=0; $i < 31; $i++) {
 			$from = $m_headers[0];
 			$subject = $m_subject[0] . $pr_name . $m_subject[1];
 			$txt = $m_messages[0] . $name . $m_messages[1] ."<br>" .$m_messages[2] . $name . $m_messages[3] . $m_messages[4] . $p_symbols . $m_messages[5] . "<br>" . $m_messages[6] . $phone . $m_messages[7] . "<br>" . $m_messages[8] . $role. $m_messages[9] . "<br>" . $m_messages[10] . $created_att . $m_messages[11] . "<br>" .  $m_messages[12];
-			
+
 
 			$mail->isSMTP();                                            // Send using SMTP
 			$mail->Host       = 'mail.westface.fi';                    // Set the SMTP server to send through
-			$mail->SMTPAuth   = true;          
+			$mail->SMTPAuth   = true;
 			$mail->addReplyTo($from,  $m_headers[2]);
 
 			$mail->Username   = $from;                     // SMTP username
 			$mail->Password   = $m_headers[3];                               // SMTP password
 			$mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-			$mail->Port       = 587; 
-			$mail->From = $from; 
+			$mail->Port       = 587;
+			$mail->From = $from;
 
 
-			$mail->FromName =  $m_headers[2]; 
-			$mail->addAddress($to, $name); 
-			// $mail->addAddress('marko.virtanen@westface.fi', "Marko Virtanen"); 
-			// $mail->addAddress($usr_email, $comment_to); 
+			$mail->FromName =  $m_headers[2];
+			$mail->addAddress($to, $name);
+			// $mail->addAddress('marko.virtanen@westface.fi', "Marko Virtanen");
+			// $mail->addAddress($usr_email, $comment_to);
 
-			$mail->isHTML(true); 
-			$mail->Subject = $subject; 
-			$mail->Body = $txt; 
-			// if(!$mail->send()) 
-			// { 
+			$mail->isHTML(true);
+			$mail->Subject = $subject;
+			$mail->Body = $txt;
+			// if(!$mail->send())
+			// {
 			// echo "Mailer Error: " . $mail->ErrorInfo;
-			// } 
-			// else 
+			// }
+			// else
 			// {  echo "Message has been sent successfully"; }
 		}
-		
-		
 
-		
-		
-		 
+
+
+
+
+
 		$project_id = mysqli_fetch_array(mysqli_query($db, "SELECT MAX(id) as max_id FROM `projects`"))["max_id"] + 1;
-		
+
 		$user = $_SESSION["username"];
 		$myyja = $_POST['prc_3'];
 		mysqli_query($db, "INSERT INTO `addedusers` (`username`, `project_id`, `added_by`) VALUES ('$adduser', $project_id, '$myyja')");
-		
-		
+
+
 	}
 }
 $list_of_the_workers = "";
 $users = mysqli_query($db, "SELECT * FROM `addedusers` WHERE `project_id`='".$id."'");
 $users = mysqli_fetch_all($users);
-foreach ($users as $user) { 
+foreach ($users as $user) {
 	$list_of_the_workers.=$user[1].", ";
 }
 
 $list_of_the_workers_ = explode(",",$list_of_the_workers);
 
-foreach ($users as $user) { 
+foreach ($users as $user) {
 	if(strlen($user[1]) > 3) {
 		$username = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='".$user[1]."'");
 		$username = mysqli_fetch_all($username)[0];
@@ -154,7 +154,7 @@ foreach ($users as $user) {
 		$m_subject = explode("~~~~", $m_data[3]);
 		$m_messages = explode("~~~~", $m_data[4]);
 
-		$mail = new PHPMailer(); 
+		$mail = new PHPMailer();
 		$mail->CharSet = "UTF-8";
 		$to = $username[7];
 
@@ -167,36 +167,36 @@ foreach ($users as $user) {
 
 		$mail->isSMTP();                                            // Send using SMTP
 		$mail->Host       = 'mail.westface.fi';                    // Set the SMTP server to send through
-		$mail->SMTPAuth   = true;          
+		$mail->SMTPAuth   = true;
 		$mail->addReplyTo($from, $m_headers[2]);
 
 		$mail->Username   = $m_headers[0];                     // SMTP username
 		$mail->Password   = $m_headers[3];                               // SMTP password
 		$mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-		$mail->Port       = 587; 
-		$mail->From = $from; 
+		$mail->Port       = 587;
+		$mail->From = $from;
 
 
-		$mail->FromName = $m_headers[2]; 
-		$mail->addAddress($to, $username[1]); 
-		// $mail->addAddress('marko.virtanen@westface.fi', "Marko Virtanen"); 
-		// $mail->addAddress($usr_email, $comment_to); 
+		$mail->FromName = $m_headers[2];
+		$mail->addAddress($to, $username[1]);
+		// $mail->addAddress('marko.virtanen@westface.fi', "Marko Virtanen");
+		// $mail->addAddress($usr_email, $comment_to);
 
-		//Provide file path and name of the attachments 
-		// $mail->addAttachment("file.txt", "File.txt");    
-		// $mail->addAttachment("images/profile.png"); //Filename is optional 
-		$mail->isHTML(true); 
-		$mail->Subject = $subject; 
-		$mail->Body = $txt; 
-		// $mail->AltBody = $txt; 
-		if(!$mail->send()) 
-		{ 
+		//Provide file path and name of the attachments
+		// $mail->addAttachment("file.txt", "File.txt");
+		// $mail->addAttachment("images/profile.png"); //Filename is optional
+		$mail->isHTML(true);
+		$mail->Subject = $subject;
+		$mail->Body = $txt;
+		// $mail->AltBody = $txt;
+		if(!$mail->send())
+		{
 		echo "Mailer Error: " . $mail->ErrorInfo;
-		} 
-		else 
+		}
+		else
 		{  echo "Message has been sent successfully"; }
 	}
-	
+
 }
 
 $a_rooms = $_POST['a_rooms'];
@@ -316,7 +316,7 @@ $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_va
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'rakennesuunnitelmat', '$rakennesuunnitelmat')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'omat_suunnitelmat', '$omat_suunnitelmat')");
 $meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'muut_asiakirjat', '$muut_asiakirjat')");
-$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'statuses__text', 'KESKEN~~EI TYÖTÄ~~ONGELMA~~KRIITTINEN ONGELMA~~L5 TILATTU~~L5 TYÖMAALLA~~L5 ASENNETTU~~L5 HYVÄKSYTTY~~L4 TILATTU~~L4 TYÖMAALLA~~L4 ASENNETTU~~L4 HYVÄKSYTTY~~L3 TILATTU~~L3 TYÖMAALLA~~L3 ASENNETTU~~L3 HYVÄKSYTTY~~L2 TILATTU~~L2 TYÖMAALLA~~L2 ASENNETTU~~L2 HYVÄKSYTTY~~L1 TILATTU~~L1 TYÖMAALLA~~L1 ASENNETTU~~L1 HYVÄKSYTTY')");
+$meta = mysqli_query($db, "INSERT INTO `projectmeta` (`id`, `meta_key`, `meta_value`) VALUES ($id, 'statuses__text', 'KESKEN~~EI TYÖTÄ~~ONGELMA~~KRIITTINEN ONGELMA~~L5 ALOITETTU~~L5 TILATTU~~L5 TYÖMAALLA~~L5 ASENNETTU~~L5 HYVÄKSYTTY~~L4 ALOITETTU~~L4 TILATTU~~L4 TYÖMAALLA~~L4 ASENNETTU~~L4 HYVÄKSYTTY~~L3 ALOITETTU~~L3 TILATTU~~L3 TYÖMAALLA~~L3 ASENNETTU~~L3 HYVÄKSYTTY~~L2 ALOITETTU~~L2 TILATTU~~L2 TYÖMAALLA~~L2 ASENNETTU~~L2 HYVÄKSYTTY~~L1 ALOITETTU~~L1 TILATTU~~L1 TYÖMAALLA~~L1 ASENNETTU~~L1 HYVÄKSYTTY')");
 
 $customer_info = json_decode($_POST["customer_contacts"], true);
 $raw = ["ö", "ä", " "];
@@ -330,7 +330,7 @@ foreach ($customer_info as $customer) {
 
 	$customer_email = $db->real_escape_string($customer["info"]["email"]);
 	$customer_type = $db->real_escape_string($customer["info"]["type"]);
-	$db->query("INSERT INTO `customer_contacts` (`project`, `roomattached`, `name`, `tel`, `email`, `type`) 
+	$db->query("INSERT INTO `customer_contacts` (`project`, `roomattached`, `name`, `tel`, `email`, `type`)
 						VALUES ($id, '$room_name', '$customer_name', '$customer_phone', '$customer_email', '$customer_type')");
 }
 $meta = mysqli_query($db, "INSERT INTO `addedusers`(`project_id`, `username`, `added_by`) VALUES ($id,'tyonjohto','tyonjohto')");
