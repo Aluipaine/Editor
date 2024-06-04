@@ -775,7 +775,6 @@
             echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
         }
         ?>
-          ?>
         </article>
     </div>
     <div class="per50 floatleft coderdy rappu-5" id="E" style="opacity: 1;">
@@ -898,7 +897,6 @@
             echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
         }
         ?>
-          ?>
         </article>
     </div>
     <div class="per50 floatleft coderdy rappu-6" id="F" style="opacity: 1;">
@@ -1024,7 +1022,7 @@
             echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
         }
         ?>
-          ?>
+          
         </article>
     </div>
     <div class="per50 floatleft coderdy rappu-7" id="G" style="opacity: 1;">
@@ -1146,7 +1144,6 @@
             echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
         }
         ?>
-          ?>
         </article>
     </div>
     <div class="per50 floatleft coderdy rappu-8" id="H" style="opacity: 1;">
@@ -1268,7 +1265,6 @@
             echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
         }
         ?>
-          ?>
         </article>
     </div>
 
