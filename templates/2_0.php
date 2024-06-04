@@ -2228,6 +2228,7 @@
                     <span>Tyyppi</span>
                     <select class="customer_type">
                         <option value="asukas">Asukas</option>
+                        <option value="osakas">Osakas</option>
                         <option value="omistaja">Omistaja</option>
                     </select>
                 </label>
@@ -3432,6 +3433,9 @@ if($remove_overflowY === true) {
             <div class="type_select">
                 <div class="type" data-type="asukas">
                     <span>asukas</span>
+                </div>
+                <div class="type" data-type="osakas">
+                    <span>osakas</span>
                 </div>
                 <div class="type" data-type="omistaja">
                     <span>omistaja</span>
