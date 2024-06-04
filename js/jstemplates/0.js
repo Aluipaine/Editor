@@ -219,7 +219,7 @@ function changeWidths_2(num) {
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_two").style.width = num / 20 + "px";
   document.querySelector("#house > div:nth-child(2) > div.house__wall.house__wall_four").style.width = num / 20 + "px";
 
-  
+
   document.querySelector("#house div.house__wall.house__wall_floor").style.height = num / 20 + "px";
   document.querySelector("#house div.house__wall.house__wall_roof").style.height = num / 20 + "px";
 
@@ -370,12 +370,12 @@ $('.project__building div.project__building_room').click(function() {
 
   $("#project_start").slideUp(200);
   refresh__drawcontrols();
- 
+
   apartment_ = $(this);
- 
+
   $('#step_drawscreen').val('rooms');
 
- 
+
   // $(this).addClass("tomeasure");
 
   // initalize_cross();
@@ -483,32 +483,32 @@ $('.project__building div.project__building_room').click(function() {
 
   if(a_saved_input.length > 10 && b_saved_input.length > 10 && c_saved_input.length > 10 && d_saved_input.length > 10 && k_saved_input.length > 10 && l_saved_input.length > 10) {
     // k_wall = document.querySelectorAll(".house__wall_status_k");
-        
+
     //   for (var w = 0; w < k_wall.length; w++) {
     //     k_wall[w].classList.add(k_saved_input.split("~")[1]);
     //   }
-    
-    
+
+
     //   a_wall = document.querySelectorAll(".house__wall_status_a");
     //   for (var w = 0; w < a_wall.length; w++) {
     //     a_wall[w].classList.add(a_saved_input.split("~")[1]);
     //   }
-    
+
     //   b_wall = document.querySelectorAll(".house__wall_status_b");
     //   for (var w = 0; w < b_wall.length; w++) {
     //     b_wall[w].classList.add(b_saved_input.split("~")[1]);
     //   }
-    
+
     //   c_wall = document.querySelectorAll(".house__wall_status_c");
     //   for (var w = 0; w < c_wall.length; w++) {
     //     c_wall[w].classList.add(c_saved_input.split("~")[1]);
     //   }
-      
+
     //   d_wall = document.querySelectorAll(".house__wall_status_d");
     //   for (var w = 0; w < d_wall.length; w++) {
     //     d_wall[w].classList.add(d_saved_input.split("~")[1]);
     //   }
-    
+
     //   l_wall = document.querySelectorAll(".house__wall_status_l");
     //   for (var w = 0; w < l_wall.length; w++) {
     //     l_wall[w].classList.add(l_saved_input.split("~")[1]);
@@ -520,13 +520,13 @@ $('.project__building div.project__building_room').click(function() {
 
 
 /**
- * This function handles the click event on elements with the class 'house__wall_status' 
- * within the '#rooms' div. It performs a series of actions such as sliding up the '#rooms' 
- * element, showing and sliding down the '#drawscreen_section_zero' element, updating text 
- * elements based on user input, setting attributes, and updating input values. It also 
- * checks for the presence of an element with the id 'open_comments' and performs additional 
+ * This function handles the click event on elements with the class 'house__wall_status'
+ * within the '#rooms' div. It performs a series of actions such as sliding up the '#rooms'
+ * element, showing and sliding down the '#drawscreen_section_zero' element, updating text
+ * elements based on user input, setting attributes, and updating input values. It also
+ * checks for the presence of an element with the id 'open_comments' and performs additional
  * actions accordingly. Finally, it initializes the 'initalize_cross' function.
- * 
+ *
  * @returns None
  */
 $('#rooms div.house__wall_status').click(function() {
@@ -534,7 +534,7 @@ $('#rooms div.house__wall_status').click(function() {
   $("#drawscreen_section_zero").show();
   $("#drawscreen_section_zero").slideDown(200);
   var tilaname = $("#roomname").val();
-  
+
   $("#zero_tila").text(tilaname);
   var text = $(this).text();
   $("#zero_huone").text(text);
@@ -557,10 +557,10 @@ $('#rooms div.house__wall_status').click(function() {
   else {
     walls_content=document.querySelector(".house__wall_status_l").innerText + ","+document.querySelector(".house__wall_status_a").innerText + ","+document.querySelector(".house__wall_status_b").innerText + ","+document.querySelector(".house__wall_status_c").innerText + ","+document.querySelector(".house__wall_status_d").innerText + ","+document.querySelector(".house__wall_status_k").innerText;
     try { document.querySelector(".walls_content").value = walls_content; } catch(e) { console.log("TRY-CATCH ERROR:", e ) }
-  
+
     initalize_cross();
   }
- 
+
 
 });
 /**
@@ -639,7 +639,7 @@ async function initalize_cross(arg) {
   l_saved = apartment.dataset.lroom.replaceAll(",","~");
 
 
-  
+
 
   // console.log(a_saved);
   // console.log(b_saved);
@@ -658,7 +658,7 @@ async function initalize_cross(arg) {
   if(document.querySelector("#open_comments")) {
     ir_coms = document.querySelector("#open_comments").value.split("~");
     console.log("ircoms" + ir_coms);
-    
+
     for (let q = 0; q < ir_coms.length; q++) {
       if(ir_coms[q].length > 4) {
         console.log("ir_coms[q].length" + ir_coms[q].length);
@@ -671,7 +671,7 @@ async function initalize_cross(arg) {
 
           // b_name = ir_coms[q].split(",")[2].split(">")[1].replaceAll(" ","").toLowerCase();
           // problem_room = document.querySelector(".house__wall_status_"+b_name.replaceAll("ä","a").replaceAll("ö","o").toLowerCase());
-          
+
           // problem_room.classList.remove("prob");
           problem_room.classList.remove("undone");
           problem_room.classList.remove("tomeasure");
@@ -687,7 +687,7 @@ async function initalize_cross(arg) {
           console.log("OPEN_CROSS RECLAMATION FIRED WITH B-NAME: " + b_name);
 
 
-         
+
         }
         commentboxes = document.querySelectorAll(".house__intro_comments > section");
 
@@ -701,9 +701,9 @@ async function initalize_cross(arg) {
             console.log("comment__hidden added?");
 
           }
-          
+
         }
-      }   
+      }
     }
   }
 
@@ -712,7 +712,7 @@ async function initalize_cross(arg) {
     currect_arak = current_apartment = String(arg).replaceAll(" ","").toLowerCase();
     if(window.location.href.indexOf('&apartment=' + current_apartment) === -1) {
       console.log("true");
-      var refresh = window.location.href + '&apartment=' + current_apartment;    
+      var refresh = window.location.href + '&apartment=' + current_apartment;
       window.history.pushState({ path: refresh }, '', refresh);
     }
     else if(window.location.href.indexOf('&apartment=' + current_apartment) !== -1) {
@@ -809,7 +809,7 @@ async function initalize_cross(arg) {
     preview_generation();
 
   }
-  
+
   setTimeout(() => {
     if(document.querySelector("#house div.house__wall.house__wall_one")) {
       a_wall = document.querySelector("#house div.house__wall.house__wall_one");
@@ -980,7 +980,7 @@ async function initalize_cross(arg) {
 
         wallname = s[2].toLowerCase();
 
-        walls = document.querySelectorAll(".tohide__room_"+wallname); 
+        walls = document.querySelectorAll(".tohide__room_"+wallname);
         walls.forEach(w => {
             w.querySelector(".wall_height").value = parseFloat(s[3]);
             w.querySelector(".wall_width").value = parseFloat(s[4]);
@@ -991,7 +991,7 @@ async function initalize_cross(arg) {
     });
   }, 400);
 
-  
+
   statuses = document.querySelectorAll(".house__wall_status");
   for (let s = 0; s < statuses.length; s++) {
     statuses[s].classList.remove("prob");
@@ -1145,7 +1145,7 @@ function adjust_roomsizes() {
     l_wall.style.width = parseFloat(l_wall.querySelector(".wall_width").value) / 20 + "px";
   }
 
-  
+
 }
 
 
@@ -1190,7 +1190,7 @@ function degradate_url(stage) {
  * @returns None
  */
 window.addEventListener('popstate', () => {
-  
+
 });
 
 jQuery(document).ready(function($) {
@@ -1207,7 +1207,7 @@ jQuery(document).ready(function($) {
 
 /**
  * Initializes the building based on the current user and role.
- * If the current user is 'tyonjohto' or the current role is 'mittaus', 
+ * If the current user is 'tyonjohto' or the current role is 'mittaus',
  * it adds buttons for project functions to each element with the class 'coderdy'.
  * It also displays or hides the house element based on the project type.
  * @returns None
@@ -1231,7 +1231,7 @@ function initializebuilding() {
 
         raput[i].querySelector("h2").appendChild(addmore);
         raput[i].querySelector("h2").appendChild(settings);
-      
+
     }
   }
   project_type = document.querySelector("#current_project_measurement").value;
@@ -1239,9 +1239,9 @@ function initializebuilding() {
       document.querySelector("#house").style.display = "block";
   }
   else {
-    document.querySelector("#house").style.display = "none";    
+    document.querySelector("#house").style.display = "none";
   }
-  
+
 }
 
 initializebuilding();
@@ -1264,11 +1264,11 @@ function projectfunction__addmore(elem) {
   table_from_cells = table_from.querySelectorAll(".project__building_room");
   try {
     for (let i = 0; i < table_from_cells.length; i++) {
-    
-      table_to.querySelectorAll("tr")[table_to.querySelectorAll("tr").length - parseFloat(table_from_cells[i].dataset.y)].style.display = "flex";  
-    
+
+      table_to.querySelectorAll("tr")[table_to.querySelectorAll("tr").length - parseFloat(table_from_cells[i].dataset.y)].style.display = "flex";
+
       right_y = table_to.querySelectorAll("tr")[table_to.querySelectorAll("tr").length - parseFloat(table_from_cells[i].dataset.y)].querySelectorAll("td")[parseFloat(table_from_cells[i].dataset.x)];
-      
+
 
       right_y.dataset.y = table_from_cells[i].dataset.y;
       right_y.dataset.x = table_from_cells[i].dataset.x;
@@ -1299,16 +1299,16 @@ function projectfunction__addmore(elem) {
       }
 
       right_y.querySelector("label").innerHTML = table_from_cells[i].innerHTML;
-      
+
       console.log("CLICK TD");
 
       document.querySelector("#a_nextnum").value = i+2;
       z = parseFloat(document.querySelector("#a_nextnum").value);
       console.log(i);
-      
+
     }
   } catch (error) {
-    
+
   }
   table_from_trs = table_to.querySelectorAll("tr");
   table_from_trs[49].style.display = "block";
@@ -1319,7 +1319,7 @@ function projectfunction__addmore(elem) {
       table_from_trs[o].remove();
     }
   }
-  
+
 }
 /**
  * Modifies the classes of the specified element to show a popup.
@@ -1329,7 +1329,7 @@ function projectfunction__addmore(elem) {
 function projectfunction__settings(elem) {
   document.querySelector('.first_popup').classList.add("two");
   document.querySelector('.first_popup').classList.remove("out");
-  
+
 }
 
 /**
@@ -1371,7 +1371,7 @@ function send_new_aparts() {
             d_room: "13~undone~1|1~2200|2200~~~~~",
             k_room: "13~undone~1|1~2200|4000~~~~~",
             l_room: "13~undone~1|1~2200|4000~~~~~"
-         });         
+         });
         }
           $("#a_rooms").val(JSON.stringify(upd__a_array));
       }
@@ -1439,7 +1439,7 @@ function start__measuring(elem) {
     elem.innerText = 'Aloita mittaaminen';
   }
   elem.classList.toggle("yellow");
-  
+
   formData = {
       project_id: project_id_,
       project_type: project_type_,
@@ -1465,7 +1465,7 @@ function start__measuring(elem) {
 function projectname__change(elem) {
   project_id_ = parseFloat(document.querySelector("#current_project_id").value);
   project_name_ = elem.value;
-  
+
   formData = {
       project_id: project_id_,
       project_name: project_name_,
@@ -1503,7 +1503,7 @@ function change__roomname() {
   project_id_ = parseFloat(document.querySelector("#current_project_id").value);
   project_roomname_ = roomname_forchange;
   project_oldroomname_ = document.querySelector("#roomname").dataset.oldname;
-  
+
   formData = {
       project_id: project_id_,
       project_roomname: project_roomname_,
@@ -1559,8 +1559,8 @@ function settings_henkilolisays(elem) {
     subgroup_4.classList.add("form-subgroup");
     subgroup_5.classList.add("form-subgroup");
     subgroup_6.classList.add("form-subgroup");
-    
-        
+
+
     subgroup_1.innerHTML = '<label>Nimi ja Rooli: </label><input type="text" name="prc_new" class="prc_new form-control prc_new" value=" " required list="prc_new_list" onchange="prsettings__give_numbers(this.value);"></div>';
     subgroup_2.innerHTML = '<label>Puhelinnumero: </label><input type="text" name="prc_new_puh" class="prc_new_puh form-control" value=" " required></div>';
     subgroup_3.innerHTML = '<label>Sähköposti: </label><input type="text" name="prc_new_email" class="prc_new_email form-control" value=" " required></div>';
@@ -1590,9 +1590,9 @@ function prsettings__give_numbers(elem) {
       console.log(elements_array);
       // document.querySelector(".prc_"+integer+"").value =elements_array[1];
       document.querySelector(".prc_new_puh").value = elements_array[1];
-      document.querySelector(".prc_new_email").value = elements_array[2];    
+      document.querySelector(".prc_new_email").value = elements_array[2];
 
-      document.querySelector("#prc_new_role").value = elements_array[3];    
+      document.querySelector("#prc_new_role").value = elements_array[3];
     // console.log(".prc_"+parseFloat(integer)+"_role ."+elements_array[3]);
     if(parseFloat(elements_array[4]) == 1) {
         document.querySelector("#prc_new_permission").checked = true;
@@ -1600,13 +1600,13 @@ function prsettings__give_numbers(elem) {
     if(parseFloat(elements_array[5]) == 1) {
         document.querySelector("#pprc_new_hiding").checked = true;
     }
-    
+
 
   } catch (error) {
     console.log("No user exists in the settings");
   }
 
-} 
+}
 
 /**
  * Sends worker data to the database using an AJAX POST request.
@@ -1684,11 +1684,11 @@ $(document).ready(function() {
             naming_2 = $(this).parent().children()[0].innerText;
             naming_ = naming_2.replaceAll("?","").replaceAll(" ","_").toLowerCase();
             attachments_ = document.querySelector("." +that_element_class).innerHTML;
-            
+
             formData = {
               project_id: parseFloat(document.querySelector("#current_project_id").value),
               naming: naming_,
-              attachments: attachments_ 
+              attachments: attachments_
             };
 
             $.ajax({
@@ -1739,7 +1739,7 @@ $('.project__building_room').click((e) => {
   if ($(".toggle_customer_modal").hasClass("active")) {
     return;
   }
-  
+
   $('.project__building_room-overlay').remove()
   $(e.target).find('.active').removeClass('active')
 })
@@ -1778,8 +1778,8 @@ $(".p_meaning")
 $(".p_meaning_end")
   .on("mousedown touchstart", (e) => {
     save__newstatuses();
-   
-    setTimeout(function() { 
+
+    setTimeout(function() {
       clearTimeout(timer);
       e.preventDefault()
       e.stopPropagation()
@@ -1795,7 +1795,7 @@ $(".p_meaning_end")
 
       open__workelab();
     }, 500);
-    
+
 
 });
 const longClick = (element) => {
@@ -1837,7 +1837,7 @@ function elab__comment_enable(stage,criticality) {
     else {
       document.querySelector("#is_thecomment_critical2").checked = false;
     }
- 
+
 
       // p_meaning_end = document.querySelector(".p_meaning_end");
       // document.querySelector(".status__elab_problem commentbox_btn").remove();
@@ -1848,7 +1848,7 @@ function elab__comment_enable(stage,criticality) {
       // p_meaning_end.classList.add("sendcommentfiles");
       // p_meaning_end.classList.setAttribute("onclick","comment__create_new(1);");
 
-     
+
 
   }
 }
@@ -1858,7 +1858,7 @@ const defaultClick = (e) => {
   _changed_tilas = "";
   if($(e.target).hasClass('project__building_room')) $(e.target).toggleClass('active');
   if($(e.target).hasClass('project__building_room')) building__action(action);
-  
+
 };
 
 /**
@@ -1893,9 +1893,9 @@ function save__newstatuses() {
     }
   }
   else {
-    
+
   }
-  
+
   if(document.querySelectorAll("#B")) {
     if(document.querySelector("#B").offsetHeight === 0) {
     }
@@ -1903,7 +1903,7 @@ function save__newstatuses() {
       b_rooms_ = document.querySelectorAll("#B .project__building_room");
       b_rooms = '';
 
-      for (let i = 0; i < b_rooms_.length; i++) {     
+      for (let i = 0; i < b_rooms_.length; i++) {
         _name = b_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
         positionX = b_rooms_[i].dataset.x.replace('"','').replace("'","");
         positionY = b_rooms_[i].dataset.y.replace('"','').replace("'","");
@@ -1918,7 +1918,7 @@ function save__newstatuses() {
         b_rooms+=element;
       }
     }
-  } 
+  }
   else {
     b_rooms = '';
   }
@@ -1928,7 +1928,7 @@ function save__newstatuses() {
       c_rooms_ = document.querySelectorAll("#C .project__building_room");
       c_rooms = '';
 
-      for (let i = 0; i < c_rooms_.length; i++) {     
+      for (let i = 0; i < c_rooms_.length; i++) {
         _name = c_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
         positionX = c_rooms_[i].dataset.x.replace('"','').replace("'","");
         positionY = c_rooms_[i].dataset.y.replace('"','').replace("'","");
@@ -1943,20 +1943,20 @@ function save__newstatuses() {
         c_rooms+=element;
       }
     }
-  
+
   }
   else {
-    
+
   }
 
-  
+
   if(document.querySelectorAll("#C")) {
     if(document.querySelector("#C").offsetHeight === 0) {}
     else {
       c_rooms_ = document.querySelectorAll("#C .project__building_room");
       c_rooms = '';
 
-      for (let i = 0; i < c_rooms_.length; i++) {     
+      for (let i = 0; i < c_rooms_.length; i++) {
         _name = c_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
         positionX = c_rooms_[i].dataset.x.replace('"','').replace("'","");
         positionY = c_rooms_[i].dataset.y.replace('"','').replace("'","");
@@ -1971,20 +1971,20 @@ function save__newstatuses() {
         c_rooms+=element;
       }
     }
-  
+
   }
   else {
     c_rooms = '';
   }
 
-  
+
   if(document.querySelectorAll("#D")) {
     if(document.querySelector("#D").offsetHeight === 0) {}
     else {
       d_rooms_ = document.querySelectorAll("#D .project__building_room");
       d_rooms = '';
 
-      for (let i = 0; i < d_rooms_.length; i++) {     
+      for (let i = 0; i < d_rooms_.length; i++) {
         _name = d_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
         positionX = d_rooms_[i].dataset.x.replace('"','').replace("'","");
         positionY = d_rooms_[i].dataset.y.replace('"','').replace("'","");
@@ -1999,20 +1999,20 @@ function save__newstatuses() {
         d_rooms+=element;
       }
     }
-  
+
   }
   else {
     d_rooms = '';
   }
 
-  
+
   if(document.querySelectorAll("#E")) {
     if(document.querySelector("#E").offsetHeight === 0) {}
     else {
       e_rooms_ = document.querySelectorAll("#E .project__building_room");
       e_rooms = '';
 
-      for (let i = 0; i < e_rooms_.length; i++) {     
+      for (let i = 0; i < e_rooms_.length; i++) {
         _name = e_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
         positionX = e_rooms_[i].dataset.x.replace('"','').replace("'","");
         positionY = e_rooms_[i].dataset.y.replace('"','').replace("'","");
@@ -2027,20 +2027,20 @@ function save__newstatuses() {
         e_rooms+=element;
       }
     }
-  
+
   }
   else {
     e_rooms = '';
   }
 
-  
+
   if(document.querySelectorAll("#F")) {
     if(document.querySelector("#F").offsetHeight === 0) {}
     else {
       f_rooms_ = document.querySelectorAll("#F .project__building_room");
       f_rooms = '';
 
-      for (let i = 0; i < f_rooms_.length; i++) {     
+      for (let i = 0; i < f_rooms_.length; i++) {
         _name = f_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
         positionX = f_rooms_[i].dataset.x.replace('"','').replace("'","");
         positionY = f_rooms_[i].dataset.y.replace('"','').replace("'","");
@@ -2055,20 +2055,20 @@ function save__newstatuses() {
         f_rooms+=element;
       }
     }
-  
+
   }
   else {
     f_rooms = '';
   }
 
-  
+
   if(document.querySelectorAll("#G")) {
     if(document.querySelector("#G").offsetHeight === 0) {}
     else {
       g_rooms_ = document.querySelectorAll("#G .project__building_room");
       g_rooms = '';
 
-      for (let i = 0; i < g_rooms_.length; i++) {     
+      for (let i = 0; i < g_rooms_.length; i++) {
         _name = g_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
         positionX = g_rooms_[i].dataset.x.replace('"','').replace("'","");
         positionY = g_rooms_[i].dataset.y.replace('"','').replace("'","");
@@ -2083,20 +2083,20 @@ function save__newstatuses() {
         g_rooms+=element;
       }
     }
-  
+
   }
   else {
     g_rooms = '';
   }
 
-  
+
   if(document.querySelectorAll("#H")) {
     if(document.querySelector("#H").offsetHeight === 0) {}
     else {
       h_rooms_ = document.querySelectorAll("#H .project__building_room");
       h_rooms = '';
 
-      for (let i = 0; i < h_rooms_.length; i++) {     
+      for (let i = 0; i < h_rooms_.length; i++) {
         _name = h_rooms_[i].innerHTML.replace('"','').replace("'","").replaceAll("<divclass=project__building_room-overlay></div>","");
         positionX = h_rooms_[i].dataset.x.replace('"','').replace("'","");
         positionY = h_rooms_[i].dataset.y.replace('"','').replace("'","");
@@ -2111,7 +2111,7 @@ function save__newstatuses() {
         h_rooms+=element;
       }
     }
-  
+
   }
   else {
     h_rooms = '';
@@ -2161,9 +2161,9 @@ function save__newstatuses() {
     saving_b_rooms: _saving_b_rooms.replaceAll(",]","]").replaceAll("   ",""),
     saving_c_rooms: _saving_c_rooms.replaceAll(",]","]").replaceAll("   ",""),
     saving_d_rooms: _saving_d_rooms.replaceAll(",]","]").replaceAll("   ",""),
-    saving_e_rooms: _saving_e_rooms.replaceAll(",]","]").replaceAll("   ",""), 
-    saving_f_rooms: _saving_f_rooms.replaceAll(",]","]").replaceAll("   ",""), 
-    saving_g_rooms: _saving_g_rooms.replaceAll(",]","]").replaceAll("   ",""), 
+    saving_e_rooms: _saving_e_rooms.replaceAll(",]","]").replaceAll("   ",""),
+    saving_f_rooms: _saving_f_rooms.replaceAll(",]","]").replaceAll("   ",""),
+    saving_g_rooms: _saving_g_rooms.replaceAll(",]","]").replaceAll("   ",""),
     saving_h_rooms: _saving_h_rooms.replaceAll(",]","]").replaceAll("   ",""),
     // settings: document.querySelector("#aukko_settings").value,
   };
@@ -2200,7 +2200,7 @@ function save__newstatuses() {
 function building__action(evt) {
   console.log(evt);
 
-  
+
   console.log(evt);
   console.log("building__action");
   $( ".project__building_room.active").each(function( index ) {
@@ -2218,38 +2218,43 @@ function building__action(evt) {
   $('.project__building_room.active').removeClass('grande_problemo')
   $('.project__building_room.active').removeClass('no_progress')
   $('.project__building_room.active').removeClass('undone')
-  
+
   $('.project__building_room.active').removeClass('l5_a')
   $('.project__building_room.active').removeClass('l5_b')
   $('.project__building_room.active').removeClass('l5_c')
   $('.project__building_room.active').removeClass('l5_d')
-  
+  $('.project__building_room.active').removeClass('l5_e')
+
   $('.project__building_room.active').removeClass('l4_a')
   $('.project__building_room.active').removeClass('l4_b')
   $('.project__building_room.active').removeClass('l4_c')
   $('.project__building_room.active').removeClass('l4_d')
+  $('.project__building_room.active').removeClass('l4_e')
 
   $('.project__building_room.active').removeClass('l3_a')
   $('.project__building_room.active').removeClass('l3_b')
   $('.project__building_room.active').removeClass('l3_c')
   $('.project__building_room.active').removeClass('l3_d')
+  $('.project__building_room.active').removeClass('l3_e')
 
   $('.project__building_room.active').removeClass('l2_a')
   $('.project__building_room.active').removeClass('l2_b')
   $('.project__building_room.active').removeClass('l2_c')
   $('.project__building_room.active').removeClass('l2_d')
+  $('.project__building_room.active').removeClass('l2_e')
 
   $('.project__building_room.active').removeClass('l1_a')
   $('.project__building_room.active').removeClass('l1_b')
   $('.project__building_room.active').removeClass('l1_c')
   $('.project__building_room.active').removeClass('l1_d')
-  
+  $('.project__building_room.active').removeClass('l1_e')
+
   $('.project__building_room.active').addClass(evt)
 
   // $('.project__building').removeClass('active')
   // $('.popup__statuses').removeClass('active')
   // $('.project__building_room').removeClass('active')
-  
+
   // $('.project__building_room-overlay').remove()
   // window.removeEventListener("click", defaultClick, true)
 }
@@ -2279,13 +2284,13 @@ function toggle__pusers(elem) {
   elem.classList.add("active_user");
   active__user = elem.innerText;
 
-  
+
 
   s_options = document.querySelectorAll(".status__report_from > option");
   for (let i = 0; i < s_options.length; i++) {
     if(s_options[i].value.toLowerCase() === active__user.toLowerCase()) {
       s_options[i].selected = true;
-    }    
+    }
   }
   s_options = document.querySelectorAll(".kommentti_comment_from");
   for (let i = 0; i < s_options.length; i++) {
@@ -2316,19 +2321,19 @@ function zero_controls(e) {
   if(e.value.length > 1) {
    zerocontrols = document.querySelectorAll(".zero_popup .hidden");
     for (let i = 0; i < zerocontrols.length; i++) {
-      zerocontrols[i].classList.remove("hidden"); 
-    } 
+      zerocontrols[i].classList.remove("hidden");
+    }
   }
   else {
     zerocontrols = document.querySelectorAll(".zero_popup .modal_close_btn");
     for (let i = 0; i < zerocontrols.length; i++) {
-      zerocontrols[i].classList.add("hidden"); 
-    } 
+      zerocontrols[i].classList.add("hidden");
+    }
   }
 }
 
 /**
- * Closes the zero controls popup by adding and removing classes, 
+ * Closes the zero controls popup by adding and removing classes,
  * extracting necessary information from the current page, and redirecting the user.
  * @returns None
  */
@@ -2378,7 +2383,7 @@ function add_new_lvlproject(elem) {
           td_label.innerHTML=num;
           // td.append(td_input);
           td.append(td_label);
-          
+
 
           td.classList.add("noindex");
           tr.append(td);
@@ -2392,12 +2397,12 @@ function add_new_lvlproject(elem) {
           var td_label = document.createElement('label');
           td.append(td_input);
           td.append(td_label);
-          
+
 
           tr.append(td);
       }
-      
-      
+
+
   }
   table.prepend(tr);
 
@@ -2435,7 +2440,7 @@ function change__stsplit(e) {
     meta: _meta,
     value: _value
   };
-  
+
 
 
   $.ajax({
@@ -2485,7 +2490,7 @@ function save_rooms() {
       console.log(well);
       h = document.querySelector("#wall_one_"+well+"_h").value;
       w = document.querySelector("#wall_one_"+well+"_w").value;
-      
+
       wall_measures = h + "~~" + w;
       formData = {
         pr_id: document.querySelector("#current_project_id").value,
@@ -2503,7 +2508,7 @@ function save_rooms() {
       });
     }, 1400);
   });
- 
+
 }
 
 $("#show_add_new_customer_contact").on("click", function(event) {
