@@ -33,7 +33,7 @@
 
           </tr>
         </table>
-        <div class="project__start_elaborate" onclick="open__workelab();">Kuittaa työt</div>
+        <div class="project__start_elaborate" onclick="open__workelab();">Kuittaa &amp; Kommentoi</div>
         <div class="open_modal yellowbtn get_project_modal col-6" onclick="settings__modal_open(this);toggle__projectexcel(0,document.querySelector(`.projektilista_btn:nth-child(1)`));" data-asmodal_mode="projektiexcel">Avaa tilaustaulu</div>
           <button class="toggle_customer_modal">Lähetä sähköpostia asukkaille</button>
 
@@ -1027,7 +1027,7 @@
             echo "<li class='project__room_lifting__$i project__room_lifting ' style='left:calc($i*80px)'><input class='lineinput' oninput='change_np(this.value,this.dataset.forrow, \"$entrance\")' data-forrow='$i' value='" . ($np[$i] ?? "NP$i") . "'> </li>";
         }
         ?>
-          
+
         </article>
     </div>
     <div class="per50 floatleft coderdy rappu-7" id="G" style="opacity: 1;">
@@ -3428,25 +3428,34 @@ if($remove_overflowY === true) {
             </label>
             <label>
                 <span>Viesti</span>
-                <textarea class="message"></textarea>
+                <textarea class="message" rows="4"></textarea>
             </label>
             <div class="type_select">
+                <div class="type" data-type="myyja">
+                    <span>Myyjä</span>
+                </div>
+                <div class="type" data-type="hankkeen_johtaja">
+                    <span>Hankkeen Johtaja</span>
+                </div>
                 <div class="type" data-type="asukas">
-                    <span>asukas</span>
+                    <span>Asukas</span>
                 </div>
                 <div class="type" data-type="osakas">
-                    <span>osakas</span>
+                    <span>Osakas</span>
                 </div>
                 <div class="type" data-type="omistaja">
-                    <span>omistaja</span>
+                    <span>Omistaja</span>
                 </div>
             </div>
+            <input type="file" class="comment__files" name="comment__files" accept=".png, .jpg, .jpeg" multiple>
+            <div class="preview_files"></div>
             <div class="tables">
+                <table class="project_contacts"></table>
                 <h3>Asukkaat Yleinen</h3>
                 <table class="without_phone"></table>
                 <h3>Asukkaat Tiedot</h3>
                 <table class="with_phone"></table>
-                <h3>Omistajat </h3>
+                <h3>Omistajat</h3>
                 <table class="owner"></table>
             </div>
             <a href="#" id="send_email" target="_blank" class="send_email_button">Tee luonnos</a>

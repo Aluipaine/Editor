@@ -1721,6 +1721,24 @@ setTimeout(() => {
 }, 1000);
 
 
+function onLongPress(element, callback, duration) {
+  let timer;
+
+  element
+    .on("mousedown touchstart", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      timer = setTimeout(callback, duration);
+    })
+    .on("mouseup mouseleave touchend touchmove", () => {
+      clearTimeout(timer);
+    });
+
+  return () => clearTimeout(timer);
+}
+
+onLongPress($('.project__start_elaborate'), showSendEmailDialog, 2000);
+
 
 /**
  * This script handles the click event on elements with the class 'project__building_room'.
@@ -2601,24 +2619,7 @@ $("#email_presets").find(".preset").on("click", function() {
   let dialog = $("#send_email_dialog");
   dialog.find(".title").val(presets[index].Title);
   dialog.find(".message").val(presets[index].Message);
-  let emails = new Set();
-  dialog.find("table .owner_checked .email").each(function() {
-    emails.add($(this).text());
-  });
-  emails = [...emails];
-  dialog.find(".send_email_button").attr("href", `mailto:${emails[0]}?subject=${presets[index].Title}&body=${presets[index].Message}&cc=${emails.slice(1).join(";")}`);
-});
-
-$("#send_email_dialog").find(".title, .message").on("keyup", function() {
-  let dialog = $("#send_email_dialog"),
-      title = dialog.find(".title").val(),
-      message = dialog.find(".message").val(),
-      emails = new Set();
-  dialog.find("table .owner_checked .email").each(function() {
-    emails.add($(this).text());
-  });
-  emails = [...emails];
-  dialog.find(".send_email_button").attr("href", `mailto:${emails[0]}?subject=${title}&body=${message}&cc=${emails.slice(1).join(";")}`);
+  updateSendEmailUrl();
 });
 
 $(".toggle_customer_modal").on("click", function () {
@@ -2629,7 +2630,7 @@ $(".toggle_customer_modal").on("click", function () {
   }
 });
 
-$("#show_send_email_dialog").on("click", () => {
+function showSendEmailDialog() {
   let dialog = $("#send_email_dialog");
   dialog[0].showModal();
   dialog.find(".without_phone").empty();
@@ -2650,14 +2651,14 @@ $("#show_send_email_dialog").on("click", () => {
       let selected_owner_types = owner_types.filter(".checked").get().map(v => $(v).attr("data-type"));
 
       let contacts = JSON.parse(answer);
-      let without_email = contacts.filter(v => v.email === "" && v.type !== "omistaja");
+      let without_email = contacts.filter(v => v.email === "" && (v.type == "asukas" || v.type == "osakas"));
       dialog.find(".without_phone").empty();
       without_email.forEach(v => {
         dialog.find(".without_phone").append(
           `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="owner_type">${v.type}</td></tr>`
         )
       });
-      let with_email = contacts.filter(v => v.email !== "" && v.type !== "omistaja");
+      let with_email = contacts.filter(v => v.email !== "" && (v.type == "asukas" || v.type == "osakas"));
       dialog.find(".with_phone").empty();
       with_email.forEach(v => {
         dialog.find(".with_phone").append(
@@ -2671,24 +2672,45 @@ $("#show_send_email_dialog").on("click", () => {
           `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
         )
       });
-      dialog.find(".send_email_button").removeAttr("disabled");
-
-      let emails = new Set();
-      dialog.find("table .email").each(function() {
-        emails.add($(this).text());
+      let project_contacts = contacts.filter(v => v.type == "myyja" || v.type == "hankkeen_johtaja");
+      dialog.find(".project_contacts").empty();
+      project_contacts.forEach(v => {
+        dialog.find(".project_contacts").append(
+          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
+        )
       });
-      emails = [...emails];
-      dialog.find(".send_email_button").attr("href", `mailto:${emails[0] ?? ""}?subject=&body=&cc=${emails.slice(1).join(";")}`);
+      dialog.find(".send_email_button").removeAttr("disabled");
+      updateSendEmailUrl();
     }
   });
-});
+}
+
+function updateSendEmailUrl() {
+  let dialog = $("#send_email_dialog"),
+      title = dialog.find(".title").val(),
+      message = dialog.find(".message").val(),
+      emails = new Set(),
+      attachments = dialog.find(".preview_image img").get().map(img => img.src).join("%0A");
+  dialog.find("table .owner_checked .email").each(function() {
+    emails.add($(this).text());
+  });
+  emails = [...emails];
+  if (attachments != "") {
+    message += "%0A" + attachments;
+  }
+  dialog.find(".send_email_button").attr("href", `mailto:${emails[0] || ""}?subject=${title}&body=${message}&cc=${emails.slice(1).join(";")}`);
+}
+
+$("#show_send_email_dialog").on("click", showSendEmailDialog);
+
+$("#send_email_dialog").find(".title, .message").on("keyup", updateSendEmailUrl);
 
 $("#send_email_dialog .type_select .type").on("click", function() {
   $(this).toggleClass("checked");
   let dialog = $("#send_email_dialog");
   let owner_types = dialog.find(".type_select .type");
   let selected_owner_types = owner_types.filter(".checked").get().map(v => $(v).attr("data-type"));
-  dialog.find(".with_phone tr, .owner tr").each(function () {
+  dialog.find(".with_phone tr, .owner tr, .project_contacts tr").each(function () {
     if (selected_owner_types.includes($(this).find(".owner_type").text())) {
       $(this).addClass("owner_checked");
     }
@@ -2699,12 +2721,36 @@ $("#send_email_dialog .type_select .type").on("click", function() {
   dialog.find(".without_phone tr").each(function () {
     $(this).removeClass("owner_checked");
   });
-  let title = dialog.find(".title").val(),
-      message = dialog.find(".message").val(),
-      emails = new Set();
-  dialog.find("table .owner_checked .email").each(function() {
-    emails.add($(this).text());
+  updateSendEmailUrl();
+});
+
+$("#send_email_dialog .comment__files").on("change", function () {
+  let dialog = $("#send_email_dialog");
+  let preview = dialog.find(".preview_files");
+  let form_data = new FormData();
+  for (let file of this.files) {
+    if (file.type == "image/jpeg" || file.type == "image/png") {
+      form_data.append("comment__files[]", file, file.name);
+    }
+  }
+  $.ajax({
+    url: "../ajaxupload.php",
+    type: "POST",
+    data: form_data,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: (answer) => {
+      paths = JSON.parse(answer);
+      paths.forEach((path) => {
+        preview.append(`<div class="preview_image"><img src="${path}"><button class="preview_delete">x</button></div>`);
+      });
+      updateSendEmailUrl();
+    },
   });
-  emails = [...emails];
-  dialog.find(".send_email_button").attr("href", `mailto:${emails[0]}?subject=${title}&body=${message}&cc=${emails.slice(1).join(";")}`);
+});
+
+$("#send_email_dialog .preview_files").on("click", ".preview_delete", function () {
+  $(this).parent().remove();
+  updateSendEmailUrl();
 });

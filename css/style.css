@@ -330,6 +330,26 @@ form input[type="submit"]:focus {
   align-items: center;
   margin: 10px auto;
   flex-wrap: wrap;
+  gap: 10px;
+}
+.preview_image {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+.preview_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.preview_delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 0, 0, 0.5);
+  color: white;
 }
 .asiakirja_first {
   width: 20%;
@@ -8265,6 +8285,9 @@ input[type="radio"].mass__selection_btn {
 }
 #send_email_dialog .tables table .owner_checked {
   background: rgba(0, 172, 37, 0.1);
+}
+#send_email_dialog .project_contacts {
+  display: none;
 }
 #send_email_dialog textarea {
   resize: none;
