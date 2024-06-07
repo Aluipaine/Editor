@@ -41,9 +41,11 @@ for($index = 0;$index < $comment__files;$index++){
 
       // Check extension
       if(in_array($ext, $valid_ext)){
-
-         // File path
-         $path = $upload_location.$filename;
+         // Unique file path
+         do {
+            $rand = uniqid('');
+            $path = $upload_location.$rand.'_'.$filename;
+         } while (file_exists($path));
 
          // Upload file
          if(move_uploaded_file($_FILES['comment__files']['tmp_name'][$index],$path)){
