@@ -1826,7 +1826,7 @@ const longClick = (element) => {
   element.append(`<div class='project__building_room-overlay'></div>`)
   console.log("longpress")
 
-  if (current_role && current_role.toLowerCase() != 'mittaus') {
+  if (current_role != 'mittaus') {
     if ($(element).hasClass('problemo')) {
       elab__comment_enable(true,'basic');
     } else if ($(element).hasClass('grande_problemo')) {
@@ -2200,7 +2200,7 @@ function save__newstatuses() {
     console.log("saved Data: " + data);
   });
 
-  if (current_role && current_role.toLowerCase() != 'mittaus') {
+  if (current_role != 'mittaus') {
     p_room = document.querySelectorAll(".project__building_room.active.problemo");
     gp_room = document.querySelectorAll(".project__building_room.active.grande_problemo");
 

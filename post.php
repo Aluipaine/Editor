@@ -1,5 +1,5 @@
 <!-- THIS IS THE PROJECT PAGE TEMPLATE -->
-<?php 
+<?php
 
 require "vendor/config.php";
 
@@ -36,7 +36,7 @@ if(isset($usr_role) && $usr_role == 'mittaus'){
     include('./templates/2_7.php');
     echo '<style> .da_controls_commenting {display: none !important}</style>';
 }
-else { 
+else {
     $usr = $_GET['user'];
     if(strtolower($_GET["user"]) == "tyonjohto") {
         $usrpermissions_ = mysqli_query($db, "SELECT * FROM `users` WHERE `username`='$usr';");
@@ -48,12 +48,12 @@ else {
         foreach ($_open_comments as $value) {
             $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13] . "," . $value[14];
             $txt .= "~";
-        } 
+        }
         echo '<input type="hidden" value="' . $txt . '" id="open_comments" name="open_comments">';
         include('./templates/2_0.php');
         include('./templates/drawarea.php');
         include('./templates/commentator.php');
-        echo '<style> .drawarea__top,.box,.drawarea__right.recl_btn,.drawarea__controls_one {display: none !important} .da_controls_commenting {display: block !important} .nav li div.nav_current {color:black}</style>';    
+        echo '<style> .drawarea__top,.box,.drawarea__right.recl_btn,.drawarea__controls_one {display: none !important} .da_controls_commenting {display: block !important} .nav li div.nav_current {color:black}</style>';
 
     }
     else {
@@ -74,13 +74,13 @@ else {
                 $txt .= $value[0] . "," . $value[1] . "," . $value[2] . "," . $value[3]. "," . $value[4] . "," .  $value[5] . "," . $value[6] . "," . $value[7] . "," .  $value[8] . "," . $value[9] . "," . $value[10] . "," . $value[11] . "," . $value[12] . "," . $value[13] . "," . $value[14];
                 $txt .= "~";
             }
-            
-        } 
+
+        }
         echo '<input type="hidden" value="' . $txt . '" id="open_comments" name="open_comments">';
         include('./templates/2_0.php');
         include('./templates/drawarea.php');
         include('./templates/commentator.php');
-        echo '<style> .drawarea__top,.box,.drawarea__right.recl_btn,.drawarea__controls_one {display: none !important} .da_controls_commenting {display: block !important} .nav li div.nav_current {color:black}</style>';    
+        echo '<style> .drawarea__top,.box,.drawarea__right.recl_btn,.drawarea__controls_one {display: none !important} .da_controls_commenting {display: block !important} .nav li div.nav_current {color:black}</style>';
     }
 }
 
@@ -88,7 +88,7 @@ else {
 // print_r($usrpermissions[0][1]);
 // print_r($usrpermissions[0][4]);
 echo '<input type="hidden" value="' . strtolower($_GET["user"]) . '" id="current_user" name="current_user">';
-echo '<input type="hidden" value="' . strtolower($_GET["role"]) . '" id="current_role" name="current_role">';
+echo '<input type="hidden" value="' . (strlen($_GET["role"]) ? strtolower($_GET["role"]) : $usr_role) . '" id="current_role" name="current_role">';
 echo '<input type="hidden" value="' . $usrpermissions[0][4] . '" id="current_user_permissions" name="current_user_permissions">';
 echo '<input type="hidden" value="' . $id . '" id="current_project_id" name="current_project_id">';
 echo '<input type="hidden" value="' . $post_tradarray[4] . '" id="current_project_measurement" name="current_project_measurement">';
