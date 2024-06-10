@@ -7039,6 +7039,9 @@ div.x_del.hidden {
 .project__building.active > div.project__building_room {
   cursor: pointer;
 }
+.project__building_room b {
+  width: 100%;
+}
 .project__buildingcoordinates li {
   line-height: 80px;
   font-size: 16px;
