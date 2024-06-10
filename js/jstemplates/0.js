@@ -1725,20 +1725,15 @@ function onLongPress(element, callback, duration) {
   let timer;
 
   element
-    .on("mousedown touchstart", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      timer = setTimeout(callback, duration);
+    .on("mousedown touchstart", function () {
+      timer = setTimeout(callback.bind(this), duration);
     })
-    .on("mouseup mouseleave touchend touchmove", () => {
+    .on("mouseup mouseleave touchend touchmove", function () {
       clearTimeout(timer);
     });
 
   return () => clearTimeout(timer);
 }
-
-onLongPress($('.project__start_elaborate'), showSendEmailDialog, 2000);
-
 
 /**
  * This script handles the click event on elements with the class 'project__building_room'.
@@ -2603,7 +2598,7 @@ $(".toggle_customer_modal").on("click", function () {
   }
 });
 
-function showSendEmailDialog() {
+function showSendEmailDialog(room) {
   let dialog = $("#send_email_dialog");
   dialog[0].showModal();
   dialog.find(".without_phone").empty();
