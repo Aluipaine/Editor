@@ -7040,7 +7040,11 @@ div.x_del.hidden {
   cursor: pointer;
 }
 .project__building_room b {
-  width: 100%;
+  width: 30px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 10px;
 }
 .project__buildingcoordinates li {
   line-height: 80px;
