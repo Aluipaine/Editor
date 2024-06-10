@@ -38,21 +38,21 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
       <?php
         $s_data = mysqli_query($db, "SELECT * FROM `settings__templates`");
         $s_da = mysqli_fetch_all($s_data);
-        $s_data = $s_da;        
-        
+        $s_data = $s_da;
+
         foreach ($s_data as $key => $s) {
           echo '
             <input name="admin__presets" type="radio" class="tmpbtn" value="'.$s[1].'" id="template-button-'.$s[1].'" data-letterid="'. $s[0] .'">
             <label onclick="preset_id=' . $s[0] .';s_change_malli(`' . $s[1] . '`,`' . $s[0] .'`);" for="template-button-'.$s[1].'" data-letterid="'. $s[0] .'">'.$s[1].'</label>';
         }
 
-        
+
 
       ?>
     </fieldset>
     <div class="admin_setting" onclick="s_newmalli();">Uusi as. presetti</div>
   </div>
-  
+
 
 </section>
 
@@ -63,7 +63,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
     <div class="row">
       <div class="tabs">
         <ul>
-         
+
           <li class="tabs__btn active"  onclick="indentnavigation__btns(tabs_btns_indent[0]);">Mittaeditorin asetukset</li>
           <li class="tabs__btn">Projektit</li>
           <li class="tabs__btn">Käyttäjät</li>
@@ -108,7 +108,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
         </ul>
         <div class="tabs__target_indent tabs__target_table" data-id="1_1" id="materials">
           <table>
-            <tbody class="materials__tbody">						
+            <tbody class="materials__tbody">
               <tr class="headingrow">
                 <td>Käytössä</td>
                 <td>Materiaalikoodi</td>
@@ -121,7 +121,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                 <td>Kuva</td>
                 <td>LISTA YR</td>
                 <td>LISTA OR</td>
-                
+
               </tr>
               <?php
               ?>
@@ -168,7 +168,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
           </section>
           <section>
             <h4>Levyn vajaus</h4>
-            
+
             <fieldset>
               <input type="radio" id="settings__saumahanta-oik" name="sauma__xtype" onclick="saumoitus__examplephoto();save_saumatyyppi();" value="<?= $sauma__xtype ?>" <?= $x_oik ?>>
               <label for="settings__saumahanta-oik">Vajaa levy oikealle</label>
@@ -193,14 +193,14 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
               Pystysaumojen asetukset
             </h4>
             <table>
-              <tbody class="saumapysty__tbody tabs__target_table">			
+              <tbody class="saumapysty__tbody tabs__target_table">
                 <tr class="headingrow">
                   <td>ON/OFF</td>
                   <td>Nimi</td>
                   <td>Paksuus</td>
                   <td>Lista</td>
                   <td>Laatu</td>
-                  
+
                 </tr>
               </tbody>
             </table>
@@ -213,13 +213,13 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
               Vaakasaumojen asetukset
             </h4>
             <table>
-              <tbody class="saumavaaka__tbody tabs__target_table">			
+              <tbody class="saumavaaka__tbody tabs__target_table">
                 <tr class="headingrow">
                   <td>ON/OFF</td>
                   <td>Nimi</td>
                   <td>Paksuus</td>
                   <td>Materiaali</td>
-                  <td>Laatu</td>                  
+                  <td>Laatu</td>
                 </tr>
               </tbody>
             </table>
@@ -236,26 +236,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
           </ul>
           <div class="tabs__target_subindent" data-id="1_4_1">
             <table>
-              <tbody class="ranka__tbody_one">			
-                <tr class="headingrow">
-                  <td>L2A Rangoitus pystyyn</td>
-                  <td>Tyyppi</td>
-                  <td>Rangan koodin alku</td>
-                  <td>Tilauskoodi </td>
-                  <td>Materiaali</td>
-                  <td>Paksuus</td>
-                  <td>Laatu</td>
-                  <td>Väri nimi </td>
-                  <td>NCS code</td>
-                  <td>Suunta </td>
-                  <td>Lisää / -poista mitasta</td>
-                  <td style="width: 150px;">Vähennä mistä</td>                  
-                </tr>
-              </tbody>
-            </table>
-
-            <table>
-              <tbody class="ranka__tbody_six">			
+              <tbody class="ranka__tbody_one">
                 <tr class="headingrow">
                   <td>L2A Rangoitus pystyyn</td>
                   <td>Tyyppi</td>
@@ -270,13 +251,32 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                   <td>Lisää / -poista mitasta</td>
                   <td style="width: 150px;">Vähennä mistä</td>
                 </tr>
-               
-               
               </tbody>
             </table>
 
             <table>
-              <tbody class="ranka__tbody_four">			
+              <tbody class="ranka__tbody_six">
+                <tr class="headingrow">
+                  <td>L2A Rangoitus pystyyn</td>
+                  <td>Tyyppi</td>
+                  <td>Rangan koodin alku</td>
+                  <td>Tilauskoodi </td>
+                  <td>Materiaali</td>
+                  <td>Paksuus</td>
+                  <td>Laatu</td>
+                  <td>Väri nimi </td>
+                  <td>NCS code</td>
+                  <td>Suunta </td>
+                  <td>Lisää / -poista mitasta</td>
+                  <td style="width: 150px;">Vähennä mistä</td>
+                </tr>
+
+
+              </tbody>
+            </table>
+
+            <table>
+              <tbody class="ranka__tbody_four">
                 <tr class="headingrow">
                   <td>L2A Rangoitus vaakaan </td>
                   <td>Tyyppi</td>
@@ -291,13 +291,13 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                   <td>Lisää / -poista mitasta</td>
                   <td style="width: 150px;">Vähennä mistä</td>
                 </tr>
-                
-                
+
+
               </tbody>
             </table>
 
             <table>
-              <tbody class="ranka__tbody_eight">			
+              <tbody class="ranka__tbody_eight">
                 <tr class="headingrow">
                   <td>L2A Rangoitus vaakaan</td>
                   <td>Tyyppi</td>
@@ -312,15 +312,15 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                   <td>Lisää / -poista mitasta</td>
                   <td style="width: 150px;">Vähennä mistä</td>
                 </tr>
-                
-                
+
+
               </tbody>
             </table>
           </div>
 
           <div class="tabs__target_subindent" data-id="1_4_2">
             <table>
-              <tbody class="ranka__tbody_two">			
+              <tbody class="ranka__tbody_two">
                 <tr class="headingrow">
                   <td>L2B Rangoitus pystyyn</td>
                   <td>Tyyppi</td>
@@ -335,13 +335,13 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                   <td>Lisää / -poista mitasta</td>
                   <td style="width: 150px;">Vähennä mistä</td>
                 </tr>
-                
-                
+
+
               </tbody>
             </table>
 
             <table>
-              <tbody class="ranka__tbody_three">			
+              <tbody class="ranka__tbody_three">
                 <tr class="headingrow">
                   <td>L2B Rangoitus pystyyn</td>
                   <td>Tyyppi</td>
@@ -356,13 +356,13 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                   <td>Lisää / -poista mitasta</td>
                   <td style="width: 150px;">Vähennä mistä</td>
                 </tr>
-               
-               
+
+
               </tbody>
             </table>
 
             <table>
-              <tbody class="ranka__tbody_five">			
+              <tbody class="ranka__tbody_five">
                 <tr class="headingrow">
                   <td>L2B Rangoitus vaakaan </td>
                   <td>Tyyppi</td>
@@ -377,13 +377,13 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                   <td>Lisää / -poista mitasta</td>
                   <td style="width: 150px;">Vähennä mistä</td>
                 </tr>
-                
-                
+
+
               </tbody>
             </table>
 
             <table>
-              <tbody class="ranka__tbody_seven">			
+              <tbody class="ranka__tbody_seven">
                 <tr class="headingrow">
                   <td>L2B Rangoitus vaakaan</td>
                   <td>Tyyppi</td>
@@ -406,7 +406,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             Rankakirjasto
           </h2>
           <table>
-            <tbody class="ranka__tbody">						
+            <tbody class="ranka__tbody">
               <tr class="headingrow">
                 <td>On/Off</td>
                 <td style="width: 220px">Editorissa</td>
@@ -435,14 +435,14 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
           <datalist id="ranka_list"></datalist>
           <datalist id="listat_list"></datalist>
         </div>
-        
+
         <div class="tabs__target_indent" data-id="1_5">
           <section>
             <h4>
               L2A Listat
             </h4>
             <table>
-              <tbody class="listat2a__tbody tabs__target_table">			
+              <tbody class="listat2a__tbody tabs__target_table">
                 <tr class="headingrow">
                   <td>ON/OFF</td>
                   <td>Tyyppi</td>
@@ -469,7 +469,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
               L2B Listat
             </h4>
             <table>
-              <tbody class="listat2b__tbody tabs__target_table">			
+              <tbody class="listat2b__tbody tabs__target_table">
                 <tr class="headingrow">
                   <td>ON/OFF</td>
                   <td>Tyyppi</td>
@@ -496,7 +496,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
               Listataulu
             </h4>
             <table>
-              <tbody class="listat__tbody tabs__target_table">			
+              <tbody class="listat__tbody tabs__target_table">
                 <tr class="headingrow">
                   <td>Pos NRO</td>
                   <td>NIMI</td>
@@ -532,7 +532,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <tbody class="levytysreunat__tbody">
               <tr class="headingrow">
                 <td>On/Off</td>
-                
+
                 <td style="width: 200px;">Selite</td>
                 <td>Min</td>
                 <td>Rangat</td>
@@ -541,7 +541,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                 <td>Listat</td>
                 <td>Listan pituus +</td>
                 <td>Listan laatu</td>
-                
+
                 <td>YR</td>
                 <td>AR</td>
                 <td>VR</td>
@@ -554,16 +554,16 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
         </div>
         <div class="tabs__target_indent" data-id="1_7">
           <section id="hole_set">
-            
-           
-            
+
+
+
           </section>
         </div>
         <div class="tabs__target_indent tabs__target_table" data-id="1_8"  id="morehole_set">
           <h2>Reijitys</h2>
           <h6>Tee yli 10000mm2 reijät Framenä. </h6>
           <table>
-            <tbody class="reikaframe__tbody">						
+            <tbody class="reikaframe__tbody">
               <tr class="headingrow">
                 <td>Sarakkeet</td>
                 <td>Dustiksi?</td>
@@ -594,7 +594,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             Lisää uusi läpivienti
           </div>
         </div>
-        
+
         <div class="tabs__target_indent" data-id="1_9">
             <section class="trow">
               <div class="row">
@@ -616,7 +616,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                      </div>
                    </div>
                   </fieldset>
-                  
+
                 </div>
                 <div class="col-6">
                   <h4 class="tabs_kiinniket_header">Leveyssuunnan Läpiviennit </h4>
@@ -637,7 +637,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                    </div>
                   </fieldset>
                 </div>
-              </div>         
+              </div>
             </section>
 
             <section>
@@ -654,7 +654,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                        <div class="col-6"><h4>Yläreunasta</h4></div>
                        <div class="col-6"><h4>Alareunasta:</h4></div>
                      </div>
-                     <div class="row"> 
+                     <div class="row">
                        <div class="col-6">
                          <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_yr_arvo" placeholder="Poraus etäisyys arvo" min="25" max="80" value="32.5" min="20" max="80">
                        </div>
@@ -665,7 +665,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                      <div class="row">
                        <div class="col-6">
                          <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_yr_min" placeholder="Poraus etäisyys min" min="25" value="25">
-                       </div> 
+                       </div>
                        <div class="col-6">
                          <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_ar_min" placeholder="Poraus etäisyys min" min="25" value="25">
                        </div>
@@ -673,7 +673,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                      <div class="row">
                        <div class="col-6">
                          <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_yr_max" placeholder="Poraus etäisyys max" min="25" value="80">
-                       </div> 
+                       </div>
                        <div class="col-6">
                          <input type="number" oninput="admin__savereunaasetukset()" id="settings__levy_ar_max" placeholder="Poraus etäisyys max" min="25" value="80">
                        </div>
@@ -698,13 +698,13 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                      </div>
                    </div>
                  </div>
-               </div>    
+               </div>
             </section>
         </div>
 
       </div>
     </section>
-    <section class="tabs__target" data-id="2">        
+    <section class="tabs__target" data-id="2">
       <a href="/new-project.php" class="start_btn"  target="_blank">Aloita uusi projekti</a>
       <div class="row">
         <table class="a_projectslist adminlist">
@@ -720,12 +720,12 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
               $projects = mysqli_fetch_all($projects);
               $prjct_array = $projects;
 
-              
-      
-              
-      
 
-              
+
+
+
+
+
 
               foreach($prjct_array as $x => $x_value) {
 
@@ -733,7 +733,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
 
                 $s_data = mysqli_query($db, "SELECT * FROM `settings__templates`");
                 $s_da = mysqli_fetch_all($s_data);
-                $s_data = $s_da;      
+                $s_data = $s_da;
 
                 $preset_data = mysqli_query($db, "SELECT * FROM `projectmeta` WHERE `id`='$x_value[0]' AND `meta_key`='s_settings'");
                 $preset_da = mysqli_fetch_all($preset_data);
@@ -743,7 +743,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
 
                 foreach ($s_data as $key => $s) {
                   $count++;
-  
+
                   if($preset_da[0][3] == $s[1]) {
                     $preset__options .= '<input name="admin__presets_'.$x_value[0].'" type="radio" class="tmpbtn" value="'.$s[1].'" id="projectpreset-button-'.$x_value[0].'_'.$count.'" checked>
                     <label onclick="s_change_preset(`' . $x_value[0] .'`,`'.$s[1].'`);" for="projectpreset-button-'.$x_value[0].'_'.$count.'">'.$s[1].'</label>';
@@ -753,7 +753,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                     <label onclick="s_change_preset(`' . $x_value[0] .'`,`'.$s[1].'`);" for="projectpreset-button-'.$x_value[0].'_'.$count.'">'.$s[1].'</label>';
                   }
                 }
-                
+
                 $pr_name = $x_value[1];
                 $added_users = mysqli_query($db, "SELECT * FROM `addedusers` WHERE `project_id`='$x_value[0]'");
                 $added_users = mysqli_fetch_all($added_users);
@@ -764,7 +764,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                 foreach($added_users as $a => $aval) {
                   if(strlen($aval[1]) > 2) {
                     $usrlist .= "<li>" . $aval[1] ."<b onclick='admin__delete_addeduser(this);'>x</b></li>";
-                    
+
                     if(strtolower($x_value[5]) == strtolower($aval[1])) {
                       $usrlist2 .= "<option selected>".$aval[1]."</option>";
                       $current__seller = $aval[1];
@@ -774,7 +774,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                     }
                     $usrlist2 .= "<li>" . $aval[1] ."<b onclick='admin__delete_addeduser(this);'>x</b></li>";
                   }
-                  
+
                 }
 
                 echo '<td><a href="/post.php?id='.$x_value[0].'&user=valinta" target="_blank">'.$x_value[1].'</a></td>';
@@ -782,12 +782,12 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                 echo '<td><select data-prid="'.$x_value[0].'" onchange="this.parentElement.querySelector(`input`).value = this.value;admin__changeprusr(this);">'.$usrlist2.'<input type="hidden" value="'.$current__seller.'" hidden></select></td>';
                 echo '<td><fieldset>'.$preset__options.'</fieldset></td>';
                 echo '</tr>';
-              }    
+              }
 
-              
+
             ?>
           </tbody>
-          
+
         </table>
       </div>
     </section>
@@ -809,9 +809,9 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
               $usr_array = $users;
               $count=0;
 
-              
 
-              
+
+
               foreach($usr_array as $x => $x_value) {
                 $count++;
                 $roleselection_input = "<select onchange='this.parentElement.querySelector(`input`).value = this.value; admin__saveusers();'>";
@@ -856,9 +856,9 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
 
                 echo '<tr>';
                 $pr_name = $x_value[1];
-                
+
                 echo '
-                <td><input type="hidden" value="'.$x_value[0].'" hidden><input type="text" value="'.$x_value[1].'" class="lineinput" oninput="admin__saveusers();"></td> 
+                <td><input type="hidden" value="'.$x_value[0].'" hidden><input type="text" value="'.$x_value[1].'" class="lineinput" oninput="admin__saveusers();"></td>
                 <td>'.$roleselection_input.'<input type="hidden" value="'.$current_role.'" hidden></td>
                 <td>
                   <input type="checkbox" name="admin_system" value="'.$x_value[4].'" onclick="this.checked ? this.value = `1` : this.value = ``;admin__saveusers();"  id="usrperm1_'.$count.'" '.$checked.'>
@@ -878,12 +878,12 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                   <input type="text" value="'.$x_value[8].'" class="lineinput" oninput="admin__saveusers();">
                 </td>';
                 echo '</tr>';
-              }    
+              }
 
-              
+
             ?>
           </tbody>
-          
+
         </table>
     </section>
     <section class="tabs__target tabs__target_table" data-id="4">
@@ -905,7 +905,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
 
         <div class="row">
           <ul class="tabs__target_indentrow">
-            
+
             <li class="tabs__btn_indent tabs__btn_viestit active" data-toid="6_1" id="first_special_intent">Projektin luonti (hankkeen osallistujat)</li>
             <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_2">Uuden käyttäjän luonti (Projektin luonti uusi käyttäjä)</li>
             <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_3">Lähetä kommenttien muokkaukset (t.johto)</li>
@@ -917,9 +917,10 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_9">Kommentin kuittaus (t.johto)</li>
             <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_10">Tilauksen lisäys (t.johto + saaja)</li>
             <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_11">Kommentin lisäys (t.johto)</li>
-          </ul>          
+            <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_12">Viestipresetit kommunikointi</li>
+          </ul>
           <section class="tabs__target_indent tabs__target_viestit active" data-id="6_1">
-            <?php 
+            <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='project_creation'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -953,10 +954,10 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <input type="text" oninput="save__messagesettings()"  value="<?= $m_messages[5]; ?>"> <b> *hankkeen nimi* </b> <input type="text" oninput="save__messagesettings()"  value="<?= $m_messages[6]; ?>"><br>
             <textarea cols="30" rows="10" value="<?= $m_messages[7]; ?>" oninput="this.innerHTML = this.value; save__messagesettings()"></textarea>
             </div>
-            
+
           </section>
 
-          <?php 
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='project_newuser'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -995,7 +996,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             </div>
           </section>
 
-          <?php 
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='project_sendedits'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -1029,7 +1030,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
 
           </section>
 
-          <?php 
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='sent_purchases'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -1062,7 +1063,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <b>*Lista laskutettavista ostoista*</b>
           </section>
 
-          <?php 
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='deleted_without_consent'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -1095,7 +1096,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
 
           </section>
 
-          <?php 
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='comments_toworkers'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -1128,7 +1129,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <b>*Tikettitaulukko*</b>
           </section>
 
-          <?php 
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='reppanareport'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -1160,7 +1161,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <h6 class="tabs__target_subject"><label>Aihe: <input type="text" oninput="save__messagesettings()"  value="<?= $m_subject[0]; ?>"></label> *pvm* <input type="text" oninput="save__messagesettings()"  value="<?= $m_subject[1]; ?>"></label> </h6>
           </section>
 
-          <?php 
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='projectreport'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -1193,7 +1194,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <h6 class="tabs__target_subject"><label>Aihe: <input type="text" oninput="save__messagesettings()"  value="<?= $m_subject[0]; ?>"></label> *pvm* <input type="text" oninput="save__messagesettings()"  value="<?= $m_subject[1]; ?>"></label> </h6>
           </section>
 
-          <?php 
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='comment_sending_to_tyonjohto'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -1227,8 +1228,8 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <b>*Kuitatun kommentin specsit*</b>
           </section>
 
-          
-          <?php 
+
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='tilauksen_lisays'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -1260,7 +1261,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
 
           </section>
 
-          <?php 
+          <?php
               $m_data = mysqli_query($db, "SELECT * FROM `mail_templates` WHERE `messagename`='kommentin_lisays'");
               $m_da = mysqli_fetch_all($m_data);
               $m_data = $m_da[0];
@@ -1293,11 +1294,32 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <h6 class="tabs__target_subject"><label>Aihe: <input type="text" oninput="save__messagesettings()"   value="<?= $m_subject[0]; ?>"></label> *hankkeen nimi* <input type="text" oninput="save__messagesettings()"   value="<?= $m_subject[1]; ?>"></label> </h6>
 
           </section>
-          
-            
+
+          <?php
+              $m_data = mysqli_query($db, "SELECT * FROM `message_templates`")->fetch_all(MYSQLI_ASSOC);
+          ?>
+          <section class="tabs__target_indent tabs__target_viestit" data-id="6_12">
+            <table class="messagepresets__tbody">
+              <tr class="headingrow">
+                <td>Name</td>
+                <td>Subject</td>
+                <td>Message</td>
+                <td></td>
+              </tr>
+              <?php foreach ($m_data as $row) { ?>
+              <tr data-id="<?= $row['id'] ?>" onchange="admin__save_message_preset(this)">
+                <td><input class="lineinput" value="<?= $row['name'] ?>"></td>
+                <td><input class="lineinput" value="<?= $row['subject'] ?>"></td>
+                <td><input class="lineinput" value="<?= $row['message'] ?>"></td>
+                <td><button class="preset_delete" onclick="admin__delete_message_preset(this)">x</button></td>
+              </tr>
+              <?php } ?>
+            </table>
+            <button class="start_btn" onclick="appendnewmessagepreset()">Add new preset</button>
+          </section>
       </div>
-      
-  
+
+
       </div>
     </section>
   </div>
@@ -1323,12 +1345,12 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
     }
     for (let i = 0; i < tabs_targets.length; i++) {
       tabs_targets[i].classList.remove('active');
-      
+
     }
     elem.classList.add("active");
     tabs_targets[elemcount].classList.add("active");
 
-    
+
 
   }
 
@@ -1350,8 +1372,8 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
       if(tabs_targets[i].querySelector(".tabs__target_toname")) {
         header_array_ += tabs_targets[i].querySelector(".tabs__target_toname").value;
       }
-      
-      
+
+
       if(tabs_targets[i].dataset.id == '6_1') {
         messagename_ = "project_creation";
         message_array_+= tabs_targets[i].querySelectorAll(".tabs__target_textarea input")[0].value + "~~~~";
@@ -1384,7 +1406,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
       }
       else if(tabs_targets[i].dataset.id =='6_3') {
         messagename_ = "project_sendedits";
-        
+
       }
       else if(tabs_targets[i].dataset.id =='6_4') {
         messagename_ = "sent_purchases";
@@ -1440,7 +1462,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
 
       });
 
-      
+
     }
     // alert("Tallennettu");
   }
@@ -1449,7 +1471,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
   for (let i = 0; i < txt.length; i++) {
     txt[i].innerHTML = txt[i].getAttribute("value");
     txt[i].value = txt[i].getAttribute("value");
-    
+
   }
 
 
@@ -1484,12 +1506,12 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
     }
     for (let i = 0; i < tabs_targets.length; i++) {
       tabs_targets[i].classList.remove('active');
-      
+
     }
     elem.classList.add("active");
     tabs_targets[elemcount].classList.add("active");
 
-    
+
 
   }
 
@@ -1503,27 +1525,27 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
     }
     for (let i = 0; i < tabs_targets_indent.length; i++) {
       tabs_targets_indent[i].classList.remove('active');
-      
+
     }
     elem.classList.add("active");
 
     b = 0;
     tabs_targets_indent.forEach(element => {
-      
+
       if(element.dataset.id == elem.dataset.toid) {
         elemcount = b;
       }
       b+=1;
     });
-   
+
     tabs_targets_indent[elemcount].classList.add("active");
 
-    
+
 
   }
   function subindentnavigation__btns(elem) {
     elemcount = 0;
-    
+
     for (let i = tabs_btns_subindent.length-1; i > -1; i--) {
       tabs_btns_subindent[i].classList.remove('active');
       if(tabs_btns_subindent[i].dataset.toid == elem.dataset.id) {
@@ -1532,22 +1554,22 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
     }
     for (let i = 0; i < tabs_targets_subindent.length; i++) {
       tabs_targets_subindent[i].classList.remove('active');
-      
+
     }
     elem.classList.add("active");
 
     b = 0;
     tabs_targets_subindent.forEach(element => {
-      
+
       if(element.dataset.id == elem.dataset.toid) {
         elemcount = b;
       }
       b+=1;
     });
-   
+
     tabs_targets_subindent[elemcount].classList.add("active");
 
-    
+
 
   }
 

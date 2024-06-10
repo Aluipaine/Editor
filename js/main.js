@@ -45,8 +45,8 @@ function decode_utf8(s) {
 
 function givenewtype() {
   setTimeout(() => {
-    
-  
+
+
     atypes = document.querySelectorAll(".ovi__asetusheading > b");
     btypes = document.querySelectorAll(".ikkuna__asetusheading > b");
     ctypes = document.querySelectorAll(".pilari__asetusheading > b");
@@ -71,44 +71,44 @@ function givenewtype() {
 
   }, 1000);
 }
-if(document.querySelector("#open_comments")) {
+// if(document.querySelector("#open_comments")) {
   // for (let i = 0; i < all_apartments.length; i++) {
   //   if(all_apartments[i].dataset.aroom.split(",")[1] == "prob" || all_apartments[i].dataset.broom.split(",")[1] == "prob" || all_apartments[i].dataset.croom.split(",")[1] == "prob" || all_apartments[i].dataset.droom.split(",")[1] == "prob" || all_apartments[i].dataset.kroom.split(",")[1] == "prob" || all_apartments[i].dataset.lroom.split(",")[1] == "prob") {
   //     all_apartments[i].classList.add("prob");
   //   }
   // }
-}
-else {
-  for (let i = 0; i < all_apartments.length; i++) {
-    if(all_apartments[i].dataset.aroom && all_apartments[i].dataset.broom && all_apartments[i].dataset.croom && all_apartments[i].dataset.droom && all_apartments[i].dataset.kroom && all_apartments[i].dataset.lroom) {
-      if(all_apartments[i].dataset.aroom.split("~")[1] == "problem" || all_apartments[i].dataset.broom.split("~")[1] == "problem" || all_apartments[i].dataset.croom.split("~")[1] == "problem" || all_apartments[i].dataset.droom.split("~")[1] == "problem" || all_apartments[i].dataset.kroom.split("~")[1] == "problem" || all_apartments[i].dataset.lroom.split("~")[1] == "problem") {
-          all_apartments[i].classList.add("problem");
-      }
-      else if(all_apartments[i].dataset.aroom.split("~")[1] == "prob" || all_apartments[i].dataset.broom.split("~")[1] == "prob" || all_apartments[i].dataset.croom.split("~")[1] == "prob" || all_apartments[i].dataset.droom.split("~")[1] == "prob" || all_apartments[i].dataset.kroom.split("~")[1] == "prob" || all_apartments[i].dataset.lroom.split("~")[1] == "prob") {
-          all_apartments[i].classList.add("prob");
-      }
-
-      else if(all_apartments[i].dataset.aroom.split("~")[1] == "measured" || all_apartments[i].dataset.broom.split("~")[1] == "measured" || all_apartments[i].dataset.croom.split("~")[1] == "measured" || all_apartments[i].dataset.droom.split("~")[1] == "measured" || all_apartments[i].dataset.kroom.split("~")[1] == "measured" || all_apartments[i].dataset.lroom.split("~")[1] == "measured") {
-          all_apartments[i].classList.add("measured");
-      }
-
-      else if(all_apartments[i].dataset.aroom.split("~")[1] == "rangatok" || all_apartments[i].dataset.broom.split("~")[1] == "rangatok" || all_apartments[i].dataset.croom.split("~")[1] == "rangatok" || all_apartments[i].dataset.droom.split("~")[1] == "rangatok" || all_apartments[i].dataset.kroom.split("~")[1] == "rangatok" || all_apartments[i].dataset.lroom.split("~")[1] == "rangatok") {
-          all_apartments[i].classList.add("rangatok");
-      }
-
-      else if(all_apartments[i].dataset.aroom.split("~")[1] == "nowork" || all_apartments[i].dataset.broom.split("~")[1] == "nowork" || all_apartments[i].dataset.croom.split("~")[1] == "nowork" || all_apartments[i].dataset.droom.split("~")[1] == "nowork" || all_apartments[i].dataset.kroom.split("~")[1] == "nowork" || all_apartments[i].dataset.lroom.split("~")[1] == "nowork") {
-          all_apartments[i].classList.add("nowork");
-      }
-      
-      else if(all_apartments[i].dataset.aroom.split("~")[1] == "undone" || all_apartments[i].dataset.broom.split("~")[1] == "undone" || all_apartments[i].dataset.croom.split("~")[1] == "undone" || all_apartments[i].dataset.droom.split("~")[1] == "undone" || all_apartments[i].dataset.kroom.split("~")[1] == "undone" || all_apartments[i].dataset.lroom.split("~")[1] == "undone") {
-          all_apartments[i].classList.add("undone");
-      }
-      else {
-          all_apartments[i].classList.add("done");
-      }
-    }
-  }
-}
+// }
+// else {
+//   for (let i = 0; i < all_apartments.length; i++) {
+//     if(all_apartments[i].dataset.aroom && all_apartments[i].dataset.broom && all_apartments[i].dataset.croom && all_apartments[i].dataset.droom && all_apartments[i].dataset.kroom && all_apartments[i].dataset.lroom) {
+//       if(all_apartments[i].dataset.aroom.split("~")[1] == "problem" || all_apartments[i].dataset.broom.split("~")[1] == "problem" || all_apartments[i].dataset.croom.split("~")[1] == "problem" || all_apartments[i].dataset.droom.split("~")[1] == "problem" || all_apartments[i].dataset.kroom.split("~")[1] == "problem" || all_apartments[i].dataset.lroom.split("~")[1] == "problem") {
+//           all_apartments[i].classList.add("problem");
+//       }
+//       else if(all_apartments[i].dataset.aroom.split("~")[1] == "prob" || all_apartments[i].dataset.broom.split("~")[1] == "prob" || all_apartments[i].dataset.croom.split("~")[1] == "prob" || all_apartments[i].dataset.droom.split("~")[1] == "prob" || all_apartments[i].dataset.kroom.split("~")[1] == "prob" || all_apartments[i].dataset.lroom.split("~")[1] == "prob") {
+//           all_apartments[i].classList.add("prob");
+//       }
+//
+//       else if(all_apartments[i].dataset.aroom.split("~")[1] == "measured" || all_apartments[i].dataset.broom.split("~")[1] == "measured" || all_apartments[i].dataset.croom.split("~")[1] == "measured" || all_apartments[i].dataset.droom.split("~")[1] == "measured" || all_apartments[i].dataset.kroom.split("~")[1] == "measured" || all_apartments[i].dataset.lroom.split("~")[1] == "measured") {
+//           all_apartments[i].classList.add("measured");
+//       }
+//
+//       else if(all_apartments[i].dataset.aroom.split("~")[1] == "rangatok" || all_apartments[i].dataset.broom.split("~")[1] == "rangatok" || all_apartments[i].dataset.croom.split("~")[1] == "rangatok" || all_apartments[i].dataset.droom.split("~")[1] == "rangatok" || all_apartments[i].dataset.kroom.split("~")[1] == "rangatok" || all_apartments[i].dataset.lroom.split("~")[1] == "rangatok") {
+//           all_apartments[i].classList.add("rangatok");
+//       }
+//
+//       else if(all_apartments[i].dataset.aroom.split("~")[1] == "nowork" || all_apartments[i].dataset.broom.split("~")[1] == "nowork" || all_apartments[i].dataset.croom.split("~")[1] == "nowork" || all_apartments[i].dataset.droom.split("~")[1] == "nowork" || all_apartments[i].dataset.kroom.split("~")[1] == "nowork" || all_apartments[i].dataset.lroom.split("~")[1] == "nowork") {
+//           all_apartments[i].classList.add("nowork");
+//       }
+//
+//       else if(all_apartments[i].dataset.aroom.split("~")[1] == "undone" || all_apartments[i].dataset.broom.split("~")[1] == "undone" || all_apartments[i].dataset.croom.split("~")[1] == "undone" || all_apartments[i].dataset.droom.split("~")[1] == "undone" || all_apartments[i].dataset.kroom.split("~")[1] == "undone" || all_apartments[i].dataset.lroom.split("~")[1] == "undone") {
+//           all_apartments[i].classList.add("undone");
+//       }
+//       else {
+//           all_apartments[i].classList.add("done");
+//       }
+//     }
+//   }
+// }
 
 
 
@@ -295,11 +295,11 @@ function refresh__drawcontrols() {
 
 
 
-    
+
     let rooms = document.querySelectorAll(".project__building_room");
 
     for (let a = 0; a < rooms.length; a++) {
-      
+
       if(document.querySelector("#open_comments")) {
         // initializebuilding_comments();
       }
@@ -335,8 +335,8 @@ function refresh__drawcontrols() {
         }
 
       }
-       
-        
+
+
     }
 
 
@@ -506,10 +506,10 @@ function refresh__drawcontrols() {
         array__ofinputsy.push(document.querySelector("#cord_up"));
         array__ofinputsx.push(document.querySelector("#cord_left"));
       }
-      
 
 
-      
+
+
     }
     if (input_step == 'drawscreen_section_two') {
       $('.drawarea__section').show();
@@ -597,7 +597,7 @@ function refresh__drawcontrols() {
       }
 
       room_status = 'tomeasure';
-      document.querySelector("input.room_status").value = room_status; 
+      document.querySelector("input.room_status").value = room_status;
       rangat__navigation(false);
       document.querySelector(".drawarea__top").style.zIndex = 2;
 
@@ -1015,7 +1015,7 @@ function refresh__drawcontrols() {
       }
 
       room_status = 'saumatok';
-      document.querySelector("input.room_status").value = room_status; 
+      document.querySelector("input.room_status").value = room_status;
       rangat__navigation(false);
       document.querySelector(".drawarea__top").style.zIndex = -2;
 
@@ -1033,7 +1033,7 @@ function refresh__drawcontrols() {
       var drawarea__bottom = document.querySelector(".drawarea__bottom");
       drawarea__bottom.onclick = function () { };
     }
-    
+
     if (input_step == 'drawscreen_section_tyostot') {
 
       if (canvas.querySelector("div.saumat__grandrow")) {
@@ -1055,7 +1055,7 @@ function refresh__drawcontrols() {
       document.querySelector(".drawarea__top").classList.add("disabled");
       document.querySelector(".drawarea__right").classList.remove("m_btn");
       document.querySelector(".drawarea__top").classList.remove("m_btn");
-      
+
       let tyostot = document.querySelectorAll(".levy_input");
       for (var i = 0; i < tyostot.length; i++) {
         var tyosto_id = tyostot[i].getAttribute("id");
@@ -1104,7 +1104,7 @@ function refresh__drawcontrols() {
         sauma__controls[i].style.zIndex = "-1";
         sauma__controls[i].style.display = "none";
       }
-    
+
       var drawarea__top_item = document.querySelectorAll(".drawarea__top_item");
       if (drawarea__top_item) {
         for (var i = 0; i < drawarea__top_item.length; i += 1) {
@@ -1121,7 +1121,7 @@ function refresh__drawcontrols() {
         // kiinnikkeet__siirto();
         // kiinnike_update_settingsinit();
       }
-      
+
       if(tyostot_ok !== 0 && canvas.querySelector(".tyostot__tyosto") == null) {
         // kiinnikkeet__siirto();
         // kiinnike_update_settingsinit();
@@ -1132,18 +1132,18 @@ function refresh__drawcontrols() {
     }
     else {
       sauma__controls = canvas.querySelectorAll(".sauma__controls");
-    
+
       for (var i = 0; i < sauma__controls.length; i++) {
         sauma__controls[i].style.opacity = 1;
         sauma__controls[i].style.zIndex = 1;
         sauma__controls[i].style.display = "block";
       }
-    
+
       if (document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled")) {
         document.querySelector("#box-wrapper > div.drawarea__control.drawarea__right.disabled").style.borderLeft = "1px solid black";
         document.querySelector("#box-wrapper > div.drawarea__control.drawarea__top.disabled").style.borderBottom = "1px solid black";
       }
-    
+
       influence__coordinates('disable');
     }
     if (input_step == 'drawscreen_section_five') {
@@ -1155,14 +1155,14 @@ function refresh__drawcontrols() {
         $('#step_drawscreen').val('drawscreen_section_four');refresh__drawcontrols();updatearea();
         return
       }
-      
+
       $('.drawarea__section').show();
       for (var i = 0; i < da__controls.length; i++) {
         da__controls[i].style.display = "none";
       }
 
       if (document.querySelector(".levy_tyostot_x") && document.querySelector(".levy_tyostot_y")) {
-        
+
       }
       else {
         $('#step_drawscreen').val('drawscreen_section_tyostot');
@@ -1172,7 +1172,7 @@ function refresh__drawcontrols() {
       }
 
       document.querySelector(".drawarea__left").style.marginLeft = "-40px";
-      
+
       $("#drawscreen_section_five").show();
       $('.drawarea__controls_five').show();
       $("#drawscreen_section_five").slideDown(200);
@@ -1278,7 +1278,7 @@ function refresh__drawcontrols() {
       for (let i = 0; i < x_cord_mkis.length; i++) {
         x_cord_mkis[i].style.display = 'none';
       }
-      
+
       x_dels = canvas.querySelectorAll(".x_del");
       for (let i = 0; i < x_dels.length; i++) {
         x_dels[i].style.display = 'none';
@@ -1305,7 +1305,7 @@ function refresh__drawcontrols() {
 
 
       room_status = 'saumatok';
-      document.querySelector("input.room_status").value = room_status; 
+      document.querySelector("input.room_status").value = room_status;
       // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
       create__ladontaoptions();
 
@@ -1515,7 +1515,7 @@ function refresh__drawcontrols() {
       }).done(function (success) {
         u_rooms = [];
         used_rooms = [];
-            
+
         try {
           successful = success.replaceAll("~~~~",",").split("&&");
           trs = document.querySelectorAll(".levy_excel tr:not(.headingrow)");
@@ -1534,7 +1534,7 @@ function refresh__drawcontrols() {
               tr.innerHTML += "<td>" + row[index] + "</td>";
             }
             document.querySelector(".levy_excel tbody").appendChild(tr);
-          });  
+          });
         } catch (error) {
           console.log("no previous save detected");
         }
@@ -1661,7 +1661,7 @@ function refresh__drawcontrols() {
       }).done(function (success) {
         u_rooms = [];
         used_rooms = [];
-            
+
         try {
           successful = success.replaceAll("~~~~",",").split("&&");
           trs = document.querySelectorAll(".ranka_tuo_excel tr:not(.headingrow)");
@@ -1680,7 +1680,7 @@ function refresh__drawcontrols() {
               tr.innerHTML += "<td>" + row[index] + "</td>";
             }
             document.querySelector(".ranka_tuo_excel tbody").appendChild(tr);
-          });  
+          });
         } catch (error) {
           console.log("no previous save detected");
           rangoita();
@@ -1721,7 +1721,7 @@ function refresh__drawcontrols() {
         $("#drawscreen_section_seven").slideDown(200);
         $('.drawarea__section').css('display', 'flex');
         $('.levy__section').css('display', 'none');
-        
+
         document.querySelector("#box-wrapper > main").style.display = "block";
         document.querySelector(".drawarea__section").style.display = 'flex';
         document.querySelector("#box-wrapper").style.display = 'block';
@@ -1800,8 +1800,8 @@ function refresh__drawcontrols() {
             closers[i].style.zIndex = -1;
           }
         }
-        
-        
+
+
         listoitus();
         formData = {
           pr_id: document.querySelector("#current_project_id").value,
@@ -1819,14 +1819,14 @@ function refresh__drawcontrols() {
         }).done(function (success) {
           u_rooms = [];
           used_rooms = [];
-              
+
           try {
             successful = success.replaceAll("~~~~",",").split("&&");
             trs = document.querySelectorAll(".lista_tuo_excel tr:not(.headingrow)");
             trs.forEach(tr => {
               tr.remove();
             });
-  
+
             cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
             raw_data = successful[0].replaceAll('&&','').split("----");
             console.log(raw_data);
@@ -1838,7 +1838,7 @@ function refresh__drawcontrols() {
                 tr.innerHTML += "<td>" + row[index] + "</td>";
               }
               document.querySelector(".lista_tuo_excel tbody").appendChild(tr);
-            });  
+            });
           } catch (error) {
             console.log("no previous save detected");
             listoitus();
@@ -1892,7 +1892,7 @@ function refresh__drawcontrols() {
       }
     }
     if (input_step == 'drawscreen_section_eight') {
-      
+
       $('.drawarea__section').show();
       $("#drawscreen_section_eight").show();
       $('.drawarea__controls_eight').show();
@@ -1917,7 +1917,7 @@ function refresh__drawcontrols() {
       }
       body = document.body;
       body.classList.remove("bg");
-      
+
       // document.querySelector(".drawarea__controls_eight").style.display = 'none';
       // Drawarea limit
       document.querySelector("#box_upper__bottom-mid").style.display = 'none';
@@ -1984,7 +1984,7 @@ function refresh__drawcontrols() {
         document.querySelector("input.room_status").value = room_status;
         // document.querySelector(".house__wall_status.house__wall_status_" + current_room.toLowerCase()).classList.add(room_status);
       }
-      
+
       rangat__navigation(false);
       document.querySelector(".drawarea__top").style.zIndex = -2;
 
@@ -2018,7 +2018,7 @@ function refresh__drawcontrols() {
 
 
       document.querySelector("#box-wrapper > main").style.display = "block";
-      
+
 
 
     }
@@ -2095,7 +2095,7 @@ function refresh__drawcontrols() {
     var recl_btn = document.getElementsByClassName("recl_btn");
     if(document.querySelector("#reclamation__popup")) {
 
-    
+
       var reclamation__popup = document.querySelector("#reclamation__popup");
       document.querySelectorAll('.recl_btn').forEach(recl_modal => {
         recl_modal.addEventListener('click', event => {
@@ -2177,8 +2177,8 @@ function nav_betweenwalls(elem) {
 
     // document.querySelector(".tohide__room_"+current_room.toLowerCase() + " .wall_height").value = wallh_cord;
     // document.querySelector(".tohide__room_"+current_room.toLowerCase() + " .wall_width").value = wallw_cord;
-  
-    
+
+
     // drawarea_h.value = wallh_cord;
     // drawarea_w.value = wallw_cord;
 
@@ -2187,9 +2187,9 @@ function nav_betweenwalls(elem) {
     // changesize();
     // transfer__height_cords(totransfer_elem);
     $('.walls').val(rooms_array);
-    
 
-    
+
+
   }, 1000);
 }
 
@@ -2201,16 +2201,16 @@ function nav_betweenwalls(elem) {
  */
 function initializeroom(room, menu) {
   ir_no = room.dataset.room;
-  
+
   if(window.location.href.indexOf('&room=' + current_room.toLowerCase()) === -1) {
     degradate_url(2);
-    var refresh = window.location.href + '&room=' + current_room.toLowerCase();    
+    var refresh = window.location.href + '&room=' + current_room.toLowerCase();
     window.history.pushState({ path: refresh }, '', refresh);
     console.log("ADDED TO URL");
   }
 
-  
-  
+
+
   mode_room = ir_no.toLowerCase();
   $('#step_drawscreen').val('drawscreen_section_one');
   if (mode_room == 'a') {
@@ -2291,7 +2291,7 @@ function initializeroom(room, menu) {
 
     for (let i = 0; i < comments__controlelems.length; i++) {
       comments__controlelems[i].remove();
-      
+
     }
 
     // STOP CLEARING
@@ -2314,7 +2314,7 @@ function initializeroom(room, menu) {
           name_splitted = ir_coms[cm].split(",")[2].split(">")[1];
           if (ir_coms[cm].length > 5 && name_splitted == mode_room) {
             grande_array = ir_coms[cm];
-            
+
             comment__restore(grande_array);
             refresh__drawcontrols();
           }
@@ -2652,7 +2652,7 @@ function initializeroom(room, menu) {
 
       }
 
-      //SAUMAT 
+      //SAUMAT
       else if (ir_sau.length > 1) {
         // MPs formatting
         for (var i = 0; i < ir_mps.length; i++) {
@@ -2881,7 +2881,7 @@ function initializeroom(room, menu) {
         updatearea();
       }
 
-      //AUKOT 
+      //AUKOT
       else if (ir_aus.length > 1) {
         for (var i = 0; i < ir_mps.length; i++) {
           if (ir_mps[i].length > 5) {
@@ -2979,28 +2979,28 @@ function initializeroom(room, menu) {
   refresh__housenav();
 
   setTimeout(() => {
-    update_lv_ondrawarea();  
+    update_lv_ondrawarea();
   }, 550);
- 
+
 }
 
 
 // added 110324
-  
+
 function refresh__housenav() {
   letter__array = ["a","b","c","d","k","l"];
 
   letter__array.forEach(letter => {
-    document.querySelector(".tohide__room_"+letter+" .wall_height").value = parseFloat(document.querySelector("#wall_one_"+letter.replace('k','roof').replace('l','floor')+"_h").value); 
+    document.querySelector(".tohide__room_"+letter+" .wall_height").value = parseFloat(document.querySelector("#wall_one_"+letter.replace('k','roof').replace('l','floor')+"_h").value);
     document.querySelector(".tohide__room_"+letter+" .wall_width").value = parseFloat(document.querySelector("#wall_one_"+letter.replace('k','roof').replace('l','floor')+"_w").value);
     console.log(letter);
   });
-  
+
 }
 
 // Function for changing element coords
 // Parametrs:
-// where - where is function called? Array in [where ("funcAXIS" or "inpAXIS (AXIS can be W - width or H - height, eg. inpW or funcH)" - input element), *if input* selector]. 
+// where - where is function called? Array in [where ("funcAXIS" or "inpAXIS (AXIS can be W - width or H - height, eg. inpW or funcH)" - input element), *if input* selector].
 // elemSelector - a selector of element that needs to be changed
 // coords - data in [x, y] (array!) !! WITH INPUT ONCHANGE USE null !!
 // canvaSelector - selector of canva, where the element is
@@ -3352,7 +3352,7 @@ function addproblemstatus(e) {
       document.querySelector(".project__building_room." + el_.replaceAll(' ', '')).classList.add("critical");
     }
   }
-  
+
 }
 /**
  * Adds a click event listener to all radio buttons and checkboxes on the page to focus on the element when clicked.
@@ -3403,7 +3403,7 @@ function skipping() {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
   (async () => {
     console.log("Skipping started");
-    if(window.location.href.indexOf('&apartment=') > 1) { 
+    if(window.location.href.indexOf('&apartment=') > 1) {
       try {
         skipping_apartment = document.querySelector('#skipping_apartment').value.replaceAll("ä","a").replaceAll("ö","o");
         document.querySelector("." + skipping_apartment).click();
@@ -3416,7 +3416,7 @@ function skipping() {
             input_step = document.querySelector('#step_drawscreen').value;
             skipping_step = document.querySelector('#skipping_step').value;
             input_step = skipping_step.replaceAll("0","drawscreen_section_zero").replaceAll("1","drawscreen_section_one").replaceAll("2","drawscreen_section_two").replaceAll("3","drawscreen_section_three").replaceAll("4","drawscreen_section_four").replaceAll("5","drawscreen_section_five").replaceAll("6","drawscreen_section_six").replaceAll("7","drawscreen_section_seven").replaceAll("8","drawscreen_section_eight").replaceAll("9","drawscreen_section_tyostot").replaceAll("10","drawscreen_section_esikatselu");
-            
+
             await sleep(1000);
             $('#step_drawscreen').val(input_step);
             refresh__drawcontrols();
@@ -3427,13 +3427,13 @@ function skipping() {
         console.log(error);
         // degradate_url(1);
         // location.reload();
-      }   
-     
+      }
+
     }
     // await sleep(100);
     $(".preloader").removeClass( "active" );
   })();
-  
+
   // if(current_user_permissions)
 }
 
@@ -3459,11 +3459,11 @@ sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
  * @returns None
  */
 function initialize__housetempla(templ,stage) {
-  
+
   rdata = document.querySelector("."+current_apartment);
 
   if(stage === 1) {
-    
+
       house__templeates = document.querySelectorAll(".house__types_type");
       for (let a = 0; a < house__templeates.length; a++) {
         house__templeates[a].classList.remove("active");
@@ -3482,7 +3482,7 @@ function initialize__housetempla(templ,stage) {
       document.querySelector("#wall_one_roof_w").value = templ.dataset.kroom.split(",")[3].split("|")[1];
       document.querySelector("#wall_one_floor_h").value = templ.dataset.lroom.split(",")[3].split("|")[0];
       document.querySelector("#wall_one_floor_w").value = templ.dataset.lroom.split(",")[3].split("|")[1];
-      
+
       preset_id = parseFloat(templ.dataset.presetid);
       formData = {
         preset_id: preset_id,
@@ -3511,13 +3511,13 @@ function initialize__housetempla(templ,stage) {
           location.reload();
         })();
       });
-      
-   
+
+
   }
   if(stage === 2) {
 
     let housetemplate_name = prompt("Enter the name of the template:");
-    
+
     if (housetemplate_name == null) {
       return;
     }
@@ -3525,7 +3525,7 @@ function initialize__housetempla(templ,stage) {
     if (housetemplate_name == ""){
       alert("Invalid template name!");
       return;
-    }  
+    }
 
     newtype = document.createElement("div");
     newtype.classList.add("house__types_type");
@@ -3543,8 +3543,8 @@ function initialize__housetempla(templ,stage) {
       b: newtype.dataset.broom.toString(),
       c: newtype.dataset.croom.toString(),
       d: newtype.dataset.droom.toString(),
-      k: newtype.dataset.kroom.toString(), 
-      l: newtype.dataset.lroom.toString(), 
+      k: newtype.dataset.kroom.toString(),
+      l: newtype.dataset.lroom.toString(),
     };
 
     $.ajax({
@@ -3664,10 +3664,10 @@ function initializecropping() {
       }
       tables[t].style.overflowX = "clip";
     }
-    
+
 
     // clip-pathinset(0 0 240px 0)
-    
+
   }
 }
 
@@ -3700,7 +3700,7 @@ function settings__modal_open(e) {
   }
 }
 
-initializecropping(); 
+initializecropping();
 
 /**
  * Initializes settings for measurements by making AJAX calls to retrieve preset settings.
@@ -3729,7 +3729,7 @@ function initializesettings__mittaus() {
   });
 
   rankatype_array = ["","Saumaranka","Väliranka","Päättöranka","Kulmaranka","ikkunaranka"];
-  
+
   trs =["lapiviennit__tbody","systems__tbody","reikaframe__tbody","levytysreunat__tbody","ranka__tbody_eight","ranka__tbody_seven","ranka__tbody_six","ranka__tbody_five","ranka__tbody_four","ranka__tbody_three","ranka__tbody_two","ranka__tbody_one","materials__tbody","saumapysty__tbody","saumavaaka__tbody","ranka__tbody","listapysty__tbody","listavaaka__tbody"];
   for (let a = 0; a < trs.length; a++) {
     tds = document.querySelectorAll("."+trs[a]+" tr:not(.headingrow)");
@@ -3741,7 +3741,7 @@ function initializesettings__mittaus() {
 
   hs = document.querySelector("#hole_set");
   hs.innerHTML = "";
-  
+
   setTimeout(() => {
     formData = {
         preset_id: preset_id
@@ -3757,15 +3757,15 @@ function initializesettings__mittaus() {
       let settings_array = settings.split("],[");
 
       settings.split("],[").forEach((setting) => {
-        
+
         key = setting.split('","')[2];
         v_ = setting.replaceAll(String.fromCharCode(92),"").replaceAll(/u00f6/g,decode_utf8(encode_utf8('\u00f6'))).replaceAll(/u00e4/g,decode_utf8(encode_utf8('\u00e4'))).replaceAll("[","").replaceAll("]","").split('","')[3];
-        
+
         if(key == 's_materials') {
           t = document.querySelector(".materials__tbody");
           v_.split("~~").forEach((v) => {
             v=v.replaceAll('"','').split(",");
-  
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -3789,7 +3789,7 @@ function initializesettings__mittaus() {
                 <input type="radio" data-orlista="${v[10]}" data-yrlista="${v[9]}" data-sku="${v[1]}" data-structure="${v[7]}" data-thickness="${v[6]}" data-img="${v[8]}" data-h="${v[2]}" data-w="${v[3]}" data-aihioh="${v[4]}" data-aihiow="${v[5]}" name="levyn_vari" id="levy_vari_`+count+`">
                 <label onclick="levy__interaction(1,this);" class="levy__label" for="levy_vari_`+count+`" ${img}>${v[1]}</label>
               </td>`;
-            
+
               row.innerHTML += `
                 <td>
                   <input type="checkbox" name="admin_material" value="" onclick="this.checked ? this.value = 'on' : this.value = '';" id="material_`+count+`" ${checked}>
@@ -3818,7 +3818,7 @@ function initializesettings__mittaus() {
                       <input type="text" disabled value="${v[7]}" class="lineinput" oninput="">
                   </td>
                   `;
-    
+
                 if(v.length > 5 && v[8].length > 5) {
                   row.innerHTML += '<td><img src="/uploads/'+v[8]+'" style="max-width: 100px"><input type="hidden" class="fileinput_value" value="'+v[8]+'"></td>';
                 }
@@ -3841,7 +3841,7 @@ function initializesettings__mittaus() {
               `;
 
               t.appendChild(row);
-            
+
               setTimeout(() => {
                 change__sauma_koko(document.querySelector("#sauma_material1"));
                 document.querySelector("#sauma_material1").checked = true;
@@ -3856,18 +3856,18 @@ function initializesettings__mittaus() {
             t.style.opacity = 0;
           }
         }
-        
+
         if(key == 's_levytysreunat') {
           t = document.querySelector(".levytysreunat__tbody");
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
             if(v[0] == 'on') {
               checked = 'checked';
-            
+
               row.innerHTML += `
                 <td>
                   <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="lvreunat_`+count+`" ${checked}>
@@ -3927,7 +3927,7 @@ function initializesettings__mittaus() {
         }
 
         for (let i = 1; i < 6; i++) {
-     
+
           if(key == 's_aukot_'+i) {
             if(i == 1) {
               h2 = '<h2>Oviaukon asetukset</h2>';
@@ -3937,31 +3937,31 @@ function initializesettings__mittaus() {
               h2 = '<h2>Ikkuna-aukon asetukset</h2>';
               typeclass = 'ikkuna';
             }
-            
+
             else if(i == 3) {
               h2 = '<h2>Pilariaukon asetukset</h2>';
               typeclass = 'pilari';
             }
-            
+
             else if(i == 4) {
               h2 = '<h2>Palkkiaukon asetukset</h2>';
               typeclass = 'palkki';
             }
-            
+
             else if(i == 5) {
               h2 = '<h2>Ilmastointiaukon asetukset</h2>';
               typeclass = 'ilmastointi';
             }
-  
+
             newsection = document.createElement("section");
             newsection.classList = typeclass+"_section";
             newsection.dataset.aukkotype = typeclass;
             newsection.dataset.count = i;
-  
+
             newsection_h4 = document.createElement("h4");
             newsection_h4.classList = typeclass+"__asetusheading";
             newsection_h4.innerHTML = typeclass+" aukko-asetus, Tyyppi <b></b>";
-  
+
             newsection_table = document.createElement("table");
             newsection_table.classList.add("tabs__target_table");
             newsection_table.classList.add("aukko-table");
@@ -3984,20 +3984,20 @@ function initializesettings__mittaus() {
               <td>L2B Listan pituus +</td>
               <td>L2B Listan laatu</td>
             `;
-  
+
             count_rows = 0;
-  
+
             newsection.appendChild(newsection_h4);
             newsection.appendChild(newsection_table);
             newsection_table.appendChild(newtr);
-            
+
             v_.split("~~").forEach((v) => {
               counting_item = 0;
               if(count_rows == 4) {
                 newsection_h4 = document.createElement("h4");
                 newsection_h4.classList = typeclass+"__asetusheading";
                 newsection_h4.innerHTML = typeclass+" aukko-asetus, Tyyppi <b></b>";
-  
+
                 newsection_table = document.createElement("table");
                 newsection_table.classList.add("tabs__target_table");
                 newsection_table.classList.add("aukko-table");
@@ -4020,12 +4020,12 @@ function initializesettings__mittaus() {
                   <td>L2B Listan pituus +</td>
                   <td>L2B Listan laatu</td>`;
                   newsection_table.appendChild(newtr);
-                    
-  
+
+
                 count_rows = 0;
                 newsection.appendChild(newsection_h4);
                 newsection.appendChild(newsection_table);
-  
+
                 count_rows=0;
               }
               v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
@@ -4050,21 +4050,21 @@ function initializesettings__mittaus() {
               newsection_table.appendChild(newtr);
               count_rows+=1;
             });
-  
+
             newdiv = document.createElement("div");
             newdiv.classList = "newtableshere";
             newsection.appendChild(newdiv);
             hs.appendChild(newsection);
-            
+
           }
-         
+
         }
 
         if(key == 's_reikaframe') {
           t = document.querySelector(".reikaframe__tbody");
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4072,28 +4072,28 @@ function initializesettings__mittaus() {
               checked = 'checked';
             }
             row.innerHTML += `
-             
-              
+
+
               <td>
                   <input type="text" disabled value="${v[0]}" class="lineinput" oninput="">
               </td>
-              
+
               <td>
                 <input type="checkbox" value="${v[1]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="reikaframe_`+count+`" ${checked}>
                 <label for="reikaframe_`+count+`"></label>
               </td>
-              
+
               `;
             t.appendChild(row);
           });
         }
-  
+
         if(key == 's_lapiviennit') {
           dt = document.querySelector(".drawarea__top");
           t = document.querySelector(".lapiviennit__tbody");
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4121,8 +4121,8 @@ function initializesettings__mittaus() {
             if(v[5] == 'on') {
               checked2 = 'checked';
             }
-            
-             
+
+
             row.innerHTML += `
               <td>
                 <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="lapivienti_`+count+`" ${checked}>
@@ -4176,16 +4176,16 @@ function initializesettings__mittaus() {
         if(key == 's_saumakulku') {
           sauma__xkulku = document.getElementsByName("sauma__saumoitus_x");
           sauma__ykulku = document.getElementsByName("sauma__saumoitus_y");
-  
+
           v_ = v_.replaceAll('"','');
-  
+
           if(v_.split("~~")[0] == 'yli') {
             sauma__xkulku[0].checked = true;
           }
           else if(v_.split("~~")[0] == 'mukaan') {
             sauma__xkulku[1].checked = true;
           }
-  
+
           if(v_.split("~~")[1] == 'yli') {
             sauma__ykulku[0].checked = true;
           }
@@ -4193,10 +4193,10 @@ function initializesettings__mittaus() {
             sauma__ykulku[1].checked = true;
           }
         }
-  
+
         if(key == 's_saumasuunta') {
           v_ = v_.replaceAll('"','');
-  
+
           if(v_ == 'levytys_pystyyn') {
             document.querySelector("#settings__sauma_pysty").checked = true;
           }
@@ -4204,14 +4204,14 @@ function initializesettings__mittaus() {
             document.querySelector("#settings__sauma_vaaka").checked = true;
           }
         }
-  
+
         if(key == 's_saumatyyppi') {
-  
+
           saumat__xkulku = document.getElementsByName("sauma__xtype");
           saumat__ykulku = document.getElementsByName("sauma__ytype");
-  
+
           v_ = v_.replaceAll('"','');
-  
+
           if(v_.split("~~")[0] == 'oik') {
             saumat__xkulku[0].checked = true;
           }
@@ -4230,14 +4230,14 @@ function initializesettings__mittaus() {
           else if(v_.split("~~")[1] == 'vaakatasoitus') {
             saumat__ykulku[2].checked = true;
           }
-  
+
         }
 
         if(key == 's_saumatpysty') {
           t = document.querySelector(".saumapysty__tbody");
           v_.split("~~").forEach((v) => {
             v=v.replaceAll('"','').split(",");
-  
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4247,7 +4247,7 @@ function initializesettings__mittaus() {
             else {
               return
             }
-           
+
             row.innerHTML += `
                 <td>
                     <input type="text" disabled value="${v[1]}" class="lineinput">
@@ -4266,12 +4266,12 @@ function initializesettings__mittaus() {
           });
           saumaset_vm = parseFloat(document.querySelector(".saumapysty__tbody td:nth-child(2) > input").value);
         }
-  
+
         if(key == 's_saumatvaaka') {
           t = document.querySelector(".saumavaaka__tbody");
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-  
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4281,7 +4281,7 @@ function initializesettings__mittaus() {
             else {
               return
             }
-           
+
             row.innerHTML += `
                 <td>
                     <input type="text" disabled value="${v[1]}" class="lineinput">
@@ -4306,7 +4306,7 @@ function initializesettings__mittaus() {
           t.style.display = "none";
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-  
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4317,7 +4317,7 @@ function initializesettings__mittaus() {
             else {
               return
             }
-  
+
             r_options = "";
             for (let i = 0; i < rankatype_array.length; i++) {
               if(v[13] == rankatype_array[i]) {
@@ -4325,10 +4325,10 @@ function initializesettings__mittaus() {
               }
               else {
                 r_options += "<option>"+rankatype_array[i]+"</option>";
-  
-              }            
+
+              }
             }
-            
+
             row.innerHTML += `
               <td>
                 <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_one_`+count+`" ${checked}>
@@ -4368,10 +4368,10 @@ function initializesettings__mittaus() {
               <td>
                   <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
-              
+
               `;
             t.appendChild(row);
-  
+
           });
         }
         if(key == 's_rangat_2') {
@@ -4379,7 +4379,7 @@ function initializesettings__mittaus() {
           t.style.display = "none";
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4397,10 +4397,10 @@ function initializesettings__mittaus() {
               }
               else {
                 r_options += "<option>"+rankatype_array[i]+"</option>";
-  
-              }            
+
+              }
             }
-  
+
             row.innerHTML += `
               <td>
                 <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_two_`+count+`" ${checked}>
@@ -4440,12 +4440,12 @@ function initializesettings__mittaus() {
               <td>
                   <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
-              
-              
+
+
               `;
             t.appendChild(row);
-        
-  
+
+
           });
         }
         if(key == 's_rangat_3') {
@@ -4453,7 +4453,7 @@ function initializesettings__mittaus() {
           t.style.display = "none";
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4464,7 +4464,7 @@ function initializesettings__mittaus() {
             else {
               return
             }
-  
+
             r_options = "";
             for (let i = 0; i < rankatype_array.length; i++) {
               if(v[13] == rankatype_array[i]) {
@@ -4472,8 +4472,8 @@ function initializesettings__mittaus() {
               }
               else {
                 r_options += "<option>"+rankatype_array[i]+"</option>";
-  
-              }            
+
+              }
             }
             row.innerHTML += `
               <td>
@@ -4514,11 +4514,11 @@ function initializesettings__mittaus() {
               <td>
                   <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
-              
+
               `;
             t.appendChild(row);
-        
-  
+
+
           });
         }
         if(key == 's_rangat_4') {
@@ -4526,7 +4526,7 @@ function initializesettings__mittaus() {
           t.style.display = "none";
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4537,7 +4537,7 @@ function initializesettings__mittaus() {
             else {
               return
             }
-  
+
             r_options = "";
             for (let i = 0; i < rankatype_array.length; i++) {
               if(v[13] == rankatype_array[i]) {
@@ -4545,8 +4545,8 @@ function initializesettings__mittaus() {
               }
               else {
                 r_options += "<option>"+rankatype_array[i]+"</option>";
-  
-              }            
+
+              }
             }
             row.innerHTML += `
               <td>
@@ -4587,11 +4587,11 @@ function initializesettings__mittaus() {
               <td>
                   <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
-              
+
               `;
             t.appendChild(row);
-        
-  
+
+
           });
         }
         if(key == 's_rangat_5') {
@@ -4599,7 +4599,7 @@ function initializesettings__mittaus() {
           t.style.display = "none";
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4610,7 +4610,7 @@ function initializesettings__mittaus() {
             else {
               return
             }
-  
+
             r_options = "";
             for (let i = 0; i < rankatype_array.length; i++) {
               if(v[13] == rankatype_array[i]) {
@@ -4618,8 +4618,8 @@ function initializesettings__mittaus() {
               }
               else {
                 r_options += "<option>"+rankatype_array[i]+"</option>";
-  
-              }            
+
+              }
             }
             row.innerHTML += `
               <td>
@@ -4660,11 +4660,11 @@ function initializesettings__mittaus() {
               <td>
                   <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
-              
+
               `;
             t.appendChild(row);
-        
-  
+
+
           });
         }
         if(key == 's_rangat_6') {
@@ -4672,7 +4672,7 @@ function initializesettings__mittaus() {
           t.style.display = "none";
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4683,7 +4683,7 @@ function initializesettings__mittaus() {
             else {
               return
             }
-  
+
             r_options = "";
             for (let i = 0; i < rankatype_array.length; i++) {
               if(v[13] == rankatype_array[i]) {
@@ -4691,8 +4691,8 @@ function initializesettings__mittaus() {
               }
               else {
                 r_options += "<option>"+rankatype_array[i]+"</option>";
-  
-              }            
+
+              }
             }
             row.innerHTML += `
               <td>
@@ -4733,11 +4733,11 @@ function initializesettings__mittaus() {
               <td>
                   <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
-              
+
               `;
             t.appendChild(row);
-        
-  
+
+
           });
         }
         if(key == 's_rangat_7') {
@@ -4745,7 +4745,7 @@ function initializesettings__mittaus() {
           t.style.display = "none";
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4756,7 +4756,7 @@ function initializesettings__mittaus() {
             else {
               return
             }
-  
+
             r_options = "";
             for (let i = 0; i < rankatype_array.length; i++) {
               if(v[13] == rankatype_array[i]) {
@@ -4764,10 +4764,10 @@ function initializesettings__mittaus() {
               }
               else {
                 r_options += "<option>"+rankatype_array[i]+"</option>";
-  
-              }            
+
+              }
             }
-  
+
             row.innerHTML += `
               <td>
                 <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';" id="ranka_seven_`+count+`" ${checked}>
@@ -4807,11 +4807,11 @@ function initializesettings__mittaus() {
               <td>
                   <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
-              
+
               `;
             t.appendChild(row);
-        
-  
+
+
           });
         }
         if(key == 's_rangat_8') {
@@ -4819,7 +4819,7 @@ function initializesettings__mittaus() {
           t.style.display = "none";
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4830,7 +4830,7 @@ function initializesettings__mittaus() {
             else {
               return
             }
-  
+
             r_options = "";
             for (let i = 0; i < rankatype_array.length; i++) {
               if(v[13] == rankatype_array[i]) {
@@ -4838,8 +4838,8 @@ function initializesettings__mittaus() {
               }
               else {
                 r_options += "<option>"+rankatype_array[i]+"</option>";
-  
-              }            
+
+              }
             }
             row.innerHTML += `
               <td>
@@ -4880,11 +4880,11 @@ function initializesettings__mittaus() {
               <td>
                   <input type="text" disabled value="${v[11]}" class="lineinput" oninput="">
               </td>
-              
+
               `;
             t.appendChild(row);
-        
-  
+
+
           });
         }
 
@@ -4894,7 +4894,7 @@ function initializesettings__mittaus() {
           t = document.querySelector(".listapysty__tbody");
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -4950,12 +4950,12 @@ function initializesettings__mittaus() {
             t.appendChild(row);
           });
         }
-  
+
         if(key == 's_listatvaaka') {
           t = document.querySelector(".listavaaka__tbody");
           v_.split("~~").forEach((v) => {
             v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-        
+
             count = t.querySelectorAll("tr").length;
             row = document.createElement("tr");
             checked = '';
@@ -5011,7 +5011,7 @@ function initializesettings__mittaus() {
             t.appendChild(row);
           });
         }
-        
+
         if(key == 's_listat') {
           t = document.querySelector(".listat__tbody");
           v_.split("~~").forEach((v) => {
@@ -5038,7 +5038,7 @@ function initializesettings__mittaus() {
           for (let i = 0; i < inputs.length; i++) {
             inputs[i].value = data[i]
           }
-        } 
+        }
 
         if (key == 's_reunaasetukset') {
           const inputs = document.querySelectorAll(".poraukset input")
@@ -5054,7 +5054,7 @@ function initializesettings__mittaus() {
     givenewtype();
   },1250);
 
-  
+
 }
 initializesettings__mittaus();
 
@@ -5134,7 +5134,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
       $(obj).val(value);
     });
     $('.room_status').each(function (i, obj) {
-     
+
       value = room_status;
       $(obj).val(value);
     });
@@ -5399,7 +5399,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
       document.querySelector(".drawarea__controls_four-vaaka").innerHTML = "";
 
       ir_sau = ir_sau_.split("__");
-      //SAUMAT 
+      //SAUMAT
       if (ir_sau.length > 1) {
         for (var i = ir_sau.length - 1; i >= 0; i--) {
 
@@ -5552,8 +5552,8 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
           }
         }
       }
-      
-      
+
+
 
       saving_origo = parseFloat(document.querySelector("#drawarea__origo_central").style.left) + "|" + parseFloat(document.querySelector(
         "#drawarea__origo_central").style.bottom);
@@ -5628,7 +5628,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
         b_rooms_ = document.querySelectorAll("#B .project__building_room");
         b_rooms = '';
 
-        for (let i = 0; i < b_rooms_.length; i++) {     
+        for (let i = 0; i < b_rooms_.length; i++) {
           _name = b_rooms_[i].dataset.room.replaceAll(",","~").replace('"','').replace("'","");
           positionX = b_rooms_[i].dataset.x.replaceAll(",","~").replace('"','').replace("'","");
           positionY = b_rooms_[i].dataset.y.replaceAll(",","~").replace('"','').replace("'","");
@@ -5652,7 +5652,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
         c_rooms_ = document.querySelectorAll("#C .project__building_room");
         c_rooms = '';
 
-        for (let i = 0; i < c_rooms_.length; i++) {     
+        for (let i = 0; i < c_rooms_.length; i++) {
           _name = c_rooms_[i].dataset.room.replaceAll(",","~").replace('"','').replace("'","");
           positionX = c_rooms_[i].dataset.x.replaceAll(",","~").replace('"','').replace("'","");
           positionY = c_rooms_[i].dataset.y.replaceAll(",","~").replace('"','').replace("'","");
@@ -5714,7 +5714,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
       // _saving_f_rooms
       // _saving_g_rooms
       // _saving_h_rooms
-      
+
 
       formData = {
         id: _id.replace('"', '').replace("'", ""),
@@ -5722,9 +5722,9 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
         saving_b_rooms: _saving_b_rooms,
         saving_c_rooms: _saving_c_rooms,
         // saving_d_rooms: _saving_d_rooms,
-        // saving_e_rooms: _saving_e_rooms, 
-        // saving_f_rooms: _saving_f_rooms, 
-        // saving_g_rooms: _saving_g_rooms, 
+        // saving_e_rooms: _saving_e_rooms,
+        // saving_f_rooms: _saving_f_rooms,
+        // saving_g_rooms: _saving_g_rooms,
         // saving_h_rooms: _saving_h_rooms
       };
 
@@ -5733,7 +5733,7 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
         if(aukkotallennus == 'aukkotallennus') {
           settings_aukot = document.querySelectorAll(".aukko__toindex");
 
-          
+
           formData = {
             id: _id.replace('"', '').replace("'", ""),
             username: document.querySelector("#current_user").value,
@@ -5741,13 +5741,13 @@ function submitprogress(b, moddingtype, id, type, array,aukkotallennus) {
             saving_b_rooms: _saving_b_rooms,
             saving_c_rooms: _saving_c_rooms,
             // saving_d_rooms: _saving_d_rooms,
-            // saving_e_rooms: _saving_e_rooms, 
-            // saving_f_rooms: _saving_f_rooms, 
-            // saving_g_rooms: _saving_g_rooms, 
+            // saving_e_rooms: _saving_e_rooms,
+            // saving_f_rooms: _saving_f_rooms,
+            // saving_g_rooms: _saving_g_rooms,
             // saving_h_rooms: _saving_h_rooms
           };
         }
-        
+
       }
 
       $.ajax({
@@ -5781,7 +5781,7 @@ function create__excelgenerationtimestamp(e) {
   _wall = current_room.toLowerCase();
   _generated_array = "";
 
-  if(_type === 'levyt') {  
+  if(_type === 'levyt') {
     __generated_array = JSON.stringify(levyexcel_array);
   }
   if(_type === 'rangat') {
@@ -5851,7 +5851,7 @@ function toggle__asexcel(mode, b) {
   rangat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
   listat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
 
-  
+
   current_id = parseFloat(document.querySelector("#current_project_id").value);
 
   if(mode === 0) {
@@ -5864,7 +5864,7 @@ function toggle__asexcel(mode, b) {
       tr.remove();
     });
     _types.forEach(_type => {
-      
+
 
       _tr = document.createElement("tr");
       rinnerText = current_tila+" "+_type.toUpperCase();
@@ -5896,7 +5896,7 @@ function toggle__asexcel(mode, b) {
       }).done(function (success) {
         u_rooms = [];
         used_rooms = [];
-        successful = success.replaceAll("~~~~",",").split("&&");    
+        successful = success.replaceAll("~~~~",",").split("&&");
         successful.forEach(timestamp => {
           if(timestamp.length < 5) {
             return
@@ -5913,15 +5913,15 @@ function toggle__asexcel(mode, b) {
           else {
             used_rooms.push(wall+"|"+roomstatus);
             u_rooms.push(wall);
-          } 
+          }
         });
         rinnerText = current_tila+" "+_type.toUpperCase();
         rinnerText_selector = rinnerText.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
-  
+
         console.log("rinnerText_selector: " + rinnerText_selector);
 
         used_rooms.forEach(r => {
-          r_wall = r.split("|")[0].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();        
+          r_wall = r.split("|")[0].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
           r_row = document.querySelector(".tilatilaus__tbody tr."+rinnerText_selector);
           wall_status = r.split("|")[1].toUpperCase();
           if(r_wall === "a") {
@@ -5946,9 +5946,9 @@ function toggle__asexcel(mode, b) {
       });
     });
 
-      
 
-    
+
+
 
     return
   }
@@ -5983,7 +5983,7 @@ function toggle__asexcel(mode, b) {
       tr.remove();
     });
 
-    successful = success.replaceAll("~~~~",",").split("&&");    
+    successful = success.replaceAll("~~~~",",").split("&&");
     used_rooms = [];
     u_rooms = [];
     successful.forEach(timestamp => {
@@ -6001,7 +6001,7 @@ function toggle__asexcel(mode, b) {
       else {
         used_rooms.push(wall+"|"+timing);
         u_rooms.push(wall);
-      } 
+      }
     });
 
     successful.forEach(timestamp => {
@@ -6037,7 +6037,7 @@ function toggle__asexcel(mode, b) {
             tr.innerHTML += "<td>" + row[index] + "</td>";
           }
           document.querySelector(".tila"+_type+"__tbody").appendChild(tr);
-        });  
+        });
       }
     });
   });
@@ -6068,7 +6068,7 @@ function lataa_seinaexcel(arg) {
   asrangat_array = [];
   aslistat_array = [];
   _types = ["levyt","rangat","listat"];
-    
+
   if(arg) {
     _types.forEach(_type => {
       formData = {
@@ -6085,7 +6085,7 @@ function lataa_seinaexcel(arg) {
         }
       }).done(function (success) {
         timest = 0;
-        successful = success.replaceAll("~~~~",",").split("&&");    
+        successful = success.replaceAll("~~~~",",").split("&&");
         used_rooms = [];
         u_rooms = [];
         successful.forEach(timestamp => {
@@ -6105,9 +6105,9 @@ function lataa_seinaexcel(arg) {
             else {
               used_rooms.push(wall+"|"+timing);
               u_rooms.push(wall);
-            } 
+            }
           }
-          
+
         });
 
         successful.forEach(timestamp => {
@@ -6148,7 +6148,7 @@ function lataa_seinaexcel(arg) {
               if(_type === "listat") {
                 aslistat_array.push(row);
               }
-            });  
+            });
 
 
             timestamby = parseFloat(timest) * 1000;
@@ -6159,7 +6159,7 @@ function lataa_seinaexcel(arg) {
               status: 'tilattu',
               timedate: formattedDate,
             }
-            
+
             $.ajax({
               type: "POST",
               url: "../vendor/excel_changestatus.php",
@@ -6196,7 +6196,7 @@ function lataa_seinaexcel(arg) {
       var ws2 = XLSX.utils.json_to_sheet(asrangat_array);
       var ws3 = XLSX.utils.json_to_sheet(aslistat_array);
       var wb = XLSX.utils.book_new();
-      
+
       XLSX.utils.book_append_sheet(wb, ws0, "Tilaukset");
       XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
       XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
@@ -6221,7 +6221,7 @@ function lataa_seinaexcel(arg) {
         }
       }).done(function (success) {
 
-        successful = success.replaceAll("~~~~",",").split("&&");    
+        successful = success.replaceAll("~~~~",",").split("&&");
         used_rooms = [];
         u_rooms = [];
         successful.forEach(timestamp => {
@@ -6239,7 +6239,7 @@ function lataa_seinaexcel(arg) {
           else {
             used_rooms.push(wall+"|"+timing);
             u_rooms.push(wall);
-          } 
+          }
         });
 
         successful.forEach(timestamp => {
@@ -6278,7 +6278,7 @@ function lataa_seinaexcel(arg) {
               if(_type === "listat") {
                 aslistat_array.push(row);
               }
-            });  
+            });
 
 
             timestamby = parseFloat(timest) * 1000;
@@ -6289,7 +6289,7 @@ function lataa_seinaexcel(arg) {
               status: 'tilattu',
               timedate: formattedDate,
             }
-            
+
             $.ajax({
               type: "POST",
               url: "../vendor/excel_changestatus.php",
@@ -6326,7 +6326,7 @@ function lataa_seinaexcel(arg) {
       var ws2 = XLSX.utils.json_to_sheet(asrangat_array);
       var ws3 = XLSX.utils.json_to_sheet(aslistat_array);
       var wb = XLSX.utils.book_new();
-      
+
       XLSX.utils.book_append_sheet(wb, ws0, "Tilaukset");
       XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
       XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
@@ -6334,7 +6334,7 @@ function lataa_seinaexcel(arg) {
       XLSX.writeFile(wb, filename);
     }, 250);
   }
-  
+
 
 }
 
@@ -6366,7 +6366,7 @@ function toggle__projectexcel(mode, b) {
   rangat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
   listat_cols = ["Rivinumero","Rangan tyyppi","Tilauskoodi","Pituus","KPL","MATERIAALI","PAKSUUS","LAATU","Väri nimi","NCS code","Tilattu PVM","STATUS","Asiakas","Projekti","Osoite","Palletgroup","Asunto Nimi 1","Nimi 2","Työstöt","Asennus"];
 
-  
+
   current_id = parseFloat(document.querySelector("#current_project_id").value);
   if(mode === 0) {
     _type = "tilaus";
@@ -6395,7 +6395,7 @@ function toggle__projectexcel(mode, b) {
         }
       }).done(function (success) {
         // ITERATE ROOM>WALLARRAY
-        successful = success.replaceAll("~~~~",",").split("&&");    
+        successful = success.replaceAll("~~~~",",").split("&&");
         successful.forEach(timestamp => {
           if(timestamp.length < 5) {
             return
@@ -6414,7 +6414,7 @@ function toggle__projectexcel(mode, b) {
             t_used_rooms.push(apart+">"+wall+"|"+timing+"|"+roomstatus);
             apart_statuses.push(timing+"|"+roomstatus);
             t_u_rooms_.push(apart+">"+wall);
-          } 
+          }
           });
 
 
@@ -6424,7 +6424,7 @@ function toggle__projectexcel(mode, b) {
             wall = iteration.split(">")[1];
             successful.forEach(timestamp => {
               if(timestamp.length < 5) {
-                
+
               }
               else {
                 raw_data = timestamp.replaceAll('&&','').split("----");
@@ -6432,7 +6432,7 @@ function toggle__projectexcel(mode, b) {
                 timing = toTimestamp(raw_data[2]);
                 raw_wall = raw_data[1];
                 if(apart === toiterate__apart && raw_wall === wall) {
-                
+
                   t_used_rooms.forEach(u1 => {
                     if(u1.split("|")[0].split(">")[1] === wall && u1.split("|")[0] === iteration) {
                       if(timest !== null) {
@@ -6453,14 +6453,14 @@ function toggle__projectexcel(mode, b) {
                         else {
                           timest = timing;
                           timest_item = apart+">"+raw_wall+"|"+timing;
-                          
+
                         }
                       }
                     }
                   });
                 }
               }
-              
+
             });
 
             console.log("timest_item -> " + timest_item);
@@ -6470,7 +6470,7 @@ function toggle__projectexcel(mode, b) {
               apart = raw_data[3];
               timing = toTimestamp(raw_data[2]);
               raw_wall = raw_data[1];
-              
+
               if(timest_item === apart+">"+raw_wall+"|"+timing) {
                 console.log("MATCH apart raw_wall timing " + apart+">"+raw_wall+"|"+timing);
                 apart_statuses.forEach(as => {
@@ -6478,22 +6478,22 @@ function toggle__projectexcel(mode, b) {
                     mystatus = as.split("|")[1];
                     _t_u_rooms.push(apart+">"+raw_wall+"|"+mystatus);
                   }
-                });           
-                
+                });
+
               }
             });
-            
+
           });
       });
 
-      
+
     });
 
 
-    
 
 
-    setTimeout(() => {      
+
+    setTimeout(() => {
       rooms_data = document.querySelectorAll(".project__building_room");
       rooms_data.forEach(r => {
         if(r.innerText.length > 1) {
@@ -6514,7 +6514,7 @@ function toggle__projectexcel(mode, b) {
             document.querySelector(".project"+_type+"__tbody").appendChild(_tr);
           }
         }
-        
+
       });
     }, 550);
 
@@ -6522,7 +6522,7 @@ function toggle__projectexcel(mode, b) {
       _t_u_rooms.forEach(r => {
         r_name = r.split("|")[0].split(">")[0].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
         r_wall = r.split("|")[0].split(">")[1].replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase();
-        
+
         r_row = document.querySelector(".projecttilaus__tbody ."+r_name.replaceAll("ä","a").replaceAll("ö","o").replaceAll(" ","_").replaceAll('\n','_').toLowerCase());
         wall_status = r.split("|")[1].toUpperCase();
         if(r_wall === "a") {
@@ -6546,10 +6546,10 @@ function toggle__projectexcel(mode, b) {
       });
     }, 650);
 
-   
+
     return
   }
-  
+
   if(mode === 1) {
     _type = "levyt";
     cols = ['Type (drawing)','Materialcode','Leveys (X)','Pituus (Y)','Thickness','Structure','Quantity','Plus','Part number','Nimi 1','Nimi 2','MPR','Palletgroup','Prioriteetti','Asiakas','Asennus','Työstöt','','X KPL','Y KPL','Yhteensä','  ','   ','    ','     ','      ','Tarra','Diameter','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10','X','Y','X ','Y ','PR1_X','PR1_Y','PR1_DX','PR1_DY','PR2_X','PR2_Y','PR1_DX','PR2_DY','PR3_X','PR3_Y','PR3_DX','PR3_DY','PR4_X','PR4_Y','PR4_DX','PR4_DY','PF1_X','PF1_Y','PF1_DX','PF1_DY','PF2_X','PF2_Y','PF2_DX','PF2_DY','CH 0=OFF 1= ON','Y Vasen','Y oikea','X ala','x ylä','X ala','X ylä','VH1_X','VH1_Y','VH1_L','VH1_KPL','VH1_K','       ','        ','         ','          ','AR Edge 1','YR Edge 1','VR Edge 1','OR Edge 1','AR Edge 2','YR Edge 2','VR Edge 2','OR Edge 2','AR Trim','YR Trim','VR Trim','OR Trim','Yhdistä Xx-XX','Yhdistä Yx-YX'];
@@ -6583,7 +6583,7 @@ function toggle__projectexcel(mode, b) {
 
 
     // ITERATE ROOM>WALLARRAY
-    successful = success.replaceAll("~~~~",",").split("&&");    
+    successful = success.replaceAll("~~~~",",").split("&&");
     used_rooms = [];
     u_rooms = [];
     successful.forEach(timestamp => {
@@ -6601,7 +6601,7 @@ function toggle__projectexcel(mode, b) {
       else {
         used_rooms.push(apart+">"+wall+"|"+timing);
         u_rooms.push(apart+">"+wall);
-      } 
+      }
     });
     // END ROOM>WALLARRAY
 
@@ -6638,7 +6638,7 @@ function toggle__projectexcel(mode, b) {
                 else {
                   timest = timing;
                   timest_item = apart+">"+raw_wall+"|"+timing;
-                  
+
                 }
               }
             }
@@ -6659,13 +6659,13 @@ function toggle__projectexcel(mode, b) {
               tr.innerHTML += "<td>" + row[index] + "</td>";
             }
             document.querySelector(".project"+_type+"__tbody").appendChild(tr);
-          });  
+          });
           timest = null;
         }
       });
     });
 
-    
+
   });
 }
 
@@ -6682,7 +6682,7 @@ function lataa_projektiexcel(arg) {
   prtilausarray = [];
   prlevytarray = [];
   prrangat_array = [];
-  prlistat_array = []; 
+  prlistat_array = [];
 
   _types = ["levyt","rangat","listat"];
 
@@ -6701,7 +6701,7 @@ function lataa_projektiexcel(arg) {
         }
       }).done(function (success) {
         // ITERATE ROOM>WALLARRAY
-        successful = success.replaceAll("~~~~",",").split("&&");    
+        successful = success.replaceAll("~~~~",",").split("&&");
         used_rooms = [];
         u_rooms = [];
         successful.forEach(timestamp => {
@@ -6722,9 +6722,9 @@ function lataa_projektiexcel(arg) {
             else {
               used_rooms.push(apart+">"+wall+"|"+timing);
               u_rooms.push(apart+">"+wall);
-            } 
+            }
           }
-          
+
         });
         // END ROOM>WALLARRAY
 
@@ -6762,7 +6762,7 @@ function lataa_projektiexcel(arg) {
                     else {
                       timest = timing;
                       timest_item = apart+">"+raw_wall+"|"+timing;
-                      
+
                     }
                   }
                 }
@@ -6786,8 +6786,8 @@ function lataa_projektiexcel(arg) {
                 if(_type === "listat") {
                   prlistat_array.push(row);
                 }
-              });  
-              
+              });
+
               timestamby = parseFloat(timing) * 1000;
               formatted_db_date = new Date(timestamby);
 
@@ -6796,7 +6796,7 @@ function lataa_projektiexcel(arg) {
                 status: 'tilattu',
                 timedate: formattedDate,
               }
-              
+
               $.ajax({
                 type: "POST",
                 url: "../vendor/excel_changestatus.php",
@@ -6831,14 +6831,14 @@ function lataa_projektiexcel(arg) {
           'LATTIA': tds[6].innerText,
         });
       });
-      
+
       filename = current_project+' [Tilausexcel hyväksytyt].xlsx';
       var ws0 = XLSX.utils.json_to_sheet(prtilausarray);
       var ws1 = XLSX.utils.json_to_sheet(prlevytarray);
       var ws2 = XLSX.utils.json_to_sheet(prrangat_array);
       var ws3 = XLSX.utils.json_to_sheet(prlistat_array);
       var wb = XLSX.utils.book_new();
-      
+
       XLSX.utils.book_append_sheet(wb, ws0, "Tilaukset");
       XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
       XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
@@ -6846,7 +6846,7 @@ function lataa_projektiexcel(arg) {
       XLSX.writeFile(wb, filename);
 
 
-      
+
     }, 250);
   }
   else {
@@ -6865,7 +6865,7 @@ function lataa_projektiexcel(arg) {
         }
       }).done(function (success) {
         // ITERATE ROOM>WALLARRAY
-        successful = success.replaceAll("~~~~",",").split("&&");    
+        successful = success.replaceAll("~~~~",",").split("&&");
         used_rooms = [];
         u_rooms = [];
         successful.forEach(timestamp => {
@@ -6883,7 +6883,7 @@ function lataa_projektiexcel(arg) {
           else {
             used_rooms.push(apart+">"+wall+"|"+timing);
             u_rooms.push(apart+">"+wall);
-          } 
+          }
         });
         // END ROOM>WALLARRAY
 
@@ -6920,7 +6920,7 @@ function lataa_projektiexcel(arg) {
                     else {
                       timest = timing;
                       timest_item = apart+">"+raw_wall+"|"+timing;
-                      
+
                     }
                   }
                 }
@@ -6944,8 +6944,8 @@ function lataa_projektiexcel(arg) {
                 if(_type === "listat") {
                   prlistat_array.push(row);
                 }
-              });  
-              
+              });
+
               timestamby = parseFloat(timing) * 1000;
               formatted_db_date = new Date(timestamby);
 
@@ -6954,7 +6954,7 @@ function lataa_projektiexcel(arg) {
                 status: 'tilattu',
                 timedate: formattedDate,
               }
-              
+
               $.ajax({
                 type: "POST",
                 url: "../vendor/excel_changestatus.php",
@@ -6989,14 +6989,14 @@ function lataa_projektiexcel(arg) {
           'LATTIA': tds[6].innerText,
         });
       });
-      
+
       filename = current_project+' [Tilausexcel kaikki].xlsx';
       var ws0 = XLSX.utils.json_to_sheet(prtilausarray);
       var ws1 = XLSX.utils.json_to_sheet(prlevytarray);
       var ws2 = XLSX.utils.json_to_sheet(prrangat_array);
       var ws3 = XLSX.utils.json_to_sheet(prlistat_array);
       var wb = XLSX.utils.book_new();
-      
+
       XLSX.utils.book_append_sheet(wb, ws0, "Tilaukset");
       XLSX.utils.book_append_sheet(wb, ws1, "Levyt");
       XLSX.utils.book_append_sheet(wb, ws2, "Rangat");
@@ -7004,16 +7004,16 @@ function lataa_projektiexcel(arg) {
       XLSX.writeFile(wb, filename);
 
 
-      
+
     }, 250);
   }
-  
+
 
 }
 
 function change_np(val, forrow, entrance = "a") {
   project__building_rooms = document.querySelectorAll(".project__building_room");
-  
+
   project__building_rooms.forEach(r => {
     if(r.dataset.x === forrow) {
       r.dataset.liftpoint = val;

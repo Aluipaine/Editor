@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Include config file
 require "config.php";
 use PHPMailer\PHPMailer\PHPMailer;
@@ -23,11 +23,11 @@ $attachments = $_POST['attachments'];
 $comment_from = $_POST['comment_from'];
 $comment_to = $_POST['comment_to'];
 $urgency = $_POST['urgency'];
-$ending_time = $_POST['ending_time']; 
-$subject = $_POST['aihe']; 
+$ending_time = $_POST['ending_time'];
+$subject = $_POST['aihe'];
 $deadline = $_POST['deadline'];
-$answer_to = $_POST['answer_to'];  
-$time_estimate = $_POST['time_estimate'];  
+$answer_to = $_POST['answer_to'];
+$time_estimate = $_POST['time_estimate'];
 $starting_time = date("Y-m-d H:i:s");
 
 // $subject= "tyonjohto kommentit";
@@ -49,7 +49,7 @@ $starting_time = date("Y-m-d H:i:s");
 
 $meta = mysqli_query($db, "INSERT INTO `comments` (`id`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$subject', '$deadline', '$answer_to', '$time_estimate','aloittamatta','','','$time_estimate','','','');");
 echo "INSERT INTO `comments` (`id`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$subject', '$deadline', '$answer_to', '$time_estimate','aloittamatta','','','$time_estimate','','','');";
-$meta = mysqli_query($db, "INSERT INTO `changed__comments_interactive` (`commentid`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$subject', '$deadline', '$answer_to', '$time_estimate','aloitettu','','','','','','') ON DUPLICATE KEY UPDATE `commentid`='$comment_id', `projectid`='$project_id', `room`='$room', `name`='$name', `x_y`='$x_y', `content`='$content', `attachments`='$attachments', `comment_from`='$comment_from', `comment_to`='$comment_to', `urgency`='$urgency', `creation_time`='$starting_time', `ending_time`='$ending_time', `aihe`='$subject', `deadline`='$deadline', `answer_to`='$answer_to', `time_estimate`='$time_estimate');");
+$meta = mysqli_query($db, "INSERT INTO `changed__comments_interactive` (`commentid`, `projectid`,`room`,`name`,`x_y`, `content`, `attachments`, `comment_from`, `comment_to`, `urgency`, `creation_time`, `ending_time`, `aihe`, `deadline`, `answer_to`,`time_estimate`,`status`,`tja`,`tta`,`h_remaining`,`pvm_remaining`,`readiness`,`myyja_lupaus`) VALUES ('$comment_id', '$project_id', '$room', '$name', '$x_y', '$content', '$attachments', '$comment_from', '$comment_to', '$urgency',  '$starting_time', '$ending_time', '$subject', '$deadline', '$answer_to', '$time_estimate','aloitettu','','','$time_estimate','','','') ON DUPLICATE KEY UPDATE `commentid`='$comment_id', `projectid`='$project_id', `room`='$room', `name`='$name', `x_y`='$x_y', `content`='$content', `attachments`='$attachments', `comment_from`='$comment_from', `comment_to`='$comment_to', `urgency`='$urgency', `creation_time`='$starting_time', `ending_time`='$ending_time', `aihe`='$subject', `deadline`='$deadline', `answer_to`='$answer_to', `time_estimate`='$time_estimate';");
 // $date = date("Y-m-d H:i:s");
 $pr_name_ = mysqli_query($db, "SELECT * FROM `projects` WHERE `id`=$project_id ");
 $_pr_name = mysqli_fetch_all($pr_name_);
@@ -72,12 +72,12 @@ else {
   $m_subject = explode("~~~~", $m_data[3]);
   $m_messages = explode("~~~~", $m_data[4]);
 
-  $mail = new PHPMailer(); 
+  $mail = new PHPMailer();
   $mail->CharSet = "UTF-8";
   $to = $m_headers[1];
   $from = $m_headers[0];
   $subject = $m_subject[0] . $pr_name . $m_subject[1];
-  $txt = "Huone " . $room . ". 
+  $txt = "Huone " . $room . ".
   <br>Aihe ".$subject."
   <br>Sisältö: ".$content."
   <br>Tuntiarvio: ".$time_estimate."
@@ -90,33 +90,33 @@ else {
 
   $mail->isSMTP();                                            // Send using SMTP
   $mail->Host       = 'mail.westface.fi';                    // Set the SMTP server to send through
-  $mail->SMTPAuth   = true;          
+  $mail->SMTPAuth   = true;
   $mail->addReplyTo($from, $m_headers[2]);
 
   $mail->Username   = $from;                     // SMTP username
   $mail->Password   = $m_headers[3];                               // SMTP password
   $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-  $mail->Port       = 587; 
-  $mail->From = $from; 
+  $mail->Port       = 587;
+  $mail->From = $from;
 
 
-  $mail->FromName = $m_headers[2]; 
-  $mail->addAddress($to, $m_headers[4]); 
-  // $mail->addAddress('marko.virtanen@westface.fi', "Marko Virtanen"); 
-  // $mail->addAddress($usr_email, $comment_to); 
+  $mail->FromName = $m_headers[2];
+  $mail->addAddress($to, $m_headers[4]);
+  // $mail->addAddress('marko.virtanen@westface.fi', "Marko Virtanen");
+  // $mail->addAddress($usr_email, $comment_to);
 
-  //Provide file path and name of the attachments 
-  // $mail->addAttachment("file.txt", "File.txt");    
-  // $mail->addAttachment("images/profile.png"); //Filename is optional 
-  $mail->isHTML(true); 
-  $mail->Subject = $subject; 
-  $mail->Body = $txt; 
-  // $mail->AltBody = $txt; 
-  if(!$mail->send()) 
-  { 
+  //Provide file path and name of the attachments
+  // $mail->addAttachment("file.txt", "File.txt");
+  // $mail->addAttachment("images/profile.png"); //Filename is optional
+  $mail->isHTML(true);
+  $mail->Subject = $subject;
+  $mail->Body = $txt;
+  // $mail->AltBody = $txt;
+  if(!$mail->send())
+  {
   echo "Mailer Error: " . $mail->ErrorInfo;
-  } 
-  else 
+  }
+  else
   {  echo "Message has been sent successfully"; }
 }
 

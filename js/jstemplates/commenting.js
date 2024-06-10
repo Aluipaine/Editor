@@ -309,8 +309,8 @@ function open_comment(id, name, tiedostot, from, to, priority, deadline, aihe, c
 
         let answer_child_id = grand_array[0];
         console.log("answer_parent "+answer_child_id);
-    
-        
+
+
         answersDiv.innerHTML += `
         <hr style="margin-top: 50px;">
         <section class="commentbox comment_answer">
@@ -417,14 +417,14 @@ function comment__kuittaus(comment_id) {
     });
   }, 500);
 
- 
+
 
 
 }
 
 // tila_btns = document.querySelectorAll(".house__wall_status");
 // for (let i = 0; i < tila_btns.length; i++) {
-//   tila_btns[i].addEventListener("click", );  
+//   tila_btns[i].addEventListener("click", );
 // }
 
 // function tila_functionbundle(arg) {
@@ -487,7 +487,7 @@ function initializeroom_comments(room, menu) {
 
   for (let i = 0; i < comments__controlelems.length; i++) {
     comments__controlelems[i].remove();
-    
+
   }
 
   // STOP CLEARING
@@ -506,7 +506,7 @@ function initializeroom_comments(room, menu) {
         name_splitted = ir_coms[i].split(",")[2].split(">")[1];
         if (ir_coms[i].length > 5 && name_splitted == mode_room) {
           grande_array = ir_coms[i];
-          
+
           comment__restore(grande_array);
           refresh__drawcontrols();
         }
@@ -617,7 +617,7 @@ function comment__restore(ga) {
       newDiv__hidden_attentioncommmets.value += grand_array[5] + '<br> Tältä: ' + grand_array[7] + '<br> Tälle: ' + grand_array[8];
       comment__text.innerHTML = grand_array[5];
       comment__from.innerHTML = grand_array[7];
-      
+
       comment__to.innerHTML = grand_array[8];
     }
     newDiv.setAttribute("onclick", "this.classList.toggle('comment__visible')");
@@ -665,7 +665,7 @@ function comment__restore(ga) {
 //       } catch (error) {
 //         console.log(error);
 //       }
-      
+
 //     }
 //   });
 // }
@@ -710,23 +710,23 @@ function initializebuilding_comments(mode) {
         problem_apartment = document.querySelector("."+a_name.replaceAll(" ","").replaceAll("<br>","").replaceAll("/",""));
         problem_apartment.classList.remove("bg-1");
         problem_apartment.classList.remove("bg-2");
-        
+
         if(ir_coms[q].split(",")[9] == 'critical') {
           problem_apartment.classList.add("problem");
         }
         else {
           problem_apartment.classList.add("prob");
         }
-      } 
-     
-        
+      }
+
+
     }
 
     statuses = document.querySelectorAll(".house__wall_status");
     for (let s = 0; s < statuses.length; s++) {
       statuses[s].classList.remove("prob");
     }
-  
+
 
     console.log("initializebuilding_comments()");
   }
@@ -739,7 +739,7 @@ function initializebuilding_comments(mode) {
           problem_apartment = document.querySelector("."+a_name.replaceAll(" ","").replaceAll("<br>","").replaceAll("/",""));
           problem_apartment.classList.remove("bg-1");
           problem_apartment.classList.remove("bg-2");
-          
+
           if(ir_coms[q].split(",")[9] == 'critical') {
             problem_apartment.classList.add("problem");
           }
@@ -747,15 +747,15 @@ function initializebuilding_comments(mode) {
             problem_apartment.classList.add("prob");
           }
         }
-        
-      }   
+
+      }
     }
 
     statuses = document.querySelectorAll(".house__wall_status");
     for (let s = 0; s < statuses.length; s++) {
       statuses[s].classList.remove("prob");
     }
-    
+
 
     // tables = document.querySelectorAll(".tablepreview");
 
@@ -770,7 +770,7 @@ function initializebuilding_comments(mode) {
     //   max_pbrarray = Math.min(...pbr_array);
     //   rowcount = 10 - max_pbrarray;
     //   tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
-      
+
     // }
   }
   else {
@@ -782,7 +782,7 @@ function initializebuilding_comments(mode) {
           problem_apartment = document.querySelector("."+a_name.replaceAll(" ","").replaceAll("<br>","").replaceAll("/",""));
           problem_apartment.classList.remove("bg-1");
           problem_apartment.classList.remove("bg-2");
-          
+
           if(ir_coms[q].split(",")[9] == 'critical') {
             problem_apartment.classList.add("problem");
           }
@@ -790,15 +790,15 @@ function initializebuilding_comments(mode) {
             problem_apartment.classList.add("prob");
           }
         }
-        
-      }   
+
+      }
     }
 
     statuses = document.querySelectorAll(".house__wall_status");
     for (let s = 0; s < statuses.length; s++) {
       statuses[s].classList.remove("prob");
     }
-    
+
 
     // tables = document.querySelectorAll(".tablepreview");
 
@@ -813,7 +813,7 @@ function initializebuilding_comments(mode) {
     //   max_pbrarray = Math.min(...pbr_array);
     //   rowcount = 10 - max_pbrarray;
     //   tables[t].style.maxHeight = "calc("+rowcount+"*80px)";
-      
+
     // }
   }
 
@@ -832,30 +832,30 @@ function comment__help(id,mode) {
   gp = id.parentElement.parentElement.parentElement;
   gp.querySelector(".commentbox__help").classList.toggle("visible");
   // document.querySelector("#reclamation__popup").classList.remove("out");
-  
+
   if(mode == 'mode1') {
     gp.querySelector(".kommentti__name").value = "Vastaus: ";
-    gp.querySelector(".commentbox__help_who").innerHTML = "Kenelle"; 
-    gp.querySelector(".commentbox__help_options").innerHTML = '<option value="Marko">Marko</option><option value="Vesi">Vesi</option><option value="Sähkö">Sähkö</option><option value="IV">IV</option><option value="Lukko">Lukko</option><option value="PV">PV</option><option value="Toimisto">Toimisto</option>'; 
+    gp.querySelector(".commentbox__help_who").innerHTML = "Kenelle";
+    gp.querySelector(".commentbox__help_options").innerHTML = '<option value="Marko">Marko</option><option value="Vesi">Vesi</option><option value="Sähkö">Sähkö</option><option value="IV">IV</option><option value="Lukko">Lukko</option><option value="PV">PV</option><option value="Toimisto">Toimisto</option>';
     gp.querySelector(".commentbox__help_order").style.display = "none";
     gp.querySelector(".commentbox__help_order_2").style.display = "none";
     gp.querySelector(".commentbox__help_order_3").style.display = "none";
     gp.querySelector(".commentbox__help_order_4").style.display = "none";
     gp.querySelector(".commentbox__help_order_5").style.display = "none";
-    gp.querySelector(".commentbox__text > h4").innerHTML = "Kommentin sisältö:"; 
+    gp.querySelector(".commentbox__text > h4").innerHTML = "Kommentin sisältö:";
   }
   if(mode == 'mode2') {
-    gp.querySelector(".kommentti__name").value = "Tilauspyyntö: "; 
-    gp.querySelector(".commentbox__help_who").innerHTML = "Kauppa:"; 
-    gp.querySelector(".commentbox__help_options").innerHTML = '<option value="Stark">Stark</option><option value="Westface">Westface</option><option value="P20 Varasto">P20 Varasto</option><option value="P20 K-krs">P20 K-krs</option><option value="Peltineloset">Peltineloset</option><option value="Kannatuspalvelu">Kannatuspalvelu</option><option value="Toimisto">Toimisto</option><option value="Muu">Muu</option>'; 
+    gp.querySelector(".kommentti__name").value = "Tilauspyyntö: ";
+    gp.querySelector(".commentbox__help_who").innerHTML = "Kauppa:";
+    gp.querySelector(".commentbox__help_options").innerHTML = '<option value="Stark">Stark</option><option value="Westface">Westface</option><option value="P20 Varasto">P20 Varasto</option><option value="P20 K-krs">P20 K-krs</option><option value="Peltineloset">Peltineloset</option><option value="Kannatuspalvelu">Kannatuspalvelu</option><option value="Toimisto">Toimisto</option><option value="Muu">Muu</option>';
     gp.querySelector(".commentbox__help_order").style.display = "block";
     gp.querySelector(".commentbox__help_order_2").style.display = "block";
     gp.querySelector(".commentbox__help_order_3").style.display = "block";
     gp.querySelector(".commentbox__help_order_4").style.display = "block";
     gp.querySelector(".commentbox__help_order_5").style.display = "flex";
-    gp.querySelector(".commentbox__text > h4").innerHTML = "Käyttötarkoitus (lyhyesti):"; 
+    gp.querySelector(".commentbox__text > h4").innerHTML = "Käyttötarkoitus (lyhyesti):";
   }
-  
+
 }
 
 
@@ -1003,7 +1003,7 @@ function comment__create_simpler(parent_id, this_element) {
           console.log(formData);
         }
       }).done(function (data) {
-        
+
       });
     }, 1500);
 
@@ -1023,13 +1023,13 @@ function comment__create_simpler(parent_id, this_element) {
       }).done(function (data) {
           // alert(data);
           location.reload();
-      });      
+      });
     }, 1800);
   }
   else if(commentbox__help_order.style.display == "block") {
     setTimeout(function () {
       new_com_id_ = parent_answer.dataset.name;
-      
+
       _project_id = parseFloat(document.querySelector("#current_project_id").value);
       _room = document.querySelector("#roomname").value.replaceAll(" ","").replaceAll(","," - ");
       _item = parent_answer.querySelector(".order_what").value.replaceAll(","," - ");
@@ -1057,7 +1057,7 @@ function comment__create_simpler(parent_id, this_element) {
         deadline: _deadline,
         attachments: _attachments,
         hinta: _hinta,
-        pituus: _pituus,	
+        pituus: _pituus,
         userfrom: _userfrom,
         userto: _userto,
 
@@ -1091,7 +1091,7 @@ function comment__create_simpler(parent_id, this_element) {
       }).done(function (data) {
           // alert(data);
           location.reload();
-      });      
+      });
     }, 1800);
   }
 }
@@ -1105,7 +1105,7 @@ function comment__create_simpler(parent_id, this_element) {
 function comment__create_new(doc,arg) {
   document.querySelector("body").classList.add("bg");
   select = doc.querySelector(".kommentti_comment_newto");
-  var result = [];
+  var result = '';
   var options = select && select.options;
   var opt;
   selected = 0;
@@ -1129,7 +1129,7 @@ function comment__create_new(doc,arg) {
   doc.querySelector(".comment__preview_files").classList.add(new_com_id + '_previewfiles');
   doc.querySelector(".comment__preview_files").classList.add(new_com_id);
 
-  if(arg) { 
+  if(arg) {
     project_id = parseFloat(document.querySelector("#current_project_id").value);
     room_id = arg.innerHTML;
     _attachments = doc.querySelector(".comment__preview_files").innerText;
@@ -1139,7 +1139,7 @@ function comment__create_new(doc,arg) {
     _content = doc.querySelector(".kommentti_comment").value.replaceAll(","," - ");
     _name = doc.querySelector(".kommentti__name").value;
     _comment_from = doc.querySelector(".kommentti_comment_from").value.replaceAll(","," - ");
-    
+
     _comment_to = result.replaceAll(","," - ");
     if(doc.querySelector(".is_thecomment_critical").checked) {
       _urgency = "critical";
@@ -1194,7 +1194,7 @@ function comment__create_new(doc,arg) {
       _content = doc.querySelector(".kommentti_comment").value.replaceAll(","," - ");
       _name = doc.querySelector(".kommentti__name").value;
       _comment_from = doc.querySelector(".kommentti_comment_from").value.replaceAll(","," - ");
-      
+
       _comment_to = result.replaceAll(","," - ");
       if(doc.querySelector(".is_thecomment_critical").checked) {
         _urgency = "critical";
@@ -1330,7 +1330,7 @@ function send_laskutus(elem) {
 
     document.querySelector(".laskutusrivit_summa > b").innerHTML = summa+'€';
 
-  
+
   }
 
 }
@@ -1351,7 +1351,7 @@ function send_laskutus_data() {
       formData = {
         identification: _id,
       };
-  
+
       $.ajax({
         type: "POST",
         url: "/vendor/change_shoppinglist_status.php",
@@ -1367,7 +1367,7 @@ function send_laskutus_data() {
     }, 150);
   }
 
-  
+
   setTimeout(function () {
     _table = document.querySelector(".laskutusrivit").innerHTML;
     _project_id = document.querySelector("#rooms > input.id").value;
@@ -1390,7 +1390,7 @@ function send_laskutus_data() {
       location.reload();
     });
   }, 250);
-  
+
 }
 
 
@@ -1402,7 +1402,7 @@ function send_laskutus_data() {
  */
 function changestatus(item,name) {
   ticket = item.parentElement.parentElement.parentElement.parentElement;
- 
+
   if(item.innerText.toLowerCase() == "aloita") {
       item.parentElement.parentElement.style.background = "red";
       item.innerText = 'Keskeytä';
@@ -1424,7 +1424,7 @@ function changestatus(item,name) {
     item.parentElement.parentElement.style.background = "red";
     item.innerText = 'Keskeytä';
     _comment_status = 'Aloitettu';
-    
+
     ticket.querySelector(".comment__status").innerHTML = "Aloitettu";
     ticket.querySelector(".comment__status").style.borderColor = "yellow";
   }
@@ -1448,8 +1448,8 @@ function changestatus(item,name) {
       });
     }, 1000);
   }
-  
-  
+
+
 }
 
 
@@ -1521,15 +1521,15 @@ function change_task_assignation(item) {
   selected = 0;
   for (var i=0, iLen=options.length; i<iLen; i++) {
     opt = options[i];
-    
+
     if (opt.selected) {
-     
+
       if(selected>0) {
         result +="|";
       }
        selected +=1;
       result += opt.value || opt.text;
-      
+
     }
   }
     // _comment_to = document.querySelector(".commentbox."+item+" .commentbox__to").value;
@@ -1558,7 +1558,7 @@ function change_task_assignation(item) {
  * @param {object} item - The item whose criticality is being changed.
  * @returns None
  */
-function change_task_criticality(com_id, item) { 
+function change_task_criticality(com_id, item) {
   _urgency = '';
   if(item.checked === false) {
     _urgency = 'no_critical';
@@ -1590,11 +1590,11 @@ function change_task_criticality(com_id, item) {
  * @param {HTMLElement} item - The HTML element representing the comment to be deleted.
  * @returns None
  */
-function comment__deletekuittaamatta(item) { 
+function comment__deletekuittaamatta(item) {
   com_id_ = item.getAttribute("name");
   statuschange_ = 'poistettu_kuittaamatta';
 
-  
+
   formData = {
       comment_id: com_id_,
       comment_status: statuschange_,
@@ -1621,9 +1621,9 @@ function comment__deletekuittaamatta(item) {
  * @param {string} com_id_ - The comment ID associated with the item.
  * @returns None
  */
-function change_task_vko(item,com_id_) { 
+function change_task_vko(item,com_id_) {
   vko_ = item.value;
-  
+
   formData = {
       comment_id: com_id_,
       vko_arvio: vko_,
@@ -1649,7 +1649,7 @@ function change_task_vko(item,com_id_) {
  * @param {string} com_id_ - The comment ID to associate with the tta value.
  * @returns None
  */
-function change_task_tta(item,com_id_) { 
+function change_task_tta(item,com_id_) {
   tta_ = item.value;
 
   formData = {
@@ -1710,8 +1710,8 @@ function change_task_specs() {
         comment_id: com_id_,
         comment_status: 'Keskeytetty'
       };
-  
-  
+
+
       $.ajax({
       type: "POST",
       url: "../vendor/modifycommentstatus.php",
@@ -1729,7 +1729,7 @@ function change_task_specs() {
       });
     }, 500);
   }, 250);
-  
+
 }
 
 

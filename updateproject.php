@@ -1,4 +1,4 @@
-<?php 
+<?php
 // This file updates projects specs in the walls (partially deprecated)
 require "vendor/config.php";
 header('Content-type: text/plain; charset=utf-8');
@@ -53,11 +53,11 @@ $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['f_rooms'] . " WHER
 $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['g_rooms'] . " WHERE `id`=$id AND `meta_key`='g_rooms';";
 $undo .= "UPDATE `projectmeta` SET `meta_value`='" . $values['h_rooms'] . " WHERE `id`=$id AND `meta_key`='h_rooms';";
 
-$queries = explode(";", $query . $kumora);
-
-foreach($queries as $q) {
-    if($q != "")
-        mysqli_query($db, $q);
-}
+// $queries = explode(";", $query . $kumora);
+//
+// foreach($queries as $q) {
+//     if($q != "")
+//         mysqli_query($db, $q);
+// }
 
  ?>

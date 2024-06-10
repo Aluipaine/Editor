@@ -32,7 +32,7 @@ function decode_utf8(s) {
  * @param {string} key - The key used to identify the materials data.
  * @returns None
  */
-function admin__savematerials(key) {   
+function admin__savematerials(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".materials__tbody tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -40,7 +40,7 @@ function admin__savematerials(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        } 
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -55,7 +55,7 @@ function admin__savematerials(key) {
         mkey: 's_materials',
         material_array: material_array,
     };
-    console.log(formData);  
+    console.log(formData);
     $.ajax({
       type: "POST",
       url: "vendor/admin__settingsedit.php",
@@ -74,14 +74,14 @@ function admin__savematerials(key) {
  * @param {string} key - The key used for authentication or identification.
  * @returns None
  */
-function admin__saveusers(key) {   
+function admin__saveusers(key) {
   material_array="";
   materialtabletr = document.querySelectorAll(".a_userlist tr:not(.headingrow)");
   for (let a = 0; a < materialtabletr.length; a++) {
       materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
       for (let b = 0; b < materialtabletd.length; b++) {
           material_array += materialtabletd[b].value.replaceAll(",","") + ",";
-      } 
+      }
       if(a == (materialtabletr.length -1)) {
           material_array+= "";
       }
@@ -94,7 +94,7 @@ function admin__saveusers(key) {
       prid: id_,
       material_array: material_array
   };
-  console.log(formData);  
+  console.log(formData);
   $.ajax({
     type: "POST",
     url: "vendor/admin__usersedit.php",
@@ -113,7 +113,7 @@ function admin__saveusers(key) {
  * @param {string} key - The key used to identify the system data.
  * @returns None
  */
-function admin__savesystems(key) {   
+function admin__savesystems(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".systems__tbody tr:not(.headingrow)");
 
@@ -123,7 +123,7 @@ function admin__savesystems(key) {
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
         }
-        
+
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -138,7 +138,7 @@ function admin__savesystems(key) {
         material_array: material_array,
     };
     console.log(formData);
-    
+
     $.ajax({
       type: "POST",
       url: "vendor/admin__settingsedit.php",
@@ -158,7 +158,7 @@ function admin__savesystems(key) {
  * @param {string} key - The key for the materials being saved.
  * @returns None
  */
-function admin__saverangat(key) {   
+function admin__saverangat(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -166,7 +166,7 @@ function admin__saverangat(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -199,7 +199,7 @@ function admin__saverangat(key) {
  * @param {string} key - The key for which the range data is being saved.
  * @returns None
  */
-function admin__saverangat_one(key) {   
+function admin__saverangat_one(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_one tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -207,7 +207,7 @@ function admin__saverangat_one(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -240,7 +240,7 @@ function admin__saverangat_one(key) {
  * @param {string} key - The key used to identify the materials being saved.
  * @returns None
  */
-function admin__saverangat_two(key) {   
+function admin__saverangat_two(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_two tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -248,7 +248,7 @@ function admin__saverangat_two(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -281,7 +281,7 @@ function admin__saverangat_two(key) {
  * @param {string} key - The key used to identify the materials being saved.
  * @returns None
  */
-function admin__saverangat_three(key) {   
+function admin__saverangat_three(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_three tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -289,7 +289,7 @@ function admin__saverangat_three(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -322,7 +322,7 @@ function admin__saverangat_three(key) {
  * @param {string} key - The key for which the material data is being saved.
  * @returns None
  */
-function admin__saverangat_four(key) {   
+function admin__saverangat_four(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_four tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -330,7 +330,7 @@ function admin__saverangat_four(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -363,7 +363,7 @@ function admin__saverangat_four(key) {
  * @param {string} key - The key to save the data under.
  * @returns None
  */
-function admin__saverangat_five(key) {   
+function admin__saverangat_five(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_five tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -371,7 +371,7 @@ function admin__saverangat_five(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -404,7 +404,7 @@ function admin__saverangat_five(key) {
  * @param {string} key - The key for which the material data is being saved.
  * @returns None
  */
-function admin__saverangat_six(key) {   
+function admin__saverangat_six(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".ranka__tbody_six tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -412,7 +412,7 @@ function admin__saverangat_six(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -445,7 +445,7 @@ function admin__saverangat_six(key) {
  * @param {string} key - The key for which the material data is being saved.
  * @returns None
  */
-function admin__saverangat_seven(key) {   
+function admin__saverangat_seven(key) {
   material_array="";
   materialtabletr = document.querySelectorAll(".ranka__tbody_seven tr:not(.headingrow)");
   for (let a = 0; a < materialtabletr.length; a++) {
@@ -453,7 +453,7 @@ function admin__saverangat_seven(key) {
       material_array += "[";
       for (let b = 0; b < materialtabletd.length; b++) {
           material_array += materialtabletd[b].value + ",";
-      }      
+      }
       if(a == (materialtabletr.length -1)) {
           material_array+= "]";
       }
@@ -486,7 +486,7 @@ function admin__saverangat_seven(key) {
  * @param {string} key - The key for which the material data is being saved.
  * @returns None
  */
-function admin__saverangat_eight(key) {   
+function admin__saverangat_eight(key) {
   material_array="";
   materialtabletr = document.querySelectorAll(".ranka__tbody_eight tr:not(.headingrow)");
   for (let a = 0; a < materialtabletr.length; a++) {
@@ -494,7 +494,7 @@ function admin__saverangat_eight(key) {
       material_array += "[";
       for (let b = 0; b < materialtabletd.length; b++) {
           material_array += materialtabletd[b].value + ",";
-      }      
+      }
       if(a == (materialtabletr.length -1)) {
           material_array+= "]";
       }
@@ -527,7 +527,7 @@ function admin__saverangat_eight(key) {
  * @param {string} key - The key used to identify the Reika frame data.
  * @returns None
  */
-function admin__savereikaframet(key) {   
+function admin__savereikaframet(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".reikaframe__tbody tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -540,7 +540,7 @@ function admin__savereikaframet(key) {
             else {
                 material_array += materialtabletd[b].value + ",";
             }
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -573,7 +573,7 @@ function admin__savereikaframet(key) {
  * @param {string} key - The key used to identify the data being saved.
  * @returns None
  */
-function admin__savelapiviennit(key) {   
+function admin__savelapiviennit(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".lapiviennit__tbody tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -586,7 +586,7 @@ function admin__savelapiviennit(key) {
             else {
                 material_array += materialtabletd[b].value + ",";
             }
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -619,7 +619,7 @@ function admin__savelapiviennit(key) {
  * @param {string} key - The key for the material data.
  * @returns None
  */
-function admin__savelevytysreunat(key) {   
+function admin__savelevytysreunat(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".levytysreunat__tbody tr:not(.headingrow)");
     for (let a = 0; a < materialtabletr.length; a++) {
@@ -627,7 +627,7 @@ function admin__savelevytysreunat(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -660,20 +660,20 @@ function admin__savelevytysreunat(key) {
  * @param {string} key - The key used to identify the settings being saved.
  * @returns None
  */
-function admin__savesaumatpysty(key) {   
+function admin__savesaumatpysty(key) {
     material_array="";
     materialtabletr = document.querySelectorAll(".saumapysty__tbody tr:not(.headingrow)");
     inputs = document.querySelectorAll(".saumapysty__tbody input[name='saumapysty']:not(:checked)");
     inputs.forEach(input => {
       input.value = "";
     })
-    
+
     for (let a = 0; a < materialtabletr.length; a++) {
         materialtabletd = materialtabletr[a].querySelectorAll("input:not(.fileinput)");
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -706,7 +706,7 @@ function admin__savesaumatpysty(key) {
  * @param {string} key - The key associated with the material data.
  * @returns None
  */
-function admin__savesaumatvaaka(key) {   
+function admin__savesaumatvaaka(key) {
     material_array="";
 
     materialtabletr = document.querySelectorAll(".saumavaaka__tbody tr:not(.headingrow)");
@@ -719,7 +719,7 @@ function admin__savesaumatvaaka(key) {
         material_array += "[";
         for (let b = 0; b < materialtabletd.length; b++) {
             material_array += materialtabletd[b].value + ",";
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array+= "]";
         }
@@ -752,9 +752,9 @@ function admin__savesaumatvaaka(key) {
  * @param {string} key - The key used for saving the setting.
  * @returns None
  */
-function save_saumasuunta(key) {   
+function save_saumasuunta(key) {
     material_array="";
-    
+
     if(document.querySelector("#settings__sauma_pysty").checked === true) {
         material_array = 'levytys_pystyyn';
     }
@@ -786,9 +786,9 @@ function save_saumasuunta(key) {
  * @param {string} key - The key to save the material type under.
  * @returns None
  */
-function save_saumatyyppi(key) {   
+function save_saumatyyppi(key) {
     material_array="";
-    
+
     if(document.querySelector("#settings__saumahanta-oik").checked === true) {
         material_array += 'oik~~';
     }
@@ -834,9 +834,9 @@ function save_saumatyyppi(key) {
  * @param {string} key - The key used for saving the data.
  * @returns None
  */
-function save_saumakulku(key) {   
+function save_saumakulku(key) {
     material_array="";
-    
+
     if(document.querySelector("#saumoitus__sauma_one").checked === true) {
         material_array += 'yli~~';
     }
@@ -877,7 +877,7 @@ function save_saumakulku(key) {
  * @param {string} key - The key associated with the data being saved.
  * @returns None
  */
-function save_aukko(e,key) {   
+function save_aukko(e,key) {
     material_array="";
 
     // _id = e.parentElement.parentElement.parentElement.parentElement.getAttribute("id");
@@ -894,7 +894,7 @@ function save_aukko(e,key) {
             else {
                 material_array += materialtabletd[b].value + ",";
             }
-        }      
+        }
         if(a == (materialtabletr.length -1)) {
             material_array += "]";
         }
@@ -927,7 +927,7 @@ function save_aukko(e,key) {
  * @param {string} key - The key used to identify the list of materials.
  * @returns None
  */
-function admin__savelistatpysty(key) {   
+function admin__savelistatpysty(key) {
   material_array="";
   materialtabletr = document.querySelectorAll(".listat2a__tbody tr:not(.headingrow)");
   for (let a = 0; a < materialtabletr.length; a++) {
@@ -935,7 +935,7 @@ function admin__savelistatpysty(key) {
       material_array += "[";
       for (let b = 0; b < materialtabletd.length; b++) {
           material_array += materialtabletd[b].value + ",";
-      }      
+      }
       if(a == (materialtabletr.length -1)) {
           material_array+= "]";
       }
@@ -968,7 +968,7 @@ function admin__savelistatpysty(key) {
  * @param {string} key - The key used to identify the list of materials.
  * @returns None
  */
-function admin__savelistatvaaka(key) {   
+function admin__savelistatvaaka(key) {
   material_array="";
   materialtabletr = document.querySelectorAll(".listat2b__tbody tr:not(.headingrow)");
   for (let a = 0; a < materialtabletr.length; a++) {
@@ -976,7 +976,7 @@ function admin__savelistatvaaka(key) {
       material_array += "[";
       for (let b = 0; b < materialtabletd.length; b++) {
           material_array += materialtabletd[b].value + ",";
-      }      
+      }
       if(a == (materialtabletr.length -1)) {
           material_array+= "]";
       }
@@ -1009,7 +1009,7 @@ function admin__savelistatvaaka(key) {
  * @param {string} key - The key used to identify the list of materials.
  * @returns None
  */
-function admin__savelistat(key) {   
+function admin__savelistat(key) {
   material_array="";
   materialtabletr = document.querySelectorAll(".listat__tbody tr:not(.headingrow)");
   for (let a = 0; a < materialtabletr.length; a++) {
@@ -1017,7 +1017,7 @@ function admin__savelistat(key) {
       material_array += "[";
       for (let b = 0; b < materialtabletd.length; b++) {
           material_array += materialtabletd[b].value + ",";
-      }      
+      }
       if(a == (materialtabletr.length -1)) {
           material_array+= "]";
       }
@@ -1052,7 +1052,7 @@ function admin__savelistat(key) {
  */
 function admin__savepituussuunnan(key) {
   material_array = "";
-  
+
   inputs = document.querySelectorAll(".pituussuunnan input")
 
   for(let i = 0; i < inputs.length; i++){
@@ -1219,7 +1219,7 @@ function appendnewaukkosetting() {
     count = au.querySelectorAll("tr").length;
 
     row = document.createElement("tr");
-    
+
     row.innerHTML = `
         <td><input type="text" value="" class="lineinput" oninput="save_aukko(this);"></td>
         <td><input type="number" value="" class="lineinput" oninput="save_aukko(this);"></td>
@@ -1274,7 +1274,7 @@ function appendnewvaakasaumasetting() {
     t = document.querySelector(".saumavaaka__tbody");
 
     count = t.querySelectorAll("tr").length;
-    
+
     row = document.createElement("tr");
     row.innerHTML = `
     <td>
@@ -1293,7 +1293,7 @@ function appendnewvaakasaumasetting() {
     <td>
         <input type="text" value="" class="lineinput" oninput="admin__savesaumatvaaka();">
     </td>`;
-    
+
     t.appendChild(row);
 }
 
@@ -1306,7 +1306,7 @@ function appendnewvaakasaumasetting() {
 function appendnewrankasetting() {
     t = document.querySelector(".ranka__tbody");
     count = t.querySelectorAll("tr").length;
-    
+
     row = document.createElement("tr");
     row.innerHTML = `
     <td>
@@ -1352,7 +1352,7 @@ function appendnewrankasetting() {
     <td>
         <input type="text" value="" class="lineinput" oninput="admin__saverangat();">
     </td>`;
-    
+
     t.appendChild(row);
 }
 
@@ -1365,7 +1365,7 @@ function appendnewrankasetting() {
 function appendnewlvitem() {
     t = document.querySelector(".lapiviennit__tbody");
     count = t.querySelectorAll("tr").length;
-    
+
     row = document.createElement("tr");
     row.innerHTML = `
       <td>
@@ -1407,7 +1407,7 @@ function appendnewlvitem() {
           <input type="text" value="" class="lineinput" oninput="admin__savelapiviennit();">
       </td>
     `;
-    
+
     t.appendChild(row);
 }
 
@@ -1474,7 +1474,7 @@ function appendnewvaakalistasetting() {
   t = document.querySelector(".listat2b__tbody");
 
   count = t.querySelectorAll("tr").length;
-  
+
   row = document.createElement("tr");
   row.innerHTML = `
     <td>
@@ -1494,7 +1494,7 @@ function appendnewvaakalistasetting() {
         <input type="text" value="" class="lineinput" oninput="admin__savelistatvaaka();">
     </td>
   `;
-  
+
   t.appendChild(row);
 }
 
@@ -1508,7 +1508,7 @@ function appendnewlistasetting() {
   t = document.querySelector(".listat__tbody");
 
   count = t.querySelectorAll("tr").length;
-  
+
   row = document.createElement("tr");
   row.innerHTML = `
     <td>
@@ -1566,7 +1566,7 @@ function appendnewlistasetting() {
       <input type="text" value="" class="lineinput" oninput="admin__savelistat();">
     </td>
   `;
-  
+
   t.appendChild(row);
 }
 
@@ -1579,16 +1579,16 @@ function delete__addeduser(e) {
  * @param {Event} e - The event object that triggered the function.
  * @returns None
  */
-function admin__delete_addeduser(e) {   
+function admin__delete_addeduser(e) {
   _prid = e.parentElement.parentElement.parentElement.parentElement.dataset.prid;
   _user = e.parentElement.innerText.replace("x","");
-  
-  
+
+
   formData = {
       prid: _prid,
       user: _user,
   };
-  console.log(formData);  
+  console.log(formData);
   $.ajax({
     type: "POST",
     url: "vendor/admin__deleteuser.php",
@@ -1606,16 +1606,16 @@ function admin__delete_addeduser(e) {
  * @param {Event} e - The event object triggering the function.
  * @returns None
  */
-function admin__changeprusr(e) {   
+function admin__changeprusr(e) {
   _prid = e.dataset.prid;
   _user = e.value;
-  
-  
+
+
   formData = {
       prid: _prid,
       user: _user,
   };
-  console.log(formData);  
+  console.log(formData);
   $.ajax({
     type: "POST",
     url: "vendor/admin__changeprusr.php",
@@ -1638,7 +1638,7 @@ function admin__changeprusr(e) {
 function s_change_malli(letter, l_id) {
   preset_id = parseFloat(l_id);
   rankatype_array = ["","Saumaranka","Väliranka","Päättöranka","Kulmaranka","ikkunaranka"];
-  
+
   trs =["lapiviennit__tbody","systems__tbody","reikaframe__tbody","levytysreunat__tbody","ranka__tbody_eight","ranka__tbody_seven","ranka__tbody_six","ranka__tbody_five","ranka__tbody_four","ranka__tbody_three","ranka__tbody_two","ranka__tbody_one","materials__tbody","saumapysty__tbody","saumavaaka__tbody","ranka__tbody","listat2a__tbody","listat2b__tbody"];
   for (let a = 0; a < trs.length; a++) {
     tds = document.querySelectorAll("."+trs[a]+" tr:not(.headingrow)");
@@ -1650,7 +1650,7 @@ function s_change_malli(letter, l_id) {
 
   hs = document.querySelector("#hole_set");
   hs.innerHTML = "";
-  
+
 
   formData = {
       preset_id: preset_id
@@ -1666,11 +1666,11 @@ function s_change_malli(letter, l_id) {
     let settings_array = settings.split("],[");
 
     settings.split("],[").forEach((setting) => {
-      
+
       key = setting.split('","')[2];
       v_ = setting.replaceAll(String.fromCharCode(92),"").replaceAll(/u00f6/g,decode_utf8(encode_utf8('\u00f6'))).replaceAll(/u00e4/g,decode_utf8(encode_utf8('\u00e4'))).replaceAll("[","").replaceAll("]","").split('","')[3];
-      
-      
+
+
       if(key == 's_materials') {
         t = document.querySelector(".materials__tbody");
         v_.split("~~").forEach((v) => {
@@ -1861,7 +1861,7 @@ function s_change_malli(letter, l_id) {
           t.appendChild(row);
         });
       }
-      
+
       if(key == 's_rangat') {
         t = document.querySelector(".ranka__tbody");
         v_.split("~~").forEach((v) => {
@@ -1882,7 +1882,7 @@ function s_change_malli(letter, l_id) {
             else {
               r_options += "<option>"+rankatype_array[i]+"</option>";
 
-            }            
+            }
           }
           row.innerHTML += `
             <td>
@@ -1920,7 +1920,7 @@ function s_change_malli(letter, l_id) {
             <td>
                 <input type="text" value="${v[10]}" class="lineinput" oninput="admin__saverangat();">
             </td>
-            
+
             <td>
                 <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat();">
             </td>
@@ -1943,7 +1943,7 @@ function s_change_malli(letter, l_id) {
                 <input type="text" value="${v[17]}" class="lineinput" oninput="admin__saverangat();">
             </td>
 
-            
+
             `;
           t.appendChild(row);
           if(v.length > 0) {
@@ -1971,9 +1971,9 @@ function s_change_malli(letter, l_id) {
             else {
               r_options += "<option>"+rankatype_array[i]+"</option>";
 
-            }            
+            }
           }
-          
+
           row.innerHTML += `
             <td>
               <input type="checkbox" value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__saverangat_one();" id="ranka_one_`+count+`" ${checked}>
@@ -2016,7 +2016,7 @@ function s_change_malli(letter, l_id) {
 
             `;
           t.appendChild(row);
-          
+
 
         });
       }
@@ -2024,7 +2024,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".ranka__tbody_two");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2039,7 +2039,7 @@ function s_change_malli(letter, l_id) {
             else {
               r_options += "<option>"+rankatype_array[i]+"</option>";
 
-            }            
+            }
           }
 
           row.innerHTML += `
@@ -2083,7 +2083,7 @@ function s_change_malli(letter, l_id) {
             </td>
             `;
           t.appendChild(row);
-      
+
 
         });
       }
@@ -2091,7 +2091,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".ranka__tbody_three");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2107,7 +2107,7 @@ function s_change_malli(letter, l_id) {
             else {
               r_options += "<option>"+rankatype_array[i]+"</option>";
 
-            }            
+            }
           }
           row.innerHTML += `
             <td>
@@ -2150,7 +2150,7 @@ function s_change_malli(letter, l_id) {
             </td>
             `;
           t.appendChild(row);
-      
+
 
         });
       }
@@ -2158,7 +2158,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".ranka__tbody_four");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2174,7 +2174,7 @@ function s_change_malli(letter, l_id) {
             else {
               r_options += "<option>"+rankatype_array[i]+"</option>";
 
-            }            
+            }
           }
           row.innerHTML += `
             <td>
@@ -2217,7 +2217,7 @@ function s_change_malli(letter, l_id) {
             </td>
             `;
           t.appendChild(row);
-      
+
 
         });
       }
@@ -2225,7 +2225,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".ranka__tbody_five");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2241,7 +2241,7 @@ function s_change_malli(letter, l_id) {
             else {
               r_options += "<option>"+rankatype_array[i]+"</option>";
 
-            }            
+            }
           }
           row.innerHTML += `
             <td>
@@ -2282,10 +2282,10 @@ function s_change_malli(letter, l_id) {
             <td>
                 <input type="text" value="${v[11]}" class="lineinput" oninput="admin__saverangat_five();">
             </td>
-            
+
             `;
           t.appendChild(row);
-      
+
 
         });
       }
@@ -2293,7 +2293,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".ranka__tbody_six");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2309,7 +2309,7 @@ function s_change_malli(letter, l_id) {
             else {
               r_options += "<option>"+rankatype_array[i]+"</option>";
 
-            }            
+            }
           }
           row.innerHTML += `
             <td>
@@ -2352,7 +2352,7 @@ function s_change_malli(letter, l_id) {
             </td>
             `;
           t.appendChild(row);
-      
+
 
         });
       }
@@ -2360,7 +2360,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".ranka__tbody_seven");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2376,7 +2376,7 @@ function s_change_malli(letter, l_id) {
             else {
               r_options += "<option>"+rankatype_array[i]+"</option>";
 
-            }            
+            }
           }
 
           row.innerHTML += `
@@ -2420,7 +2420,7 @@ function s_change_malli(letter, l_id) {
             </td>
             `;
           t.appendChild(row);
-      
+
 
         });
       }
@@ -2428,7 +2428,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".ranka__tbody_eight");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2444,7 +2444,7 @@ function s_change_malli(letter, l_id) {
             else {
               r_options += "<option>"+rankatype_array[i]+"</option>";
 
-            }            
+            }
           }
           row.innerHTML += `
             <td>
@@ -2487,7 +2487,7 @@ function s_change_malli(letter, l_id) {
             </td>
             `;
           t.appendChild(row);
-      
+
 
         });
       }
@@ -2496,7 +2496,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".listat2a__tbody");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2547,7 +2547,7 @@ function s_change_malli(letter, l_id) {
             </td>
             `;
           t.appendChild(row);
-          
+
         });
       }
 
@@ -2555,7 +2555,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".listat2b__tbody");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2612,7 +2612,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".listat__tbody");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2687,7 +2687,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".levytysreunat__tbody");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2745,7 +2745,7 @@ function s_change_malli(letter, l_id) {
       }
 
       for (let i = 1; i < 6; i++) {
-        
+
         if(key == 's_aukot_'+i) {
           if(i == 1) {
             h2 = '<h2>Oviaukon asetukset</h2>';
@@ -2755,17 +2755,17 @@ function s_change_malli(letter, l_id) {
             h2 = '<h2>Ikkuna-aukon asetukset</h2>';
             typeclass = 'ikkuna';
           }
-          
+
           else if(i == 3) {
             h2 = '<h2>Pilariaukon asetukset</h2>';
             typeclass = 'pilari';
           }
-          
+
           else if(i == 4) {
             h2 = '<h2>Palkkiaukon asetukset</h2>';
             typeclass = 'palkki';
           }
-          
+
           else if(i == 5) {
             h2 = '<h2>Ilmastointiaukon asetukset</h2>';
             typeclass = 'ilmastointi';
@@ -2808,7 +2808,7 @@ function s_change_malli(letter, l_id) {
           newsection.appendChild(newsection_h4);
           newsection.appendChild(newsection_table);
           newsection_table.appendChild(newtr);
-          
+
           v_.split("~~").forEach((v) => {
             counting_item = 0;
             if(count_rows == 4) {
@@ -2904,16 +2904,16 @@ function s_change_malli(letter, l_id) {
           // newsection.appendChild(newdiv);
           newsection.appendChild(start_btn);
           hs.appendChild(newsection);
-          
+
         }
-       
+
       }
 
       if(key == 's_reikaframe') {
         t = document.querySelector(".reikaframe__tbody");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -2921,17 +2921,17 @@ function s_change_malli(letter, l_id) {
             checked = 'checked';
           }
           row.innerHTML += `
-           
-            
+
+
             <td>
                 <input type="text" value="${v[0]}" class="lineinput" oninput="admin__savereikaframet();">
             </td>
-            
+
             <td>
               <input type="checkbox" value="${v[1]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__savereikaframet();" id="reikaframe_`+count+`" ${checked}>
               <label for="reikaframe_`+count+`"></label>
             </td>
-            
+
             `;
           t.appendChild(row);
         });
@@ -2941,7 +2941,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".lapiviennit__tbody");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -3000,7 +3000,7 @@ function s_change_malli(letter, l_id) {
         t = document.querySelector(".systems__tbody");
         v_.split("~~").forEach((v) => {
           v=decode_utf8(encode_utf8(v.replaceAll('"',''))).split(",");
-      
+
           count = t.querySelectorAll("tr").length;
           row = document.createElement("tr");
           checked = '';
@@ -3012,7 +3012,7 @@ function s_change_malli(letter, l_id) {
               <input type="checkbox" name="admin_system"  value="${v[0]}" onclick="this.checked ? this.value = 'on' : this.value = '';admin__savesystems();" id="system_${count}" ${checked}>
               <label for="system_${count}"></label>
             </td>
-            
+
             <td>
                 <input type="text" value="${v[1]}" class="lineinput" oninput="admin__savesystems();">
             </td>
@@ -3054,7 +3054,7 @@ function s_change_malli(letter, l_id) {
         }
       }
     });
-    
+
     $('.send_material_btn').click(function() {
       totalfiles =  $(this).parent().find(".fileinput")[0].files.length;
       material_files =  $(this).parent().find(".fileinput")[0].files;
@@ -3063,7 +3063,7 @@ function s_change_malli(letter, l_id) {
       for (var a = 0; a < totalfiles; a++) {
           form_data = new FormData();
           form_data.append("files", material_files[a]);
-          
+
           $.ajax({
               url: '/upload.php',
               type: 'POST',
@@ -3080,13 +3080,13 @@ function s_change_malli(letter, l_id) {
           });
       }
 
-      
+
     });
 
     givenewtype();
   });
 
-  
+
 }
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -3113,7 +3113,7 @@ function s_newmalli() {
   formData = {
     index: letter,
   };
-  console.log(formData);  
+  console.log(formData);
   $.ajax({
     type: "POST",
     url: "vendor/admin__changetemplate.php",
@@ -3123,12 +3123,12 @@ function s_newmalli() {
     }
   }).done(function (data) {
     console.log(data);
-    
+
     (async () => {
       preset_id = data;
       console.log("PRESET ID!: " + preset_id);
       // await sleep(1000);
-      admin__savematerials(); 
+      admin__savematerials();
       // await sleep(1000);
       admin__saveusers();
       // await sleep(1000);
@@ -3167,8 +3167,8 @@ function s_newmalli() {
       inputs = document.querySelectorAll("#hole_set input");
       for (let i = 0; i < inputs.length; i++) {
         try {
-          save_aukko(inputs[i]); 
-          // await sleep(50); 
+          save_aukko(inputs[i]);
+          // await sleep(50);
         } catch (error) {
           console.log(error);
         }
@@ -3178,14 +3178,14 @@ function s_newmalli() {
       admin__savelistatvaaka();
       // await sleep(50);
       s_change_malli(letter,data);
-    
+
     })();
-    
+
 
   });
 
-  
-  
+
+
 }
 
 preset_id=100;
@@ -3387,8 +3387,8 @@ function appendnewaukkoitem(e) {
 
 function givenewtype() {
   setTimeout(() => {
-    
-  
+
+
     atypes = document.querySelectorAll(".ovi__asetusheading > b");
     btypes = document.querySelectorAll(".ikkuna__asetusheading > b");
     ctypes = document.querySelectorAll(".pilari__asetusheading > b");
@@ -3456,4 +3456,48 @@ function change_aukkoranka(e,inputpos) {
     e.parentElement.parentElement.querySelectorAll("input")[parseFloat(inputpos)].value = elements_array[16]; //Vähennä mistä ehdotus
     e.parentElement.parentElement.querySelectorAll("input")[parseFloat(inputpos)+1].value = elements_array[4]; //Laatu
   }
+}
+
+function appendnewmessagepreset() {
+  let table = document.querySelector(".messagepresets__tbody");
+  let newId = +table.querySelector("tr:last-child").dataset.id + 1;
+  let row = table.insertRow();
+  row.addEventListener("change", () => admin__save_message_preset(row));
+  row.dataset.id = newId;
+  row.innerHTML = `
+    <td><input class="lineinput"></td>
+    <td><input class="lineinput"></td>
+    <td><input class="lineinput"></td>
+    <td><button class="preset_delete" onclick="admin__delete_message_preset(this)">x</button></td>
+  `;
+  admin__save_message_preset(row);
+}
+
+function admin__save_message_preset(row) {
+  let inputs = row.querySelectorAll(".lineinput");
+  let formData = {
+    id: row.dataset.id,
+    name: inputs[0].value,
+    subject: inputs[1].value,
+    message: inputs[2].value,
+  };
+  $.ajax({
+    url: "vendor/admin__updatemessagepreset.php",
+    type: "POST",
+    data: formData,
+  });
+}
+
+function admin__delete_message_preset(el) {
+  let row = el.closest("tr");
+  let id = row.dataset.id;
+  let formData = { id };
+  $.ajax({
+    url: "vendor/admin__deletemessagepreset.php",
+    type: "POST",
+    data: formData,
+    success: function () {
+      row.remove();
+    },
+  });
 }

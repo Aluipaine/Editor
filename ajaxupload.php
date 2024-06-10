@@ -1,12 +1,26 @@
 <?php
 // Count total files
-$countfiles_1 = count($_FILES['files-1']['name']);
-$countfiles_2 = count($_FILES['files-2']['name']);
-$countfiles_3 = count($_FILES['files-3']['name']);
-$countfiles_4 = count($_FILES['files-4']['name']);
-$countfiles_5 = count($_FILES['files-5']['name']);
-$countfiles_6 = count($_FILES['files-6']['name']);
-$comment__files = count($_FILES['comment__files']['name']);
+if (isset($_FILES['files-1'])) {
+   $countfiles_1 = count($_FILES['files-1']['name']);
+}
+if (isset($_FILES['files-2'])) {
+   $countfiles_2 = count($_FILES['files-2']['name']);
+}
+if (isset($_FILES['files-3'])) {
+   $countfiles_3 = count($_FILES['files-3']['name']);
+}
+if (isset($_FILES['files-4'])) {
+   $countfiles_4 = count($_FILES['files-4']['name']);
+}
+if (isset($_FILES['files-5'])) {
+   $countfiles_5 = count($_FILES['files-5']['name']);
+}
+if (isset($_FILES['files-6'])) {
+   $countfiles_6 = count($_FILES['files-6']['name']);
+}
+if (isset($_FILES['comment__files'])) {
+   $comment__files = count($_FILES['comment__files']['name']);
+}
 
 // Upload Location
 $upload_location = "uploads/";
@@ -27,9 +41,11 @@ for($index = 0;$index < $comment__files;$index++){
 
       // Check extension
       if(in_array($ext, $valid_ext)){
-
-         // File path
-         $path = $upload_location.$filename;
+         // Unique file path
+         do {
+            $rand = uniqid('');
+            $path = $upload_location.$rand.'_'.$filename;
+         } while (file_exists($path));
 
          // Upload file
          if(move_uploaded_file($_FILES['comment__files']['tmp_name'][$index],$path)){
