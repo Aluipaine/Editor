@@ -2585,8 +2585,8 @@ $("#close_send_email_dialog").on("click", function(event) {
 
 $("#email_presets").find(".preset").on("click", function() {
   let dialog = $("#send_email_dialog");
-  dialog.find(".title").val(presets[index].Title);
-  dialog.find(".message").val(presets[index].Message);
+  dialog.find(".title").val(this.dataset.title);
+  dialog.find(".message").val(this.dataset.message);
   updateSendEmailUrl();
 });
 
