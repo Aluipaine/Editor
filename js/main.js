@@ -3179,15 +3179,15 @@ function gridify() {
 window.onload = (event) => {
   gridify();
 };
-$(document).ready(function () {
-  $(window).keydown(function (event) {
-    if (event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
-
-});
+// $(document).ready(function () {
+//   $(window).keydown(function (event) {
+//     if (event.keyCode == 13) {
+//       event.preventDefault();
+//       return false;
+//     }
+//   });
+//
+// });
 
 /**
  * Check if a given number is even.

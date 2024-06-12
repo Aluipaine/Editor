@@ -3467,7 +3467,7 @@ function appendnewmessagepreset() {
   row.innerHTML = `
     <td><input class="lineinput"></td>
     <td><input class="lineinput"></td>
-    <td><input class="lineinput"></td>
+    <td><textarea class="lineinput" rows="6"></textarea></td>
     <td><button class="preset_delete" onclick="admin__delete_message_preset(this)">x</button></td>
   `;
   admin__save_message_preset(row);

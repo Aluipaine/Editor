@@ -1310,7 +1310,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
               <tr data-id="<?= $row['id'] ?>" onchange="admin__save_message_preset(this)">
                 <td><input class="lineinput" value="<?= $row['name'] ?>"></td>
                 <td><input class="lineinput" value="<?= $row['subject'] ?>"></td>
-                <td><input class="lineinput" value="<?= $row['message'] ?>"></td>
+                <td><textarea class="lineinput" rows="6" value="<?= $row['message'] ?>"></textarea></td>
                 <td><button class="preset_delete" onclick="admin__delete_message_preset(this)">x</button></td>
               </tr>
               <?php } ?>

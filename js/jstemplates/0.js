@@ -2661,15 +2661,16 @@ function updateSendEmailUrl() {
       title = dialog.find(".title").val(),
       message = dialog.find(".message").val(),
       emails = new Set(),
-      attachments = dialog.find(".preview_image img").get().map(img => img.src).join("%0A");
+      attachments = dialog.find(".preview_image img").get();
   dialog.find("table .owner_checked .email").each(function() {
     emails.add($(this).text());
   });
   emails = [...emails];
-  if (attachments != "") {
-    message += "%0A" + attachments;
+  if (attachments.length) {
+    message += attachments.map((img) => '\n' + img.src).join('');
   }
-  dialog.find(".send_email_button").attr("href", `mailto:${emails[0] || ""}?subject=${title}&body=${message}&cc=${emails.slice(1).join(";")}`);
+  message = message.replaceAll('\n', '%0D%0A');
+  dialog.find(".send_email_button").attr("href", `mailto:${emails[0] || ""}?subject=${title}&body=${message}&cc=${emails.slice(1).join(",")}`);
 }
 
 $("#show_send_email_dialog").on("click", showSendEmailDialog);
