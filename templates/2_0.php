@@ -22,7 +22,10 @@
 <section id="project_start" class="project__roomcount" >
   <div class="container">
     <div class="row">
-      <div class="col-6"><h1 class="project_start_heading">Kohde <?= $post["title"]; ?></h1></div>
+      <div class="col-6">
+        <h1 class="project_start_heading">Kohde <?= $post["title"]; ?></h1>
+        <button class="show_project_files_btn">Tiedostopankki</button>
+      </div>
       <div class="col-6">
         <table>
           <tr>
@@ -2208,10 +2211,10 @@
         </div>
       </div>
     </div>
-    <dialog id="add_customer_dialog">
+    <dialog class="dialog" id="add_customer_dialog">
         <div class="dialog_container">
             <div class="form">
-                <button id="close_add_customer_dialog">x</button>
+                <button class="close_dialog" id="close_add_customer_dialog">x</button>
                 <label>
                     <span>Nimi</span>
                     <input type="text" class="customer_name">
@@ -2289,6 +2292,7 @@
           <i><?= $tiedot_huoneista ?></i> <br> <br>
           <b>Tiedot tekijästä</b> <br>
           <i><?= $tiedot_tekijasta ?></i> <br> <br>
+          <button type="button" class="show_project_files_btn">Asunnon tiedostopankki</button>
           <?php
        $id = $post['id'];
        $role = $_GET['user'];
@@ -3406,11 +3410,19 @@ if($remove_overflowY === true) {
     ticket.querySelector(".comment__status").style.borderColor = "red";
   }
 </script>
-
-<dialog id="send_email_dialog">
+<dialog class="dialog" id="project_files_dialog">
+  <div class="dialog_container">
+    <div class="form">
+      <button class="close_dialog" id="close_project_files_dialog">x</button>
+      <div class="project_files_empty">No files</div>
+      <div class="project_files_list"></div>
+    </div>
+  </div>
+</dialog>
+<dialog class="dialog" id="send_email_dialog">
     <div class="dialog_container">
         <div class="form">
-            <button id="close_send_email_dialog">x</button>
+            <button class="close_dialog" id="close_send_email_dialog">x</button>
             <h2>Presetit</h2>
             <div id="email_presets" class="presets">
             <?php
@@ -3432,6 +3444,9 @@ if($remove_overflowY === true) {
                 <div class="type" data-type="myyja">
                     <span>Myyjä</span>
                 </div>
+                <div class="type" data-type="tilaaja">
+                    <span>Tilaaja</span>
+                </div>
                 <div class="type" data-type="hankkeen_johtaja">
                     <span>Hankkeen Johtaja</span>
                 </div>
@@ -3445,7 +3460,8 @@ if($remove_overflowY === true) {
                     <span>Omistaja</span>
                 </div>
             </div>
-            <input type="file" class="comment__files" name="comment__files" accept=".png, .jpg, .jpeg" multiple>
+            <input type="file" class="comment__files" name="comment__files" multiple>
+            <input type="hidden" class="preset_name">
             <div class="preview_files"></div>
             <div class="tables">
                 <table class="project_contacts"></table>

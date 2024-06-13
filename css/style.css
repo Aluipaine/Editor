@@ -250,6 +250,7 @@ h1 {
 button {
   background: unset;
   border: unset;
+  color: unset;
   cursor: pointer;
 }
 
@@ -372,7 +373,11 @@ form input[type="submit"]:focus {
   padding: 9px 0;
   border: unset;
 }
-
+.show_project_files_btn {
+  width: 100%;
+  background: lightgray;
+  padding: 9px 0;
+}
 .get_excel_btn {
   display: block;
   text-align: center;
@@ -8230,23 +8235,20 @@ input[type="radio"].mass__selection_btn {
   text-align: center;
 }
 
-#add_customer_dialog,
-#send_email_dialog {
+.dialog {
   width: 100%;
   height: 100%;
   margin: auto;
   background: transparent;
   border: none;
 }
-#add_customer_dialog .dialog_container,
-#send_email_dialog .dialog_container {
+.dialog_container {
   width: 100%;
   height: 100%;
   display: flex;
 }
 
-#add_customer_dialog .form,
-#send_email_dialog .form {
+.form {
   margin: auto;
   background: #fff;
   display: flex;
@@ -8263,8 +8265,7 @@ input[type="radio"].mass__selection_btn {
   margin: 0;
   max-width: 100%;
 }
-#add_customer_dialog .form #close_add_customer_dialog,
-#send_email_dialog .form #close_send_email_dialog {
+.close_dialog {
   position: absolute;
   font-size: 1.5rem;
   /* top: -3rem;
@@ -8349,4 +8350,29 @@ input[type="radio"].mass__selection_btn {
 }
 #send_email_dialog .type_select .type.checked {
   border-color: #00ac25;
+}
+.project_files_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.project_file_preview {
+  display: flex;
+  width: 150px;
+  flex-direction: column;
+  border: 1px solid gray;
+  color: black;
+  padding: 6px;
+  overflow-wrap: break-word;
+  text-decoration: none;
+}
+.project_file_preview img {
+  max-width: 100%;
+  max-height: 150px;
+  margin: auto;
+}
+.project_files_empty {
+  width: 150px;
+  line-height: 150px;
+  text-align: center;
 }

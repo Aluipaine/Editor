@@ -1,4 +1,7 @@
 <?php
+
+require "vendor/config.php";
+
 // Count total files
 if (isset($_FILES['files-1'])) {
    $countfiles_1 = count($_FILES['files-1']['name']);
@@ -26,30 +29,45 @@ if (isset($_FILES['comment__files'])) {
 $upload_location = "uploads/";
 
 // To store uploaded files path
-$files_arr = array();
-for($index = 0;$index < $comment__files;$index++){
-
-   if(isset($_FILES['comment__files']['name'][$index]) && $_FILES['comment__files']['name'][$index] != ''){
+$files_arr = [];
+for ($index = 0; $index < $comment__files; $index++) {
+   if (isset($_FILES['comment__files']['name'][$index]) && $_FILES['comment__files']['name'][$index] != '') {
       // File name
       $filename = $_FILES['comment__files']['name'][$index];
 
       // Get extension
       $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-      // Valid image extension
-      $valid_ext = array("pdf","jpg","png","sql","dwg","docx");
+      // Valid extension
+      $valid_ext = ["pdf","jpg","png","sql","dwg","docx","xls","xlsx","mp4"];
 
       // Check extension
-      if(in_array($ext, $valid_ext)){
+      if (in_array($ext, $valid_ext)) {
+         $preset = str_replace(
+            [' ', 'ä', 'ö', 'å' ],
+            ['-', 'a', 'o', 'ao'],
+            $_POST['preset']
+         );
+
+         $room = $_POST['room'];
+         $date = date('Y-m-d_H-i');
+
          // Unique file path
          do {
-            $rand = uniqid('');
-            $path = $upload_location.$rand.'_'.$filename;
+            $rand = substr(uniqid('', true), -4);
+            $title = explode('~', $room)[0].'_'.$preset.'_'.$date.'_'.$rand.'.'.$ext;
+            $path = $upload_location.$title;
          } while (file_exists($path));
 
          // Upload file
-         if(move_uploaded_file($_FILES['comment__files']['tmp_name'][$index],$path)){
+         if (move_uploaded_file($_FILES['comment__files']['tmp_name'][$index], $path)) {
             $files_arr[] = $path;
+
+            // Add file to database
+            $projectid = $_POST['projectid'];
+            $tags = $_POST['tags'];
+            $timestamp = time();
+            mysqli_query($db, "INSERT INTO `project_files` (`projectid`, `room`, `photo_title`, `url`, `tags`, `timestamp`) VALUES ('$projectid', '$room', '$title', '$path', '$tags', '$timestamp')");
          }
       }
    }

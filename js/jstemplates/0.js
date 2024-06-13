@@ -1166,6 +1166,8 @@ function degradate_url(stage) {
 
     removedParam = 'step';
     url.searchParams.delete(removedParam);
+
+    current_apartment = null;
   }
   if(stage === 2) {
     removedParam = 'room';
@@ -1758,7 +1760,8 @@ $('.project__building_room').click((e) => {
 })
 
 onLongPress($('.project__building_room'), function () {
-  showSendEmailDialog(this);
+  current_apartment = this.dataset.room;
+  showSendEmailDialog();
 }, 2000);
 
 $(".p_meaning")
@@ -2532,6 +2535,49 @@ function save_rooms() {
 
 }
 
+$(".show_project_files_btn").on("click", function () {
+  let dialog = $("#project_files_dialog");
+  let files_list = dialog.find(".project_files_list");
+  let data = {
+    project_id: document.querySelector("#current_project_id").value,
+  };
+  dialog[0].showModal();
+  document.body.style.overflow = "hidden";
+  files_list.empty();
+  if (current_apartment) {
+    data.room = current_apartment;
+  }
+  $.ajax({
+    url: "/vendor/get-project-files.php",
+    data: data,
+    success: (answer) => {
+      let files = JSON.parse(answer);
+      files_list.toggle(!!files.length);
+      dialog.find(".project_files_empty").toggle(!files.length);
+      files.forEach((file) => {
+        let preview = file.url;
+        if (preview.endsWith(".xls") || preview.endsWith(".xlsx")) {
+          preview = "/img/file-xls.svg";
+        } else if (preview.endsWith(".pdf")) {
+          preview = "/img/file-pdf.svg";
+        } else if (preview.endsWith(".mp4")) {
+          preview = "/img/file-video.svg";
+        }
+        files_list.append(`
+          <a class="project_file_preview" href="${file.url}" target="_blank">
+            <img src="${preview}">
+            <div>${file.photo_title}</div>
+          </a>
+        `);
+      });
+    }
+  });
+});
+$(".close_dialog").on("click", function () {
+  this.closest("dialog").close();
+  document.body.style.overflow = "";
+});
+
 $("#show_add_new_customer_contact").on("click", function(event) {
   event.preventDefault();
   event.stopPropagation();
@@ -2581,12 +2627,14 @@ $("#close_send_email_dialog").on("click", function(event) {
   event.preventDefault();
   event.stopPropagation();
   $("#send_email_dialog")[0].close();
+  current_apartment = null;
 });
 
 $("#email_presets").find(".preset").on("click", function() {
   let dialog = $("#send_email_dialog");
   dialog.find(".title").val(this.dataset.title);
   dialog.find(".message").val(this.dataset.message);
+  dialog.find(".preset_name").val(this.textContent);
   updateSendEmailUrl();
 });
 
@@ -2598,7 +2646,7 @@ $(".toggle_customer_modal").on("click", function () {
   }
 });
 
-function showSendEmailDialog(room) {
+function showSendEmailDialog() {
   let dialog = $("#send_email_dialog");
   dialog[0].showModal();
   dialog.find(".without_phone").empty();
@@ -2609,11 +2657,11 @@ function showSendEmailDialog(room) {
   owner_types.addClass("checked");
   let rooms;
   if ($(".toggle_customer_modal").hasClass("active")) {
-    rooms = $(".send_email_selected").get();
+    rooms = $(".send_email_selected").get().map(v => v.getAttribute("data-room"));
+    current_apartment = rooms.join("~");
   } else {
-    rooms = [room];
+    rooms = [current_apartment];
   }
-  rooms = rooms.map(v => v.getAttribute("data-room"));
   $.ajax({
     url: "../vendor/get-customer-contacts.php",
     type: "POST",
@@ -2643,7 +2691,7 @@ function showSendEmailDialog(room) {
           `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
         )
       });
-      let project_contacts = contacts.filter(v => v.type == "myyja" || v.type == "hankkeen_johtaja");
+      let project_contacts = contacts.filter(v => v.type == "myyja" || v.type == "tilaaja" || v.type == "hankkeen_johtaja");
       dialog.find(".project_contacts").empty();
       project_contacts.forEach(v => {
         dialog.find(".project_contacts").append(
@@ -2667,7 +2715,8 @@ function updateSendEmailUrl() {
   });
   emails = [...emails];
   if (attachments.length) {
-    message += attachments.map((img) => '\n' + img.src).join('');
+    let host = `${location.protocol}//${location.host}/`;
+    message += attachments.map((img) => '\n' + host + img.dataset.url).join('');
   }
   message = message.replaceAll('\n', '%0D%0A');
   dialog.find(".send_email_button").attr("href", `mailto:${emails[0] || ""}?subject=${title}&body=${message}&cc=${emails.slice(1).join(",")}`);
@@ -2695,13 +2744,15 @@ $("#send_email_dialog .type_select .type").on("click", function() {
 
 $("#send_email_dialog .comment__files").on("change", function () {
   let dialog = $("#send_email_dialog");
-  let preview = dialog.find(".preview_files");
+  let previews = dialog.find(".preview_files");
   let form_data = new FormData();
+  let preset = dialog.find(".preset_name").val();
   for (let file of this.files) {
-    if (file.type == "image/jpeg" || file.type == "image/png") {
-      form_data.append("comment__files[]", file, file.name);
-    }
+    form_data.append("comment__files[]", file, file.name);
   }
+  form_data.append("preset", preset);
+  form_data.append("room", current_apartment);
+  form_data.append("projectid", $("#current_project_id").val());
   $.ajax({
     url: "../ajaxupload.php",
     type: "POST",
@@ -2710,9 +2761,22 @@ $("#send_email_dialog .comment__files").on("change", function () {
     contentType: false,
     processData: false,
     success: (answer) => {
-      paths = JSON.parse(answer);
-      paths.forEach((path) => {
-        preview.append(`<div class="preview_image"><img src="${path}"><button class="preview_delete">x</button></div>`);
+      files = JSON.parse(answer);
+      files.forEach((url) => {
+        let preview = url;
+        if (url.endsWith(".xls") || url.endsWith(".xlsx")) {
+          preview = "/img/file-xls.svg";
+        } else if (url.endsWith(".pdf")) {
+          preview = "/img/file-pdf.svg";
+        } else if (url.endsWith(".mp4")) {
+          preview = "/img/file-video.svg";
+        }
+        previews.append(`
+          <div class="preview_image">
+            <img src="${preview}" data-url="${url}">
+            <button class="preview_delete">x</button>
+          </div>
+        `);
       });
       updateSendEmailUrl();
     },
