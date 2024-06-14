@@ -8308,11 +8308,14 @@ input[type="radio"].mass__selection_btn {
 #email_presets {
   display: flex;
   gap: 1rem;
+  max-width: 80vw;
+  overflow-x: scroll;
 }
 #email_presets .preset {
   padding: .5rem 1rem;
   border: 1px solid #000;
   cursor: pointer;
+  white-space: pre;
 }
 #email_presets .preset:hover {
   color: #fff;
