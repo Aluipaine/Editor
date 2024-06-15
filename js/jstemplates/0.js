@@ -2535,9 +2535,21 @@ function save_rooms() {
 
 }
 
+function getFileIcon(url) {
+  if (url.endsWith(".xls") || url.endsWith(".xlsx")) {
+    return "/img/file-xls.svg";
+  } else if (url.endsWith(".pdf")) {
+    return "/img/file-pdf.svg";
+  } else if (url.endsWith(".mp4")) {
+    return "/img/file-video.svg";
+  } else {
+    return url;
+  }
+}
+
 $(".show_project_files_btn").on("click", function () {
   let dialog = $("#project_files_dialog");
-  let files_list = dialog.find(".project_files_list");
+  let files_list = dialog.find(".preview_files");
   let data = {
     project_id: document.querySelector("#current_project_id").value,
   };
@@ -2555,19 +2567,26 @@ $(".show_project_files_btn").on("click", function () {
       files_list.toggle(!!files.length);
       dialog.find(".project_files_empty").toggle(!files.length);
       files.forEach((file) => {
-        let preview = file.url;
-        if (preview.endsWith(".xls") || preview.endsWith(".xlsx")) {
-          preview = "/img/file-xls.svg";
-        } else if (preview.endsWith(".pdf")) {
-          preview = "/img/file-pdf.svg";
-        } else if (preview.endsWith(".mp4")) {
-          preview = "/img/file-video.svg";
+        let tags = "";
+        if (file.tags) {
+          tags = file.tags.split(',').map((tag) => `
+            <div class="tag">
+              <input class="tag_name" value="${tag}">
+              <button class="tag_delete">x</button>
+            </div>
+          `).join('');
         }
         files_list.append(`
-          <a class="project_file_preview" href="${file.url}" target="_blank">
-            <img src="${preview}">
-            <div>${file.photo_title}</div>
-          </a>
+          <div class="preview_item" data-id="${file.id}">
+            <a href="${file.url}" target="_blank">
+              <img src="${getFileIcon(file.url)}">
+              <div>${file.photo_title}</div>
+            </a>
+            <div class="tag_list">
+              ${tags}
+              <button class="tag_add">+ Add tag</button>
+            </div>
+          </div>
         `);
       });
     }
@@ -2658,7 +2677,7 @@ function showSendEmailDialog() {
   let rooms;
   if ($(".toggle_customer_modal").hasClass("active")) {
     rooms = $(".send_email_selected").get().map(v => v.getAttribute("data-room"));
-    current_apartment = rooms.join("~");
+    current_apartment = rooms.join();
   } else {
     rooms = [current_apartment];
   }
@@ -2677,26 +2696,44 @@ function showSendEmailDialog() {
       dialog.find(".without_phone").empty();
       dialog.find(".with_phone").empty();
       residents.forEach(v => {
-        dialog.find(".without_phone").append(
-          `<tr><td>${v.name}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
-        );
-        dialog.find(".with_phone").append(
-          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
-        );
+        dialog.find(".without_phone").append(`
+          <tr>
+            <td>${v.name}</td>
+            <td class="email">${v.email}</td>
+            <td class="owner_type">${v.type}</td>
+          </tr>
+        `);
+        dialog.find(".with_phone").append(`
+          <tr class="${selected_owner_types.includes(v.type) ? 'owner_checked' : ''}">
+            <td>${v.name}</td>
+            <td>${v.tel}</td>
+            <td class="email">${v.email}</td>
+            <td class="owner_type">${v.type}</td>
+          </tr>
+        `);
       });
       let owner = contacts.filter(v => v.type === "omistaja");
       dialog.find(".owner").empty();
       owner.forEach(v => {
-        dialog.find(".owner").append(
-          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
-        )
+        dialog.find(".owner").append(`
+          <tr class="${selected_owner_types.includes(v.type) ? 'owner_checked' : ''}">
+            <td>${v.name}</td><td>${v.tel}</td>
+            <td class="email">${v.email}</td>
+            <td class="owner_type">${v.type}</td>
+          </tr>
+        `);
       });
       let project_contacts = contacts.filter(v => v.type == "myyja" || v.type == "tilaaja" || v.type == "hankkeen_johtaja");
       dialog.find(".project_contacts").empty();
       project_contacts.forEach(v => {
-        dialog.find(".project_contacts").append(
-          `<tr class="${selected_owner_types.includes(v.type)? 'owner_checked': ''}"><td>${v.name}</td><td>${v.tel}</td><td class="email">${v.email}</td><td class="owner_type">${v.type}</td></tr>`
-        )
+        dialog.find(".project_contacts").append(`
+          <tr class="${selected_owner_types.includes(v.type) ? 'owner_checked' : ''}">
+            <td>${v.name}</td>
+            <td>${v.tel}</td>
+            <td class="email">${v.email}</td>
+            <td class="owner_type">${v.type}</td>
+          </tr>
+        `);
       });
       dialog.find(".send_email_button").removeAttr("disabled");
       updateSendEmailUrl();
@@ -2709,7 +2746,7 @@ function updateSendEmailUrl() {
       title = dialog.find(".title").val(),
       message = dialog.find(".message").val(),
       emails = new Set(),
-      attachments = dialog.find(".preview_image img").get();
+      attachments = dialog.find(".preview_item").get();
   dialog.find("table .owner_checked .email").each(function() {
     emails.add($(this).text());
   });
@@ -2762,19 +2799,14 @@ $("#send_email_dialog .comment__files").on("change", function () {
     processData: false,
     success: (answer) => {
       files = JSON.parse(answer);
-      files.forEach((url) => {
-        let preview = url;
-        if (url.endsWith(".xls") || url.endsWith(".xlsx")) {
-          preview = "/img/file-xls.svg";
-        } else if (url.endsWith(".pdf")) {
-          preview = "/img/file-pdf.svg";
-        } else if (url.endsWith(".mp4")) {
-          preview = "/img/file-video.svg";
-        }
+      Object.entries(files).forEach(([id, url]) => {
         previews.append(`
-          <div class="preview_image">
-            <img src="${preview}" data-url="${url}">
+          <div class="preview_item" data-id="${id}" data-url="${url}">
+            <img src="${getFileIcon(url)}">
             <button class="preview_delete">x</button>
+            <div class="tag_list">
+              <button class="tag_add">+ Add tag</button>
+            </div>
           </div>
         `);
       });
@@ -2786,4 +2818,34 @@ $("#send_email_dialog .comment__files").on("change", function () {
 $("#send_email_dialog .preview_files").on("click", ".preview_delete", function () {
   $(this).parent().remove();
   updateSendEmailUrl();
+});
+
+$(".preview_files").on("click", ".tag_add", function () {
+  $(this).before(`
+    <div class="tag">
+      <input class="tag_name">
+      <button class="tag_delete">x</button>
+    </div>
+  `);
+});
+
+function updateFileTags(item) {
+  $.ajax({
+    url: "/vendor/update-project-file.php",
+    type: "POST",
+    data: {
+      id: item.data("id"),
+      tags: item.find(".tag_name").get().filter((tag) => tag.value).map((tag) => tag.value).join(),
+    },
+  });
+}
+
+$(".dialog").on("change", ".preview_item", function () {
+  updateFileTags($(this));
+});
+
+$(".preview_files").on("click", ".tag_delete", function () {
+  let preview_item = $(this).closest(".preview_item");
+  $(this).parent().remove();
+  updateFileTags(preview_item);
 });

@@ -49,25 +49,32 @@ for ($index = 0; $index < $comment__files; $index++) {
             $_POST['preset']
          );
 
-         $room = $_POST['room'];
+         $projectid = $_POST['projectid'];
+         $rooms = $_POST['room'];
+         $room = explode(',', $rooms)[0];
          $date = date('Y-m-d_H-i');
+
+         // Check if directory exists
+         $dir = $upload_location.$projectid.'/'.$room;
+         if (!is_dir($dir)) {
+            mkdir($dir, 0775, true);
+         }
 
          // Unique file path
          do {
             $rand = substr(uniqid('', true), -4);
-            $title = explode('~', $room)[0].'_'.$preset.'_'.$date.'_'.$rand.'.'.$ext;
-            $path = $upload_location.$title;
+            $title = $room.'_'.$preset.'_'.$date.'_'.$rand.'.'.$ext;
+            $path = $dir.'/'.$title;
          } while (file_exists($path));
 
          // Upload file
          if (move_uploaded_file($_FILES['comment__files']['tmp_name'][$index], $path)) {
-            $files_arr[] = $path;
-
             // Add file to database
-            $projectid = $_POST['projectid'];
-            $tags = $_POST['tags'];
             $timestamp = time();
-            mysqli_query($db, "INSERT INTO `project_files` (`projectid`, `room`, `photo_title`, `url`, `tags`, `timestamp`) VALUES ('$projectid', '$room', '$title', '$path', '$tags', '$timestamp')");
+            mysqli_query($db, "INSERT INTO `project_files` (`projectid`, `room`, `photo_title`, `url`, `tags`, `timestamp`) VALUES ('$projectid', '$rooms', '$title', '$path', '', '$timestamp')");
+
+            $id = mysqli_insert_id($db);
+            $files_arr[$id] = $path;
          }
       }
    }

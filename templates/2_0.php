@@ -3415,7 +3415,7 @@ if($remove_overflowY === true) {
     <div class="form">
       <button class="close_dialog" id="close_project_files_dialog">x</button>
       <div class="project_files_empty">No files</div>
-      <div class="project_files_list"></div>
+      <div class="preview_files"></div>
     </div>
   </div>
 </dialog>
