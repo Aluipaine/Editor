@@ -3406,10 +3406,10 @@ $(
 })
 
 $("#send_email_dialog .comment__files").on("change", function () {
-	let dialog = $("#send_email_dialog")
-	let previews = dialog.find(".preview_files")
-	form_data = new FormData()
-	let preset = dialog.find(".preset_name").val()
+  let dialog = $("#send_email_dialog");
+  let previews = dialog.find(".preview_files");
+  let form_data = new FormData();
+  let preset = dialog.find(".preset_name").val();
 
 	if (preset === "" || preset === null) {
 		preset = "kuva_"
