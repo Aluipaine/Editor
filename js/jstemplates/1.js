@@ -139,7 +139,7 @@ function open_element(element,left_distance,right_distance,bottom_distance,top_d
     document.querySelector('body').classList.add('modal-active');
     settings__mitta();
     change__newdiv_cord();
-   
+
     aukko = document.querySelector('#' + element);
     // aukko.parentElement.remove();
     aukko_count -= 1;
@@ -356,7 +356,7 @@ function updatearea(maxval) {
       changesize();
     }, 2000);
   }
-  
+
 }
 
 /**
@@ -413,7 +413,7 @@ function changeheights() {
 
   //  console.log("tochange_roomarray[i].querySelector(.wall_height).value " + parseFloat(document.querySelector("#drawarea_h").value));
  }
-  
+
 }
 /**
  * Adjusts the size of elements based on the maximum value provided.
@@ -446,7 +446,7 @@ function changesize(maxval,frominput) {
       document.querySelector('.modal-yes').setAttribute("onclick","document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(measureforcross_h);changeWidths(measureforcross_w);save_rooms();");
     }
   }
-  
+
 
   if(canvas.querySelectorAll(".mp").length > 0) {
     mps = canvas.querySelectorAll(".mp");
@@ -454,11 +454,11 @@ function changesize(maxval,frominput) {
       if(canvas.offsetHeight < parseFloat(mp.style.bottom) || canvas.offsetWidth < parseFloat(mp.style.left)) {
         console.log(mp.getAttribute("id"));
         document.querySelector(".newDiv__comment_del[name='"+mp.getAttribute("id")+"']").click();
-        alert("Syystä että mittapiste on alueen ulkopuolella, se poistettiin"); 
+        alert("Syystä että mittapiste on alueen ulkopuolella, se poistettiin");
       }
     });
   }
-  
+
   try {
     changeheights();
     if (maxval) {
@@ -468,7 +468,7 @@ function changesize(maxval,frominput) {
       if (mval_dir === "y" && mval_cord > 3650 || mval_dir === "x" && mval_cord > 9999) {
         return;
       }
-      
+
       if(mval_dir == "y") {
         document.querySelector(".drawarea__left b.end_measure").innerHTML = parseFloat(mval_cord) - saumaset_hm;
       }
@@ -482,7 +482,7 @@ function changesize(maxval,frominput) {
     if(userinteraction === true) {
       thisroom = document.querySelector(".house__wall_" + current_room.toLowerCase());
 
-      
+
       thisroom.querySelectorAll("input")[0].value = parseFloat(height);
       thisroom.querySelectorAll("input")[1].value = parseFloat(width);
 
@@ -498,8 +498,8 @@ function changesize(maxval,frominput) {
       changesize(reserve_maxval);
     }, 500);
   }
- 
- 
+
+
 
   wall_oncross = document.querySelector(".current__housewall");
 
@@ -567,11 +567,11 @@ function changesize(maxval,frominput) {
      array__ofinputsy[i].dataset.maximum = parseFloat(height);
    }
   } catch (error) {
-   
+
   }
 
   let array__ofinputsy = [];
-  
+
 
  changeheights();
  adjust_roomsizes();
@@ -582,7 +582,7 @@ function changesize(maxval,frominput) {
  * @returns None
  */
 function changesize__bottom(maxval,frominput) {
-  
+
   if(frominput && canvas.querySelector(".levyt") && canvas.querySelector(".saumat__grandrow")) {
     if(canvas.querySelector(".levyt").innerHTML.length > 1 || canvas.querySelector(".saumat__grandrow").innerHTML.length > 1) {
       canvas.querySelector(".saumat__grandrow").remove();
@@ -592,7 +592,7 @@ function changesize__bottom(maxval,frominput) {
       if(canvas.querySelector(".listat__grandrow")) {
         canvas.querySelector(".listat__grandrow").remove();
       }
-      
+
       canvas.querySelector(".levyt").innerHTML = "";
       alert("Syystä että alueen koko on vaihtunut, piirrosalueen ladonta pyyhitty.");
     }
@@ -662,7 +662,7 @@ function changesize__bottom(maxval,frominput) {
   }
 
   changeheights();
- 
+
 }
 /**
  * Function to handle settings related to measurements on the canvas.
@@ -726,8 +726,8 @@ function settings__mitta() {
       document.querySelector(".label_mp_cord_b").innerHTML = "Oikealle";
     }
     else {
-      document.querySelector(".label_mp_cord_a").innerHTML = "Ylös"; 
-      document.querySelector(".label_mp_cord_b").innerHTML = "Oikealle"; 
+      document.querySelector(".label_mp_cord_a").innerHTML = "Ylös";
+      document.querySelector(".label_mp_cord_b").innerHTML = "Oikealle";
     }
 
     document.querySelector("#cord_up").value = 0;
@@ -765,8 +765,8 @@ function settings__mitta() {
       document.querySelector(".label_lv_cord_b").innerHTML = "Oikealle";
     }
     else {
-      document.querySelector(".label_lv_cord_a").innerHTML = "Ylös"; 
-      document.querySelector(".label_lv_cord_b").innerHTML = "Oikealle"; 
+      document.querySelector(".label_lv_cord_a").innerHTML = "Ylös";
+      document.querySelector(".label_lv_cord_b").innerHTML = "Oikealle";
     }
     // touchedElement('#setting__canvas_lapiviennit > main', '#box_w', '#box_h', newDiv, 'elem', document.querySelector('#lvcord_left'), document.querySelector('#lvcord_low') );
   }
@@ -845,7 +845,7 @@ function null__origo_cord() {
     document.getElementById("settings__aukko").style.bottom = "0";
     document.getElementById("settings__aukko").style.left = "0";
 
-    
+
   }
   if (input_step == "drawscreen_section_three") {
     document.querySelector("#lvcord_low").value = "0";
@@ -872,7 +872,7 @@ function elem_del(e, count) {
     barent = document.getElementsByName(obj)[0];
     barent.remove();
   }
-  
+
   e.remove();
 }
 /**
@@ -943,7 +943,7 @@ function change__newdiv_cord() {
      newDiv.style.left = eval(document.getElementById("lvcord_left").value / 5) + "px";
    }
   }
-  
+
 }
 
 /**
@@ -981,7 +981,7 @@ function give__origo_cord() {
 async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord, mode_hcord, mode_wcord, mode_count, mode_id, mode_specifications,ir_mitta_comment,ir_mitta_cfrom,ir_mitta_cto) {
   if(modding === true) {
     correct_name = tomode_object.getAttribute('id');
-    
+
     a_dels = document.querySelectorAll(".newDiv__comment_del");
 
     a_dels.forEach(a_del => {
@@ -993,7 +993,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
     });
   }
 
-  
+
   const newDiv = document.createElement("span");
   const newDiv__comment = document.createElement("span");
   const newDiv__hidden_attention = document.createElement("input");
@@ -1033,7 +1033,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
     newDiv__comment_del.setAttribute("name", id);
     newDiv__comment.setAttribute("name", id);
     if (type == "mp") {
-      
+
       newDiv__comment.innerHTML = document.querySelector("#mittapiste__name").value + "# <b class='mp_count'>" + mittapiste_count + "</b>";
       newDiv__hidden_attention.type = "hidden";
       newDiv__hidden_attention.name = "attentions";
@@ -1045,10 +1045,10 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
 
 
        newDiv.style.left = eval(document.querySelector("#cord_left").value) / 5 + "px";
-      
+
        newDiv.style.bottom = eval(document.querySelector("#cord_up").value) / 5 + "px";
-      
-      
+
+
       if (document.querySelector("#cord_up").value == "") {
         newDiv.style.bottom = 0;
       }
@@ -1086,7 +1086,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       things_array = ['"' + newDiv__comment.innerText + '|' + '' + parseFloat(newDiv.style.bottom) * 5 + '|' + '' + parseFloat(newDiv.style.left) * 5 + '|' +
         newDiv.dataset.no + '|' + id + '|' + current_room + '__"'
       ];
-      
+
       t_array = JSON.parse(things_array);
       mp_prevdata = t_array;
       mode_xcord = parseFloat(newDiv.style.left) * 5;
@@ -1095,7 +1095,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       newDiv__comment_del.setAttribute("onclick", "obj = this.getAttribute('name');delete_from_db('"+t_array+"');elem_del(document.querySelector('#'+obj), -1);");
       newDiv__comment_settings.setAttribute("onclick", "obj = this.getAttribute('name');document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();enable__modding(document.querySelector('#'+obj));");
       // newDiv__comment_settings.setAttribute("onclick", " document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();delete_from_db('"+t_array+"');mp_previous_vord = '';");
-      
+
     }
     if (type == "au") {
 
@@ -1109,7 +1109,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       const newDiv__y = document.createElement("i");
       const newDiv__x = document.createElement("i");
 
-      
+
 
       newDiv__height.classList.add("newDiv__height");
       newDiv__width.classList.add("newDiv__width");
@@ -1150,7 +1150,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         comment__from.innerHTML = document.querySelector("#aukko_comment_from").value;
         comment__to.innerHTML = document.querySelector("#aukko_comment_to").value;
 
-        
+
       }
       newDiv.classList.add("aukko");
       newDiv.classList.add(mode_name);
@@ -1234,14 +1234,14 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       aukko_tcord.classList.add("aukko_tcord");
       aukko_tcord.innerHTML = 10+ parseFloat(newDiv.style.bottom)*5 + parseFloat(newDiv.style.height)*5;
       aukko_tcord.style.left = (-1) * parseFloat(newDiv.style.left) -32 + "px";
-      newDiv.appendChild(aukko_tcord); 
+      newDiv.appendChild(aukko_tcord);
 
       aukko_bcord = document.createElement("div");
       aukko_bcord.classList.add("aukko__cord");
       aukko_bcord.classList.add("aukko_bcord");
       aukko_bcord.innerHTML = 10+ parseFloat(newDiv.style.bottom)*5;
       aukko_bcord.style.left = (-1) * parseFloat(newDiv.style.left) -32 + "px";
-      newDiv.appendChild(aukko_bcord); 
+      newDiv.appendChild(aukko_bcord);
 
       aukko_lcord.dataset.from = parseFloat(aukko_lcord.innerHTML);
     aukko_rcord.dataset.from = parseFloat(aukko_rcord.innerHTML);
@@ -1271,7 +1271,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
     aukko_inner_tcord.innerHTML = "x:" + (parseFloat(newDiv.style.left)*5+parseFloat(newDiv.style.width)*5) + "  <br/> y:" + parseFloat(newDiv.style.bottom)*5;
     aukko_inner_tcord.style.left = (parseFloat(newDiv.style.width) -32.5) + "px";
     aukko_inner_tcord.style.bottom = 10 +"px";
-    newDiv.appendChild(aukko_inner_tcord); 
+    newDiv.appendChild(aukko_inner_tcord);
 
     aukko_inner_bcord = document.createElement("div");
     aukko_inner_bcord.classList.add("aukko_inner__cord");
@@ -1279,14 +1279,14 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
     aukko_inner_bcord.innerHTML = "x:" + (parseFloat(newDiv.style.left)*5)+ "  <br/> y:" + parseFloat(newDiv.style.bottom)*5;
     aukko_inner_bcord.style.left = 10 + "px";
     aukko_inner_bcord.style.bottom = 10 +"px";
-    newDiv.appendChild(aukko_inner_bcord); 
+    newDiv.appendChild(aukko_inner_bcord);
 
     aukko_inner_lcord.dataset.from = parseFloat(aukko_inner_lcord.innerHTML);
     aukko_inner_rcord.dataset.from = parseFloat(aukko_inner_rcord.innerHTML);
     aukko_inner_tcord.dataset.from = parseFloat(aukko_inner_tcord.innerHTML);
     aukko_inner_bcord.dataset.from = parseFloat(aukko_inner_bcord.innerHTML);
 
-    ylitys__array();
+    ylitys__array(mode_name);
 
     saving_leftcord = parseFloat(newDiv.style.left) * 5;
     saving_bottomcord = parseFloat(newDiv.style.bottom) * 5;
@@ -1359,7 +1359,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         newDiv.style.height = lv_sade / 5 + "px";
         newDiv.style.width = lv_sade / 5 + "px";
       }
-      
+
       if (document.querySelector("#lv_comment").value != '') {
         newDiv__hidden_attentioncommmets.value += document.querySelector("#lv_comment").value + '<br> Tältä: ' + document.querySelector("#lv_comment_from")
           .value + '<br> Tälle: ' + document.querySelector("#lv_comment_to").value;
@@ -1372,14 +1372,14 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       newDiv.classList.add("lapivienti");
       newDiv.classList.add("lv");
       // Add styles to new lapivienti
-    
+
       const height = document.querySelector('#box_h').value;
       const width = document.querySelector('#box_w').value;
       if (document.querySelector("#lapiviennit__sade_muucord").value != "") {
-        
+
         newDiv.classList.add("lapivienti__customsize");
       }
-      
+
       newDiv.setAttribute("id", id);
       newDiv.dataset.no = lapivienti_count;
       newDiv__comment_settings.setAttribute("name", id);
@@ -1404,7 +1404,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
           newDiv.dataset.no + '|' + id + '|' + lv_sade +"|"+ c_text + "|" +c_from + "|" + c_to + '__"'
         ];
       }
-      
+
 
       t_array = JSON.parse(things_array);
       lv_prevdata = t_array;
@@ -1415,7 +1415,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         "obj = this.getAttribute('name');document.querySelector('#'+obj).remove();this.parentElement.remove();lapivienti_count-=1;delete_from_db('"+t_array+"');elem_del(document.querySelector('#'+obj), -1);");
 
         newDiv__comment_settings.setAttribute("onclick",
-        "obj = this.getAttribute('name');open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"','"+parseFloat(newDiv.style.height)+"','"+parseFloat(newDiv.style.width)+"','"+c_text.innerText+"','"+document.querySelector("#lv_comment_from").value+"','"+document.querySelector("#lv_comment_to").value+"');lv_previous_vord = '"+lv_previous_vord_+"';enable__modding(document.querySelector('#'+obj));" 
+        "obj = this.getAttribute('name');open_element('"+id+"','"+parseFloat(newDiv.style.left)+"','"+parseFloat(newDiv.style.bottom)+"','"+parseFloat(newDiv.style.height)+"','"+parseFloat(newDiv.style.width)+"','"+c_text.innerText+"','"+document.querySelector("#lv_comment_from").value+"','"+document.querySelector("#lv_comment_to").value+"');lv_previous_vord = '"+lv_previous_vord_+"';enable__modding(document.querySelector('#'+obj));"
       );
 
       // delete_from_db('"+t_array+"');
@@ -1438,7 +1438,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       aukko_bcord.classList.add("lv_bcord");
       aukko_bcord.innerHTML = parseFloat(newDiv.style.left)*5;
       aukko_bcord.style.left = (-1) * parseFloat(newDiv.style.height)/2 - 15 + "px";
-      newDiv.appendChild(aukko_bcord); 
+      newDiv.appendChild(aukko_bcord);
     // touchedElement('#box-wrapper > main', '#box_w', '#box_h', newDiv, 'elem', inH, inW );
 
       newDiv.appendChild(comment__container);
@@ -1453,7 +1453,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
 
       if(document.querySelector("#lv_comment_from").value.length > 2) {
         comment__from.innerHTML = document.querySelector("#lv_comment_from").value;
-      } 
+      }
       else {
         comment__from.innerHTML = "";
       }
@@ -1476,7 +1476,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       }
       else {
         border_radius = "50%";
-      }    
+      }
     }
   }
   else {
@@ -1515,9 +1515,9 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         newDiv.style.left = eval(document.querySelector("#cord_left").value) / 5 + "px";
         newDiv.style.bottom = (parseFloat(canvas.offsetHeight) - eval(document.querySelector("#cord_up").value) / 5) + "px";
       }
-       
-      
-      
+
+
+
       if (document.querySelector("#cord_up").value == "") {
         newDiv.style.bottom = 0;
       }
@@ -1555,11 +1555,11 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       things_array = ['"' + newDiv__comment.innerText + '|' + '' + parseFloat(newDiv.style.bottom) * 5 + '|' + '' + parseFloat(newDiv.style.left) * 5 + '|' +
         newDiv.dataset.no + '|' + id + '|' + current_room + '__"'
       ];
-      
+
       t_array = JSON.parse(things_array);
       mp_prevdata = t_array;
 
-      
+
       mode_xcord = parseFloat(newDiv.style.left) * 5;
       mode_ycord = parseFloat(newDiv.style.bottom) * 5;
       save("mp~~"+mode_xcord+"~~"+mode_ycord+"~~"+newDiv__comment.innerText);
@@ -1585,7 +1585,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         const newDiv__y = document.createElement("i");
         const newDiv__x = document.createElement("i");
 
-        
+
 
         newDiv__height.classList.add("newDiv__height");
         newDiv__width.classList.add("newDiv__width");
@@ -1623,7 +1623,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
 
           // newDiv.style.bottom = (eval(document.getElementById("aukotcord_low").value) / 5) + "px";
           // newDiv.style.left = (eval(document.getElementById("aukotcord_left").value) / 5) + 'px';
-          
+
         }
         else {
           newDiv.style.left =  parseFloat(mp_leftcord)/5 + (eval(document.querySelector("#aukotcord_left").value) / 5 ) + "px";
@@ -1653,7 +1653,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
           comment__from.innerHTML = document.querySelector("#aukko_comment_from").value;
           comment__to.innerHTML = document.querySelector("#aukko_comment_to").value;
 
-          
+
         }
         newDiv.classList.add("aukko");
         newDiv__height.innerHTML = (eval(document.getElementById("hole__height").value));
@@ -1666,31 +1666,31 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         newDiv.appendChild(newDiv__x);
         mytype = "";
         if (document.querySelector("#type__door").checked) {
-          
+
           newDiv.dataset.no = canvas.querySelectorAll(".ovi").length +1;
           newDiv.classList.add("ovi");
           mytype = "ovi";
         }
         if (document.querySelector("#type__window").checked) {
-          
+
           newDiv.dataset.no = canvas.querySelectorAll(".ikkuna").length+1;
           newDiv.classList.add("ikkuna");
           mytype = "ikkuna";
         }
         if (document.querySelector("#type__palkki").checked) {
-          
+
           newDiv.dataset.no = canvas.querySelectorAll(".palkki").length+1;
           newDiv.classList.add("palkki");
           mytype = "palkki";
         }
         if (document.querySelector("#type__collar").checked) {
-          
+
           newDiv.dataset.no = canvas.querySelectorAll(".pilari").length+1;
           newDiv.classList.add("pilari");
           mytype = "pilari";
         }
         if (document.querySelector("#type__ventilation").checked) {
-          
+
           newDiv.dataset.no = canvas.querySelectorAll(".tuuletus").length+1;
           newDiv.classList.add("tuuletus");
           mytype = "tuuletus";
@@ -1766,21 +1766,21 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         aukko_tcord.classList.add("aukko_tcord");
         aukko_tcord.innerHTML = 10+ parseFloat(newDiv.style.bottom)*5 + parseFloat(newDiv.style.height)*5;
         aukko_tcord.style.left = (-1) * parseFloat(newDiv.style.left) -32 + "px";
-        newDiv.appendChild(aukko_tcord); 
+        newDiv.appendChild(aukko_tcord);
 
         aukko_bcord = document.createElement("div");
         aukko_bcord.classList.add("aukko__cord");
         aukko_bcord.classList.add("aukko_bcord");
         aukko_bcord.innerHTML = 10+ parseFloat(newDiv.style.bottom)*5;
         aukko_bcord.style.left = (-1) * parseFloat(newDiv.style.left) -32 + "px";
-        newDiv.appendChild(aukko_bcord); 
+        newDiv.appendChild(aukko_bcord);
 
         aukko_lcord.dataset.from = parseFloat(aukko_lcord.innerHTML);
       aukko_rcord.dataset.from = parseFloat(aukko_rcord.innerHTML);
       aukko_tcord.dataset.from = parseFloat(aukko_tcord.innerHTML);
       aukko_bcord.dataset.from = parseFloat(aukko_bcord.innerHTML);
 
-  
+
       aukko_inner_lcord = document.createElement("div");
       aukko_inner_lcord.classList.add("aukko_inner__cord");
       aukko_inner_lcord.classList.add("aukko_inner_lcord");
@@ -1803,7 +1803,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       aukko_inner_tcord.innerHTML = "x:" + (parseFloat(newDiv.style.left)*5+parseFloat(newDiv.style.width)*5) + "  <br/> y:" + parseFloat(newDiv.style.bottom)*5;
       aukko_inner_tcord.style.left = (parseFloat(newDiv.style.width) -32.5) + "px";
       aukko_inner_tcord.style.bottom = 10 +"px";
-      newDiv.appendChild(aukko_inner_tcord); 
+      newDiv.appendChild(aukko_inner_tcord);
 
       aukko_inner_bcord = document.createElement("div");
       aukko_inner_bcord.classList.add("aukko_inner__cord");
@@ -1811,14 +1811,14 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       aukko_inner_bcord.innerHTML = "x:" + (parseFloat(newDiv.style.left)*5)+ "  <br/> y:" + parseFloat(newDiv.style.bottom)*5;
       aukko_inner_bcord.style.left = 10 + "px";
       aukko_inner_bcord.style.bottom = 10 +"px";
-      newDiv.appendChild(aukko_inner_bcord); 
+      newDiv.appendChild(aukko_inner_bcord);
 
       aukko_inner_lcord.dataset.from = parseFloat(aukko_inner_lcord.innerHTML);
       aukko_inner_rcord.dataset.from = parseFloat(aukko_inner_rcord.innerHTML);
       aukko_inner_tcord.dataset.from = parseFloat(aukko_inner_tcord.innerHTML);
       aukko_inner_bcord.dataset.from = parseFloat(aukko_inner_bcord.innerHTML);
 
-      ylitys__array();
+      ylitys__array(mytype);
 
       saving_leftcord = parseFloat(newDiv.style.left) * 5;
       saving_bottomcord = parseFloat(newDiv.style.bottom) * 5;
@@ -1864,7 +1864,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       }
 
       save("au~~"+saving_leftcord+"~~"+saving_bottomcord+"~~"+(saving_leftcord+saving_w)+"~~"+(saving_bottomcord + saving_h)+"~~"+ylitys_mode+"~~"+comment+"~~"+comment_from+"~~"+comment_to+"~~"+mytype);
-    
+
 
     }
     if (input_step == "drawscreen_section_three" || input_step === "drawscreen_section_five") {
@@ -1924,7 +1924,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         newDiv.style.height = lv_sade / 5 + "px";
         newDiv.style.width = lv_sade / 5 + "px";
       }
-      
+
       if (document.querySelector("#lv_comment").value != '') {
         newDiv__hidden_attentioncommmets.value += document.querySelector("#lv_comment").value + '<br> Tältä: ' + document.querySelector("#lv_comment_from")
           .value + '<br> Tälle: ' + document.querySelector("#lv_comment_to").value;
@@ -1937,14 +1937,14 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       newDiv.classList.add("lapivienti");
       newDiv.classList.add("lv");
       // Add styles to new lapivienti
-    
+
       const height = document.querySelector('#box_h').value;
       const width = document.querySelector('#box_w').value;
       if (document.querySelector("#lapiviennit__sade_muucord").value != "") {
-        
+
         newDiv.classList.add("lapivienti__customsize");
       }
-      
+
       newDiv.setAttribute("id", id);
       newDiv.dataset.no = lapivienti_count;
       newDiv__comment_settings.setAttribute("name", id);
@@ -1969,7 +1969,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
           newDiv.dataset.no + '|' + id + '|' + lv_sade +"|"+ c_text + "|" +c_from + "|" + c_to + '__"'
         ];
       }
-      
+
 
       t_array = JSON.parse(things_array);
       lv_prevdata = t_array;
@@ -2001,7 +2001,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
        aukko_bcord.classList.add("lv_bcord");
        aukko_bcord.innerHTML = parseFloat(newDiv.style.left)*5;
        aukko_bcord.style.left = (-1) * parseFloat(newDiv.style.height)/2 - 15 + "px";
-       newDiv.appendChild(aukko_bcord); 
+       newDiv.appendChild(aukko_bcord);
       // touchedElement('#box-wrapper > main', '#box_w', '#box_h', newDiv, 'elem', inH, inW );
 
        newDiv.appendChild(comment__container);
@@ -2016,7 +2016,7 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
 
         if(document.querySelector("#lv_comment_from").value.length > 2) {
           comment__from.innerHTML = document.querySelector("#lv_comment_from").value;
-        } 
+        }
         else {
           comment__from.innerHTML = "";
         }
@@ -2112,11 +2112,11 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       }
     }
   }
-  
+
   // document.querySelector(".drawarea__bottom");
   count__mp();
   count__lv();
-  
+
 }
 
 

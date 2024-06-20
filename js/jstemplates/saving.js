@@ -42,7 +42,7 @@ function restoreprogress() {
     lvalarm = true;
     restoring__mode = true;
     sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-    
+
     $(".preloader").addClass( "active" );
     s_ar = parseFloat(document.querySelector("#settings__levy_ar_arvo").value);
     s_yr = parseFloat(document.querySelector("#settings__levy_yr_arvo").value);
@@ -84,7 +84,7 @@ function restoreprogress() {
 
             wallname = s[2].toLowerCase();
 
-            walls = document.querySelectorAll(".tohide__room_"+wallname); 
+            walls = document.querySelectorAll(".tohide__room_"+wallname);
             walls.forEach(w => {
                 w.querySelector(".wall_height").value = parseFloat(s[3]);
                 w.querySelector(".wall_width").value = parseFloat(s[4]);
@@ -111,10 +111,12 @@ function restoreprogress() {
                 content = s[4];
                 timestamp = s[5];
                 if(content.split("~~")[0] === "au") {
-                    $('#step_drawscreen').val('drawscreen_section_two');refresh__drawcontrols();updatearea();           
+                    $('#step_drawscreen').val('drawscreen_section_two');refresh__drawcontrols();updatearea();
                     settings__aukko();
-                    ylitysas = content.split("~~")[5];
-                    ylitys__array(content.split("~~")[5]);
+                    ylitysas = content.split("~~")[5].replace(/\\u([\da-fA-F]{4})/g, function (m, $1) {
+                        return String.fromCharCode(parseInt($1, 16));
+                    });
+                    // ylitys__array(content.split("~~")[5]);
                     console.log(content.split("~~"));
                     input_step = "drawscreen_section_two";
                     origo_position = "left_bottom";
@@ -126,10 +128,7 @@ function restoreprogress() {
                     document.querySelector("#aukotcord_up").value = parseFloat(content.split("~~")[4]);
                     aukko__ylitykset = document.querySelectorAll(".aukko_ylitys input");
                     aukko__ylitykset.forEach(ylitys => {
-                        greeklet = content.split("~~")[5].replace(/\\u([\da-fA-F]{4})/g, function (m, $1) {
-                            return String.fromCharCode(parseInt($1, 16));
-                        }); 
-                        if(ylitys.value === greeklet) {
+                        if(ylitys.value === ylitysas) {
                             ylitys.checked = true;
                             console.log("checkedok");
                         }
@@ -140,7 +139,7 @@ function restoreprogress() {
                     document.querySelector("#aukko_comment_to").value = content.split("~~")[8];
                     // aukko__types
                     aukko__types = document.querySelectorAll(".aukko__types > input[name='aukko__types']");
-                    
+
                     // DEPRECATED. NOT WORKING  130324
                     // aukko__types.forEach(a_type => {
                     //     if(content.split("~~")[9].toLowerCase() === a_type.value.toLowerCase()) {
@@ -149,12 +148,12 @@ function restoreprogress() {
                     //     }
                     // });
                     mitta__create_mitta("restore","au",content.split("~~")[9].toLowerCase());
-                    
+
                  }
             });
         }
     });
-    
+
     formData = {
         pr_id: document.querySelector("#current_project_id").value,
         room: current_apartment,
@@ -187,7 +186,7 @@ function restoreprogress() {
                     document.querySelector("#cord_up").value = parseFloat(content.split("~~")[2]);
                     mitta__create_mitta("restore","mp");
                 }
-                
+
                 else if(content.split("~~")[0] === "lv") {
                     update_lv_ondrawarea();
                     origo_position = "left_bottom";
@@ -207,13 +206,13 @@ function restoreprogress() {
                         document.querySelector("#lvframing_frame").checked;
                     }
                     document.querySelector("#lv_comment_to").value = content.split("~~")[8];
-                    
+
                     mitta__create_mitta("restore","lv");
                 }
                 else if(sau_ok < timestamp && content.split("~~")[0] === "sau") {
                     input_step = "drawscreen_section_four";
                     sau_ok = timestamp;
-   
+
                     if(content.split("~~")[11] === "vly") {
                         document.querySelector(".settings__saumahanta-yla").click();
                     }
@@ -267,7 +266,7 @@ function restoreprogress() {
                     // document.querySelector("#settings__sauma_aihiotrimy").value = content.split("~~")[7];
                     document.querySelector("#settings__sauma_aihiopituus").value = content.split("~~")[8];
                     document.querySelector("#settings__sauma_aihioleveys").value = content.split("~~")[9];
-                    
+
                 }
                 else if(levyt_ok < timestamp && content.split("~~")[0] === "levyt") {
                     levyt_ok = timestamp;
@@ -280,9 +279,9 @@ function restoreprogress() {
                     tyostot__timestamp = timestamp;
                     tyostocontent = content;
 
-                   
+
                 }
-                
+
             });
         }
 
@@ -327,7 +326,7 @@ function restoreprogress() {
                     restore__kiinnikkeet(tyostocontent);
                     // reorganise__newtyosto();
                     // removeduplicatecords__adjustcords();
-                }, 250);     
+                }, 250);
             }
 
             if(tyostot_ok !== 0) {
@@ -337,14 +336,14 @@ function restoreprogress() {
                     restore__kiinnikkeet(tyostocontent);
                     // reorganise__newtyosto();
                     // removeduplicatecords__adjustcords();
-                }, 250);     
+                }, 250);
             }
         }
     });
     restoring__mode = false;
 
     $(".preloader").removeClass( "active" );
-    
+
     })();
 }
 
@@ -359,7 +358,7 @@ function delete_from_db(t_array) {
     array = "";
     if(input_step === "drawscreen_section_one") {
         array += "mp~~";
-        array += t_array.split("|")[2] + "~~" + t_array.split("|")[1]; 
+        array += t_array.split("|")[2] + "~~" + t_array.split("|")[1];
     }
     else if(input_step === "drawscreen_section_two") {
         array += "au~~";
@@ -369,7 +368,7 @@ function delete_from_db(t_array) {
         array += "lv~~";
         array += t_array.split("|")[5]+ "~~" + t_array.split("|")[2] +"~~" + t_array.split("|")[1];
     }
-   
+
     formData = {
         projectid: parseFloat(document.querySelector("#current_project_id").value),
         apartment: current_apartment,
