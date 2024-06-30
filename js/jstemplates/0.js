@@ -3358,23 +3358,23 @@ function showSendEmailDialog() {
 }
 
 function updateSendEmailUrl() {
-	let dialog = $("#send_email_dialog")
-	let title = dialog.find(".title").val()
-	let message = dialog.find(".message").val() + "\n"
-	let emails = new Set()
-	dialog.find("table .owner_checked .email").each(function () {
-		emails.add($(this).text())
-	})
-	emails = [...emails]
-	message = message.replaceAll("\n", "%0D%0A")
-	dialog
-		.find(".send_email_button")
-		.attr(
-			"href",
-			`mailto:${emails[0] || ""}?subject=${title}&body=${message}&cc=${emails
-				.slice(1)
-				.join(",")}`
-		)
+  let dialog = $("#send_email_dialog");
+  let title = dialog.find(".title").val();
+  let message = dialog.find(".message").val() + '\n';
+  let emails = new Set();
+  dialog.find("table .owner_checked .email").each(function() {
+    emails.add($(this).text());
+  });
+  emails = [...emails];
+  message = message.replaceAll("\n", "%0D%0A");
+  dialog
+    .find(".send_email_button")
+    .attr(
+      "href",
+      `mailto:${emails[0] || ""}?subject=${title}&body=${message}&cc=${emails
+        .slice(1)
+        .join(",")}`
+    );
 }
 
 $("#show_send_email_dialog").on("click", showSendEmailDialog)
@@ -3491,82 +3491,69 @@ $(".dialog").on("change", ".preview_item", function () {
 })
 
 $(".preview_files").on("click", ".tag_delete", function () {
-	let preview_item = $(this).closest(".preview_item")
-	$(this).parent().remove()
-	updateFileTags(preview_item)
-})
+  let preview_item = $(this).closest(".preview_item");
+  $(this).parent().remove();
+  updateFileTags(preview_item);
+});
 
 $(".send_email_button").on("click", function () {
-	let dialog = $("#send_email_dialog")
-	let attachments = dialog.find(".preview_item").get()
-	if (!attachments.length) {
-		return
-	}
-	let message = dialog.find(".message").val().replace("\n", "<br>") + "<br>"
-	let promises = attachments.map((file) => {
-		let img_url = file.querySelector("img").src
-		let file_url = `${window.location.origin}/${file.dataset.url}`
-		return fetch(img_url)
-			.then((response) => response.blob())
-			.then(
-				(blob) =>
-					new Promise((resolve) => {
-						let reader = new FileReader()
-						reader.onload = () => {
-							if (file_url == img_url) {
-								resolve(`<img src="${reader.result}">`)
-							} else {
-								resolve(
-									`<a href="${file_url}"><img src="${reader.result}" width="200"></a>`
-								)
-							}
-						}
-						reader.readAsDataURL(blob)
-					})
-			)
-	})
-	// promises.unshift(message)
-	// navigator.clipboard
-	// 	.writeText(copyText.value)
-	// 	.then(() => {
-	// 		alert("successfully copied")
-	// 	})
-	// 	.catch(() => {
-	// 		alert("something went wrong")
-	// 	})
-	try {
-		navigator.permissions
-			.query({ name: "write-on-clipboard" })
-			.then((result) => {
-				if (result.state == "granted" || result.state == "prompt") {
-					alert("Write access granted!")
-				}
-			})
-		navigator.permissions
-			.query({ name: "read-text-on-clipboard" })
-			.then((result) => {
-				if (result.state == "granted" || result.state == "prompt") {
-					alert("Read access granted!")
-				}
-			})
-		navigator.clipboard.write([
-			new ClipboardItem({
-				"text/html": Promise.all(promises).then(
-					(html) => new Blob(html, { type: "text/html" })
-				),
-			}),
-		])
-	} catch (error) {
-		alert(error)
-	}
+  let dialog = $("#send_email_dialog");
+  let attachments = dialog.find(".preview_item").get();
+  if (!attachments.length) {
+    return;
+  }
+  let promises = attachments.map(file => {
+    let img_url = file.querySelector('img').src;
+    let file_url = `${window.location.origin}/${file.dataset.url}`;
+    return fetch(img_url)
+      .then((response) => response.blob())
+      .then((blob) =>
+        new Promise(resolve => {
+          let reader = new FileReader();
+          reader.onload = () => {
+            if (file_url == img_url) {
+              resolve(`<img src="${reader.result}">`);
+            } else {
+              resolve(`<a href="${file_url}"><img src="${reader.result}" width="200"></a>`);
+            }
+          };
+          reader.readAsDataURL(blob);
+        })
+      );
+  });
+  try {
+    navigator.permissions
+      .query({ name: "write-on-clipboard" })
+      .then((result) => {
+        if (result.state == "granted" || result.state == "prompt") {
+          alert("Write access granted!");
+        }
+      });
+    navigator.permissions
+      .query({ name: "read-text-on-clipboard" })
+      .then((result) => {
+        if (result.state == "granted" || result.state == "prompt") {
+          alert("Read access granted!");
+        }
+      });
+    navigator.clipboard.write([
+      new ClipboardItem({
+        'text/html': Promise.all(promises).then(
+          (html) => new Blob(html, { type: 'text/html' })
+        ),
+      }),
+    ]);
+  } catch (error) {
+    alert(error);
+  }
 
-	location = $(this).attr("href")
-	var win = window.open(location)
-	if (win) {
-		//Browser has allowed it to be opened
-		win.focus()
-	} else {
-		//Browser has blocked it
-		alert("Please allow popups for this website")
-	}
+  location = $(this).attr("href");
+  var win = window.open(location);
+  if (win) {
+    //Browser has allowed it to be opened
+    win.focus();
+  } else {
+    //Browser has blocked it
+    alert("Please allow popups for this website");
+  }
 })
