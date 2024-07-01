@@ -3596,7 +3596,7 @@ if($remove_overflowY === true) {
                 <h3>Omistajat</h3>
                 <table class="owner"></table>
             </div>
-            <a href="#" id="send_email" target="_blank" class="send_email_button">Tee luonnos</a>
+            <div href="#" id="send_email" target="_blank" class="send_email_button">Tee luonnos</div>
         </div>
     </div>
 </dialog>
