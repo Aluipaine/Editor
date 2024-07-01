@@ -1635,93 +1635,163 @@
           echo '<div class="col-6 row house__inputrow nowrap">';
         }
       ?>
-        <h2><input maxlength="10" type="hidden" placeholder="Tilan nimi tähän" value="" name="wall_name" class="lineinput" id="roomname" oninput="open__change_btn();"></h2>
-        <h2><input maxlength="10" type="text" placeholder="Tilanimen 1 rivi" value="" name="wall_name" class="lineinput" id="roomname_1" oninput="open__change_btn();"></h2>
-        <h2><input maxlength="10" type="text" placeholder="Tilanimen 2 rivi" value="" name="wall_name" class="lineinput" id="roomname_2" oninput="open__change_btn();"></h2>
-        <h2><input maxlength="10" type="text" placeholder="Tilanimen 3 rivi" value="" name="wall_name" class="lineinput" id="roomname_3" oninput="open__change_btn();"></h2>
+        <h2><input maxlength="200" type="hidden" placeholder="Tilan nimi tähän" value="" name="wall_name" class="lineinput" id="roomname" oninput="open__change_btn();"></h2>
+        <h2><input maxlength="30" type="text" placeholder="Tilanimen 1 rivi" value="" name="wall_name" class="lineinput" id="roomname_1" oninput="open__change_btn();"></h2>
+        <h2><input maxlength="30" type="text" placeholder="Tilanimen 2 rivi" value="" name="wall_name" class="lineinput" id="roomname_2" oninput="open__change_btn();"></h2>
+        <h2><input maxlength="30" type="text" placeholder="Tilanimen 3 rivi" value="" name="wall_name" class="lineinput" id="roomname_3" oninput="open__change_btn();"></h2>
         <div class="change__roomname_btn" style="opacity: 0;" onclick="change__roomname();">
           Vaihda tilan nimi
         </div>
       <?php
-       $available_users = '';
+      //  $available_users = '';
 
-       if(strtolower($_GET["user"]) == "tyonjohto") {
-         $role = $_GET['user'];
-         $_id = $_GET['id'];
+      //  if(strtolower($_GET["user"]) == "tyonjohto") {
+      //    $role = $_GET['user'];
+      //    $_id = $_GET['id'];
 
-         $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id");
-         $userslist = mysqli_fetch_all($_userslist);
-
-
-         $ul="";
-
-         foreach ($userslist as $usern) {
-           $ul.='<option value="'.ucfirst($usern[0]).'">'.ucfirst($usern[0]).'</option>';
-         }
-
-         $ddate = date("Y-m-d");
-         $date = new DateTime($ddate);
-         $week = $date->format("W");
-         $weekcount = $week;
-         $cur_week = $week;
+      //    $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id");
+      //    $userslist = mysqli_fetch_all($_userslist);
 
 
-         echo '
-           <div class="row">
-             <h2 style="width: 100%;">Jätä työ</h2>
-             <hr style="margin-top: 50px;">
-             <section class="commentbox commentbox__new commentbox__newfirst">
-               <div class="row">
-                 <div class="col-6">
-                   <h2><input type="text" value="" class="lineinput kommentti__name" placeholder="Mikä murehduttaa?" onchange="window.scrollTo(0, 150);"></h2>
+      //    $ul="";
 
-                 </div>
-                 <div class="col-3">
-                   <h6>Deadline:</h6>
-                   <input name="deadline_time" class="comment__deadline newcomment__deadline" type="date" min="' .  date("Y-m-d") . '" value="'.date("Y-m-t", strtotime(date("Y-m-d"))).'" onchange="this.parentElement.parentElement.parentElement.querySelector(`.newcomment__vko`).value= new Date(this.value).getWeek();">
-                 </div>
-                 <div class="col-3">
-                     <h6>Arvio työtunneista</h6>
-                     <input name="time_estimate" class="time_estimate newcomment__estimatehours" type="number" pattern="\d*"/ value="0" style="max-width: 70px;" min="0">h
-                 </div>
-               </div>
-               <div class="row">
-                 <div class="col-6">
-                 <div class="form-group">
-                       <h6>Lisää tiedostot:</h6>
-                       <input type="file" class="comment__files newcomment__files newcomment__files_input" name="comment__files[]" multiple>
-                       <div class="comment__preview_files newcomment__previewfiles"></div>
-                   </div>
-                   <h6>Keneltä</h6>
-                   <input name="kommentti_comment_from" class="kommentti_comment_from" type="text" value="' . $role . '">
+      //    foreach ($userslist as $usern) {
+      //      $ul.='<option value="'.ucfirst($usern[0]).'">'.ucfirst($usern[0]).'</option>';
+      //    }
+
+      //    $ddate = date("Y-m-d");
+      //    $date = new DateTime($ddate);
+      //    $week = $date->format("W");
+      //    $weekcount = $week;
+      //    $cur_week = $week;
 
 
-                 </div>
-                 <div class="col-6">
-                     <h6>Tehdään viikolla</h6>
-                     <input name="vko_estimate" class="vko_estimate newcomment__vko" type="number" pattern="\d*"/ value="'.$cur_week.'" min="1" max="52" style="max-width: 70px;">
-                     <div class="row elevated_spaces">
-                       <div class="col-6">
-                         <h6>Kenelle</h6>
-                         <select name="kommentti_comment_to" class="kommentti_comment_to kommentti_comment_newto" multiple>'.$ul.'</select>
-                       </div>
+      //    echo '
+      //      <div class="row">
+      //        <h2 style="width: 100%;">Jätä työ</h2>
+      //        <hr style="margin-top: 50px;">
+      //        <section class="commentbox commentbox__new commentbox__newfirst">
+      //          <div class="row">
+      //            <div class="col-6">
+      //              <h2><input type="text" value="" class="lineinput kommentti__name" placeholder="Mikä murehduttaa?" onchange="window.scrollTo(0, 150);"></h2>
 
-                     </div>
-                 </div>
-               </div>
-               <div class="commentbox__text">
-                 <h4>Sisältö</h4>
-                 <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
-                 <div class="row pohjakierros">
-                   <input id="is_thecomment_critical" class="is_thecomment_critical" type="checkbox" value="Critical">
-                   <label for="is_thecomment_critical">Onko kriittinen?</label>
-                 </div>
-               </div>
-             </section>
-           </div>';
-         }
+      //            </div>
+      //            <div class="col-3">
+      //              <h6>Deadline:</h6>
+      //              <input name="deadline_time" class="comment__deadline newcomment__deadline" type="date" min="' .  date("Y-m-d") . '" value="'.date("Y-m-t", strtotime(date("Y-m-d"))).'" onchange="this.parentElement.parentElement.parentElement.querySelector(`.newcomment__vko`).value= new Date(this.value).getWeek();">
+      //            </div>
+      //            <div class="col-3">
+      //                <h6>Arvio työtunneista</h6>
+      //                <input name="time_estimate" class="time_estimate newcomment__estimatehours" type="number" pattern="\d*"/ value="0" style="max-width: 70px;" min="0">h
+      //            </div>
+      //          </div>
+      //          <div class="row">
+      //            <div class="col-6">
+      //            <div class="form-group">
+      //                  <h6>Lisää tiedostot:</h6>
+      //                  <input type="file" class="comment__files newcomment__files newcomment__files_input" name="comment__files[]" multiple>
+      //                  <div class="comment__preview_files newcomment__previewfiles"></div>
+      //              </div>
+      //              <h6>Keneltä</h6>
+      //              <input name="kommentti_comment_from" class="kommentti_comment_from" type="text" value="' . $role . '">
 
 
+      //            </div>
+      //            <div class="col-6">
+      //                <h6>Tehdään viikolla</h6>
+      //                <input name="vko_estimate" class="vko_estimate newcomment__vko" type="number" pattern="\d*"/ value="'.$cur_week.'" min="1" max="52" style="max-width: 70px;">
+      //                <div class="row elevated_spaces">
+      //                  <div class="col-6">
+      //                    <h6>Kenelle</h6>
+      //                    <select name="kommentti_comment_to" class="kommentti_comment_to kommentti_comment_newto" multiple>'.$ul.'</select>
+      //                  </div>
+
+      //                </div>
+      //            </div>
+      //          </div>
+      //          <div class="commentbox__text">
+      //            <h4>Sisältö</h4>
+      //            <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
+      //            <div class="row pohjakierros">
+      //              <input id="is_thecomment_critical" class="is_thecomment_critical" type="checkbox" value="Critical">
+      //              <label for="is_thecomment_critical">Onko kriittinen?</label>
+      //            </div>
+      //          </div>
+      //        </section>
+      //      </div>';
+      //    }
+
+      $available_users = '';
+
+      if(strtolower($_GET["user"]) == "tyonjohto") {
+
+        $role = $_GET['user'];
+
+        $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id");
+        $userslist = mysqli_fetch_all($_userslist);
+
+
+        $ul="";
+
+        foreach ($userslist as $usern) {
+          $ul.='<option value="'.ucfirst($usern[0]).'">'.ucfirst($usern[0]).'</option>';
+        }
+        echo '
+          <div class="row">
+            <h2 style="width: 100%;">Jätä työ</h2>
+            <hr style="margin-top: 50px;">
+            <section class="commentbox commentbox__new commentbox__newsecond">
+              <div class="row">
+                <div class="col-6">
+                  <h2><input type="text" value="" class="lineinput kommentti__name" placeholder="Mikä murehduttaa?" onchange="window.scrollTo(0, 150);"></h2>
+
+                </div>
+                <div class="col-3">
+                  <h6>Deadline:</h6>
+                  <input name="deadline_time" class="comment__deadline newcomment__deadline" type="date" min="' .  date("Y-m-d") . '" value="'.date("Y-m-t", strtotime(date("Y-m-d"))).'" onchange="this.parentElement.parentElement.parentElement.querySelector(`.newcomment__vko`).value= new Date(this.value).getWeek();">
+                </div>
+                <div class="col-3">
+                    <h6>Arvio työtunneista</h6>
+                    <input name="time_estimate" class="time_estimate newcomment__estimatehours" type="number" pattern="\d*"/ value="0" style="max-width: 70px;" min="0">h
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                <div class="form-group">
+                      <h6>Lisää tiedostot:</h6>
+                      
+                      <input type="file" class="newcomment__files newcomment__files_input" name="comment__files[]" multiple onchange="preparefile(this)">
+                      <div class="comment__preview_files newcomment__previewfiles_new"></div>
+                  </div>
+                  <h6>Keneltä</h6>
+                  <input name="kommentti_comment_from" class="kommentti_comment_from" type="text" value="' . $role . '">
+
+
+                </div>
+                <div class="col-6">
+                    <h6>Tehdään viikolla</h6>
+                    <input name="vko_estimate" class="vko_estimate newcomment__vko" type="number" pattern="\d*"/ value="'.$cur_week.'" min="1" max="52" style="max-width: 70px;">
+                    <div class="row elevated_spaces">
+                      <div class="col-6">
+                        <h6>Kenelle</h6>
+                        <select name="kommentti_comment_to" class="kommentti_comment_to kommentti_comment_newto" multiple>'.$ul.'</select>
+                      </div>
+
+                    </div>
+                </div>
+              </div>
+              <div class="commentbox__text">
+                <h4>Sisältö</h4>
+                <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
+                <div class="row pohjakierros">
+                  <input id="is_thecomment_critical" class="is_thecomment_critical" type="checkbox" value="Critical">
+                  <label for="is_thecomment_critical">Onko kriittinen?</label>
+                </div>
+              </div>
+              <div class="commentbox_btn drawarea__controls_btn btn commentreadyready_btn sendcommentfiles"  onclick="preparefiles_sendcomment(this);">Lähetä</div>
+            </section>
+          </div>';
+        }
 
 
       ?>
@@ -1765,7 +1835,7 @@
 
             echo '
               </div>
-              <div class="house__types_button" onclick="initialize__housetempla(this,2);" style="display: none;">
+              <div class="house__types_button" onclick="initialize__housetempla(this,2);">
                 Tallenna tämä asunto pohjaksi
               </div>
             </div>';
@@ -1782,76 +1852,76 @@
 
     <?php
 
-      $available_users = '';
+      // $available_users = '';
 
-      if(strtolower($_GET["user"]) == "tyonjohto") {
+      // if(strtolower($_GET["user"]) == "tyonjohto") {
 
-        $role = $_GET['user'];
+      //   $role = $_GET['user'];
 
-        $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id");
-        $userslist = mysqli_fetch_all($_userslist);
-
-
-        $ul="";
-
-        foreach ($userslist as $usern) {
-          $ul.='<option value="'.ucfirst($usern[0]).'">'.ucfirst($usern[0]).'</option>';
-        }
-        echo '
-          <div class="row">
-            <h2 style="width: 100%;">Jätä työ</h2>
-            <hr style="margin-top: 50px;">
-            <section class="commentbox commentbox__new commentbox__newsecond">
-              <div class="row">
-                <div class="col-6">
-                  <h2><input type="text" value="" class="lineinput kommentti__name" placeholder="Mikä murehduttaa?" onchange="window.scrollTo(0, 150);"></h2>
-
-                </div>
-                <div class="col-3">
-                  <h6>Deadline:</h6>
-                  <input name="deadline_time" class="comment__deadline newcomment__deadline" type="date" min="' .  date("Y-m-d") . '" value="'.date("Y-m-t", strtotime(date("Y-m-d"))).'" onchange="this.parentElement.parentElement.parentElement.querySelector(`.newcomment__vko`).value= new Date(this.value).getWeek();">
-                </div>
-                <div class="col-3">
-                    <h6>Arvio työtunneista</h6>
-                    <input name="time_estimate" class="time_estimate newcomment__estimatehours" type="number" pattern="\d*"/ value="0" style="max-width: 70px;" min="0">h
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                <div class="form-group">
-                      <h6>Lisää tiedostot:</h6>
-                      <input type="file" class="comment__files newcomment__files newcomment__files_input" name="comment__files[]" multiple>
-                      <div class="comment__preview_files newcomment__previewfiles"></div>
-                  </div>
-                  <h6>Keneltä</h6>
-                  <input name="kommentti_comment_from" class="kommentti_comment_from" type="text" value="' . $role . '">
+      //   $_userslist = mysqli_query($db, "SELECT `username` FROM `addedusers` WHERE `project_id`=$id");
+      //   $userslist = mysqli_fetch_all($_userslist);
 
 
-                </div>
-                <div class="col-6">
-                    <h6>Tehdään viikolla</h6>
-                    <input name="vko_estimate" class="vko_estimate newcomment__vko" type="number" pattern="\d*"/ value="'.$cur_week.'" min="1" max="52" style="max-width: 70px;">
-                    <div class="row elevated_spaces">
-                      <div class="col-6">
-                        <h6>Kenelle</h6>
-                        <select name="kommentti_comment_to" class="kommentti_comment_to kommentti_comment_newto" multiple>'.$ul.'</select>
-                      </div>
+      //   $ul="";
 
-                    </div>
-                </div>
-              </div>
-              <div class="commentbox__text">
-                <h4>Sisältö</h4>
-                <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
-                <div class="row pohjakierros">
-                  <input id="is_thecomment_critical" class="is_thecomment_critical" type="checkbox" value="Critical">
-                  <label for="is_thecomment_critical">Onko kriittinen?</label>
-                </div>
-              </div>
-              <div class="commentbox_btn drawarea__controls_btn btn commentreadyready_btn sendcommentfiles"  onclick="comment__create_new(this.parentElement.parentElement);">Lähetä</div>
-            </section>
-          </div>';
-        }
+      //   foreach ($userslist as $usern) {
+      //     $ul.='<option value="'.ucfirst($usern[0]).'">'.ucfirst($usern[0]).'</option>';
+      //   }
+      //   echo '
+      //     <div class="row">
+      //       <h2 style="width: 100%;">Jätä työ</h2>
+      //       <hr style="margin-top: 50px;">
+      //       <section class="commentbox commentbox__new commentbox__newsecond">
+      //         <div class="row">
+      //           <div class="col-6">
+      //             <h2><input type="text" value="" class="lineinput kommentti__name" placeholder="Mikä murehduttaa?" onchange="window.scrollTo(0, 150);"></h2>
+
+      //           </div>
+      //           <div class="col-3">
+      //             <h6>Deadline:</h6>
+      //             <input name="deadline_time" class="comment__deadline newcomment__deadline" type="date" min="' .  date("Y-m-d") . '" value="'.date("Y-m-t", strtotime(date("Y-m-d"))).'" onchange="this.parentElement.parentElement.parentElement.querySelector(`.newcomment__vko`).value= new Date(this.value).getWeek();">
+      //           </div>
+      //           <div class="col-3">
+      //               <h6>Arvio työtunneista</h6>
+      //               <input name="time_estimate" class="time_estimate newcomment__estimatehours" type="number" pattern="\d*"/ value="0" style="max-width: 70px;" min="0">h
+      //           </div>
+      //         </div>
+      //         <div class="row">
+      //           <div class="col-6">
+      //           <div class="form-group">
+      //                 <h6>Lisää tiedostot:</h6>
+      //                 <input type="file" class="comment__files newcomment__files newcomment__files_input" name="comment__files[]" multiple>
+      //                 <div class="comment__preview_files newcomment__previewfiles"></div>
+      //             </div>
+      //             <h6>Keneltä</h6>
+      //             <input name="kommentti_comment_from" class="kommentti_comment_from" type="text" value="' . $role . '">
+
+
+      //           </div>
+      //           <div class="col-6">
+      //               <h6>Tehdään viikolla</h6>
+      //               <input name="vko_estimate" class="vko_estimate newcomment__vko" type="number" pattern="\d*"/ value="'.$cur_week.'" min="1" max="52" style="max-width: 70px;">
+      //               <div class="row elevated_spaces">
+      //                 <div class="col-6">
+      //                   <h6>Kenelle</h6>
+      //                   <select name="kommentti_comment_to" class="kommentti_comment_to kommentti_comment_newto" multiple>'.$ul.'</select>
+      //                 </div>
+
+      //               </div>
+      //           </div>
+      //         </div>
+      //         <div class="commentbox__text">
+      //           <h4>Sisältö</h4>
+      //           <textarea name="kommentti_comment" class="kommentti_comment" cols="30" rows="10"></textarea>
+      //           <div class="row pohjakierros">
+      //             <input id="is_thecomment_critical" class="is_thecomment_critical" type="checkbox" value="Critical">
+      //             <label for="is_thecomment_critical">Onko kriittinen?</label>
+      //           </div>
+      //         </div>
+      //         <div class="commentbox_btn drawarea__controls_btn btn commentreadyready_btn sendcommentfiles"  onclick="comment__create_new(this.parentElement.parentElement);">Lähetä</div>
+      //       </section>
+      //     </div>';
+      //   }
       ?>
       </div>
       <div class="col-6">
@@ -3423,21 +3493,34 @@ if($remove_overflowY === true) {
     <div class="dialog_container">
         <div class="form">
             <button class="close_dialog" id="close_send_email_dialog">x</button>
-            <h2>Presetit</h2>
-            <div id="email_presets" class="presets">
-            <?php
-              $presets = mysqli_query($db, "SELECT * from `message_templates`")->fetch_all(MYSQLI_ASSOC);
-              foreach ($presets as $preset) {
-            ?>
-              <div class="preset" data-title="<?= $preset['subject'] ?>" data-message="<?= $preset['message'] ?>"><?= $preset['name'] ?></div>
-            <?php } ?>
+            <div class="row dialog_firstrow">
+              <h2>Presetit</h2>
+              <div id="email_type_presets" class="presets">
+                <?php
+                  $presets = mysqli_query($db, "SELECT * from `message_types`")->fetch_all(MYSQLI_ASSOC);
+                  foreach ($presets as $preset) {
+                ?>
+                <div class="toggling_preset" data-show="<?= $preset['id'] ?>"><img src="<?= $preset['svg_adress'] ?>"><?= $preset['name'] ?></div>
+                <?php } ?>
+              </div>
+              
             </div>
-            <label>
-                <span>Aihe</span>
+            <div id="email_presets" class="presets">
+                <?php
+                  $presets = mysqli_query($db, "SELECT * from `message_templates`")->fetch_all(MYSQLI_ASSOC);
+                  foreach ($presets as $preset) {
+                ?>
+                <div class="preset " data-identifiction="<?= $preset['id'] ?>" data-type="<?= $preset['preset_type'] ?>" data-title="<?= $preset['subject'] ?>" data-message="<?= $preset['message'] ?>"><?= $preset['name'] ?></div>
+                <?php } ?>
+              </div>
+            <div class="preset_is_ok">
+              Presetin muokkaus valmis
+            </div>
+            <label class="row">
+                <span><b>Aihe</b></span>
                 <input type="text" class="title">
             </label>
             <label>
-                <span>Viesti</span>
                 <textarea class="message" rows="4"></textarea>
             </label>
             <div class="type_select">
@@ -3459,12 +3542,53 @@ if($remove_overflowY === true) {
                 <div class="type" data-type="omistaja">
                     <span>Omistaja</span>
                 </div>
+              </div>
+              <div class="secondtype_select">
+              <?php 
+                $prid = $_GET["id"];
+                $users = mysqli_query($db, "SELECT * from `users` WHERE `role`='kommentointi'")->fetch_all(MYSQLI_ASSOC);
+                $a_users = mysqli_query($db, "SELECT * from `addedusers` WHERE `project_id`='$prid'")->fetch_all(MYSQLI_ASSOC);
+                foreach ($users as $u) {
+                  foreach ($a_users as $a_u) {
+                    if($u['username'] === $a_u['username'] && $u['username'] !== "tyonjohto") {
+                    
+                      echo '
+                        <div class="type" data-type="'.$u['email'].'" data-email="'.$u['email'].'">
+                            <span>'.$u['username'].'</span>
+                        </div>';
+                        break;
+                    }
+                  }
+                }
+              ?>
             </div>
             <input type="file" class="comment__files" name="comment__files" multiple>
             <input type="hidden" class="preset_name">
             <div class="preview_files"></div>
             <div class="tables">
                 <table class="project_contacts"></table>
+                <table class="project_workers" style="display: none;">
+                  <?php 
+                    $prid = $_GET["id"];
+                    $users = mysqli_query($db, "SELECT * from `users` WHERE `role`='kommentointi'")->fetch_all(MYSQLI_ASSOC);
+                    $a_users = mysqli_query($db, "SELECT * from `addedusers` WHERE `project_id`='$prid'")->fetch_all(MYSQLI_ASSOC);
+                    foreach ($users as $u) {
+                      foreach ($a_users as $a_u) {
+                        if($u['username'] === $a_u['username'] && $u['username'] !== "tyonjohto") {
+                        
+                          echo '
+                            <tr>
+                                <td>'.$u['username'].'</td>
+                                <td>'.$u['phone'].'</td>
+                                <td class="owner_type email">'.$u['email'].'</td>
+                                <td>'.$u['role'].'</td>
+                            </tr>';
+                            break;
+                        }
+                      }
+                    }
+                  ?>
+                </table>
                 <h3>Asukkaat Yleinen</h3>
                 <table class="without_phone"></table>
                 <h3>Asukkaat Tiedot</h3>

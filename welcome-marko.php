@@ -918,6 +918,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
             <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_10">Tilauksen lisäys (t.johto + saaja)</li>
             <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_11">Kommentin lisäys (t.johto)</li>
             <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_12">Viestipresetit kommunikointi</li>
+            <li class="tabs__btn_indent tabs__btn_viestit" data-toid="6_13">Viestipresetit tyypit</li>
           </ul>
           <section class="tabs__target_indent tabs__target_viestit active" data-id="6_1">
             <?php
@@ -1300,22 +1301,62 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
           ?>
           <section class="tabs__target_indent tabs__target_viestit" data-id="6_12">
             <table class="messagepresets__tbody">
-              <tr class="headingrow">
-                <td>Name</td>
-                <td>Subject</td>
-                <td>Message</td>
+              <tr class="headingrow"  data-id="0">
+                <td>Nimi</td>
+                <td>Aihe</td>
+                <td>Tyyppi</td>
+                <td>Viesti</td>
                 <td></td>
               </tr>
-              <?php foreach ($m_data as $row) { ?>
+              <?php 
+              foreach ($m_data as $row) { 
+                $message_types = mysqli_query($db, "SELECT * FROM `message_types`");
+                $message_types = mysqli_fetch_all($message_types);
+
+                $type_list = "<option data_id='0'>-</option>";
+                $current__type = $row['preset_type'];
+                foreach($message_types as $a => $aval) {
+                  if($aval[0] == $current__type) {
+                    $type_list .= "<option selected data_id=".$aval[0]." value=".$aval[0].">".$aval[1]."</option>";
+                  }
+                  else {
+                    $type_list .= "<option data_id=".$aval[0]." value=".$aval[0].">".$aval[1]."</option>";
+                  }
+                }
+                ?>
               <tr data-id="<?= $row['id'] ?>" onchange="admin__save_message_preset(this)">
                 <td><input class="lineinput" value="<?= $row['name'] ?>"></td>
                 <td><input class="lineinput" value="<?= $row['subject'] ?>"></td>
+                <td><select class="lineinput"><?= $type_list ?></select></td>
                 <td><textarea class="lineinput" rows="6" value="<?= $row['message'] ?>"></textarea></td>
                 <td><button class="preset_delete" onclick="admin__delete_message_preset(this)">x</button></td>
               </tr>
               <?php } ?>
+              
             </table>
+            <?= '<select style="display: none" class="types_list">'. str_replace(" selected","",$type_list).'</select>' ?>
+
             <button class="start_btn" onclick="appendnewmessagepreset()">Add new preset</button>
+          </section>
+          <?php
+              $m_data = mysqli_query($db, "SELECT * FROM `message_types`")->fetch_all(MYSQLI_ASSOC);
+          ?>
+          <section class="tabs__target_indent tabs__target_viestit" data-id="6_13">
+            <table class="messagetypes__tbody">
+              <tr class="headingrow" data-id="0">
+                <td>Nimi</td>
+                <td>SVG Ikonin osoite</td>
+                <td></td>
+              </tr>
+              <?php foreach ($m_data as $row) { ?>
+              <tr data-id="<?= $row['id'] ?>">
+                <td><input class="lineinput" value="<?= $row['name'] ?>" oninput="admin__save_message_type(this.parentElement.parentElement)"></td>
+                <td><input class="lineinput" value="<?= $row['svg_adress'] ?>"></td>
+                <td><button class="preset_delete" onclick="admin__delete_message_type(this.parentElement.parentElement)">x</button></td>
+              </tr>
+              <?php } ?>
+            </table>
+            <button class="start_btn" onclick="appendnewmessagetype()">Uusi presettityyppi</button>
           </section>
       </div>
 
