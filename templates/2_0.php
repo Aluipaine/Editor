@@ -3212,34 +3212,12 @@
         <table class="projectlevyt prthree_sheet_item">
           <tbody class="projectlevyt__tbody">
             <tr class="headingrow">
-              <td>Type (drawing)</td>
+              <td>Part number</td>
               <td>Materialcode</td>
               <td>Leveys (X)</td>
               <td>Pituus (Y)</td>
-              <td>Thickness</td>
-              <td>Structure</td>
               <td>Quantity</td>
-              <td>Plus</td>
-              <td>Part number</td>
               <td>Nimi 1</td>
-              <td>Nimi 2</td>
-              <td>MPR</td>
-              <td>Palletgroup</td>
-              <td>Prioriteetti</td>
-              <td>Asiakas</td>
-              <td>Asennus</td>
-              <td>Työstöt</td>
-              <td></td>
-              <td>X KPL</td>
-              <td>Y KPL</td>
-              <td>Yhteensä</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Tarra</td>
-              <td>Diameter</td>
               <td>X1</td>
               <td>X2</td>
               <td>X3</td>
@@ -3260,6 +3238,9 @@
               <td>Y8</td>
               <td>Y9</td>
               <td>Y10</td>
+              <td>Palletgroup</td>
+              <td>Diameter</td>
+              <td>Prioriteetti</td>
               <td>X</td>
               <td>Y</td>
               <td>X</td>
@@ -3291,6 +3272,8 @@
               <td>CH 0=OFF 1= ON</td>
               <td>Y Vasen</td>
               <td>Y oikea</td>
+              <td>Y Vasen</td>
+              <td>Y oikea</td>
               <td>X ala</td>
               <td>x ylä</td>
               <td>X ala</td>
@@ -3300,10 +3283,16 @@
               <td>VH1_L</td>
               <td>VH1_KPL</td>
               <td>VH1_K</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>Asiakas</td>
+              <td>Tarra</td>
+              <td>Nimi 2</td>
+              <td>Asennus</td>
+              <td>Työstöt</td>
+              <td>MPR</td>
+              <td>Type (drawing)</td>
+              <td>Thickness</td>
+              <td>Structure</td>
+              <td>Plus</td>
               <td>AR Edge 1</td>
               <td>YR Edge 1</td>
               <td>VR Edge 1</td>
