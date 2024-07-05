@@ -1218,28 +1218,28 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
       aukko_lcord = document.createElement("div");
       aukko_lcord.classList.add("aukko__cord");
       aukko_lcord.classList.add("aukko_lcord");
-      aukko_lcord.innerHTML = 10+ parseFloat(newDiv.style.left)*5;
+      aukko_lcord.innerHTML = parseFloat(newDiv.style.left)*5;
       aukko_lcord.style.bottom = (-1) * parseFloat(newDiv.style.bottom) -32 +"px";
       newDiv.appendChild(aukko_lcord);
 
       aukko_rcord = document.createElement("div");
       aukko_rcord.classList.add("aukko__cord");
       aukko_rcord.classList.add("aukko_rcord");
-      aukko_rcord.innerHTML = 10+ parseFloat(newDiv.style.left)*5 + parseFloat(newDiv.style.width)*5;
+      aukko_rcord.innerHTML = parseFloat(newDiv.style.left)*5 + parseFloat(newDiv.style.width)*5;
       aukko_rcord.style.bottom = (-1) * parseFloat(newDiv.style.bottom) -32 +"px";
       newDiv.appendChild(aukko_rcord);
 
       aukko_tcord = document.createElement("div");
       aukko_tcord.classList.add("aukko__cord");
       aukko_tcord.classList.add("aukko_tcord");
-      aukko_tcord.innerHTML = 10+ parseFloat(newDiv.style.bottom)*5 + parseFloat(newDiv.style.height)*5;
+      aukko_tcord.innerHTML = parseFloat(newDiv.style.bottom)*5 + parseFloat(newDiv.style.height)*5;
       aukko_tcord.style.left = (-1) * parseFloat(newDiv.style.left) -32 + "px";
       newDiv.appendChild(aukko_tcord);
 
       aukko_bcord = document.createElement("div");
       aukko_bcord.classList.add("aukko__cord");
       aukko_bcord.classList.add("aukko_bcord");
-      aukko_bcord.innerHTML = 10+ parseFloat(newDiv.style.bottom)*5;
+      aukko_bcord.innerHTML = parseFloat(newDiv.style.bottom)*5;
       aukko_bcord.style.left = (-1) * parseFloat(newDiv.style.left) -32 + "px";
       newDiv.appendChild(aukko_bcord);
 
@@ -1750,28 +1750,28 @@ async function mitta__create_mitta(mode, type, mode_name, mode_ycord, mode_xcord
         aukko_lcord = document.createElement("div");
         aukko_lcord.classList.add("aukko__cord");
         aukko_lcord.classList.add("aukko_lcord");
-        aukko_lcord.innerHTML = 10+ parseFloat(newDiv.style.left)*5;
+        aukko_lcord.innerHTML = parseFloat(newDiv.style.left)*5;
         aukko_lcord.style.bottom = (-1) * parseFloat(newDiv.style.bottom) -32 +"px";
         newDiv.appendChild(aukko_lcord);
 
         aukko_rcord = document.createElement("div");
         aukko_rcord.classList.add("aukko__cord");
         aukko_rcord.classList.add("aukko_rcord");
-        aukko_rcord.innerHTML = 10+ parseFloat(newDiv.style.left)*5 + parseFloat(newDiv.style.width)*5;
+        aukko_rcord.innerHTML = parseFloat(newDiv.style.left)*5 + parseFloat(newDiv.style.width)*5;
         aukko_rcord.style.bottom = (-1) * parseFloat(newDiv.style.bottom) -32 +"px";
         newDiv.appendChild(aukko_rcord);
 
         aukko_tcord = document.createElement("div");
         aukko_tcord.classList.add("aukko__cord");
         aukko_tcord.classList.add("aukko_tcord");
-        aukko_tcord.innerHTML = 10+ parseFloat(newDiv.style.bottom)*5 + parseFloat(newDiv.style.height)*5;
+        aukko_tcord.innerHTML = parseFloat(newDiv.style.bottom)*5 + parseFloat(newDiv.style.height)*5;
         aukko_tcord.style.left = (-1) * parseFloat(newDiv.style.left) -32 + "px";
         newDiv.appendChild(aukko_tcord);
 
         aukko_bcord = document.createElement("div");
         aukko_bcord.classList.add("aukko__cord");
         aukko_bcord.classList.add("aukko_bcord");
-        aukko_bcord.innerHTML = 10+ parseFloat(newDiv.style.bottom)*5;
+        aukko_bcord.innerHTML = parseFloat(newDiv.style.bottom)*5;
         aukko_bcord.style.left = (-1) * parseFloat(newDiv.style.left) -32 + "px";
         newDiv.appendChild(aukko_bcord);
 
