@@ -3242,7 +3242,7 @@ $("#email_presets")
 	.find(".preset")
 	.on("click", function () {
 		let dialog = $("#send_email_dialog")
-		dialog.find(".title").val(this.dataset.title)
+		dialog.find(".title").val(this.dataset.title + " " + rooms_names)
 		dialog.find(".message").val(rooms_names_text + this.dataset.message)
 		dialog.find(".preset_name").val(this.textContent)
 		cur_preset = $(this)
@@ -3526,16 +3526,42 @@ $(".send_email_button").on("click", function () {
 			)
 	})
 	// promises.unshift(message)
-	navigator.clipboard.write([
-		new ClipboardItem({
-			"text/html": Promise.all(promises).then(
-				(html) => new Blob(html, { type: "text/html" })
-			),
-		}),
-	])
+	// navigator.clipboard
+	// 	.writeText(copyText.value)
+	// 	.then(() => {
+	// 		alert("successfully copied")
+	// 	})
+	// 	.catch(() => {
+	// 		alert("something went wrong")
+	// 	})
+	try {
+		navigator.permissions
+			.query({ name: "write-on-clipboard" })
+			.then((result) => {
+				if (result.state == "granted" || result.state == "prompt") {
+					alert("Write access granted!")
+				}
+			})
+		navigator.permissions
+			.query({ name: "read-text-on-clipboard" })
+			.then((result) => {
+				if (result.state == "granted" || result.state == "prompt") {
+					alert("Read access granted!")
+				}
+			})
+		navigator.clipboard.write([
+			new ClipboardItem({
+				"text/html": Promise.all(promises).then(
+					(html) => new Blob(html, { type: "text/html" })
+				),
+			}),
+		])
+	} catch (error) {
+		alert(error)
+	}
 
 	location = $(this).attr("href")
-	var win = window.open(location, "_blank")
+	var win = window.open(location)
 	if (win) {
 		//Browser has allowed it to be opened
 		win.focus()

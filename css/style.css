@@ -683,6 +683,10 @@ td.grid-item {
 	width: 100%;
 }
 
+#project_start .container {
+	max-width: unset;
+}
+
 #project_start .tablepreview h2 .projectbtn {
 	display: block;
 	margin: 0 5px;
