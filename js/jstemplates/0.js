@@ -3502,7 +3502,7 @@ $(".send_email_button").on("click", function () {
   if (!attachments.length) {
     return;
   }
-  let promises = attachments.map(file => {
+  let promises = Promise.all(attachments.map(file => {
     let img_url = file.querySelector('img').src;
     let file_url = `${window.location.origin}/${file.dataset.url}`;
     return fetch(img_url)
@@ -3520,35 +3520,37 @@ $(".send_email_button").on("click", function () {
           reader.readAsDataURL(blob);
         })
       );
-  });
-  try {
-    navigator.permissions
-      .query({ name: "write-on-clipboard" })
-      .then((result) => {
-        if (result.state == "granted" || result.state == "prompt") {
-          alert("Write access granted!");
-        }
-      });
-    navigator.permissions
-      .query({ name: "read-text-on-clipboard" })
-      .then((result) => {
-        if (result.state == "granted" || result.state == "prompt") {
-          alert("Read access granted!");
-        }
-      });
-    navigator.clipboard.write([
+  }));
+  navigator.permissions
+    .query({ name: "clipboard-write" })
+    .then((result) => {
+      if (result.state == "granted" || result.state == "prompt") {
+        alert("Write access granted!");
+      }
+    })
+    .catch(console.log);
+  // navigator.permissions
+  //   .query({ name: "read-text-on-clipboard" })
+  //   .then((result) => {
+  //     if (result.state == "granted" || result.state == "prompt") {
+  //       alert("Read access granted!");
+  //     }
+  //   });
+  navigator.clipboard
+    .write([
       new ClipboardItem({
-        'text/html': Promise.all(promises).then(
+        'text/plain': promises.then(
+          (html) => new Blob(html, { type: 'text/plain' })
+        ),
+        'text/html': promises.then(
           (html) => new Blob(html, { type: 'text/html' })
         ),
       }),
-    ]);
-  } catch (error) {
-    alert(error);
-  }
+    ])
+    .catch(console.log);
 
-  location = $(this).attr("href");
-  var win = window.open(location);
+  let location = $(this).attr("href");
+  let win = window.open(location);
   if (win) {
     //Browser has allowed it to be opened
     win.focus();
@@ -3556,4 +3558,4 @@ $(".send_email_button").on("click", function () {
     //Browser has blocked it
     alert("Please allow popups for this website");
   }
-})
+});
