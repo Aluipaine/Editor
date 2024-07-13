@@ -3499,9 +3499,6 @@ $(".preview_files").on("click", ".tag_delete", function () {
 $(".send_email_button").on("click", function () {
   let dialog = $("#send_email_dialog");
   let attachments = dialog.find(".preview_item").get();
-  if (!attachments.length) {
-    return;
-  }
   let promises = Promise.all(attachments.map(file => {
     let img_url = file.querySelector('img').src;
     let file_url = `${window.location.origin}/${file.dataset.url}`;
@@ -3547,15 +3544,16 @@ $(".send_email_button").on("click", function () {
         ),
       }),
     ])
+    .then(() => {
+      let location = $(this).attr("href");
+      let win = window.open(location);
+      if (win) {
+        //Browser has allowed it to be opened
+        win.focus();
+      } else {
+        //Browser has blocked it
+        alert("Please allow popups for this website");
+      }
+    })
     .catch(console.log);
-
-  let location = $(this).attr("href");
-  let win = window.open(location);
-  if (win) {
-    //Browser has allowed it to be opened
-    win.focus();
-  } else {
-    //Browser has blocked it
-    alert("Please allow popups for this website");
-  }
 });
