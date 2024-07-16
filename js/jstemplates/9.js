@@ -33,11 +33,11 @@ function listoitus() {
     if(listat[i].querySelector('.ranka_type')) {
       listat[i].querySelector('.ranka_type').classList = ["lista_type"];
     }
-    
+
     if(listat[i].querySelector('.ranka_cord:not(.ranka_type)')) {
       listat[i].querySelector('.ranka_cord:not(.ranka_type)').classList = ["lista_cord"];
     }
-    
+
     if(listat[i].querySelector('.ranka_secondcord')) {
       listat[i].querySelector('.ranka_secondcord').classList = ["lista_secondcord"];
     }
@@ -46,7 +46,7 @@ function listoitus() {
     listat[i].classList.add("lista");
     listat[i].dataset.listan_koodin_alku = "EPDM";
   }
- 
+
 
   s_listaonsettings = document.querySelectorAll(".rankalista_as .s_listat input:checked");
   listat_sarray = [];
@@ -71,7 +71,7 @@ function listoitus() {
       settingvalue = trs[a].querySelector("td:nth-child(2) input");
 
       setval = settingvalue.value.toLowerCase().replaceAll(" ","");
-     
+
       if(setval == "alueenalareuna") {
         tomod = canvas.querySelectorAll(".listat__grandrow > .alkuranka_vaaka");
       }
@@ -86,13 +86,13 @@ function listoitus() {
       if(setval == "alueenoikeareuna") {
         tomod = canvas.querySelectorAll(".listat__grandrow > .viimranka_pysty");
       }
-      
+
 
       for (let b = 0; b < tomod.length; b++) {
         tomod[b].classList.add(layer);
         tomod[b].classList.remove("ranka");
         tomod[b].classList.add("lista");
-        
+
         Object.keys(tomod[b].dataset).forEach(dataKey => {
           delete tomod[b].dataset[dataKey];
         });
@@ -107,7 +107,7 @@ function listoitus() {
         else if(tomod[b].classList.contains("ranka_vaaka")) {
           // tomod[b].classList.add("lista_vaaka");
           tomod[b].dataset.pituus = (parseFloat(tomod[b].offsetWidth)*5) + parseFloat(trs[a].querySelector("td:nth-child(4) input").value);
-        }          
+        }
         tomod[b].dataset.listaname	= trs[a].querySelector("td:nth-child(6) input").value;
         tomod[b].dataset.tilauskoodi	= trs[a].querySelector("td:nth-child(7) input").value;
         tomod[b].dataset.materiaali	= trs[a].querySelector("td:nth-child(8) input").value;
@@ -132,7 +132,7 @@ function listoitus() {
           }
         }
       }
-    } 
+    }
   });
   for (let c = 0; c < aukot.length; c++) {
     or_distance = parseFloat(aukot[c].style.left) + parseFloat(aukot[c].style.width);
@@ -196,7 +196,7 @@ function listoitus() {
     lista.remove();
   });
 
-  
+
   if (listoitettu === false) {
     listat_remove_duplicates();
     create__lista__tuoexcel();
@@ -237,7 +237,7 @@ function create_lista(type,distance,levymitta,settingsarray) {
         lista.style.height = levymitta.style.height;
         lista.style.bottom = levymitta.style.bottom;
       }
-      
+
     }
     try {
           lista.dataset.pituus = (parseFloat(levymitta.offsetHeight)*5) - parseFloat(trs[a].querySelector("td:nth-child(4) input").value);
@@ -264,7 +264,7 @@ function create_lista(type,distance,levymitta,settingsarray) {
         lista.style.width = levymitta.style.width;
         lista.style.left = levymitta.style.left;
       }
-      
+
     }
     try {
       lista.dataset.pituus = (parseFloat(levymitta.offsetWidth)*5) - parseFloat(trs[a].querySelector("td:nth-child(4) input").value);
@@ -317,7 +317,7 @@ function listat_remove_duplicates() {
       });
       paate.classList.add("lista_pysty");
       paate.style.height = parseFloat(paate.dataset.pituus)/5 + "px";
-      
+
 
     }
     if(paate.classList.contains("ranka_vaaka")) {
@@ -328,7 +328,7 @@ function listat_remove_duplicates() {
           vaaka.remove();
         }
       });
-      
+
       paate.classList.add("lista_vaaka");
       paate.style.width = parseFloat(paate.dataset.pituus)/5 + "px";
     }
@@ -348,15 +348,15 @@ function listat_remove_duplicates() {
           l_end = l_start + pysty.offsetHeight;
           a_start = parseFloat(a_l.style.bottom);
           a_end = a_start + parseFloat(a_l.style.height);
-  
-          
-  
+
+
+
           // if(l_end>a_end && a_start>l_start) // AUKKO LISTA ISON LISTAN SISÄLLÄ - SPLITTAA?
           if(l_start>a_start && l_end<a_end ||
             l_start>a_start && l_start<a_end ||
             l_start<a_start && l_end>a_end)  {
               if(parseFloat(a_l.style.bottom) === parseFloat(pysty.style.height)) {
-                
+
               }
               else {
                 pysty.remove();
@@ -367,7 +367,7 @@ function listat_remove_duplicates() {
                 console.log("a_end" + a_end);
                 console.log(pysty);
               }
-          
+
           }
         }
       });
@@ -382,14 +382,14 @@ function listat_remove_duplicates() {
           a_start = parseFloat(a_l.style.left);
           a_end = a_start + parseFloat(a_l.style.width);
           // if(l_end>a_end && a_start>l_start) // AUKKO LISTA ISON LISTAN SISÄLLÄ - SPLITTAA?
-  
-         
-  
+
+
+
           if(l_start>a_start && l_end<a_end ||
             l_start>a_start && l_start<a_end ||
             l_start<a_start && l_end>a_end)  {
               if(parseFloat(a_l.style.left) === parseFloat(vaaka.style.width)) {
-                
+
               }
               else {
                 vaaka.remove();
@@ -405,6 +405,74 @@ function listat_remove_duplicates() {
       });
     }
   });
+
+  // Delete intersecting parts
+  let aukko_pystyt = canvas.querySelectorAll(".listat__grandrow > .aukko_lista.lista_pysty");
+  let aukko_vaat = canvas.querySelectorAll(".listat__grandrow > .aukko_lista.lista_vaaka");
+  for (let i = 0; i < aukko_pystyt.length - 1; i++) {
+    if (aukko_pystyt[i].style.height == "0px")
+      continue;
+
+    let a_min = parseFloat(aukko_pystyt[i].style.bottom);
+    let a_max = a_min + parseFloat(aukko_pystyt[i].style.height);
+
+    for (let j = i + 1; j < aukko_pystyt.length; j++) {
+      if (aukko_pystyt[i].style.left != aukko_pystyt[j].style.left
+      ||  aukko_pystyt[j].style.height == "0px")
+        continue;
+
+      let b_min = parseFloat(aukko_pystyt[j].style.bottom);
+      let b_max = b_min + parseFloat(aukko_pystyt[j].style.height);
+
+      if (Math.min(a_max, b_max) <= Math.max(a_min, b_min))
+        continue;
+
+      aukko_pystyt[i].style.bottom = `${Math.min(a_min, b_min)}px`;
+      aukko_pystyt[i].style.height = `${Math.abs(a_min - b_min)}px`;
+      aukko_pystyt[j].style.bottom = `${Math.min(a_max, b_max)}px`;
+      aukko_pystyt[j].style.height = `${Math.abs(a_max - b_max)}px`;
+
+      if (aukko_pystyt[j].style.height == "0px") {
+        aukko_pystyt[j].remove();
+      }
+      if (aukko_pystyt[i].style.height == "0px") {
+        aukko_pystyt[i].remove();
+        break;
+      }
+    }
+  }
+  for (let i = 0; i < aukko_vaat.length - 1; i++) {
+    if (aukko_vaat[i].style.width == "0px")
+      continue;
+
+    let a_min = parseFloat(aukko_vaat[i].style.left);
+    let a_max = a_min + parseFloat(aukko_vaat[i].style.width);
+
+    for (let j = i + 1; j < aukko_vaat.length; j++) {
+      if (aukko_vaat[i].style.bottom != aukko_vaat[j].style.bottom
+      ||  aukko_vaat[j].style.width == "0px")
+        continue;
+
+      let b_min = parseFloat(aukko_vaat[j].style.left);
+      let b_max = b_min + parseFloat(aukko_vaat[j].style.width);
+
+      if (Math.min(a_max, b_max) <= Math.max(a_min, b_min))
+        continue;
+
+      aukko_vaat[i].style.left = `${Math.min(a_min, b_min)}px`;
+      aukko_vaat[i].style.width = `${Math.abs(a_min - b_min)}px`;
+      aukko_vaat[j].style.left = `${Math.min(a_max, b_max)}px`;
+      aukko_vaat[j].style.width = `${Math.abs(a_max - b_max)}px`;
+
+      if (aukko_vaat[j].style.width == "0px") {
+        aukko_vaat[j].remove();
+      }
+      if (aukko_vaat[i].style.width == "0px") {
+        aukko_vaat[i].remove();
+        break;
+      }
+    }
+  }
 }
 
 /**
@@ -424,7 +492,7 @@ function create__lista__tuoexcel() {
   tableExcel_trs.forEach(tr => {
     tr.remove();
   });
-  
+
   for (var i = 0; i < listat.length; i++) {
     const row = document.createElement('tr');
     var h1 = document.createElement('td');
@@ -463,7 +531,7 @@ function create__lista__tuoexcel() {
       h20.innerHTML = etaisyys + " mm ylös tilan " + current_tila + " seinässä " + current_room;
     }
 
-       
+
     h1.innerHTML = i+1;
     h2.innerHTML = listat[i].dataset.listaname;
     h3.innerHTML = "---"; //lista taulusta
@@ -485,7 +553,7 @@ function create__lista__tuoexcel() {
     h18.innerHTML = current_room;
     h19.innerHTML = "";
 
-    
+
     listat_tuotanto_data.push({
       "Rivinumero": h1.textContent,
       "Listan tyyppi": h2.textContent,
@@ -525,7 +593,7 @@ function create__lista__tuoexcel() {
       if(l[0] === e["Listan tyyppi"]) {
         found+=e["Listan tyyppi"] + "->" + e["Pituus"] + "->" + e["Asennus"] + "~~";
         if(listat_lenghts.includes(parseFloat(e["Pituus"]))) {
-          
+
         }
         else {
           listat_lenghts.push(parseFloat(e["Pituus"]));
@@ -535,7 +603,7 @@ function create__lista__tuoexcel() {
     if(found.length > 5) {
       listat_real_names.push(found);
     }
-   
+
   });
   console.log(listat_real_names);
 
@@ -548,7 +616,7 @@ function create__lista__tuoexcel() {
       internal_array.forEach(len_ => {
         len = parseFloat(len_.split("->")[1]);
         if(len == len2) {
-          
+
           type = len_.split("->")[0];
           kpl+=1;
           asennukset += len_.split("->")[2];
@@ -606,12 +674,12 @@ function create__lista__tuoexcel() {
     var h18  = document.createElement('td');
     var h19  = document.createElement('td');
     var h20  = document.createElement('td');
-  
+
 
     f_array = [];
     listat_list.forEach(list => {
       l = list.split("~~");
-   
+
       if(l[0] === e["Listan tyyppi"]) {
         f_array= [({
           "Listan_SKU": l[1],
@@ -621,7 +689,7 @@ function create__lista__tuoexcel() {
           "LAATU": l[4],
           "Väri nimi": l[5],
           "NCS code": l[6],
-        })]; 
+        })];
       }
     });
     if (e["Listan tyyppi"] === "LV") {
@@ -659,7 +727,7 @@ function create__lista__tuoexcel() {
     h17.innerHTML = current_tila;
     h18.innerHTML = current_room;
     h19.innerHTML = "";
-  
+
     row.append(h1);
     row.append(h2);
     row.append(h3);
@@ -685,7 +753,7 @@ function create__lista__tuoexcel() {
 }
 
 
-  
+
 
 // function lataa_lista_as_excel() {
 //   filename = current_tila +" seinä "+ current_room+' [Listat Asennusohje].xlsx';
