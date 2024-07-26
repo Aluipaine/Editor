@@ -3358,23 +3358,23 @@ function showSendEmailDialog() {
 }
 
 function updateSendEmailUrl() {
-  let dialog = $("#send_email_dialog");
-  let title = dialog.find(".title").val();
-  let message = dialog.find(".message").val() + '\n';
-  let emails = new Set();
-  dialog.find("table .owner_checked .email").each(function() {
-    emails.add($(this).text());
-  });
-  emails = [...emails];
-  message = message.replaceAll("\n", "%0D%0A");
-  dialog
-    .find(".send_email_button")
-    .attr(
-      "href",
-      `mailto:${emails[0] || ""}?subject=${title}&body=${message}&cc=${emails
-        .slice(1)
-        .join(",")}`
-    );
+	let dialog = $("#send_email_dialog")
+	let title = dialog.find(".title").val()
+	let message = dialog.find(".message").val() + "\n"
+	let emails = new Set()
+	dialog.find("table .owner_checked .email").each(function () {
+		emails.add($(this).text())
+	})
+	emails = [...emails]
+	message = message.replaceAll("\n", "%0D%0A")
+	dialog
+		.find(".send_email_button")
+		.attr(
+			"href",
+			`mailto:${emails[0] || ""}?subject=${title}&body=${message}&cc=${emails
+				.slice(1)
+				.join(",")}`
+		)
 }
 
 $("#show_send_email_dialog").on("click", showSendEmailDialog)
@@ -3406,10 +3406,10 @@ $(
 })
 
 $("#send_email_dialog .comment__files").on("change", function () {
-  let dialog = $("#send_email_dialog");
-  let previews = dialog.find(".preview_files");
-  let form_data = new FormData();
-  let preset = dialog.find(".preset_name").val();
+	let dialog = $("#send_email_dialog")
+	let previews = dialog.find(".preview_files")
+	let form_data = new FormData()
+	let preset = dialog.find(".preset_name").val()
 
 	if (preset === "" || preset === null) {
 		preset = "kuva_"
@@ -3491,69 +3491,132 @@ $(".dialog").on("change", ".preview_item", function () {
 })
 
 $(".preview_files").on("click", ".tag_delete", function () {
-  let preview_item = $(this).closest(".preview_item");
-  $(this).parent().remove();
-  updateFileTags(preview_item);
-});
+	let preview_item = $(this).closest(".preview_item")
+	$(this).parent().remove()
+	updateFileTags(preview_item)
+})
 
-$(".send_email_button").on("click", function () {
-  let dialog = $("#send_email_dialog");
-  let attachments = dialog.find(".preview_item").get();
-  let promises = Promise.all(attachments.map(file => {
-    let img_url = file.querySelector('img').src;
-    let file_url = `${window.location.origin}/${file.dataset.url}`;
-    return fetch(img_url)
-      .then((response) => response.blob())
-      .then((blob) =>
-        new Promise(resolve => {
-          let reader = new FileReader();
-          reader.onload = () => {
-            if (file_url == img_url) {
-              resolve(`<img src="${reader.result}">`);
-            } else {
-              resolve(`<a href="${file_url}"><img src="${reader.result}" width="200"></a>`);
-            }
-          };
-          reader.readAsDataURL(blob);
-        })
-      );
-  }));
-  navigator.permissions
-    .query({ name: "clipboard-write" })
-    .then((result) => {
-      if (result.state == "granted" || result.state == "prompt") {
-        alert("Write access granted!");
-      }
-    })
-    .catch(console.log);
-  // navigator.permissions
-  //   .query({ name: "read-text-on-clipboard" })
-  //   .then((result) => {
-  //     if (result.state == "granted" || result.state == "prompt") {
-  //       alert("Read access granted!");
-  //     }
-  //   });
-  navigator.clipboard
-    .write([
-      new ClipboardItem({
-        'text/plain': promises.then(
-          (html) => new Blob(html, { type: 'text/plain' })
-        ),
-        'text/html': promises.then(
-          (html) => new Blob(html, { type: 'text/html' })
-        ),
-      }),
-    ])
-    .then(() => {
-      let location = $(this).attr("href");
-      let win = window.open(location);
-      if (win) {
-        //Browser has allowed it to be opened
-        win.focus();
-      } else {
-        //Browser has blocked it
-        alert("Please allow popups for this website");
-      }
-    })
-    .catch(console.log);
-});
+document.addEventListener("DOMContentLoaded", async function () {
+	$(".send_email_button").on("click", function (e) {
+		const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+		let dialog = $("#send_email_dialog")
+		let attachments = dialog.find(".preview_item").get()
+		// let promises = Promise.all(
+		// 	attachments.map((file) => {
+		// 		let img_url = file.querySelector("img").src
+		// 		let file_url = `${window.location.origin}/${file.dataset.url}`
+		// 		return fetch(img_url)
+		// 			.then((response) => response.blob())
+		// 			.then(
+		// 				(blob) =>
+		// 					new Promise((resolve) => {
+		// 						let reader = new FileReader()
+		// 						reader.onload = () => {
+		// 							if (file_url == img_url) {
+		// 								resolve(`<img src="${reader.result}">`)
+		// 							} else {
+		// 								resolve(
+		// 									`<a href="${file_url}"><img src="${reader.result}" width="200"></a>`
+		// 								)
+		// 							}
+		// 						}
+		// 						reader.readAsDataURL(blob)
+		// 					})
+		// 			)
+		// 	})
+		// )
+
+		//     html2canvas(document.querySelector("#copyToImage")).then(canvas => canvas.toBlob(blob => navigator.clipboard.write([new ClipboardItem({'image/png': blob})])));
+
+		// navigator.permissions
+		// 	.query({ name: "clipboard-write" })
+		// 	.then((result) => {
+		// 		if (result.state == "granted" || result.state == "prompt") {
+		// 			alert("Write access granted!")
+		// 		}
+		// 	})
+		// 	.catch(console.log)
+		// // navigator.permissions
+		// //   .query({ name: "read-text-on-clipboard" })
+		// //   .then((result) => {
+		// //     if (result.state == "granted" || result.state == "prompt") {
+		// //       alert("Read access granted!");
+		// //     }
+		// //   });
+
+		// html2canvas(document.querySelector(".preview_files")).then((canvas) =>
+		// 	canvas.toBlob((blob) =>
+		// 		navigator.clipboard.write([new ClipboardItem({ "image/png": blob })])
+		// 	)
+		// )
+
+		//   const canWriteEl = document.getElementById('can-write')
+		// const textarea = document.querySelector('textarea')
+		// const errorEl = document.getElementById('errorMsg')
+		copyImgBtn = document.querySelector(".send_email_button")
+		img = document.querySelector(".preview_files img")
+
+		async function askWritePermission() {
+			try {
+				const { state } = await navigator.permissions.query({
+					name: "clipboard-write",
+					allowWithoutGesture: false,
+				})
+				return state === "granted"
+			} catch (error) {
+				errorEl.textContent = `Compatibility error (ONLY CHROME > V66): ${error.message}`
+				console.log(error)
+				return false
+			}
+		}
+
+		const setToClipboard = (blob) => {
+			const data = [new ClipboardItem({ [blob.type]: blob })]
+			return navigator.clipboard.write(data)
+		}
+
+		copyImgBtn.addEventListener("click", async () => {
+			try {
+				response = await fetch(img.src)
+				blob = await response.blob()
+				await setToClipboard(blob)
+			} catch (error) {
+				console.error("Something wrong happened")
+				console.error(error)
+			}
+		})
+
+		setTimeout(() => {
+			let location = $(this).attr("href")
+			let win = window.open(location)
+			if (win) {
+				//Browser has allowed it to be opened
+				win.focus()
+			} else {
+				//Browser has blocked it
+				alert("Please allow popups for this website")
+			}
+		}, 2000)
+		// console.log(e)
+		// location = $(this).attr("href")
+		// win = window.open(location)
+		// if (win) {
+		// 	win.focus()
+		// } else {
+		// 	alert("Please allow popups for this website")
+		// }
+
+		// navigator.clipboard
+		// 	.write([
+		// 		new ClipboardItem({
+		// 			"text/plain": promises.then(
+		// 				(html) => new Blob(html, { type: "text/plain" })
+		// 			),
+		// 			"text/html": promises.then(
+		// 				(html) => new Blob(html, { type: "text/html" })
+		// 			),
+		// 		}),
+		// 	])
+	})
+})
