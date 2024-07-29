@@ -3499,7 +3499,7 @@ if($remove_overflowY === true) {
                   $presets = mysqli_query($db, "SELECT * from `message_templates`")->fetch_all(MYSQLI_ASSOC);
                   foreach ($presets as $preset) {
                 ?>
-                <div class="preset " data-identifiction="<?= $preset['id'] ?>" data-type="<?= $preset['preset_type'] ?>" data-title="<?= $preset['subject'] ?>" data-message="<?= $preset['message'] ?>"><?= $preset['name'] ?></div>
+                <div class="preset " data-status_of_link="<?= $preset['status_of_link'] ?>"  data-identifiction="<?= $preset['id'] ?>" data-type="<?= $preset['preset_type'] ?>" data-title="<?= $preset['subject'] ?>" data-message="<?= $preset['message'] ?>"><?= $preset['name'] ?></div>
                 <?php } ?>
               </div>
             <div class="preset_is_ok">

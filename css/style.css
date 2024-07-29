@@ -786,11 +786,24 @@ td.grid-item {
 
 .coderdy .prob,
 .coderdy .problemo {
-	background: var(--prob);
+	/* position: relative; */
 }
 
-.coderdy .prob.critical,
-.coderdy .grande_problemo {
+.coderdy .prob:before,
+.coderdy .problemo:before,
+.coderdy .prob.critical:before,
+.coderdy .grande_problemo:before {
+	height: 10px;
+	width: 100%;
+	content: "";
+	position: absolute;
+	display: block;
+	background: var(--prob);
+	bottom: 0;
+}
+
+.coderdy .prob.critical:before,
+.coderdy .grande_problemo:before {
 	background: var(--problem);
 }
 /* .coderdy .problemo {
@@ -1988,7 +2001,7 @@ td input {
 	background: var(--undone);
 }
 .project__building_room.prob {
-	background: var(--prob);
+	/* background: var(--prob); */
 }
 .project__building_room.problem {
 	background: var(--problem);

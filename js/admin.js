@@ -3839,7 +3839,8 @@ function admin__save_message_preset(row) {
 		name: inputs[0].value,
 		subject: inputs[1].value,
 		preset_type: inputs[2].value,
-		message: inputs[3].value,
+		message: inputs[4].value,
+		status_of_link: inputs[3].value,
 	}
 	$.ajax({
 		url: "vendor/admin__updatemessagepreset.php",

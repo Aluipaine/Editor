@@ -748,7 +748,7 @@ async function initalize_cross(arg) {
 		for (let q = 0; q < ir_coms.length; q++) {
 			if (ir_coms[q].length > 4) {
 				console.log("ir_coms[q].length" + ir_coms[q].length)
-				a_name = ir_coms[q]
+				a_name = removeHTMLTags(ir_coms[q])
 					.replaceAll("--Tila", "")
 					.replaceAll(" <br> ", "")
 					.replaceAll(" <br>", "")
@@ -759,6 +759,7 @@ async function initalize_cross(arg) {
 					.split(",")[2]
 					.split(">")[0]
 					.replaceAll(" ", "")
+				console.log("a_name: " + a_name)
 				problem_apartment = document.querySelector(
 					"." +
 						a_name
@@ -768,7 +769,7 @@ async function initalize_cross(arg) {
 				)
 
 				if (apartment.classList.contains(problem_apartment)) {
-					b_name = ir_coms[q]
+					b_name = removeHTMLTags(ir_coms[q])
 						.replaceAll("--Tila", "")
 						.replaceAll(" <br> ", "")
 						.replaceAll(" <br>", "")
@@ -2018,18 +2019,30 @@ onLongPress(
 onLongPress(
 	$(".preset"),
 	function () {
+		dialog = $("#send_email_dialog")
+		title_oldval = dialog.find(".title").val()
+		oldval = dialog.find(".message").val()
+
 		alert(
 			'Presetin muokkaustila on otettu käyttöön. Paina "Presetin muokkaus valmis"-nappia kun olet valmis'
 		)
 		cur_preset_id = $(this).data("identifiction")
 		cur_preset_name = $(this).text()
 		cur_preset_type = $(this).data("type")
+		dialog.find(".title").val(title_oldval.replace(rooms_names, ""))
+		dialog
+			.find(".message")
+			.val(
+				oldval
+					.replace(rooms_names_text, "")
+					.replace(changed_link_text, "%LINKKI%")
+			)
 		$(".preset_is_ok").addClass("active")
 	},
 	1500
 )
 $(".preset_is_ok").click((e) => {
-	let dialog = $("#send_email_dialog")
+	dialog = $("#send_email_dialog")
 
 	let formData = {
 		id: cur_preset_id,
@@ -2048,6 +2061,12 @@ $(".preset_is_ok").click((e) => {
 	cur_preset.attr("data-message", dialog.find(".message").val())
 	$(".preset_is_ok").removeClass("active")
 	alert("Muutokset tallennettu tietokantaan")
+	oldval = dialog.find(".message").val()
+	title_oldval = dialog.find(".title").val()
+	dialog
+		.find(".message")
+		.val(rooms_names_textoldval.replace("%LINKKI%", changed_link_text))
+	dialog.find(".title").val(title_oldval + " " + rooms_names)
 })
 $(".p_meaning").on("mousedown touchstart", (e) => {
 	$(e.target).focus()
@@ -3241,9 +3260,29 @@ $("#email_type_presets")
 $("#email_presets")
 	.find(".preset")
 	.on("click", function () {
+		status_of_room = this.dataset.status_of_link
+		changed_link_text =
+			"Paina tätä linkkiä kun olet valmis: " +
+			"https://editori.westface.fi/status.php?project_id=" +
+			current_project +
+			"&room=" +
+			rappu_coordinate_of_room +
+			"," +
+			x_coordinate_of_room +
+			"," +
+			y_coordinate_of_room +
+			"&status=" +
+			status_of_room +
+			""
 		let dialog = $("#send_email_dialog")
 		dialog.find(".title").val(this.dataset.title + " " + rooms_names)
-		dialog.find(".message").val(rooms_names_text + this.dataset.message)
+		dialog
+			.find(".message")
+			.val(
+				rooms_names_text +
+					this.dataset.message.replace("%LINKKI%", changed_link_text)
+			)
+
 		dialog.find(".preset_name").val(this.textContent)
 		cur_preset = $(this)
 		updateSendEmailUrl()
@@ -3258,6 +3297,28 @@ $(".toggle_customer_modal").on("click", function () {
 })
 
 function showSendEmailDialog() {
+	// DEFINE DATA FOR STATUS LINK
+	active_rooms = document.querySelectorAll(".send_email_selected")
+	if (active_rooms.length == 1) {
+		status_link = true
+		current_project = parseFloat(
+			document.querySelector("#current_project_id").value
+		)
+		x_coordinate_of_room = parseFloat(active_rooms[0].dataset.x)
+		y_coordinate_of_room = parseFloat(active_rooms[0].dataset.y)
+		rappu_coordinate_of_room =
+			active_rooms[0].parentElement.parentElement.parentElement.id.toLowerCase()
+		status_of_room = ""
+	} else {
+		status_link = false
+		x_coordinate_of_room =
+			rappu_coordinate_of_room =
+			y_coordinate_of_room =
+			status_of_room =
+				""
+	}
+
+	// END DEFINING
 	let dialog = $("#send_email_dialog")
 	dialog[0].showModal()
 	dialog.find(".without_phone").empty()

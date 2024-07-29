@@ -1305,6 +1305,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                 <td>Nimi</td>
                 <td>Aihe</td>
                 <td>Tyyppi</td>
+                <td>Status linkissä</td>
                 <td>Viesti</td>
                 <td></td>
               </tr>
@@ -1328,6 +1329,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] != 'admin'){
                 <td><input class="lineinput" value="<?= $row['name'] ?>"></td>
                 <td><input class="lineinput" value="<?= $row['subject'] ?>"></td>
                 <td><select class="lineinput"><?= $type_list ?></select></td>
+                <td><input class="lineinput" value="<?= $row['status_of_link'] ?>"></td>
                 <td><textarea class="lineinput" rows="6" value="<?= $row['message'] ?>"></textarea></td>
                 <td><button class="preset_delete" onclick="admin__delete_message_preset(this)">x</button></td>
               </tr>

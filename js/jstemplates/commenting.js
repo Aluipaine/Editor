@@ -1,4 +1,17 @@
 kommentti_count = 0
+function removeHTMLTags(htmlString) {
+	// Create a new DOMParser instance
+	const parser = new DOMParser()
+	// Parse the HTML string into a DOM document
+	const doc = parser.parseFromString(
+		htmlString.replaceAll(" ", "").replaceAll(" ", ""),
+		"text/html"
+	)
+	// Extract the text content from the parsed document
+	const textContent = doc.body.textContent || ""
+	return textContent.trim() // Trim any leading or trailing whitespace
+}
+
 /**
  * Creates a new comment element based on the provided parameters and appends it to the DOM.
  * @param {string} mode - The mode of the comment.
@@ -849,7 +862,7 @@ function initializebuilding_comments(mode) {
 	if (mode === "all") {
 		for (let q = 0; q < ir_coms.length; q++) {
 			if (ir_coms[q].length > 5) {
-				a_name = ir_coms[q]
+				a_name = removeHTMLTags(ir_coms[q])
 					.replaceAll("--Tila", "")
 					.replaceAll(" <br> ", "")
 					.replaceAll(" <br>", "")
@@ -860,6 +873,8 @@ function initializebuilding_comments(mode) {
 					.split(",")[2]
 					.split(">")[0]
 					.replaceAll(" ", "")
+				console.log("a_name: " + a_name)
+				console.log("removeHTMLTags(ir_coms[q]): " + removeHTMLTags(ir_coms[q]))
 				// a_name = ir_coms[q].replaceAll("--Tila","").replaceAll(" ","").replaceAll(" ","").replaceAll("/","").replaceAll("<br","").toLowerCase().split(",")[2].split(">")[0];
 				problem_apartment = document.querySelector(
 					"." +
@@ -888,7 +903,7 @@ function initializebuilding_comments(mode) {
 	} else if (mode === "all_raktyo") {
 		for (let q = 0; q < ir_coms.length; q++) {
 			if (ir_coms[q].length > 5) {
-				a_name = ir_coms[q]
+				a_name = removeHTMLTags(ir_coms[q])
 					.replaceAll("--Tila", "")
 					.replaceAll(" <br> ", "")
 					.replaceAll(" <br>", "")
@@ -947,7 +962,7 @@ function initializebuilding_comments(mode) {
 	} else {
 		for (let q = 0; q < ir_coms.length; q++) {
 			if (ir_coms[q].length > 5) {
-				a_name = ir_coms[q]
+				a_name = removeHTMLTags(ir_coms[q])
 					.replaceAll("--Tila", "")
 					.replaceAll(" <br> ", "")
 					.replaceAll(" <br>", "")

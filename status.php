@@ -28,3 +28,46 @@ mysqli_query($db, "UPDATE `projectmeta` SET `meta_value`='$rooms' WHERE `id`=$pr
 
 $timestamp = time();
 mysqli_query($db, "INSERT INTO `workdiary` (`meta_id`, `projectid`, `who`, `what`, `where`, `timestamp`) VALUES (NULL,'$project_id','','$status','$room','$timestamp');");
+
+
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="fI">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiitos!</title>
+  
+  <link rel="stylesheet" href="/css/modal.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/css/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/css/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/css/favicon.ico">
+
+  <style>
+
+    h1 {
+      margin-top: 10vh
+    }
+    p,img,i {
+      text-align: center;
+      margin: 10px auto;
+      display: block;
+      max-width: 100%
+    }
+  </style>
+</head>
+<body>
+  <h1>Kiitämme ilmoituksesta!</h1>
+  <p>Voimme nyt edetä urakassa eteenpäin :) </p>
+  <i>Tiedoksi: Tallennamme vain urakoitavan asunnon sijainnin rapussa, emme säilytä henkilötietojanne järjestelmissämme ilman tarvetta ja teidän lupaa. </i>
+
+  <img src="https://www.kiipeilytekniikka.com/wp-content/uploads/2017/03/Ruuvausta_pieni.jpg">
+</body>
+</html>
