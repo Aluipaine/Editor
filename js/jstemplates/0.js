@@ -3263,15 +3263,15 @@ $("#email_presets")
 		status_of_room = this.dataset.status_of_link
 		changed_link_text =
 			"Paina tätä linkkiä kun olet valmis: " +
-			"https://editori.westface.fi/status.php?project_id=" +
+			"https://editori.westface.fi/status.php?post=" +
 			current_project +
-			"&room=" +
+			";" +
 			rappu_coordinate_of_room +
 			"," +
 			x_coordinate_of_room +
 			"," +
 			y_coordinate_of_room +
-			"&status=" +
+			";" +
 			status_of_room +
 			""
 		let dialog = $("#send_email_dialog")
