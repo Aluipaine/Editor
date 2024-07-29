@@ -3,9 +3,7 @@
 
 require 'vendor/config.php';
 
-$project_id = $_REQUEST['project_id'];
-$room = $_REQUEST['room'];
-$status = $_REQUEST['status'];
+[$project_id, $room, $status] = explode(';', $_REQUEST['post']);
 [$letter, $x, $y] = explode(',', $room);
 
 $rooms = json_decode(mysqli_query($db, "SELECT `meta_value` from `projectmeta` WHERE `id`=$project_id AND `meta_key`='{$letter}_rooms'")->fetch_row()[0], true);
