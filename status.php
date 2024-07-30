@@ -3,10 +3,12 @@
 
 require 'vendor/config.php';
 
-[$project_id, $room, $status] = explode(';', $_GET['post']);
-[$letter, $x, $y] = explode(',', $room);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try {
+  [$project_id, $room, $status] = explode(';', $_GET['post']);
+  [$letter, $x, $y] = explode(',', $room);
+
   $rooms = json_decode(mysqli_query($db, "SELECT `meta_value` from `projectmeta` WHERE `id`=$project_id AND `meta_key`='{$letter}_rooms'")->fetch_row()[0], true);
 
   foreach ($rooms as $id => $room_data) {
