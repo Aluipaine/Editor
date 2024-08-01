@@ -3557,127 +3557,45 @@ $(".preview_files").on("click", ".tag_delete", function () {
 	updateFileTags(preview_item)
 })
 
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", function () {
 	$(".send_email_button").on("click", function (e) {
-		const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-
 		let dialog = $("#send_email_dialog")
 		let attachments = dialog.find(".preview_item").get()
-		// let promises = Promise.all(
-		// 	attachments.map((file) => {
-		// 		let img_url = file.querySelector("img").src
-		// 		let file_url = `${window.location.origin}/${file.dataset.url}`
-		// 		return fetch(img_url)
-		// 			.then((response) => response.blob())
-		// 			.then(
-		// 				(blob) =>
-		// 					new Promise((resolve) => {
-		// 						let reader = new FileReader()
-		// 						reader.onload = () => {
-		// 							if (file_url == img_url) {
-		// 								resolve(`<img src="${reader.result}">`)
-		// 							} else {
-		// 								resolve(
-		// 									`<a href="${file_url}"><img src="${reader.result}" width="200"></a>`
-		// 								)
-		// 							}
-		// 						}
-		// 						reader.readAsDataURL(blob)
-		// 					})
-		// 			)
-		// 	})
-		// )
-
-		//     html2canvas(document.querySelector("#copyToImage")).then(canvas => canvas.toBlob(blob => navigator.clipboard.write([new ClipboardItem({'image/png': blob})])));
-
-		// navigator.permissions
-		// 	.query({ name: "clipboard-write" })
-		// 	.then((result) => {
-		// 		if (result.state == "granted" || result.state == "prompt") {
-		// 			alert("Write access granted!")
-		// 		}
-		// 	})
-		// 	.catch(console.log)
-		// // navigator.permissions
-		// //   .query({ name: "read-text-on-clipboard" })
-		// //   .then((result) => {
-		// //     if (result.state == "granted" || result.state == "prompt") {
-		// //       alert("Read access granted!");
-		// //     }
-		// //   });
-
-		// html2canvas(document.querySelector(".preview_files")).then((canvas) =>
-		// 	canvas.toBlob((blob) =>
-		// 		navigator.clipboard.write([new ClipboardItem({ "image/png": blob })])
-		// 	)
-		// )
-
-		//   const canWriteEl = document.getElementById('can-write')
-		// const textarea = document.querySelector('textarea')
-		// const errorEl = document.getElementById('errorMsg')
-		copyImgBtn = document.querySelector(".send_email_button")
-		img = document.querySelector(".preview_files img")
-
-		async function askWritePermission() {
-			try {
-				const { state } = await navigator.permissions.query({
-					name: "clipboard-write",
-					allowWithoutGesture: false,
-				})
-				return state === "granted"
-			} catch (error) {
-				errorEl.textContent = `Compatibility error (ONLY CHROME > V66): ${error.message}`
-				console.log(error)
-				return false
-			}
-		}
-
-		const setToClipboard = (blob) => {
-			const data = [new ClipboardItem({ [blob.type]: blob })]
-			return navigator.clipboard.write(data)
-		}
-
-		copyImgBtn.addEventListener("click", async () => {
-			try {
-				response = await fetch(img.src)
-				blob = await response.blob()
-				await setToClipboard(blob)
-			} catch (error) {
-				console.error("Something wrong happened")
-				console.error(error)
-			}
-		})
-
-		setTimeout(() => {
-			let location = $(this).attr("href")
-			let win = window.open(location)
-			if (win) {
-				//Browser has allowed it to be opened
-				win.focus()
+		let html = attachments.map(file => {
+			let img_url = file.querySelector('img').src;
+			let file_url = `${window.location.origin}/${file.dataset.url}`;
+			if (file_url == img_url) {
+				return `<img src="${img_url}">`;
 			} else {
-				//Browser has blocked it
-				alert("Please allow popups for this website")
+				return `<a href="${file_url}"><img src="${img_url}" width="200"></a>`;
 			}
-		}, 2000)
-		// console.log(e)
-		// location = $(this).attr("href")
-		// win = window.open(location)
-		// if (win) {
-		// 	win.focus()
-		// } else {
-		// 	alert("Please allow popups for this website")
-		// }
-
-		// navigator.clipboard
-		// 	.write([
-		// 		new ClipboardItem({
-		// 			"text/plain": promises.then(
-		// 				(html) => new Blob(html, { type: "text/plain" })
-		// 			),
-		// 			"text/html": promises.then(
-		// 				(html) => new Blob(html, { type: "text/html" })
-		// 			),
-		// 		}),
-		// 	])
+		});
+		navigator.permissions
+			.query({ name: "clipboard-write" })
+			.then((result) => {
+				if (result.state == "granted" || result.state == "prompt") {
+					alert("Write access granted!");
+				}
+			})
+			.catch(console.error);
+		navigator.clipboard
+			.write([
+				new ClipboardItem({
+					'text/plain': new Blob(html, { type: 'text/plain' }),
+					'text/html': new Blob(html, { type: 'text/html' }),
+				}),
+			])
+			.then(() => {
+				let location = $(this).attr("href");
+				let win = window.open(location);
+				if (win) {
+					//Browser has allowed it to be opened
+					win.focus();
+				} else {
+					//Browser has blocked it
+					alert("Please allow popups for this website");
+				}
+			})
+			.catch(console.error);
 	})
 })
