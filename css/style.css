@@ -4112,6 +4112,7 @@ article.preview_canvas:before {
 	opacity: 0.65;
 	z-index: 12;
 	outline-offset: -1px;
+	outline: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .canvas span.aukko:before,

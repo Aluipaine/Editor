@@ -1299,8 +1299,8 @@ async function mitta__create_mitta(
 			// newDiv__comment_settings.setAttribute("onclick", " document.querySelector('#drawscreen_section_one > div.modal-container').classList.add('two');document.querySelector('#drawscreen_section_one > div.modal-container').classList.remove('out');document.querySelector('body').classList.add('modal-active');settings__mitta();change__newdiv_cord();delete_from_db('"+t_array+"');mp_previous_vord = '';");
 		}
 		if (type == "au") {
-			if (canvas.querySelectorAll(".aukko").length > 2) {
-				// alert("Huomio! Aukkoja voi olla yhdessä seinässä max 3.");
+			if (canvas.querySelectorAll(".aukko").length >= 10) {
+				alert("Huomio! Aukkoja voi olla yhdessä seinässä max 10.")
 				return
 			}
 			changedimensions_aukko()
@@ -2027,8 +2027,8 @@ async function mitta__create_mitta(
 			}
 		}
 		if (input_step == "drawscreen_section_two") {
-			if (canvas.querySelectorAll(".aukko").length > 2) {
-				// alert("Huomio! Aukkoja voi olla yhdessä seinässä max 3.");
+			if (canvas.querySelectorAll(".aukko").length >= 10) {
+				alert("Huomio! Aukkoja voi olla yhdessä seinässä max 10.")
 				return
 			}
 			changedimensions_aukko()
