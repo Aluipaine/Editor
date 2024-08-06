@@ -32,7 +32,6 @@ include('header.php');
 <form action="vendor/create.php" method="post" id="new_project__form">
 
    <section id="new_project">
-       <input type="hidden" name="project_type" id="project_type" value="Huone/seinä" required>
          <div class="form-subgroup main">
             <label>Projektin nimi: </label>
             <input type="text" name="project_name" class="form-control project_name_slugfrom" value="" required oninput="slugify__prname();">
@@ -45,6 +44,13 @@ include('header.php');
          </div>
        <fieldset class="tiedot_textareas">
            <div class="form-group">
+               <div class="form-subgroup">
+                <label for="project_type">Project type:</label>
+                <select name="project_type" id="project_type" value="Huone/seinä">
+                  <option value="Huone/seinä">Huone/seinä</option>
+                  <option value="Julkisivu">Julkisivu</option>
+                </select>
+               </div>
                <div class="form-subgroup">
                    <label for="tiedot_projektista">Tiedot projektista</label>
                    <textarea rows="4" type="text" id="tiedot_projektista" name="tiedot_projektista" class="form-control"></textarea>
