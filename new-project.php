@@ -45,7 +45,7 @@ include('header.php');
        <fieldset class="tiedot_textareas">
            <div class="form-group">
                <div class="form-subgroup">
-                <label for="project_type">Project type:</label>
+                <label for="project_type">Tyyppi:</label>
                 <select name="project_type" id="project_type" value="Huone/seinä">
                   <option value="Huone/seinä">Huone/seinä</option>
                   <option value="Julkisivu">Julkisivu</option>
@@ -253,6 +253,7 @@ include('header.php');
           <div class="col-6"><div class="prev_btn" onclick="$('#roomconfig_second').hide();$('#roomconfig_second').slideUp(200);$('#roomconfig_first').slideDown(200);$('#roomconfig_first').show();">Edellinen</div></div>
           <div class="col-6">
             <div onclick='$("#roomconfig_second").hide();$("#roomconfig_second").slideUp(200);$("#roomconfig_third").slideDown(200);$("#roomconfig_third").show();' class="next_btn btn ready_btn">Seuraava</div>
+            <button class="finalization_btn ready_btn">Aloita projekti</button>
           </div>
       </div>
    </section>

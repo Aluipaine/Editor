@@ -325,16 +325,16 @@
                     $key1 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[1]))))));
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
                       if($key1 == "K") {
-                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                         $remove_overflowY = true;
                       }
                       else if($key1 == "AK") {
-                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                         $remove_overflowY = true;
                       }
                       else {
                         $tila__bottomcord = intval($key1) -1;
-                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                        echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                       }
 
                   }
@@ -371,15 +371,15 @@
                     }
                     if($key1 == "K") {
                        $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else if($key1 == "AK") {
                        $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else {
                       $tila__bottomcord = intval($key1) -1;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                       $floornum = 50 - intval($tila__bottomcord);
 
                       echo '<script>if(document.querySelector("#A ul > li:nth-child('.$floornum.')")) {document.querySelector("#A ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
@@ -453,16 +453,16 @@
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
 
                     if($key1 == "K") {
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                       $remove_overflowY = true;
                     }
                     else if($key1 == "AK") {
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                       $remove_overflowY = true;
                     }
                     else {
                       $tila__bottomcord = intval($key1) -1;
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                     }
 
 
@@ -502,14 +502,14 @@
 
                     if($key1 == "K") {
                       $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else if($key1 == "AK") {
                       $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else {
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                       $floornum = 50 - intval($tila__bottomcord);
 
                       echo '<script>if(document.querySelector("#B ul > li:nth-child('.$floornum.')")) {document.querySelector("#B ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
@@ -579,16 +579,16 @@
 
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
                     if($key1 == "K") {
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                       $remove_overflowY = true;
                     }
                     else if($key1 == "AK") {
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                       $remove_overflowY = true;
                     }
                     else {
                       $tila__bottomcord = intval($key1) -1;
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                     }
 
                   }
@@ -627,14 +627,14 @@
 
                     if($key1 == "K") {
                       $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else if($key1 == "AK") {
                       $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else {
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                       $floornum = 50 - intval($tila__bottomcord);
 
                       echo '<script>if(document.querySelector("#C ul > li:nth-child('.$floornum.')")) {document.querySelector("#C ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
@@ -705,16 +705,16 @@
 
                   $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
                   if($key1 == "K") {
-                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                     $remove_overflowY = true;
                   }
                   else if($key1 == "AK") {
-                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                     $remove_overflowY = true;
                   }
                   else {
                     $tila__bottomcord = intval($key1) -1;
-                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                    echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                   }
                 }
 
@@ -751,14 +751,14 @@
                   }
                   if($key1 == "K") {
                     $remove_overflowY = true;
-                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                   }
                   else if($key1 == "AK") {
                     $remove_overflowY = true;
-                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                   }
                   else {
-                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     $floornum = 50 - intval($tila__bottomcord);
                     echo '<script>if(document.querySelector("#D ul > li:nth-child('.$floornum.')")) {document.querySelector("#D ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
                     echo '<script>if(document.querySelector("#D ul > li:nth-child('.$floornum.')")) {document.querySelector("#D ul > li:nth-child('.$floornum.')").style.opacity = "1";}</script>';
@@ -825,16 +825,16 @@
 
                     $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
                     if($key1 == "K") {
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                       $remove_overflowY = true;
                     }
                     else if($key1 == "AK") {
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                       $remove_overflowY = true;
                     }
                     else {
                       $tila__bottomcord = intval($key1) -1;
-                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                      echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                     }
 
                   }
@@ -873,14 +873,14 @@
 
                     if($key1 == "K") {
                       $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else if($key1 == "AK") {
                       $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else {
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                       $floornum = 50 - intval($tila__bottomcord);
 
                       echo '<script>if(document.querySelector("#E ul > li:nth-child('.$floornum.')")) {document.querySelector("#E ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
@@ -949,16 +949,16 @@
 
                 $key2 = str_replace('positionY:','',str_replace('positionX:','',str_replace('name:','', str_replace('}]', '', str_replace('[{', '',str_replace('"', '', $da_child[2]))))));
                 if($key1 == "K") {
-                  echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                  echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                   $remove_overflowY = true;
                 }
                 else if($key1 == "AK") {
-                  echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                  echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                   $remove_overflowY = true;
                 }
                 else {
                   $tila__bottomcord = intval($key1) -1;
-                  echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
+                  echo "<div class=' ".strtolower(str_replace('Tila ','',$key0))."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."'>".$key0."</div>";
                 }
 
               }
@@ -997,14 +997,14 @@
 
                 if($key1 == "K") {
                   $remove_overflowY = true;
-                  echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<b>','',str_replace('</b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<b>','',str_replace('</b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                  echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                 }
                 else if($key1 == "AK") {
                   $remove_overflowY = true;
-                  echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) . "' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                  echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) . "' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                 }
                 else {
-                  echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                  echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                   $floornum = 50 - intval($tila__bottomcord);
 
                   echo '<script>if(document.querySelector("#F ul > li:nth-child('.$floornum.')")) {document.querySelector("#F ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
@@ -1120,14 +1120,14 @@
                     }
                     if($key1 == "K") {
                       $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<b>','',str_replace('</b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<b>','',str_replace('</b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else if($key1 == "AK") {
                       $remove_overflowY = true;
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) . "' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) . "' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     }
                     else {
-                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                      echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                       $floornum = 50 - intval($tila__bottomcord);
 
                       echo '<script>if(document.querySelector("#G ul > li:nth-child('.$floornum.')")) {document.querySelector("#G ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
@@ -1241,14 +1241,14 @@
                   }
                   if($key1 == "K") {
                     $remove_overflowY = true;
-                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('<b>','',str_replace('</b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('<b>','',str_replace('</b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-1px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='K' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                   }
                   else if($key1 == "AK") {
                     $remove_overflowY = true;
-                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) . "' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(-2px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) . "' data-y='AK' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                   }
                   else {
-                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8')))))) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".strtolower(str_replace('</b>','',str_replace('<b>','',str_replace('<br>','',str_replace(' ','',mb_convert_encoding($key0,'HTML-ENTITIES','utf-8'))))))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
+                    echo "<div onclick='apartment = this;initalize_cross(this);' class='project__building_room ". $additionalclass . " " .str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8')) ."' style='bottom: calc(" . $tila__bottomcord . "px*80);left:calc(".$key2 . "px*80);' data-room='".str_replace(['</b>','<b>','<br>',' '],'',mb_convert_encoding(mb_strtolower($key0),'HTML-ENTITIES','utf-8'))."' data-y='".$key1."' data-x='".$key2."' data-liftpoint='" . ($np[intval($key2)] ?? "NP$key2") . "' data-aroom='".strtolower($aroom)."' data-broom='".strtolower($broom)."' data-croom='".strtolower($croom)."' data-droom='".strtolower($droom)."' data-kroom='".strtolower($kroom)."' data-lroom='".strtolower($lroom)."'>".$key0."</div>";
                     $floornum = 50 - intval($tila__bottomcord);
 
                     echo '<script>if(document.querySelector("#H ul > li:nth-child('.$floornum.')")) {document.querySelector("#H ul > li:nth-child('.$floornum.')").style.display = "block";}</script>';
@@ -1759,7 +1759,7 @@
                 <div class="col-6">
                 <div class="form-group">
                       <h6>Lisää tiedostot:</h6>
-                      
+
                       <input type="file" class="newcomment__files newcomment__files_input" name="comment__files[]" multiple onchange="preparefile(this)">
                       <div class="comment__preview_files newcomment__previewfiles_new"></div>
                   </div>
@@ -3492,7 +3492,7 @@ if($remove_overflowY === true) {
                 <div class="toggling_preset" data-show="<?= $preset['id'] ?>"><img src="<?= $preset['svg_adress'] ?>"><?= $preset['name'] ?></div>
                 <?php } ?>
               </div>
-              
+
             </div>
             <div id="email_presets" class="presets">
                 <?php
@@ -3533,14 +3533,14 @@ if($remove_overflowY === true) {
                 </div>
               </div>
               <div class="secondtype_select">
-              <?php 
+              <?php
                 $prid = $_GET["id"];
                 $users = mysqli_query($db, "SELECT * from `users` WHERE `role`='kommentointi'")->fetch_all(MYSQLI_ASSOC);
                 $a_users = mysqli_query($db, "SELECT * from `addedusers` WHERE `project_id`='$prid'")->fetch_all(MYSQLI_ASSOC);
                 foreach ($users as $u) {
                   foreach ($a_users as $a_u) {
                     if($u['username'] === $a_u['username'] && $u['username'] !== "tyonjohto") {
-                    
+
                       echo '
                         <div class="type" data-type="'.$u['email'].'" data-email="'.$u['email'].'">
                             <span>'.$u['username'].'</span>
@@ -3557,14 +3557,14 @@ if($remove_overflowY === true) {
             <div class="tables">
                 <table class="project_contacts"></table>
                 <table class="project_workers" style="display: none;">
-                  <?php 
+                  <?php
                     $prid = $_GET["id"];
                     $users = mysqli_query($db, "SELECT * from `users` WHERE `role`='kommentointi'")->fetch_all(MYSQLI_ASSOC);
                     $a_users = mysqli_query($db, "SELECT * from `addedusers` WHERE `project_id`='$prid'")->fetch_all(MYSQLI_ASSOC);
                     foreach ($users as $u) {
                       foreach ($a_users as $a_u) {
                         if($u['username'] === $a_u['username'] && $u['username'] !== "tyonjohto") {
-                        
+
                           echo '
                             <tr>
                                 <td>'.$u['username'].'</td>
