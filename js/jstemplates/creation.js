@@ -89,7 +89,7 @@ $(".table").delegate('td', 'mouseover mouseleave', function(e) {
 // END highlighter for sizer visuals
 // toggle sizer input
 /**
- * Adds a click event listener to the element with id "sizertoggle". 
+ * Adds a click event listener to the element with id "sizertoggle".
  * When clicked, it removes the classes "showcaptioner" and "showheaderer" from the element with id "tablepreview",
  * and toggles the class "showsizer" on the same element.
  * @returns None
@@ -2758,7 +2758,7 @@ $(document).ready(function() {
 });
 
 /**
- * Handles the click event on the '.finalization_btn' button. 
+ * Handles the click event on the '.finalization_btn' button.
  * Retrieves data from various elements on the page, processes it, and sends it to the server.
  * @returns None
  */
@@ -3426,3 +3426,12 @@ jQuery(document).ready(function($) {
     });
 });
 
+$("#project_type").on("change", function () {
+    if ($(this).val() == "Julkisivu") {
+        $("#roomconfig_second .next_btn").hide();
+        $("#roomconfig_second .finalization_btn").show();
+    } else {
+        $("#roomconfig_second .next_btn").show();
+        $("#roomconfig_second .finalization_btn").hide();
+    }
+});

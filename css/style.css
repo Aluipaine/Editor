@@ -784,34 +784,28 @@ td.grid-item {
 	background: var(--tomeasure);
 }
 
-.coderdy .prob,
-.coderdy .problemo {
-	/* position: relative; */
-}
-
 .coderdy .prob:before,
+.coderdy .problem:before,
 .coderdy .problemo:before,
-.coderdy .prob.critical:before,
 .coderdy .grande_problemo:before {
 	height: 10px;
 	width: 100%;
 	content: "";
 	position: absolute;
 	display: block;
-	background: var(--prob);
 	bottom: 0;
 }
 
-.coderdy .prob.critical:before,
+.coderdy .prob:before,
+.coderdy .problemo:before {
+	background: var(--prob);
+}
+
+.coderdy .problem:before,
 .coderdy .grande_problemo:before {
 	background: var(--problem);
 }
-/* .coderdy .problemo {
-  background: var(--problemo);
-}
-.coderdy .grande_problemo  {
-  background: var(--grande_problemo);
-} */
+
 .rappus .nowork {
 	background: var(--nowork);
 	color: rgba(255, 255, 255, 0.1);
@@ -2000,12 +1994,12 @@ td input {
 .project__building_room.undone {
 	background: var(--undone);
 }
-.project__building_room.prob {
-	/* background: var(--prob); */
+/*.project__building_room.prob {
+	background: var(--prob);
 }
 .project__building_room.problem {
 	background: var(--problem);
-}
+}*/
 .project__building_room.no_progress {
 	background-color: var(--undone);
 }

@@ -32,7 +32,6 @@ include('header.php');
 <form action="vendor/create.php" method="post" id="new_project__form">
 
    <section id="new_project">
-       <input type="hidden" name="project_type" id="project_type" value="Huone/seinä" required>
          <div class="form-subgroup main">
             <label>Projektin nimi: </label>
             <input type="text" name="project_name" class="form-control project_name_slugfrom" value="" required oninput="slugify__prname();">
@@ -45,6 +44,13 @@ include('header.php');
          </div>
        <fieldset class="tiedot_textareas">
            <div class="form-group">
+               <div class="form-subgroup">
+                <label for="project_type">Tyyppi:</label>
+                <select name="project_type" id="project_type" value="Huone/seinä">
+                  <option value="Huone/seinä">Huone/seinä</option>
+                  <option value="Julkisivu">Julkisivu</option>
+                </select>
+               </div>
                <div class="form-subgroup">
                    <label for="tiedot_projektista">Tiedot projektista</label>
                    <textarea rows="4" type="text" id="tiedot_projektista" name="tiedot_projektista" class="form-control"></textarea>
@@ -247,6 +253,7 @@ include('header.php');
           <div class="col-6"><div class="prev_btn" onclick="$('#roomconfig_second').hide();$('#roomconfig_second').slideUp(200);$('#roomconfig_first').slideDown(200);$('#roomconfig_first').show();">Edellinen</div></div>
           <div class="col-6">
             <div onclick='$("#roomconfig_second").hide();$("#roomconfig_second").slideUp(200);$("#roomconfig_third").slideDown(200);$("#roomconfig_third").show();' class="next_btn btn ready_btn">Seuraava</div>
+            <button class="finalization_btn ready_btn">Aloita projekti</button>
           </div>
       </div>
    </section>

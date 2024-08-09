@@ -1172,7 +1172,7 @@ function comment__create_simpler(parent_id, this_element) {
 			formData = {
 				comment_id: id,
 				project_id: project_id,
-				room: room_id + ">a",
+				room: room_id,
 				name: _name,
 				x_y: _x_y,
 				content: _content,
@@ -1357,65 +1357,63 @@ function comment__create_new(doc, arg) {
 	doc.querySelector(".comment__preview_files").classList.add(new_com_id)
 
 	if (arg) {
-		setTimeout(function () {
-			project_id = parseFloat(
-				document.querySelector("#current_project_id").value
-			)
-			room_id = arg.innerHTML
-			_attachments = doc.querySelector(".comment__preview_files").innerText
-			_ending_time = ""
-			_deadline = doc.querySelector(".comment__deadline").value
-			_x_y = doc.querySelector(".vko_estimate").value
-			_content = doc
-				.querySelector(".kommentti_comment")
-				.value.replaceAll(",", " - ")
-			_name = doc.querySelector(".kommentti__name").value
-			_comment_from = doc
-				.querySelector(".kommentti_comment_from")
-				.value.replaceAll(",", " - ")
+		project_id = parseFloat(
+			document.querySelector("#current_project_id").value
+		)
+		room_id = arg.innerHTML
+		_attachments = doc.querySelector(".comment__preview_files").innerText
+		_ending_time = ""
+		_deadline = doc.querySelector(".comment__deadline").value
+		_x_y = doc.querySelector(".vko_estimate").value
+		_content = doc
+			.querySelector(".kommentti_comment")
+			.value.replaceAll(",", " - ")
+		_name = doc.querySelector(".kommentti__name").value
+		_comment_from = doc
+			.querySelector(".kommentti_comment_from")
+			.value.replaceAll(",", " - ")
 
-			_comment_to = result.replaceAll(",", " - ")
-			if (doc.querySelector(".is_thecomment_critical").checked) {
-				_urgency = "critical"
-			} else {
-				_urgency = "no_critical"
-			}
-			_aihe = _comment_from + " kommentit"
-			_answer_to = ""
-			_time_estimate = doc.querySelector(".time_estimate").value
+		_comment_to = result.replaceAll(",", " - ")
+		if (doc.querySelector(".is_thecomment_critical").checked) {
+			_urgency = "critical"
+		} else {
+			_urgency = "no_critical"
+		}
+		_aihe = _comment_from + " kommentit"
+		_answer_to = ""
+		_time_estimate = doc.querySelector(".time_estimate").value
 
-			formData = {
-				comment_id: new_com_id_,
-				project_id: project_id,
-				room: room_id + ">a",
-				name: _name,
-				x_y: _x_y,
-				content: _content,
-				attachments: _attachments,
-				comment_from: _comment_from,
-				comment_to: _comment_to,
-				urgency: _urgency,
-				ending_time: _ending_time,
-				deadline: _deadline,
-				aihe: _aihe,
-				answer_to: _answer_to,
-				time_estimate: _time_estimate,
-			}
-			console.log(formData)
-			$.ajax({
-				type: "POST",
-				url: "/vendor/addcomment.php",
-				data: formData,
-				error: function (jqxhr, status, exception) {
-					alert("Tietokantavirhe, soita numeroon +358449782028")
-					console.log(formData)
-				},
-			}).done(function (data) {
-				alert("Kommentti lisätty")
-				document.querySelector("body").classList.remove("bg")
+		formData = {
+			comment_id: new_com_id_,
+			project_id: project_id,
+			room: room_id,
+			name: _name,
+			x_y: _x_y,
+			content: _content,
+			attachments: _attachments,
+			comment_from: _comment_from,
+			comment_to: _comment_to,
+			urgency: _urgency,
+			ending_time: _ending_time,
+			deadline: _deadline,
+			aihe: _aihe,
+			answer_to: _answer_to,
+			time_estimate: _time_estimate,
+		}
+		console.log(formData)
+		$.ajax({
+			type: "POST",
+			url: "/vendor/addcomment.php",
+			data: formData,
+			error: function (jqxhr, status, exception) {
+				alert("Tietokantavirhe, soita numeroon +358449782028")
 				console.log(formData)
-			})
-		}, 2500)
+			},
+		}).done(function (data) {
+			alert("Kommentti lisätty")
+			document.querySelector("body").classList.remove("bg")
+			console.log(formData)
+		})
 	} else {
 		setTimeout(function () {
 			project_id = parseFloat(
@@ -1447,7 +1445,7 @@ function comment__create_new(doc, arg) {
 			formData = {
 				comment_id: new_com_id_,
 				project_id: project_id,
-				room: room_id + ">a",
+				room: room_id,
 				name: _name,
 				x_y: _x_y,
 				content: _content,

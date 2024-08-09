@@ -2799,84 +2799,86 @@ function building__action(evt) {
 
 	console.log(evt)
 	console.log("building__action")
-	$(".project__building_room.active").each(function (index) {
-		$(this).attr(
-			"data-aroom",
-			$(this)
-				.attr("data-aroom")
-				.replaceAll($(this).attr("data-aroom").split("~")[1], evt)
-		)
-		$(this).attr(
-			"data-broom",
-			$(this)
-				.attr("data-broom")
-				.replaceAll($(this).attr("data-broom").split("~")[1], evt)
-		)
-		$(this).attr(
-			"data-croom",
-			$(this)
-				.attr("data-croom")
-				.replaceAll($(this).attr("data-croom").split("~")[1], evt)
-		)
-		$(this).attr(
-			"data-droom",
-			$(this)
-				.attr("data-droom")
-				.replaceAll($(this).attr("data-droom").split("~")[1], evt)
-		)
-		$(this).attr(
-			"data-kroom",
-			$(this)
-				.attr("data-kroom")
-				.replaceAll($(this).attr("data-kroom").split("~")[1], evt)
-		)
-		$(this).attr(
-			"data-lroom",
-			$(this)
-				.attr("data-lroom")
-				.replaceAll($(this).attr("data-lroom").split("~")[1], evt)
-		)
-	})
+	if (evt == "problemo" || evt == "grande_problemo") {
+		$(".project__building_room.active").removeClass("prob")
+		$(".project__building_room.active").removeClass("problem")
+		$(".project__building_room.active").removeClass("problemo")
+		$(".project__building_room.active").removeClass("grande_problemo")
+	} else {
+		$(".project__building_room.active").each(function (index) {
+			$(this).attr(
+				"data-aroom",
+				$(this)
+					.attr("data-aroom")
+					.replaceAll($(this).attr("data-aroom").split("~")[1], evt)
+			)
+			$(this).attr(
+				"data-broom",
+				$(this)
+					.attr("data-broom")
+					.replaceAll($(this).attr("data-broom").split("~")[1], evt)
+			)
+			$(this).attr(
+				"data-croom",
+				$(this)
+					.attr("data-croom")
+					.replaceAll($(this).attr("data-croom").split("~")[1], evt)
+			)
+			$(this).attr(
+				"data-droom",
+				$(this)
+					.attr("data-droom")
+					.replaceAll($(this).attr("data-droom").split("~")[1], evt)
+			)
+			$(this).attr(
+				"data-kroom",
+				$(this)
+					.attr("data-kroom")
+					.replaceAll($(this).attr("data-kroom").split("~")[1], evt)
+			)
+			$(this).attr(
+				"data-lroom",
+				$(this)
+					.attr("data-lroom")
+					.replaceAll($(this).attr("data-lroom").split("~")[1], evt)
+			)
+		})
+		$(".project__building_room.active").removeClass("no_progress")
+		$(".project__building_room.active").removeClass("undone")
+
+		$(".project__building_room.active").removeClass("l5_a")
+		$(".project__building_room.active").removeClass("l5_b")
+		$(".project__building_room.active").removeClass("l5_c")
+		$(".project__building_room.active").removeClass("l5_d")
+		$(".project__building_room.active").removeClass("l5_e")
+
+		$(".project__building_room.active").removeClass("l4_a")
+		$(".project__building_room.active").removeClass("l4_b")
+		$(".project__building_room.active").removeClass("l4_c")
+		$(".project__building_room.active").removeClass("l4_d")
+		$(".project__building_room.active").removeClass("l4_e")
+
+		$(".project__building_room.active").removeClass("l3_a")
+		$(".project__building_room.active").removeClass("l3_b")
+		$(".project__building_room.active").removeClass("l3_c")
+		$(".project__building_room.active").removeClass("l3_d")
+		$(".project__building_room.active").removeClass("l3_e")
+
+		$(".project__building_room.active").removeClass("l2_a")
+		$(".project__building_room.active").removeClass("l2_b")
+		$(".project__building_room.active").removeClass("l2_c")
+		$(".project__building_room.active").removeClass("l2_d")
+		$(".project__building_room.active").removeClass("l2_e")
+
+		$(".project__building_room.active").removeClass("l1_a")
+		$(".project__building_room.active").removeClass("l1_b")
+		$(".project__building_room.active").removeClass("l1_c")
+		$(".project__building_room.active").removeClass("l1_d")
+		$(".project__building_room.active").removeClass("l1_e")
+	}
 	$(".project__building_room.active").removeClass(
 		"<divclass=project__building_room-overlay></div>"
 	)
-	$(".project__building_room.active").removeClass("prob")
-	$(".project__building_room.active").removeClass("problem")
-	$(".project__building_room.active").removeClass("problemo")
-	$(".project__building_room.active").removeClass("grande_problemo")
-	$(".project__building_room.active").removeClass("no_progress")
-	$(".project__building_room.active").removeClass("undone")
-
-	$(".project__building_room.active").removeClass("l5_a")
-	$(".project__building_room.active").removeClass("l5_b")
-	$(".project__building_room.active").removeClass("l5_c")
-	$(".project__building_room.active").removeClass("l5_d")
-	$(".project__building_room.active").removeClass("l5_e")
-
-	$(".project__building_room.active").removeClass("l4_a")
-	$(".project__building_room.active").removeClass("l4_b")
-	$(".project__building_room.active").removeClass("l4_c")
-	$(".project__building_room.active").removeClass("l4_d")
-	$(".project__building_room.active").removeClass("l4_e")
-
-	$(".project__building_room.active").removeClass("l3_a")
-	$(".project__building_room.active").removeClass("l3_b")
-	$(".project__building_room.active").removeClass("l3_c")
-	$(".project__building_room.active").removeClass("l3_d")
-	$(".project__building_room.active").removeClass("l3_e")
-
-	$(".project__building_room.active").removeClass("l2_a")
-	$(".project__building_room.active").removeClass("l2_b")
-	$(".project__building_room.active").removeClass("l2_c")
-	$(".project__building_room.active").removeClass("l2_d")
-	$(".project__building_room.active").removeClass("l2_e")
-
-	$(".project__building_room.active").removeClass("l1_a")
-	$(".project__building_room.active").removeClass("l1_b")
-	$(".project__building_room.active").removeClass("l1_c")
-	$(".project__building_room.active").removeClass("l1_d")
-	$(".project__building_room.active").removeClass("l1_e")
-
 	$(".project__building_room.active").addClass(evt)
 
 	// $('.project__building').removeClass('active')
