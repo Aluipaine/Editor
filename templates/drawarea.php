@@ -12,8 +12,8 @@
             <div class="wall_prev">&larr;</div>
             <div class="wall_next">&rarr;</div>
          </div>
-         <div class="drawarea__mm drawarea__height"><input type="tel" value="<?= $post["room_one_a-h"]; ?>" class="lineinput" id="box_h" oninput="changesize__bottom(parseFloat(this.value)+'|y');updatearea(parseFloat(this.value)+'|y')" max="3650"> </div>
-         <div class="drawarea__mm drawarea__lenght"> <input type="tel" value="<?= $post["room_one_a-w"]; ?>" class="lineinput" id="box_w" oninput="changesize__bottom(parseFloat(this.value)+'|x');updatearea(parseFloat(this.value)+'|x')" max="9975"></div>
+         <div class="drawarea__mm drawarea__height"><input type="tel" value="<?= $post["room_one_a-h"]; ?>" class="lineinput" id="box_h" onchange="userinteraction = true;changesize(this.value+'|y',true);" oninput="changesize__bottom(parseFloat(this.value)+'|y');updatearea(parseFloat(this.value)+'|y')" max="3650"> </div>
+         <div class="drawarea__mm drawarea__lenght"> <input type="tel" value="<?= $post["room_one_a-w"]; ?>" class="lineinput" id="box_w" onchange="userinteraction = true;changesize(this.value+'|x',true);" oninput="changesize__bottom(parseFloat(this.value)+'|x');updatearea(parseFloat(this.value)+'|x')" max="9975"></div>
          <div class="drawarea__control drawarea__left">
            <div class="drawarea__left_container">
             <div class="drawarea__h_cord">

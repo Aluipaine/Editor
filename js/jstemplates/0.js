@@ -165,6 +165,7 @@ function changeHeights(num) {
 	allHeights.forEach(function (item) {
 		item.value = num
 	})
+
 	document.querySelector("#house .house__wall_roof").style.height =
 		num / 20 + "px"
 	document.querySelector("#house .house__wall_floor").style.height =
@@ -190,6 +191,19 @@ function changeHeights(num) {
  */
 function changeWidths(num) {
 	console.log("changeWidths called")
+	if (document.querySelector(".tohide__room_a")) {
+		document.querySelector(".tohide__room_a .wall_width").value = num
+	}
+	if (document.querySelector(".tohide__room_c")) {
+		document.querySelector(".tohide__room_c .wall_width").value = num
+	}
+	if (document.querySelector(".tohide__room_k")) {
+		document.querySelector(".tohide__room_k .wall_width").value = num
+	}
+	if (document.querySelector(".tohide__room_l")) {
+		document.querySelector(".tohide__room_l .wall_width").value = num
+	}
+
 	document.querySelector("#house .house__wall_roof").style.width =
 		num / 20 + "px"
 	document.querySelector("#house .house__wall_floor").style.width =
@@ -228,6 +242,13 @@ function changeWidths(num) {
  */
 function changeWidths_2(num) {
 	console.log("changeWidths_2 Called")
+	if (document.querySelector(".tohide__room_b")) {
+		document.querySelector(".tohide__room_b .wall_width").value = num
+	}
+	if (document.querySelector(".tohide__room_d")) {
+		document.querySelector(".tohide__room_d .wall_width").value = num
+	}
+
 	allWidths = document.querySelectorAll(".wall_width_2")
 	allWidths.forEach(function (item) {
 		item.value = parseFloat(num)
@@ -649,7 +670,6 @@ $("#rooms div.house__wall_status").click(function () {
 		} catch (e) {
 			console.log("TRY-CATCH ERROR:", e)
 		}
-
 		initalize_cross()
 	}
 })
@@ -3561,41 +3581,41 @@ document.addEventListener("DOMContentLoaded", function () {
 	$(".send_email_button").on("click", function (e) {
 		let dialog = $("#send_email_dialog")
 		let attachments = dialog.find(".preview_item").get()
-		let html = attachments.map(file => {
-			let img_url = file.querySelector('img').src;
-			let file_url = `${window.location.origin}/${file.dataset.url}`;
+		let html = attachments.map((file) => {
+			let img_url = file.querySelector("img").src
+			let file_url = `${window.location.origin}/${file.dataset.url}`
 			if (file_url == img_url) {
-				return `<img src="${img_url}">`;
+				return `<img src="${img_url}">`
 			} else {
-				return `<a href="${file_url}"><img src="${img_url}" width="200"></a>`;
+				return `<a href="${file_url}"><img src="${img_url}" width="200"></a>`
 			}
-		});
+		})
 		navigator.permissions
 			.query({ name: "clipboard-write" })
 			.then((result) => {
 				if (result.state == "granted" || result.state == "prompt") {
-					alert("Write access granted!");
+					alert("Write access granted!")
 				}
 			})
-			.catch(console.error);
+			.catch(console.error)
 		navigator.clipboard
 			.write([
 				new ClipboardItem({
-					'text/plain': new Blob(html, { type: 'text/plain' }),
-					'text/html': new Blob(html, { type: 'text/html' }),
+					"text/plain": new Blob(html, { type: "text/plain" }),
+					"text/html": new Blob(html, { type: "text/html" }),
 				}),
 			])
 			.then(() => {
-				let location = $(this).attr("href");
-				let win = window.open(location);
+				let location = $(this).attr("href")
+				let win = window.open(location)
 				if (win) {
 					//Browser has allowed it to be opened
-					win.focus();
+					win.focus()
 				} else {
 					//Browser has blocked it
-					alert("Please allow popups for this website");
+					alert("Please allow popups for this website")
 				}
 			})
-			.catch(console.error);
+			.catch(console.error)
 	})
 })

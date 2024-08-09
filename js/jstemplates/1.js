@@ -505,30 +505,30 @@ function changesize(maxval, frominput) {
 		}
 	}
 
-	if (input_step === "drawscreen_section_one") {
-		measureforcross_h = document.querySelector(".drawarea_h").value
-		measureforcross_w = document.querySelector(".drawarea_w").value
-		if (
-			current_room === "b" ||
-			current_room === "d" ||
-			current_room === "k" ||
-			current_room === "l"
-		) {
-			document
-				.querySelector(".modal-yes")
-				.setAttribute(
-					"onclick",
-					"document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(measureforcross_h);changeWidths_2(measureforcross_w);save_rooms();"
-				)
-		} else if (current_room === "a" || current_room === "c") {
-			document
-				.querySelector(".modal-yes")
-				.setAttribute(
-					"onclick",
-					"document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(measureforcross_h);changeWidths(measureforcross_w);save_rooms();"
-				)
-		}
+	// if (input_step === "drawscreen_section_one") {
+	measureforcross_h = document.querySelector(".drawarea_h").value
+	measureforcross_w = document.querySelector(".drawarea_w").value
+	if (
+		current_room === "b" ||
+		current_room === "d" ||
+		current_room === "k" ||
+		current_room === "l"
+	) {
+		document
+			.querySelector(".modal-yes")
+			.setAttribute(
+				"onclick",
+				"document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(measureforcross_h);changeWidths_2(measureforcross_w);save_rooms();"
+			)
+	} else if (current_room === "a" || current_room === "c") {
+		document
+			.querySelector(".modal-yes")
+			.setAttribute(
+				"onclick",
+				"document.querySelector('.question-container').classList.add('out');document.querySelector('.question-container').classList.remove('two');changeHeights(measureforcross_h);changeWidths(measureforcross_w);save_rooms();"
+			)
 	}
+	// }
 
 	if (canvas.querySelectorAll(".mp").length > 0) {
 		mps = canvas.querySelectorAll(".mp")

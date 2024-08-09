@@ -68,8 +68,6 @@ try {
 <?php if (!$error) { ?>
   <h1>Kiitämme ilmoituksesta!</h1>
   <p>Voimme nyt edetä urakassa eteenpäin :) </p>
-  <i>Tiedoksi: Tallennamme vain urakoitavan asunnon sijainnin rapussa, emme säilytä henkilötietojanne järjestelmissämme ilman tarvetta ja teidän lupaa. </i>
-
   <img src="https://www.kiipeilytekniikka.com/wp-content/uploads/2017/03/Ruuvausta_pieni.jpg">
 <?php } else { ?>
   <h1>:(</h1>
